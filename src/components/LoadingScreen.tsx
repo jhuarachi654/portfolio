@@ -233,14 +233,11 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
         gap: 0,
         zIndex: 2,
       }}>
-        {(window.innerWidth < 768
-          ? [{ w: 220, h: 270, mt: 0, delay: 0 }]
-          : [
-              { w: 160, h: 200, mt: 20, delay: 800  },
-              { w: 220, h: 270, mt: -10, delay: 0   },
-              { w: 160, h: 200, mt: 20, delay: 1400 },
-            ]
-        ).map((f, i) => (
+        {[
+          { w: 160, h: 200, mt: 20, delay: 800  },
+          { w: 220, h: 270, mt: -10, delay: 0   },
+          { w: 160, h: 200, mt: 20, delay: 1400 },
+        ].map((f, i) => (
           <div key={i} style={{ marginTop: f.mt, flexShrink: 0 }}>
             <AsciiVideo
               src="/cosmos-1.mp4"
