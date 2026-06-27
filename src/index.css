@@ -42,10 +42,7 @@ html {
 }
 
 html {
-  background-color: #ffffff;
-}
-[data-theme="dark"] html {
-  background-color: #0A1118;
+  background-color: #0d1b2a;
 }
 
 body {
