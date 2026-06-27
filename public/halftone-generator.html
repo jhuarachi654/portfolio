@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Halftone Generator</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    background: #0f0f0f;
+    color: #e8e8e8;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+  p.sub { font-size: 13px; color: #888; margin-bottom: 32px; }
+
+  .layout { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
+
+  .controls {
+    width: 290px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-title {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #555;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #222;
+    margin-top: 4px;
+  }
+
+  .control-group label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
+    color: #aaa;
+    margin-bottom: 5px;
+  }
+  .control-group label span { color: #5af; }
+  .control-group input[type="range"] { width: 100%; accent-color: #5af; }
+  .control-group input[type="color"] {
+    width: 44px; height: 28px;
+    border: 1px solid #333; border-radius: 4px;
+    cursor: pointer; background: none; padding: 2px;
+  }
+  .control-group select {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #e8e8e8;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    width: 100%;
+  }
+  .range-row { display: flex; justify-content: space-between; font-size: 11px; color: #444; margin-top: 2px; }
+
+  .color-row { display: flex; gap: 12px; }
+  .color-field { flex: 1; }
+  .color-field label { display: block; font-size: 11px; color: #666; margin-bottom: 4px; }
+  .color-field input[type="color"] { width: 100%; height: 32px; }
+
+  .drop-zone {
+    border: 2px dashed #2a2a2a;
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .drop-zone:hover, .drop-zone.drag-over { border-color: #5af; color: #5af; }
+  .drop-zone input { display: none; }
+
+  .btn {
+    background: #5af;
+    color: #000;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .btn:disabled { background: #1e1e1e; color: #444; cursor: not-allowed; }
+  .btn-secondary {
+    background: #1a1a1a;
+    color: #e8e8e8;
+    border: 1px solid #2a2a2a;
+  }
+  .btn-secondary:disabled { background: #111; color: #333; border-color: #1a1a1a; }
+
+  .preview-area { flex: 1; min-width: 300px; }
+
+  .preview-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .preview-label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .toggle-group { display: flex; gap: 4px; }
+  .toggle-btn {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    border: 1px solid #2a2a2a;
+    background: #111;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .toggle-btn.active { background: #2a2a2a; color: #e8e8e8; border-color: #444; }
+
+  .preview-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+    background: repeating-conic-gradient(#1a1a1a 0% 25%, #111 0% 50%) 0 0 / 16px 16px;
+    position: relative;
+  }
+  .preview-wrap.bg-dark { background: #0f0f0f; }
+  .preview-wrap.bg-light { background: #f5f5f5; }
+
+  #preview-svg { display: block; width: 100%; height: auto; }
+
+  .hint { font-size: 11px; color: #444; line-height: 1.5; padding: 10px; background: #111; border-radius: 4px; border: 1px solid #1e1e1e; }
+  .hint strong { color: #666; }
+
+  canvas { display: none; }
+  .filename { font-size: 11px; color: #444; margin-top: 6px; min-height: 14px; }
+</style>
+</head>
+<body>
+
+<h1>Halftone Generator</h1>
+<p class="sub">Drop a poster image → tune → download an animated SVG that auto-switches color in dark/light mode</p>
+
+<canvas id="canvas"></canvas>
+
+<div class="layout">
+  <div class="controls">
+
+    <div class="section-title">Image</div>
+
+    <div class="control-group">
+      <div class="drop-zone" id="drop-zone">
+        <input type="file" id="file-input" accept="image/*" />
+        Drop image here or <u>click to browse</u>
+      </div>
+      <div class="filename" id="filename"></div>
+    </div>
+
+    <div class="section-title">Dot Grid</div>
+
+    <div class="control-group">
+      <label>Grid spacing <span id="grid-val">10</span>px</label>
+      <input type="range" id="grid-size" min="4" max="32" value="10" step="1" />
+      <div class="range-row"><span>Dense</span><span>Sparse</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Max dot size <span id="dot-val">85</span>%</label>
+      <input type="range" id="dot-max" min="20" max="100" value="85" step="1" />
+    </div>
+
+    <div class="control-group">
+      <label>Min dot size <span id="dot-min-val">0</span>%</label>
+      <input type="range" id="dot-min" min="0" max="50" value="0" step="1" />
+    </div>
+
+    <div class="control-group">
+      <label>Threshold <span id="thresh-val">230</span></label>
+      <input type="range" id="threshold" min="80" max="255" value="230" step="1" />
+      <div class="range-row"><span>More dots</span><span>Fewer dots</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Shape</label>
+      <select id="dot-shape">
+        <option value="circle">Circle</option>
+        <option value="square">Square</option>
+      </select>
+    </div>
+
+    <div class="section-title">Animation</div>
+
+    <div class="control-group">
+      <label>Wave groups <span id="groups-val">12</span></label>
+      <input type="range" id="wave-groups" min="3" max="20" value="12" step="1" />
+      <div class="range-row"><span>Chunky</span><span>Smooth</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Duration <span id="dur-val">6</span>s</label>
+      <input type="range" id="duration" min="2" max="20" value="6" step="0.5" />
+      <div class="range-row"><span>Fast</span><span>Slow</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Opacity range <span id="pulse-val">20</span>%</label>
+      <input type="range" id="pulse" min="5" max="60" value="20" step="1" />
+      <div class="range-row"><span>Barely visible</span><span>Noticeable</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Wave direction</label>
+      <select id="wave-dir">
+        <option value="diagonal">Diagonal (top-left → bottom-right)</option>
+        <option value="horizontal">Horizontal (left → right)</option>
+        <option value="vertical">Vertical (top → bottom)</option>
+        <option value="radial">Radial (center out)</option>
+        <option value="random">Random scatter</option>
+      </select>
+    </div>
+
+    <div class="section-title">Colors (auto dark / light mode)</div>
+
+    <div class="color-row">
+      <div class="color-field">
+        <label>Dark mode dot</label>
+        <input type="color" id="color-dark" value="#ffffff" />
+      </div>
+      <div class="color-field">
+        <label>Light mode dot</label>
+        <input type="color" id="color-light" value="#1a1a2e" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Base opacity <span id="opacity-val">40</span>%</label>
+      <input type="range" id="base-opacity" min="10" max="100" value="40" step="1" />
+    </div>
+
+    <button class="btn" id="generate-btn" disabled>Generate</button>
+    <button class="btn btn-secondary" id="download-btn" disabled>Download SVG</button>
+
+    <div class="hint">
+      <strong>Tip:</strong> Use this as an overlay on your card's media container with <code>mix-blend-mode: screen</code> (dark) or <code>multiply</code> (light). The SVG switches color automatically — no JS needed.
+    </div>
+
+  </div>
+
+  <div class="preview-area">
+    <div class="preview-top">
+      <span class="preview-label">Preview</span>
+      <div class="toggle-group">
+        <button class="toggle-btn active" data-bg="checker">Checker</button>
+        <button class="toggle-btn" data-bg="dark">Dark</button>
+        <button class="toggle-btn" data-bg="light">Light</button>
+      </div>
+    </div>
+    <div class="preview-wrap" id="preview-wrap">
+      <svg id="preview-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="#333" font-size="14">Drop an image to get started</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById("canvas")
+const ctx = canvas.getContext("2d")
+let currentSVG = null
+let imgEl = null
+
+// Drop zone
+const dropZone = document.getElementById("drop-zone")
+const fileInput = document.getElementById("file-input")
+dropZone.addEventListener("click", () => fileInput.click())
+dropZone.addEventListener("dragover", e => { e.preventDefault(); dropZone.classList.add("drag-over") })
+dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-over"))
+dropZone.addEventListener("drop", e => {
+  e.preventDefault()
+  dropZone.classList.remove("drag-over")
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0])
+})
+fileInput.addEventListener("change", e => { if (e.target.files[0]) loadFile(e.target.files[0]) })
+
+function loadFile(file) {
+  document.getElementById("filename").textContent = file.name
+  const reader = new FileReader()
+  reader.onload = ev => {
+    imgEl = new Image()
+    imgEl.onload = () => {
+      document.getElementById("generate-btn").disabled = false
+      generate()
+    }
+    imgEl.src = ev.target.result
+  }
+  reader.readAsDataURL(file)
+}
+
+// Live-update all range inputs
+const rangeMap = {
+  "grid-size": "grid-val",
+  "dot-max": "dot-val",
+  "dot-min": "dot-min-val",
+  "threshold": "thresh-val",
+  "wave-groups": "groups-val",
+  "duration": "dur-val",
+  "pulse": "pulse-val",
+  "base-opacity": "opacity-val",
+}
+Object.entries(rangeMap).forEach(([id, labelId]) => {
+  document.getElementById(id).addEventListener("input", () => {
+    document.getElementById(labelId).textContent = document.getElementById(id).value
+    if (imgEl) generate()
+  })
+})
+;["dot-shape", "wave-dir", "color-dark", "color-light"].forEach(id => {
+  document.getElementById(id).addEventListener("input", () => imgEl && generate())
+  document.getElementById(id).addEventListener("change", () => imgEl && generate())
+})
+document.getElementById("generate-btn").addEventListener("click", generate)
+
+function generate() {
+  if (!imgEl) return
+
+  const gridSize    = parseInt(document.getElementById("grid-size").value)
+  const dotMaxPct   = parseInt(document.getElementById("dot-max").value) / 100
+  const dotMinPct   = parseInt(document.getElementById("dot-min").value) / 100
+  const threshold   = parseInt(document.getElementById("threshold").value)
+  const dotShape    = document.getElementById("dot-shape").value
+  const numGroups   = parseInt(document.getElementById("wave-groups").value)
+  const duration    = parseFloat(document.getElementById("duration").value)
+  const pulsePct    = parseInt(document.getElementById("pulse").value) / 100
+  const waveDir     = document.getElementById("wave-dir").value
+  const colorDark   = document.getElementById("color-dark").value
+  const colorLight  = document.getElementById("color-light").value
+  const baseOpacity = parseInt(document.getElementById("base-opacity").value) / 100
+
+  canvas.width  = imgEl.naturalWidth
+  canvas.height = imgEl.naturalHeight
+  ctx.drawImage(imgEl, 0, 0)
+
+  const W = canvas.width
+  const H = canvas.height
+  const maxR = (gridSize / 2) * dotMaxPct
+  const minR = (gridSize / 2) * dotMinPct
+
+  // Collect dots with their positions
+  const dots = [] // { x, y, r }
+
+  const cols = Math.ceil(W / gridSize)
+  const rows = Math.ceil(H / gridSize)
+
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const x = col * gridSize + gridSize / 2
+      const y = row * gridSize + gridSize / 2
+      const sx = col * gridSize
+      const sy = row * gridSize
+      const sw = Math.min(gridSize, W - sx)
+      const sh = Math.min(gridSize, H - sy)
+      if (sw <= 0 || sh <= 0) continue
+
+      const data = ctx.getImageData(sx, sy, sw, sh).data
+      let brightness = 0
+      const pixels = sw * sh
+      for (let i = 0; i < data.length; i += 4) {
+        brightness += data[i] * 0.299 + data[i+1] * 0.587 + data[i+2] * 0.114
+      }
+      brightness /= pixels
+
+      if (brightness > threshold) continue
+      const t = 1 - brightness / 255
+      const r = minR + t * (maxR - minR)
+      if (r < 0.5) continue
+      dots.push({ x, y, r })
+    }
+  }
+
+  // Assign each dot a wave group based on direction
+  function groupIndex(dot) {
+    let val
+    switch (waveDir) {
+      case "horizontal": val = dot.x / W; break
+      case "vertical":   val = dot.y / H; break
+      case "radial": {
+        const dx = dot.x / W - 0.5, dy = dot.y / H - 0.5
+        val = Math.sqrt(dx*dx + dy*dy) / 0.707
+        break
+      }
+      case "random": val = Math.random(); break
+      default: // diagonal
+        val = (dot.x / W + dot.y / H) / 2
+    }
+    return Math.min(numGroups - 1, Math.floor(val * numGroups))
+  }
+
+  // Build group arrays
+  const groups = Array.from({ length: numGroups }, () => [])
+  dots.forEach(dot => groups[groupIndex(dot)].push(dot))
+
+  // Build CSS keyframes + per-group animation (opacity only — no scale, no movement)
+  const opHigh = Math.min(1, baseOpacity + pulsePct / 100).toFixed(2)
+  const opLow  = Math.max(0, baseOpacity - pulsePct / 100 * 0.5).toFixed(2)
+
+  let style = `
+<style>
+@keyframes ht-breathe {
+  0%, 100% { opacity: ${opLow}; }
+  50%       { opacity: ${opHigh}; }
+}
+`
+  for (let g = 0; g < numGroups; g++) {
+    const delay = ((g / numGroups) * duration).toFixed(2)
+    style += `.g${g} { animation: ht-breathe ${duration}s ease-in-out ${delay}s infinite; }\n`
+  }
+
+  // Dark mode: use colorDark; light mode: use colorLight
+  style += `
+.ht-dots { fill: ${colorDark}; }
+@media (prefers-color-scheme: light) { .ht-dots { fill: ${colorLight}; } }
+</style>`
+
+  // Build group elements
+  let groupEls = ""
+  for (let g = 0; g < numGroups; g++) {
+    if (!groups[g].length) continue
+    const shapes = groups[g].map(dot => {
+      if (dotShape === "circle") {
+        return `<circle cx="${dot.x.toFixed(1)}" cy="${dot.y.toFixed(1)}" r="${dot.r.toFixed(2)}"/>`
+      } else {
+        const s = (dot.r * 2).toFixed(2)
+        return `<rect x="${(dot.x - dot.r).toFixed(1)}" y="${(dot.y - dot.r).toFixed(1)}" width="${s}" height="${s}"/>`
+      }
+    }).join("")
+    groupEls += `<g class="g${g}">${shapes}</g>`
+  }
+
+  const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${style}<g class="ht-dots">${groupEls}</g></svg>`
+  currentSVG = svgStr
+
+  // Update preview
+  const previewSVG = document.getElementById("preview-svg")
+  previewSVG.setAttribute("viewBox", `0 0 ${W} ${H}`)
+  previewSVG.innerHTML = `${style}<g class="ht-dots">${groupEls}</g>`
+
+  document.getElementById("download-btn").disabled = false
+}
+
+document.getElementById("download-btn").addEventListener("click", () => {
+  if (!currentSVG) return
+  const blob = new Blob([currentSVG], { type: "image/svg+xml" })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  const base = document.getElementById("filename").textContent.replace(/\.[^.]+$/, "") || "halftone"
+  a.download = `${base}-halftone.svg`
+  a.click()
+  URL.revokeObjectURL(url)
+})
+
+document.querySelectorAll(".toggle-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("active"))
+    btn.classList.add("active")
+    const wrap = document.getElementById("preview-wrap")
+    wrap.className = "preview-wrap"
+    if (btn.dataset.bg === "dark")  wrap.classList.add("bg-dark")
+    if (btn.dataset.bg === "light") wrap.classList.add("bg-light")
+  })
+})
+</script>
+</body>
+</html>
