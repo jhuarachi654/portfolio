@@ -1388,6 +1388,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 /* ── Work Grid / Masonry ─────────────────────────────────────────── */
 .work-grid-section {
+  overflow-anchor: none;
   padding: 56px 16px 100px;
   border-top: 1px solid rgba(30, 75, 154, 0.12);
   background-image:
@@ -2410,6 +2411,8 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  min-height: 75vh;
   padding-bottom: 48px;
   user-select: none;
 }
@@ -2419,6 +2422,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   position: relative;
   width: 100%;
   max-width: 640px;
+  margin: 0 auto;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(
     to bottom,
@@ -2452,6 +2456,10 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   margin-top: 16px;
   position: relative;
   z-index: 100;
+  width: 100%;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
   min-width: 0;
   overflow: hidden;
 }
