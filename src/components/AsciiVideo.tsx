@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react"
 
 const IS_MOBILE       = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
 const TILE            = IS_MOBILE ? 6 : 3
-const SAMPLE_INTERVAL = IS_MOBILE ? 200 : 80
-const FRAME_INTERVAL  = IS_MOBILE ? 1000 / 30 : 1000 / 60
+const SAMPLE_INTERVAL = 80
+const FRAME_INTERVAL  = 1000 / 60
 const SPRING          = 0.19
 const DAMPING         = 0.72
 const REPEL_RADIUS    = 40
@@ -197,6 +197,64 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       rafRef.current = requestAnimationFrame(render)
     }
 
+    // ── Mobile: static bloom image, spring interaction ─────────────
+    if (IS_MOBILE) {
+      const img = new Image()
+      img.src = "/cosmos-bloom.png"
+      img.onload = () => {
+        fCtx.drawImage(img, 0, 0, width, height)
+        processPixels()
+        const tileW = cols * TILE
+        const tileH = rows * TILE
+        let lastFrame = 0
+        const render = (now: number) => {
+          rafRef.current = requestAnimationFrame(render)
+          if (now - lastFrame < 1000 / 30) return
+          lastFrame = now
+          const mx = mouseRef.current.x
+          const my = mouseRef.current.y
+          const active = mx > -100 && my > -100
+          const rr2 = REPEL_RADIUS * REPEL_RADIUS
+          for (let i = 0; i < tiles.length; i++) {
+            const t = tiles[i]
+            if (!t.visible) continue
+            if (active) {
+              const cx = t.x + TILE / 2, cy = t.y + TILE / 2
+              const dx = cx - mx, dy = cy - my
+              const d2 = dx * dx + dy * dy
+              if (d2 < rr2 && d2 > 0) {
+                const dist = Math.sqrt(d2)
+                const force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH
+                t.vx += (dx / dist) * force
+                t.vy += (dy / dist) * force
+              }
+            }
+            t.vx += (t.homeX - t.x) * SPRING
+            t.vy += (t.homeY - t.y) * SPRING
+            t.vx *= DAMPING; t.vy *= DAMPING
+            t.x  += t.vx;    t.y  += t.vy
+          }
+          ctx.clearRect(0, 0, width, height)
+          const displaced: Tile[] = []
+          for (let i = 0; i < tiles.length; i++) {
+            const t = tiles[i]
+            if (!t.visible) continue
+            if (Math.abs(t.x - t.homeX) > DISPLACE_THRESH || Math.abs(t.y - t.homeY) > DISPLACE_THRESH) displaced.push(t)
+          }
+          if (displaced.length === 0) {
+            ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
+          } else {
+            ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
+            for (const t of displaced) ctx.clearRect(t.homeX, t.homeY, TILE, TILE)
+            for (const t of displaced) ctx.drawImage(frame, t.homeX, t.homeY, TILE, TILE, Math.round(t.x), Math.round(t.y), TILE, TILE)
+          }
+        }
+        rafRef.current = requestAnimationFrame(render)
+      }
+      return () => cancelAnimationFrame(rafRef.current)
+    }
+
+    // ── Desktop/tablet: video path ─────────────────────────────────
     const start = () => {
       setTimeout(() => {
         video.playbackRate = playbackRate
