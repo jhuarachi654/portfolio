@@ -217,8 +217,9 @@ export default function WorkGrid() {
             />
           </div>
           <ViewSwitcher current={view} onChange={v => {
+            const el = document.getElementById("featured-work")
+            if (el) window.scrollTo({ top: el.offsetTop - 24, behavior: "instant" })
             setView(v)
-            document.getElementById("featured-work")?.scrollIntoView({ behavior: "smooth", block: "start" })
           }} />
         </div>
 
