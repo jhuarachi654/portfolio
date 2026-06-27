@@ -1,16 +1,14 @@
 import { useEffect, useRef } from "react"
 
-const TILE            = 3
 const IS_MOBILE       = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
-const SAMPLE_INTERVAL = 80
-const FRAME_INTERVAL  = 1000 / 60
+const TILE            = IS_MOBILE ? 6 : 3
+const SAMPLE_INTERVAL = IS_MOBILE ? 200 : 80
+const FRAME_INTERVAL  = IS_MOBILE ? 1000 / 30 : 1000 / 60
 const SPRING          = 0.19
 const DAMPING         = 0.72
 const REPEL_RADIUS    = 40
 const REPEL_STRENGTH  = 20
 const DISPLACE_THRESH = 0.4
-
-const MOBILE_STATIC_SRC = "/cosmos-bloom.png"
 
 interface Tile {
   homeX: number
@@ -43,6 +41,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
   const tilesRef  = useRef<Tile[]>([])
   const mouseRef  = useRef({ x: -9999, y: -9999 })
   const rafRef    = useRef(0)
+
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -111,79 +110,6 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       fCtx.putImageData(img, 0, 0)
     }
 
-    // ── Mobile: static image path ──────────────────────────────────
-    if (IS_MOBILE) {
-      const img = new Image()
-      img.src = MOBILE_STATIC_SRC
-      img.onload = () => {
-        fCtx.drawImage(img, 0, 0, width, height)
-        processPixels()
-
-        let lastFrame = 0
-        const render = (now: number) => {
-          if (now - lastFrame < 1000 / 30) { rafRef.current = requestAnimationFrame(render); return }
-          lastFrame = now
-
-          const mx = mouseRef.current.x
-          const my = mouseRef.current.y
-          const active = mx > -100 && my > -100
-          const rr2 = REPEL_RADIUS * REPEL_RADIUS
-
-          let anyMoving = false
-          for (let i = 0; i < tiles.length; i++) {
-            const t = tiles[i]
-            if (!t.visible) continue
-            if (active) {
-              const cx = t.x + TILE / 2
-              const cy = t.y + TILE / 2
-              const dx = cx - mx
-              const dy = cy - my
-              const d2 = dx * dx + dy * dy
-              if (d2 < rr2 && d2 > 0) {
-                const dist  = Math.sqrt(d2)
-                const force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH
-                t.vx += (dx / dist) * force
-                t.vy += (dy / dist) * force
-              }
-            }
-            t.vx += (t.homeX - t.x) * SPRING
-            t.vy += (t.homeY - t.y) * SPRING
-            t.vx *= DAMPING
-            t.vy *= DAMPING
-            t.x  += t.vx
-            t.y  += t.vy
-            if (Math.abs(t.vx) < 0.01 && Math.abs(t.vy) < 0.01 && Math.abs(t.x - t.homeX) < 0.1 && Math.abs(t.y - t.homeY) < 0.1) {
-              t.vx = 0; t.vy = 0; t.x = t.homeX; t.y = t.homeY
-            } else { anyMoving = true }
-          }
-
-          ctx.clearRect(0, 0, width, height)
-          const tileW = cols * TILE
-          const tileH = rows * TILE
-          const displaced: Tile[] = []
-          for (let i = 0; i < tiles.length; i++) {
-            const t = tiles[i]
-            if (!t.visible) continue
-            if (Math.abs(t.x - t.homeX) > DISPLACE_THRESH || Math.abs(t.y - t.homeY) > DISPLACE_THRESH) displaced.push(t)
-          }
-          if (displaced.length === 0) {
-            ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
-          } else {
-            ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
-            for (const t of displaced) ctx.clearRect(t.homeX, t.homeY, TILE, TILE)
-            for (const t of displaced) ctx.drawImage(frame, t.homeX, t.homeY, TILE, TILE, Math.round(t.x), Math.round(t.y), TILE, TILE)
-          }
-
-          if (active || anyMoving) rafRef.current = requestAnimationFrame(render)
-          else rafRef.current = 0
-        }
-
-        rafRef.current = requestAnimationFrame(render)
-      }
-      return () => cancelAnimationFrame(rafRef.current)
-    }
-
-    // ── Desktop/tablet: video path ─────────────────────────────────
     const video = videoRef.current
     if (!video) return
 
@@ -319,18 +245,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {!IS_MOBILE && (
-        <video
-          ref={videoRef}
-          src={src}
-          autoPlay
-          loop={loop}
-          muted
-          playsInline
-          preload="auto"
-          style={{ display: "none" }}
-        />
-      )}
+      <video ref={videoRef} src={src} autoPlay loop={loop} muted playsInline preload="auto" style={{ display: "none" }} />
       <canvas ref={frameRef} style={{ display: "none" }} />
       <canvas
         ref={canvasRef}
