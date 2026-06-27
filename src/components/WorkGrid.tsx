@@ -216,7 +216,10 @@ export default function WorkGrid() {
               onClearAll={clearTags}
             />
           </div>
-          <ViewSwitcher current={view} onChange={setView} />
+          <ViewSwitcher current={view} onChange={v => {
+            setView(v)
+            document.getElementById("featured-work")?.scrollIntoView({ behavior: "smooth", block: "start" })
+          }} />
         </div>
 
         {/* Grid view */}
