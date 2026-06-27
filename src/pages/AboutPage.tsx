@@ -294,7 +294,7 @@ export default function AboutPage() {
       <section className="work-grid-section about-bio-section">
         <div className="about-bio-grid">
           <div className="about-bio-left">
-            <h2 className="about-section-heading" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>A snippet<br />of who I am</h2>
+            <h2 className="about-section-heading" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>A snippet of who I am</h2>
           </div>
           <div className="about-bio-right">
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>

@@ -1047,7 +1047,7 @@ h1 {
     display: block;
   }
   .hero-left {
-    padding: 20px 20px 8px;
+    padding: 20px 20px 0;
     min-width: 0;
     width: 100%;
     box-sizing: border-box;
@@ -1057,7 +1057,7 @@ h1 {
     width: 100%;
   }
   .hero-right {
-    padding: 4px 20px 20px;
+    padding: 0 20px 16px;
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
@@ -2845,10 +2845,10 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 /* Mobile */
 @media (max-width: 767px) {
-  .about-corkboard { height: 340px; }
-  .about-pile-hero-wrap { top: 28px; left: 50%; transform: translateX(-50%); }
-  .about-pile-thumb { width: 176px; height: 206px; }
-  .about-pile-thumb-card { width: 176px; padding: 5px 5px 18px; }
+  .about-corkboard { height: 420px; }
+  .about-pile-hero-wrap { top: 40px; left: 50%; transform: translateX(-50%); }
+  .about-pile-thumb { width: 240px; height: 280px; }
+  .about-pile-thumb-card { width: 240px; padding: 7px 7px 28px; }
 }
 
 @keyframes pile-card-send-back {

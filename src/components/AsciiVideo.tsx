@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react"
 
 const TILE            = 3
-const SAMPLE_INTERVAL = 80
-const FRAME_INTERVAL  = 1000 / 60   // cap at 60fps
+const IS_MOBILE       = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
+const SAMPLE_INTERVAL = IS_MOBILE ? 160 : 80
+const FRAME_INTERVAL  = IS_MOBILE ? 1000 / 30 : 1000 / 60
 const SPRING          = 0.19
 const DAMPING        = 0.72
 const REPEL_RADIUS   = 30
@@ -223,7 +224,11 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
     }
 
     if (video.readyState >= 2) start()
-    else video.addEventListener("loadeddata", start, { once: true })
+    else {
+      video.addEventListener("loadeddata", start, { once: true })
+      video.addEventListener("canplay", start, { once: true })
+      video.load()
+    }
 
     return () => cancelAnimationFrame(rafRef.current)
   }, [src, width, height, seekTo, startDelay])
@@ -252,6 +257,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
         loop={loop}
         muted
         playsInline
+        preload="auto"
         style={{ display: "none" }}
       />
       <canvas ref={frameRef} style={{ display: "none" }} />
