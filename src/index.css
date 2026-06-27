@@ -1032,7 +1032,7 @@ h1 {
     box-sizing: border-box;
   }
   .hero-name.hero-display-headline {
-    font-size: clamp(26px, 6.5vw, 32px);
+    font-size: clamp(30px, 7.5vw, 38px);
     line-height: 1.15;
     text-wrap: balance;
     word-break: break-word;
@@ -1047,7 +1047,7 @@ h1 {
     display: block;
   }
   .hero-left {
-    padding: 20px 20px 16px;
+    padding: 20px 20px 8px;
     min-width: 0;
     width: 100%;
     box-sizing: border-box;
@@ -1057,7 +1057,7 @@ h1 {
     width: 100%;
   }
   .hero-right {
-    padding: 16px 20px 32px;
+    padding: 4px 20px 20px;
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
