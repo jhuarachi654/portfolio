@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
-const TILE            = 3
-const IS_MOBILE       = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
-const MOBILE_FALLBACK_DELAY = 2000 // ms before showing static fallback
+const TILE      = 3
+const IS_MOBILE = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
 const SAMPLE_INTERVAL = 80
 const FRAME_INTERVAL  = 1000 / 60
 const SPRING          = 0.19
@@ -36,16 +35,109 @@ interface Props {
 }
 
 export default function AsciiVideo({ src, width = 420, height = 460, twinkle = false, tileColor, seekTo, loop = true, startDelay = 0, playbackRate = 1 }: Props) {
-  const canvasRef      = useRef<HTMLCanvasElement>(null)
-  const videoRef       = useRef<HTMLVideoElement>(null)
-  const frameRef       = useRef<HTMLCanvasElement>(null)
-  const tilesRef       = useRef<Tile[]>([])
-  const mouseRef       = useRef({ x: -9999, y: -9999 })
-  const rafRef         = useRef(0)
-  const videoStarted   = useRef(false)
-  const [useFallback, setUseFallback] = useState(false)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const videoRef  = useRef<HTMLVideoElement>(null)
+  const frameRef  = useRef<HTMLCanvasElement>(null)
+  const tilesRef  = useRef<Tile[]>([])
+  const mouseRef  = useRef({ x: -9999, y: -9999 })
+  const rafRef    = useRef(0)
+
+  // Mobile: always use static bloom image — skip video entirely
+  useEffect(() => {
+    if (!IS_MOBILE) return
+    const canvas = canvasRef.current
+    const frame  = frameRef.current
+    if (!canvas || !frame) return
+    const ctx  = canvas.getContext("2d", { alpha: true })
+    if (!ctx) return
+    canvas.width = width; canvas.height = height
+    frame.width  = width; frame.height  = height
+    const fCtx = frame.getContext("2d", { willReadFrequently: true })!
+    const cols = Math.floor(width / TILE)
+    const rows = Math.floor(height / TILE)
+    const LUM_FLOOR = 0.15
+    const tiles: Tile[] = []
+    for (let r = 0; r < rows; r++)
+      for (let c = 0; c < cols; c++)
+        tiles.push({ homeX: c*TILE, homeY: r*TILE, x: c*TILE, y: r*TILE, vx: 0, vy: 0, visible: false, baseAlpha: 0, twinklePhase: 0 })
+    tilesRef.current = tiles
+    const isDark = () => document.documentElement.getAttribute("data-theme") === "dark"
+    const img = new Image()
+    img.src = "/cosmos-bloom.png"
+    img.onload = () => {
+      fCtx.drawImage(img, 0, 0, width, height)
+      const imgData = fCtx.getImageData(0, 0, width, height)
+      const d = imgData.data
+      const dark = isDark()
+      const [tr, tg, tb] = tileColor ?? (dark ? [255,255,255] : [30,75,154])
+      for (let i = 0; i < tiles.length; i++) {
+        const col = i % cols, row = Math.floor(i / cols)
+        const sx = col*TILE, sy = row*TILE
+        let lumSum = 0
+        for (let py = sy; py < sy+2 && py < height; py++)
+          for (let px = sx; px < sx+2 && px < width; px++) {
+            const pi = (py*width+px)*4
+            lumSum += (0.299*d[pi] + 0.587*d[pi+1] + 0.114*d[pi+2]) / 255
+          }
+        const lum = lumSum / 4
+        tiles[i].visible = lum > LUM_FLOOR
+        for (let py = sy; py < sy+TILE && py < height; py++)
+          for (let px = sx; px < sx+TILE && px < width; px++) {
+            const p = (py*width+px)*4
+            if (!tiles[i].visible) { d[p+3] = 0; continue }
+            const l = (0.299*d[p] + 0.587*d[p+1] + 0.114*d[p+2]) / 255
+            const a = l < LUM_FLOOR ? 0 : Math.pow((l-LUM_FLOOR)/(1-LUM_FLOOR), 0.35)
+            d[p]=tr; d[p+1]=tg; d[p+2]=tb; d[p+3]=Math.round(a*255)
+          }
+      }
+      fCtx.putImageData(imgData, 0, 0)
+      const tileW = cols*TILE, tileH = rows*TILE
+      let lastFrame = 0
+      const render = (now: number) => {
+        rafRef.current = requestAnimationFrame(render)
+        if (now - lastFrame < 1000/30) return
+        lastFrame = now
+        const mx = mouseRef.current.x, my = mouseRef.current.y
+        const active = mx > -100 && my > -100
+        const rr2 = REPEL_RADIUS * REPEL_RADIUS
+        for (let i = 0; i < tiles.length; i++) {
+          const t = tiles[i]
+          if (!t.visible) continue
+          if (active) {
+            const cx = t.x+TILE/2, cy = t.y+TILE/2
+            const dx = cx-mx, dy = cy-my, d2 = dx*dx+dy*dy
+            if (d2 < rr2 && d2 > 0) {
+              const dist = Math.sqrt(d2)
+              t.vx += (dx/dist)*(1-dist/REPEL_RADIUS)*REPEL_STRENGTH
+              t.vy += (dy/dist)*(1-dist/REPEL_RADIUS)*REPEL_STRENGTH
+            }
+          }
+          t.vx += (t.homeX-t.x)*SPRING; t.vy += (t.homeY-t.y)*SPRING
+          t.vx *= DAMPING; t.vy *= DAMPING
+          t.x += t.vx; t.y += t.vy
+        }
+        ctx.clearRect(0, 0, width, height)
+        const displaced: Tile[] = []
+        for (let i = 0; i < tiles.length; i++) {
+          const t = tiles[i]
+          if (!t.visible) continue
+          if (Math.abs(t.x-t.homeX) > DISPLACE_THRESH || Math.abs(t.y-t.homeY) > DISPLACE_THRESH) displaced.push(t)
+        }
+        if (displaced.length === 0) {
+          ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
+        } else {
+          ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
+          for (const t of displaced) ctx.clearRect(t.homeX, t.homeY, TILE, TILE)
+          for (const t of displaced) ctx.drawImage(frame, t.homeX, t.homeY, TILE, TILE, Math.round(t.x), Math.round(t.y), TILE, TILE)
+        }
+      }
+      rafRef.current = requestAnimationFrame(render)
+    }
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [width, height])
 
   useEffect(() => {
+    if (IS_MOBILE) return
     const canvas = canvasRef.current
     const video  = videoRef.current
     const frame  = frameRef.current
@@ -217,7 +309,6 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
     }
 
     const start = () => {
-      videoStarted.current = true
       setTimeout(() => {
         video.playbackRate = playbackRate
         video.play().catch(() => {})
@@ -232,111 +323,8 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       video.load()
     }
 
-    // Mobile: if video hasn't started within timeout, show static fallback
-    let fallbackTimer: ReturnType<typeof setTimeout> | undefined
-    if (IS_MOBILE) {
-      fallbackTimer = setTimeout(() => {
-        if (!videoStarted.current) setUseFallback(true)
-      }, MOBILE_FALLBACK_DELAY)
-    }
-
-    return () => {
-      cancelAnimationFrame(rafRef.current)
-      clearTimeout(fallbackTimer)
-    }
-  }, [src, width, height, seekTo, startDelay])
-
-  // Mobile fallback: render static bloom image as ASCII tiles with touch interaction
-  useEffect(() => {
-    if (!useFallback) return
-    const canvas = canvasRef.current
-    const frame  = frameRef.current
-    if (!canvas || !frame) return
-    const ctx  = canvas.getContext("2d", { alpha: true })
-    if (!ctx) return
-    const fCtx = frame.getContext("2d", { willReadFrequently: true })!
-    const cols = Math.floor(width / TILE)
-    const rows = Math.floor(height / TILE)
-    const LUM_FLOOR = 0.15
-    const tiles = tilesRef.current
-    const isDark = () => document.documentElement.getAttribute("data-theme") === "dark"
-
-    const img = new Image()
-    img.src = "/cosmos-bloom.png"
-    img.onload = () => {
-      fCtx.drawImage(img, 0, 0, width, height)
-      const imgData = fCtx.getImageData(0, 0, width, height)
-      const d = imgData.data
-      const dark = isDark()
-      const [tr, tg, tb] = tileColor ?? (dark ? [255, 255, 255] : [30, 75, 154])
-
-      for (let i = 0; i < tiles.length; i++) {
-        const col = i % cols, row = Math.floor(i / cols)
-        const sx = col * TILE, sy = row * TILE
-        let lumSum = 0
-        for (let py = sy; py < sy + 2 && py < height; py++)
-          for (let px = sx; px < sx + 2 && px < width; px++) {
-            const pi = (py * width + px) * 4
-            lumSum += (0.299 * d[pi] + 0.587 * d[pi+1] + 0.114 * d[pi+2]) / 255
-          }
-        const lum = lumSum / 4
-        tiles[i].visible = lum > LUM_FLOOR
-        for (let py = sy; py < sy + TILE && py < height; py++)
-          for (let px = sx; px < sx + TILE && px < width; px++) {
-            const p = (py * width + px) * 4
-            if (!tiles[i].visible) { d[p+3] = 0; continue }
-            const l = (0.299*d[p] + 0.587*d[p+1] + 0.114*d[p+2]) / 255
-            const a = l < LUM_FLOOR ? 0 : Math.pow((l - LUM_FLOOR) / (1 - LUM_FLOOR), 0.35)
-            d[p] = tr; d[p+1] = tg; d[p+2] = tb; d[p+3] = Math.round(a * 255)
-          }
-      }
-      fCtx.putImageData(imgData, 0, 0)
-
-      const tileW = cols * TILE, tileH = rows * TILE
-      let lastFrame = 0
-      const render = (now: number) => {
-        rafRef.current = requestAnimationFrame(render)
-        if (now - lastFrame < 1000 / 30) return
-        lastFrame = now
-        const mx = mouseRef.current.x, my = mouseRef.current.y
-        const active = mx > -100 && my > -100
-        const rr2 = REPEL_RADIUS * REPEL_RADIUS
-        for (let i = 0; i < tiles.length; i++) {
-          const t = tiles[i]
-          if (!t.visible) continue
-          if (active) {
-            const cx = t.x + TILE/2, cy = t.y + TILE/2
-            const dx = cx - mx, dy = cy - my
-            const d2 = dx*dx + dy*dy
-            if (d2 < rr2 && d2 > 0) {
-              const dist = Math.sqrt(d2)
-              const force = (1 - dist/REPEL_RADIUS) * REPEL_STRENGTH
-              t.vx += (dx/dist)*force; t.vy += (dy/dist)*force
-            }
-          }
-          t.vx += (t.homeX - t.x)*SPRING; t.vy += (t.homeY - t.y)*SPRING
-          t.vx *= DAMPING; t.vy *= DAMPING
-          t.x += t.vx; t.y += t.vy
-        }
-        ctx.clearRect(0, 0, width, height)
-        const displaced: Tile[] = []
-        for (let i = 0; i < tiles.length; i++) {
-          const t = tiles[i]
-          if (!t.visible) continue
-          if (Math.abs(t.x - t.homeX) > DISPLACE_THRESH || Math.abs(t.y - t.homeY) > DISPLACE_THRESH) displaced.push(t)
-        }
-        if (displaced.length === 0) {
-          ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
-        } else {
-          ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
-          for (const t of displaced) ctx.clearRect(t.homeX, t.homeY, TILE, TILE)
-          for (const t of displaced) ctx.drawImage(frame, t.homeX, t.homeY, TILE, TILE, Math.round(t.x), Math.round(t.y), TILE, TILE)
-        }
-      }
-      rafRef.current = requestAnimationFrame(render)
-    }
     return () => cancelAnimationFrame(rafRef.current)
-  }, [useFallback])
+  }, [src, width, height, seekTo, startDelay])
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = canvasRef.current?.getBoundingClientRect()
