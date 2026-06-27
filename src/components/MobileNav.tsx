@@ -151,14 +151,14 @@ export default function MobileNav() {
             </div>
             <div style={{ borderTop: "1px solid rgba(30,75,154,0.08)", paddingTop: 14, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <a href="mailto:johanna.huarachi@cca.edu" aria-label="Email" className="icon-btn">
+                <a href="mailto:jhuarachi654@gmail.com" aria-label="Email" className="icon-btn">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <path d="m2 4 10 9 10-9" />
                   </svg>
                 </a>
                 <a
-                  href="https://linkedin.com/in/johannahuarachi"
+                  href="https://www.linkedin.com/in/johanna-huarachi"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
