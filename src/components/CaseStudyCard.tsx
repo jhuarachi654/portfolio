@@ -74,6 +74,7 @@ export default function CaseStudyCard({
   const [isInView, setIsInView] = useState(false)
   const [isReady, setIsReady] = useState(false)
   const [slowLoad, setSlowLoad] = useState(false)
+  const mobileInViewRef = useRef(false)
 
   // Set src once card enters viewport (lazy load); forcePlay bypasses this
   useEffect(() => {
@@ -147,10 +148,10 @@ export default function CaseStudyCard({
     if (prefersReducedMotion) return
     const vid = videoRef.current
     if (!vid) return
-    if (!forcePlay && !(isDesktop && isHoveredRef.current)) {
-      vid.currentTime = lottieStartTime ?? 0
-    } else {
+    if (forcePlay || (isDesktop && isHoveredRef.current) || (!isDesktop && mobileInViewRef.current)) {
       vid.play().catch(() => {})
+    } else {
+      vid.currentTime = lottieStartTime ?? 0
     }
   }
 
@@ -184,9 +185,11 @@ export default function CaseStudyCard({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          mobileInViewRef.current = true
           videoRef.current?.play().catch(() => {})
           lottieRef.current?.play()
         } else {
+          mobileInViewRef.current = false
           const vid = videoRef.current
           if (vid) { vid.pause(); vid.currentTime = 0 }
           lottieRef.current?.stop()

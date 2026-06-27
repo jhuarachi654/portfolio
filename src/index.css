@@ -1119,11 +1119,12 @@ h1 {
   left: -4px;
   width: 8px;
   height: 8px;
-  background: var(--color-navy-dark);
+  background: #ffffff;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 10000;
+  z-index: 99999;
   will-change: transform;
+  mix-blend-mode: difference;
   transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
 }
 
@@ -1133,10 +1134,10 @@ h1 {
   left: -18px;
   width: 36px;
   height: 36px;
-  border: 1.5px solid rgba(30, 75, 154, 0.4);
+  border: 1.5px solid rgba(30, 75, 154, 0.5);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 10000;
+  z-index: 99999;
   will-change: transform;
   transition: width 0.25s ease, height 0.25s ease,
               top 0.25s ease, left 0.25s ease,
@@ -1224,20 +1225,13 @@ h1 {
   color: #0d1b2a;
 }
 
-/* ── Overlay-open: white cursor over dark backdrop ───────────────── */
-body.overlay-open .cursor-dot {
-  background: #ffffff;
-}
+/* ── Overlay-open: ring adapts to dark backdrop ───────────────── */
 body.overlay-open .cursor-ring {
   border-color: rgba(255, 255, 255, 0.45);
 }
 body.overlay-open .cursor-ring.is-hovering {
   border-color: rgba(255, 255, 255, 0.7);
   background: rgba(255, 255, 255, 0.08);
-}
-/* Revert to navy when hovering over a light-background card */
-body.overlay-open.cursor-on-light-card .cursor-dot {
-  background: var(--color-navy-dark);
 }
 body.overlay-open.cursor-on-light-card .cursor-ring {
   border-color: rgba(30, 75, 154, 0.4);
@@ -2458,6 +2452,8 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   margin-top: 16px;
   position: relative;
   z-index: 100;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .deck-nav-arrow {
@@ -2497,39 +2493,41 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .deck-toc {
   display: flex;
   align-items: center;
-  gap: 32px;
-  padding: 10px 16px 10px 20px;
+  padding: 8px 12px;
   background: rgba(255,255,255,0.92);
   border: 1px solid rgba(30,75,154,0.1);
   border-radius: 20px;
   backdrop-filter: blur(8px);
+  min-width: 0;
+  flex: 1;
   overflow: visible;
 }
 
-.deck-toc-counter {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: #1E4B9A;
-  opacity: 0.5;
-  white-space: nowrap;
-}
 
 .deck-toc-pills {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
-  overflow: visible;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 4px;
+  margin: -8px -4px;
 }
+.deck-toc-pills::-webkit-scrollbar { display: none; }
 
 .deck-toc-pill {
   position: relative;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
   border: 1.5px solid transparent;
   background: rgba(30,75,154,0.12);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 0;
   cursor: pointer;
   transition: transform 0.15s, opacity 0.15s, border-color 0.15s;
@@ -2562,7 +2560,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 20px;
   border-radius: 10px;
 }
 /* Tooltip bubble */
@@ -3538,6 +3536,28 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   align-items: center;
   justify-content: center;
   padding: 20px;
+}
+
+.draw-modal-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.draw-color-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .draw-color-btn {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 

@@ -29,8 +29,9 @@ export default function DeckView({ studies }: Props) {
   const snapTimer  = useRef<ReturnType<typeof setTimeout>>()
   const touchStartY = useRef<number | null>(null)
 
-  const trackRef = useRef<HTMLDivElement>(null)
-  const viewRef  = useRef<HTMLDivElement>(null)
+  const trackRef  = useRef<HTMLDivElement>(null)
+  const viewRef   = useRef<HTMLDivElement>(null)
+  const pillsRef  = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const el = trackRef.current?.firstElementChild as HTMLElement | null
@@ -120,6 +121,14 @@ export default function DeckView({ studies }: Props) {
   const realIndex  = Math.min(Math.max(visualIndex - 1, 0), n - 1)
   const viewHeight = cardHeight ? PREV_PEEK + cardHeight + PEEK : "auto"
 
+  // Scroll active pill into view on mobile
+  useEffect(() => {
+    const pills = pillsRef.current
+    if (!pills) return
+    const active = pills.children[realIndex] as HTMLElement | undefined
+    active?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
+  }, [realIndex])
+
   return (
     <div className="deck-view">
       <div
@@ -140,19 +149,8 @@ export default function DeckView({ studies }: Props) {
       </div>
 
       <div className="deck-nav">
-        <button
-          className="deck-nav-arrow"
-          onClick={() => snapTo(visualRef.current - 1)}
-          aria-label="Previous"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-
         <div className="deck-toc">
-          <span className="deck-toc-counter">{realIndex + 1} / {n}</span>
-          <div className="deck-toc-pills">
+          <div className="deck-toc-pills" ref={pillsRef}>
             {studies.map((s, i) => (
               <button
                 key={s.title}
@@ -170,16 +168,6 @@ export default function DeckView({ studies }: Props) {
             ))}
           </div>
         </div>
-
-        <button
-          className="deck-nav-arrow"
-          onClick={() => snapTo(visualRef.current + 1)}
-          aria-label="Next"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M8 4v8M4 8l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
       </div>
     </div>
   )

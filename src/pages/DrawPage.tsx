@@ -6,16 +6,21 @@ import Footer from "../components/Footer"
 const SUPABASE_URL = "https://jwjpnwxzpjtjigquuism.supabase.co"
 const SUPABASE_KEY = "sb_publishable_HIcPdHfVH7_58p5skQFVNg_DNqCKa7R"
 
-// Card canvas dimensions (logical px, rendered at 2×)
-const CW = 660
-const CH = 360
+// Card canvas dimensions (logical px, rendered at 2×) — portrait
+const CW = 360
+const CH = 500
 const CDPR = 2
 
-// ASCII art area on the card (right side)
-const ASCII_X    = 250   // where ASCII starts on card
-const ASCII_COLS = 130   // fills right panel: 130 × 3px ≈ 390px (panel is ~390px wide)
-const ASCII_ROWS = 48    // fills right panel height: 48 × 6.75px = 324px
-const ASCII_FS   = 5.0   // font size px on card canvas
+// ASCII art area — below the info panel
+const ASCII_Y    = 160   // info panel height; drawing starts here
+const ASCII_COLS = 88
+const ASCII_ROWS = 48
+const ASCII_FS   = 4.5
+
+// Center the ASCII art vertically in the drawing panel
+const LINE_H_CONST = ASCII_FS * 1.35
+const DRAW_AREA_H  = CH - (ASCII_Y + 8) - 10
+const DRAW_Y = ASCII_Y + 8 + Math.max(0, Math.round((DRAW_AREA_H - ASCII_ROWS * LINE_H_CONST) / 2))
 
 const ASCII_RAMP = [' ', '·', '.', '`', "'", ',', ':', ';', '-', '~', 'i', 'l', '+', 'x', 'r', 't', '*', 'n', 'u', 'z', '%', '$', '#', '@']
 
@@ -141,11 +146,12 @@ function canvasToAscii(drawCanvas: HTMLCanvasElement): string[] {
   return lines
 }
 
-// ── Card canvas renderer ─────────────────────────────────────────────────────
+// ── Card canvas renderer — portrait layout ────────────────────────────────────
+// Returns { charW, drawX } measured at render time — caller uses these for coordinate mapping.
 async function renderCard(
   canvas: HTMLCanvasElement,
   opts: { color: typeof CARD_COLORS[0]; cardNum: number; ascii: string[]; name?: string; date?: string }
-) {
+): Promise<{ charW: number; drawX: number }> {
   const { color, cardNum, ascii, name, date } = opts
   const { hex, ink } = color
 
@@ -158,7 +164,7 @@ async function renderCard(
   ctx.fillStyle = hex
   ctx.fillRect(0, 0, CW, CH)
 
-  // Dot grid texture (subtle)
+  // Dot grid texture
   ctx.fillStyle = ink
   ctx.globalAlpha = 0.045
   for (let x = 16; x < CW; x += 16)
@@ -167,32 +173,23 @@ async function renderCard(
     }
   ctx.globalAlpha = 1
 
-
-  // ── Corner bracket marks ──────────────────────────────────────────────
-  const M = 10   // margin from edge
-  const B = 14   // bracket arm length
-  ctx.strokeStyle = ink
-  ctx.lineWidth = 1.2
-  ctx.globalAlpha = 0.28
-  // top-left
+  // Corner brackets
+  const M = 10, B = 14
+  ctx.strokeStyle = ink; ctx.lineWidth = 1.2; ctx.globalAlpha = 0.28
   ctx.beginPath(); ctx.moveTo(M, M + B); ctx.lineTo(M, M); ctx.lineTo(M + B, M); ctx.stroke()
-  // top-right
   ctx.beginPath(); ctx.moveTo(CW - M - B, M); ctx.lineTo(CW - M, M); ctx.lineTo(CW - M, M + B); ctx.stroke()
-  // bottom-left
   ctx.beginPath(); ctx.moveTo(M, CH - M - B); ctx.lineTo(M, CH - M); ctx.lineTo(M + B, CH - M); ctx.stroke()
-  // bottom-right
   ctx.beginPath(); ctx.moveTo(CW - M - B, CH - M); ctx.lineTo(CW - M, CH - M); ctx.lineTo(CW - M, CH - M - B); ctx.stroke()
   ctx.globalAlpha = 1
 
-  // ── Left panel: decorative ───────────────────────────────────────────
-  const LEFT = 26
-  const PANEL_W = ASCII_X - 28
-  ctx.fillStyle = ink
-
   await document.fonts.load(`bold 22px Domine`)
 
-  // Top ornament row: three small diamonds
-  const oy = 38
+  const LEFT = 20
+  const PANEL_W = CW - LEFT * 2
+  ctx.fillStyle = ink
+
+  // Three small diamonds ornament
+  const oy = 28
   for (let i = 0; i < 3; i++) {
     const ox = LEFT + i * 14
     ctx.globalAlpha = i === 1 ? 0.55 : 0.22
@@ -203,26 +200,20 @@ async function renderCard(
   ctx.globalAlpha = 1
 
   // Thin rule
-  ctx.globalAlpha = 0.2
-  ctx.fillRect(LEFT, oy + 12, PANEL_W, 0.6)
-  ctx.globalAlpha = 1
+  ctx.globalAlpha = 0.2; ctx.fillRect(LEFT, oy + 12, PANEL_W, 0.6); ctx.globalAlpha = 1
 
-  // Main title — large Domine serif, stacked
+  // Title
   ctx.font = "bold 20px Domine, Georgia, serif"
   ctx.globalAlpha = 0.95
-  ctx.fillText("Johanna's", LEFT, oy + 40)
-  ctx.fillText("Drawing", LEFT, oy + 62)
-  ctx.fillText("Board", LEFT, oy + 84)
+  ctx.fillText("Johanna's Drawing Board", LEFT, oy + 38)
 
   // Thin rule
-  ctx.globalAlpha = 0.15
-  ctx.fillRect(LEFT, oy + 94, PANEL_W, 0.6)
-  ctx.globalAlpha = 1
+  ctx.globalAlpha = 0.15; ctx.fillRect(LEFT, oy + 50, PANEL_W, 0.6); ctx.globalAlpha = 1
 
-  // Visitor number + name block
+  // Visitor number + name
   ctx.font = "500 11px 'Space Grotesk', sans-serif"
   ctx.globalAlpha = 0.38
-  ctx.fillText(`VISITOR · NO. ${String(cardNum).padStart(3, "0")}`, LEFT, oy + 116)
+  ctx.fillText(`VISITOR · NO. ${String(cardNum).padStart(3, "0")}`, LEFT, oy + 72)
   if (name) {
     ctx.font = "600 16px 'Space Grotesk', sans-serif"
     ctx.globalAlpha = 0.88
@@ -230,103 +221,73 @@ async function renderCard(
     while (displayName.length > 1 && ctx.measureText(displayName).width > PANEL_W) {
       displayName = displayName.slice(0, -1)
     }
-    ctx.fillText(displayName, LEFT, oy + 136)
+    ctx.fillText(displayName, LEFT, oy + 92)
   }
 
-  // Date block
+  // Date
   ctx.font = "500 11px 'Space Grotesk', sans-serif"
   ctx.globalAlpha = 0.38
-  ctx.fillText("DATE ISSUED", LEFT, name ? oy + 158 : oy + 136)
+  ctx.fillText("DATE ISSUED", LEFT, name ? oy + 114 : oy + 92)
   ctx.font = "400 16px 'Space Grotesk', sans-serif"
   ctx.globalAlpha = 0.82
-  ctx.fillText(fmtDate(date), LEFT, name ? oy + 178 : oy + 156)
+  ctx.fillText(fmtDate(date), LEFT, name ? oy + 130 : oy + 108)
 
-  // Decorative arc / semicircle ornament in the lower left area
-  ctx.strokeStyle = ink
-  ctx.lineWidth = 0.8
-  ctx.globalAlpha = 0.14
-  for (let r = 18; r <= 54; r += 12) {
-    ctx.beginPath()
-    ctx.arc(LEFT, CH - 20, r, -Math.PI / 2, 0)
-    ctx.stroke()
-  }
+  // JH stamp (top-right)
+  const SX = CW - 28, SY = 38, SR = 15
+  ctx.strokeStyle = ink; ctx.lineWidth = 1; ctx.globalAlpha = 0.22
+  ctx.beginPath(); ctx.arc(SX, SY, SR, 0, Math.PI * 2); ctx.stroke()
+  ctx.beginPath(); ctx.arc(SX, SY, SR - 4, 0, Math.PI * 2); ctx.stroke()
+  ctx.fillStyle = ink; ctx.globalAlpha = 0.3
+  ctx.font = "700 9px 'Space Grotesk', sans-serif"
+  ctx.textAlign = "center"; ctx.fillText("JH", SX, SY + 3); ctx.textAlign = "left"
   ctx.globalAlpha = 1
 
-  ctx.globalAlpha = 1
-
-  // ── Center divider ────────────────────────────────────────────────────
-  const DIVX = ASCII_X - 14
-  ctx.strokeStyle = ink
-  ctx.lineWidth = 0.7
-  ctx.globalAlpha = 0.2
+  // Horizontal divider between info and drawing area
+  const DIVY = ASCII_Y - 14
+  ctx.strokeStyle = ink; ctx.lineWidth = 0.7; ctx.globalAlpha = 0.2
   ctx.setLineDash([3, 4])
-  ctx.beginPath(); ctx.moveTo(DIVX, 20); ctx.lineTo(DIVX, CH - 20); ctx.stroke()
+  ctx.beginPath(); ctx.moveTo(20, DIVY); ctx.lineTo(CW - 20, DIVY); ctx.stroke()
   ctx.setLineDash([])
 
   // Diamond at center of divider
-  const cy = CH / 2
-  ctx.globalAlpha = 0.28
-  ctx.save()
-  ctx.translate(DIVX, cy)
-  ctx.rotate(Math.PI / 4)
-  ctx.fillStyle = ink
-  ctx.fillRect(-4, -4, 8, 8)
-  ctx.restore()
-  ctx.globalAlpha = 1
+  ctx.globalAlpha = 0.28; ctx.save()
+  ctx.translate(CW / 2, DIVY); ctx.rotate(Math.PI / 4)
+  ctx.fillStyle = ink; ctx.fillRect(-4, -4, 8, 8)
+  ctx.restore(); ctx.globalAlpha = 1
 
-  // ── Right panel: ASCII art ────────────────────────────────────────────
-  const ASCII_PX = ASCII_X + 6
+  // Drawing area: ruled lines
   const lineH = ASCII_FS * 1.35
-
-  // Faint ruled lines behind ASCII art (drawing-board feel)
-  ctx.strokeStyle = ink
-  ctx.lineWidth = 0.5
-  ctx.globalAlpha = 0.07
+  ctx.strokeStyle = ink; ctx.lineWidth = 0.5; ctx.globalAlpha = 0.07
   for (let row = 0; row <= ASCII_ROWS; row++) {
-    const ry = 14 + row * lineH
-    ctx.beginPath(); ctx.moveTo(ASCII_PX - 4, ry); ctx.lineTo(CW - 16, ry); ctx.stroke()
+    const ry = ASCII_Y + 4 + row * lineH
+    ctx.beginPath(); ctx.moveTo(14, ry); ctx.lineTo(CW - 14, ry); ctx.stroke()
   }
   ctx.globalAlpha = 1
 
+  // Measure charW and compute centered drawX
+  ctx.font = `${ASCII_FS}px 'Courier New', Courier, monospace`
+  const charW = ctx.measureText("M").width
+  const drawX = Math.round((CW - ASCII_COLS * charW) / 2)
+
+  // ASCII art in drawing area
   if (ascii.length > 0) {
-    ctx.font = `${ASCII_FS}px 'Courier New', Courier, monospace`
-    const charW = ctx.measureText("M").width
-
-    ctx.fillStyle = ink
-    ctx.globalAlpha = 1
-
+    ctx.fillStyle = ink; ctx.globalAlpha = 1
     for (let row = 0; row < ascii.length; row++) {
       for (let col = 0; col < ascii[row].length; col++) {
         const ch = ascii[row][col]
         if (ch === " ") continue
-        const x = ASCII_PX + col * charW
-        const y = 18 + row * lineH
-        if (x > CW - 14 || y > CH - 14) continue
+        const x = drawX + col * charW
+        const y = DRAW_Y + row * lineH
+        if (x > CW - 10 || y > CH - 10) continue
         ctx.fillText(ch, x, y)
       }
     }
     ctx.globalAlpha = 1
   }
 
-  // ── JH circular stamp (bottom-right) ─────────────────────────────────
-  const SX = CW - 28, SY = CH - 24, SR = 15
-  ctx.strokeStyle = ink
-  ctx.lineWidth = 1
-  ctx.globalAlpha = 0.22
-  // outer circle
-  ctx.beginPath(); ctx.arc(SX, SY, SR, 0, Math.PI * 2); ctx.stroke()
-  // inner circle
-  ctx.beginPath(); ctx.arc(SX, SY, SR - 4, 0, Math.PI * 2); ctx.stroke()
-  // JW text
-  ctx.fillStyle = ink
-  ctx.globalAlpha = 0.3
-  ctx.font = "700 9px 'Space Grotesk', sans-serif"
-  ctx.textAlign = "center"
-  ctx.fillText("JH", SX, SY + 3)
-  ctx.textAlign = "left"
-
   ctx.globalAlpha = 1
   ctx.setTransform(1, 0, 0, 1, 0, 0)
+  return { charW, drawX }
 }
 
 // ── Gallery card — renders ASCII card client-side from raw drawing PNG ────────
@@ -335,6 +296,7 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
   const overlayRef = useRef<HTMLCanvasElement>(null)
   const rafRef     = useRef(0)
   const asciiRef   = useRef<string[]>([])
+  const drawXRef   = useRef(14)
   const color = CARD_COLORS[idx % CARD_COLORS.length]
 
   useEffect(() => {
@@ -342,10 +304,11 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
     if (!canvas) return
     let cancelled = false
 
-    imageUrlToAscii(drawing.image_url).then(ascii => {
+    imageUrlToAscii(drawing.image_url).then(async ascii => {
       if (cancelled || !canvasRef.current) return
       asciiRef.current = ascii
-      renderCard(canvasRef.current, { color, cardNum: idx + 1, ascii, name: resolveVisitorName(drawing.name, drawing.id), date: drawing.created_at })
+      const { drawX } = await renderCard(canvasRef.current, { color, cardNum: idx + 1, ascii, name: resolveVisitorName(drawing.name, drawing.id), date: drawing.created_at })
+      drawXRef.current = drawX
     })
 
     return () => { cancelled = true }
@@ -366,13 +329,13 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
     const lineH = ASCII_FS * 1.35
     // approximate char width for overlay (monospace ~0.6× font size)
     const charW = ASCII_FS * 0.62
-    const ASCII_PX = ASCII_X + 6
+    const ASCII_PX = drawXRef.current
     asciiRef.current.forEach((line, row) => {
       for (let col = 0; col < line.length; col++) {
         if (line[col] !== " ") {
           cells.push({
             x: ASCII_PX + col * charW,
-            y: 18 + row * lineH - ASCII_FS,
+            y: DRAW_Y + row * lineH - ASCII_FS,
             w: charW + 0.5,
             h: ASCII_FS + 1,
           })
@@ -466,6 +429,7 @@ export default function DrawPage() {
   const zoomOverlayRef            = useRef<HTMLCanvasElement>(null)
   const zoomAsciiRef              = useRef<string[]>([])
   const zoomRafRef                = useRef(0)
+  const zoomDrawXRef              = useRef(14)
   const PER_PAGE = 12
 
   const cardCanvasRef  = useRef<HTMLCanvasElement>(null)
@@ -475,6 +439,7 @@ export default function DrawPage() {
   const offscreenRef   = useRef<HTMLCanvasElement | null>(null)
   // measured charW of Courier New at ASCII_FS — set after first render, used for coordinate mapping
   const charWRef       = useRef(ASCII_FS * 0.6)
+  const drawXRef       = useRef(14)
   const brushSizeRef   = useRef(brushSize)
   brushSizeRef.current = brushSize
   const isDrawing      = useRef(false)
@@ -504,8 +469,9 @@ export default function DrawPage() {
 
   const shuffle = () => setShuffled(prev => [...prev].sort(() => Math.random() - 0.5))
 
+  const LINE_H = LINE_H_CONST
+
   // Synchronous: composite pre-rendered base + current ASCII onto card canvas.
-  // Used for real-time updates during drawing — no async overhead.
   const renderAsciiOnBase = useCallback(() => {
     const card = cardCanvasRef.current
     const base = baseCanvasRef.current
@@ -517,54 +483,43 @@ export default function DrawPage() {
     ctx.setTransform(CDPR, 0, 0, CDPR, 0, 0)
     ctx.font = `${ASCII_FS}px 'Courier New', Courier, monospace`
     const charW = ctx.measureText("M").width
-    const lineH = ASCII_FS * 1.35
-    const ASCII_PX = ASCII_X + 6
+    const lh = ASCII_FS * 1.35
     ctx.fillStyle = cardColor.ink
     ctx.globalAlpha = 1
+    const dx = drawXRef.current
     for (let row = 0; row < asciiRef.current.length; row++) {
       for (let col = 0; col < asciiRef.current[row].length; col++) {
         const ch = asciiRef.current[row][col]
         if (ch === " ") continue
-        const x = ASCII_PX + col * charW
-        const y = 18 + row * lineH
-        if (x > CW - 14 || y > CH - 14) continue
+        const x = dx + col * charW
+        const y = DRAW_Y + row * lh
+        if (x > CW - 10 || y > CH - 10) continue
         ctx.fillText(ch, x, y)
       }
     }
     ctx.setTransform(1, 0, 0, 1, 0, 0)
   }, [cardColor])
 
-  // ASCII panel origin constants (card logical coords)
-  const DRAW_X = ASCII_X + 6   // = 256, matches ASCII_PX in renderCard
-  const DRAW_Y = 18             // matches starting y for ASCII rows in renderCard
-  const LINE_H = ASCII_FS * 1.35
-
   useEffect(() => {
     if (modalOpen) {
       asciiRef.current = []
-      // Render full card (async), then snapshot base and measure charW
       ;(async () => {
         const canvas = cardCanvasRef.current
         if (!canvas) return
-        await renderCard(canvas, {
+        const { charW, drawX } = await renderCard(canvas, {
           color: cardColor,
           cardNum: drawingsRef.current.length + 1,
           ascii: [],
           name: "Mystery Visitor",
         })
-        // Measure true charW from the canvas after font loads
-        const ctx = canvas.getContext("2d")!
-        ctx.font = `${ASCII_FS}px 'Courier New', Courier, monospace`
-        charWRef.current = ctx.measureText("M").width
+        charWRef.current = charW
+        drawXRef.current = drawX
 
-        // Offscreen sized to exactly ASCII_COLS×charW by ASCII_ROWS×lineH
-        // so each sample cell = one rendered character — perfect coordinate alignment
         const off = document.createElement("canvas")
-        off.width  = Math.ceil(ASCII_COLS * charWRef.current)
+        off.width  = Math.ceil(ASCII_COLS * charW)
         off.height = Math.ceil(ASCII_ROWS * LINE_H)
         offscreenRef.current = off
 
-        // Snapshot base (no ASCII) for fast synchronous compositing during drawing
         const base = document.createElement("canvas")
         base.width  = canvas.width
         base.height = canvas.height
@@ -575,7 +530,6 @@ export default function DrawPage() {
   }, [modalOpen, cardColor])
 
   // ── Drawing directly on card canvas ───────────────────────────────────
-  // Maps a pointer event on the card canvas element to card logical coords
   const getCardPos = (e: React.MouseEvent | React.TouchEvent) => {
     const canvas = cardCanvasRef.current!
     const rect   = canvas.getBoundingClientRect()
@@ -586,13 +540,10 @@ export default function DrawPage() {
     }
   }
 
-  // Map card logical coords → offscreen ASCII-space coords.
-  // x is 1:1 (offscreen.width = ASCII_COLS * charW). y is clamped so drawing
-  // anywhere on the card registers — strokes below the ASCII grid compress to bottom rows.
   const toOff = (p: { x: number; y: number }) => {
     const off = offscreenRef.current
     return {
-      x: p.x - DRAW_X,
+      x: p.x - drawXRef.current,
       y: Math.min(Math.max(0, p.y - DRAW_Y), off ? off.height - 1 : 0),
     }
   }
@@ -722,10 +673,11 @@ export default function DrawPage() {
     let cancelled = false
     cancelAnimationFrame(zoomRafRef.current)
     zoomAsciiRef.current = []
-    imageUrlToAscii(drawing.image_url).then(ascii => {
+    imageUrlToAscii(drawing.image_url).then(async ascii => {
       if (cancelled || !zoomCanvasRef.current) return
       zoomAsciiRef.current = ascii
-      renderCard(zoomCanvasRef.current, { color, cardNum: zoomedIdx + 1, ascii, name: resolveVisitorName(drawing.name, drawing.id), date: drawing.created_at })
+      const { drawX: zdx } = await renderCard(zoomCanvasRef.current, { color, cardNum: zoomedIdx + 1, ascii, name: resolveVisitorName(drawing.name, drawing.id), date: drawing.created_at })
+      zoomDrawXRef.current = zdx
     })
     return () => { cancelled = true }
   }, [zoomedIdx])
@@ -903,10 +855,10 @@ export default function DrawPage() {
                 const cells: { x: number; y: number; w: number; h: number }[] = []
                 const lineH = ASCII_FS * 1.35
                 const charW = ASCII_FS * 0.62
-                const ASCII_PX = ASCII_X + 6
+                const ASCII_PX = zoomDrawXRef.current
                 zoomAsciiRef.current.forEach((line, row) => {
                   for (let col = 0; col < line.length; col++) {
-                    if (line[col] !== " ") cells.push({ x: ASCII_PX + col * charW, y: 18 + row * lineH - ASCII_FS, w: charW + 0.5, h: ASCII_FS + 1 })
+                    if (line[col] !== " ") cells.push({ x: ASCII_PX + col * charW, y: DRAW_Y + row * lineH - ASCII_FS, w: charW + 0.5, h: ASCII_FS + 1 })
                   }
                 })
                 if (cells.length === 0) return
@@ -974,21 +926,22 @@ export default function DrawPage() {
           onClick={e => { if (e.target === e.currentTarget) closeModal() }}
         >
           <div
+            className="draw-modal-inner"
             style={{
               background: isDark ? "#0F1923" : "#fff", borderRadius: 16,
-              width: "100%", maxWidth: 700, maxHeight: "95dvh", overflowY: "auto",
-              padding: "28px 24px 24px",
+              width: "100%", maxWidth: 440, maxHeight: "95dvh", overflowY: "auto",
+              padding: "24px 20px 20px",
               boxShadow: isDark ? "0 32px 80px rgba(0,0,0,0.55)" : "0 32px 80px rgba(20,40,100,0.22)",
             }}
             onClick={e => e.stopPropagation()}
           >
             {/* Modal header */}
-            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 16 }}>
+            <div className="draw-modal-header" style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 16 }}>
               <div>
                 <h2 style={{ fontFamily: "Domine, Georgia, serif", fontSize: 24, fontWeight: 700, color: isDark ? "#ffffff" : "#1E4B9A", margin: "0 0 4px" }}>
                   {editingId ? "Edit your card" : "Leave your mark"}
                 </h2>
-                <p style={{ fontSize: 12, color: isDark ? "rgba(255,255,255,0.45)" : "#9aa5b4", margin: 0, letterSpacing: "0.03em" }}>
+                <p className="draw-modal-subtitle" style={{ fontSize: 12, color: isDark ? "rgba(255,255,255,0.45)" : "#9aa5b4", margin: 0, letterSpacing: "0.03em" }}>
                   {editingId ? "Redraw on the card to update your entry." : "Draw directly on the card — your sketch becomes ASCII art."}
                 </p>
               </div>
@@ -1002,12 +955,12 @@ export default function DrawPage() {
             </div>
 
             {/* Card — draw directly on it */}
-            <div style={{ borderRadius: 10, overflow: "hidden", marginBottom: 14, boxShadow: "0 4px 24px rgba(20,40,100,0.16)" }}>
+            <div className="draw-modal-canvas-wrap" style={{ display: "flex", justifyContent: "center", marginBottom: 14 }}>
               <canvas
                 ref={cardCanvasRef}
                 width={CW * CDPR}
                 height={CH * CDPR}
-                style={{ display: "block", width: "100%", height: "auto", cursor: "crosshair", touchAction: "none" }}
+                style={{ display: "block", width: `${CW}px`, maxWidth: "100%", height: "auto", cursor: "crosshair", touchAction: "none", borderRadius: 10, boxShadow: "0 4px 24px rgba(20,40,100,0.16)" }}
                 onMouseDown={onDrawStart}
                 onMouseMove={onDrawMove}
                 onMouseUp={onDrawEnd}
@@ -1019,27 +972,19 @@ export default function DrawPage() {
             </div>
 
             {/* Controls */}
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>
+            <div className="draw-modal-controls">
               {/* Card colors */}
               {CARD_COLORS.map(c => (
-                <button key={c.hex} onClick={() => setCardColor(c)} title={c.name} style={{
-                  width: 24, height: 24, borderRadius: "50%", background: c.hex,
+                <button key={c.hex} onClick={() => setCardColor(c)} title={c.name} className="draw-color-btn" style={{
+                  background: c.hex,
                   border: cardColor.hex === c.hex ? `2.5px solid ${isDark ? "#ffffff" : "#1E4B9A"}` : `2px solid ${isDark ? "rgba(255,255,255,0.18)" : "rgba(30,75,154,0.14)"}`,
                   outline: cardColor.hex === c.hex ? `2px solid ${isDark ? "#0F1923" : "#fff"}` : "none", outlineOffset: -3,
-                  cursor: "none", flexShrink: 0, boxShadow: "0 1px 4px rgba(0,0,0,0.14)",
+                  cursor: "none", boxShadow: "0 1px 4px rgba(0,0,0,0.14)",
                 }} />
               ))}
 
-              <div style={{ width: 1, height: 18, background: isDark ? "rgba(255,255,255,0.12)" : "rgba(30,75,154,0.12)", flexShrink: 0 }} />
 
               {/* Brush sizes */}
-              {[{ s: 2, d: 8 }, { s: 5, d: 14 }, { s: 10, d: 20 }].map(({ s, d }) => (
-                <button key={s} onClick={() => setBrushSize(s)} style={{
-                  width: d, height: d, borderRadius: "50%", background: isDark ? "#ffffff" : "#1E4B9A", border: "none",
-                  opacity: brushSize === s ? 1 : 0.2, cursor: "none", flexShrink: 0, transition: "opacity 0.15s",
-                }} />
-              ))}
-
               <div style={{ flex: 1 }} />
 
               <button onClick={clearDrawing} style={{

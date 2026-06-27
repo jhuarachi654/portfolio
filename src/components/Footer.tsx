@@ -51,7 +51,7 @@ export default function Footer() {
         <div className="footer-dark-links">
           <a href="mailto:jhuarachi654@gmail.com" className="footer-dark-link"><span>Email</span></a>
           <a href="https://www.linkedin.com/in/johanna-huarachi" target="_blank" rel="noopener noreferrer" className="footer-dark-link"><span>LinkedIn</span></a>
-          <a href="/Johanna_Huarachi_Resumee.pdf" target="_blank" rel="noopener noreferrer" className="footer-dark-link"><span>Resume</span></a>
+          <a href="https://drive.google.com/file/d/1i5BMnL9dF8lv1CjTIwBDqzOtvkcd779x/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="footer-dark-link"><span>Resume</span></a>
         </div>
 
       </div>

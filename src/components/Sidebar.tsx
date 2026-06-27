@@ -103,7 +103,7 @@ export default function Sidebar() {
         </div>
 
         <a
-          href="/Johanna_Huarachi_Resumee.pdf"
+          href="https://drive.google.com/file/d/1i5BMnL9dF8lv1CjTIwBDqzOtvkcd779x/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-resume w-full"
