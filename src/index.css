@@ -41,6 +41,13 @@ html {
   scroll-behavior: auto;
 }
 
+html {
+  background-color: #ffffff;
+}
+[data-theme="dark"] html {
+  background-color: #0A1118;
+}
+
 body {
   font-family: var(--font-sans);
   font-size: 14px;
@@ -48,6 +55,11 @@ body {
   background-color: var(--color-paper);
   -webkit-font-smoothing: antialiased;
   --page-bg: #ffffff;
+}
+
+html.loading,
+html.loading body {
+  overflow: hidden;
 }
 [data-theme="dark"] body {
   --page-bg: #0A1118;
@@ -2506,8 +2518,6 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   border: 1px solid rgba(30,75,154,0.1);
   border-radius: 20px;
   backdrop-filter: blur(8px);
-  min-width: 0;
-  flex: 1;
   overflow: visible;
 }
 
@@ -2622,6 +2632,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 [data-theme="dark"] .deck-toc-pill { background: rgba(168,190,232,0.08); }
 [data-theme="dark"] .deck-toc-pill.is-active { border-color: #A8BEE8; }
 [data-theme="dark"] .deck-toc-pill img[src*="LLSF"] { background: #1a2535; }
+
 
 /* ── ListView (removed — keeping CSS in case of rollback) ──────── */
 .list-view {

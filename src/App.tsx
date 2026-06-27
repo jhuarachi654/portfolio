@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./components/Layout";
 import CustomCursor from "./components/CustomCursor";
@@ -15,6 +15,12 @@ import RevenueManagementPage from "./pages/work/RevenueManagementPage";
 import DNCPage from "./pages/work/DNCPage";
 import ExpertAIPage from "./pages/work/ExpertAIPage";
 
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -39,10 +45,15 @@ function AnimatedRoutes() {
 export default function App() {
   const [loaded, setLoaded] = useState(false)
 
+  useEffect(() => {
+    document.documentElement.classList.toggle("loading", !loaded)
+  }, [loaded])
+
   return (
     <ThemeProvider>
       {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
       <BrowserRouter>
+        <ScrollToTop />
         <CustomCursor />
         <Layout>
           <AnimatedRoutes />

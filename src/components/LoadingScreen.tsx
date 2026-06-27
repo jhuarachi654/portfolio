@@ -185,12 +185,21 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               },
             },
             {
-              text: "She's a product designer grounded in psychology who builds what she designs.",
+              text: "She's a product designer grounded in",
               style: {
                 fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 color: "rgba(255,255,255,0.4)", maxWidth: 520, textAlign: "center",
                 lineHeight: 1.8,
+              },
+            },
+            {
+              text: "psychology who builds what she designs.",
+              style: {
+                fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
+                letterSpacing: "0.18em", textTransform: "uppercase",
+                color: "rgba(255,255,255,0.4)", maxWidth: 520, textAlign: "center",
+                lineHeight: 1.8, marginTop: -10,
               },
             },
           ]}

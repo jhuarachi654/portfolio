@@ -1,4 +1,5 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { flushSync } from "react-dom"
 import CaseStudyCard from "./CaseStudyCard"
 import DeckView from "./DeckView"
 import ViewSwitcher, { type ViewMode } from "./ViewSwitcher"
@@ -180,13 +181,6 @@ function useNumCols() {
 export default function WorkGrid() {
   const [view, setView]               = useState<ViewMode>("grid")
   const scrollLockRef                 = useRef<number | null>(null)
-
-  useLayoutEffect(() => {
-    if (scrollLockRef.current !== null) {
-      window.scrollTo({ top: scrollLockRef.current, behavior: "instant" })
-      scrollLockRef.current = null
-    }
-  }, [view])
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const numCols = useNumCols()
 
@@ -225,8 +219,9 @@ export default function WorkGrid() {
             />
           </div>
           <ViewSwitcher current={view} onChange={v => {
-            scrollLockRef.current = window.scrollY
-            setView(v)
+            const y = window.scrollY
+            flushSync(() => setView(v))
+            window.scrollTo({ top: y, behavior: "instant" })
           }} />
         </div>
 
