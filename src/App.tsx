@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./components/Layout";
 import CustomCursor from "./components/CustomCursor";
@@ -51,6 +52,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
+      <Analytics />
       {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
       <BrowserRouter>
         <ScrollToTop />
