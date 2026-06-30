@@ -6,7 +6,7 @@ import { useScrollReveal } from "../hooks/useScrollReveal"
 // ── Shared type ─────────────────────────────────────────────────────
 export type CaseStudy = {
   title: string
-  year: number
+  year?: number
   tags: string[]
   image: string
   video: string
