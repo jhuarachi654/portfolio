@@ -4040,9 +4040,9 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   .cs-hero-lottie-wrap > div video,
   .cs-hero-lottie-wrap > div iframe {
     width: 100% !important;
-    height: 120% !important;
-    object-fit: cover;
-    transform: translateY(-8%);
+    height: 100% !important;
+    transform: scale(1.1);
+    transform-origin: top center;
   }
 
   .challenge-banner-question {

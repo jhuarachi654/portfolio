@@ -46,12 +46,7 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(() => sessionStorage.getItem("visited") === "1")
-
-  const handleDone = () => {
-    sessionStorage.setItem("visited", "1")
-    setLoaded(true)
-  }
+  const [loaded, setLoaded] = useState(() => window.location.pathname !== "/")
 
   useEffect(() => {
     document.documentElement.classList.toggle("loading", !loaded)
@@ -60,7 +55,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <Analytics />
-      {!loaded && <LoadingScreen onDone={handleDone} />}
+      {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
       <BrowserRouter>
         <ScrollToTop />
         <CustomCursor />

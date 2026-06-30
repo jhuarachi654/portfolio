@@ -264,12 +264,12 @@ const PERSONAS = [
   },
 ]
 
-function PersonaToggle({ className = '' }: { className?: string }) {
+function PersonaToggle({ className = '', style: styleProp }: { className?: string; style?: React.CSSProperties }) {
   const [active, setActive] = useState(0)
   const p = PERSONAS[active]
 
   return (
-    <div className={className} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start', marginTop: 16 }}>
+    <div className={className} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start', ...styleProp }}>
 
       {/* Left: selector buttons with descriptions */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -830,9 +830,9 @@ export default function RevenueManagementPage() {
           </BodyText>
         </div>
 
-        <PersonaToggle className="mt-12" />
+        <PersonaToggle className="" style={{ marginTop: 48 }} />
 
-        <div className="mt-16">
+        <div style={{ marginTop: 64 }}>
           <SubHeading tag="SYSTEMS MAPPING">Mapping out the Current State</SubHeading>
           <BodyText>
             I mapped the relationship between users, the platform, and the three pain points. High cognitive load pushed Junior Analysts in two directions: some left the platform entirely, others turned to workarounds — relying on Senior colleagues or outside AI to get unstuck. The platform served neither user well.
