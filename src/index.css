@@ -4034,16 +4034,15 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   }
   .cs-hero-lottie-wrap > div {
     overflow: hidden;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 9;
   }
   .cs-hero-lottie-wrap > div > *,
   .cs-hero-lottie-wrap > div video,
   .cs-hero-lottie-wrap > div iframe {
     width: 100% !important;
-    height: 100% !important;
+    height: 120% !important;
     object-fit: cover;
-    transform: scale(1.1);
-    transform-origin: center top;
+    transform: translateY(-8%);
   }
 
   .challenge-banner-question {
@@ -4075,7 +4074,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   /* Collapse all inline multi-column grids to single column */
   .cs-page [style*="grid-template-columns"] {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: 32px !important;
   }
   /* Prevent grid items from overflowing their 1fr track */
   .cs-page [style*="grid-template-columns"] > * {
