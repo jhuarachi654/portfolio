@@ -545,9 +545,9 @@ export default function DNCPage() {
       </div> {/* end padded wrapper */}
 
       <NextProject
-        title="PROS Revenue Management"
-        to="/work/revenue-management"
-        description="Modernized an AI-powered airline pricing platform for 50+ carrier analysts."
+        title="Expert.ai"
+        to="/work/expert-ai"
+        description="Redesigned filtering for an AI text analysis platform, improving accessibility."
       />
 
       <Footer />

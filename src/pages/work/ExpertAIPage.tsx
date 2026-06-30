@@ -758,9 +758,9 @@ export default function ExpertAIPage() {
       </div>
 
       <NextProject
-        title="PROS Fare Finder Map"
-        to="/work/fare-finder"
-        description="Designed and shipped a flight map tool for travelers to explore and book their next trip."
+        title="PROS Revenue Management"
+        to="/work/revenue-management"
+        description="Modernized an AI-powered airline pricing platform for 50+ carrier analysts."
       />
 
       <Footer />

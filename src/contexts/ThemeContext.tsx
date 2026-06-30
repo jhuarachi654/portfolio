@@ -12,6 +12,7 @@ const ThemeContext = createContext<ThemeContextType>({ theme: "light", toggle: (
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") return "light"
+    if (window.location.pathname === "/") return "light"
     return (localStorage.getItem("theme") as Theme) ?? "light"
   })
 

@@ -241,7 +241,6 @@ export default function CaseStudyCard({
         )}
         {showSkeleton && <div className="case-study-card-skeleton" aria-busy="true" />}
         {comingSoon && <span className="case-study-card-badge">Soon</span>}
-        {year && <span className="case-study-card-year-pill">{year}</span>}
       </div>
 
       <div className="case-study-card-body">
