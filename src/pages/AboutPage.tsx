@@ -313,6 +313,9 @@ export default function AboutPage() {
               equitable and delightful. The digital world is only growing, and it
               needs to be built for everyone.
             </p>
+            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "320ms" } as React.CSSProperties}>
+              This portfolio was designed and built entirely in code — React, TypeScript, and Vite.
+            </p>
           </div>
         </div>
 

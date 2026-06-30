@@ -31,6 +31,9 @@ export interface CaseStudyCardProps {
   cursorIconIsEmoji?: boolean
   projectType?: string
   status?: string
+  metrics?: { stat: string; label: string }[]
+  team?: string
+  timeframe?: string
 }
 
 export default function CaseStudyCard({
@@ -61,6 +64,9 @@ export default function CaseStudyCard({
   cursorIconIsEmoji,
   projectType,
   status,
+  metrics,
+  team,
+  timeframe,
 }: CaseStudyCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const lottieRef = useRef<LottieRefCurrentProps>(null)
@@ -76,53 +82,35 @@ export default function CaseStudyCard({
   const [slowLoad, setSlowLoad] = useState(false)
   const mobileInViewRef = useRef(false)
 
-  // Set src once card enters viewport (lazy load); forcePlay bypasses this
   useEffect(() => {
     if (forcePlay) { setIsInView(true); return }
     const el = mediaRef.current
     if (!el) return
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true)
-          observer.disconnect()
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting) { setIsInView(true); observer.disconnect() } },
       { rootMargin: "100px" }
     )
     observer.observe(el)
     return () => observer.disconnect()
   }, [forcePlay])
 
-  // Only show skeleton if loading takes longer than 400ms
   useEffect(() => {
     if (isReady) { setSlowLoad(false); return }
     const t = setTimeout(() => setSlowLoad(true), 400)
     return () => clearTimeout(t)
   }, [isReady])
 
-  // Seek Lottie to initial frame after it mounts
   useEffect(() => {
     if (!lottieData || !isDesktop || lottieStartTime == null) return
-    const id = requestAnimationFrame(() => {
-      lottieRef.current?.goToAndStop(lottieStartTime * 1000, false)
-    })
+    const id = requestAnimationFrame(() => { lottieRef.current?.goToAndStop(lottieStartTime * 1000, false) })
     return () => cancelAnimationFrame(id)
   }, [lottieData, isDesktop, lottieStartTime])
 
-  // Fetch Lottie JSON when card comes into view
   useEffect(() => {
     if (!lottie || !isInView || lottieData) return
-    fetch(lottie)
-      .then(r => r.json())
-      .then(data => {
-        setLottieData(data)
-        setIsReady(true)
-      })
-      .catch(() => {})
+    fetch(lottie).then(r => r.json()).then(data => { setLottieData(data); setIsReady(true) }).catch(() => {})
   }, [lottie, isInView, lottieData])
 
-  // forcePlay: play/stop whenever the prop changes
   useEffect(() => {
     if (prefersReducedMotion) return
     if (forcePlay) {
@@ -131,18 +119,13 @@ export default function CaseStudyCard({
     } else {
       const vid = videoRef.current
       if (vid) { vid.pause(); vid.currentTime = lottieStartTime ?? 0 }
-      if (lottieStartTime != null) {
-        lottieRef.current?.goToAndStop(lottieStartTime * 1000, false)
-      } else {
-        lottieRef.current?.stop()
-      }
+      if (lottieStartTime != null) lottieRef.current?.goToAndStop(lottieStartTime * 1000, false)
+      else lottieRef.current?.stop()
     }
   }, [forcePlay, prefersReducedMotion, lottieStartTime, lottieData])
 
-  // Static image: mark ready on load
   const handleImageLoad = () => setIsReady(true)
 
-  // Video: mark ready on canplay, and auto-play if already hovered or forced
   const handleCanPlay = () => {
     setIsReady(true)
     if (prefersReducedMotion) return
@@ -155,7 +138,6 @@ export default function CaseStudyCard({
     }
   }
 
-  // Desktop hover
   const handleMouseEnter = () => {
     if (!isDesktop || prefersReducedMotion) return
     isHoveredRef.current = true
@@ -168,20 +150,15 @@ export default function CaseStudyCard({
     isHoveredRef.current = false
     const vid = videoRef.current
     if (vid) { vid.pause(); vid.currentTime = 0 }
-    if (lottieStartTime != null) {
-      lottieRef.current?.goToAndStop(lottieStartTime * 1000, false)
-    } else {
-      lottieRef.current?.stop()
-    }
+    if (lottieStartTime != null) lottieRef.current?.goToAndStop(lottieStartTime * 1000, false)
+    else lottieRef.current?.stop()
   }
 
-  // Mobile: play/pause based on viewport visibility
   useEffect(() => {
     if (isDesktop || prefersReducedMotion || !isInView) return
     if (!video && !lottieData) return
     const el = cardRef.current
     if (!el) return
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -204,6 +181,8 @@ export default function CaseStudyCard({
   const aspectRatioClass = `aspect-${aspectRatio.replace("/", "-")}`
   const showSkeleton = slowLoad && !isReady
 
+  const hasMetrics = metrics && metrics.length > 0
+
   const cardContent = (
     <div
       ref={cardRef}
@@ -213,7 +192,7 @@ export default function CaseStudyCard({
     >
       <div
         ref={mediaRef}
-        className={`case-study-card-media ${aspectRatioClass} ${isReady ? 'is-loaded' : ''}`}
+        className={`case-study-card-media ${aspectRatioClass} ${isReady ? "is-loaded" : ""}`}
         style={{ ...(bgColor ? { background: bgColor } : {}), ...(mediaPadding ? { padding: mediaPadding } : {}) }}
       >
         {dotField && <DotField layout={dotLayout} />}
@@ -223,10 +202,7 @@ export default function CaseStudyCard({
             className="case-study-card-video"
             src={isInView ? video : undefined}
             poster={image}
-            muted
-            loop
-            playsInline
-            preload="metadata"
+            muted loop playsInline preload="metadata"
             onCanPlay={handleCanPlay}
             style={{ objectFit, objectPosition, ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
           />
@@ -247,13 +223,9 @@ export default function CaseStudyCard({
             onLoad={handleImageLoad}
           />
         )}
-
         {showSkeleton && <div className="case-study-card-skeleton" aria-busy="true" />}
         {comingSoon && <span className="case-study-card-badge">Soon</span>}
-
-        {year && (
-          <span className="case-study-card-year-pill">{year}</span>
-        )}
+        {year && <span className="case-study-card-year-pill">{year}</span>}
       </div>
 
       <div className="case-study-card-body">
@@ -267,6 +239,21 @@ export default function CaseStudyCard({
         </div>
         {description && <p className="case-study-card-description">{description}</p>}
       </div>
+
+      {hasMetrics && (
+        <div className="cs-metrics-panel">
+          <div className="cs-metrics-inner">
+            <div className="cs-metrics-boxes">
+              {metrics!.map((m, i) => (
+                <div key={i} className="cs-metric-box">
+                  <span className="cs-metric-stat">{m.stat}</span>
+                  <span className="cs-metric-label">{m.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 

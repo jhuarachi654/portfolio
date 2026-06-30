@@ -38,7 +38,6 @@ export default function CaseStudySidebar() {
         <Link
           to="/"
           className="nav-link"
-          data-cursor-label="take me home ↩"
         >
           <span>← Home</span>
         </Link>

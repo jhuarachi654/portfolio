@@ -59,7 +59,7 @@ export default function Footer() {
 
       <div className="footer-dark-bar">
         <span className="footer-dark-made">Made with Iced Hojichas, genuine thought, and delight.</span>
-        <span className="footer-dark-copy">© 2026 Johanna Huarachi. Design &amp; code.</span>
+        <span className="footer-dark-copy">© 2026 Johanna Huarachi. Designed &amp; built in React + TypeScript.</span>
       </div>
 
     </footer>

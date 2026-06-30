@@ -37,8 +37,7 @@ export default function Sidebar() {
         <Link
           to="/"
           className="flex items-center gap-2 text-navy no-underline"
-          data-cursor-label="take me home ↩"
-          style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none" }}
           onClick={e => {
             e.preventDefault()
             if (location.pathname === "/") {
@@ -85,7 +84,7 @@ export default function Sidebar() {
 
       <div className="flex flex-col gap-3">
         <p className="font-sans text-[14px] leading-relaxed text-navy">
-          Multidisciplinary Designer & Builder bringing delight and a humanities perspective to every product.
+          First-gen. Humanities-trained. I design for the people these systems usually miss.
         </p>
         <p className="font-sans text-[14px] text-navy">
           Design Prev. @ PROS & DNC
