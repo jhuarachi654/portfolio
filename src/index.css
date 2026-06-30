@@ -2011,7 +2011,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   letter-spacing: -0.01em;
 }
 [data-theme="dark"] .cs-metric-stat {
-  color: #4ECDC4;
+  color: #ffffff;
 }
 .cs-metric-label {
   font-family: var(--font-sans);
