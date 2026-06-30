@@ -12,21 +12,32 @@ interface LayoutProps {
 function useGlobalReveal() {
   const { pathname } = useLocation()
   useEffect(() => {
-    const observe = () => {
-      const els = document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)")
-      if (!els.length) return
-      const obs = new IntersectionObserver(
-        (entries) => entries.forEach(e => {
-          if (e.isIntersecting) { (e.target as HTMLElement).classList.add("is-visible"); obs.unobserve(e.target) }
-        }),
-        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-      )
-      els.forEach(el => obs.observe(el))
-      return () => obs.disconnect()
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          (e.target as HTMLElement).classList.add("is-visible")
+          io.unobserve(e.target)
+        }
+      }),
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    )
+
+    const observeNew = () => {
+      document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)").forEach(el => io.observe(el))
     }
-    // Small delay so new page's DOM is painted
-    const t = setTimeout(observe, 60)
-    return () => clearTimeout(t)
+
+    // Initial observe after paint
+    const t = setTimeout(observeNew, 60)
+
+    // Re-observe whenever new [data-reveal] nodes are added (e.g. column reflow on resize)
+    const mo = new MutationObserver(() => observeNew())
+    mo.observe(document.body, { childList: true, subtree: true })
+
+    return () => {
+      clearTimeout(t)
+      io.disconnect()
+      mo.disconnect()
+    }
   }, [pathname])
 }
 

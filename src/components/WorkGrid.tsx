@@ -179,8 +179,19 @@ function useNumCols() {
   return n
 }
 
+function useIsMobile() {
+  const get = () => window.innerWidth < 768
+  const [v, setV] = useState(get)
+  useEffect(() => {
+    const update = () => setV(get())
+    window.addEventListener("resize", update)
+    return () => window.removeEventListener("resize", update)
+  }, [])
+  return v
+}
+
 export default function WorkGrid() {
-  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
+  const isMobile = useIsMobile()
   const [view, setView]               = useState<ViewMode>("grid")
   const scrollLockRef                 = useRef<number | null>(null)
   const [selectedTags, setSelectedTags] = useState<string[]>([])
