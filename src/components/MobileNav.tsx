@@ -37,7 +37,7 @@ function LiveClock() {
 const NAV_LINKS = [
   { label: "Works", to: "/", end: true },
   { label: "About", to: "/about" },
-  { label: "Playground", to: "/play" },
+  { label: "Play", to: "/play" },
   { label: "Drawing Board", to: "/draw" },
 ]
 
@@ -85,7 +85,7 @@ export default function MobileNav() {
           borderBottom: theme === "dark" ? "1px solid rgba(168,190,232,0.08)" : "1px solid rgba(30,75,154,0.1)",
         }}
       >
-        <Link to="/" onClick={close} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+        <Link to="/" onClick={e => { e.preventDefault(); close(); if (location.pathname === "/") { window.scrollTo({ top: 0, behavior: "smooth" }) } else { navigate("/"); setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 120) } }} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
           <img
             src="/Johanna Profile Picture.png"
             alt="Johanna Huarachi"

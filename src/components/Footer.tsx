@@ -45,6 +45,7 @@ export default function Footer() {
             width={200}
             height={200}
             tileColor={[168, 190, 232]}
+            staticBloom
           />
         </div>
 

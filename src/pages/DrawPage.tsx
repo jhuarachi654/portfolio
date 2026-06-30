@@ -375,11 +375,13 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
 
   return (
     <div
+      className="draw-card-enter"
       style={{
         borderRadius: 12, overflow: "hidden", position: "relative",
         boxShadow: "0 2px 16px rgba(30,75,154,0.10), 0 1px 3px rgba(30,75,154,0.06)",
         transition: "transform 0.22s cubic-bezier(.25,.8,.25,1), box-shadow 0.22s",
         cursor: "zoom-in",
+        animationDelay: `${Math.min(idx, 8) * 60}ms`,
       }}
       onMouseEnter={e => {
         const el = e.currentTarget as HTMLElement
@@ -718,7 +720,12 @@ export default function DrawPage() {
     if (zoomedIdx === null || !zoomCanvasRef.current) return
     const drawing = visible[zoomedIdx]
     if (!drawing) return
-    const color = CARD_COLORS[zoomedIdx % CARD_COLORS.length]
+    const color = CARD_COLORS.find(c => c.hex === drawing.card_color) ?? CARD_COLORS[zoomedIdx % CARD_COLORS.length]
+    // Render zoom at device pixel ratio for sharp display on retina screens
+    const dpr = Math.min(window.devicePixelRatio || 2, 3)
+    const canvas = zoomCanvasRef.current
+    canvas.width  = CW * dpr
+    canvas.height = CH * dpr
     let cancelled = false
     cancelAnimationFrame(zoomRafRef.current)
     zoomAsciiRef.current = []
@@ -885,7 +892,7 @@ export default function DrawPage() {
                 fontFamily: "Space Grotesk, sans-serif",
                 letterSpacing: "0.12em", textTransform: "uppercase" as const,
               }}>
-                THAT'S YOURS ✦
+                THAT'S YOURS
               </div>
             )}
 
@@ -934,7 +941,7 @@ export default function DrawPage() {
                 document.body.classList.remove("cursor-on-light-card")
               }}
             >
-              <canvas ref={zoomCanvasRef} width={CW * CDPR} height={CH * CDPR} style={{ display: "block", width: "100%", height: "auto" }} />
+              <canvas ref={zoomCanvasRef} style={{ display: "block", width: "100%", height: "auto" }} />
               <canvas ref={zoomOverlayRef} width={CW * CDPR} height={CH * CDPR} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }} />
             </div>
 

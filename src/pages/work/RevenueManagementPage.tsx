@@ -119,7 +119,7 @@ function PersonaCard({
         <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
           {needs.map(n => (
             <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <span className="font-sans text-navy/40 shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>✳</span>
+              <span className="font-sans text-navy/40 shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>—</span>
               <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', lineHeight: 1.5 }}>{n}</span>
             </li>
           ))}
@@ -641,7 +641,7 @@ export default function RevenueManagementPage() {
       >
         {/* Hero Lottie */}
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)' }}>
+          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', lineHeight: 0, fontSize: 0 }}>
             <HeroLottie />
           </div>
         </div>

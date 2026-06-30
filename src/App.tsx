@@ -15,6 +15,7 @@ import FareFinderPage from "./pages/work/FareFinderPage";
 import RevenueManagementPage from "./pages/work/RevenueManagementPage";
 import DNCPage from "./pages/work/DNCPage";
 import ExpertAIPage from "./pages/work/ExpertAIPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 
 function ScrollToTop() {
@@ -38,6 +39,7 @@ function AnimatedRoutes() {
         <Route path="/work/revenue-management" element={<RevenueManagementPage />} />
         <Route path="/work/democratic-national-committee" element={<DNCPage />} />
         <Route path="/work/expert-ai" element={<ExpertAIPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   )

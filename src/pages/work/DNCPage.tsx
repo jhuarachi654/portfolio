@@ -201,7 +201,7 @@ const iterationOptions = [
     photoChoice: "The photo's tone is muted and didn't feel celebratory enough for the event.",
   },
   {
-    label: '★  Final',
+    label: 'Final',
     image: 'dnc-iter-final.png',
     isFinal: true,
     accessibility: { result: 'Passes WCAG AAA (14.59)', note: 'Selected design. Layout is clear, tone is celebratory and professional.' },

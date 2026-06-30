@@ -14,7 +14,7 @@ export default function ChallengeBanner({ label = 'Challenge', question }: Chall
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         margin: '0 auto 12px',
       }}>
-        <span style={{ fontSize: 16 }}>✈</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
       </div>
 
       {/* Label */}

@@ -16,18 +16,51 @@
 }
 
 @keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .page-transition {
-  animation: page-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: page-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────────── */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+}
+.reveal.reveal-in {
+  animation: reveal-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* stagger helpers */
+.reveal-d1 { animation-delay: 0.08s; }
+.reveal-d2 { animation-delay: 0.16s; }
+.reveal-d3 { animation-delay: 0.24s; }
+.reveal-d4 { animation-delay: 0.32s; }
+.reveal-d5 { animation-delay: 0.40s; }
+.reveal-d6 { animation-delay: 0.48s; }
+
+/* ── Draw gallery card stagger ──────────────────────────────────── */
+@keyframes card-pop {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.draw-card-enter {
+  animation: card-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── 404 stagger ────────────────────────────────────────────────── */
+@keyframes not-found-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.nf-anim {
+  opacity: 0;
+  animation: not-found-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 *, *::before, *::after {
@@ -621,7 +654,7 @@ h1 {
   100% { transform: scale(0.55); opacity: 0; }
 }
 
-/* ✿ glyphs flying outward radially — 8 at 45° each */
+/* glyphs flying outward radially — 8 at 45° each */
 .footer-spark-particle {
   --i: 0;
   --angle: calc(var(--i) * 45deg);
@@ -632,7 +665,7 @@ h1 {
   animation-delay: calc(0.04s + var(--i) * 0.018s);
 }
 .footer-spark-particle::before {
-  content: '✿';
+  content: '*';
   position: absolute;
   font-size: 11px;
   color: rgba(168, 190, 232, 0.8);
@@ -1160,6 +1193,10 @@ h1 {
   height: 52px;
   border-color: rgba(30, 75, 154, 0.6);
   background: rgba(30, 75, 154, 0.06);
+}
+
+@media (max-width: 767px) {
+  .cursor-label { display: none !important; }
 }
 
 .cursor-label {
@@ -1851,6 +1888,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .case-study-card-wrapper:hover .case-study-card {
   border-color: rgba(30, 75, 154, 0.7);
   box-shadow: 0 8px 32px rgba(30, 75, 154, 0.18), 0 2px 8px rgba(30, 75, 154, 0.10);
+  transform: translateY(-4px);
 }
 
 [data-theme="dark"] .case-study-card {
@@ -2118,6 +2156,16 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   gap: 4px;
   align-items: flex-start;
   flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .case-study-card-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .case-study-card-tags {
+    flex-shrink: 1;
+  }
 }
 
 .case-study-card-tag {

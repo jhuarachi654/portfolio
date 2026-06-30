@@ -260,7 +260,7 @@ export default function AboutPage() {
 
             {/* Main pile — center of corkboard */}
             <div className="about-pile-hero-wrap">
-              <span className="about-clip" aria-hidden="true">🖇️</span>
+              <span className="about-clip" aria-hidden="true" />
               <button
                 className="about-pile-thumb"
                 onClick={shuffle}

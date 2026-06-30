@@ -179,8 +179,8 @@ export default function PlayPage() {
     <>
       <div className="play-page">
         <div className="play-header">
-          <p className="play-eyebrow">Playground</p>
-          <h1 className="play-headline">Fun side projects, explorations, and more.</h1>
+          <p className="play-eyebrow" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>Play</p>
+          <h1 className="play-headline" data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>Fun side projects, explorations, and more.</h1>
         </div>
 
         <div className="play-card-grid line-grid">
@@ -209,7 +209,7 @@ export default function PlayPage() {
           </div>
 
           {/* Popple */}
-          <a href="https://popple.app" target="_blank" rel="noopener noreferrer" className="case-study-card-wrapper" style={{ display: "block", textDecoration: "none" }}>
+          <a href="https://popple.pages.dev/" target="_blank" rel="noopener noreferrer" className="case-study-card-wrapper" style={{ display: "block", textDecoration: "none" }}>
             <div className="case-study-card">
               <div className="case-study-card-media aspect-4-3" style={{ position: "relative", overflow: "hidden" }}>
                 <PoppleVideo />

@@ -32,9 +32,10 @@ interface Props {
   loop?: boolean
   startDelay?: number
   playbackRate?: number
+  staticBloom?: boolean
 }
 
-export default function AsciiVideo({ src, width = 420, height = 460, twinkle = false, tileColor, seekTo, loop = true, startDelay = 0, playbackRate = 1 }: Props) {
+export default function AsciiVideo({ src, width = 420, height = 460, twinkle = false, tileColor, seekTo, loop = true, startDelay = 0, playbackRate = 1, staticBloom = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const videoRef  = useRef<HTMLVideoElement>(null)
   const frameRef  = useRef<HTMLCanvasElement>(null)
@@ -42,9 +43,9 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
   const mouseRef  = useRef({ x: -9999, y: -9999 })
   const rafRef    = useRef(0)
 
-  // Mobile: always use static bloom image — skip video entirely
+  // Mobile / staticBloom: always use static bloom image — skip video entirely
   useEffect(() => {
-    if (!IS_MOBILE) return
+    if (!IS_MOBILE && !staticBloom) return
     const canvas = canvasRef.current
     const frame  = frameRef.current
     if (!canvas || !frame) return
@@ -137,7 +138,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
   }, [width, height])
 
   useEffect(() => {
-    if (IS_MOBILE) return
+    if (IS_MOBILE || staticBloom) return
     const canvas = canvasRef.current
     const video  = videoRef.current
     const frame  = frameRef.current

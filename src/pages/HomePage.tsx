@@ -82,14 +82,13 @@ function useTypewriter() {
 export default function HomePage() {
   const displayed = useTypewriter()
   const flowerSize = useFlowerSize()
-
   return (
     <>
       <div className="line-grid hero-page">
 
         {/* ── Left: headline + button + hashtags ── */}
         <div className="hero-left">
-          <div className="hero-name hero-display-headline">
+          <div className="hero-name hero-display-headline" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>
             <div className="hero-first-line">
               Hi, I'm Johanna, a{" "}
               <span className="hero-role-wrap">
@@ -100,7 +99,7 @@ export default function HomePage() {
             <div>who thinks in behavior, leads with craft, and ships in code.</div>
           </div>
 
-          <div className="hero-tags">
+          <div className="hero-tags" data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
             {TAGS.map(tag => (
               <span key={tag} className="hero-tag">{tag}</span>
             ))}

@@ -4,6 +4,7 @@ import CaseStudyCard from "./CaseStudyCard"
 import DeckView from "./DeckView"
 import ViewSwitcher, { type ViewMode } from "./ViewSwitcher"
 import WorkFilter from "./WorkFilter"
+import { useScrollReveal } from "../hooks/useScrollReveal"
 
 // ── Shared type ─────────────────────────────────────────────────────
 export type CaseStudy = {
@@ -72,43 +73,6 @@ const CASE_STUDIES: CaseStudy[] = [
     status: "Handed Off",
   },
   {
-    title: "Democratic National Committee",
-    year: 2023,
-    tags: ["Consumer"],
-    image: "/images/featured-work/featured-work-11-hmQDs6.png",
-    video: "",
-    lottie: "/videos/DNC-Video.json",
-    href: "/work/democratic-national-committee",
-    role: "Digital Design Intern",
-    description: "Created campaign assets across social, ads, and email for Biden-Harris.",
-    objectFit: "contain",
-    mediaScale: 1.5,
-    dotField: true,
-    dotLayout: 1,
-    icon: "/DNC Logo.svg.png",
-    cursorLabel: "Open case study",
-    projectType: "Internship",
-    status: "Handed Off",
-  },
-  {
-    title: "Expert.ai",
-    year: 2022,
-    tags: ["Enterprise", "Accessibility"],
-    image: "/videos/expert.ai-Video-poster.png",
-    video: "/videos/expert.ai-Video.webm",
-    href: "/work/expert-ai",
-    role: "Product Design Intern",
-    description: "Redesigned filtering for an AI text analysis platform, improving accessibility.",
-    objectFit: "contain",
-    mediaPadding: 16,
-    dotField: true,
-    dotLayout: 2,
-    icon: "/expert.ai Logo.png",
-    cursorLabel: "Open case study",
-    projectType: "Internship",
-    status: "Handed Off",
-  },
-  {
     title: "Popple",
     year: 2026,
     tags: ["AI"],
@@ -157,12 +121,49 @@ const CASE_STUDIES: CaseStudy[] = [
     aspectRatio: "4/3",
     dotField: true,
     dotLayout: 3,
-    icon: "🫰",
+    icon: "SS",
     iconIsEmoji: true,
     comingSoon: true,
     cursorLabel: "Case study coming soon",
     projectType: "Freelance",
     status: "Shipped",
+  },
+  {
+    title: "Democratic National Committee",
+    year: 2023,
+    tags: ["Consumer"],
+    image: "/images/featured-work/featured-work-11-hmQDs6.png",
+    video: "",
+    lottie: "/videos/DNC-Video.json",
+    href: "/work/democratic-national-committee",
+    role: "Digital Design Intern",
+    description: "Created campaign assets across social, ads, and email for Biden-Harris.",
+    objectFit: "contain",
+    mediaScale: 1.5,
+    dotField: true,
+    dotLayout: 1,
+    icon: "/DNC Logo.svg.png",
+    cursorLabel: "Open case study",
+    projectType: "Internship",
+    status: "Handed Off",
+  },
+  {
+    title: "Expert.ai",
+    year: 2022,
+    tags: ["Enterprise", "Accessibility"],
+    image: "/videos/expert.ai-Video-poster.png",
+    video: "/videos/expert.ai-Video.webm",
+    href: "/work/expert-ai",
+    role: "Product Design Intern",
+    description: "Redesigned filtering for an AI text analysis platform, improving accessibility.",
+    objectFit: "contain",
+    mediaPadding: 16,
+    dotField: true,
+    dotLayout: 2,
+    icon: "/expert.ai Logo.png",
+    cursorLabel: "Open case study",
+    projectType: "Internship",
+    status: "Handed Off",
   },
 ]
 
@@ -179,10 +180,12 @@ function useNumCols() {
 }
 
 export default function WorkGrid() {
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
   const [view, setView]               = useState<ViewMode>("grid")
   const scrollLockRef                 = useRef<number | null>(null)
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const numCols = useNumCols()
+  const headingRef = useScrollReveal<HTMLHeadingElement>()
 
   const allTags = useMemo(() => {
     const count = new Map<string, number>()
@@ -206,7 +209,7 @@ export default function WorkGrid() {
     <>
       <section className="work-grid-section">
         <div className="work-grid-header">
-          <h2 className="work-grid-heading">Featured Work</h2>
+          <h2 ref={headingRef} className="work-grid-heading reveal">Featured Work</h2>
         </div>
 
         <div className="work-controls">
@@ -218,11 +221,11 @@ export default function WorkGrid() {
               onClearAll={clearTags}
             />
           </div>
-          <ViewSwitcher current={view} onChange={v => {
+          {!isMobile && <ViewSwitcher current={view} onChange={v => {
             const y = window.scrollY
             flushSync(() => setView(v))
             window.scrollTo({ top: y, behavior: "instant" })
-          }} />
+          }} />}
         </div>
 
         {/* Grid view */}

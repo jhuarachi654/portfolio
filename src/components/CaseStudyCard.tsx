@@ -276,9 +276,12 @@ export default function CaseStudyCard({
     ...(cursorIconIsEmoji ? { "data-cursor-emoji": "true" } : {}),
   } : {}
 
+  const revealDelay = `${Math.min((index ?? 0) % 4, 3) * 80}ms`
+  const revealAttrs = { "data-reveal": true, style: { "--reveal-delay": revealDelay } as React.CSSProperties }
+
   if (comingSoon) {
     return (
-      <div className="case-study-card-wrapper case-study-card-wrapper--disabled" {...cursorAttrs}>
+      <div className="case-study-card-wrapper case-study-card-wrapper--disabled" {...cursorAttrs} {...revealAttrs}>
         {cardContent}
       </div>
     )
@@ -288,14 +291,14 @@ export default function CaseStudyCard({
 
   if (isExternal) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className="case-study-card-wrapper" tabIndex={0} {...cursorAttrs}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className="case-study-card-wrapper" tabIndex={0} {...cursorAttrs} {...revealAttrs}>
         {cardContent}
       </a>
     )
   }
 
   return (
-    <Link to={href} className="case-study-card-wrapper" tabIndex={0} {...cursorAttrs}>
+    <Link to={href} className="case-study-card-wrapper" tabIndex={0} {...cursorAttrs} {...revealAttrs}>
       {cardContent}
     </Link>
   )

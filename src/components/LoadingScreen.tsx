@@ -109,7 +109,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
       <div className="loading-geo" style={{
         position: "absolute", bottom: 28, right: 36, zIndex: 5,
         textAlign: "right", pointerEvents: "none",
-        opacity: phase === "intro" ? 0 : 1, transition: "opacity 1s ease 0.6s",
+        opacity: 0, animation: "stagger-in 0.65s ease 0.05s forwards",
       }}>
         <p style={{ margin: 0, fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)" }}>
           <LoadingClock />
@@ -142,6 +142,10 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           transform: translateY(-6px) scale(1.1);
           box-shadow: 0 20px 48px rgba(0,0,0,0.4), 0 0 40px rgba(255,255,255,0.15);
         }
+        @keyframes stagger-in {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
         @media (max-width: 767px) {
           .loading-geo {
             bottom: auto !important;
@@ -163,11 +167,6 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
         {/* eslint-disable-next-line react-hooks/exhaustive-deps */}
         <SpringText
           gap={16}
-          containerStyle={{
-            opacity: phase === "intro" ? 0 : 1,
-            transform: phase === "intro" ? "translateY(8px)" : "translateY(0)",
-            transition: "opacity 0.8s ease, transform 0.8s ease",
-          }}
           lines={[
             {
               text: "Hello, welcome to",
@@ -175,6 +174,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 color: "rgba(255,255,255,0.45)",
+                opacity: 0, animation: "stagger-in 0.65s ease 0.15s forwards",
               },
             },
             {
@@ -182,6 +182,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               style: {
                 fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3vw, 42px)",
                 fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em",
+                opacity: 0, animation: "stagger-in 0.65s ease 0.35s forwards",
               },
             },
             {
@@ -191,6 +192,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 color: "rgba(255,255,255,0.4)", maxWidth: 520, textAlign: "center",
                 lineHeight: 1.8,
+                opacity: 0, animation: "stagger-in 0.65s ease 0.55s forwards",
               },
             },
             {
@@ -200,6 +202,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 color: "rgba(255,255,255,0.4)", maxWidth: 520, textAlign: "center",
                 lineHeight: 1.8, marginTop: -10,
+                opacity: 0, animation: "stagger-in 0.65s ease 0.7s forwards",
               },
             },
           ]}
@@ -213,8 +216,8 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           onMouseLeave={() => setBtnHovered(false)}
           style={{
             marginTop: 8,
-            opacity: phase === "ready" || phase === "dissolving" ? 1 : 0,
-            transition: "opacity 0.5s ease, color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
+            opacity: 0, animation: "stagger-in 0.65s ease 0.9s forwards",
+            transition: "color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
             pointerEvents: phase === "ready" ? "auto" : "none",
           }}
         >
@@ -232,6 +235,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
         alignItems: "flex-end",
         gap: 0,
         zIndex: 2,
+        opacity: 0, animation: "stagger-in 0.9s ease 0.25s forwards",
       }}>
         {(window.innerWidth < 768
           ? [{ w: 220, h: 270, mt: 0, delay: 0 }]

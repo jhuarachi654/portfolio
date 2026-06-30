@@ -108,7 +108,7 @@ function PersonaCard({
         <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
           {goals.map(g => (
             <li key={g} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <span className="font-sans text-navy/40 shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>✳</span>
+              <span className="font-sans text-navy/40 shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>—</span>
               <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', lineHeight: 1.5 }}>{g}</span>
             </li>
           ))}
@@ -121,7 +121,7 @@ function PersonaCard({
         <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
           {needs.map(n => (
             <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <span className="font-sans text-navy/40 shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>✳</span>
+              <span className="font-sans text-navy/40 shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>—</span>
               <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', lineHeight: 1.5 }}>{n}</span>
             </li>
           ))}

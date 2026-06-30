@@ -39,6 +39,15 @@ export default function Sidebar() {
           className="flex items-center gap-2 text-navy no-underline"
           data-cursor-label="take me home ↩"
           style={{ textDecoration: "none" }}
+          onClick={e => {
+            e.preventDefault()
+            if (location.pathname === "/") {
+              window.scrollTo({ top: 0, behavior: "smooth" })
+            } else {
+              navigate("/")
+              setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 120)
+            }
+          }}
         >
           <img
             src="/Johanna Profile Picture.png"
@@ -67,7 +76,7 @@ export default function Sidebar() {
           <span>About</span>
         </NavLink>
         <NavLink to="/play" className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
-          <span>Playground</span>
+          <span>Play</span>
         </NavLink>
         <NavLink to="/draw" className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
           <span>Drawing Board</span>
