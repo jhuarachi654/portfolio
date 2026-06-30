@@ -297,7 +297,7 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
   const rafRef     = useRef(0)
   const asciiRef   = useRef<string[]>([])
   const drawXRef   = useRef(14)
-  const color = CARD_COLORS[idx % CARD_COLORS.length]
+  const color = CARD_COLORS.find(c => c.hex === drawing.card_color) ?? CARD_COLORS[idx % CARD_COLORS.length]
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -500,34 +500,83 @@ export default function DrawPage() {
     ctx.setTransform(1, 0, 0, 1, 0, 0)
   }, [cardColor])
 
+  // Modal open / edit init — creates offscreen canvas and loads existing drawing if editing
   useEffect(() => {
-    if (modalOpen) {
-      asciiRef.current = []
-      ;(async () => {
-        const canvas = cardCanvasRef.current
-        if (!canvas) return
-        const { charW, drawX } = await renderCard(canvas, {
-          color: cardColor,
-          cardNum: drawingsRef.current.length + 1,
-          ascii: [],
-          name: "Mystery Visitor",
-        })
-        charWRef.current = charW
-        drawXRef.current = drawX
+    if (!modalOpen) return
+    asciiRef.current = []
+    offscreenRef.current = null
 
-        const off = document.createElement("canvas")
-        off.width  = Math.ceil(ASCII_COLS * charW)
-        off.height = Math.ceil(ASCII_ROWS * LINE_H)
-        offscreenRef.current = off
+    ;(async () => {
+      const canvas = cardCanvasRef.current
+      if (!canvas) return
+      const { charW, drawX } = await renderCard(canvas, {
+        color: cardColor,
+        cardNum: drawingsRef.current.length + 1,
+        ascii: [],
+        name: "Mystery Visitor",
+      })
+      charWRef.current = charW
+      drawXRef.current = drawX
 
-        const base = document.createElement("canvas")
-        base.width  = canvas.width
-        base.height = canvas.height
-        base.getContext("2d")!.drawImage(canvas, 0, 0)
-        baseCanvasRef.current = base
-      })()
-    }
-  }, [modalOpen, cardColor])
+      const off = document.createElement("canvas")
+      off.width  = Math.ceil(ASCII_COLS * charW)
+      off.height = Math.ceil(ASCII_ROWS * LINE_H)
+      offscreenRef.current = off
+
+      // Load existing drawing when editing
+      if (editingId) {
+        const drawing = drawingsRef.current.find(d => d.id === editingId)
+        if (drawing) {
+          await new Promise<void>(resolve => {
+            const img = new Image()
+            img.onload = () => {
+              off.getContext("2d")!.drawImage(img, 0, 0, off.width, off.height)
+              asciiRef.current = canvasToAscii(off)
+              resolve()
+            }
+            img.onerror = () => resolve()
+            img.src = drawing.image_url
+          })
+          await renderCard(canvas, {
+            color: cardColor,
+            cardNum: drawingsRef.current.length + 1,
+            ascii: asciiRef.current,
+            name: "Mystery Visitor",
+          })
+        }
+      }
+
+      const base = document.createElement("canvas")
+      base.width  = canvas.width
+      base.height = canvas.height
+      base.getContext("2d")!.drawImage(canvas, 0, 0)
+      baseCanvasRef.current = base
+    })()
+  }, [modalOpen, editingId])
+
+  // Color change — re-render card with existing drawing preserved
+  useEffect(() => {
+    if (!modalOpen || !baseCanvasRef.current) return
+
+    ;(async () => {
+      const canvas = cardCanvasRef.current
+      if (!canvas) return
+      const { charW, drawX } = await renderCard(canvas, {
+        color: cardColor,
+        cardNum: drawingsRef.current.length + 1,
+        ascii: asciiRef.current,
+        name: "Mystery Visitor",
+      })
+      charWRef.current = charW
+      drawXRef.current = drawX
+
+      const base = document.createElement("canvas")
+      base.width  = canvas.width
+      base.height = canvas.height
+      base.getContext("2d")!.drawImage(canvas, 0, 0)
+      baseCanvasRef.current = base
+    })()
+  }, [cardColor])
 
   // ── Drawing directly on card canvas ───────────────────────────────────
   const getCardPos = (e: React.MouseEvent | React.TouchEvent) => {
@@ -634,10 +683,10 @@ export default function DrawPage() {
             apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`,
             "Content-Type": "application/json", Prefer: "return=representation",
           },
-          body: JSON.stringify({ image_url: imageUrl }),
+          body: JSON.stringify({ image_url: imageUrl, card_color: cardColor.hex }),
         })
-        setDrawings(prev => prev.map(d => d.id === editingId ? { ...d, image_url: imageUrl } : d))
-        setShuffled(prev => prev.map(d => d.id === editingId ? { ...d, image_url: imageUrl } : d))
+        setDrawings(prev => prev.map(d => d.id === editingId ? { ...d, image_url: imageUrl, card_color: cardColor.hex } : d))
+        setShuffled(prev => prev.map(d => d.id === editingId ? { ...d, image_url: imageUrl, card_color: cardColor.hex } : d))
         setEditingId(null)
         setModalOpen(false)
       } else {
@@ -648,7 +697,7 @@ export default function DrawPage() {
             apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`,
             "Content-Type": "application/json", Prefer: "return=representation",
           },
-          body: JSON.stringify({ name: randomName(), image_url: imageUrl, position_x: 0, position_y: 0, rotation: 0 }),
+          body: JSON.stringify({ name: randomName(), image_url: imageUrl, card_color: cardColor.hex, position_x: 0, position_y: 0, rotation: 0 }),
         })
         const saved = await res.json()
         const d: Drawing = Array.isArray(saved) ? saved[0] : saved
