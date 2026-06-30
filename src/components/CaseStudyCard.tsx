@@ -71,6 +71,7 @@ export default function CaseStudyCard({
   const videoRef = useRef<HTMLVideoElement>(null)
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const cardRef = useRef<HTMLDivElement>(null)
+
   const mediaRef = useRef<HTMLDivElement>(null)
   const isHoveredRef = useRef(false)
 
@@ -178,15 +179,16 @@ export default function CaseStudyCard({
     return () => observer.disconnect()
   }, [isDesktop, video, lottieData, isInView, prefersReducedMotion])
 
-  const [metricsVisible, setMetricsVisible] = useState(false)
-
   useEffect(() => {
     if (isDesktop) return
     const el = cardRef.current
     if (!el) return
     const observer = new IntersectionObserver(
-      ([entry]) => setMetricsVisible(entry.isIntersecting),
-      { threshold: 0.6 }
+      ([entry]) => {
+        const wrapper = el.closest(".case-study-card-wrapper")
+        wrapper?.classList.toggle("metrics-in-view", entry.isIntersecting)
+      },
+      { rootMargin: "-30% 0px -30% 0px", threshold: 0 }
     )
     observer.observe(el)
     return () => observer.disconnect()
@@ -280,11 +282,9 @@ export default function CaseStudyCard({
   const revealDelay = `${Math.min((index ?? 0) % 4, 3) * 80}ms`
   const revealAttrs = { "data-reveal": true, style: { "--reveal-delay": revealDelay } as React.CSSProperties }
 
-  const mobileMetricsClass = metricsVisible ? " metrics-in-view" : ""
-
   if (comingSoon) {
     return (
-      <div className={`case-study-card-wrapper case-study-card-wrapper--disabled${mobileMetricsClass}`} {...cursorAttrs} {...revealAttrs}>
+      <div className="case-study-card-wrapper case-study-card-wrapper--disabled" {...cursorAttrs} {...revealAttrs}>
         {cardContent}
       </div>
     )
@@ -294,14 +294,14 @@ export default function CaseStudyCard({
 
   if (isExternal) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={`case-study-card-wrapper${mobileMetricsClass}`} tabIndex={0} {...cursorAttrs} {...revealAttrs}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className="case-study-card-wrapper" tabIndex={0} {...cursorAttrs} {...revealAttrs}>
         {cardContent}
       </a>
     )
   }
 
   return (
-    <Link to={href} className={`case-study-card-wrapper${mobileMetricsClass}`} tabIndex={0} {...cursorAttrs} {...revealAttrs}>
+    <Link to={href} className="case-study-card-wrapper" tabIndex={0} {...cursorAttrs} {...revealAttrs}>
       {cardContent}
     </Link>
   )
