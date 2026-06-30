@@ -1971,6 +1971,19 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   padding: 12px 16px 14px;
 }
 
+@media (hover: none) {
+  .case-study-card-wrapper.metrics-in-view .cs-metrics-panel {
+    grid-template-rows: 1fr;
+    border-top-color: rgba(30, 75, 154, 0.1);
+  }
+  .case-study-card-wrapper.metrics-in-view .cs-metrics-inner {
+    padding: 12px 16px 14px;
+  }
+  [data-theme="dark"] .case-study-card-wrapper.metrics-in-view .cs-metrics-panel {
+    border-top-color: rgba(168, 190, 232, 0.1);
+  }
+}
+
 .cs-metrics-boxes {
   display: flex;
   gap: 8px;
