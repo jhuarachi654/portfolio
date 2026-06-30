@@ -850,12 +850,12 @@ export default function DrawPage() {
             }}
           >✕</button>
 
-          {/* Prev arrow */}
+          {/* Prev arrow — side on desktop, bottom-left on mobile */}
           <button
             onClick={e => { e.stopPropagation(); setZoomedIdx(i => i !== null ? Math.max(0, i - 1) : null) }}
             disabled={zoomedIdx === 0}
+            className="draw-zoom-arrow draw-zoom-arrow--prev"
             style={{
-              position: "fixed", left: 16, top: "50%", transform: "translateY(-50%)",
               background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.18)",
               borderRadius: "50%", width: 44, height: 44,
               color: "#fff", fontSize: 18, cursor: "none",
@@ -864,12 +864,12 @@ export default function DrawPage() {
             }}
           >‹</button>
 
-          {/* Next arrow */}
+          {/* Next arrow — side on desktop, bottom-right on mobile */}
           <button
             onClick={e => { e.stopPropagation(); setZoomedIdx(i => i !== null ? Math.min(visible.length - 1, i + 1) : null) }}
             disabled={zoomedIdx === visible.length - 1}
+            className="draw-zoom-arrow draw-zoom-arrow--next"
             style={{
-              position: "fixed", right: 16, top: "50%", transform: "translateY(-50%)",
               background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.18)",
               borderRadius: "50%", width: 44, height: 44,
               color: "#fff", fontSize: 18, cursor: "none",

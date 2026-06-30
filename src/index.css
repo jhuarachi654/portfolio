@@ -3756,6 +3756,26 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 
 /* ── Drawing Board ────────────────────────────────────────────────── */
+/* Zoom overlay arrows */
+.draw-zoom-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.draw-zoom-arrow--prev { left: 16px; }
+.draw-zoom-arrow--next { right: 16px; }
+
+@media (max-width: 767px) {
+  .draw-zoom-arrow {
+    position: fixed;
+    top: auto;
+    bottom: 40px;
+    transform: none;
+  }
+  .draw-zoom-arrow--prev { left: calc(50% - 56px); }
+  .draw-zoom-arrow--next { right: calc(50% - 56px); }
+}
+
 .draw-modal-backdrop {
   position: fixed;
   inset: 0;
