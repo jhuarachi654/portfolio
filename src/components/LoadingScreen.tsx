@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback, useMemo, memo } from "react"
+import { useEffect, useRef, useState, useCallback, memo } from "react"
 import AsciiVideo from "./AsciiVideo"
 import SpringText from "./SpringText"
 
@@ -52,6 +52,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
     const t = setTimeout(() => setPhase("ready"), 900)
     return () => clearTimeout(t)
   }, [])
+
 
   const handleExplore = useCallback(() => {
     if (phase !== "ready") return
@@ -173,7 +174,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               style: {
                 fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
                 letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(255,255,255,0.45)",
+                color: "rgba(255,255,255,0.75)",
                 opacity: 0, animation: "stagger-in 0.65s ease 0.15s forwards",
               },
             },
@@ -190,7 +191,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               style: {
                 fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
                 letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(255,255,255,0.4)", maxWidth: 520, textAlign: "center",
+                color: "rgba(255,255,255,0.75)", maxWidth: 520, textAlign: "center",
                 lineHeight: 1.8,
                 opacity: 0, animation: "stagger-in 0.65s ease 0.55s forwards",
               },
@@ -200,7 +201,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               style: {
                 fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
                 letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(255,255,255,0.4)", maxWidth: 520, textAlign: "center",
+                color: "rgba(255,255,255,0.75)", maxWidth: 520, textAlign: "center",
                 lineHeight: 1.8, marginTop: -10,
                 opacity: 0, animation: "stagger-in 0.65s ease 0.7s forwards",
               },
@@ -223,6 +224,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
         >
           Explore
         </button>
+
       </div>
 
       {/* ── Flower bed at bottom ── */}
