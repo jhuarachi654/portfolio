@@ -6,6 +6,7 @@ import SectionHeading from '../../components/case-study/SectionHeading'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
+import ReadingProgress from '../../components/case-study/ReadingProgress'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -23,17 +24,13 @@ const img = (file: string) => `/images/fare-finder/${file}`
 
 function Section({ id, children, className = '' }: { id?: string; children: React.ReactNode; className?: string }) {
   return (
-    <motion.section
+    <section
       id={id}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
       style={{ marginTop: 48 }}
     >
       {children}
-    </motion.section>
+    </section>
   )
 }
 
@@ -213,7 +210,7 @@ function DestinationsExplorer() {
   const [selected, setSelected] = useState(0)
   const opt = destinationOptions[selected]
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 32, marginTop: 48 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'start' }}>
         <div>
           <SubHeading tag="IDEATION">Destinations</SubHeading>
@@ -250,7 +247,7 @@ function FlexibleDatesExplorer() {
   const [selected, setSelected] = useState(0)
   const opt = flexibleDatesOptions[selected]
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 32, marginTop: 48 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
       <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>IDEATION</p>
       <h3 className="text-[22px] font-bold text-navy-dark leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 12, marginTop: 0 }}>Flexible Dates</h3>
       <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>How might we help travelers who don't have a destination in mind yet open up their options by exploring flights with flexible availability?</p>
@@ -282,7 +279,7 @@ function FlightFareExplorer() {
   const [selected, setSelected] = useState(0)
   const opt = flightFareOptions[selected]
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 32, marginTop: 48 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
         <div>
           <SubHeading tag="IDEATION">Flight Fare Card</SubHeading>
@@ -314,13 +311,10 @@ export default function FareFinderPage() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
     <div className="min-h-screen cs-page">
+      <ReadingProgress />
 
       {/* ── Hero ── */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-      >
+      <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
           <div style={{ background: '#f0f4fb', padding: '4px 4px 0', border: '1px solid rgba(30,75,154,0.2)' }}>
             <video
@@ -337,11 +331,12 @@ export default function FareFinderPage() {
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-            <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 16 }}>
-              PROS Fare Finder Map
+            <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-navy)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>PROS</p>
+            <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+              Fare Finder
             </h1>
-            <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 24 }}>
-              Designed and shipped a map-based flight exploration tool for travelers to discover and book their next trip — directly through the airline's site.
+            <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
+              A flight exploration tool for everyday travelers. Designed the map-based feature for PROS's 130+ airline partners; direct bookings up 35%.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4">
               {[
@@ -350,15 +345,18 @@ export default function FareFinderPage() {
                 { label: 'Team',     value: 'UX Strategist, UX Researcher, PM' },
                 { label: 'Tools',    value: 'Figma, Claude, Figma Make' },
               ].map(({ label, value }) => (
-                <div key={label} style={{ padding: '8px', border: '1px solid rgba(30,75,154,0.2)' }}>
-                  <p className="font-sans text-[11px] font-bold text-navy mb-3 tracking-wide">{label}</p>
-                  <p className="font-sans text-[14px] text-navy/70">{value}</p>
+                <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
+                  <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
+                  <p style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>{value}</p>
                 </div>
               ))}
             </div>
+
+            
+            <a href="#ff-solution" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 32, display: 'flex', flexDirection: 'column', gap: 0 }}>
 
@@ -397,7 +395,7 @@ export default function FareFinderPage() {
               rel="noopener noreferrer"
               data-cursor-label="Open site"
               className="draw-btn-primary"
-              style={{ textDecoration: 'none', marginTop: 8 }}
+              style={{ textDecoration: 'none', marginTop: 8, alignSelf: 'flex-start', display: 'inline-flex' }}
             >
               <span>Visit Fare Finder →</span>
             </a>
@@ -507,26 +505,38 @@ export default function FareFinderPage() {
           }} />
         </div>
 
-        <div className="cs-solution-video-wrap">
-          <video
-            src="/videos/Fare-Finder-Video.webm"
-            poster="/videos/Fare-Finder-Video-poster.png"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="cs-solution-video"
-            style={{ width: '100%', display: 'block' }}
-          />
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start', marginTop: 48 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
           <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0 }}>
             A new way to discover your next flight destination
           </h3>
           <p className="font-sans" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
             Fare Finder is a map-based exploration tool with an interface that is <strong>customizable,</strong> <strong>personalized,</strong> and <strong>intuitive.</strong>
           </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16, alignItems: 'start' }}>
+          <div className="cs-solution-video-wrap">
+            <video
+              src="/videos/Fare-Finder-Video.webm"
+              poster="/videos/Fare-Finder-Video-poster.png"
+              autoPlay loop muted playsInline
+              className="cs-solution-video"
+              style={{ width: '100%', display: 'block' }}
+            />
+          </div>
+          <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+            <p className="font-sans font-bold text-navy" style={{ fontSize: 13, marginBottom: 12 }}>IMPACT</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {[
+                { kpi: 'Map Abandonment:', value: '45% decrease' },
+                { kpi: 'Direct Bookings:', value: '35% increase' },
+              ].map(({ kpi, value }) => (
+                <p key={kpi} className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>
+                  <span className="font-bold text-navy">{kpi}</span> {value}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -709,7 +719,7 @@ export default function FareFinderPage() {
         </Prose>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 24 }}>
+          <div className="cs-card-box" style={{ padding: 24 }}>
             <img src={img('fare-finder-17-ATi7Ig.png')} alt="User flow diagram" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
           <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>User flow revealed a key inconsistency in the booking experience</figcaption>
@@ -845,7 +855,7 @@ export default function FareFinderPage() {
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32, alignItems: 'start' }}>
           {[
-            { icon: <AirplaneTakeoff size={24} weight="thin" color="var(--color-navy)" />, stat: '3 months', label: 'after handoff, Fare Finder went live' },
+            { icon: <AirplaneTakeoff size={24} weight="thin" color="var(--color-navy)" />, stat: '3 months', label: 'to ship after handoff' },
             { icon: <AirplaneInFlight size={24} weight="thin" color="var(--color-navy)" />, stat: '45%', label: 'decrease in map abandonment' },
             { icon: <TrendUp size={24} weight="thin" color="var(--color-navy)" />, stat: '35%', label: 'increase in direct bookings' },
           ].map(({ icon, stat, label }) => (
@@ -881,7 +891,7 @@ export default function FareFinderPage() {
               { heading: 'AI as a design tool', body: 'Using Figma Make and Claude to generate layout iterations quickly opened up new kinds of conversations with PMs and engineers — and taught me to present ideas, not just artifacts.' },
               { heading: 'Gratitude', body: 'I\'m so grateful to the PROS UX design team for their mentorship, the conversations that shaped my thinking, and for a memorable summer!' },
             ].map(({ heading, body }) => (
-              <div key={heading} style={{ background: 'rgba(30,75,154,0.04)', border: '1px solid rgba(30,75,154,0.1)', padding: 20 }}>
+              <div key={heading} className="cs-info-box" style={{ padding: 20 }}>
                 <p className="font-sans font-bold text-navy" style={{ fontSize: 15, margin: '0 0 10px', lineHeight: 1.4 }}>{heading}</p>
                 <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
               </div>

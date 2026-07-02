@@ -34,6 +34,9 @@ export interface CaseStudyCardProps {
   metrics?: { stat: string; label: string }[]
   team?: string
   timeframe?: string
+  problem?: string
+  outcome?: string
+  company?: string
 }
 
 export default function CaseStudyCard({
@@ -67,6 +70,9 @@ export default function CaseStudyCard({
   metrics,
   team,
   timeframe,
+  problem,
+  outcome,
+  company,
 }: CaseStudyCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const lottieRef = useRef<LottieRefCurrentProps>(null)
@@ -245,30 +251,18 @@ export default function CaseStudyCard({
 
       <div className="case-study-card-body">
         <div className="case-study-card-header">
-          <h3 className="case-study-card-title">{title}</h3>
-          {tags.length > 0 && (
-            <div className="case-study-card-tags">
-              {tags.map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
-            </div>
-          )}
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8, width: '100%' }}>
+            <h3 className="case-study-card-title">{title}</h3>
+            {company && <span className="font-sans font-semibold tracking-[0.1em] uppercase" style={{ fontSize: 10, color: 'rgba(30,75,154,0.65)', whiteSpace: 'nowrap', flexShrink: 0 }}>{company}</span>}
+          </div>
+          <div className="case-study-card-tags">
+            {tags.filter(t => t !== "Internship" && t !== "Freelance" && t !== "Solo").map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
+            {role && <span className="case-study-card-tag">{role}</span>}
+          </div>
         </div>
         {description && <p className="case-study-card-description">{description}</p>}
       </div>
 
-      {hasMetrics && (
-        <div className="cs-metrics-panel">
-          <div className="cs-metrics-inner">
-            <div className="cs-metrics-boxes">
-              {metrics!.map((m, i) => (
-                <div key={i} className="cs-metric-box">
-                  <span className="cs-metric-stat">{m.stat}</span>
-                  <span className="cs-metric-label">{m.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 

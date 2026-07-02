@@ -49,7 +49,7 @@ export default function CaseStudySidebar() {
           className="font-sans font-semibold tracking-[0.14em] uppercase px-2"
           style={{ fontSize: '10px', color: 'var(--color-secondary)', opacity: 0.6 }}
         >
-          On this page
+          Table of Contents
         </p>
 
         <ul className="flex flex-col gap-1 list-none m-0 p-0">
@@ -65,15 +65,6 @@ export default function CaseStudySidebar() {
                     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
                   }}
                 >
-                  <span
-                    className="font-mono tabular-nums mr-2 shrink-0 toc-num"
-                    style={{
-                      fontSize: '10px',
-                      opacity: isActive ? 1 : 0.3,
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')}.
-                  </span>
                   <span>{label}</span>
                 </a>
               </li>

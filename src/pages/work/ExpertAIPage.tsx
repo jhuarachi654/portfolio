@@ -5,6 +5,7 @@ import Footer from '../../components/Footer'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
+import ReadingProgress from '../../components/case-study/ReadingProgress'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -21,17 +22,13 @@ const img = (file: string) => `/images/expert-ai/${file}`
 
 function Section({ id, children, className = '' }: { id?: string; children: React.ReactNode; className?: string }) {
   return (
-    <motion.section
+    <section
       id={id}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
       style={{ marginTop: 48 }}
     >
       {children}
-    </motion.section>
+    </section>
   )
 }
 
@@ -138,11 +135,11 @@ function AccessibilityExplorer() {
   const [selected, setSelected] = useState(0)
   const opt = accessibilityOptions[selected]
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 32, marginTop: 48 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'start' }}>
         <div>
           <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>WIREFRAME EXPLORATION</p>
-          <h3 className="text-[22px] font-bold text-navy-dark leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 16, marginTop: 8 }}>Exploring Accessibility</h3>
+          <h3 className="text-[22px] font-bold text-navy-dark leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 16, marginTop: 8 }}>Wireframe iterations</h3>
           <div className="cs-option-btns" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {accessibilityOptions.map((o, i) => (
               <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
@@ -240,13 +237,10 @@ export default function ExpertAIPage() {
 
   return (
     <div className="min-h-screen cs-page">
+      <ReadingProgress />
 
       {/* ── Hero ── */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-      >
+      <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
           <div className="cs-solution-wrap" style={{ background: '#f0f4fb', padding: '56px 100px', border: '1px solid rgba(30,75,154,0.2)' }}>
             <video
@@ -263,11 +257,12 @@ export default function ExpertAIPage() {
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-            <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 16 }}>
-              Expert.ai Filter Component
+            <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-navy)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>Expert.ai</p>
+            <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+              Corpus Platform
             </h1>
-            <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 16 }}>
-              Expert.ai is an AI text analysis platform for legal, finance, and government organizations. As a Product Design Intern, I worked with the AI innovation team and directly with enterprise users to redesign the filtering system.
+            <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
+              An AI text analysis platform for enterprise teams. Redesigned filtering for accessibility; task time dropped from 2 min to 30s.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4">
               {[
@@ -276,15 +271,18 @@ export default function ExpertAIPage() {
                 { label: 'Team',     value: 'UX Engineer, Developer, PMs' },
                 { label: 'Tools',    value: 'Figma' },
               ].map(({ label, value }) => (
-                <div key={label} style={{ padding: '8px', border: '1px solid rgba(30,75,154,0.2)' }}>
-                  <p className="font-sans text-[11px] font-bold text-navy mb-3 tracking-wide">{label}</p>
-                  <p className="font-sans text-[14px] text-navy/70">{value}</p>
+                <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
+                  <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
+                  <p style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>{value}</p>
                 </div>
               ))}
             </div>
+
+            
+            <a href="#ea-solution" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 32, display: 'flex', flexDirection: 'column', gap: 0 }}>
 
@@ -369,17 +367,32 @@ export default function ExpertAIPage() {
             }} />
           </div>
 
-          <div style={{ marginTop: 48 }}>
-            <img src="/videos/expert.ai-Video-poster.png" alt="Expert.ai filter component — solution preview" style={{ width: '100%', height: 'auto', display: 'block' }} />
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start', marginTop: 32 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24, marginTop: 48 }}>
             <h3 className="font-bold leading-snug" style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--color-navy)', margin: 0 }}>
               A faster, clearer, and more accessible way to filter.
             </h3>
             <p className="font-sans" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
               A seamless dropdown filter panel with clear status indicators, accessible interface, and improved usability that work for everyone.
             </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16, alignItems: 'start' }}>
+            <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+              <img src="/videos/expert.ai-Video-poster.png" alt="Expert.ai filter component — solution preview" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </div>
+            <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+              <p className="font-sans font-bold text-navy" style={{ fontSize: 13, marginBottom: 12 }}>IMPACT</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {[
+                  { kpi: 'Task Time:', value: '30s (down from 2 min)' },
+                  { kpi: 'Support Tickets:', value: '42% fewer after ship' },
+                ].map(({ kpi, value }) => (
+                  <p key={kpi} className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>
+                    <span className="font-bold text-navy">{kpi}</span> {value}
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
         </Section>
 
@@ -448,7 +461,7 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 48 }}>
-            <SubHeading tag="ACCESSIBILITY">Accessibility</SubHeading>
+            <SubHeading tag="ACCESSIBILITY">Color and interaction barriers</SubHeading>
             <BodyText>
               Several users also mentioned accessibility issues. The system used red and green to show exclusion and inclusion, which meant colorblind users could not tell them apart. The filtering system also required users to drag elements into inclusion and exclusion areas. For users who could not use a mouse, this was difficult.
             </BodyText>
@@ -493,7 +506,7 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 48 }}>
-            <SubHeading tag="CONSTRAINTS">Technical Constraints</SubHeading>
+            <SubHeading tag="CONSTRAINTS">What engineering couldn't change</SubHeading>
             <Prose>
               <BodyText>
                 Although I had the go-ahead on accessibility, I had to ensure design iterations were feasible. I checked in with both developers and the Lead Designer to understand the boundaries.
@@ -525,7 +538,7 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 48 }}>
-            <SubHeading tag="IDEATION">Exploring Accessibility</SubHeading>
+            <SubHeading tag="IDEATION">From conservative fix to rigorous redesign</SubHeading>
             <Prose>
               <BodyText>
                 My first attempt was conservative — I added labels inside category buttons and tooltip labels on hover. During a design critique, the Lead Designer pointed out these helped with labeling but didn't solve the core problems. The popup still blocked results. Drag-and-drop still slowed users.
@@ -694,7 +707,7 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 48 }}>
-            <SubHeading tag="TESTING">Testing and Impact</SubHeading>
+            <SubHeading tag="TESTING">Validating with real users</SubHeading>
             <BodyText>
               I ran usability testing with 8 enterprise users across legal, finance, and government. The Lead Designer observed sessions with me. I asked each user to complete filtering tasks while sharing their screen, watching for friction, what they clicked, and how long each task took.
             </BodyText>
@@ -741,7 +754,7 @@ export default function ExpertAIPage() {
                 { heading: 'Advocacy through research', body: "User interviews and support ticket analysis gave me the evidence I needed to push for accessibility improvements — even when it wasn't in the original scope." },
                 { heading: 'Gratitude', body: "I'm so grateful to the Expert.ai AI Innovation team for supporting my initiative and for the mentorship and guidance throughout the process." },
               ].map(({ heading, body }) => (
-                <div key={heading} style={{ background: 'rgba(30,75,154,0.04)', border: '1px solid rgba(30,75,154,0.1)', padding: 20 }}>
+                <div key={heading} className="cs-info-box" style={{ padding: 20 }}>
                   <p className="font-sans font-bold text-navy" style={{ fontSize: 15, margin: '0 0 10px', lineHeight: 1.4 }}>{heading}</p>
                   <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
                 </div>

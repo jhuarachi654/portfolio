@@ -109,7 +109,7 @@ export default function HomePage() {
         {/* ── Right: ASCII flower ── */}
         <div className="hero-right hero-flower-wrap">
           <AsciiVideo src="/cosmos-1.mp4" width={flowerSize.width} height={flowerSize.height} />
-          <span className="hero-flower-label">Made with React + Canvas API</span>
+          <span className="hero-flower-label">Built from the ground up with React + Canvas API</span>
         </div>
 
         {/* ── Clock: absolute top-right of hero ── */}

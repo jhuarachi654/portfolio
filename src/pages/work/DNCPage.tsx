@@ -7,6 +7,7 @@ import Footer from '../../components/Footer'
 import SectionHeading from '../../components/case-study/SectionHeading'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
+import ReadingProgress from '../../components/case-study/ReadingProgress'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -45,17 +46,13 @@ function HeroLottie() {
 
 function Section({ id, children, className = '' }: { id?: string; children: React.ReactNode; className?: string }) {
   return (
-    <motion.section
+    <section
       id={id}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
       style={{ marginTop: 96 }}
     >
       {children}
-    </motion.section>
+    </section>
   )
 }
 
@@ -215,7 +212,7 @@ function IterationExplorer() {
   const passes = opt.accessibility.result.startsWith('Passes')
   return (
     <div>
-      <div className="dnc-iter-container" style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 32 }}>
+      <div className="dnc-iter-container" className="cs-card-box" style={{ padding: 32 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div>
             <SubHeading tag="GRAPHIC EXPLORATION">VP Anniversary Iterations</SubHeading>
@@ -261,13 +258,10 @@ export default function DNCPage() {
 
   return (
     <div className="min-h-screen cs-page">
+      <ReadingProgress />
 
       {/* ── Hero ── */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-      >
+      <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
           <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)' }}>
             <HeroLottie />
@@ -276,11 +270,12 @@ export default function DNCPage() {
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-            <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 16 }}>
-              Democratic National Committee
+            <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-navy)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>Democratic National Committee</p>
+            <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+              Campaign Design
             </h1>
-            <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 24 }}>
-              Created campaign assets across social, ads, and email for the Biden-Harris administration as a Visual Design intern on the DNC Mobilization team.
+            <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
+              Digital design for Biden-Harris and Democratic party initiatives. Turned around 18 same-day assets during an active presidential campaign; posts hit 5,500+ likes.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4">
               {[
@@ -289,15 +284,18 @@ export default function DNCPage() {
                 { label: 'Team',     value: 'Design Director, Graphic Designers' },
                 { label: 'Tools',    value: 'Figma, Monday, Slack' },
               ].map(({ label, value }) => (
-                <div key={label} style={{ padding: '8px', border: '1px solid rgba(30,75,154,0.2)' }}>
-                  <p className="font-sans text-[11px] font-bold text-navy mb-3 tracking-wide">{label}</p>
-                  <p className="font-sans text-[14px] text-navy/70">{value}</p>
+                <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
+                  <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
+                  <p style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>{value}</p>
                 </div>
               ))}
             </div>
+
+            
+            <a href="#dnc-solution" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 32, display: 'flex', flexDirection: 'column', gap: 0 }}>
 
@@ -327,7 +325,7 @@ export default function DNCPage() {
           <BodyText>The workload at the DNC changed all the time. Some days a protest would break out and I had to drop everything to design something that same day. Other times I got assignments with a week or two of notice. My schedule never looked the same week to week, but I learned to adapt fast.</BodyText>
           <BodyText>No matter the timeline, every request followed the same path. Here is how a typical ticket moved from brief to handoff.</BodyText>
 
-          <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 32, marginTop: 48 }}>
+          <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
             <img src={img('democratic-national-committee-06-S5fGOr.png')} alt="Design ticket workflow" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
           <p className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Every graphic went through the same six steps: brief, draft, feedback, revisions, verification, and handoff. *Even in same-day design requests</p>
@@ -446,7 +444,7 @@ export default function DNCPage() {
                 { quote: 'The colors feel much more celebratory now.', role: 'Graphic Designer', icon: <PaintBrush size={20} weight="thin" color="var(--color-navy)" /> },
                 { quote: 'Nice speed. Just send it over sooner so we have more breathing room.', role: 'Design Director', icon: <Briefcase size={20} weight="thin" color="var(--color-navy)" /> },
               ].map(({ quote, role, icon }) => (
-                <div key={quote} style={{ border: '1px solid rgba(30,75,154,0.1)', background: 'rgba(30,75,154,0.04)', padding: 20 }}>
+                <div key={quote} className="cs-info-box" style={{ padding: 20 }}>
                   <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(30,75,154,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
                     {icon}
                   </div>
@@ -466,24 +464,22 @@ export default function DNCPage() {
         <Section id="dnc-solution">
           <SectionHeading index={5} chapter="Final Design" heading="" />
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 48, alignItems: 'start' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <p className="font-sans" style={{ fontSize: 15, color: 'var(--color-secondary)', lineHeight: 1.7, margin: '0 0 4px' }}>The final graphic went live on Instagram for the Vice President's anniversary milestone.</p>
-              {[
-                { tag: 'ACCESSIBILITY', heading: 'Color Contrast Check', body: 'Contrast ratio 14.59 — passes WCAG AAA.' },
-                { tag: 'RATIONALE', heading: 'Why this design won', body: 'The layout is clear, the tone is celebratory and professional, and it meets accessibility standards.' },
-                { tag: 'PHOTO CHOICE', heading: 'Why this photo', body: 'Warm, professional, and celebratory — this image matched the energy of the milestone.' },
-              ].map(({ tag, heading, body }) => (
-                <div key={tag} style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 16 }}>
-                  <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 10, color: 'var(--color-navy)', margin: '0 0 6px' }}>{tag}</p>
-                  <p className="font-sans font-bold text-navy" style={{ fontSize: 14, margin: '0 0 4px' }}>{heading}</p>
-                  <p className="font-sans" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{body}</p>
-                </div>
-              ))}
-            </div>
-
-            <img src={img('dnc-iter-final.png')} alt="Final VP Anniversary graphic" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain', objectPosition: 'top', display: 'block' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
+            <p className="font-sans" style={{ fontSize: 15, color: 'var(--color-secondary)', lineHeight: 1.7, margin: '0 0 4px' }}>The final graphic went live on Instagram for the Vice President's anniversary milestone.</p>
+            {[
+              { tag: 'ACCESSIBILITY', heading: 'Color Contrast Check', body: 'Contrast ratio 14.59 — passes WCAG AAA.' },
+              { tag: 'RATIONALE', heading: 'Why this design won', body: 'The layout is clear, the tone is celebratory and professional, and it meets accessibility standards.' },
+              { tag: 'PHOTO CHOICE', heading: 'Why this photo', body: 'Warm, professional, and celebratory — this image matched the energy of the milestone.' },
+            ].map(({ tag, heading, body }) => (
+              <div key={tag} className="cs-card-box" style={{ padding: 16 }}>
+                <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 10, color: 'var(--color-navy)', margin: '0 0 6px' }}>{tag}</p>
+                <p className="font-sans font-bold text-navy" style={{ fontSize: 14, margin: '0 0 4px' }}>{heading}</p>
+                <p className="font-sans" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{body}</p>
+              </div>
+            ))}
           </div>
+
+          <img src={img('dnc-iter-final.png')} alt="Final VP Anniversary graphic" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain', objectPosition: 'top', display: 'block' }} />
 
         </Section>
 
@@ -507,7 +503,7 @@ export default function DNCPage() {
               { label: 'REQUESTS', stat: '18 same day', body: 'Turned around within hours while still leaving room for feedback, revisions, and handoff.' },
               { label: 'ACROSS INSTAGRAM AND TIKTOK', stat: '5,500 likes\n600 shares', body: 'People saw and responded to the work I made.' },
             ].map(({ label, stat, body }) => (
-              <div key={label} style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 20 }}>
+              <div key={label} className="cs-card-box" style={{ padding: 20 }}>
                 <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 10, color: 'var(--color-secondary)', margin: '0 0 8px' }}>{label}</p>
                 <p className="font-bold text-navy" style={{ fontFamily: 'var(--font-display)', fontSize: 28, margin: '0 0 8px', lineHeight: 1.2, whiteSpace: 'pre-line' }}>{stat}</p>
                 <p className="font-sans" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{body}</p>
@@ -528,7 +524,7 @@ export default function DNCPage() {
                 { heading: 'Speed and quality coexist', body: 'Same-day turnarounds taught me to work faster without sacrificing accessibility or brand integrity. Constraints sharpen your thinking.' },
                 { heading: 'Gratitude', body: 'I am grateful to the Mobilization team for trusting me with real work and for creating the kind of environment where I could grow quickly.' },
               ].map(({ heading, body }) => (
-                <div key={heading} style={{ background: 'rgba(30,75,154,0.04)', border: '1px solid rgba(30,75,154,0.1)', padding: 14 }}>
+                <div key={heading} className="cs-info-box" style={{ padding: 14 }}>
                   <p className="font-sans font-bold text-navy" style={{ fontSize: 15, margin: '0 0 10px' }}>{heading}</p>
                   <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
                 </div>

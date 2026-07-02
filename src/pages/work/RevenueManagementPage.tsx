@@ -7,6 +7,7 @@ import SectionHeading from '../../components/case-study/SectionHeading'
 import ImageFigure from '../../components/case-study/ImageFigure'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
+import ReadingProgress from '../../components/case-study/ReadingProgress'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -25,17 +26,13 @@ const ff  = (file: string) => `/images/fare-finder/${file}`
 
 function Section({ id, children, className = '' }: { id?: string; children: React.ReactNode; className?: string }) {
   return (
-    <motion.section
+    <section
       id={id}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
       style={{ marginTop: 48 }}
     >
       {children}
-    </motion.section>
+    </section>
   )
 }
 
@@ -334,7 +331,7 @@ function MyMarketsExplorer() {
   const option = MARKET_OPTIONS[active]
 
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 32, marginTop: 48 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
         {/* Left */}
         <div>
@@ -427,7 +424,7 @@ function AIPlacementExplorer() {
   const option = AI_OPTIONS[active]
 
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: 32, marginTop: 48 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
         {/* Left: context + 2x2 buttons */}
         <div>
@@ -632,13 +629,10 @@ export default function RevenueManagementPage() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
     <div className="min-h-screen cs-page">
+      <ReadingProgress />
 
       {/* ── Hero ── */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-      >
+      <section>
         {/* Hero Lottie */}
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
           <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', lineHeight: 0, fontSize: 0 }}>
@@ -649,34 +643,34 @@ export default function RevenueManagementPage() {
         {/* Text content below image */}
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
         <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-          <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 16 }}>
-            PROS Revenue Management
+          <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-navy)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>PROS</p>
+          <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+            Revenue Management
           </h1>
 
-          <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 16 }}>
-            During my UX Design internship at PROS, I worked on product strategy and developed AI features for the Revenue Management (RM) platform for airline analysts of all experience levels.
+          <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
+            An enterprise airline pricing platform for major airlines. Redesigned the core workflow for new-hire and veteran analysts and handed off to engineering.
           </p>
 
-          {/* Meta row — 4 bordered boxes */}
-          <div className="grid grid-cols-2 sm:grid-cols-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4" style={{ marginBottom: 0 }}>
             {[
               { label: 'Role',     value: 'UX Design Intern' },
               { label: 'Duration', value: 'Jun – Sep 2025' },
               { label: 'Team',     value: 'UX Strategist, UX Researcher, PM' },
               { label: 'Tools',    value: 'Figma, Claude, Figma Make' },
             ].map(({ label, value }) => (
-              <div
-                key={label}
-                style={{ padding: '8px', border: '1px solid rgba(30,75,154,0.2)' }}
-              >
-                <p className="font-sans text-[11px] font-bold text-navy mb-3 tracking-wide">{label}</p>
-                <p className="font-sans text-[14px] text-navy/70">{value}</p>
+              <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
+                <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>{value}</p>
               </div>
             ))}
           </div>
+
+          
+          <a href="#rm-solution" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
         </div>
         </div>
-      </motion.section>
+      </section>
 
       <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 32, display: 'flex', flexDirection: 'column', gap: 0 }}>
 
@@ -762,26 +756,37 @@ export default function RevenueManagementPage() {
           }} />
         </div>
 
-        {/* Full-width video container */}
-        <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', overflow: 'hidden', marginBottom: 8 }}>
-          <video
-            src="/videos/RM-Solution.webm"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="cs-solution-video-inner"
-            style={{ width: '75%', display: 'block', margin: '0 auto' }}
-          />
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start', marginTop: 8 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
           <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0 }}>
             A clearer and supportive data platform for Airline Analysts
           </h3>
           <BodyText>
             Revenue Management is the platform airlines use to price flights and manage seat inventory — now redesigned to be clearer, faster, and with AI built in where it matters.
           </BodyText>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16, alignItems: 'start' }}>
+          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', overflow: 'hidden' }}>
+            <video
+              src="/videos/RM-Solution.webm"
+              autoPlay loop muted playsInline
+              className="cs-solution-video-inner"
+              style={{ width: '75%', display: 'block', margin: '0 auto' }}
+            />
+          </div>
+          <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+            <p className="font-sans font-bold text-navy" style={{ fontSize: 13, marginBottom: 12 }}>IMPACT</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {[
+                { kpi: 'Timeline:', value: '10 weeks from research to engineering handoff' },
+                { kpi: 'Users Served:', value: '2 analyst types supported by one adaptive UI' },
+              ].map(({ kpi, value }) => (
+                <p key={kpi} className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>
+                  <span className="font-bold text-navy">{kpi}</span> {value}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -1086,7 +1091,7 @@ export default function RevenueManagementPage() {
             { heading: 'Integrating AI thoughtfully', body: 'Figuring out where AI should live and where it shouldn\'t was one of the most interesting design challenges I\'ve navigated — and taught me to advocate for users in ambiguous product territory.' },
             { heading: 'Gratitude', body: 'I\'m grateful to my team at PROS for trusting me with a modernization initiative for a live enterprise platform and for challenging my thinking at every step.' },
           ].map(({ heading, body }) => (
-            <div key={heading} style={{ background: 'rgba(30,75,154,0.04)', border: '1px solid rgba(30,75,154,0.1)', padding: 20 }}>
+            <div key={heading} className="cs-info-box" style={{ padding: 20 }}>
               <p className="font-sans font-bold text-navy" style={{ fontSize: 15, margin: '0 0 10px' }}>{heading}</p>
               <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
             </div>

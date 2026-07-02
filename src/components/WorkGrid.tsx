@@ -33,19 +33,23 @@ export type CaseStudy = {
   metrics?: { stat: string; label: string }[]
   team?: string
   timeframe?: string
+  problem?: string
+  outcome?: string
+  company?: string
 }
 
 // ── Data (newest → oldest) ───────────────────────────────────────────
 const CASE_STUDIES: CaseStudy[] = [
   {
-    title: "PROS Revenue Management",
+    title: "Revenue Management",
+    company: "PROS",
     tags: ["Enterprise", "AI", "Internship"],
     image: "/images/featured-work/featured-work-pros-rm.png",
     video: "",
     lottie: "/videos/Revenue-Management-Video.json",
     href: "/work/revenue-management",
     role: "Product Design Intern",
-    description: "Modernized an AI-powered airline pricing platform for 50+ carrier analysts.",
+    description: "An enterprise airline pricing platform for major airlines. Redesigned the core workflow for new-hire and veteran analysts and handed off to engineering.",
     lottieStartTime: 1.5,
     dotField: true,
     dotLayout: 0,
@@ -56,15 +60,18 @@ const CASE_STUDIES: CaseStudy[] = [
     metrics: [{ stat: "45%", label: "of analysts were newcomers" }, { stat: "2×", label: "mental models balanced in one UI" }],
     team: "UX Strategist · UX Researcher · PM",
     timeframe: "Jun – Aug 2025",
+    problem: "Enterprise pricing software used by major airlines",
+    outcome: "Redesigned the core workflow for new-hire and veteran airline pricing analysts; handed off to engineering",
   },
   {
-    title: "PROS Fare Finder",
+    title: "Fare Finder",
+    company: "PROS",
     tags: ["Enterprise", "Internship"],
     image: "/videos/Fare-Finder-Video-poster.png",
     video: "/videos/Fare-Finder-Video.webm",
     href: "/work/fare-finder",
     role: "Product Design Intern",
-    description: "Designed a map-based flight explorer for everyday leisure travelers.",
+    description: "A flight exploration tool for everyday travelers. Designed the map-based feature for PROS's 130+ airline partners; bookings up 35%.",
     mediaScale: 1.3,
     dotField: true,
     dotLayout: 0,
@@ -75,16 +82,19 @@ const CASE_STUDIES: CaseStudy[] = [
     metrics: [{ stat: "45%", label: "drop in map abandonment" }, { stat: "35%", label: "increase in direct bookings" }, { stat: "30%", label: "improvement in fare findability" }],
     team: "PROS Product Team · 130+ airlines",
     timeframe: "Jun – Aug 2025",
+    problem: "Flight exploration tool for everyday travelers",
+    outcome: "Designed a map-based feature for PROS's 130+ airline partners; direct bookings up 35%",
   },
   {
-    title: "Democratic National Committee",
+    title: "Campaign Design",
+    company: "Democratic National Committee",
     tags: ["Consumer", "Internship"],
     image: "/images/featured-work/featured-work-11-hmQDs6.png",
     video: "",
     lottie: "/videos/DNC-Video.json",
     href: "/work/democratic-national-committee",
     role: "Digital Design Intern",
-    description: "Created campaign assets across social, ads, and email for Biden-Harris.",
+    description: "Digital design for Biden-Harris and Democratic party initiatives. Turned around 18 same-day assets during an active presidential campaign; posts hit 5,500+ likes.",
     objectFit: "contain",
     mediaScale: 1.5,
     dotField: true,
@@ -96,15 +106,18 @@ const CASE_STUDIES: CaseStudy[] = [
     metrics: [{ stat: "18", label: "same-day turnarounds" }, { stat: "5,500", label: "likes across Instagram & TikTok" }],
     team: "Digital Design Team",
     timeframe: "Jun – Sep 2023",
+    problem: "Digital design for Biden-Harris and Democratic party initiatives",
+    outcome: "18 assets turned around same-day during an active presidential campaign; posts hit 5,500+ likes",
   },
   {
-    title: "Expert.ai",
+    title: "Corpus Platform",
+    company: "Expert.ai",
     tags: ["Enterprise", "Accessibility", "Internship"],
     image: "/videos/expert.ai-Video-poster.png",
     video: "/videos/expert.ai-Video.webm",
     href: "/work/expert-ai",
     role: "Product Design Intern",
-    description: "Redesigned filtering for an AI text analysis platform, improving accessibility.",
+    description: "An AI text analysis platform for enterprise teams. Redesigned filtering for accessibility; task time dropped from 2 min to 30s.",
     objectFit: "contain",
     mediaPadding: 16,
     dotField: true,
@@ -116,6 +129,8 @@ const CASE_STUDIES: CaseStudy[] = [
     metrics: [{ stat: "30s", label: "task time (down from 2 min)" }, { stat: "42%", label: "fewer support tickets after ship" }],
     team: "UX Team",
     timeframe: "2022",
+    problem: "AI text analysis platform for enterprise teams",
+    outcome: "Redesigned filtering for accessibility; task time dropped from 2 min to 30s",
   },
   {
     title: "Popple",
@@ -124,7 +139,7 @@ const CASE_STUDIES: CaseStudy[] = [
     video: "/videos/Popple-Video.webm",
     href: "https://popple.pages.dev/",
     role: "Design Engineer",
-    description: "Designed an app that makes completed tasks tangible and collectible.",
+    description: "An app that makes completed tasks tangible and collectible. Designed, built, and shipped solo, end to end.",
     objectFit: "cover",
     aspectRatio: "4/3",
     dotField: true,
@@ -137,6 +152,8 @@ const CASE_STUDIES: CaseStudy[] = [
     metrics: [{ stat: "Solo", label: "Designed, built & shipped" }, { stat: "Live", label: "Deployed with Cloudflare R2" }],
     team: "Solo",
     timeframe: "2025 – Present",
+    problem: "App that makes completed tasks tangible and collectible",
+    outcome: "Solo: designed, built, and shipped end to end",
   },
   {
     title: "Love Lives in SF",
@@ -145,7 +162,8 @@ const CASE_STUDIES: CaseStudy[] = [
     video: "/videos/llsf-Video.webm",
     href: "https://lovelivesinsf.org/",
     role: "Visual Design Intern",
-    description: "Built a digital hub connecting SF creatives to public art programming.",
+    description: "Website for SF's public art programming. Designed as the sole designer; traffic grew 35% in the first 30 days.",
+    company: "Love Lives in SF",
     mediaPadding: 16,
     dotField: true,
     dotLayout: 1,
@@ -156,6 +174,8 @@ const CASE_STUDIES: CaseStudy[] = [
     metrics: [{ stat: "35%", label: "traffic increase in 30 days" }, { stat: "3 min", label: "avg session duration" }, { stat: "8", label: "user interviews" }],
     team: "Sole Designer",
     timeframe: "Jan – May 2026",
+    problem: "Website for SF public art programming",
+    outcome: "Sole designer; site saw 35% more traffic in the first 30 days",
   },
   {
     title: "SnapSplit",
@@ -164,7 +184,7 @@ const CASE_STUDIES: CaseStudy[] = [
     video: "/videos/SnapSplit-Video.webm",
     href: "/work",
     role: "Freelance Designer",
-    description: "Rebranded a bill-splitting app to reduce expense friction between friends.",
+    description: "A bill-splitting app for friend groups. Rebranded and redesigned; cut the core task from 4 min to 30s.",
     objectFit: "cover",
     aspectRatio: "4/3",
     dotField: true,
@@ -178,6 +198,8 @@ const CASE_STUDIES: CaseStudy[] = [
     metrics: [{ stat: "30s", label: "core task time (from 4 min)" }, { stat: "40%", label: "reduction in abandonment" }, { stat: "11", label: "users tested" }],
     team: "Sole Designer + Dev Team",
     timeframe: "Dec 2023 – Sep 2024",
+    problem: "Bill-splitting app for friend groups",
+    outcome: "Rebrand and redesign that cut the core task from 4 min to 30s",
   },
 ]
 
@@ -283,6 +305,9 @@ export default function WorkGrid() {
                     metrics={s.metrics}
                     team={s.team}
                     timeframe={s.timeframe}
+                    problem={s.problem}
+                    outcome={s.outcome}
+                    company={s.company}
                   />
                 ))}
               </div>
