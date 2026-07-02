@@ -212,7 +212,7 @@ function IterationExplorer() {
   const passes = opt.accessibility.result.startsWith('Passes')
   return (
     <div>
-      <div className="dnc-iter-container" className="cs-card-box" style={{ padding: 32 }}>
+      <div className="cs-card-box" style={{ padding: 32 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div>
             <SubHeading tag="GRAPHIC EXPLORATION">VP Anniversary Iterations</SubHeading>
