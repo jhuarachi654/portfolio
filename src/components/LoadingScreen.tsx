@@ -31,7 +31,6 @@ const SEEDS = Array.from({ length: 18 }, (_, i) => {
 })
 
 const DISMISS_DISTANCE = 520
-const PREFERS_REDUCED_MOTION = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 function clamp(n: number, min: number, max: number) { return Math.min(max, Math.max(min, n)) }
 
@@ -60,7 +59,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
   // After intro fade-in, show button — matches the button's own staggered
   // fade-in delay below, so it isn't clickable before it's visible.
   useEffect(() => {
-    const t = setTimeout(() => setReady(true), PREFERS_REDUCED_MOTION ? 200 : 850)
+    const t = setTimeout(() => setReady(true), 850)
     return () => clearTimeout(t)
   }, [])
 
@@ -75,11 +74,6 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
   // a jump-cut — a longer duration + gentle ease-in-out reads as more elegant
   // than a fast snap.
   const dismiss = useCallback(() => {
-    if (PREFERS_REDUCED_MOTION) {
-      setProgress(DISMISS_DISTANCE)
-      commitIfDone(DISMISS_DISTANCE)
-      return
-    }
     const start = progressRef.current
     const startTime = performance.now()
     const duration = 750
@@ -186,7 +180,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
   // Real vibration pulse on Android, timed to each flower's visual "snap" —
   // feature-detected, so iOS (no web vibration API) just gets the visual.
   useEffect(() => {
-    if (PREFERS_REDUCED_MOTION || typeof navigator.vibrate !== "function") return
+    if (typeof navigator.vibrate !== "function") return
     const timers = flowers.map(f => setTimeout(() => navigator.vibrate(15), f.delay))
     return () => timers.forEach(clearTimeout)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -279,10 +273,6 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           from { opacity: 0; transform: translateY(18px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        @keyframes stagger-in-reduced {
-          from { opacity: 0; }
-          to   { opacity: 1; }
-        }
         /* A quick overshoot-and-settle "snap" instead of a soft fade — reads as
            a crisp, tactile landing. Paired with a real vibration pulse on
            Android (feature-detected; iOS has no web vibration API at all, so
@@ -321,9 +311,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 color: "rgba(255,255,255,0.75)",
                 opacity: 0,
-                animation: PREFERS_REDUCED_MOTION
-                  ? "stagger-in-reduced 0.2s ease forwards"
-                  : "stagger-in 0.55s ease 0.1s forwards",
+                animation: "stagger-in 0.55s ease 0.1s forwards",
               },
             },
             {
@@ -333,9 +321,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em",
                 maxWidth: "min(1100px, 92vw)", textAlign: "center", lineHeight: 1.3,
                 opacity: 0,
-                animation: PREFERS_REDUCED_MOTION
-                  ? "stagger-in-reduced 0.2s ease forwards"
-                  : "stagger-in 0.55s ease 0.35s forwards",
+                animation: "stagger-in 0.55s ease 0.35s forwards",
               },
             },
           ]}
@@ -348,9 +334,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             letterSpacing: "0.18em", textTransform: "uppercase",
             color: "rgba(255,255,255,0.75)",
             opacity: 0,
-            animation: PREFERS_REDUCED_MOTION
-              ? "stagger-in-reduced 0.2s ease forwards"
-              : "stagger-in 0.55s ease 0.6s forwards",
+            animation: "stagger-in 0.55s ease 0.6s forwards",
           }}
         >
           Ideas bloom through iteration. Click to see what's grown so far.
@@ -365,9 +349,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           style={{
             marginTop: 8,
             opacity: 0,
-            animation: PREFERS_REDUCED_MOTION
-              ? "stagger-in-reduced 0.2s ease 0.1s forwards"
-              : "stagger-in 0.65s ease 0.85s forwards",
+            animation: "stagger-in 0.65s ease 0.85s forwards",
             transition: "color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
             pointerEvents: ready ? "auto" : "none",
           }}
@@ -396,10 +378,8 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             style={{
               marginTop: f.mt,
               flexShrink: 0,
-              opacity: PREFERS_REDUCED_MOTION ? undefined : 0,
-              animation: PREFERS_REDUCED_MOTION
-                ? undefined
-                : `snap-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) ${f.delay}ms both`,
+              opacity: 0,
+              animation: `snap-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) ${f.delay}ms both`,
             }}
           >
             <AsciiVideo
