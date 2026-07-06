@@ -18,29 +18,12 @@ function LiveClock() {
 }
 
 
-function useFlowerSize() {
-  const getSize = () => {
-    const w = window.innerWidth
-    if (w >= 1200) return { width: 420, height: 500 }
-    if (w >= 768) return { width: 220, height: 300 }
-    const size = Math.min(w - 40, 320)
-    return { width: size, height: Math.round(size * 1.15) }
-  }
-  const [size, setSize] = useState(getSize)
-  useEffect(() => {
-    const update = () => setSize(getSize())
-    window.addEventListener("resize", update)
-    return () => window.removeEventListener("resize", update)
-  }, [])
-  return size
-}
-
 const TITLES = [
   "product designer",
   "design engineer",
   "interaction designer",
 ]
-const TAGS = ["Based in SF", "MDes @ CCA", "Figma Campus Leader"] as const
+const TAGS = ["MS-HCI @ CCA", "Psych & Neuro @ Williams", "Figma Campus Leader"] as const
 
 const TYPE_SPEED   = 80
 const DELETE_SPEED = 45
@@ -81,7 +64,6 @@ function useTypewriter() {
 
 export default function HomePage() {
   const displayed = useTypewriter()
-  const flowerSize = useFlowerSize()
   return (
     <>
       <div className="line-grid hero-page">
@@ -108,7 +90,7 @@ export default function HomePage() {
 
         {/* ── Right: ASCII flower ── */}
         <div className="hero-right hero-flower-wrap">
-          <AsciiVideo src="/cosmos-1.mp4" width={flowerSize.width} height={flowerSize.height} />
+          <AsciiVideo src="/cosmos-1.mp4" width={420} height={500} />
           <span className="hero-flower-label">Built from the ground up with React + Canvas API</span>
         </div>
 

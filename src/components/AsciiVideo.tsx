@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react"
 
 const TILE      = 3
 const IS_MOBILE = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
+const PREFERS_REDUCED_MOTION = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 const SAMPLE_INTERVAL = 80
 const FRAME_INTERVAL  = 1000 / 60
 const SPRING          = 0.19
@@ -9,6 +10,10 @@ const DAMPING         = 0.72
 const REPEL_RADIUS    = 30
 const REPEL_STRENGTH  = 18
 const DISPLACE_THRESH = 0.4
+const SCATTER_MAG        = 140
+const SCATTER_DELAY_MAX  = 300
+const SCATTER_DUR_BASE   = 1400
+const SCATTER_DUR_RANGE  = 500
 
 interface Tile {
   homeX: number
@@ -20,6 +25,47 @@ interface Tile {
   visible: boolean
   baseAlpha: number
   twinklePhase: number
+  scatterX: number
+  scatterY: number
+  introDelay: number
+  introDuration: number
+  introDone: boolean
+}
+
+function makeTile(homeX: number, homeY: number, scatterIntro: boolean): Tile {
+  const scattered = scatterIntro && !PREFERS_REDUCED_MOTION
+  return {
+    homeX, homeY,
+    x: scattered ? homeX + (Math.random() - 0.5) * 2 * SCATTER_MAG : homeX,
+    y: scattered ? homeY + (Math.random() - 0.5) * 2 * SCATTER_MAG : homeY,
+    vx: 0, vy: 0,
+    visible: false, baseAlpha: 0,
+    twinklePhase: Math.random() * Math.PI * 2,
+    scatterX: scattered ? homeX + (Math.random() - 0.5) * 2 * SCATTER_MAG : homeX,
+    scatterY: scattered ? homeY + (Math.random() - 0.5) * 2 * SCATTER_MAG : homeY,
+    introDelay: scattered ? Math.random() * SCATTER_DELAY_MAX : 0,
+    introDuration: scattered ? SCATTER_DUR_BASE + Math.random() * SCATTER_DUR_RANGE : 0,
+    introDone: !scattered,
+  }
+}
+
+function easeOutCubic(t: number) { return 1 - Math.pow(1 - t, 3) }
+
+/** Advances tiles still in their scatter-assemble intro. Returns true if any tile is still introducing. */
+function stepIntro(tiles: Tile[], now: number, introStart: number): boolean {
+  let stillIntroducing = false
+  for (const t of tiles) {
+    if (t.introDone) continue
+    const elapsed = now - introStart
+    if (elapsed < t.introDelay) { stillIntroducing = true; continue }
+    const progress = Math.min(1, (elapsed - t.introDelay) / t.introDuration)
+    const eased = easeOutCubic(progress)
+    t.x = t.scatterX + (t.homeX - t.scatterX) * eased
+    t.y = t.scatterY + (t.homeY - t.scatterY) * eased
+    if (progress >= 1) { t.x = t.homeX; t.y = t.homeY; t.introDone = true }
+    else stillIntroducing = true
+  }
+  return stillIntroducing
 }
 
 interface Props {
@@ -33,9 +79,10 @@ interface Props {
   startDelay?: number
   playbackRate?: number
   staticBloom?: boolean
+  scatterIntro?: boolean
 }
 
-export default function AsciiVideo({ src, width = 420, height = 460, twinkle = false, tileColor, seekTo, loop = true, startDelay = 0, playbackRate = 1, staticBloom = false }: Props) {
+export default function AsciiVideo({ src, width = 420, height = 460, twinkle = false, tileColor, seekTo, loop = true, startDelay = 0, playbackRate = 1, staticBloom = false, scatterIntro = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const videoRef  = useRef<HTMLVideoElement>(null)
   const frameRef  = useRef<HTMLCanvasElement>(null)
@@ -60,7 +107,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
     const tiles: Tile[] = []
     for (let r = 0; r < rows; r++)
       for (let c = 0; c < cols; c++)
-        tiles.push({ homeX: c*TILE, homeY: r*TILE, x: c*TILE, y: r*TILE, vx: 0, vy: 0, visible: false, baseAlpha: 0, twinklePhase: 0 })
+        tiles.push(makeTile(c*TILE, r*TILE, scatterIntro))
     tilesRef.current = tiles
     const isDark = () => document.documentElement.getAttribute("data-theme") === "dark"
     const img = new Image()
@@ -94,16 +141,19 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       fCtx.putImageData(imgData, 0, 0)
       const tileW = cols*TILE, tileH = rows*TILE
       let lastFrame = 0
+      let introStart: number | null = null
       const render = (now: number) => {
         rafRef.current = requestAnimationFrame(render)
         if (now - lastFrame < 1000/30) return
         lastFrame = now
+        if (introStart === null) introStart = now
+        stepIntro(tiles, now, introStart)
         const mx = mouseRef.current.x, my = mouseRef.current.y
         const active = mx > -100 && my > -100
         const rr2 = REPEL_RADIUS * REPEL_RADIUS
         for (let i = 0; i < tiles.length; i++) {
           const t = tiles[i]
-          if (!t.visible) continue
+          if (!t.visible || !t.introDone) continue
           if (active) {
             const cx = t.x+TILE/2, cy = t.y+TILE/2
             const dx = cx-mx, dy = cy-my, d2 = dx*dx+dy*dy
@@ -161,13 +211,14 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
     const tiles: Tile[] = []
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-        tiles.push({ homeX: c * TILE, homeY: r * TILE, x: c * TILE, y: r * TILE, vx: 0, vy: 0, visible: false, baseAlpha: 0, twinklePhase: Math.random() * Math.PI * 2 })
+        tiles.push(makeTile(c * TILE, r * TILE, scatterIntro))
       }
     }
     tilesRef.current = tiles
 
     let lastSample = 0
     let lastFrame  = 0
+    let introStart: number | null = null
 
     const isDark = () =>
       document.documentElement.getAttribute("data-theme") === "dark"
@@ -227,6 +278,8 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       }
       lastFrame = now
       sampleFrame(now)
+      if (introStart === null) introStart = now
+      stepIntro(tiles, now, introStart)
 
       const mx = mouseRef.current.x
       const my = mouseRef.current.y
@@ -236,7 +289,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       if (mouseActive) {
         for (let i = 0; i < tiles.length; i++) {
           const t  = tiles[i]
-          if (!t.visible) continue
+          if (!t.visible || !t.introDone) continue
           const cx = t.x + TILE / 2
           const cy = t.y + TILE / 2
           const dx = cx - mx
@@ -260,7 +313,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       } else {
         for (let i = 0; i < tiles.length; i++) {
           const t = tiles[i]
-          if (!t.visible || (t.vx === 0 && t.vy === 0 && t.x === t.homeX && t.y === t.homeY)) continue
+          if (!t.visible || !t.introDone || (t.vx === 0 && t.vy === 0 && t.x === t.homeX && t.y === t.homeY)) continue
           t.vx += (t.homeX - t.x) * SPRING
           t.vy += (t.homeY - t.y) * SPRING
           t.vx *= DAMPING
@@ -346,7 +399,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
   return (
     <div
       className="ascii-video-wrap"
-      style={{ width, height, flexShrink: 0, position: "relative" }}
+      style={{ width: "100%", aspectRatio: `${width} / ${height}`, flexShrink: 0, position: "relative" }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onTouchMove={handleTouchMove}
@@ -365,7 +418,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       <canvas ref={frameRef} style={{ display: "none" }} />
       <canvas
         ref={canvasRef}
-        style={{ display: "block", width, height, background: "transparent" }}
+        style={{ display: "block", width: "100%", height: "100%", background: "transparent" }}
       />
     </div>
   )

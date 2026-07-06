@@ -3,6 +3,12 @@ import { useRef, useEffect, useState } from "react"
 import Lottie, { type LottieRefCurrentProps } from "lottie-react"
 import DotField from "./DotField"
 
+const CATEGORY_PRIORITY = ["AI", "Accessibility", "Enterprise", "Consumer"] as const
+
+function getCategory(tags: string[]) {
+  return CATEGORY_PRIORITY.find(cat => tags.includes(cat))
+}
+
 export interface CaseStudyCardProps {
   index?: number
   title: string
@@ -201,6 +207,7 @@ export default function CaseStudyCard({
   }, [isDesktop])
 
   const aspectRatioClass = `aspect-${aspectRatio.replace("/", "-")}`
+  const category = getCategory(tags)
   const showSkeleton = slowLoad && !isReady
 
   const hasMetrics = metrics && metrics.length > 0
@@ -214,7 +221,7 @@ export default function CaseStudyCard({
     >
       <div
         ref={mediaRef}
-        className={`case-study-card-media ${aspectRatioClass} ${isReady ? "is-loaded" : ""}`}
+        className={`case-study-card-media ${aspectRatioClass} ${category ? `case-study-card-media--${category.toLowerCase()}` : ""} ${isReady ? "is-loaded" : ""}`}
         style={{ ...(bgColor ? { background: bgColor } : {}), ...(mediaPadding ? { padding: mediaPadding } : {}) }}
       >
         {dotField && <DotField layout={dotLayout} />}
@@ -251,10 +258,8 @@ export default function CaseStudyCard({
 
       <div className="case-study-card-body">
         <div className="case-study-card-header">
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8, width: '100%' }}>
-            <h3 className="case-study-card-title">{title}</h3>
-            {company && <span className="font-sans font-semibold tracking-[0.1em] uppercase" style={{ fontSize: 10, color: 'rgba(30,75,154,0.65)', whiteSpace: 'nowrap', flexShrink: 0 }}>{company}</span>}
-          </div>
+          <h3 className="case-study-card-title">{title}</h3>
+          {company && <span className="case-study-card-company font-sans font-semibold tracking-[0.1em] uppercase" style={{ fontSize: 10, color: 'rgba(30,75,154,0.65)' }}>at {company}</span>}
           <div className="case-study-card-tags">
             {tags.filter(t => t !== "Internship" && t !== "Freelance" && t !== "Solo").map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
             {role && <span className="case-study-card-tag">{role}</span>}

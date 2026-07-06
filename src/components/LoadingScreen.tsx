@@ -30,15 +30,25 @@ const SEEDS = Array.from({ length: 18 }, (_, i) => {
   }
 })
 
-const SLIDE_DUR = 700
+const DISMISS_DISTANCE = 520
+const PREFERS_REDUCED_MOTION = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+function clamp(n: number, min: number, max: number) { return Math.min(max, Math.max(min, n)) }
 
 export default function LoadingScreen({ onDone }: { onDone: () => void }) {
-  const [phase, setPhase]           = useState<"intro" | "ready" | "dissolving">("intro")
+  // progress is a continuous scrub value [0, DISMISS_DISTANCE] — scrolling up/down
+  // moves it in both directions, so the reveal always tracks scroll intent exactly
+  // and is fully reversible until it commits at the very end.
+  const [progress, setProgress]     = useState(0)
+  const [ready, setReady]           = useState(false)
   const [btnHovered, setBtnHovered] = useState(false)
   const [sparks, setSparks]         = useState<{ id: number; x: number; y: number }[]>([])
   const sparkId                     = useRef(0)
   const onDoneRef = useRef(onDone)
   onDoneRef.current = onDone
+  const progressRef = useRef(0)
+  progressRef.current = progress
+  const committedRef = useRef(false)
 
   const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -49,16 +59,86 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
 
   // After intro fade-in, show button
   useEffect(() => {
-    const t = setTimeout(() => setPhase("ready"), 900)
+    const t = setTimeout(() => setReady(true), PREFERS_REDUCED_MOTION ? 200 : 900)
     return () => clearTimeout(t)
   }, [])
 
+  const commitIfDone = useCallback((next: number) => {
+    if (next >= DISMISS_DISTANCE && !committedRef.current) {
+      committedRef.current = true
+      onDoneRef.current()
+    }
+  }, [])
 
-  const handleExplore = useCallback(() => {
-    if (phase !== "ready") return
-    setPhase("dissolving")
-    setTimeout(() => onDoneRef.current(), SLIDE_DUR)
-  }, [phase])
+  // Explore button: animates progress to completion instead of jump-cutting,
+  // so it behaves like a fast scroll rather than a separate one-way dismissal.
+  const dismiss = useCallback(() => {
+    if (PREFERS_REDUCED_MOTION) {
+      setProgress(DISMISS_DISTANCE)
+      commitIfDone(DISMISS_DISTANCE)
+      return
+    }
+    const start = progressRef.current
+    const startTime = performance.now()
+    const duration = 500
+    const tick = (now: number) => {
+      const t = clamp((now - startTime) / duration, 0, 1)
+      const eased = 1 - Math.pow(1 - t, 3)
+      const next = start + (DISMISS_DISTANCE - start) * eased
+      setProgress(next)
+      if (t < 1) requestAnimationFrame(tick)
+      else commitIfDone(DISMISS_DISTANCE)
+    }
+    requestAnimationFrame(tick)
+  }, [commitIfDone])
+
+  // Wheel / touch / keyboard scrub the splash away — and back — continuously.
+  // Real page scroll stays locked (see html.loading) so the homepage sits
+  // pristine at scrollTop 0 until this fully commits.
+  useEffect(() => {
+    if (committedRef.current) return
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault()
+      const next = clamp(progressRef.current + e.deltaY, 0, DISMISS_DISTANCE)
+      setProgress(next)
+      commitIfDone(next)
+    }
+    let touchY: number | null = null
+    const onTouchStart = (e: TouchEvent) => { touchY = e.touches[0]?.clientY ?? null }
+    const onTouchMove = (e: TouchEvent) => {
+      if (touchY === null) return
+      e.preventDefault()
+      const y = e.touches[0]?.clientY ?? touchY
+      const delta = touchY - y
+      touchY = y
+      const next = clamp(progressRef.current + delta, 0, DISMISS_DISTANCE)
+      setProgress(next)
+      commitIfDone(next)
+    }
+    const onKeyDown = (e: KeyboardEvent) => {
+      const step = 80
+      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
+        const next = clamp(progressRef.current + step, 0, DISMISS_DISTANCE)
+        setProgress(next)
+        commitIfDone(next)
+      } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+        setProgress(clamp(progressRef.current - step, 0, DISMISS_DISTANCE))
+      }
+    }
+
+    window.addEventListener("wheel", onWheel, { passive: false })
+    window.addEventListener("touchstart", onTouchStart, { passive: true })
+    window.addEventListener("touchmove", onTouchMove, { passive: false })
+    window.addEventListener("keydown", onKeyDown)
+    return () => {
+      window.removeEventListener("wheel", onWheel)
+      window.removeEventListener("touchstart", onTouchStart)
+      window.removeEventListener("touchmove", onTouchMove)
+      window.removeEventListener("keydown", onKeyDown)
+    }
+  }, [commitIfDone])
+
+  const reveal = progress / DISMISS_DISTANCE
 
   return (
     <div
@@ -69,8 +149,8 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
         display: "flex", flexDirection: "column",
         alignItems: "center", justifyContent: "center",
         overflow: "hidden", cursor: "none",
-        transform: phase === "dissolving" ? "translateY(-100vh)" : "translateY(0)",
-        transition: phase === "dissolving" ? `transform ${SLIDE_DUR}ms cubic-bezier(0.76, 0, 0.24, 1)` : "none",
+        transform: `translateY(${-reveal * 100}%)`,
+        pointerEvents: reveal >= 1 ? "none" : "auto",
       }}
     >
       {sparks.map(sp => (
@@ -147,6 +227,10 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           from { opacity: 0; transform: translateY(18px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes stagger-in-reduced {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
         @media (max-width: 767px) {
           .loading-geo {
             bottom: auto !important;
@@ -170,56 +254,61 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           gap={16}
           lines={[
             {
-              text: "Hello, welcome to",
+              text: "Welcome to",
               style: {
                 fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 color: "rgba(255,255,255,0.75)",
-                opacity: 0, animation: "stagger-in 0.65s ease 0.15s forwards",
+                opacity: 0,
+                animation: PREFERS_REDUCED_MOTION
+                  ? "stagger-in-reduced 0.2s ease forwards"
+                  : "stagger-in 0.55s ease 0.1s forwards",
               },
             },
             {
-              text: "Johanna's Portfolio.",
+              text: "Johanna's Corner of the Internet.",
               style: {
-                fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3vw, 42px)",
+                fontFamily: "var(--font-display)", fontSize: "clamp(22px, 3vw, 32px)",
                 fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em",
-                opacity: 0, animation: "stagger-in 0.65s ease 0.35s forwards",
-              },
-            },
-            {
-              text: "She's a product designer grounded in",
-              style: {
-                fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
-                letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(255,255,255,0.75)", maxWidth: 520, textAlign: "center",
-                lineHeight: 1.8,
-                opacity: 0, animation: "stagger-in 0.65s ease 0.55s forwards",
-              },
-            },
-            {
-              text: "psychology who builds what she designs.",
-              style: {
-                fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
-                letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(255,255,255,0.75)", maxWidth: 520, textAlign: "center",
-                lineHeight: 1.8, marginTop: -10,
-                opacity: 0, animation: "stagger-in 0.65s ease 0.7s forwards",
+                maxWidth: "min(1100px, 92vw)", textAlign: "center", lineHeight: 1.3,
+                opacity: 0,
+                animation: PREFERS_REDUCED_MOTION
+                  ? "stagger-in-reduced 0.2s ease forwards"
+                  : "stagger-in 0.55s ease 0.45s forwards",
               },
             },
           ]}
         />
 
+        <p
+          style={{
+            margin: 0,
+            fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500,
+            letterSpacing: "0.18em", textTransform: "uppercase",
+            color: "rgba(255,255,255,0.75)",
+            opacity: 0,
+            animation: PREFERS_REDUCED_MOTION
+              ? "stagger-in-reduced 0.2s ease forwards"
+              : "stagger-in 0.55s ease 0.8s forwards",
+          }}
+        >
+          Ideas bloom through iteration. Click to see what's grown so far.
+        </p>
+
         {/* Explore button */}
         <button
           className="loading-explore-btn"
-          onClick={handleExplore}
+          onClick={dismiss}
           onMouseEnter={() => setBtnHovered(true)}
           onMouseLeave={() => setBtnHovered(false)}
           style={{
             marginTop: 8,
-            opacity: 0, animation: "stagger-in 0.65s ease 0.9s forwards",
+            opacity: 0,
+            animation: PREFERS_REDUCED_MOTION
+              ? "stagger-in-reduced 0.2s ease 0.1s forwards"
+              : "stagger-in 0.65s ease 0.95s forwards",
             transition: "color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
-            pointerEvents: phase === "ready" ? "auto" : "none",
+            pointerEvents: ready ? "auto" : "none",
           }}
         >
           Explore
@@ -254,6 +343,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               height={f.h}
               tileColor={[255, 255, 255]}
               loop={false}
+              scatterIntro
               startDelay={f.delay}
               playbackRate={2.5}
             />

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import Lottie from 'lottie-react'
+import { useEffect, useRef, useState } from 'react'
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
 import { Brain, Ghost, BookOpen, MapPin, Briefcase, User, ChartBar, Stack, Bell, Robot, AirTrafficControl } from '@phosphor-icons/react'
 import Footer from '../../components/Footer'
 import SectionHeading from '../../components/case-study/SectionHeading'
@@ -603,20 +603,38 @@ function PolaroidDeck({ fullWidth = false }: { fullWidth?: boolean }) {
   )
 }
 
-// ─── Hero Lottie ──────────────────────────────────────────────────────────────
+// ─── Hero Lottie — paused by default, plays on hover (same as work-grid cards) ──
+
+const LOTTIE_START_TIME = 1.5 // matches the work-grid card's default thumbnail frame
 
 function HeroLottie() {
   const [data, setData] = useState<object | null>(null)
+  const lottieRef = useRef<LottieRefCurrentProps>(null)
+  const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
+
   useEffect(() => {
     fetch('/videos/Revenue-Management-Video.json')
       .then(r => r.json())
       .then(setData)
       .catch(() => {})
   }, [])
+
+  useEffect(() => {
+    if (!data) return
+    const id = requestAnimationFrame(() => { lottieRef.current?.goToAndStop(LOTTIE_START_TIME * 1000, false) })
+    return () => cancelAnimationFrame(id)
+  }, [data])
+
+  const handleMouseEnter = () => { if (isDesktop) lottieRef.current?.play() }
+  const handleMouseLeave = () => {
+    if (!isDesktop) return
+    lottieRef.current?.goToAndStop(LOTTIE_START_TIME * 1000, false)
+  }
+
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-hidden" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {data && (
-        <Lottie animationData={data} loop autoplay style={{ width: '100%', display: 'block' }} />
+        <Lottie lottieRef={lottieRef} animationData={data} loop autoplay={false} style={{ width: '100%', display: 'block' }} />
       )}
     </div>
   )
@@ -633,7 +651,7 @@ export default function RevenueManagementPage() {
 
       {/* ── Hero ── */}
       <section>
-        {/* Hero Lottie */}
+        {/* Hero Lottie — paused by default, plays on hover */}
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
           <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', lineHeight: 0, fontSize: 0 }}>
             <HeroLottie />
@@ -1110,6 +1128,9 @@ export default function RevenueManagementPage() {
         title="PROS Fare Finder Map"
         to="/work/fare-finder"
         description="Designed and shipped a flight map tool for travelers to explore and book their next trip."
+        video="/videos/Fare-Finder-Video.webm"
+        poster="/videos/Fare-Finder-Video-poster.png"
+        restTime={4}
       />
 
       <Footer />

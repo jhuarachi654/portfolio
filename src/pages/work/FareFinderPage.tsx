@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Briefcase, MapTrifold, Compass, MagnifyingGlass, CheckCircle, XCircle, AirplaneTakeoff, AirplaneInFlight, TrendUp, AirTrafficControl } from '@phosphor-icons/react'
 import Footer from '../../components/Footer'
@@ -177,13 +177,7 @@ function SolutionBlock({
   return (
     <div style={{ marginTop: index === 1 ? 40 : 64 }}>
       {index > 1 && <hr style={{ border: 'none', borderTop: '1px solid rgba(30,75,154,0.2)', marginBottom: 64 }} />}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 48, alignItems: 'center' }}>
-        <div>
-          <img src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block' }} />
-          {caption && (
-            <p className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>{caption}</p>
-          )}
-        </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
         <div>
           <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>{num}. {heading}</h3>
           <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: outcome ? 20 : 0 }}>{body}</p>
@@ -192,6 +186,12 @@ function SolutionBlock({
               <span className="text-navy font-bold" style={{ fontSize: 16, flexShrink: 0 }}>→</span>
               <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{outcome}</p>
             </div>
+          )}
+        </div>
+        <div>
+          <img src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block' }} />
+          {caption && (
+            <p className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>{caption}</p>
           )}
         </div>
       </div>
@@ -304,6 +304,42 @@ function FlightFareExplorer() {
   )
 }
 
+// ─── Hero video — paused by default (resting 4s in), plays on hover ──────────
+
+const HERO_REST_TIME = 4
+
+function HeroVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
+
+  const handleLoadedMetadata = () => {
+    const vid = videoRef.current
+    if (vid) vid.currentTime = HERO_REST_TIME
+  }
+
+  const handleMouseEnter = () => { if (isDesktop) videoRef.current?.play().catch(() => {}) }
+  const handleMouseLeave = () => {
+    if (!isDesktop) return
+    const vid = videoRef.current
+    if (vid) { vid.pause(); vid.currentTime = HERO_REST_TIME }
+  }
+
+  return (
+    <video
+      ref={videoRef}
+      src="/videos/Fare-Finder-Video.webm"
+      poster="/videos/Fare-Finder-Video-poster.png"
+      muted
+      loop
+      playsInline
+      onLoadedMetadata={handleLoadedMetadata}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{ width: '100%', display: 'block' }}
+    />
+  )
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function FareFinderPage() {
@@ -317,15 +353,7 @@ export default function FareFinderPage() {
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
           <div style={{ background: '#f0f4fb', padding: '4px 4px 0', border: '1px solid rgba(30,75,154,0.2)' }}>
-            <video
-              src="/videos/Fare-Finder-Video.webm"
-              poster="/videos/Fare-Finder-Video-poster.png"
-              autoPlay
-              loop
-              muted
-              playsInline
-              style={{ width: '100%', display: 'block' }}
-            />
+            <HeroVideo />
           </div>
         </div>
 
@@ -917,6 +945,7 @@ export default function FareFinderPage() {
         title="Democratic National Committee"
         to="/work/democratic-national-committee"
         description="Created campaign assets across social, ads, and email for Biden-Harris."
+        lottie="/videos/DNC-Video.json"
       />
 
       <Footer />

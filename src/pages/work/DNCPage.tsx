@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import Lottie from 'lottie-react'
+import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
 import { MapPin, Briefcase, Megaphone, Users, PaintBrush, Star } from '@phosphor-icons/react'
 import Footer from '../../components/Footer'
 import SectionHeading from '../../components/case-study/SectionHeading'
@@ -22,25 +22,6 @@ const TOC = [
 ]
 
 const img = (f: string) => `/images/democratic-national-committee/${f}`
-
-// ─── Hero Lottie ──────────────────────────────────────────────────────────────
-
-function HeroLottie() {
-  const [data, setData] = useState<object | null>(null)
-  useEffect(() => {
-    fetch('/videos/DNC-Video.json')
-      .then(r => r.json())
-      .then(setData)
-      .catch(() => {})
-  }, [])
-  return (
-    <div className="w-full aspect-video overflow-hidden">
-      {data && (
-        <Lottie animationData={data} loop autoplay style={{ width: '100%', height: '100%' }} />
-      )}
-    </div>
-  )
-}
 
 // ─── Section wrapper ──────────────────────────────────────────────────────────
 
@@ -246,6 +227,32 @@ function IterationExplorer() {
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+// ─── Hero Lottie — paused by default, plays on hover (same as work-grid cards) ──
+
+function HeroLottie() {
+  const [data, setData] = useState<object | null>(null)
+  const lottieRef = useRef<LottieRefCurrentProps>(null)
+  const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
+
+  useEffect(() => {
+    fetch('/videos/DNC-Video.json')
+      .then(r => r.json())
+      .then(setData)
+      .catch(() => {})
+  }, [])
+
+  const handleMouseEnter = () => { if (isDesktop) lottieRef.current?.play() }
+  const handleMouseLeave = () => { if (isDesktop) lottieRef.current?.stop() }
+
+  return (
+    <div className="w-full aspect-video overflow-hidden" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {data && (
+        <Lottie lottieRef={lottieRef} animationData={data} loop autoplay={false} style={{ width: '100%', height: '100%' }} />
+      )}
     </div>
   )
 }
@@ -544,6 +551,10 @@ export default function DNCPage() {
         title="Expert.ai"
         to="/work/expert-ai"
         description="Redesigned filtering for an AI text analysis platform, improving accessibility."
+        video="/videos/expert.ai-Video.webm"
+        poster="/videos/expert.ai-Video-poster.png"
+        restTime={4}
+        mediaPadding={24}
       />
 
       <Footer />

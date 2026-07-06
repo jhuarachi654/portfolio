@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Timer, Ticket } from '@phosphor-icons/react'
 import Footer from '../../components/Footer'
@@ -231,6 +231,42 @@ function ImpactToggle() {
   )
 }
 
+// ─── Hero video — paused by default (resting 4s in), plays on hover ──────────
+
+const HERO_REST_TIME = 4
+
+function HeroVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
+
+  const handleLoadedMetadata = () => {
+    const vid = videoRef.current
+    if (vid) vid.currentTime = HERO_REST_TIME
+  }
+
+  const handleMouseEnter = () => { if (isDesktop) videoRef.current?.play().catch(() => {}) }
+  const handleMouseLeave = () => {
+    if (!isDesktop) return
+    const vid = videoRef.current
+    if (vid) { vid.pause(); vid.currentTime = HERO_REST_TIME }
+  }
+
+  return (
+    <video
+      ref={videoRef}
+      src="/videos/expert.ai-Video.webm"
+      poster="/videos/expert.ai-Video-poster.png"
+      muted
+      loop
+      playsInline
+      onLoadedMetadata={handleLoadedMetadata}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{ width: '100%', display: 'block' }}
+    />
+  )
+}
+
 export default function ExpertAIPage() {
   useCaseToc(TOC)
   useEffect(() => { window.scrollTo(0, 0) }, [])
@@ -243,15 +279,7 @@ export default function ExpertAIPage() {
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
           <div className="cs-solution-wrap" style={{ background: '#f0f4fb', padding: '56px 100px', border: '1px solid rgba(30,75,154,0.2)' }}>
-            <video
-              src="/videos/expert.ai-Video.webm"
-              poster="/videos/expert.ai-Video-poster.png"
-              autoPlay
-              loop
-              muted
-              playsInline
-              style={{ width: '100%', display: 'block' }}
-            />
+            <HeroVideo />
           </div>
         </div>
 
@@ -774,6 +802,8 @@ export default function ExpertAIPage() {
         title="PROS Revenue Management"
         to="/work/revenue-management"
         description="Modernized an AI-powered airline pricing platform for 50+ carrier analysts."
+        lottie="/videos/Revenue-Management-Video.json"
+        restTime={1.5}
       />
 
       <Footer />

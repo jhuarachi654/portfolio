@@ -163,7 +163,6 @@ const CASE_STUDIES: CaseStudy[] = [
     href: "https://lovelivesinsf.org/",
     role: "Visual Design Intern",
     description: "Website for SF's public art programming. Designed as the sole designer; traffic grew 35% in the first 30 days.",
-    company: "Love Lives in SF",
     mediaPadding: 16,
     dotField: true,
     dotLayout: 1,

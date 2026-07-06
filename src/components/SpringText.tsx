@@ -133,13 +133,22 @@ export default function SpringText({ lines, containerStyle, gap = 12 }: Props) {
     >
       {lines.map((line, li) => (
         <p key={li} style={{ margin: 0, lineHeight: 1, ...line.style }}>
-          {line.text.split("").map((ch, ci) => (
-            <span
-              key={ci}
-              data-char
-              style={{ display: "inline-block", whiteSpace: "pre" }}
-            >
-              {ch}
+          {line.text.split(" ").map((word, wi, words) => (
+            <span key={wi} style={{ display: "inline" }}>
+              <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+                {word.split("").map((ch, ci) => (
+                  <span
+                    key={ci}
+                    data-char
+                    style={{ display: "inline-block", whiteSpace: "pre" }}
+                  >
+                    {ch}
+                  </span>
+                ))}
+              </span>
+              {wi < words.length - 1 && (
+                <span data-char style={{ display: "inline-block", whiteSpace: "pre" }}> </span>
+              )}
             </span>
           ))}
         </p>
