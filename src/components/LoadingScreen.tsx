@@ -57,10 +57,10 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
     setTimeout(() => setSparks(s => s.filter(sp => sp.id !== id)), 1200)
   }, [])
 
-  // After intro fade-in, show button — matches the button's own sequential
-  // fade-in delay (1.75s) below, so it isn't clickable before it's visible.
+  // After intro fade-in, show button — matches the button's own staggered
+  // fade-in delay below, so it isn't clickable before it's visible.
   useEffect(() => {
-    const t = setTimeout(() => setReady(true), PREFERS_REDUCED_MOTION ? 200 : 1750)
+    const t = setTimeout(() => setReady(true), PREFERS_REDUCED_MOTION ? 200 : 850)
     return () => clearTimeout(t)
   }, [])
 
@@ -71,8 +71,9 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
     }
   }, [])
 
-  // Explore button: animates progress to completion instead of jump-cutting,
-  // so it behaves like a fast scroll rather than a separate one-way dismissal.
+  // Explore button: smoothly swipes the whole curtain up and away, rather than
+  // a jump-cut — a longer duration + gentle ease-in-out reads as more elegant
+  // than a fast snap.
   const dismiss = useCallback(() => {
     if (PREFERS_REDUCED_MOTION) {
       setProgress(DISMISS_DISTANCE)
@@ -81,10 +82,12 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
     }
     const start = progressRef.current
     const startTime = performance.now()
-    const duration = 500
+    const duration = 750
     const tick = (now: number) => {
       const t = clamp((now - startTime) / duration, 0, 1)
-      const eased = 1 - Math.pow(1 - t, 3)
+      // ease-in-out cubic: gentle acceleration, gentle settle — smoother than a
+      // pure ease-out snap for a deliberate "swipe up and away" feel.
+      const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
       const next = start + (DISMISS_DISTANCE - start) * eased
       setProgress(next)
       if (t < 1) requestAnimationFrame(tick)
@@ -326,13 +329,9 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em",
                 maxWidth: "min(1100px, 92vw)", textAlign: "center", lineHeight: 1.3,
                 opacity: 0,
-                // Sequential reveal: each element's delay starts only after the
-                // previous one has fully finished (0.1 + 0.55 = 0.65s), rather
-                // than the old overlapping stagger where several were fading
-                // in at once.
                 animation: PREFERS_REDUCED_MOTION
                   ? "stagger-in-reduced 0.2s ease forwards"
-                  : "stagger-in 0.55s ease 0.65s forwards",
+                  : "stagger-in 0.55s ease 0.35s forwards",
               },
             },
           ]}
@@ -347,7 +346,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             opacity: 0,
             animation: PREFERS_REDUCED_MOTION
               ? "stagger-in-reduced 0.2s ease forwards"
-              : "stagger-in 0.55s ease 1.2s forwards",
+              : "stagger-in 0.55s ease 0.6s forwards",
           }}
         >
           Ideas bloom through iteration. Click to see what's grown so far.
@@ -364,7 +363,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             opacity: 0,
             animation: PREFERS_REDUCED_MOTION
               ? "stagger-in-reduced 0.2s ease 0.1s forwards"
-              : "stagger-in 0.65s ease 1.75s forwards",
+              : "stagger-in 0.65s ease 0.85s forwards",
             transition: "color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
             pointerEvents: ready ? "auto" : "none",
           }}
