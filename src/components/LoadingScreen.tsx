@@ -59,7 +59,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
   // After intro fade-in, show button — matches the button's own sequential
   // fade-in delay below, so it isn't clickable before it's visible.
   useEffect(() => {
-    const t = setTimeout(() => setReady(true), 1600)
+    const t = setTimeout(() => setReady(true), 1150)
     return () => clearTimeout(t)
   }, [])
 
@@ -166,19 +166,18 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
   const reveal = progress / DISMISS_DISTANCE
 
   // Flowers land as the final beat of the cascade, right after the button
-  // (which finishes at 0.85s + 0.65s = 1.5s) — tightly clustered together
-  // (150ms apart) rather than spread across their own long, disconnected
-  // schedule that used to start before the text and outlast the button.
+  // (which finishes at 1.25s + 0.4s = 1.65s) — tightly clustered together
+  // (100ms apart) so the whole splash settles by ~1.8s instead of ~3s.
   // Mobile's splash flower is bigger and crisper than before (was 220x270,
   // same blocky tile density as a much smaller canvas) but not full 420x500 —
   // that overflowed the screen and made touch interaction noticeably heavier
   // (more tiles to scan). 280x340 keeps the improved detail without either problem.
   const flowers = window.innerWidth < 768
-    ? [{ w: 280, h: 340, mt: 0, delay: 2100 }]
+    ? [{ w: 280, h: 340, mt: 0, delay: 1300 }]
     : [
-        { w: 160, h: 200, mt: 20, delay: 2250 },
-        { w: 220, h: 270, mt: -10, delay: 2100 },
-        { w: 160, h: 200, mt: 20, delay: 2400 },
+        { w: 160, h: 200, mt: 20, delay: 1360 },
+        { w: 220, h: 270, mt: -10, delay: 1240 },
+        { w: 160, h: 200, mt: 20, delay: 1420 },
       ]
 
   // Real vibration pulse on Android, timed to each flower's visual "snap" —
@@ -240,7 +239,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
       <div className="loading-geo" style={{
         position: "absolute", bottom: 28, right: 36, zIndex: 5,
         textAlign: "right", pointerEvents: "none",
-        opacity: 0, animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards",
+        opacity: 0, animation: "stagger-in 0.6s ease-out 0.05s forwards",
       }}>
         <p style={{ margin: 0, fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)" }}>
           <LoadingClock />
@@ -273,17 +272,22 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           transform: translateY(-3px) scale(1.04);
           box-shadow: 0 12px 30px rgba(0,0,0,0.3), 0 0 24px rgba(255,255,255,0.12);
         }
+        /* Plain fade + a small drift, nothing else — no blur, no glow, no
+           scale bump. Every added effect (blur-to-sharp, glow flash,
+           overshoot) kept reading as more "effort", not less, no matter how
+           faint. Gentleness here comes from the motion itself: a longer,
+           soft ease-out drift with real room between beats. */
         @keyframes stagger-in {
-          from { opacity: 0; transform: translateY(10px); }
+          from { opacity: 0; transform: translateY(8px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        /* A soft, decelerating settle rather than a bouncy overshoot — reads as
-           calm and elegant instead of a blunt "snap". Paired with a real
-           vibration pulse on Android (feature-detected; iOS has no web
-           vibration API at all, so it silently gets just the visual). */
         @keyframes snap-in {
-          0%   { transform: scale(0.97) translateY(6px); opacity: 0; }
-          100% { transform: scale(1) translateY(0); opacity: 1; }
+          from { opacity: 0; transform: translateY(8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes button-bloom-in {
+          from { opacity: 0; transform: translateY(8px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 767px) {
           .loading-geo {
@@ -314,10 +318,10 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 color: "rgba(255,255,255,0.75)",
                 opacity: 0,
-                // Fully sequential: each element's delay starts only once the
-                // previous has completely finished fading in (no overlap), so
-                // it reads as a clear one-at-a-time reveal instead of a cascade.
-                animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards",
+                // Each element starts a little before the previous one fully
+                // settles — a gentle overlap reads as one continuous flow
+                // instead of a rigid, evenly-spaced pop-pop-pop sequence.
+                animation: "stagger-in 0.6s ease-out 0.05s forwards",
               },
             },
             {
@@ -327,7 +331,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em",
                 maxWidth: "min(1100px, 92vw)", textAlign: "center", lineHeight: 1.3,
                 opacity: 0,
-                animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards",
+                animation: "stagger-in 0.6s ease-out 0.35s forwards",
               },
             },
           ]}
@@ -340,7 +344,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             letterSpacing: "0.18em", textTransform: "uppercase",
             color: "rgba(255,255,255,0.75)",
             opacity: 0,
-            animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards",
+            animation: "stagger-in 0.6s ease-out 0.65s forwards",
           }}
         >
           Ideas bloom through iteration. Click to see what's grown so far.
@@ -355,7 +359,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           style={{
             marginTop: 8,
             opacity: 0,
-            animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards",
+            animation: "button-bloom-in 0.6s ease-out 0.95s forwards",
             transition: "color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
             pointerEvents: ready ? "auto" : "none",
           }}
@@ -385,7 +389,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               marginTop: f.mt,
               flexShrink: 0,
               opacity: 0,
-              animation: `snap-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${f.delay}ms both`,
+              animation: `snap-in 0.55s ease-out ${f.delay}ms both`,
             }}
           >
             <AsciiVideo

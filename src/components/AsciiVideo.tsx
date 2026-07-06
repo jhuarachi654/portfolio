@@ -320,6 +320,13 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
     // callback below).
     let localRaf = 0
 
+    // Only tiles currently mid-repel or mid-spring-return live here — same
+    // grid-bounded approach as the mobile static path. Without this, moving
+    // the mouse over a full-size flower (420x500 = ~23k tiles) scanned every
+    // single tile each frame just to check distance, which is the real cause
+    // of "laggy" cursor tracking, not draw-call count.
+    const activeSet = new Set<number>()
+
     const render = (now: number) => {
       localRaf = requestAnimationFrame(render)
       if (now - lastFrame < FRAME_INTERVAL) return
@@ -332,47 +339,47 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       const my = mouseRef.current.y
       const mouseActive = mx > -100 && my > -100
 
-      if (settled && video.ended && !introActive && !mouseActive) return
+      if (settled && video.ended && !introActive && !mouseActive && activeSet.size === 0) return
 
       const rr2 = REPEL_RADIUS * REPEL_RADIUS
 
       if (mouseActive) {
-        for (let i = 0; i < tiles.length; i++) {
-          const t  = tiles[i]
-          if (!t.visible || !t.introDone) continue
-          const cx = t.x + TILE / 2
-          const cy = t.y + TILE / 2
-          const dx = cx - mx
-          const dy = cy - my
-          const d2 = dx * dx + dy * dy
-
-          if (d2 < rr2 && d2 > 0) {
-            const dist  = Math.sqrt(d2)
-            const force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH
-            t.vx += (dx / dist) * force
-            t.vy += (dy / dist) * force
+        const minCol = Math.max(0, Math.floor((mx - REPEL_RADIUS) / TILE))
+        const maxCol = Math.min(cols - 1, Math.ceil((mx + REPEL_RADIUS) / TILE))
+        const minRow = Math.max(0, Math.floor((my - REPEL_RADIUS) / TILE))
+        const maxRow = Math.min(rows - 1, Math.ceil((my + REPEL_RADIUS) / TILE))
+        for (let r = minRow; r <= maxRow; r++) {
+          for (let c = minCol; c <= maxCol; c++) {
+            const i = r * cols + c
+            const t = tiles[i]
+            if (!t.visible || !t.introDone) continue
+            const cx = t.x + TILE / 2
+            const cy = t.y + TILE / 2
+            const dx = cx - mx
+            const dy = cy - my
+            const d2 = dx * dx + dy * dy
+            if (d2 < rr2 && d2 > 0) {
+              const dist  = Math.sqrt(d2)
+              const force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH
+              t.vx += (dx / dist) * force
+              t.vy += (dy / dist) * force
+              activeSet.add(i)
+            }
           }
-
-          t.vx += (t.homeX - t.x) * SPRING
-          t.vy += (t.homeY - t.y) * SPRING
-          t.vx *= DAMPING
-          t.vy *= DAMPING
-          t.x  += t.vx
-          t.y  += t.vy
         }
-      } else {
-        for (let i = 0; i < tiles.length; i++) {
-          const t = tiles[i]
-          if (!t.visible || !t.introDone || (t.vx === 0 && t.vy === 0 && t.x === t.homeX && t.y === t.homeY)) continue
-          t.vx += (t.homeX - t.x) * SPRING
-          t.vy += (t.homeY - t.y) * SPRING
-          t.vx *= DAMPING
-          t.vy *= DAMPING
-          t.x  += t.vx
-          t.y  += t.vy
-          if (Math.abs(t.vx) < 0.01 && Math.abs(t.vy) < 0.01) {
-            t.vx = 0; t.vy = 0; t.x = t.homeX; t.y = t.homeY
-          }
+      }
+
+      for (const i of activeSet) {
+        const t = tiles[i]
+        t.vx += (t.homeX - t.x) * SPRING
+        t.vy += (t.homeY - t.y) * SPRING
+        t.vx *= DAMPING
+        t.vy *= DAMPING
+        t.x  += t.vx
+        t.y  += t.vy
+        if (Math.abs(t.vx) < 0.01 && Math.abs(t.vy) < 0.01 && Math.abs(t.x - t.homeX) < DISPLACE_THRESH && Math.abs(t.y - t.homeY) < DISPLACE_THRESH) {
+          t.vx = 0; t.vy = 0; t.x = t.homeX; t.y = t.homeY
+          activeSet.delete(i)
         }
       }
 
@@ -389,7 +396,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
         settled = false // twinkle modulates forever by design — never sleep
       } else {
         const displaced: Tile[] = []
-        for (let i = 0; i < tiles.length; i++) {
+        for (const i of activeSet) {
           const t = tiles[i]
           if (!t.visible) continue
           if (Math.abs(t.x - t.homeX) > DISPLACE_THRESH || Math.abs(t.y - t.homeY) > DISPLACE_THRESH) {
