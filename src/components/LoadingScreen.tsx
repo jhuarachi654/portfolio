@@ -171,11 +171,15 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
 
   const reveal = progress / DISMISS_DISTANCE
 
+  // Flowers land as the final beat of the cascade, right after the button
+  // (which finishes at 0.85s + 0.65s = 1.5s) — tightly clustered together
+  // (150ms apart) rather than spread across their own long, disconnected
+  // schedule that used to start before the text and outlast the button.
   const flowers = window.innerWidth < 768
-    ? [{ w: 220, h: 270, mt: 0, delay: 0 }]
+    ? [{ w: 220, h: 270, mt: 0, delay: 1100 }]
     : [
-        { w: 160, h: 200, mt: 20, delay: 800  },
-        { w: 220, h: 270, mt: -10, delay: 0   },
+        { w: 160, h: 200, mt: 20, delay: 1250 },
+        { w: 220, h: 270, mt: -10, delay: 1100 },
         { w: 160, h: 200, mt: 20, delay: 1400 },
       ]
 
@@ -373,7 +377,9 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
 
       </div>
 
-      {/* ── Flower bed at bottom ── */}
+      {/* ── Flower bed at bottom — each flower controls its own reveal timing
+           via snap-in below, so this container itself stays plainly visible
+           (no separate fade, which would otherwise compound with theirs). ── */}
       <div style={{
         position: "absolute",
         bottom: -40,
@@ -383,7 +389,6 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
         alignItems: "flex-end",
         gap: 0,
         zIndex: 2,
-        opacity: 0, animation: "stagger-in 0.9s ease 0.25s forwards",
       }}>
         {flowers.map((f, i) => (
           <div
