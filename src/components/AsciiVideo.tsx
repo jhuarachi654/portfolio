@@ -114,7 +114,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
     // without it, onload would start a fresh rAF loop on an already-detached canvas.
     let cancelled = false
     const img = new Image()
-    img.src = "/cosmos-bloom.png"
+    img.src = "/cosmos-bloom.jpg"
     img.onload = () => {
       if (cancelled) return
       fCtx.drawImage(img, 0, 0, width, height)
