@@ -56,10 +56,10 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
     setTimeout(() => setSparks(s => s.filter(sp => sp.id !== id)), 1200)
   }, [])
 
-  // After intro fade-in, show button — matches the button's own staggered
+  // After intro fade-in, show button — matches the button's own sequential
   // fade-in delay below, so it isn't clickable before it's visible.
   useEffect(() => {
-    const t = setTimeout(() => setReady(true), 850)
+    const t = setTimeout(() => setReady(true), 1600)
     return () => clearTimeout(t)
   }, [])
 
@@ -169,12 +169,16 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
   // (which finishes at 0.85s + 0.65s = 1.5s) — tightly clustered together
   // (150ms apart) rather than spread across their own long, disconnected
   // schedule that used to start before the text and outlast the button.
+  // Mobile's splash flower is bigger and crisper than before (was 220x270,
+  // same blocky tile density as a much smaller canvas) but not full 420x500 —
+  // that overflowed the screen and made touch interaction noticeably heavier
+  // (more tiles to scan). 280x340 keeps the improved detail without either problem.
   const flowers = window.innerWidth < 768
-    ? [{ w: 220, h: 270, mt: 0, delay: 1100 }]
+    ? [{ w: 280, h: 340, mt: 0, delay: 2100 }]
     : [
-        { w: 160, h: 200, mt: 20, delay: 1250 },
-        { w: 220, h: 270, mt: -10, delay: 1100 },
-        { w: 160, h: 200, mt: 20, delay: 1400 },
+        { w: 160, h: 200, mt: 20, delay: 2250 },
+        { w: 220, h: 270, mt: -10, delay: 2100 },
+        { w: 160, h: 200, mt: 20, delay: 2400 },
       ]
 
   // Real vibration pulse on Android, timed to each flower's visual "snap" —
@@ -311,7 +315,10 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 letterSpacing: "0.18em", textTransform: "uppercase",
                 color: "rgba(255,255,255,0.75)",
                 opacity: 0,
-                animation: "stagger-in 0.55s ease 0.1s forwards",
+                // Fully sequential: each element's delay starts only once the
+                // previous has completely finished fading in (no overlap), so
+                // it reads as a clear one-at-a-time reveal instead of a cascade.
+                animation: "stagger-in 0.5s ease 0.1s forwards",
               },
             },
             {
@@ -321,7 +328,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em",
                 maxWidth: "min(1100px, 92vw)", textAlign: "center", lineHeight: 1.3,
                 opacity: 0,
-                animation: "stagger-in 0.55s ease 0.35s forwards",
+                animation: "stagger-in 0.5s ease 0.6s forwards",
               },
             },
           ]}
@@ -334,7 +341,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             letterSpacing: "0.18em", textTransform: "uppercase",
             color: "rgba(255,255,255,0.75)",
             opacity: 0,
-            animation: "stagger-in 0.55s ease 0.6s forwards",
+            animation: "stagger-in 0.5s ease 1.1s forwards",
           }}
         >
           Ideas bloom through iteration. Click to see what's grown so far.
@@ -349,7 +356,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           style={{
             marginTop: 8,
             opacity: 0,
-            animation: "stagger-in 0.65s ease 0.85s forwards",
+            animation: "stagger-in 0.5s ease 1.6s forwards",
             transition: "color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
             pointerEvents: ready ? "auto" : "none",
           }}

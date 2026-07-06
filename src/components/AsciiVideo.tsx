@@ -1,12 +1,10 @@
 import { useEffect, useRef } from "react"
 
 const IS_MOBILE = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
-// Mobile's touch-repel interaction loops every tile checking distance from
-// the touch point each frame — an O(tile count) cost per frame regardless of
-// how many tiles are actually near the finger. A 420x500 flower at TILE=3 is
-// ~23,000 tiles, which is too slow to track a real-time drag on a phone CPU.
-// Coarser tiles on mobile cut that ~4x while desktop keeps the finer grain.
-const TILE      = IS_MOBILE ? 6 : 3
+// Same tile size everywhere (hero and splash alike) — the touch-repel loop
+// below now only ever visits tiles near the finger via grid math, so a finer
+// tile grid no longer costs anything extra during interaction.
+const TILE      = 3
 const PREFERS_REDUCED_MOTION = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 const SAMPLE_INTERVAL = 80
 const FRAME_INTERVAL  = 1000 / 60
@@ -151,10 +149,15 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       const tileW = cols*TILE, tileH = rows*TILE
       let lastFrame = 0
       let introStart: number | null = null
-      // Once fully settled (intro done, no pointer interaction, every tile home),
-      // skip all per-tile work entirely instead of re-computing physics for
-      // thousands of tiles at 30fps forever — huge win for mobile CPU/battery.
-      let settled = false
+      let hasDrawnOnce = false
+      // Only tiles currently mid-repel or mid-spring-return live here. Touch
+      // interaction used to loop over EVERY tile each frame just to check if
+      // it was near the finger — for a few thousand tiles that's the actual
+      // cause of "laggy, not real-time" dragging, not just draw-call count.
+      // Now a touch only ever visits a small neighborhood via row/col math
+      // (grid position is deterministic: col*TILE, row*TILE), and only tiles
+      // in this set get physics/redraw work at all.
+      const activeSet = new Set<number>()
       // Locally-scoped raf id so this effect's cleanup can never race with
       // another invocation's loop (e.g. React StrictMode's dev-only double-effect).
       let localRaf = 0
@@ -163,42 +166,56 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
         if (now - lastFrame < 1000/30) return
         lastFrame = now
         if (introStart === null) introStart = now
-        const introActive = stepIntro(tiles, now, introStart)
+        stepIntro(tiles, now, introStart)
         const mx = mouseRef.current.x, my = mouseRef.current.y
         const active = mx > -100 && my > -100
-        if (settled && !introActive && !active) return
-        const rr2 = REPEL_RADIUS * REPEL_RADIUS
-        for (let i = 0; i < tiles.length; i++) {
-          const t = tiles[i]
-          if (!t.visible || !t.introDone) continue
-          if (active) {
-            const cx = t.x+TILE/2, cy = t.y+TILE/2
-            const dx = cx-mx, dy = cy-my, d2 = dx*dx+dy*dy
-            if (d2 < rr2 && d2 > 0) {
-              const dist = Math.sqrt(d2)
-              t.vx += (dx/dist)*(1-dist/REPEL_RADIUS)*REPEL_STRENGTH
-              t.vy += (dy/dist)*(1-dist/REPEL_RADIUS)*REPEL_STRENGTH
+
+        if (active) {
+          const rr2 = REPEL_RADIUS * REPEL_RADIUS
+          const minCol = Math.max(0, Math.floor((mx - REPEL_RADIUS) / TILE))
+          const maxCol = Math.min(cols - 1, Math.ceil((mx + REPEL_RADIUS) / TILE))
+          const minRow = Math.max(0, Math.floor((my - REPEL_RADIUS) / TILE))
+          const maxRow = Math.min(rows - 1, Math.ceil((my + REPEL_RADIUS) / TILE))
+          for (let r = minRow; r <= maxRow; r++) {
+            for (let c = minCol; c <= maxCol; c++) {
+              const i = r * cols + c
+              const t = tiles[i]
+              if (!t.visible || !t.introDone) continue
+              const cx = t.x+TILE/2, cy = t.y+TILE/2
+              const dx = cx-mx, dy = cy-my, d2 = dx*dx+dy*dy
+              if (d2 < rr2 && d2 > 0) {
+                const dist = Math.sqrt(d2)
+                t.vx += (dx/dist)*(1-dist/REPEL_RADIUS)*REPEL_STRENGTH
+                t.vy += (dy/dist)*(1-dist/REPEL_RADIUS)*REPEL_STRENGTH
+                activeSet.add(i)
+              }
             }
           }
+        }
+
+        if (activeSet.size === 0 && hasDrawnOnce) return
+
+        for (const i of activeSet) {
+          const t = tiles[i]
           t.vx += (t.homeX-t.x)*SPRING; t.vy += (t.homeY-t.y)*SPRING
           t.vx *= DAMPING; t.vy *= DAMPING
           t.x += t.vx; t.y += t.vy
+          if (Math.abs(t.vx) < 0.01 && Math.abs(t.vy) < 0.01 && Math.abs(t.x-t.homeX) < DISPLACE_THRESH && Math.abs(t.y-t.homeY) < DISPLACE_THRESH) {
+            t.vx = 0; t.vy = 0; t.x = t.homeX; t.y = t.homeY
+            activeSet.delete(i)
+          }
         }
+
         ctx.clearRect(0, 0, width, height)
+        ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
         const displaced: Tile[] = []
-        for (let i = 0; i < tiles.length; i++) {
+        for (const i of activeSet) {
           const t = tiles[i]
-          if (!t.visible) continue
           if (Math.abs(t.x-t.homeX) > DISPLACE_THRESH || Math.abs(t.y-t.homeY) > DISPLACE_THRESH) displaced.push(t)
         }
-        if (displaced.length === 0) {
-          ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
-        } else {
-          ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
-          for (const t of displaced) ctx.clearRect(t.homeX, t.homeY, TILE, TILE)
-          for (const t of displaced) ctx.drawImage(frame, t.homeX, t.homeY, TILE, TILE, Math.round(t.x), Math.round(t.y), TILE, TILE)
-        }
-        settled = !introActive && !active && displaced.length === 0
+        for (const t of displaced) ctx.clearRect(t.homeX, t.homeY, TILE, TILE)
+        for (const t of displaced) ctx.drawImage(frame, t.homeX, t.homeY, TILE, TILE, Math.round(t.x), Math.round(t.y), TILE, TILE)
+        hasDrawnOnce = true
       }
       localRaf = requestAnimationFrame(render)
       cleanupRaf = () => cancelAnimationFrame(localRaf)
