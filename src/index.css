@@ -1061,6 +1061,12 @@ h1 {
     overflow-wrap: break-word;
     max-width: 100%;
   }
+  /* Reserve space for 2 lines regardless of which typewriter word is showing
+     (e.g. "design engineer" fits on 1 line, "interaction designer" wraps to 2)
+     so the flower below doesn't shift up/down as the word cycles. */
+  .hero-first-line {
+    min-height: 2.3em;
+  }
   .hero-name.hero-display-headline > div {
     white-space: normal;
     max-width: 100%;

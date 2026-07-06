@@ -104,16 +104,39 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
       commitIfDone(next)
     }
     let touchY: number | null = null
-    const onTouchStart = (e: TouchEvent) => { touchY = e.touches[0]?.clientY ?? null }
+    // Track recent touch samples to estimate fling velocity on release — a real
+    // swipe/scroll keeps going after your finger lifts (momentum); this was
+    // purely 1:1 with finger movement and stopped dead on touchend, which is
+    // why a hard flick did nothing extra and dragging felt "heavy"/stuck.
+    let lastTouchTime = 0
+    let velocity = 0 // px/ms, +down
+    const onTouchStart = (e: TouchEvent) => {
+      touchY = e.touches[0]?.clientY ?? null
+      lastTouchTime = performance.now()
+      velocity = 0
+    }
     const onTouchMove = (e: TouchEvent) => {
       if (touchY === null) return
       e.preventDefault()
+      const now = performance.now()
       const y = e.touches[0]?.clientY ?? touchY
       const delta = touchY - y
-      touchY = y
-      const next = clamp(progressRef.current + delta, 0, DISMISS_DISTANCE)
+      const dt = Math.max(1, now - lastTouchTime)
+      // A gentle response curve: amplify the raw finger delta a bit so the
+      // gesture doesn't require dragging the full DISMISS_DISTANCE in real
+      // screen pixels (which felt heavier than a native scroll on tall phones).
+      const next = clamp(progressRef.current + delta * 1.6, 0, DISMISS_DISTANCE)
       setProgress(next)
       commitIfDone(next)
+      velocity = delta / dt
+      touchY = y
+      lastTouchTime = now
+    }
+    const FLING_VELOCITY = 0.5 // px/ms — a quick flick easily clears this
+    const onTouchEnd = () => {
+      touchY = null
+      if (velocity > FLING_VELOCITY) dismiss()
+      velocity = 0
     }
     const onKeyDown = (e: KeyboardEvent) => {
       const step = 80
@@ -129,14 +152,18 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
     window.addEventListener("wheel", onWheel, { passive: false })
     window.addEventListener("touchstart", onTouchStart, { passive: true })
     window.addEventListener("touchmove", onTouchMove, { passive: false })
+    window.addEventListener("touchend", onTouchEnd, { passive: true })
+    window.addEventListener("touchcancel", onTouchEnd, { passive: true })
     window.addEventListener("keydown", onKeyDown)
     return () => {
       window.removeEventListener("wheel", onWheel)
       window.removeEventListener("touchstart", onTouchStart)
       window.removeEventListener("touchmove", onTouchMove)
+      window.removeEventListener("touchend", onTouchEnd)
+      window.removeEventListener("touchcancel", onTouchEnd)
       window.removeEventListener("keydown", onKeyDown)
     }
-  }, [commitIfDone])
+  }, [commitIfDone, dismiss])
 
   const reveal = progress / DISMISS_DISTANCE
 
