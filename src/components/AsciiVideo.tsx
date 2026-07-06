@@ -88,7 +88,6 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
   const frameRef  = useRef<HTMLCanvasElement>(null)
   const tilesRef  = useRef<Tile[]>([])
   const mouseRef  = useRef({ x: -9999, y: -9999 })
-  const rafRef    = useRef(0)
 
   // Mobile / staticBloom: always use static bloom image — skip video entirely
   useEffect(() => {
@@ -110,9 +109,14 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
         tiles.push(makeTile(c*TILE, r*TILE, scatterIntro))
     tilesRef.current = tiles
     const isDark = () => document.documentElement.getAttribute("data-theme") === "dark"
+    // Guards against img.onload firing after this effect has already been
+    // cleaned up (component unmounted while the image was still loading) —
+    // without it, onload would start a fresh rAF loop on an already-detached canvas.
+    let cancelled = false
     const img = new Image()
     img.src = "/cosmos-bloom.png"
     img.onload = () => {
+      if (cancelled) return
       fCtx.drawImage(img, 0, 0, width, height)
       const imgData = fCtx.getImageData(0, 0, width, height)
       const d = imgData.data
@@ -142,14 +146,22 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       const tileW = cols*TILE, tileH = rows*TILE
       let lastFrame = 0
       let introStart: number | null = null
+      // Once fully settled (intro done, no pointer interaction, every tile home),
+      // skip all per-tile work entirely instead of re-computing physics for
+      // thousands of tiles at 30fps forever — huge win for mobile CPU/battery.
+      let settled = false
+      // Locally-scoped raf id so this effect's cleanup can never race with
+      // another invocation's loop (e.g. React StrictMode's dev-only double-effect).
+      let localRaf = 0
       const render = (now: number) => {
-        rafRef.current = requestAnimationFrame(render)
+        localRaf = requestAnimationFrame(render)
         if (now - lastFrame < 1000/30) return
         lastFrame = now
         if (introStart === null) introStart = now
-        stepIntro(tiles, now, introStart)
+        const introActive = stepIntro(tiles, now, introStart)
         const mx = mouseRef.current.x, my = mouseRef.current.y
         const active = mx > -100 && my > -100
+        if (settled && !introActive && !active) return
         const rr2 = REPEL_RADIUS * REPEL_RADIUS
         for (let i = 0; i < tiles.length; i++) {
           const t = tiles[i]
@@ -181,10 +193,13 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
           for (const t of displaced) ctx.clearRect(t.homeX, t.homeY, TILE, TILE)
           for (const t of displaced) ctx.drawImage(frame, t.homeX, t.homeY, TILE, TILE, Math.round(t.x), Math.round(t.y), TILE, TILE)
         }
+        settled = !introActive && !active && displaced.length === 0
       }
-      rafRef.current = requestAnimationFrame(render)
+      localRaf = requestAnimationFrame(render)
+      cleanupRaf = () => cancelAnimationFrame(localRaf)
     }
-    return () => cancelAnimationFrame(rafRef.current)
+    let cleanupRaf = () => {}
+    return () => { cancelled = true; cleanupRaf() }
   }, [width, height])
 
   useEffect(() => {
@@ -224,7 +239,9 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       document.documentElement.getAttribute("data-theme") === "dark"
 
     const sampleFrame = (now: number) => {
-      if (video.readyState < 2 || now - lastSample < SAMPLE_INTERVAL) return
+      // Once a non-looping video ends, its frame stops changing — resampling it
+      // (getImageData/putImageData over the whole canvas) is pure wasted work.
+      if (video.ended || video.readyState < 2 || now - lastSample < SAMPLE_INTERVAL) return
       lastSample = now
 
       fCtx.drawImage(video, 0, 0, width, height)
@@ -271,19 +288,30 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       fCtx.putImageData(img, 0, 0)
     }
 
+    // Once the video has ended (loop=false), tiles are settled, and there's no
+    // pointer interaction, there's nothing left to animate — skip the per-tile
+    // work and redraw entirely instead of doing it forever at ~60fps.
+    let settled = false
+    // Locally-scoped raf id — cleanup below cancels exactly this invocation's
+    // loop, so it can't race with another invocation (e.g. React StrictMode's
+    // dev-only double-effect simulation combined with the async video-load
+    // callback below).
+    let localRaf = 0
+
     const render = (now: number) => {
-      if (now - lastFrame < FRAME_INTERVAL) {
-        rafRef.current = requestAnimationFrame(render)
-        return
-      }
+      localRaf = requestAnimationFrame(render)
+      if (now - lastFrame < FRAME_INTERVAL) return
       lastFrame = now
       sampleFrame(now)
       if (introStart === null) introStart = now
-      stepIntro(tiles, now, introStart)
+      const introActive = stepIntro(tiles, now, introStart)
 
       const mx = mouseRef.current.x
       const my = mouseRef.current.y
       const mouseActive = mx > -100 && my > -100
+
+      if (settled && video.ended && !introActive && !mouseActive) return
+
       const rr2 = REPEL_RADIUS * REPEL_RADIUS
 
       if (mouseActive) {
@@ -336,6 +364,7 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
         ctx.globalAlpha = flicker
         ctx.drawImage(frame, 0, 0, tileW, tileH, 0, 0, tileW, tileH)
         ctx.globalAlpha = 1
+        settled = false // twinkle modulates forever by design — never sleep
       } else {
         const displaced: Tile[] = []
         for (let i = 0; i < tiles.length; i++) {
@@ -357,16 +386,29 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
             ctx.drawImage(frame, t.homeX, t.homeY, TILE, TILE, Math.round(t.x), Math.round(t.y), TILE, TILE)
           }
         }
-      }
 
-      rafRef.current = requestAnimationFrame(render)
+        settled = video.ended && !introActive && !mouseActive && displaced.length === 0
+      }
     }
 
+    // "loadeddata" and "canplay" commonly both fire for the same load — guard
+    // against start() running twice (which would spin up two parallel rAF loops).
+    // `cancelled` additionally guards against start()'s deferred setTimeout
+    // firing after this effect has already been cleaned up (e.g. the component
+    // unmounted while the video was still loading) — without it, that callback
+    // would spin up a fresh rAF loop on an already-detached canvas that nothing
+    // would ever stop.
+    let started = false
+    let cancelled = false
+    let startTimeout: ReturnType<typeof setTimeout> | undefined
     const start = () => {
-      setTimeout(() => {
+      if (started) return
+      started = true
+      startTimeout = setTimeout(() => {
+        if (cancelled) return
         video.playbackRate = playbackRate
         video.play().catch(() => {})
-        rafRef.current = requestAnimationFrame(render)
+        localRaf = requestAnimationFrame(render)
       }, startDelay)
     }
 
@@ -377,7 +419,13 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
       video.load()
     }
 
-    return () => cancelAnimationFrame(rafRef.current)
+    return () => {
+      cancelled = true
+      clearTimeout(startTimeout)
+      video.removeEventListener("loadeddata", start)
+      video.removeEventListener("canplay", start)
+      cancelAnimationFrame(localRaf)
+    }
   }, [src, width, height, seekTo, startDelay])
 
   const handleMouseMove = (e: React.MouseEvent) => {

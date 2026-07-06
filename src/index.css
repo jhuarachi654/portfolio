@@ -1065,9 +1065,6 @@ h1 {
     white-space: normal;
     max-width: 100%;
   }
-  .hero-role-wrap {
-    display: block;
-  }
   .hero-left {
     padding: 20px 20px 0;
     min-width: 0;
