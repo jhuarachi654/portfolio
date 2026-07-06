@@ -343,7 +343,6 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               height={f.h}
               tileColor={[255, 255, 255]}
               loop={false}
-              scatterIntro
               startDelay={f.delay}
               playbackRate={2.5}
             />

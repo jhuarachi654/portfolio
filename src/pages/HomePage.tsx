@@ -103,11 +103,13 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Right: ASCII flower — waits for the intro splash to finish, then scatter-assembles in ── */}
-        <div className="hero-right hero-flower-wrap">
+        {/* ── Right: ASCII flower — waits for the intro splash to finish, then fades in.
+             (Was a per-tile scatter-assemble animation; switched to a plain CSS fade
+             since the physics-driven version could hitch on slower phones.) ── */}
+        <div className="hero-right hero-flower-wrap" style={introDone ? { animation: "fadeIn 0.6s ease" } : undefined}>
           {introDone && (
             <>
-              <AsciiVideo src="/cosmos-1.mp4" width={420} height={500} loop={false} scatterIntro playbackRate={2.5} />
+              <AsciiVideo src="/cosmos-1.mp4" width={420} height={500} loop={false} playbackRate={2.5} />
               <span className="hero-flower-label">Built from the ground up with React + Canvas API</span>
             </>
           )}

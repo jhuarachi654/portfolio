@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-const TILE      = 5
+const TILE      = 3
 const IS_MOBILE = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
 const PREFERS_REDUCED_MOTION = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 const SAMPLE_INTERVAL = 80
