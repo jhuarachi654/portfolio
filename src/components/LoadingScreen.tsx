@@ -57,9 +57,10 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
     setTimeout(() => setSparks(s => s.filter(sp => sp.id !== id)), 1200)
   }, [])
 
-  // After intro fade-in, show button
+  // After intro fade-in, show button — matches the button's own sequential
+  // fade-in delay (1.75s) below, so it isn't clickable before it's visible.
   useEffect(() => {
-    const t = setTimeout(() => setReady(true), PREFERS_REDUCED_MOTION ? 200 : 900)
+    const t = setTimeout(() => setReady(true), PREFERS_REDUCED_MOTION ? 200 : 1750)
     return () => clearTimeout(t)
   }, [])
 
@@ -167,6 +168,23 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
 
   const reveal = progress / DISMISS_DISTANCE
 
+  const flowers = window.innerWidth < 768
+    ? [{ w: 220, h: 270, mt: 0, delay: 0 }]
+    : [
+        { w: 160, h: 200, mt: 20, delay: 800  },
+        { w: 220, h: 270, mt: -10, delay: 0   },
+        { w: 160, h: 200, mt: 20, delay: 1400 },
+      ]
+
+  // Real vibration pulse on Android, timed to each flower's visual "snap" —
+  // feature-detected, so iOS (no web vibration API) just gets the visual.
+  useEffect(() => {
+    if (PREFERS_REDUCED_MOTION || typeof navigator.vibrate !== "function") return
+    const timers = flowers.map(f => setTimeout(() => navigator.vibrate(15), f.delay))
+    return () => timers.forEach(clearTimeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div
       onClick={handleClick}
@@ -258,6 +276,15 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
+        /* A quick overshoot-and-settle "snap" instead of a soft fade — reads as
+           a crisp, tactile landing. Paired with a real vibration pulse on
+           Android (feature-detected; iOS has no web vibration API at all, so
+           it silently gets just the visual snap). */
+        @keyframes snap-in {
+          0%   { transform: scale(0.85); opacity: 0; }
+          60%  { transform: scale(1.06); opacity: 1; }
+          100% { transform: scale(1); opacity: 1; }
+        }
         @media (max-width: 767px) {
           .loading-geo {
             bottom: auto !important;
@@ -299,9 +326,13 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em",
                 maxWidth: "min(1100px, 92vw)", textAlign: "center", lineHeight: 1.3,
                 opacity: 0,
+                // Sequential reveal: each element's delay starts only after the
+                // previous one has fully finished (0.1 + 0.55 = 0.65s), rather
+                // than the old overlapping stagger where several were fading
+                // in at once.
                 animation: PREFERS_REDUCED_MOTION
                   ? "stagger-in-reduced 0.2s ease forwards"
-                  : "stagger-in 0.55s ease 0.45s forwards",
+                  : "stagger-in 0.55s ease 0.65s forwards",
               },
             },
           ]}
@@ -316,7 +347,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             opacity: 0,
             animation: PREFERS_REDUCED_MOTION
               ? "stagger-in-reduced 0.2s ease forwards"
-              : "stagger-in 0.55s ease 0.8s forwards",
+              : "stagger-in 0.55s ease 1.2s forwards",
           }}
         >
           Ideas bloom through iteration. Click to see what's grown so far.
@@ -333,7 +364,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             opacity: 0,
             animation: PREFERS_REDUCED_MOTION
               ? "stagger-in-reduced 0.2s ease 0.1s forwards"
-              : "stagger-in 0.65s ease 0.95s forwards",
+              : "stagger-in 0.65s ease 1.75s forwards",
             transition: "color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
             pointerEvents: ready ? "auto" : "none",
           }}
@@ -355,15 +386,18 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
         zIndex: 2,
         opacity: 0, animation: "stagger-in 0.9s ease 0.25s forwards",
       }}>
-        {(window.innerWidth < 768
-          ? [{ w: 220, h: 270, mt: 0, delay: 0 }]
-          : [
-              { w: 160, h: 200, mt: 20, delay: 800  },
-              { w: 220, h: 270, mt: -10, delay: 0   },
-              { w: 160, h: 200, mt: 20, delay: 1400 },
-            ]
-        ).map((f, i) => (
-          <div key={i} style={{ marginTop: f.mt, flexShrink: 0 }}>
+        {flowers.map((f, i) => (
+          <div
+            key={i}
+            style={{
+              marginTop: f.mt,
+              flexShrink: 0,
+              opacity: PREFERS_REDUCED_MOTION ? undefined : 0,
+              animation: PREFERS_REDUCED_MOTION
+                ? undefined
+                : `snap-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) ${f.delay}ms both`,
+            }}
+          >
             <AsciiVideo
               src="/cosmos-1.mp4"
               width={f.w}

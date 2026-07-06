@@ -239,7 +239,7 @@ export default function CaseStudyCard({
           <Lottie
             lottieRef={lottieRef}
             animationData={lottieData}
-            autoplay={!isDesktop}
+            autoplay={false}
             loop
             style={{ width: "100%", height: "100%", objectFit, objectPosition, position: "relative", zIndex: 1, ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
           />

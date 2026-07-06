@@ -1067,6 +1067,12 @@ h1 {
   .hero-first-line {
     min-height: 2.3em;
   }
+  /* Force the alternating role text onto its own second line — never sharing
+     a line with "Hi, I'm Johanna, a" — instead of flowing inline and wrapping
+     unpredictably depending on word length. */
+  .hero-role-wrap {
+    display: block;
+  }
   .hero-name.hero-display-headline > div {
     white-space: normal;
     max-width: 100%;
