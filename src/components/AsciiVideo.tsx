@@ -450,10 +450,17 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
     }
   }, [src, width, height, seekTo, startDelay])
 
+  // The canvas has a fixed internal resolution (width/height props) but is
+  // CSS-scaled to its container, which is often a different size — so a raw
+  // clientX/Y - rect.left/top offset drifts from the true pointer position
+  // (worse near the edges) unless scaled back into canvas pixel space.
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = canvasRef.current?.getBoundingClientRect()
     if (!rect) return
-    mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
+    mouseRef.current = {
+      x: (e.clientX - rect.left) * (width / rect.width),
+      y: (e.clientY - rect.top) * (height / rect.height),
+    }
   }
 
   const handleMouseLeave = () => { mouseRef.current = { x: -9999, y: -9999 } }
@@ -462,7 +469,10 @@ export default function AsciiVideo({ src, width = 420, height = 460, twinkle = f
     const rect = canvasRef.current?.getBoundingClientRect()
     if (!rect) return
     const t = e.touches[0]
-    mouseRef.current = { x: t.clientX - rect.left, y: t.clientY - rect.top }
+    mouseRef.current = {
+      x: (t.clientX - rect.left) * (width / rect.width),
+      y: (t.clientY - rect.top) * (height / rect.height),
+    }
   }
   const handleTouchEnd = () => { mouseRef.current = { x: -9999, y: -9999 } }
 

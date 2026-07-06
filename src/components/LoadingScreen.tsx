@@ -240,7 +240,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
       <div className="loading-geo" style={{
         position: "absolute", bottom: 28, right: 36, zIndex: 5,
         textAlign: "right", pointerEvents: "none",
-        opacity: 0, animation: "stagger-in 0.65s ease 0.05s forwards",
+        opacity: 0, animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards",
       }}>
         <p style={{ margin: 0, fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)" }}>
           <LoadingClock />
@@ -270,21 +270,20 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
         .loading-explore-btn:hover {
-          transform: translateY(-6px) scale(1.1);
-          box-shadow: 0 20px 48px rgba(0,0,0,0.4), 0 0 40px rgba(255,255,255,0.15);
+          transform: translateY(-3px) scale(1.04);
+          box-shadow: 0 12px 30px rgba(0,0,0,0.3), 0 0 24px rgba(255,255,255,0.12);
         }
         @keyframes stagger-in {
-          from { opacity: 0; transform: translateY(18px); }
+          from { opacity: 0; transform: translateY(10px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        /* A quick overshoot-and-settle "snap" instead of a soft fade — reads as
-           a crisp, tactile landing. Paired with a real vibration pulse on
-           Android (feature-detected; iOS has no web vibration API at all, so
-           it silently gets just the visual snap). */
+        /* A soft, decelerating settle rather than a bouncy overshoot — reads as
+           calm and elegant instead of a blunt "snap". Paired with a real
+           vibration pulse on Android (feature-detected; iOS has no web
+           vibration API at all, so it silently gets just the visual). */
         @keyframes snap-in {
-          0%   { transform: scale(0.85); opacity: 0; }
-          60%  { transform: scale(1.06); opacity: 1; }
-          100% { transform: scale(1); opacity: 1; }
+          0%   { transform: scale(0.97) translateY(6px); opacity: 0; }
+          100% { transform: scale(1) translateY(0); opacity: 1; }
         }
         @media (max-width: 767px) {
           .loading-geo {
@@ -318,7 +317,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 // Fully sequential: each element's delay starts only once the
                 // previous has completely finished fading in (no overlap), so
                 // it reads as a clear one-at-a-time reveal instead of a cascade.
-                animation: "stagger-in 0.5s ease 0.1s forwards",
+                animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards",
               },
             },
             {
@@ -328,7 +327,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
                 fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em",
                 maxWidth: "min(1100px, 92vw)", textAlign: "center", lineHeight: 1.3,
                 opacity: 0,
-                animation: "stagger-in 0.5s ease 0.6s forwards",
+                animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards",
               },
             },
           ]}
@@ -341,7 +340,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
             letterSpacing: "0.18em", textTransform: "uppercase",
             color: "rgba(255,255,255,0.75)",
             opacity: 0,
-            animation: "stagger-in 0.5s ease 1.1s forwards",
+            animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards",
           }}
         >
           Ideas bloom through iteration. Click to see what's grown so far.
@@ -356,7 +355,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
           style={{
             marginTop: 8,
             opacity: 0,
-            animation: "stagger-in 0.5s ease 1.6s forwards",
+            animation: "stagger-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards",
             transition: "color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
             pointerEvents: ready ? "auto" : "none",
           }}
@@ -386,7 +385,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               marginTop: f.mt,
               flexShrink: 0,
               opacity: 0,
-              animation: `snap-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) ${f.delay}ms both`,
+              animation: `snap-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${f.delay}ms both`,
             }}
           >
             <AsciiVideo

@@ -100,6 +100,13 @@ export default function HomePage() {
   const displayed = useTypewriter()
   const introDone = useIntroDone()
   const [flowerRef, flowerInView] = useInView<HTMLDivElement>()
+  const [isMobile] = useState(() => window.matchMedia("(max-width: 767px)").matches)
+  const showFlower = introDone && flowerInView
+  // On mobile the flower is a static image (no playback to get "ahead of"),
+  // so it's safe to mount it immediately — hidden behind the splash — and let
+  // it do its decode/sampling work there instead of cold at reveal time. On
+  // desktop it's a real video, so it stays gated to avoid starting early.
+  const mountFlower = isMobile || showFlower
   return (
     <>
       <div className="line-grid hero-page">
@@ -128,8 +135,12 @@ export default function HomePage() {
              this container to actually be in the viewport, then fades in.
              (Was a per-tile scatter-assemble animation; switched to a plain CSS fade
              since the physics-driven version could hitch on slower phones.) ── */}
-        <div ref={flowerRef} className="hero-right hero-flower-wrap" style={introDone && flowerInView ? { animation: "fadeIn 0.6s ease" } : undefined}>
-          {introDone && flowerInView && (
+        <div
+          ref={flowerRef}
+          className="hero-right hero-flower-wrap"
+          style={showFlower ? { animation: "fadeIn 0.6s ease", opacity: 1 } : { opacity: 0, pointerEvents: "none" }}
+        >
+          {mountFlower && (
             <>
               <AsciiVideo src="/cosmos-1.mp4" width={420} height={500} loop={false} playbackRate={2.5} />
               <span className="hero-flower-label">Built from the ground up with React + Canvas API</span>
