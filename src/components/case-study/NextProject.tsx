@@ -13,6 +13,7 @@ interface NextProjectProps {
   lottie?: string
   restTime?: number
   mediaPadding?: number
+  category?: 'enterprise' | 'ai' | 'consumer' | 'accessibility'
 }
 
 // Paused by default, plays on hover — same behavior as the case study heroes.
@@ -74,7 +75,7 @@ function PreviewLottie({ src, restTime = 0 }: { src: string; restTime?: number }
   )
 }
 
-export default function NextProject({ title, to, description, image, video, poster, lottie, restTime, mediaPadding }: NextProjectProps) {
+export default function NextProject({ title, to, description, image, video, poster, lottie, restTime, mediaPadding, category }: NextProjectProps) {
   return (
     <div style={{ paddingLeft: 32, paddingRight: 32, marginTop: 84 }}>
       <section
@@ -105,8 +106,8 @@ export default function NextProject({ title, to, description, image, video, post
 
           {(video || lottie || image) && (
             <Link to={to} tabIndex={-1} style={{ display: 'block' }}>
-              <div style={{
-                background: 'rgba(30,75,154,0.05)',
+              <div className={category ? `case-study-card-media--${category}` : undefined} style={{
+                background: category ? undefined : 'rgba(30,75,154,0.05)',
                 border: '1px solid rgba(30,75,154,0.15)',
                 padding: mediaPadding,
                 overflow: 'hidden',

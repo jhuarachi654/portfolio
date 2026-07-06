@@ -191,7 +191,7 @@ h1 {
   font-weight: 500;
   color: #1E4B9A;
   background: transparent;
-  border: 1px solid #1E4B9A;
+  border: 1px solid rgba(30, 75, 154, 0.25);
   padding: 0 18px;
   height: 34px;
   border-radius: 0;
@@ -1338,7 +1338,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 /* Buttons */
 [data-theme="dark"] .btn-resume {
   color: #E8EFF8;
-  border-color: rgba(232, 239, 248, 0.4);
+  border-color: rgba(168, 190, 232, 0.5);
   background: transparent;
 }
 [data-theme="dark"] .btn-resume::before,

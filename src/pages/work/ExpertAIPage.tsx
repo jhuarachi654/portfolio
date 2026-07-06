@@ -278,7 +278,7 @@ export default function ExpertAIPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div className="cs-solution-wrap" style={{ background: '#f0f4fb', padding: '56px 100px', border: '1px solid rgba(30,75,154,0.2)' }}>
+          <div className="cs-solution-wrap case-study-card-media--accessibility" style={{ padding: '56px 100px', border: '1px solid rgba(30,75,154,0.2)' }}>
             <HeroVideo />
           </div>
         </div>
@@ -804,6 +804,7 @@ export default function ExpertAIPage() {
         description="Modernized an AI-powered airline pricing platform for 50+ carrier analysts."
         lottie="/videos/Revenue-Management-Video.json"
         restTime={1.5}
+        category="ai"
       />
 
       <Footer />

@@ -52,10 +52,15 @@ export default function App() {
     document.documentElement.classList.toggle("loading", !loaded)
   }, [loaded])
 
+  const handleIntroDone = () => {
+    setLoaded(true)
+    window.dispatchEvent(new Event("intro-complete"))
+  }
+
   return (
     <ThemeProvider>
       <Analytics />
-      {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
+      {!loaded && <LoadingScreen onDone={handleIntroDone} />}
       <BrowserRouter>
         <ScrollToTop />
         <CustomCursor />

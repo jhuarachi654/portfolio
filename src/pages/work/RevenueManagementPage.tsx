@@ -653,7 +653,7 @@ export default function RevenueManagementPage() {
       <section>
         {/* Hero Lottie — paused by default, plays on hover */}
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', lineHeight: 0, fontSize: 0 }}>
+          <div className="case-study-card-media--ai" style={{ border: '1px solid rgba(30,75,154,0.2)', lineHeight: 0, fontSize: 0 }}>
             <HeroLottie />
           </div>
         </div>
@@ -1131,6 +1131,7 @@ export default function RevenueManagementPage() {
         video="/videos/Fare-Finder-Video.webm"
         poster="/videos/Fare-Finder-Video-poster.png"
         restTime={4}
+        category="enterprise"
       />
 
       <Footer />

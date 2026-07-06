@@ -270,7 +270,7 @@ export default function DNCPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)' }}>
+          <div className="case-study-card-media--consumer" style={{ border: '1px solid rgba(30,75,154,0.2)' }}>
             <HeroLottie />
           </div>
         </div>
@@ -555,6 +555,7 @@ export default function DNCPage() {
         poster="/videos/expert.ai-Video-poster.png"
         restTime={4}
         mediaPadding={24}
+        category="accessibility"
       />
 
       <Footer />

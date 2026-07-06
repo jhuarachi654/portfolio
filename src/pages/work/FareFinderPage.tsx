@@ -352,7 +352,7 @@ export default function FareFinderPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div style={{ background: '#f0f4fb', padding: '4px 4px 0', border: '1px solid rgba(30,75,154,0.2)' }}>
+          <div className="case-study-card-media--enterprise" style={{ padding: '4px 4px 0', border: '1px solid rgba(30,75,154,0.2)' }}>
             <HeroVideo />
           </div>
         </div>
@@ -946,6 +946,7 @@ export default function FareFinderPage() {
         to="/work/democratic-national-committee"
         description="Created campaign assets across social, ads, and email for Biden-Harris."
         lottie="/videos/DNC-Video.json"
+        category="consumer"
       />
 
       <Footer />

@@ -62,8 +62,23 @@ function useTypewriter() {
   return displayed
 }
 
+// The hero flower shouldn't play until the intro splash is actually dismissed —
+// otherwise it's already animating (or finished) behind the curtain by the time
+// the user sees it. `intro-complete` is fired by App.tsx the moment the splash commits.
+function useIntroDone() {
+  const [introDone, setIntroDone] = useState(() => !document.documentElement.classList.contains("loading"))
+  useEffect(() => {
+    if (introDone) return
+    const onDone = () => setIntroDone(true)
+    window.addEventListener("intro-complete", onDone)
+    return () => window.removeEventListener("intro-complete", onDone)
+  }, [introDone])
+  return introDone
+}
+
 export default function HomePage() {
   const displayed = useTypewriter()
+  const introDone = useIntroDone()
   return (
     <>
       <div className="line-grid hero-page">
@@ -88,10 +103,14 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Right: ASCII flower ── */}
+        {/* ── Right: ASCII flower — waits for the intro splash to finish, then scatter-assembles in ── */}
         <div className="hero-right hero-flower-wrap">
-          <AsciiVideo src="/cosmos-1.mp4" width={420} height={500} />
-          <span className="hero-flower-label">Built from the ground up with React + Canvas API</span>
+          {introDone && (
+            <>
+              <AsciiVideo src="/cosmos-1.mp4" width={420} height={500} loop={false} scatterIntro playbackRate={2.5} />
+              <span className="hero-flower-label">Built from the ground up with React + Canvas API</span>
+            </>
+          )}
         </div>
 
         {/* ── Clock: absolute top-right of hero ── */}
