@@ -8,6 +8,7 @@ import SectionHeading from '../../components/case-study/SectionHeading'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
+import PlayPauseButton from '../../components/PlayPauseButton'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -237,6 +238,7 @@ function HeroLottie() {
   const [data, setData] = useState<object | null>(null)
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
+  const [playing, setPlaying] = useState(false)
 
   useEffect(() => {
     fetch('/videos/DNC-Video.json')
@@ -245,14 +247,22 @@ function HeroLottie() {
       .catch(() => {})
   }, [])
 
-  const handleMouseEnter = () => { if (isDesktop) lottieRef.current?.play() }
-  const handleMouseLeave = () => { if (isDesktop) lottieRef.current?.stop() }
+  const handleMouseEnter = () => { if (isDesktop) { lottieRef.current?.play(); setPlaying(true) } }
+  const handleMouseLeave = () => { if (isDesktop) { lottieRef.current?.stop(); setPlaying(false) } }
+
+  // Explicit control for mobile (no hover) and for pausing a hover-triggered
+  // play on desktop — doesn't reset the frame like mouse-leave does.
+  const handleToggle = () => {
+    if (playing) { lottieRef.current?.pause(); setPlaying(false) }
+    else { lottieRef.current?.play(); setPlaying(true) }
+  }
 
   return (
-    <div className="w-full aspect-video overflow-hidden" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="w-full aspect-video overflow-hidden" style={{ position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {data && (
         <Lottie lottieRef={lottieRef} animationData={data} loop autoplay={false} style={{ width: '100%', height: '100%' }} />
       )}
+      {data && <PlayPauseButton playing={playing} onToggle={handleToggle} />}
     </div>
   )
 }

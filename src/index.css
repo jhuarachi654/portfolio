@@ -1986,6 +1986,27 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   [data-theme="dark"] .case-study-card-wrapper.metrics-in-view .cs-metrics-panel {
     border-top-color: rgba(168, 190, 232, 0.1);
   }
+
+  /* No cursor/hover on touch devices, so the "active" look has to be driven
+     by scroll position instead: the card centered in the viewport gets the
+     same highlighted border/shadow/lift/zoom treatment desktop gets on
+     :hover, via the same metrics-in-view class the observer already toggles. */
+  .case-study-card-wrapper.metrics-in-view .case-study-card {
+    border-color: rgba(30, 75, 154, 0.7);
+    box-shadow: 0 8px 32px rgba(30, 75, 154, 0.18), 0 2px 8px rgba(30, 75, 154, 0.10);
+    transform: translateY(-4px);
+  }
+  [data-theme="dark"] .case-study-card-wrapper.metrics-in-view .case-study-card {
+    border-color: rgba(168, 190, 232, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  .case-study-card-wrapper.metrics-in-view .case-study-card-video,
+  .case-study-card-wrapper.metrics-in-view .case-study-card-image {
+    transform: scale(1.03);
+  }
+  .work-masonry-col .case-study-card-wrapper.metrics-in-view {
+    transform: rotate(0deg) translateY(-4px);
+  }
 }
 
 .reading-progress-bar {
@@ -4194,6 +4215,31 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   transition: background 0.2s, border-color 0.2s;
   white-space: nowrap;
   line-height: 1.4;
+}
+
+/* ── Case study hero play/pause control ──────────────────────────── */
+.cs-hero-playpause {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 43, 85, 0.55);
+  color: #ffffff;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.cs-hero-playpause:hover {
+  background: rgba(22, 43, 85, 0.78);
+  transform: scale(1.06);
 }
 
 /* ── Case study mobile responsiveness ────────────────────────────── */

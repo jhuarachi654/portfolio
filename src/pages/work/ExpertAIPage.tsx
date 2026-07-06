@@ -6,6 +6,7 @@ import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
+import PlayPauseButton from '../../components/PlayPauseButton'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -238,32 +239,46 @@ const HERO_REST_TIME = 4
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
+  const [playing, setPlaying] = useState(false)
 
   const handleLoadedMetadata = () => {
     const vid = videoRef.current
     if (vid) vid.currentTime = HERO_REST_TIME
   }
 
-  const handleMouseEnter = () => { if (isDesktop) videoRef.current?.play().catch(() => {}) }
+  const handleMouseEnter = () => { if (isDesktop) { videoRef.current?.play().catch(() => {}); setPlaying(true) } }
   const handleMouseLeave = () => {
     if (!isDesktop) return
     const vid = videoRef.current
     if (vid) { vid.pause(); vid.currentTime = HERO_REST_TIME }
+    setPlaying(false)
+  }
+
+  // Explicit control for mobile (no hover) and for pausing a hover-triggered
+  // play on desktop — doesn't reset the frame like mouse-leave does.
+  const handleToggle = () => {
+    const vid = videoRef.current
+    if (!vid) return
+    if (playing) { vid.pause(); setPlaying(false) }
+    else { vid.play().catch(() => {}); setPlaying(true) }
   }
 
   return (
-    <video
-      ref={videoRef}
-      src="/videos/expert.ai-Video.webm"
-      poster="/videos/expert.ai-Video-poster.png"
-      muted
-      loop
-      playsInline
-      onLoadedMetadata={handleLoadedMetadata}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{ width: '100%', display: 'block' }}
-    />
+    <div style={{ position: 'relative' }}>
+      <video
+        ref={videoRef}
+        src="/videos/expert.ai-Video.webm"
+        poster="/videos/expert.ai-Video-poster.png"
+        muted
+        loop
+        playsInline
+        onLoadedMetadata={handleLoadedMetadata}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{ width: '100%', display: 'block' }}
+      />
+      <PlayPauseButton playing={playing} onToggle={handleToggle} />
+    </div>
   )
 }
 

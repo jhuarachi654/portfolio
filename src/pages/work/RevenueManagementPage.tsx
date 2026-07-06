@@ -8,6 +8,7 @@ import ImageFigure from '../../components/case-study/ImageFigure'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
+import PlayPauseButton from '../../components/PlayPauseButton'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -611,6 +612,7 @@ function HeroLottie() {
   const [data, setData] = useState<object | null>(null)
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
+  const [playing, setPlaying] = useState(false)
 
   useEffect(() => {
     fetch('/videos/Revenue-Management-Video.json')
@@ -625,17 +627,26 @@ function HeroLottie() {
     return () => cancelAnimationFrame(id)
   }, [data])
 
-  const handleMouseEnter = () => { if (isDesktop) lottieRef.current?.play() }
+  const handleMouseEnter = () => { if (isDesktop) { lottieRef.current?.play(); setPlaying(true) } }
   const handleMouseLeave = () => {
     if (!isDesktop) return
     lottieRef.current?.goToAndStop(LOTTIE_START_TIME * 1000, false)
+    setPlaying(false)
+  }
+
+  // Explicit control for mobile (no hover) and for pausing a hover-triggered
+  // play on desktop — doesn't reset the frame like mouse-leave does.
+  const handleToggle = () => {
+    if (playing) { lottieRef.current?.pause(); setPlaying(false) }
+    else { lottieRef.current?.play(); setPlaying(true) }
   }
 
   return (
-    <div className="w-full overflow-hidden" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="w-full overflow-hidden" style={{ position: 'relative' }} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {data && (
         <Lottie lottieRef={lottieRef} animationData={data} loop autoplay={false} style={{ width: '100%', display: 'block' }} />
       )}
+      {data && <PlayPauseButton playing={playing} onToggle={handleToggle} />}
     </div>
   )
 }
