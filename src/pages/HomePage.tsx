@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import AsciiVideo from "../components/AsciiVideo"
 import WorkGrid from "../components/WorkGrid"
 import Footer from "../components/Footer"
@@ -76,9 +76,30 @@ function useIntroDone() {
   return introDone
 }
 
+// Only start the flower once its container is actually visible in the
+// viewport — on mobile especially, there's no reason to spin up the canvas
+// render loop for a hero that isn't on screen yet.
+function useInView<T extends HTMLElement>() {
+  const ref = useRef<T>(null)
+  const [inView, setInView] = useState(false)
+  useEffect(() => {
+    if (inView) return
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect() } },
+      { rootMargin: "100px" }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [inView])
+  return [ref, inView] as const
+}
+
 export default function HomePage() {
   const displayed = useTypewriter()
   const introDone = useIntroDone()
+  const [flowerRef, flowerInView] = useInView<HTMLDivElement>()
   return (
     <>
       <div className="line-grid hero-page">
@@ -103,11 +124,12 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Right: ASCII flower — waits for the intro splash to finish, then fades in.
+        {/* ── Right: ASCII flower — waits for the intro splash to finish AND for
+             this container to actually be in the viewport, then fades in.
              (Was a per-tile scatter-assemble animation; switched to a plain CSS fade
              since the physics-driven version could hitch on slower phones.) ── */}
-        <div className="hero-right hero-flower-wrap" style={introDone ? { animation: "fadeIn 0.6s ease" } : undefined}>
-          {introDone && (
+        <div ref={flowerRef} className="hero-right hero-flower-wrap" style={introDone && flowerInView ? { animation: "fadeIn 0.6s ease" } : undefined}>
+          {introDone && flowerInView && (
             <>
               <AsciiVideo src="/cosmos-1.mp4" width={420} height={500} loop={false} playbackRate={2.5} />
               <span className="hero-flower-label">Built from the ground up with React + Canvas API</span>

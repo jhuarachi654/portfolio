@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react"
 
-const TILE      = 3
 const IS_MOBILE = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
+// Mobile's touch-repel interaction loops every tile checking distance from
+// the touch point each frame — an O(tile count) cost per frame regardless of
+// how many tiles are actually near the finger. A 420x500 flower at TILE=3 is
+// ~23,000 tiles, which is too slow to track a real-time drag on a phone CPU.
+// Coarser tiles on mobile cut that ~4x while desktop keeps the finer grain.
+const TILE      = IS_MOBILE ? 6 : 3
 const PREFERS_REDUCED_MOTION = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 const SAMPLE_INTERVAL = 80
 const FRAME_INTERVAL  = 1000 / 60
