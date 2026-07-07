@@ -337,7 +337,7 @@ function HeroVideo() {
   }
 
   return (
-    <div style={{ position: 'relative' }}>
+    <>
       <video
         ref={videoRef}
         src="/videos/Fare-Finder-Video.webm"
@@ -351,7 +351,7 @@ function HeroVideo() {
         style={{ width: '100%', display: 'block' }}
       />
       <PlayPauseButton playing={playing} onToggle={handleToggle} />
-    </div>
+    </>
   )
 }
 
@@ -367,7 +367,7 @@ export default function FareFinderPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div className="case-study-card-media--enterprise" style={{ padding: '4px 4px 0', border: '1px solid rgba(30,75,154,0.2)' }}>
+          <div className="case-study-card-media--enterprise" style={{ padding: '4px 4px 0', border: '1px solid rgba(30,75,154,0.2)', position: 'relative' }}>
             <HeroVideo />
           </div>
         </div>

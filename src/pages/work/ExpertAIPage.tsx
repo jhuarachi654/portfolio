@@ -264,7 +264,7 @@ function HeroVideo() {
   }
 
   return (
-    <div style={{ position: 'relative' }}>
+    <>
       <video
         ref={videoRef}
         src="/videos/expert.ai-Video.webm"
@@ -278,7 +278,7 @@ function HeroVideo() {
         style={{ width: '100%', display: 'block' }}
       />
       <PlayPauseButton playing={playing} onToggle={handleToggle} />
-    </div>
+    </>
   )
 }
 
@@ -293,7 +293,7 @@ export default function ExpertAIPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div className="cs-solution-wrap case-study-card-media--accessibility" style={{ padding: '56px 100px', border: '1px solid rgba(30,75,154,0.2)' }}>
+          <div className="cs-solution-wrap case-study-card-media--accessibility" style={{ padding: '56px 100px', border: '1px solid rgba(30,75,154,0.2)', position: 'relative' }}>
             <HeroVideo />
           </div>
         </div>

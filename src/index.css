@@ -4265,6 +4265,15 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
     object-position: top;
     transform: none;
   }
+  /* The play/pause icon is also a direct child of that wrapper (sibling to
+     the video/lottie), so it gets caught by the `> *` rule above unless
+     explicitly excluded — it's a small fixed-size control, not the hero
+     media itself. */
+  .cs-hero-lottie-wrap > div > .cs-hero-playpause {
+    width: 32px !important;
+    height: 32px !important;
+    transform: none !important;
+  }
 
   .challenge-banner-question {
     font-size: 15px !important;
