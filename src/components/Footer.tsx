@@ -35,7 +35,7 @@ export default function Footer() {
       <div className="footer-dark-body">
 
         <div className="footer-dark-left">
-          <p className="footer-dark-tagline">Let's make something<br />worth noticing.</p>
+          <p className="footer-dark-tagline">Great ideas bloom<br />through iteration.</p>
           <p className="footer-dark-sub">Want to talk design, grab an iced hojicha, or just chat? <a href="mailto:jhuarachi654@gmail.com" className="footer-dark-link"><span>Reach out.</span></a></p>
         </div>
 

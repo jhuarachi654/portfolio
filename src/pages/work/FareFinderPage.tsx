@@ -305,35 +305,17 @@ function FlightFareExplorer() {
   )
 }
 
-// ─── Hero video — paused by default (resting 4s in), plays on hover ──────────
-
-const HERO_REST_TIME = 4
+// ─── Hero video — autoplays by default; the button is the sole manual control ──
 
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
-  const [playing, setPlaying] = useState(false)
+  const [playing, setPlaying] = useState(true)
 
-  const handleLoadedMetadata = () => {
-    const vid = videoRef.current
-    if (vid) vid.currentTime = HERO_REST_TIME
-  }
-
-  const handleMouseEnter = () => { if (isDesktop) { videoRef.current?.play().catch(() => {}); setPlaying(true) } }
-  const handleMouseLeave = () => {
-    if (!isDesktop) return
-    const vid = videoRef.current
-    if (vid) { vid.pause(); vid.currentTime = HERO_REST_TIME }
-    setPlaying(false)
-  }
-
-  // Explicit control for mobile (no hover) and for pausing a hover-triggered
-  // play on desktop — doesn't reset the frame like mouse-leave does.
   const handleToggle = () => {
     const vid = videoRef.current
     if (!vid) return
-    if (playing) { vid.pause(); setPlaying(false) }
-    else { vid.play().catch(() => {}); setPlaying(true) }
+    if (playing) vid.pause()
+    else vid.play().catch(() => {})
   }
 
   return (
@@ -344,10 +326,10 @@ function HeroVideo() {
         poster="/videos/Fare-Finder-Video-poster.png"
         muted
         loop
+        autoPlay
         playsInline
-        onLoadedMetadata={handleLoadedMetadata}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
         style={{ width: '100%', display: 'block' }}
       />
       <PlayPauseButton playing={playing} onToggle={handleToggle} />
