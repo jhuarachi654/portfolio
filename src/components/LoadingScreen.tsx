@@ -165,19 +165,18 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
 
   const reveal = progress / DISMISS_DISTANCE
 
-  // Flowers land as the final beat of the cascade, right after the button
-  // (which finishes at 1.25s + 0.4s = 1.65s) — tightly clustered together
-  // (100ms apart) so the whole splash settles by ~1.8s instead of ~3s.
-  // Mobile's splash flower is bigger and crisper than before (was 220x270,
-  // same blocky tile density as a much smaller canvas) but not full 420x500 —
-  // that overflowed the screen and made touch interaction noticeably heavier
-  // (more tiles to scan). 280x340 keeps the improved detail without either problem.
+  // Flowers land as the final beat of the cascade — pulled in so they finish
+  // by ~1.2-1.3s instead of ~1.8-2s. Mobile's splash flower is bigger and
+  // crisper than before (was 220x270, same blocky tile density as a much
+  // smaller canvas) but not full 420x500 — that overflowed the screen and
+  // made touch interaction noticeably heavier (more tiles to scan). 280x340
+  // keeps the improved detail without either problem.
   const flowers = window.innerWidth < 768
-    ? [{ w: 280, h: 340, mt: 0, delay: 1300 }]
+    ? [{ w: 280, h: 340, mt: 0, delay: 650 }]
     : [
-        { w: 160, h: 200, mt: 20, delay: 1360 },
-        { w: 220, h: 270, mt: -10, delay: 1240 },
-        { w: 160, h: 200, mt: 20, delay: 1420 },
+        { w: 160, h: 200, mt: 20, delay: 720 },
+        { w: 220, h: 270, mt: -10, delay: 600 },
+        { w: 160, h: 200, mt: 20, delay: 780 },
       ]
 
   // Real vibration pulse on Android, timed to each flower's visual "snap" —
