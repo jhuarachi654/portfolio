@@ -20,8 +20,8 @@ function LiveClock() {
 
 const TITLES = [
   "product designer",
-  "design engineer",
-  "interaction designer",
+  "user advocate",
+  "AI-native designer",
 ]
 const TAGS = ["MS-HCI @ CCA", "Psych & Neuro @ Williams", "Figma Campus Leader"] as const
 
@@ -59,7 +59,7 @@ function useTypewriter() {
     }
   }, [displayed, wordIdx, typing])
 
-  return displayed
+  return { displayed, word: TITLES[wordIdx] }
 }
 
 // The hero flower shouldn't play until the intro splash is actually dismissed —
@@ -97,7 +97,8 @@ function useInView<T extends HTMLElement>() {
 }
 
 export default function HomePage() {
-  const displayed = useTypewriter()
+  const { displayed, word } = useTypewriter()
+  const article = /^[aeiou]/i.test(word) ? "an" : "a"
   const introDone = useIntroDone()
   const [flowerRef, flowerInView] = useInView<HTMLDivElement>()
   const [isMobile] = useState(() => window.matchMedia("(max-width: 767px)").matches)
@@ -115,7 +116,7 @@ export default function HomePage() {
         <div className="hero-left">
           <div className="hero-name hero-display-headline" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>
             <div className="hero-first-line">
-              Hi, I'm Johanna, a{" "}
+              Hi, I'm Johanna, {article}{" "}
               <span className="hero-role-wrap">
                 <span className="hero-role">{displayed}</span>
                 <span className="hero-role-cursor">|</span>
