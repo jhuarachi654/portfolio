@@ -80,12 +80,12 @@ function PersonaCard({
 }) {
   return (
     <div>
-      <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
         {/* Avatar */}
         <div style={{
           width: 80, height: 80, borderRadius: '50%',
           overflow: 'hidden', margin: '0 auto 16px',
-          border: '1px solid rgba(30,75,154,0.15)',
+          border: '1px solid rgba(var(--color-navy-rgb),0.15)',
           background: '#ffffff',
         }}>
           <img src={avatar} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', ...avatarStyle }} />
@@ -97,20 +97,20 @@ function PersonaCard({
         {/* Age + Location + Experience — single row */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <User size={13} style={{ color: 'rgba(30,75,154,0.4)' }} />
+            <User size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
             <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{age}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <MapPin size={13} style={{ color: 'rgba(30,75,154,0.4)' }} />
+            <MapPin size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
             <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{location}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <Briefcase size={13} style={{ color: 'rgba(30,75,154,0.4)' }} />
+            <Briefcase size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
             <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{experience}</span>
           </div>
         </div>
 
-        <hr style={{ border: 'none', borderTop: '1px solid rgba(30,75,154,0.12)', marginBottom: 16 }} />
+        <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.12)', marginBottom: 16 }} />
 
         {/* Needs */}
         <p className="font-sans font-bold text-navy" style={{ fontSize: 14, marginBottom: 12 }}>Needs:</p>
@@ -136,7 +136,7 @@ function ComparisonCard({
   title: string; pros: string; cons: string; verdict?: string
 }) {
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 16 }}>
+    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
       <h4 className="text-[15px] font-bold text-navy-dark mb-4" style={{ fontFamily: 'var(--font-display)' }}>{title}</h4>
       <div className="space-y-3">
         <div className="flex gap-2">
@@ -168,13 +168,13 @@ function SolutionBlock({
   const num = String(index).padStart(2, '0')
   return (
     <div style={{ marginTop: index === 1 ? 40 : 64 }}>
-      {index > 1 && <hr style={{ border: 'none', borderTop: '1px solid rgba(30,75,154,0.2)', marginBottom: 64 }} />}
+      {index > 1 && <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', marginBottom: 64 }} />}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
         {/* Left: text + impact */}
         <div>
           <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>{num}. {heading}</h3>
           <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 24 }}>{body}</p>
-          <div style={{ borderTop: '1px solid rgba(30,75,154,0.2)', paddingTop: 16, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+          <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', paddingTop: 16, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
             <span className="text-navy font-bold" style={{ fontSize: 16, flexShrink: 0 }}>→</span>
             <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>
               <strong className="text-navy">User Impact: </strong>{impact}
@@ -182,7 +182,7 @@ function SolutionBlock({
           </div>
         </div>
         {/* Right: image */}
-        <img src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+        <img src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
       </div>
     </div>
   )
@@ -194,9 +194,9 @@ function FeedbackRow({ feedback, response }: { feedback: string; response: strin
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 16 }}>
       {/* Stakeholder feedback card */}
-      <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 16 }}>
+      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-          <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(30,75,154,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-navy)', flexShrink: 0 }}>
+          <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-navy)', flexShrink: 0 }}>
             <AirTrafficControl size={18} weight="light" />
           </div>
           <h4 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 16, margin: 0 }}>Stakeholder</h4>
@@ -204,7 +204,7 @@ function FeedbackRow({ feedback, response }: { feedback: string; response: strin
         <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{feedback}</p>
       </div>
       {/* My response card */}
-      <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 16 }}>
+      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
         <h4 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 16, margin: '0 0 16px' }}>My Response</h4>
         <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{response}</p>
       </div>
@@ -281,8 +281,8 @@ function PersonaToggle({ className = '', style: styleProp }: { className?: strin
               style={{
                 textAlign: 'left',
                 padding: 16,
-                border: `1px solid ${isActive ? '#1E4B9A' : 'rgba(30,75,154,0.2)'}`,
-                background: isActive ? 'rgba(30,75,154,0.1)' : 'transparent',
+                border: `1px solid ${isActive ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.2)'}`,
+                background: isActive ? 'rgba(var(--color-navy-rgb),0.1)' : 'transparent',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
               }}
@@ -351,9 +351,9 @@ function MyMarketsExplorer() {
                 className="cs-tab-btn"
                 data-cursor-label="Open option"
                 style={{
-                  border: `1px solid ${i === active ? '#1E4B9A' : 'rgba(30,75,154,0.2)'}`,
-                  background: i === active ? 'rgba(30,75,154,0.1)' : 'transparent',
-                  color: i === active ? '#1E4B9A' : 'rgba(30,75,154,0.5)',
+                  border: `1px solid ${i === active ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.2)'}`,
+                  background: i === active ? 'rgba(var(--color-navy-rgb),0.1)' : 'transparent',
+                  color: i === active ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.5)',
                 }}
               >
                 {o.title}
@@ -371,7 +371,7 @@ function MyMarketsExplorer() {
             transition={{ duration: 0.25 }}
             style={{ marginBottom: 16 }}
           >
-            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
           </motion.div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100 }}>
             <div style={{ display: 'flex', gap: 10 }}>
@@ -444,9 +444,9 @@ function AIPlacementExplorer() {
                 className="cs-tab-btn"
                 data-cursor-label="Open option"
                 style={{
-                  border: `1px solid ${i === active ? '#1E4B9A' : 'rgba(30,75,154,0.2)'}`,
-                  background: i === active ? 'rgba(30,75,154,0.1)' : 'transparent',
-                  color: i === active ? '#1E4B9A' : 'rgba(30,75,154,0.5)',
+                  border: `1px solid ${i === active ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.2)'}`,
+                  background: i === active ? 'rgba(var(--color-navy-rgb),0.1)' : 'transparent',
+                  color: i === active ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.5)',
                 }}
               >
                 {o.title}
@@ -464,7 +464,7 @@ function AIPlacementExplorer() {
             transition={{ duration: 0.25 }}
             style={{ marginBottom: 16 }}
           >
-            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
           </motion.div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100 }}>
@@ -590,7 +590,7 @@ function PolaroidDeck({ fullWidth = false }: { fullWidth?: boolean }) {
             style={{
               width: i === active ? 28 : 8,
               height: 8,
-              background: i === active ? '#1E4B9A' : 'rgba(30,75,154,0.2)',
+              background: i === active ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.2)',
               border: 'none',
               borderRadius: 4,
               cursor: 'pointer',
@@ -646,7 +646,7 @@ export default function RevenueManagementPage() {
       <section>
         {/* Hero Lottie — paused by default, plays on hover */}
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div className="case-study-card-media--ai" style={{ border: '1px solid rgba(30,75,154,0.2)', lineHeight: 0, fontSize: 0 }}>
+          <div className="case-study-card-media--ai" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', lineHeight: 0, fontSize: 0 }}>
             <HeroLottie />
           </div>
         </div>
@@ -696,9 +696,9 @@ export default function RevenueManagementPage() {
             </h2>
           </div>
           <div style={{
-            borderTop: '1px solid rgba(30,75,154,0.2)',
-            borderLeft: '1px solid rgba(30,75,154,0.2)',
-            borderRight: '1px solid rgba(30,75,154,0.2)',
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
             borderBottom: 'none',
             borderRadius: '12px 12px 0 0',
             height: 32,
@@ -719,7 +719,7 @@ export default function RevenueManagementPage() {
           </Prose>
         </div>
 
-        <hr style={{ border: 'none', borderTop: '1px solid rgba(30,75,154,0.08)', margin: '48px 0' }} />
+        <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.08)', margin: '48px 0' }} />
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
           <div>
@@ -736,7 +736,7 @@ export default function RevenueManagementPage() {
           </div>
 
           <figure style={{ margin: 0 }}>
-            <img src={img('revenue-management-10-eiVem1.png')} alt="Major US airlines to lay off thousands of workers as Covid-19 support expires" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+            <img src={img('revenue-management-10-eiVem1.png')} alt="Major US airlines to lay off thousands of workers as Covid-19 support expires" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
             <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Airplanes parked at Southern California Logistics Airport in July 2020. (Credit: Ryan Patterson)</figcaption>
           </figure>
         </div>
@@ -757,9 +757,9 @@ export default function RevenueManagementPage() {
             </h2>
           </div>
           <div style={{
-            borderTop: '1px solid rgba(30,75,154,0.2)',
-            borderLeft: '1px solid rgba(30,75,154,0.2)',
-            borderRight: '1px solid rgba(30,75,154,0.2)',
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
             borderBottom: 'none',
             borderRadius: '12px 12px 0 0',
             height: 32,
@@ -777,7 +777,7 @@ export default function RevenueManagementPage() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16, alignItems: 'start' }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', overflow: 'hidden' }}>
+          <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', overflow: 'hidden' }}>
             <video
               src="/videos/RM-Solution.webm"
               autoPlay loop muted playsInline
@@ -785,7 +785,7 @@ export default function RevenueManagementPage() {
               style={{ width: '75%', display: 'block', margin: '0 auto' }}
             />
           </div>
-          <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+          <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.03)', padding: 20 }}>
             <p className="font-sans font-bold text-navy" style={{ fontSize: 13, marginBottom: 12 }}>IMPACT</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
@@ -819,11 +819,11 @@ export default function RevenueManagementPage() {
             { icon: <Ghost size={24} weight="light" />, title: 'Low User Adoption',    body: 'Junior Analysts abandoned tasks mid-way and opted for AI workarounds outside the platform.' },
             { icon: <BookOpen size={24} weight="light" />, title: 'Training Dependency', body: 'Junior Analysts relied on Senior colleagues and external AI when they got stuck.' },
           ].map(({ icon, title, body }) => (
-            <div key={title} style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 16 }}>
+            <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
               <div style={{
                 width: 40, height: 40,
                 borderRadius: '50%',
-                border: '1px solid rgba(30,75,154,0.2)',
+                border: '1px solid rgba(var(--color-navy-rgb),0.2)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: 'var(--color-navy)',
                 marginBottom: 12,
@@ -856,7 +856,7 @@ export default function RevenueManagementPage() {
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+          <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
             <img src={img('revenue-management-13-pX9ss5.png')} alt="How the current RM experience affects Senior and Junior Analysts differently" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
           </div>
           <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>How the current RM experience affects Senior and Junior Analysts differently</figcaption>
@@ -874,7 +874,7 @@ export default function RevenueManagementPage() {
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+          <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
             <img src={img('revenue-management-14-3LKss2.png')} alt="Comparative look at how Junior and Senior Analysts move through the same platform" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
           </div>
           <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>A comparative look at how Junior and Senior Analysts move through the same platform differently</figcaption>
@@ -903,10 +903,10 @@ export default function RevenueManagementPage() {
             { icon: <Bell size={24} weight="light" />,     title: 'Onboarding',      body: 'A welcome message and quick tour — just enough to orient new users.' },
             { icon: <Robot size={24} weight="light" />,    title: 'AI Assistant',    body: 'Context-aware guidance that suggests next steps based on what is on screen.' },
           ].map(({ icon, title, body }) => (
-            <div key={title} style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 16, display: 'flex', gap: 12 }}>
+            <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16, display: 'flex', gap: 12 }}>
               <div style={{
                 width: 40, height: 40, borderRadius: '50%',
-                border: '1px solid rgba(30,75,154,0.2)',
+                border: '1px solid rgba(var(--color-navy-rgb),0.2)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: 'var(--color-navy)', flexShrink: 0,
               }}>
@@ -937,7 +937,7 @@ export default function RevenueManagementPage() {
               <div key={title}>
                 <p className="font-bold text-navy" style={{ fontFamily: 'var(--font-display)', fontSize: 15, marginBottom: 8 }}>{title}</p>
                 <div style={{ marginBottom: 10 }}>
-                  <img src={image} alt={title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+                  <img src={image} alt={title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
                 </div>
                 <p className="font-sans" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>
                   <strong className="text-navy">Verdict:</strong> {verdict}
@@ -971,7 +971,7 @@ export default function RevenueManagementPage() {
 
           {/* Right */}
           <div>
-            <img src={img('revenue-management-23-VWDfyX.png')} alt="Compact Cards Layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+            <img src={img('revenue-management-23-VWDfyX.png')} alt="Compact Cards Layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
           </div>
         </div>
       </Section>
@@ -1050,7 +1050,7 @@ export default function RevenueManagementPage() {
               </p>
 
               {/* Questions box */}
-              <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 16, marginBottom: 8 }}>
+              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16, marginBottom: 8 }}>
                 <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 12px' }}>Questions I would've asked</h4>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {[
@@ -1066,7 +1066,7 @@ export default function RevenueManagementPage() {
               </div>
 
               {/* Metrics box */}
-              <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 16 }}>
+              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
                 <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 12px' }}>What I would have measured</h4>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {[
@@ -1084,7 +1084,7 @@ export default function RevenueManagementPage() {
             </div>
 
             {/* Right: image */}
-            <img src={img('revenue-management-29-3udItG.png')} alt="A/B test mockup — chat-centered layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+            <img src={img('revenue-management-29-3udItG.png')} alt="A/B test mockup — chat-centered layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
           </div>
         </div>
       </Section>

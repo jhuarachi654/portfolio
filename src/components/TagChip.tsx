@@ -5,7 +5,7 @@ interface TagChipProps {
 
 export default function TagChip({ label, variant = 'outline' }: TagChipProps) {
   const styles = {
-    outline: 'border border-[rgba(30,75,154,0.2)] text-navy/70 bg-transparent',
+    outline: 'border border-[rgba(var(--color-navy-rgb),0.2)] text-navy/70 bg-transparent',
     teal: 'border border-teal/30 text-teal bg-teal-tint',
     navy: 'border border-navy text-white bg-navy',
   }

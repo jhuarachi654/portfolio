@@ -259,7 +259,7 @@ export default function CaseStudyCard({
       <div className="case-study-card-body">
         <div className="case-study-card-header">
           <h3 className="case-study-card-title">{title}</h3>
-          {company && <span className="case-study-card-company font-sans font-semibold tracking-[0.1em] uppercase" style={{ fontSize: 10, color: 'rgba(30,75,154,0.65)' }}>at {company}</span>}
+          {company && <span className="case-study-card-company font-sans font-semibold tracking-[0.1em] uppercase" style={{ fontSize: 10 }}>at {company}</span>}
           <div className="case-study-card-tags">
             {tags.filter(t => t !== "Internship" && t !== "Freelance" && t !== "Solo").map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
             {role && <span className="case-study-card-tag">{role}</span>}

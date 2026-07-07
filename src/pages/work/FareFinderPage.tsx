@@ -70,19 +70,19 @@ function PersonaCard({
 }) {
   return (
     <div>
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
       {/* Chip label */}
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
         <span className="font-sans font-semibold" style={{
           fontSize: 13, color: 'var(--color-navy)',
-          border: '1px solid rgba(30,75,154,0.2)',
+          border: '1px solid rgba(var(--color-navy-rgb),0.2)',
           padding: '4px 14px',
         }}>{type}</span>
       </div>
 
       {/* Avatar image */}
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
-        <div style={{ width: 80, height: 80, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(30,75,154,0.15)' }}>
+        <div style={{ width: 80, height: 80, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.15)' }}>
           <img src={avatar} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
         </div>
       </div>
@@ -98,7 +98,7 @@ function PersonaCard({
         </span>
       </div>
 
-      <hr style={{ border: 'none', borderTop: '1px solid rgba(30,75,154,0.12)', marginBottom: 20 }} />
+      <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.12)', marginBottom: 20 }} />
 
       {/* Goals */}
       <div style={{ marginBottom: 20 }}>
@@ -138,11 +138,11 @@ function PersonaCard({
 
 function StatBlock({ stat, description, icon }: { stat: string; description: string; icon: React.ReactNode }) {
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
         <div style={{
           width: 44, height: 44, borderRadius: '50%',
-          border: '1px solid rgba(30,75,154,0.2)',
+          border: '1px solid rgba(var(--color-navy-rgb),0.2)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           flexShrink: 0,
         }}>
@@ -159,7 +159,7 @@ function StatBlock({ stat, description, icon }: { stat: string; description: str
 
 function QuoteBlock({ quote, attribution }: { quote: string; attribution: string }) {
   return (
-    <div style={{ borderLeft: '2px solid rgba(30,75,154,0.2)', paddingLeft: 16, paddingTop: 4, paddingBottom: 4 }}>
+    <div style={{ borderLeft: '2px solid rgba(var(--color-navy-rgb),0.2)', paddingLeft: 16, paddingTop: 4, paddingBottom: 4 }}>
       <p className="font-sans" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', fontStyle: 'italic', margin: '0 0 8px' }}>"{quote}"</p>
       <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: 0 }}>— {attribution}</p>
     </div>
@@ -177,13 +177,13 @@ function SolutionBlock({
   const num = String(index).padStart(2, '0')
   return (
     <div style={{ marginTop: index === 1 ? 40 : 64 }}>
-      {index > 1 && <hr style={{ border: 'none', borderTop: '1px solid rgba(30,75,154,0.2)', marginBottom: 64 }} />}
+      {index > 1 && <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', marginBottom: 64 }} />}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
         <div>
           <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>{num}. {heading}</h3>
           <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: outcome ? 20 : 0 }}>{body}</p>
           {outcome && (
-            <div style={{ borderTop: '1px solid rgba(30,75,154,0.2)', paddingTop: 16, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+            <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', paddingTop: 16, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
               <span className="text-navy font-bold" style={{ fontSize: 16, flexShrink: 0 }}>→</span>
               <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{outcome}</p>
             </div>
@@ -219,10 +219,10 @@ function DestinationsExplorer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 24 }}>
             {destinationOptions.map((o, i) => (
               <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
-                border: selected === i ? '1px solid #1E4B9A' : '1px solid rgba(30,75,154,0.2)',
-                background: selected === i ? 'rgba(30,75,154,0.08)' : 'transparent',
+                border: selected === i ? '1px solid var(--color-navy)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
+                background: selected === i ? 'rgba(var(--color-navy-rgb),0.08)' : 'transparent',
               }}>
-                <span className="font-sans" style={{ fontSize: 14, fontWeight: selected === i ? 600 : 400, color: selected === i ? '#1E4B9A' : 'rgba(30,75,154,0.4)' }}>{o.label}</span>
+                <span className="font-sans" style={{ fontSize: 14, fontWeight: selected === i ? 600 : 400, color: selected === i ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.4)' }}>{o.label}</span>
               </button>
             ))}
           </div>
@@ -255,10 +255,10 @@ function FlexibleDatesExplorer() {
       <div style={{ display: 'flex', gap: 8, marginTop: 16, flexWrap: 'wrap' }}>
         {flexibleDatesOptions.map((o, i) => (
           <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
-            border: selected === i ? '1px solid #1E4B9A' : '1px solid rgba(30,75,154,0.2)',
-            background: selected === i ? 'rgba(30,75,154,0.08)' : 'transparent',
+            border: selected === i ? '1px solid var(--color-navy)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
+            background: selected === i ? 'rgba(var(--color-navy-rgb),0.08)' : 'transparent',
           }}>
-            <span className="font-sans" style={{ fontSize: 13, fontWeight: selected === i ? 600 : 400, color: selected === i ? '#1E4B9A' : 'rgba(30,75,154,0.4)' }}>{o.label}</span>
+            <span className="font-sans" style={{ fontSize: 13, fontWeight: selected === i ? 600 : 400, color: selected === i ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.4)' }}>{o.label}</span>
           </button>
         ))}
       </div>
@@ -288,10 +288,10 @@ function FlightFareExplorer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 24, alignItems: 'flex-start' }}>
             {flightFareOptions.map((o, i) => (
               <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
-                border: selected === i ? '1px solid #1E4B9A' : '1px solid rgba(30,75,154,0.2)',
-                background: selected === i ? 'rgba(30,75,154,0.08)' : 'transparent',
+                border: selected === i ? '1px solid var(--color-navy)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
+                background: selected === i ? 'rgba(var(--color-navy-rgb),0.08)' : 'transparent',
               }}>
-                <span className="font-sans" style={{ fontSize: 13, fontWeight: selected === i ? 600 : 400, color: selected === i ? '#1E4B9A' : 'rgba(30,75,154,0.4)' }}>{o.label}</span>
+                <span className="font-sans" style={{ fontSize: 13, fontWeight: selected === i ? 600 : 400, color: selected === i ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.4)' }}>{o.label}</span>
               </button>
             ))}
           </div>
@@ -349,7 +349,7 @@ export default function FareFinderPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div className="case-study-card-media--enterprise" style={{ padding: '4px 4px 0', border: '1px solid rgba(30,75,154,0.2)', position: 'relative' }}>
+          <div className="case-study-card-media--enterprise" style={{ padding: '4px 4px 0', border: '1px solid rgba(var(--color-navy-rgb),0.2)', position: 'relative' }}>
             <HeroVideo />
           </div>
         </div>
@@ -395,9 +395,9 @@ export default function FareFinderPage() {
             </h2>
           </div>
           <div style={{
-            borderTop: '1px solid rgba(30,75,154,0.2)',
-            borderLeft: '1px solid rgba(30,75,154,0.2)',
-            borderRight: '1px solid rgba(30,75,154,0.2)',
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
             borderBottom: 'none',
             borderRadius: '12px 12px 0 0',
             height: 32,
@@ -430,8 +430,8 @@ export default function FareFinderPage() {
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 48, alignItems: 'center', marginTop: 48 }}>
           {/* Left: video */}
           <div style={{
-            background: 'rgba(30,75,154,0.06)',
-            border: '1px solid rgba(30,75,154,0.4)',
+            background: 'rgba(var(--color-navy-rgb),0.06)',
+            border: '1px solid rgba(var(--color-navy-rgb),0.4)',
             padding: 24,
             display: 'flex',
             alignItems: 'center',
@@ -469,7 +469,7 @@ export default function FareFinderPage() {
                     fontWeight: 700,
                     flexShrink: 0,
                     lineHeight: 1.5,
-                    color: type === '+' ? '#1E4B9A' : 'rgba(30,75,154,0.35)',
+                    color: type === '+' ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.35)',
                   }}>{type}</span>
                   <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{text}</p>
                 </div>
@@ -495,7 +495,7 @@ export default function FareFinderPage() {
             <img
               src={img('fare-finder-09-6yOer8.png')}
               alt="Booking solutions on the market"
-              style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }}
+              style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}
             />
             <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>
               Booking solutions on the market
@@ -520,9 +520,9 @@ export default function FareFinderPage() {
             </h2>
           </div>
           <div style={{
-            borderTop: '1px solid rgba(30,75,154,0.2)',
-            borderLeft: '1px solid rgba(30,75,154,0.2)',
-            borderRight: '1px solid rgba(30,75,154,0.2)',
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
             borderBottom: 'none',
             borderRadius: '12px 12px 0 0',
             height: 32,
@@ -549,7 +549,7 @@ export default function FareFinderPage() {
               style={{ width: '100%', display: 'block' }}
             />
           </div>
-          <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+          <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.03)', padding: 20 }}>
             <p className="font-sans font-bold text-navy" style={{ fontSize: 13, marginBottom: 12 }}>IMPACT</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
@@ -580,7 +580,7 @@ export default function FareFinderPage() {
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+          <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
             <img src={img('fare-finder-10-L9E2IY.png')} alt="Product ecosystem diagram" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
           </div>
           <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Product Ecosystem</figcaption>
@@ -645,13 +645,13 @@ export default function FareFinderPage() {
             </BodyText>
           </div>
           <figure style={{ margin: 0 }}>
-            <img src={img('fare-finder-13-QcRxqH.png')} alt="Relevant features across the booking market" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+            <img src={img('fare-finder-13-QcRxqH.png')} alt="Relevant features across the booking market" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
             <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>FigJam AI use in Affinity Mapping</figcaption>
           </figure>
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <img src={img('fare-finder-14-uaiF3T.png')} alt="Affinity mapping before and after sorting" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+          <img src={img('fare-finder-14-uaiF3T.png')} alt="Affinity mapping before and after sorting" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
           <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Affinity Mapping - Before (AI results) and After Sorting</figcaption>
         </figure>
 
@@ -706,7 +706,7 @@ export default function FareFinderPage() {
             </BodyText>
           </Prose>
           <figure style={{ margin: '48px 0 0' }}>
-            <img src={img('fare-finder-15-18R8vT.png')} alt="State of the market — relevant booking features" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+            <img src={img('fare-finder-15-18R8vT.png')} alt="State of the market — relevant booking features" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
             <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Relevant features across the booking market</figcaption>
           </figure>
         </div>
@@ -724,7 +724,7 @@ export default function FareFinderPage() {
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+          <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
             <img src={img('fare-finder-16-KkcukH.png')} alt="Fare Finder positioning" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
           </div>
           <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Fare Finder has the opportunity to integrate these features into the direct booking experience</figcaption>
@@ -764,7 +764,7 @@ export default function FareFinderPage() {
             </BodyText>
           </div>
           <figure style={{ margin: 0 }}>
-            <img src={img('fare-finder-18-4UGudS.png')} alt="Destination card layout concepts" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(30,75,154,0.2)' }} />
+            <img src={img('fare-finder-18-4UGudS.png')} alt="Destination card layout concepts" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
             <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Destination card layout concepts</figcaption>
           </figure>
         </div>
@@ -790,7 +790,7 @@ export default function FareFinderPage() {
               { label: 'Entry Point validated', body: 'Partners confirmed the concept, but requested more travel-centered visuals beyond the map background.', icon: <CheckCircle size={18} weight="fill" color="var(--color-navy)" /> },
               { label: 'Destinations scrapped', body: 'The layout concepts were cut entirely. The final design lets travelers customize destinations, flight card details, and filters throughout the experience.', icon: <XCircle size={18} weight="fill" color="var(--color-secondary)" /> },
             ].map(({ label, body, icon }) => (
-              <div key={label} style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+              <div key={label} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                   {icon}
                   <p className="font-sans font-semibold" style={{ fontSize: 14, color: 'var(--color-navy)', margin: 0 }}>{label}</p>
@@ -884,9 +884,9 @@ export default function FareFinderPage() {
             { icon: <AirplaneInFlight size={24} weight="thin" color="var(--color-navy)" />, stat: '45%', label: 'decrease in map abandonment' },
             { icon: <TrendUp size={24} weight="thin" color="var(--color-navy)" />, stat: '35%', label: 'increase in direct bookings' },
           ].map(({ icon, stat, label }) => (
-            <div key={stat} style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+            <div key={stat} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                <div style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid rgba(30,75,154,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <div style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   {icon}
                 </div>
                 <CountUp stat={stat} style={{ fontFamily: 'var(--font-display)', fontSize: 36, margin: 0, lineHeight: 1.1, fontWeight: 700, color: 'var(--color-navy)' }} />
@@ -901,7 +901,7 @@ export default function FareFinderPage() {
             { label: 'Where we landed', body: 'I handed off the designs at the end of my internship. Three months later, Fare Finder shipped — and the results above reflect its measured impact.' },
             { label: 'What I\'d do differently', body: 'If I had more time, I would have planned for more end consumer testing with the PM and User Researcher. Although our direct users were airline partners, Fare Finder ultimately reaches travelers — and their input would have been valuable.' },
           ].map(({ label, body }) => (
-            <div key={label} style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+            <div key={label} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
               <p className="font-sans font-semibold" style={{ fontSize: 13, color: 'var(--color-navy)', margin: '0 0 6px' }}>{label}</p>
               <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
             </div>

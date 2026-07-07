@@ -21,7 +21,7 @@ export default function NotFoundPage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "clamp(40px, 6vw, 80px)",
-          borderRight: "1px solid rgba(30,75,154,0.1)",
+          borderRight: "1px solid rgba(var(--color-navy-rgb),0.1)",
         }}>
           <p className="about-eyebrow nf-anim" style={{ animationDelay: "60ms" }}>
             Error 404

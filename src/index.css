@@ -8,6 +8,7 @@
 
   --color-navy: #1E4B9A;
   --color-navy-dark: #162B55;
+  --color-navy-rgb: 30, 75, 154;
   --color-teal: #29C4B0;
   --color-teal-tint: #E5F8F5;
   --color-paper: #FFFFFF;
@@ -97,6 +98,7 @@ html.loading body {
   --color-paper: #0A1118;
   --color-navy: #ffffff;
   --color-navy-dark: #ffffff;
+  --color-navy-rgb: 255, 255, 255;
   --color-secondary: rgba(255,255,255,0.6);
 }
 
@@ -2068,6 +2070,9 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   color: #fff;
   border-color: #18181B;
 }
+[data-theme="dark"] .cs-jump-btn { color: #ffffff; border-color: rgba(255,255,255,0.3); }
+[data-theme="dark"] .cs-jump-btn::after { background: #ffffff; }
+[data-theme="dark"] .cs-jump-btn:hover { color: #111; border-color: #ffffff; }
 
 /* Tier 1 — data/meta containers */
 .cs-info-box {
@@ -2315,8 +2320,9 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 }
 
 .case-study-card-title { order: 2; }
-.case-study-card-company { order: 1; }
+.case-study-card-company { order: 1; color: rgba(30, 75, 154, 0.65); }
 .case-study-card-tags { order: 3; }
+[data-theme="dark"] .case-study-card-company { color: rgba(168, 190, 232, 0.7); }
 
 .case-study-card-title {
   font-family: var(--font-sans);

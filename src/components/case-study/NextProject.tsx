@@ -81,7 +81,7 @@ export default function NextProject({ title, to, description, image, video, post
       <section
         className="max-w-[1080px] px-8 md:px-14"
         style={{
-          borderTop: '1px solid rgba(30,75,154,0.2)',
+          borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
           paddingTop: 48,
           paddingBottom: 84,
         }}
@@ -107,8 +107,8 @@ export default function NextProject({ title, to, description, image, video, post
           {(video || lottie || image) && (
             <Link to={to} tabIndex={-1} style={{ display: 'block' }}>
               <div className={category ? `case-study-card-media--${category}` : undefined} style={{
-                background: category ? undefined : 'rgba(30,75,154,0.05)',
-                border: '1px solid rgba(30,75,154,0.15)',
+                background: category ? undefined : 'rgba(var(--color-navy-rgb),0.05)',
+                border: '1px solid rgba(var(--color-navy-rgb),0.15)',
                 padding: mediaPadding,
                 overflow: 'hidden',
               }}>

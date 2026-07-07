@@ -5,12 +5,12 @@ interface ChallengeBannerProps {
 
 export default function ChallengeBanner({ label = 'Challenge', question }: ChallengeBannerProps) {
   return (
-    <div className="challenge-banner-wrap" style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.04)', padding: '32px 48px', textAlign: 'center', marginTop: 8, marginBottom: 8 }}>
+    <div className="challenge-banner-wrap" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.04)', padding: '32px 48px', textAlign: 'center', marginTop: 8, marginBottom: 8 }}>
       {/* Icon */}
       <div style={{
         width: 40, height: 40,
         borderRadius: '50%',
-        border: '1px solid rgba(30,75,154,0.3)',
+        border: '1px solid rgba(var(--color-navy-rgb),0.3)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         margin: '0 auto 12px',
       }}>

@@ -28,9 +28,9 @@ export default function SectionHeading({ chapter, index, heading, tag, sub, clas
 
       {/* Container indicator — open-bottom box, rounded top corners */}
       <div style={{
-        borderTop: '1px solid rgba(30,75,154,0.3)',
-        borderLeft: '1px solid rgba(30,75,154,0.3)',
-        borderRight: '1px solid rgba(30,75,154,0.3)',
+        borderTop: '1px solid rgba(var(--color-navy-rgb),0.3)',
+        borderLeft: '1px solid rgba(var(--color-navy-rgb),0.3)',
+        borderRight: '1px solid rgba(var(--color-navy-rgb),0.3)',
         borderBottom: 'none',
         borderRadius: '12px 12px 0 0',
         height: 32,

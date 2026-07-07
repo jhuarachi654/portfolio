@@ -60,7 +60,7 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
 
 function TicketCard({ label, description, count, total }: { label: string; description: string; count: number; total: number }) {
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 20 }}>
+    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 20 }}>
       <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', marginBottom: 12 }}>{label}</p>
       <p className="font-sans font-semibold text-navy" style={{ fontSize: 13, marginBottom: 12 }}>
         <CountUp stat={String(count)} style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 700, color: 'var(--color-navy)' }} /> of {total} support tickets
@@ -72,7 +72,7 @@ function TicketCard({ label, description, count, total }: { label: string; descr
 
 function QuoteRow({ quote, role }: { quote: string; role: string }) {
   return (
-    <div style={{ borderLeft: '2px solid rgba(30,75,154,0.2)', paddingLeft: 16, paddingTop: 4, paddingBottom: 4 }}>
+    <div style={{ borderLeft: '2px solid rgba(var(--color-navy-rgb),0.2)', paddingLeft: 16, paddingTop: 4, paddingBottom: 4 }}>
       <p className="font-sans" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', fontStyle: 'italic', margin: '0 0 8px' }}>"{quote}"</p>
       <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: 0 }}>— {role}</p>
     </div>
@@ -82,7 +82,7 @@ function QuoteRow({ quote, role }: { quote: string; role: string }) {
 type Bullet = { text: string; type?: 'check' | 'x' | 'neutral' }
 function ConstraintCard({ title, bullets }: { title: string; bullets: (string | Bullet)[] }) {
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
       <p className="font-sans font-bold text-navy" style={{ fontSize: 15, margin: '0 0 16px' }}>{title}</p>
       <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
         {bullets.map((b, i) => {
@@ -95,9 +95,9 @@ function ConstraintCard({ title, bullets }: { title: string; bullets: (string | 
               <span className="shrink-0 font-bold" style={{
                 fontSize: 11,
                 lineHeight: 1,
-                color: filled ? '#fff' : '#1E4B9A',
-                background: filled ? '#1E4B9A' : 'transparent',
-                border: '1.5px solid #1E4B9A',
+                color: filled ? '#fff' : 'var(--color-navy)',
+                background: filled ? 'var(--color-navy)' : 'transparent',
+                border: '1.5px solid var(--color-navy)',
                 borderRadius: '50%',
                 width: 18,
                 height: 18,
@@ -144,14 +144,14 @@ function AccessibilityExplorer() {
           <div className="cs-option-btns" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {accessibilityOptions.map((o, i) => (
               <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
-                border: selected === i ? '1px solid #1E4B9A' : '1px solid rgba(30,75,154,0.2)',
-                background: selected === i ? 'rgba(30,75,154,0.08)' : 'transparent',
+                border: selected === i ? '1px solid var(--color-navy)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
+                background: selected === i ? 'rgba(var(--color-navy-rgb),0.08)' : 'transparent',
               }}>
-                <span className="font-sans" style={{ fontSize: 13, fontWeight: selected === i ? 600 : 400, color: selected === i ? '#1E4B9A' : 'rgba(30,75,154,0.4)' }}>{o.label}</span>
+                <span className="font-sans" style={{ fontSize: 13, fontWeight: selected === i ? 600 : 400, color: selected === i ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.4)' }}>{o.label}</span>
               </button>
             ))}
           </div>
-          <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 8, borderTop: '1px solid rgba(30,75,154,0.15)', paddingTop: 16 }}>
+          <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 8, borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', paddingTop: 16 }}>
             <p className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', margin: 0 }}>
               <span className="font-bold text-navy">Pros:</span> {opt.pros}
             </p>
@@ -172,7 +172,7 @@ function AccessibilityExplorer() {
 
 function StatBlock({ stat, label, description, icon }: { stat: string; label: string; description: string; icon: React.ReactNode }) {
   return (
-    <div style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 24, height: '100%', boxSizing: 'border-box' }}>
+    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24, height: '100%', boxSizing: 'border-box' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
         <span style={{ color: 'var(--color-secondary)' }}>{icon}</span>
         <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: 0 }}>{label}</p>
@@ -191,9 +191,9 @@ function ImpactToggle() {
       <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
         {(['stats', 'quotes', 'future'] as const).map(v => (
           <button key={v} onClick={() => setView(v)} className="cs-tab-btn" style={{
-            border: view === v ? '1px solid #1E4B9A' : '1px solid rgba(30,75,154,0.2)',
-            background: view === v ? 'rgba(30,75,154,0.08)' : 'transparent',
-            color: view === v ? '#1E4B9A' : 'rgba(30,75,154,0.4)',
+            border: view === v ? '1px solid var(--color-navy)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
+            background: view === v ? 'rgba(var(--color-navy-rgb),0.08)' : 'transparent',
+            color: view === v ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.4)',
           }}>
             {labels[v]}
           </button>
@@ -210,7 +210,7 @@ function ImpactToggle() {
             { quote: "It's pretty neat that I can see the real time results on the side. The only thing I'm unsure of is how to exclude an item?", role: 'Legal Analyst' },
             { quote: "The content is pretty clear and I appreciate the multiple labels for clarity. I also like that there is no tedious dragging for filtering.", role: 'Data Analyst w/ Colorblindness' },
           ].map(({ quote, role }) => (
-            <div key={role} style={{ border: '1px solid rgba(30,75,154,0.2)', padding: '20px', height: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div key={role} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: '20px', height: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
               <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', fontStyle: 'italic', margin: '0 0 10px' }}>"{quote}"</p>
               <p className="font-sans font-semibold tracking-[0.1em] uppercase text-navy" style={{ fontSize: 11, margin: 0 }}>{role}</p>
             </div>
@@ -221,7 +221,7 @@ function ImpactToggle() {
             { label: 'Where we landed', body: 'I handed off the designs at the end of my internship. The redesigned filter component shipped and support tickets related to filtering fell by 42% — a direct result of addressing the root causes uncovered during research.' },
             { label: "What I'd do differently", body: 'If I had more time, I would have pushed for more end-user testing earlier in the process. Discovering the accessibility issues mid-project meant some iterations felt rushed. Starting with a broader audit would have set a stronger foundation.' },
           ].map(({ label, body }) => (
-            <div key={label} style={{ border: '1px solid rgba(30,75,154,0.2)', padding: 16, height: '100%', boxSizing: 'border-box' }}>
+            <div key={label} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16, height: '100%', boxSizing: 'border-box' }}>
               <p className="font-sans font-semibold" style={{ fontSize: 13, color: 'var(--color-navy)', margin: '0 0 6px' }}>{label}</p>
               <p className="font-sans text-[13px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
             </div>
@@ -275,7 +275,7 @@ export default function ExpertAIPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div className="cs-solution-wrap case-study-card-media--accessibility" style={{ padding: '56px 100px', border: '1px solid rgba(30,75,154,0.2)', position: 'relative' }}>
+          <div className="cs-solution-wrap case-study-card-media--accessibility" style={{ padding: '56px 100px', border: '1px solid rgba(var(--color-navy-rgb),0.2)', position: 'relative' }}>
             <HeroVideo />
           </div>
         </div>
@@ -321,9 +321,9 @@ export default function ExpertAIPage() {
               </h2>
             </div>
             <div style={{
-              borderTop: '1px solid rgba(30,75,154,0.2)',
-              borderLeft: '1px solid rgba(30,75,154,0.2)',
-              borderRight: '1px solid rgba(30,75,154,0.2)',
+              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
               borderBottom: 'none',
               borderRadius: '12px 12px 0 0',
               height: 32,
@@ -358,7 +358,7 @@ export default function ExpertAIPage() {
                   { type: '-', text: 'No way to see active filters once the popup was closed' },
                 ].map(({ type, text }, i) => (
                   <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: 16, fontWeight: 700, flexShrink: 0, lineHeight: 1.5, color: 'rgba(30,75,154,0.35)' }}>{type}</span>
+                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: 16, fontWeight: 700, flexShrink: 0, lineHeight: 1.5, color: 'rgba(var(--color-navy-rgb),0.35)' }}>{type}</span>
                     <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{text}</p>
                   </div>
                 ))}
@@ -382,9 +382,9 @@ export default function ExpertAIPage() {
               </h2>
             </div>
             <div style={{
-              borderTop: '1px solid rgba(30,75,154,0.2)',
-              borderLeft: '1px solid rgba(30,75,154,0.2)',
-              borderRight: '1px solid rgba(30,75,154,0.2)',
+              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
               borderBottom: 'none',
               borderRadius: '12px 12px 0 0',
               height: 32,
@@ -402,10 +402,10 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16, alignItems: 'start' }}>
-            <div style={{ background: '#f0f4fb', border: '1px solid rgba(30,75,154,0.2)', padding: 24 }}>
+            <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
               <img src="/videos/expert.ai-Video-poster.png" alt="Expert.ai filter component — solution preview" style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>
-            <div style={{ border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+            <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.03)', padding: 20 }}>
               <p className="font-sans font-bold text-navy" style={{ fontSize: 13, marginBottom: 12 }}>IMPACT</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {[
@@ -431,9 +431,9 @@ export default function ExpertAIPage() {
               </h2>
             </div>
             <div style={{
-              borderTop: '1px solid rgba(30,75,154,0.2)',
-              borderLeft: '1px solid rgba(30,75,154,0.2)',
-              borderRight: '1px solid rgba(30,75,154,0.2)',
+              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
               borderBottom: 'none',
               borderRadius: '12px 12px 0 0',
               height: 32,
@@ -474,7 +474,7 @@ export default function ExpertAIPage() {
                 { role: 'Government Contract Analyst', quote: 'I gave up on drag and drop. I just type everything now.', offset: '15%' },
                 { role: 'Data Analyst w/ Colorblindness', quote: 'I did not even know there were red and green indicators until someone told me.', offset: '8%' },
               ].map(({ role, quote, offset }) => (
-                <div key={role} style={{ marginLeft: offset, border: '1px solid rgba(30,75,154,0.2)', padding: '12px 16px', maxWidth: '75%' }}>
+                <div key={role} style={{ marginLeft: offset, border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: '12px 16px', maxWidth: '75%' }}>
                   <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy" style={{ fontSize: 11, marginBottom: 6 }}>{role}</p>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16 }}>
                     <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{quote}</p>
@@ -502,7 +502,7 @@ export default function ExpertAIPage() {
               </div>
             </div>
 
-            <div style={{ marginTop: 32, border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+            <div style={{ marginTop: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.03)', padding: 20 }}>
               <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
                 <strong style={{ color: 'var(--color-navy)' }}>Takeaway:</strong> This was not part of the original project scope, but I brought it up to my team and backed the case with user research — showing how fixing accessibility would increase overall usability and improve things for everyone.
               </p>
@@ -520,9 +520,9 @@ export default function ExpertAIPage() {
               </h2>
             </div>
             <div style={{
-              borderTop: '1px solid rgba(30,75,154,0.2)',
-              borderLeft: '1px solid rgba(30,75,154,0.2)',
-              borderRight: '1px solid rgba(30,75,154,0.2)',
+              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
               borderBottom: 'none',
               borderRadius: '12px 12px 0 0',
               height: 32,
@@ -555,7 +555,7 @@ export default function ExpertAIPage() {
               />
             </div>
 
-            <div style={{ marginTop: 32, border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+            <div style={{ marginTop: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.03)', padding: 20 }}>
               <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
                 <strong style={{ color: 'var(--color-navy)' }}>Takeaway:</strong> The solution had to come from the existing design system. I also had to balance accessibility improvements with what the team could realistically build in one sprint.
               </p>
@@ -595,7 +595,7 @@ export default function ExpertAIPage() {
               { n: '02', bold: 'Changed how filtering works.', body: 'I embedded labels directly into the panel. Instead of dragging and dropping, users just click a label to change its state — one click to include, another to exclude, another to reset.' },
               { n: '03', bold: 'Fixed the colors.', body: 'I swapped red and green for blue and gray. Every state also has a text label so no one has to rely on color alone.' },
             ].map(({ n, bold, body }) => (
-              <div key={n} style={{ display: 'flex', gap: 20, alignItems: 'flex-start', borderTop: '1px solid rgba(30,75,154,0.12)', paddingTop: 14 }}>
+              <div key={n} style={{ display: 'flex', gap: 20, alignItems: 'flex-start', borderTop: '1px solid rgba(var(--color-navy-rgb),0.12)', paddingTop: 14 }}>
                 <span className="font-sans font-bold text-navy/20" style={{ fontSize: 13, flexShrink: 0, minWidth: 24 }}>{n}</span>
                 <p className="font-sans" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
                   <span className="font-semibold text-navy">{bold}</span> {body}
@@ -604,12 +604,12 @@ export default function ExpertAIPage() {
             ))}
           </div>
 
-          <div style={{ borderTop: '1px solid rgba(30,75,154,0.12)', marginTop: 32, paddingTop: 32, display: 'grid', gridTemplateColumns: '2fr auto 3fr', gap: 24, alignItems: 'center' }}>
+          <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.12)', marginTop: 32, paddingTop: 32, display: 'grid', gridTemplateColumns: '2fr auto 3fr', gap: 24, alignItems: 'center' }}>
             <div>
               <img src={img('expert-ai-15-bW3HXl.png')} alt="Standalone filter component" style={{ width: '100%', height: 'auto', display: 'block' }} />
               <p className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Standalone component</p>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(30,75,154,0.2)', fontSize: 24, fontWeight: 300 }}>→</div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(var(--color-navy-rgb),0.2)', fontSize: 24, fontWeight: 300 }}>→</div>
             <div>
               <img src={img('expert-ai-16-BSVPlU.png')} alt="Filter integrated into full page" style={{ width: '100%', height: 'auto', display: 'block' }} />
               <p className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Integrated into full page</p>
@@ -643,7 +643,7 @@ export default function ExpertAIPage() {
               />
             </div>
 
-            <div style={{ marginTop: 24, border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+            <div style={{ marginTop: 24, border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.03)', padding: 20 }}>
               <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
                 <strong style={{ color: 'var(--color-navy)' }}>Takeaway:</strong> Consistency with the design system helped with both feasibility and timeline. I kept that foundation and improved the layout based on feedback.
               </p>
@@ -661,9 +661,9 @@ export default function ExpertAIPage() {
               </h2>
             </div>
             <div style={{
-              borderTop: '1px solid rgba(30,75,154,0.2)',
-              borderLeft: '1px solid rgba(30,75,154,0.2)',
-              borderRight: '1px solid rgba(30,75,154,0.2)',
+              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
               borderBottom: 'none',
               borderRadius: '12px 12px 0 0',
               height: 32,
@@ -678,7 +678,7 @@ export default function ExpertAIPage() {
                 After incorporating feedback from both the design critique and technical team, I landed on a dropdown filter panel that sits alongside the results — users can see their data update in real time as they make selections.
               </BodyText>
 
-              <div style={{ marginTop: 24, border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+              <div style={{ marginTop: 24, border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.03)', padding: 20 }}>
                 <p className="font-sans font-bold text-navy" style={{ fontSize: 13, marginBottom: 12 }}>NEW GUIDELINES</p>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {[
@@ -721,9 +721,9 @@ export default function ExpertAIPage() {
               </h2>
             </div>
             <div style={{
-              borderTop: '1px solid rgba(30,75,154,0.2)',
-              borderLeft: '1px solid rgba(30,75,154,0.2)',
-              borderRight: '1px solid rgba(30,75,154,0.2)',
+              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
               borderBottom: 'none',
               borderRadius: '12px 12px 0 0',
               height: 32,
@@ -739,7 +739,7 @@ export default function ExpertAIPage() {
 
             <ImpactToggle />
 
-            <div className="cs-after-interactive" style={{ marginTop: 32, border: '1px solid rgba(30,75,154,0.2)', background: 'rgba(30,75,154,0.03)', padding: 20 }}>
+            <div className="cs-after-interactive" style={{ marginTop: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.03)', padding: 20 }}>
               <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy" style={{ fontSize: 11, marginBottom: 10 }}>Takeaway</p>
               <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
                 The Lead Designer and I noted that two users still hesitated when trying to reset a filter. The three-click pattern (include → exclude → reset) was not obvious to everyone. If I had more time, I would add a small indicator showing what each click would do, and create an onboarding experience for first-time users.
@@ -759,9 +759,9 @@ export default function ExpertAIPage() {
               </h2>
             </div>
             <div style={{
-              borderTop: '1px solid rgba(30,75,154,0.2)',
-              borderLeft: '1px solid rgba(30,75,154,0.2)',
-              borderRight: '1px solid rgba(30,75,154,0.2)',
+              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
               borderBottom: 'none',
               borderRadius: '12px 12px 0 0',
               height: 32,

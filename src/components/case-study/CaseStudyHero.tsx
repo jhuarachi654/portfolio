@@ -54,7 +54,7 @@ export default function CaseStudyHero({
           {description}
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 pt-8 border-t border-[rgba(30,75,154,0.12)]">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 pt-8 border-t border-[rgba(var(--color-navy-rgb),0.12)]">
           {meta.map(({ label, value }) => (
             <div key={label}>
               <p className="font-sans text-[10px] font-semibold tracking-[0.12em] uppercase text-secondary mb-1.5">
