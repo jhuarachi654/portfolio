@@ -51,7 +51,7 @@ export default function NotFoundPage() {
           </p>
 
           <div className="about-cta nf-anim" style={{ animationDelay: "300ms" }}>
-            <Link to="/" className="btn-resume">
+            <Link to="/" className="btn-resume btn-resume--filled">
               <span>Back to home</span>
             </Link>
           </div>

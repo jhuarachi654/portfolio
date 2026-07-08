@@ -237,6 +237,14 @@ h1 {
   border-color: #18181B;
 }
 
+/* Filled variant — solid white fill by default instead of transparent,
+   for CTAs that need to read as a real button rather than a ghost/outline
+   one (e.g. "Get in touch"), while still sharing the same hover fill-in. */
+.btn-resume--filled {
+  background: #ffffff;
+  border-color: rgba(30, 75, 154, 0.3);
+}
+
 /* ── Sidebar nav link hover animation ───────────────────────────── */
 .nav-link {
   position: relative;
@@ -1359,6 +1367,14 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 [data-theme="dark"] .btn-resume:hover {
   color: #0A1118;
   border-color: #E8EFF8;
+}
+[data-theme="dark"] .btn-resume--filled {
+  background: #ffffff;
+  color: #162B55;
+  border-color: #ffffff;
+}
+[data-theme="dark"] .btn-resume--filled:hover {
+  color: #fff;
 }
 [data-theme="dark"] .icon-btn {
   color: #A8BEE8;
@@ -3128,9 +3144,11 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .about-corkboard {
   position: relative;
-  width: min(460px, 100%);
+  width: 460px;
+  max-width: 100%;
   height: 540px;
   overflow: visible;
+  flex-shrink: 0;
 }
 
 /* Main pile — anchored center-left of board */

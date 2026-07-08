@@ -174,7 +174,7 @@ export default function MobileNav() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={close}
-                className="btn-resume"
+                className="btn-resume btn-resume--filled"
               >
                 <span>Resume</span>
               </a>

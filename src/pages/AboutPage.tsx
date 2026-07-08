@@ -7,16 +7,16 @@ const BASE = "/images/about"
 
 // Portrait is index 0 → always starts on top of the pile
 const PILE_PHOTOS = [
-  { src: `${BASE}/about-16-fXGtIR.png`, alt: "Johanna Huarachi" },
-  { src: `${BASE}/about-10-EeeX71.png`, alt: "Fall hike in the DMV" },
+  { src: `${BASE}/about-16-fXGtIR.jpg`, alt: "Johanna Huarachi" },
+  { src: `${BASE}/about-10-EeeX71.jpg`, alt: "Fall hike in the DMV" },
   { src: `${BASE}/about-12-nWwB5x.jpg`, alt: "Palace of Fine Arts, SF" },
-  { src: `${BASE}/about-17-QN6Eya.png`, alt: "SF at golden hour" },
+  { src: `${BASE}/about-17-QN6Eya.jpg`, alt: "SF at golden hour" },
 ]
 
 const MOMENTS = [
   { src: `${BASE}/about-13-TPGcKT.jpg`, alt: "At CCA with pennant",       rotate: -1   },
-  { src: `${BASE}/about-14-8iDJK2.png`, alt: "Countryside with sparkles", rotate:  1.5 },
-  { src: `${BASE}/about-15-ds1yVi.png`, alt: "Red heart sculpture",       rotate: -2   },
+  { src: `${BASE}/about-14-8iDJK2.jpg`, alt: "Countryside with sparkles", rotate:  1.5 },
+  { src: `${BASE}/about-15-ds1yVi.jpg`, alt: "Red heart sculpture",       rotate: -2   },
   { src: `${BASE}/about-09-B9RMPR.jpg`, alt: "Pink magnolias",            rotate:  1   },
   { src: `${BASE}/about-07-tJpiN1.jpg`, alt: "Waves",                     rotate: -3   },
 ]
@@ -24,12 +24,12 @@ const MOMENTS = [
 // size = rendered img size in px, offsetY = vertical nudge (positive = down), floatDelay = animation offset
 // x/y are percent of scatter container (disc centered at 50%, 45%)
 const TREASURES = [
-  { src: `${BASE}/about-24-hIUzPz.png`, alt: "Catpple tin",   label: "Some stickers I gifted",          rotate: -8,  size: 94, x: "10%", y: "18%", floatDelay: "0s"   },
-  { src: `${BASE}/about-23-cHxzUK.png`, alt: "Latte art",     label: "A cap I made",                    rotate:  5,  size: 56, x: "16%", y: "72%", floatDelay: "0.8s" },
-  { src: `${BASE}/about-25-1kVOwL.png`, alt: "Tuxedo cat",    label: "One of my pencil pouches",        rotate: -4,  size: 85, x: "36%", y: "80%", floatDelay: "1.4s" },
-  { src: `${BASE}/about-27-ebo5bp.png`, alt: "Doge",          label: "Hi this is my child, Toto.",      rotate:  6,  size: 85, x: "64%", y: "75%", floatDelay: "0.4s" },
-  { src: `${BASE}/about-26-6JOonA.png`, alt: "A NYC exhibit that caught my eye", label: "A NYC exhibit that caught my eye", rotate: -5, size: 75, x: "82%", y: "22%", floatDelay: "1.9s" },
-  { src: `${BASE}/about-22-RJyGV4.png`, alt: "Salmon nigiri", label: "Some sushi from omakase I had",   rotate:  4,  size: 73, x: "87%", y: "65%", floatDelay: "1.1s" },
+  { src: `${BASE}/about-24-hIUzPz.jpg`, alt: "Catpple tin",   label: "Some stickers I gifted",          rotate: -8,  size: 94, x: "10%", y: "18%", floatDelay: "0s"   },
+  { src: `${BASE}/about-23-cHxzUK.jpg`, alt: "Latte art",     label: "A cap I made",                    rotate:  5,  size: 56, x: "16%", y: "72%", floatDelay: "0.8s" },
+  { src: `${BASE}/about-25-1kVOwL.jpg`, alt: "Tuxedo cat",    label: "One of my pencil pouches",        rotate: -4,  size: 85, x: "36%", y: "80%", floatDelay: "1.4s" },
+  { src: `${BASE}/about-27-ebo5bp.jpg`, alt: "Doge",          label: "Hi this is my child, Toto.",      rotate:  6,  size: 85, x: "64%", y: "75%", floatDelay: "0.4s" },
+  { src: `${BASE}/about-26-6JOonA.jpg`, alt: "A NYC exhibit that caught my eye", label: "A NYC exhibit that caught my eye", rotate: -5, size: 75, x: "82%", y: "22%", floatDelay: "1.9s" },
+  { src: `${BASE}/about-22-RJyGV4.jpg`, alt: "Salmon nigiri", label: "Some sushi from omakase I had",   rotate:  4,  size: 73, x: "87%", y: "65%", floatDelay: "1.1s" },
 ]
 
 // Rotations for [bottom, middle, top] cards in the pile
@@ -248,7 +248,7 @@ export default function AboutPage() {
           <p className="about-pronunciation" data-reveal style={{ "--reveal-delay": "160ms" } as React.CSSProperties}>(jo-HAN-uh wah-RAH-chee)</p>
 
           <div className="about-cta" data-reveal style={{ "--reveal-delay": "240ms" } as React.CSSProperties}>
-            <a href="mailto:jhuarachi654@gmail.com" className="btn-resume">
+            <a href="mailto:jhuarachi654@gmail.com" className="btn-resume btn-resume--filled">
               <span>Get in touch</span>
             </a>
           </div>
