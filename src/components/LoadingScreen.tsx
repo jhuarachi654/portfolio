@@ -324,7 +324,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               },
             },
             {
-              text: "Johanna's Corner of the Internet.",
+              text: "Johanna Huarachi's Portfolio",
               style: {
                 fontFamily: "var(--font-display)", fontSize: "clamp(22px, 3vw, 32px)",
                 fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em",
