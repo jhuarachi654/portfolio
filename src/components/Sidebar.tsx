@@ -106,7 +106,7 @@ export default function Sidebar() {
         </a>
 
         <a
-          href="https://drive.google.com/file/d/1i5BMnL9dF8lv1CjTIwBDqzOtvkcd779x/view?usp=sharing"
+          href="https://drive.google.com/file/d/1oSHIgcuBWo6L9dmaBmn4xB9ssO6JzjGA/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-resume btn-resume--filled flex-1"
