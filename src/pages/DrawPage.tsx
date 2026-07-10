@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { useTheme } from "../contexts/ThemeContext"
 import Footer from "../components/Footer"
+import { useVisitorNumber } from "../hooks/useVisitorNumber"
 
 const SUPABASE_URL = "https://jwjpnwxzpjtjigquuism.supabase.co"
 const SUPABASE_KEY = "sb_publishable_HIcPdHfVH7_58p5skQFVNg_DNqCKa7R"
@@ -59,7 +60,7 @@ const fmtDate = (iso?: string) => {
   return `${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")}/${String(d.getFullYear()).slice(2)}`
 }
 
-type Drawing = { id: string; name: string; image_url: string; created_at?: string; card_color?: string }
+type Drawing = { id: string; name: string; image_url: string; created_at?: string; card_color?: string; visitor_number?: number }
 
 // ── localStorage ownership tracking ──────────────────────────────────────────
 const OWNED_KEY = "jw_draw_owned"
@@ -307,7 +308,7 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
     imageUrlToAscii(drawing.image_url).then(async ascii => {
       if (cancelled || !canvasRef.current) return
       asciiRef.current = ascii
-      const { drawX } = await renderCard(canvasRef.current, { color, cardNum: idx + 1, ascii, name: resolveVisitorName(drawing.name, drawing.id), date: drawing.created_at })
+      const { drawX } = await renderCard(canvasRef.current, { color, cardNum: drawing.visitor_number ?? idx + 1, ascii, name: resolveVisitorName(drawing.name, drawing.id), date: drawing.created_at })
       drawXRef.current = drawX
     })
 
@@ -416,6 +417,7 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
 export default function DrawPage() {
   const { theme } = useTheme()
   const isDark = theme === "dark"
+  const { myNumber: myVisitorNumber, totalCount: visitorCount } = useVisitorNumber()
   const [drawings, setDrawings]   = useState<Drawing[]>([])
   const [shuffled, setShuffled]   = useState<Drawing[]>([])
   const [loading, setLoading]     = useState(true)
@@ -459,7 +461,7 @@ export default function DrawPage() {
     let count = 0
     try {
       const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/drawings?select=id,name,image_url,created_at&order=created_at.desc`,
+        `${SUPABASE_URL}/rest/v1/drawings?select=id,name,image_url,created_at,visitor_number&order=created_at.desc`,
         { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
       )
       const data = await res.json()
@@ -513,7 +515,7 @@ export default function DrawPage() {
       if (!canvas) return
       const { charW, drawX } = await renderCard(canvas, {
         color: cardColor,
-        cardNum: drawingsRef.current.length + 1,
+        cardNum: myVisitorNumber ?? drawingsRef.current.length + 1,
         ascii: [],
         name: "Mystery Visitor",
       })
@@ -541,7 +543,7 @@ export default function DrawPage() {
           })
           await renderCard(canvas, {
             color: cardColor,
-            cardNum: drawingsRef.current.length + 1,
+            cardNum: myVisitorNumber ?? drawingsRef.current.length + 1,
             ascii: asciiRef.current,
             name: "Mystery Visitor",
           })
@@ -565,7 +567,7 @@ export default function DrawPage() {
       if (!canvas) return
       const { charW, drawX } = await renderCard(canvas, {
         color: cardColor,
-        cardNum: drawingsRef.current.length + 1,
+        cardNum: myVisitorNumber ?? drawingsRef.current.length + 1,
         ascii: asciiRef.current,
         name: "Mystery Visitor",
       })
@@ -699,7 +701,7 @@ export default function DrawPage() {
             apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`,
             "Content-Type": "application/json", Prefer: "return=representation",
           },
-          body: JSON.stringify({ name: randomName(), image_url: imageUrl, card_color: cardColor.hex, position_x: 0, position_y: 0, rotation: 0 }),
+          body: JSON.stringify({ name: randomName(), image_url: imageUrl, card_color: cardColor.hex, position_x: 0, position_y: 0, rotation: 0, visitor_number: myVisitorNumber }),
         })
         const saved = await res.json()
         const d: Drawing = Array.isArray(saved) ? saved[0] : saved
@@ -732,7 +734,7 @@ export default function DrawPage() {
     imageUrlToAscii(drawing.image_url).then(async ascii => {
       if (cancelled || !zoomCanvasRef.current) return
       zoomAsciiRef.current = ascii
-      const { drawX: zdx } = await renderCard(zoomCanvasRef.current, { color, cardNum: zoomedIdx + 1, ascii, name: resolveVisitorName(drawing.name, drawing.id), date: drawing.created_at })
+      const { drawX: zdx } = await renderCard(zoomCanvasRef.current, { color, cardNum: drawing.visitor_number ?? zoomedIdx + 1, ascii, name: resolveVisitorName(drawing.name, drawing.id), date: drawing.created_at })
       zoomDrawXRef.current = zdx
     })
     return () => { cancelled = true }
@@ -788,9 +790,10 @@ export default function DrawPage() {
         </div>
         <div className="draw-divider">
           <div className="draw-divider-line" />
-          {drawings.length > 0 && (
+          {visitorCount != null && (
             <span className="draw-count">
-              {drawings.length} {drawings.length === 1 ? "visitor" : "visitors"}
+              {visitorCount} {visitorCount === 1 ? "visitor" : "visitors"}
+              {myVisitorNumber != null && ` (Visitor n.${myVisitorNumber})`}
             </span>
           )}
         </div>

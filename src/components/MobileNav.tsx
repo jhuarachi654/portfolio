@@ -149,6 +149,7 @@ export default function MobileNav() {
                 </NavLink>
               ))}
             </div>
+
             <div style={{ borderTop: theme === "dark" ? "1px solid rgba(168,190,232,0.08)" : "1px solid rgba(30,75,154,0.08)", paddingTop: 14, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <a href="mailto:jhuarachi654@gmail.com" aria-label="Email" className="icon-btn">
