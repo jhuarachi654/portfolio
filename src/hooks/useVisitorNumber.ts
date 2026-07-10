@@ -29,7 +29,7 @@ function registerVisitor(): Promise<number | null> {
   sharedRegisterPromise = (async () => {
     const uuid = getOrCreateVisitorUuid()
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/visitors`, {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/site_visitors`, {
         method: "POST",
         headers: {
           apikey: SUPABASE_KEY,
@@ -54,7 +54,7 @@ function registerVisitor(): Promise<number | null> {
 
 async function fetchVisitorTotal(): Promise<number | null> {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/visitors?select=id`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/site_visitors?select=id`, {
       headers: {
         apikey: SUPABASE_KEY,
         Authorization: `Bearer ${SUPABASE_KEY}`,
