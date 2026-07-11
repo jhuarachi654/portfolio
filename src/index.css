@@ -4138,11 +4138,12 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .draw-divider {
   display: flex;
-  align-items: center;
-  gap: 32px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
   margin: 24px 0 36px;
 }
-.draw-divider-line { height: 1px; flex: 1; background: rgba(30,75,154,0.12); }
+.draw-divider-line { height: 1px; width: 100%; flex-shrink: 0; background: rgba(30,75,154,0.12); }
 .draw-count {
   font-family: var(--font-sans);
   font-size: 11px;

@@ -789,7 +789,6 @@ export default function DrawPage() {
           </div>
         </div>
         <div className="draw-divider">
-          <div className="draw-divider-line" />
           {(visitorCount != null || myVisitorNumber != null) && (
             <span className="draw-count">
               {visitorCount != null && <>Total visitors: {visitorCount}</>}
@@ -797,6 +796,7 @@ export default function DrawPage() {
               {myVisitorNumber != null && <>You're visitor #{myVisitorNumber}</>}
             </span>
           )}
+          <div className="draw-divider-line" />
         </div>
       </div>
 
