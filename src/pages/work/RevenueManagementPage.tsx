@@ -290,7 +290,7 @@ function PersonaToggle({ className = '', style: styleProp }: { className?: strin
               <p className="font-sans font-semibold text-navy" style={{ fontSize: 14, margin: '0 0 4px' }}>
                 {persona.type}
               </p>
-              <p className="font-sans text-[13px] italic" style={{ color: 'var(--color-secondary)', margin: 0 }}>
+              <p className="font-sans text-[13px] italic cs-persona-desc" style={{ margin: 0 }}>
                 {persona.description}
               </p>
             </button>

@@ -217,7 +217,7 @@ function IterationExplorer() {
             <img src={img(opt.image)} alt={opt.label} className="dnc-iter-img" style={{ width: '100%', height: 'auto', display: 'block' }} />
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 8 }}>
               <div style={{ border: `1px solid ${passes ? 'rgba(var(--color-navy-rgb),0.2)' : 'rgba(200,50,50,0.3)'}`, padding: 10 }}>
-                <p className="font-sans font-semibold" style={{ fontSize: 11, color: passes ? 'var(--color-navy)' : '#c03030', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 4px' }}>Accessibility — {opt.accessibility.result}</p>
+                <p className={`font-sans font-semibold${passes ? '' : ' cs-a11y-fail'}`} style={{ fontSize: 11, color: passes ? 'var(--color-navy)' : undefined, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 4px' }}>Accessibility — {opt.accessibility.result}</p>
                 <p className="font-sans" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{opt.accessibility.note}</p>
               </div>
               <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 10 }}>

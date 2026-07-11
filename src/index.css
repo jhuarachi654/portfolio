@@ -4148,8 +4148,10 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.05em;
-  color: rgba(30,75,154,0.4);
+  color: rgba(30,75,154,0.75);
   white-space: nowrap;
+  line-height: 1.6;
+  text-align: right;
 }
 
 .draw-body {
@@ -4194,7 +4196,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 [data-theme="dark"] .draw-eyebrow          { color: rgba(255,255,255,0.45); }
 [data-theme="dark"] .draw-headline         { color: #ffffff; }
 [data-theme="dark"] .draw-divider-line     { background: rgba(255,255,255,0.1); }
-[data-theme="dark"] .draw-count            { color: rgba(255,255,255,0.35); }
+[data-theme="dark"] .draw-count            { color: rgba(255,255,255,0.7); }
 [data-theme="dark"] .draw-empty            { color: rgba(255,255,255,0.3); }
 [data-theme="dark"] .draw-empty-text       { color: rgba(255,255,255,0.18); }
 [data-theme="dark"] .draw-btn-lightbox                { background: #ffffff; color: #111111; }
@@ -4227,6 +4229,19 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   }
   .dnc-iter-quote { display: none; }
 }
+
+/* Accessibility-fail label — a single red hardcoded value couldn't hit 4.5:1
+   against both light and dark card backgrounds, so it needs its own
+   theme-aware color like everything else. */
+.cs-a11y-fail { color: #b91c1c; }
+[data-theme="dark"] .cs-a11y-fail { color: #ff8a8a; }
+
+/* Persona card description — the shared --color-secondary gray falls just
+   under 4.5:1 against this card's light-blue-tinted background specifically
+   (most other --color-secondary uses sit on plain white/dark page bg and
+   are fine), so it gets its own slightly darker/lighter value per theme. */
+.cs-persona-desc { color: rgb(100, 100, 110); }
+[data-theme="dark"] .cs-persona-desc { color: rgba(255, 255, 255, 0.72); }
 
 /* ── Unified case study tab/option button ─────────────────────────────────── */
 .cs-tab-btn {
