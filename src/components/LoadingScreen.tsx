@@ -398,7 +398,7 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
               tileColor={[255, 255, 255]}
               loop={false}
               startDelay={f.delay}
-              playbackRate={2.5}
+              playbackRate={7}
             />
           </div>
         ))}

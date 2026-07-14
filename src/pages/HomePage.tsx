@@ -143,7 +143,7 @@ export default function HomePage() {
         >
           {mountFlower && (
             <>
-              <AsciiVideo src="/cosmos-1.mp4" width={420} height={500} loop={false} playbackRate={2.5} />
+              <AsciiVideo src="/cosmos-1.mp4" width={420} height={500} loop={false} playbackRate={7} />
               <span className="hero-flower-label">Built from the ground up with React + Canvas API</span>
             </>
           )}
