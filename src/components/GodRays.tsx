@@ -330,6 +330,7 @@ export default function GodRays({
       {/* Unblurred grain layer on top — the canvas blur above would otherwise
           smooth away any texture rendered into the canvas itself. */}
       <div
+        className="god-rays-grain"
         style={{
           position: "absolute",
           inset: 0,

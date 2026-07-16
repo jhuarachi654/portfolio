@@ -6,6 +6,7 @@ import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import PlayPauseButton from '../../components/PlayPauseButton'
+import LazyVideo from '../../components/LazyVideo'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -255,6 +256,7 @@ function HeroVideo() {
         loop
         autoPlay
         playsInline
+        preload="metadata"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }}
@@ -401,10 +403,9 @@ export default function ExpertAIPage() {
             </p>
           </div>
 
-          <video
+          <LazyVideo
             src="/videos/expert.ai-Video.webm"
             poster="/videos/expert.ai-Video-poster.png"
-            autoPlay loop muted playsInline
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
           <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Task time dropped to 30s (from 2 min), support tickets down 42% after ship</figcaption>
@@ -684,13 +685,9 @@ export default function ExpertAIPage() {
             </div>
 
             <div>
-              <video
+              <LazyVideo
                 src="/videos/expert.ai-Video.webm"
                 poster="/videos/expert.ai-Video-poster.png"
-                autoPlay
-                loop
-                muted
-                playsInline
                 style={{ width: '100%', height: 'auto', display: 'block' }}
               />
               <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Final filter component, dropdown panel embedded alongside results</p>

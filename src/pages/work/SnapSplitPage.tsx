@@ -108,6 +108,7 @@ function HeroVideo() {
         loop
         autoPlay
         playsInline
+        preload="metadata"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}

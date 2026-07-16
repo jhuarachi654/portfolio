@@ -8,6 +8,7 @@ import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import PlayPauseButton from '../../components/PlayPauseButton'
+import LazyVideo from '../../components/LazyVideo'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -606,10 +607,16 @@ function HeroLottie() {
   const [playing, setPlaying] = useState(true)
 
   useEffect(() => {
-    fetch('/videos/Revenue-Management-Video.json')
-      .then(r => r.json())
-      .then(setData)
-      .catch(() => {})
+    // Defers the 4MB Lottie fetch/parse off the initial render's critical
+    // path — the hero image is fixed-size regardless, so the rest of the
+    // page can paint before this heavy JSON.parse runs.
+    const load = () => fetch('/videos/Revenue-Management-Video.json').then(r => r.json()).then(setData).catch(() => {})
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(load)
+      return () => window.cancelIdleCallback(id)
+    }
+    const id = setTimeout(load, 0)
+    return () => clearTimeout(id)
   }, [])
 
   const handleToggle = () => {
@@ -773,9 +780,8 @@ export default function RevenueManagementPage() {
           </BodyText>
         </div>
 
-        <video
+        <LazyVideo
           src="/videos/RM-Solution.webm"
-          autoPlay loop muted playsInline
           className="cs-solution-video-inner"
           style={{ width: '100%', display: 'block' }}
         />

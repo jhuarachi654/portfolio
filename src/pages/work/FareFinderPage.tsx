@@ -7,6 +7,7 @@ import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import PlayPauseButton from '../../components/PlayPauseButton'
+import LazyVideo from '../../components/LazyVideo'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -323,6 +324,7 @@ function HeroVideo() {
         loop
         autoPlay
         playsInline
+        preload="metadata"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain', transform: 'scale(1.3)' }}
@@ -432,12 +434,8 @@ export default function FareFinderPage() {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-            <video
+            <LazyVideo
               src="/videos/Fare-Finder-Precedent.webm"
-              autoPlay
-              loop
-              muted
-              playsInline
               style={{ width: '100%', display: 'block' }}
             />
           </div>
@@ -535,10 +533,9 @@ export default function FareFinderPage() {
         </div>
 
         <div className="cs-solution-video-wrap" style={{ background: '#003854', padding: 16, aspectRatio: '16/9', overflow: 'hidden' }}>
-          <video
+          <LazyVideo
             src="/videos/Fare-Finder-Video.webm"
             poster="/videos/Fare-Finder-Video-poster.png"
-            autoPlay loop muted playsInline
             className="cs-solution-video"
             style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain', transform: 'scale(1.3)' }}
           />

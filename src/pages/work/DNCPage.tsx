@@ -239,10 +239,16 @@ function HeroLottie() {
   const [playing, setPlaying] = useState(true)
 
   useEffect(() => {
-    fetch('/videos/DNC-Video.json')
-      .then(r => r.json())
-      .then(setData)
-      .catch(() => {})
+    // Defers the 5.8MB Lottie fetch/parse off the initial render's critical
+    // path — the hero image is fixed-size regardless, so the rest of the
+    // page can paint before this heavy JSON.parse runs.
+    const load = () => fetch('/videos/DNC-Video.json').then(r => r.json()).then(setData).catch(() => {})
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(load)
+      return () => window.cancelIdleCallback(id)
+    }
+    const id = setTimeout(load, 0)
+    return () => clearTimeout(id)
   }, [])
 
   const handleToggle = () => {
