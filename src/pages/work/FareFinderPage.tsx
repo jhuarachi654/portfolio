@@ -344,7 +344,7 @@ export default function FareFinderPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-          <div style={{ background: '#12213a', padding: 16, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, position: 'relative', aspectRatio: '16/9', overflow: 'hidden' }}>
+          <div style={{ background: '#003854', padding: 16, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, position: 'relative', aspectRatio: '16/9', overflow: 'hidden' }}>
             <HeroVideo />
           </div>
         </div>
@@ -534,7 +534,7 @@ export default function FareFinderPage() {
           </p>
         </div>
 
-        <div className="cs-solution-video-wrap" style={{ background: '#12213a', padding: 16, aspectRatio: '16/9', overflow: 'hidden' }}>
+        <div className="cs-solution-video-wrap" style={{ background: '#003854', padding: 16, aspectRatio: '16/9', overflow: 'hidden' }}>
           <video
             src="/videos/Fare-Finder-Video.webm"
             poster="/videos/Fare-Finder-Video-poster.png"
@@ -647,7 +647,7 @@ export default function FareFinderPage() {
           <StatBlock
             stat="40%"
             icon={<MapTrifold size={20} weight="regular" color="var(--color-cs-heading)" />}
-            description="wanted smarter destination recommendations based on their preferences"
+            description="wanted destination recommendations based on their preferences"
           />
           <StatBlock
             stat="60%"

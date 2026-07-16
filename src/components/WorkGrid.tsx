@@ -76,7 +76,7 @@ const CASE_STUDIES: CaseStudy[] = [
     href: "/work/fare-finder",
     role: "Product Design Intern",
     description: "A flight exploration tool for everyday travelers. Designed the map-based feature for PROS's 130+ airline partners; bookings up 35%.",
-    bgColor: "#12213a",
+    bgColor: "#003854",
     objectFit: "contain",
     mediaPadding: 16,
     mediaScale: 1.3,
