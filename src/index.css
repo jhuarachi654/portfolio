@@ -2240,36 +2240,28 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   }
 }
 
+/* Same thicker gradient treatment at every breakpoint, using the same
+   palette as the hero's GodRays gradient instead of the old flat navy
+   that used to be desktop/tablet-only (and the bar used to be hidden
+   entirely above 1199px). */
 .reading-progress-bar {
-  display: none;
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
-  height: 2px;
-  background: #1E4B9A;
+  height: 10px;
+  background: linear-gradient(90deg, #476ED3, #5B82F5, #7CA2FF, #95B9F8, #B7BDF0);
   z-index: 9999;
   transition: width 0.1s linear;
   pointer-events: none;
-}
-@media (max-width: 1199px) {
-  .reading-progress-bar {
-    display: block;
-  }
+  /* Fades the leading edge to transparent over a fixed distance (rather
+     than scaling with the bar's width) so the tip tapers off softly like
+     a brush stroke instead of ending in a hard vertical line. */
+  -webkit-mask-image: linear-gradient(to right, black, black calc(100% - 32px), transparent 100%);
+  mask-image: linear-gradient(to right, black, black calc(100% - 32px), transparent 100%);
 }
 [data-theme="dark"] .reading-progress-bar {
-  background: #a8bee8;
-}
-
-/* Thicker on mobile, using the same palette as the hero's GodRays gradient
-   instead of the flat navy used at larger sizes. */
-@media (max-width: 767px) {
-  .reading-progress-bar {
-    height: 10px;
-    background: linear-gradient(90deg, #476ED3, #5B82F5, #7CA2FF, #95B9F8, #B7BDF0);
-  }
-  [data-theme="dark"] .reading-progress-bar {
-    background: linear-gradient(90deg, #476ED3, #5B82F5, #7CA2FF, #95B9F8, #B7BDF0);
-  }
+  background: linear-gradient(90deg, #476ED3, #5B82F5, #7CA2FF, #95B9F8, #B7BDF0);
 }
 
 .cs-solution-video-wrap {
