@@ -4317,15 +4317,17 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   }
   .cs-hero-lottie-wrap > div {
     overflow: hidden;
-    aspect-ratio: 16 / 9;
+    /* Matches the landing page's case-study card media box (4/3), instead
+       of the desktop hero's 16/9, so the two feel consistent on mobile.
+       !important since each page sets aspectRatio:'16/9' inline, which
+       otherwise always wins over a plain stylesheet rule. */
+    aspect-ratio: 4 / 3 !important;
   }
   .cs-hero-lottie-wrap > div > *,
   .cs-hero-lottie-wrap > div video,
   .cs-hero-lottie-wrap > div iframe {
     width: 100% !important;
     height: 100% !important;
-    transform: scale(1.1);
-    transform-origin: center center;
   }
   .cs-hero-lottie-wrap > div > img {
     object-fit: cover;
