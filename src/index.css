@@ -689,7 +689,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .icon-btn:hover::after {
   transform: translateX(0);
 }
-.icon-btn::before { font-family: var(--type-label-family); font-size: var(--type-label-size); font-weight: 500; line-height: var(--type-label-line-height); text-transform: var(--type-label-transform); letter-spacing: var(--type-label-tracking); content: attr(aria-label); position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(-4px); background: #3A3A3E; color: #fff; white-space: nowrap; padding: 4px 8px; border-radius: 6px; opacity: 0; pointer-events: none; transition: opacity 0.15s ease, transform 0.15s ease; z-index: 10; }
+.icon-btn::before { font-family: var(--type-label-family); font-size: var(--type-label-size); font-weight: 500; line-height: var(--type-label-line-height); text-transform: none; letter-spacing: normal; content: attr(aria-label); position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(-4px); background: #3A3A3E; color: #fff; white-space: nowrap; padding: 4px 8px; border-radius: 6px; opacity: 0; pointer-events: none; transition: opacity 0.15s ease, transform 0.15s ease; z-index: 10; }
 .icon-btn:hover::before {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
