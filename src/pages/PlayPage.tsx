@@ -181,21 +181,21 @@ export default function PlayPage() {
             </div>
           </div>
 
-          {/* Popple — same CaseStudyCard config as the Home page entry */}
+          {/* Popple — same CaseStudyCard config as the Home page entry.
+              Uses the pre-composited MP4 (phone + purple bg baked in) rather
+              than the original alpha-channel WebM, since alpha-channel WebM
+              only renders correctly in Chromium — see WorkGrid.tsx for the
+              full explanation. */}
           <CaseStudyCard
             title="Popple"
             tags={["AI", "Design Engineering"]}
-            image="/videos/Popple-Video-poster.png"
-            video="/videos/Popple-Video.webm"
-            bgLottie="/videos/Popple-Background.json"
+            image="/videos/Popple-Video-composited-poster.png"
+            video="/videos/Popple-Video-composited.mp4"
             href="https://popple.pages.dev/"
             description="Designed an app that makes completed tasks tangible and collectible."
             aspectRatio="4/3"
-            bgColor="linear-gradient(135deg, #d9d3f0, #c7c9d6)"
             objectFit="cover"
-            dotField
             dotLayout={2}
-            lottieStartTime={8.79}
             cursorLabel="Open live site"
           />
 

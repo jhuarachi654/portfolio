@@ -144,18 +144,23 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     title: "Popple",
     tags: ["AI", "Solo"],
-    image: "/videos/Popple-Video-poster.png",
-    video: "/videos/Popple-Video.webm",
+    // Popple-Video.webm has real alpha transparency (composited live over the
+    // purple bgColor + bgLottie pattern), but alpha-channel WebM only renders
+    // correctly in Chromium — Safari/Firefox ignore the alpha track entirely
+    // and show a flat opaque frame instead, which reads as a missing/white
+    // background. Popple-Video-composited.mp4 is a screen recording of that
+    // same Chromium-correct composite (phone + purple + pattern, pre-baked
+    // into plain pixels), so it looks identical everywhere with no alpha
+    // dependency at all.
+    image: "/videos/Popple-Video-composited-poster.png",
+    video: "/videos/Popple-Video-composited.mp4",
     href: "https://popple.pages.dev/",
     role: "Design Engineer",
     description: "An app that makes completed tasks tangible and collectible. Designed, built, and shipped solo, end to end.",
-    bgColor: "linear-gradient(135deg, #d9d3f0, #c7c9d6)",
-    bgLottie: "/videos/Popple-Background.json",
     objectFit: "cover",
     aspectRatio: "4/3",
-    dotField: true,
+    dotField: false,
     dotLayout: 2,
-    lottieStartTime: 8.79,
     icon: "/Popple Logo.png",
     cursorLabel: "Open live site",
     projectType: "Side Project",
