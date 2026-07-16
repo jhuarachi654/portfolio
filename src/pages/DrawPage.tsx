@@ -68,11 +68,22 @@ const CARD_COLORS = [
   { hex: "#FFFEF5", name: "Cream",  ink: "#1E4B9A" },
 ]
 
-const ADJECTIVES = ["Blooming","Petal","Dewy","Rosy","Wilting","Tangled","Sunlit","Mossy","Thorny","Blushing","Overgrown","Fragrant","Pressed","Drifting","Quiet","Velvety","Tender","Gilded","Wistful","Dreamy"]
-const NOUNS      = ["Dahlia","Primrose","Wisteria","Marigold","Foxglove","Larkspur","Clover","Peony","Anemone","Buttercup","Verbena","Cornflower","Snapdragon","Edelweiss","Hellebore","Mallow","Yarrow","Tansy","Meadow","Blossom"]
+const ADJECTIVES = ["Dusty","Deep","Pale","Muted","Soft","Icy","Steel","Misty","Faded","Frosted","Smoky","Slate","Powder","Stormy","Glacial","Twilight","Midnight","Cool","Washed","Dusky"]
+const NOUNS      = ["Cerulean","Cobalt","Indigo","Teal","Periwinkle","Sapphire","Navy","Azure","Turquoise","Aqua","Denim","Violet","Lavender","Ultramarine","Prussian","Mint","Cyan","Slate","Iris","Marine"]
 
-const randomName = () =>
-  `${ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)]} ${NOUNS[Math.floor(Math.random() * NOUNS.length)]}`
+// Every (adjective, noun) pair, so we can hand out names without repeats
+// instead of re-rolling randomly and hoping for no collision.
+const NAME_COMBOS = ADJECTIVES.flatMap(a => NOUNS.map(n => `${a} ${n}`))
+
+// Picks a name not already used by any currently-loaded drawing. `used` is
+// the live set of names already on the board — with 400 combos and no
+// server-side uniqueness constraint, this is a best-effort guarantee
+// scoped to what the client has loaded, not a hard database-level lock.
+function randomName(used: Set<string>): string {
+  const available = NAME_COMBOS.filter(n => !used.has(n))
+  const pool = available.length > 0 ? available : NAME_COMBOS
+  return pool[Math.floor(Math.random() * pool.length)]
+}
 
 // Deterministic whimsical name from a string seed (used to fix old visitor_## names)
 function seededName(seed: string): string {
@@ -949,7 +960,7 @@ export default function DrawPage() {
             apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`,
             "Content-Type": "application/json", Prefer: "return=representation",
           },
-          body: JSON.stringify({ name: randomName(), image_url: imageUrl, card_color: cardColor.hex, position_x: 0, position_y: 0, rotation: 0, visitor_number: myVisitorNumber }),
+          body: JSON.stringify({ name: randomName(new Set(drawingsRef.current.map(d => d.name))), image_url: imageUrl, card_color: cardColor.hex, position_x: 0, position_y: 0, rotation: 0, visitor_number: myVisitorNumber }),
         })
         const saved = await res.json()
         const d: Drawing = Array.isArray(saved) ? saved[0] : saved

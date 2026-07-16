@@ -2264,7 +2264,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
    instead of the flat navy used at larger sizes. */
 @media (max-width: 767px) {
   .reading-progress-bar {
-    height: 6px;
+    height: 10px;
     background: linear-gradient(90deg, #476ED3, #5B82F5, #7CA2FF, #95B9F8, #B7BDF0);
   }
   [data-theme="dark"] .reading-progress-bar {
