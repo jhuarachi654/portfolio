@@ -13,13 +13,13 @@ export default function SectionHeading({ chapter, index, heading, tag, sub, clas
       {chapter && (
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
           {index !== undefined && (
-            <span className="font-sans text-navy/40" style={{ fontSize: 13, fontWeight: 500 }}>
+            <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>
               {index}.
             </span>
           )}
           <h2
-            className="font-bold"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0, color: 'var(--color-navy-dark)' }}
+            className="font-normal"
+            style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, lineHeight: 1.2, margin: 0, color: 'var(--color-cs-heading)' }}
           >
             {chapter}
           </h2>
@@ -39,11 +39,11 @@ export default function SectionHeading({ chapter, index, heading, tag, sub, clas
       }} />
 
       {tag && (
-        <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
+        <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 6, color: 'var(--color-cs-heading)', opacity: 0.5 }}>{tag}</p>
       )}
       <h3
-        className="font-bold"
-        style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, color: 'var(--color-navy-dark)' }}
+        className="font-normal"
+        style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 22, lineHeight: 1.3, margin: 0, color: 'var(--color-cs-heading)' }}
       >
         {heading}
       </h3>

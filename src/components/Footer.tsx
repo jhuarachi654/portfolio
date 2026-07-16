@@ -1,65 +1,40 @@
-import { useCallback, useRef, useState } from "react"
-import AsciiVideo from "./AsciiVideo"
+import { useEffect } from "react"
+import { ShootingStar } from "@phosphor-icons/react"
 
-interface Spark {
-  id: number
-  x: number
-  y: number
+// Fades + slides the headline in once it scrolls into view. The curtain
+// corner itself is a static, fixed-radius cutout (see .featured-work-curve
+// in index.css) — no JS or scroll-timeline involved in revealing the
+// footer, that's just normal scroll motion passing the section's trailing
+// edge through the corner.
+function useHeadlineReveal() {
+  useEffect(() => {
+    const headline = document.querySelector<HTMLElement>(".footer-dark-tagline")
+    if (!headline) return
+
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) headline.classList.add("is-visible") }),
+      { threshold: 0.15 }
+    )
+    io.observe(headline)
+
+    return () => io.disconnect()
+  }, [])
 }
 
 export default function Footer() {
-  const [sparks, setSparks] = useState<Spark[]>([])
-  const nextId = useRef(0)
-
-  const handleClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const id = nextId.current++
-    setSparks(s => [...s, { id, x, y }])
-    setTimeout(() => setSparks(s => s.filter(sp => sp.id !== id)), 1200)
-  }, [])
+  useHeadlineReveal()
 
   return (
-    <footer className="footer-new footer-dark" onClick={handleClick}>
-
-      {sparks.map(sp => (
-        <div key={sp.id} className="footer-spark-burst" style={{ left: sp.x, top: sp.y }}>
-          <div className="footer-spark-star" />
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="footer-spark-particle" style={{ "--i": i } as React.CSSProperties} />
-          ))}
-        </div>
-      ))}
-
+    <footer className="footer-new footer-dark">
       <div className="footer-dark-body">
-
         <div className="footer-dark-left">
-          <p className="footer-dark-tagline">Great ideas bloom<br />through iteration.</p>
-          <p className="footer-dark-sub">Want to talk design, grab an iced hojicha, or just chat? <a href="mailto:jhuarachi654@gmail.com" className="footer-dark-link"><span>Reach out.</span></a></p>
+          <p className="footer-dark-tagline">
+            Thank you for making it all the way here!{" "}
+            <ShootingStar size={64} weight="light" className="footer-dark-tagline-icon" />
+          </p>
+          <p className="footer-dark-sub">Open to talk projects, collaborations, or anything design.</p>
+          <span className="footer-dark-copy">© 2026 Johanna. Made with grit, thought, and lattes.</span>
         </div>
-
-        <div className="footer-flower-wrap">
-          <AsciiVideo
-            src="/cosmos-1.mp4"
-            width={200}
-            height={200}
-            tileColor={[168, 190, 232]}
-            staticBloom
-          />
-        </div>
-
-        <div className="footer-dark-links">
-          <a href="mailto:jhuarachi654@gmail.com" className="footer-dark-link"><span>Email</span></a>
-          <a href="https://www.linkedin.com/in/johanna-huarachi" target="_blank" rel="noopener noreferrer" className="footer-dark-link"><span>LinkedIn</span></a>
-          <a href="https://docs.google.com/document/d/1ak7ln9627ek1KxQODL-yZ3cQLpjccrpHin7fv6HP_qg/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="footer-dark-link"><span>Resume</span></a>
-        </div>
-
-      </div>
-
-      <div className="footer-dark-bar">
-        <span className="footer-dark-made">Made with Iced Hojichas, genuine thought, and delight.</span>
-        <span className="footer-dark-copy">© 2026 Johanna Huarachi. Designed &amp; built in React + TypeScript.</span>
       </div>
 
     </footer>

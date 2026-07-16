@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
 import { MapPin, Briefcase, Megaphone, Users, PaintBrush, Star } from '@phosphor-icons/react'
-import Footer from '../../components/Footer'
 import SectionHeading from '../../components/case-study/SectionHeading'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
@@ -31,7 +30,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
     <section
       id={id}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
-      style={{ marginTop: 96 }}
+      style={{ marginTop: 256 }}
     >
       {children}
     </section>
@@ -44,7 +43,7 @@ function Prose({ children }: { children: React.ReactNode }) {
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
+    <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
       {children}
     </p>
   )
@@ -54,9 +53,9 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
   return (
     <div>
       {tag && (
-        <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
+        <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[22px] font-bold text-navy-dark leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 24, marginTop: 0 }}>
+      <h3 className="text-[22px] font-bold text-[var(--color-cs-heading)] leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -121,10 +120,10 @@ function CollectionGallery() {
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 24 }}>
         {FILTERS.map(f => (
           <button key={f} onClick={() => setActive(f)} className="cs-tab-btn" style={{
-            border: active === f ? '1px solid var(--color-navy)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
-            background: active === f ? 'rgba(var(--color-navy-rgb),0.08)' : 'transparent',
+            border: active === f ? '1px solid var(--color-cs-heading)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
+            background: 'transparent',
           }}>
-            <span className="font-sans" style={{ fontSize: 13, fontWeight: active === f ? 600 : 400, color: active === f ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.4)' }}>{f}</span>
+            <span className="font-landing-body" style={{ fontSize: 13, fontWeight: active === f ? 600 : 400, color: active === f ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.4)' }}>{f}</span>
           </button>
         ))}
       </div>
@@ -138,7 +137,7 @@ function CollectionGallery() {
             style={{ position: 'relative', marginBottom: 12, breakInside: 'avoid' }}
             onClick={() => setSelected(item.file)}
           >
-            <img src={img(item.file)} alt={item.alt} loading="lazy" className="collection-img" style={{ width: '100%', display: 'block' }} />
+            <img src={img(item.file)} alt={item.alt} loading="lazy" className="collection-img" style={{ width: '100%', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
           </div>
         ))}
       </div>
@@ -197,18 +196,18 @@ function IterationExplorer() {
       <div className="cs-card-box" style={{ padding: 32 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div>
-            <SubHeading tag="GRAPHIC EXPLORATION">VP Anniversary Iterations</SubHeading>
+            <SubHeading>VP Anniversary Iterations</SubHeading>
             <BodyText>I tested a few different directions before landing on the final version. The photo selection told people whether this was a celebration or an announcement. The layout told them whether to feel inspired or just informed.</BodyText>
             <div className="dnc-iter-quote" style={{ borderLeft: '2px solid rgba(var(--color-navy-rgb),0.2)', paddingLeft: 16, marginBottom: 24 }}>
-              <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>Throughout the process, I got input from my team, which helped me narrow down the options.</p>
+              <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>Throughout the process, I got input from my team, which helped me narrow down the options.</p>
             </div>
             <div className="dnc-iter-tabs">
               {iterationOptions.map((o, i) => (
                 <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
-                  border: o.isFinal ? '1px solid var(--color-navy)' : selected === i ? '1px solid var(--color-navy)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
-                  background: o.isFinal ? (selected === i ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.12)') : selected === i ? 'rgba(var(--color-navy-rgb),0.08)' : 'transparent',
+                  border: o.isFinal ? '1px solid var(--color-cs-heading)' : selected === i ? '1px solid var(--color-cs-heading)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
+                  background: o.isFinal && selected === i ? 'var(--color-cs-heading)' : 'transparent',
                 }}>
-                  <span className="font-sans" style={{ fontSize: 13, fontWeight: o.isFinal || selected === i ? 600 : 400, color: o.isFinal ? (selected === i ? '#ffffff' : 'var(--color-navy)') : selected === i ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.4)', whiteSpace: 'nowrap' }}>{o.label}</span>
+                  <span className="font-landing-body" style={{ fontSize: 13, fontWeight: o.isFinal || selected === i ? 600 : 400, color: o.isFinal ? (selected === i ? '#ffffff' : 'var(--color-cs-heading)') : selected === i ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.4)', whiteSpace: 'nowrap' }}>{o.label}</span>
                 </button>
               ))}
             </div>
@@ -216,13 +215,13 @@ function IterationExplorer() {
           <div>
             <img src={img(opt.image)} alt={opt.label} className="dnc-iter-img" style={{ width: '100%', height: 'auto', display: 'block' }} />
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 8 }}>
-              <div style={{ border: `1px solid ${passes ? 'rgba(var(--color-navy-rgb),0.2)' : 'rgba(200,50,50,0.3)'}`, padding: 10 }}>
-                <p className={`font-sans font-semibold${passes ? '' : ' cs-a11y-fail'}`} style={{ fontSize: 11, color: passes ? 'var(--color-navy)' : undefined, textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 4px' }}>Accessibility — {opt.accessibility.result}</p>
-                <p className="font-sans" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{opt.accessibility.note}</p>
+              <div style={{ border: `1px solid ${passes ? 'rgba(var(--color-navy-rgb),0.2)' : 'rgba(200,50,50,0.3)'}`, borderRadius: 12, padding: 10 }}>
+                <p className={`font-landing-body font-semibold${passes ? '' : ' cs-a11y-fail'}`} style={{ fontSize: 11, color: passes ? 'var(--color-cs-heading)' : undefined, textTransform: 'uppercase', letterSpacing: '0.12em', margin: '0 0 4px' }}>Accessibility: {opt.accessibility.result}</p>
+                <p className="font-landing-body" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{opt.accessibility.note}</p>
               </div>
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 10 }}>
-                <p className="font-sans font-semibold" style={{ fontSize: 11, color: 'var(--color-secondary)', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 4px' }}>Photo Choice</p>
-                <p className="font-sans" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{opt.photoChoice}</p>
+              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 10 }}>
+                <p className="font-landing-body font-semibold" style={{ fontSize: 11, color: 'var(--color-secondary)', textTransform: 'uppercase', letterSpacing: '0.12em', margin: '0 0 4px' }}>Photo Choice</p>
+                <p className="font-landing-body" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{opt.photoChoice}</p>
               </div>
             </div>
           </div>
@@ -252,9 +251,16 @@ function HeroLottie() {
   }
 
   return (
-    <div className="w-full aspect-video overflow-hidden" style={{ position: 'relative' }}>
+    <div className="w-full h-full overflow-hidden" style={{ position: 'relative' }}>
       {data && (
-        <Lottie lottieRef={lottieRef} animationData={data} loop autoplay style={{ width: '100%', height: '100%' }} />
+        <Lottie
+          lottieRef={lottieRef}
+          animationData={data}
+          loop
+          autoplay
+          rendererSettings={{ preserveAspectRatio: 'xMidYMid meet' }}
+          style={{ width: '100%', height: '100%', display: 'block', transform: 'scale(1.5)' }}
+        />
       )}
       {data && <PlayPauseButton playing={playing} onToggle={handleToggle} />}
     </div>
@@ -264,7 +270,7 @@ function HeroLottie() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function DNCPage() {
-  useCaseToc(TOC)
+  useCaseToc(TOC, 'Campaign Design')
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
@@ -273,22 +279,22 @@ export default function DNCPage() {
 
       {/* ── Hero ── */}
       <section>
-        <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div className="case-study-card-media--consumer" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
+        <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
+          <div style={{ background: 'linear-gradient(135deg, #2b3a8f, #1a2358)', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, position: 'relative', aspectRatio: '16/9', overflow: 'hidden' }}>
             <HeroLottie />
           </div>
         </div>
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-            <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-navy)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>Democratic National Committee</p>
-            <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+            <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-cs-heading)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>Democratic National Committee</p>
+            <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
               Campaign Design
             </h1>
-            <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
+            <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
               Digital design for Biden-Harris and Democratic party initiatives. Turned around 18 same-day assets during an active presidential campaign; posts hit 5,500+ likes.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'Visual Design Intern' },
                 { label: 'Duration', value: 'Jun – Sep 2023' },
@@ -297,7 +303,7 @@ export default function DNCPage() {
               ].map(({ label, value }) => (
                 <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
                   <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
-                  <p style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>{value}</p>
+                  <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', margin: 0, lineHeight: 1.4 }}>{value}</p>
                 </div>
               ))}
             </div>
@@ -313,35 +319,31 @@ export default function DNCPage() {
         {/* ── Introduction ── */}
         <Section id="dnc-intro">
           <SectionHeading index={1} chapter="Introduction" heading="" />
-          <SubHeading tag="OVERVIEW">Mobilization team at the Democratic National Committee (DNC)</SubHeading>
+          <SubHeading>Mobilization team at the Democratic National Committee (DNC)</SubHeading>
           <BodyText>I joined the Mobilization team at the DNC as the Visual Design intern. The DNC acts as the in-house design agency for the DNC initiatives supporting both the Biden-Harris administration and the Democratic platform as well. I managed requests for both simultaneously and even had same-day deadlines.</BodyText>
           <div style={{ borderLeft: '2px solid rgba(var(--color-navy-rgb),0.2)', paddingLeft: 16, marginBottom: 32 }}>
-            <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>
-              <span className="font-semibold text-navy">Context: </span>The Biden-Harris branding system was in midst of a transition when I joined.
+            <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>
+              <span className="font-semibold text-[var(--color-cs-heading)]">Context: </span>The Biden-Harris branding system was in midst of a transition when I joined.
             </p>
           </div>
-          <figure style={{ marginTop: 48 }}>
-            <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
-              <img src={img('democratic-national-committee-05-EPOpQr.png')} alt="Biden-Harris 2024 branding" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
-            </div>
-            <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>This is the new branding for the Biden-Harris 2024 campaign. It was characterized by handwritten elements, gradients, and brighter blues and reds.</figcaption>
+          <figure style={{ marginTop: 86 }}>
+            <img src={img('democratic-national-committee-05-EPOpQr.png')} alt="Biden-Harris 2024 branding" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
+            <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>This is the new branding for the Biden-Harris 2024 campaign. It was characterized by handwritten elements, gradients, and brighter blues and reds.</figcaption>
           </figure>
         </Section>
 
         {/* ── Context ── */}
         <Section id="dnc-context">
           <SectionHeading index={2} chapter="Context" heading="" />
-          <SubHeading tag="WORKFLOW">The journey of a design ticket request</SubHeading>
+          <SubHeading>The journey of a design ticket request</SubHeading>
 
           <BodyText>The workload at the DNC changed all the time. Some days a protest would break out and I had to drop everything to design something that same day. Other times I got assignments with a week or two of notice. My schedule never looked the same week to week, but I learned to adapt fast.</BodyText>
           <BodyText>No matter the timeline, every request followed the same path. Here is how a typical ticket moved from brief to handoff.</BodyText>
 
-          <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
-            <img src={img('democratic-national-committee-06-S5fGOr.png')} alt="Design ticket workflow" style={{ width: '100%', height: 'auto', display: 'block' }} />
-          </div>
-          <p className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Every graphic went through the same six steps: brief, draft, feedback, revisions, verification, and handoff. *Even in same-day design requests</p>
+          <img src={img('democratic-national-committee-06-S5fGOr.png')} alt="Design ticket workflow" style={{ width: '100%', height: 'auto', display: 'block', marginTop: 86 }} />
+          <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Every graphic went through the same six steps: brief, draft, feedback, revisions, verification, and handoff. *Even in same-day design requests</p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginTop: 48 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginTop: 86 }}>
             <div>
               <SubHeading>The Challenge</SubHeading>
               <BodyText>Design requests came in on a daily basis. The brand was mid-transition, so I had to balance that while still delivering high quality work.</BodyText>
@@ -349,12 +351,12 @@ export default function DNCPage() {
               <BodyText>The process was exciting yet I had to keep tabs on myself and be considerate of the constraints.</BodyText>
             </div>
             <figure style={{ margin: 0 }}>
-              <img src={img('democratic-national-committee-07-VCrcQ3.gif')} alt="Balance — mentality throughout design requests" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>This was my mentality throughout the design requests</figcaption>
+              <img src={img('democratic-national-committee-07-VCrcQ3.gif')} alt="Balance — mentality throughout design requests" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
+              <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>This was my mentality throughout the design requests</figcaption>
             </figure>
           </div>
 
-          <div style={{ marginTop: 48 }}>
+          <div style={{ marginTop: 86 }}>
             <ChallengeBanner
               label="Challenge"
               question="How might I balance brand consistency, accessibility, and quality to create effective, inclusive designs?"
@@ -365,7 +367,7 @@ export default function DNCPage() {
         {/* ── Audience ── */}
         <Section id="dnc-audience">
           <SectionHeading index={3} chapter="Audience" heading="" />
-          <SubHeading tag="AUDIENCE">Who I Designed For</SubHeading>
+          <SubHeading>Who I Designed For</SubHeading>
 
           <BodyText>As I did my design requests, I kept two distinct perspectives in mind while designing.</BodyText>
 
@@ -388,31 +390,30 @@ export default function DNCPage() {
                 needs: ['Trust the brand work is done', 'Have time to give real feedback', 'Get a design that is almost ready to go'],
               },
             ].map(({ type, name, location, role, avatar, needs }) => (
-              <div key={name} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
+              <div key={name} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 20 }}>
                   <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.15)', flexShrink: 0 }}>
                     <img src={avatar} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                   </div>
                   <div>
-                    <span className="font-sans font-semibold" style={{ fontSize: 11, color: 'var(--color-secondary)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{type}</span>
-                    <h4 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 20, margin: '2px 0 4px' }}>{name}</h4>
-                    <div style={{ display: 'flex', gap: 12 }}>
-                      <span className="font-sans" style={{ fontSize: 13, color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <span className="font-landing-body font-semibold" style={{ fontSize: 11, color: 'var(--color-secondary)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>{type}</span>
+                    <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 20, margin: '2px 0 4px' }}>{name}</h4>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                      <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
                         <MapPin size={12} weight="bold" /> {location}
                       </span>
-                      <span className="font-sans" style={{ fontSize: 13, color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
                         <Briefcase size={12} weight="bold" /> {role}
                       </span>
                     </div>
                   </div>
                 </div>
-                <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.12)', marginBottom: 16 }} />
-                <p className="font-sans font-bold text-navy" style={{ fontSize: 13, marginBottom: 10 }}>Needs:</p>
+                <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, marginBottom: 10 }}>Needs:</p>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {needs.map(n => (
                     <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <span className="text-navy font-bold shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>
-                      <span className="font-sans" style={{ fontSize: 14, color: 'var(--color-secondary)', lineHeight: 1.5 }}>{n}</span>
+                      <span className="text-[var(--color-cs-heading)] font-bold shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>
+                      <span className="font-landing-body" style={{ fontSize: 14, color: 'var(--color-secondary)', lineHeight: 1.5 }}>{n}</span>
                     </li>
                   ))}
                 </ul>
@@ -427,42 +428,42 @@ export default function DNCPage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginTop: 8 }}>
             <div>
-              <SubHeading tag="FEATURED WORK">Kamala Anniversary Graphic</SubHeading>
+              <SubHeading>Kamala Anniversary Graphic</SubHeading>
               <BodyText>Kamala Harris is someone who inspires me. When the Vice President was about to hit a milestone anniversary in office, the request came in last minute for an Instagram post.</BodyText>
               <BodyText>I had worked on many graphics by this point, but this one stood out because of how many things I had to balance at once. The timeline was tight, but the stakes felt high. This was a memorable event, and a lot of people were going to see it.</BodyText>
               <BodyText>Here is how the Kamala anniversary graphic came together.</BodyText>
             </div>
             <figure style={{ margin: 0 }}>
-              <img src={img('democratic-national-committee-10-5DfmYK.png')} alt="VP Kamala Harris reference photo" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <img src={img('democratic-national-committee-10-5DfmYK.png')} alt="VP Kamala Harris reference photo" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
             </figure>
           </div>
 
-          <div style={{ marginTop: 48 }}>
+          <div style={{ marginTop: 86 }}>
             <IterationExplorer />
           </div>
 
-          <div className="cs-after-interactive" style={{ marginTop: 48 }}>
-            <SubHeading tag="FEEDBACK">What the team said</SubHeading>
+          <div className="cs-after-interactive" style={{ marginTop: 86 }}>
+            <SubHeading>What the team said</SubHeading>
             <BodyText>One of my favorite parts about design is the iterative process and the discussions centered on layout, feeling, and more. Not everyone agreed on the same thing, but that is alright. Some wanted a different photo. Some wanted a cleaner layout. At the end of the day, they helped me consider aspects of the designs I hadn't thought about.</BodyText>
             <div style={{ borderLeft: '2px solid rgba(var(--color-navy-rgb),0.2)', paddingLeft: 16, marginBottom: 32 }}>
-              <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>
+              <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>
                 <strong>Takeaway:</strong> I had to narrow in on the solution, so I focused on what made the most sense for the graphic and took that in with the iterations.
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
               {[
-                { quote: 'I still liked the other photo better. It felt more genuine.', role: 'Ad Strategist', icon: <Megaphone size={20} weight="thin" color="var(--color-navy)" /> },
-                { quote: 'The colors feel much more celebratory now.', role: 'Graphic Designer', icon: <PaintBrush size={20} weight="thin" color="var(--color-navy)" /> },
-                { quote: 'Nice speed. Just send it over sooner so we have more breathing room.', role: 'Design Director', icon: <Briefcase size={20} weight="thin" color="var(--color-navy)" /> },
+                { quote: 'I still liked the other photo better. It felt more genuine.', role: 'Ad Strategist', icon: <Megaphone size={20} weight="thin" color="var(--color-cs-heading)" /> },
+                { quote: 'The colors feel much more celebratory now.', role: 'Graphic Designer', icon: <PaintBrush size={20} weight="thin" color="var(--color-cs-heading)" /> },
+                { quote: 'Nice speed. Just send it over sooner so we have more breathing room.', role: 'Design Director', icon: <Briefcase size={20} weight="thin" color="var(--color-cs-heading)" /> },
               ].map(({ quote, role, icon }) => (
                 <div key={quote} className="cs-info-box" style={{ padding: 20 }}>
                   <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
                     {icon}
                   </div>
-                  <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 11, color: 'var(--color-navy)', margin: '0 0 8px' }}>{role}</p>
+                  <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 11, color: 'var(--color-cs-heading)', margin: '0 0 8px' }}>{role}</p>
                   <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
                     <span style={{ fontFamily: 'var(--font-display)', fontSize: 40, color: 'rgba(var(--color-navy-rgb),0.15)', lineHeight: 1, flexShrink: 0 }}>"</span>
-                    <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0, fontStyle: 'italic' }}>{quote}</p>
+                    <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0, fontStyle: 'italic' }}>{quote}</p>
                   </div>
                 </div>
               ))}
@@ -475,29 +476,30 @@ export default function DNCPage() {
         <Section id="dnc-solution">
           <SectionHeading index={5} chapter="Final Design" heading="" />
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
-            <p className="font-sans" style={{ fontSize: 15, color: 'var(--color-secondary)', lineHeight: 1.7, margin: '0 0 4px' }}>The final graphic went live on Instagram for the Vice President's anniversary milestone.</p>
-            {[
-              { tag: 'ACCESSIBILITY', heading: 'Color Contrast Check', body: 'Contrast ratio 14.59 — passes WCAG AAA.' },
-              { tag: 'RATIONALE', heading: 'Why this design won', body: 'The layout is clear, the tone is celebratory and professional, and it meets accessibility standards.' },
-              { tag: 'PHOTO CHOICE', heading: 'Why this photo', body: 'Warm, professional, and celebratory — this image matched the energy of the milestone.' },
-            ].map(({ tag, heading, body }) => (
-              <div key={tag} className="cs-card-box" style={{ padding: 16 }}>
-                <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 10, color: 'var(--color-navy)', margin: '0 0 6px' }}>{tag}</p>
-                <p className="font-sans font-bold text-navy" style={{ fontSize: 14, margin: '0 0 4px' }}>{heading}</p>
-                <p className="font-sans" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{body}</p>
-              </div>
-            ))}
-          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', lineHeight: 1.7, margin: '0 0 4px' }}>The final graphic went live on Instagram for the Vice President's anniversary milestone.</p>
+              {[
+                { heading: 'Color Contrast Check', body: 'Contrast ratio 14.59, passes WCAG AAA.' },
+                { heading: 'Why this design won', body: 'The layout is clear, the tone is celebratory and professional, and it meets accessibility standards.' },
+                { heading: 'Why this photo', body: 'Warm, professional, and celebratory: this image matched the energy of the milestone.' },
+              ].map(({ heading, body }) => (
+                <div key={heading} className="cs-card-box" style={{ padding: 16 }}>
+                  <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 4px' }}>{heading}</p>
+                  <p className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{body}</p>
+                </div>
+              ))}
+            </div>
 
-          <img src={img('dnc-iter-final.png')} alt="Final VP Anniversary graphic" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain', objectPosition: 'top', display: 'block' }} />
+            <img src={img('dnc-iter-final.png')} alt="Final VP Anniversary graphic" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain', objectPosition: 'top', display: 'block' }} />
+          </div>
 
         </Section>
 
         {/* ── Collection of Work ── */}
         <Section id="dnc-collection">
           <SectionHeading index={6} chapter="Collection of Work" heading="" />
-          <SubHeading tag="COLLECTION">Here are some of the digital assets I made!</SubHeading>
+          <SubHeading>Here are some of the digital assets I made!</SubHeading>
           <CollectionGallery />
         </Section>
 
@@ -505,8 +507,8 @@ export default function DNCPage() {
         {/* ── Impact ── */}
         <Section id="dnc-impact">
           <SectionHeading index={7} chapter="Impact" heading="" />
-          <SubHeading tag="IMPACT">Results</SubHeading>
-          <BodyText>Being part of the Mobilization team at the DNC pushed my visual design skills. I got to learn quickly on my feet, consider multiple perspectives, and think about the real-world reach of my work. I also got to practice my interest in accessibility — I advocated for it regularly, shared WCAG checking tools with my team, caught a few issues along the way, and the team started paying more attention to it because of it.</BodyText>
+          <SubHeading>Results</SubHeading>
+          <BodyText>Being part of the Mobilization team at the DNC pushed my visual design skills. I got to learn quickly on my feet, consider multiple perspectives, and think about the real-world reach of my work. I also got to practice my interest in accessibility. I advocated for it regularly, shared WCAG checking tools with my team, caught a few issues along the way, and the team started paying more attention to it because of it.</BodyText>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 24 }}>
             {[
@@ -515,9 +517,9 @@ export default function DNCPage() {
               { label: 'ACROSS INSTAGRAM AND TIKTOK', stat: '5,500 likes\n600 shares', body: 'People saw and responded to the work I made.' },
             ].map(({ label, stat, body }) => (
               <div key={label} className="cs-card-box" style={{ padding: 20 }}>
-                <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 10, color: 'var(--color-secondary)', margin: '0 0 8px' }}>{label}</p>
-                <p className="font-bold text-navy" style={{ fontFamily: 'var(--font-display)', fontSize: 28, margin: '0 0 8px', lineHeight: 1.2, whiteSpace: 'pre-line' }}>{stat}</p>
-                <p className="font-sans" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{body}</p>
+                <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: '0 0 8px' }}>{label}</p>
+                <p className="cs-stat-number" style={{ fontSize: 28, margin: '0 0 8px', lineHeight: 1.2, whiteSpace: 'pre-line' }}>{stat}</p>
+                <p className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{body}</p>
               </div>
             ))}
           </div>
@@ -526,25 +528,25 @@ export default function DNCPage() {
         <Section id="dnc-reflection">
           <SectionHeading index={8} chapter="Reflection" heading="" />
 
-          <SubHeading tag="TAKEAWAYS">What I'd carry forward from a summer in D.C.</SubHeading>
+          <SubHeading>What I'd carry forward from a summer in D.C.</SubHeading>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignItems: 'start', marginTop: -8 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
-                { heading: 'Design communicates', body: 'Every choice — photo, color, layout — tells people how to feel. I learned to be intentional even under pressure, because nothing is neutral.' },
+                { heading: 'Design communicates', body: 'Every choice, whether photo, color, or layout, tells people how to feel. I learned to be intentional even under pressure, because nothing is neutral.' },
                 { heading: 'Speed and quality coexist', body: 'Same-day turnarounds taught me to work faster without sacrificing accessibility or brand integrity. Constraints sharpen your thinking.' },
                 { heading: 'Gratitude', body: 'I am grateful to the Mobilization team for trusting me with real work and for creating the kind of environment where I could grow quickly.' },
               ].map(({ heading, body }) => (
                 <div key={heading} className="cs-info-box" style={{ padding: 14 }}>
-                  <p className="font-sans font-bold text-navy" style={{ fontSize: 15, margin: '0 0 10px' }}>{heading}</p>
-                  <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+                  <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px' }}>{heading}</p>
+                  <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
                 </div>
               ))}
             </div>
 
             <figure style={{ margin: 0 }}>
-              <img src={img('democratic-national-committee-18-clohhk.jpg')} alt="DC Metro" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Snippet of my morning commute! DC Metro is so cool</figcaption>
+              <img src={img('democratic-national-committee-18-clohhk.jpg')} alt="DC Metro" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
+              <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Snippet of my morning commute! DC Metro is so cool</figcaption>
             </figure>
           </div>
         </Section>
@@ -554,15 +556,17 @@ export default function DNCPage() {
       <NextProject
         title="Expert.ai"
         to="/work/expert-ai"
+        tags={["Enterprise", "Accessibility", "Product Design Intern"]}
         description="Redesigned filtering for an AI text analysis platform, improving accessibility."
         video="/videos/expert.ai-Video.webm"
         poster="/videos/expert.ai-Video-poster.png"
         restTime={4}
-        mediaPadding={24}
+        mediaPadding={16}
+        objectFit="contain"
         category="accessibility"
+        bgColor="#c4ecff"
       />
 
-      <Footer />
     </div>
   )
 }

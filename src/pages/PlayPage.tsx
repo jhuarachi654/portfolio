@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from "react"
 import { createPortal } from "react-dom"
-import { X } from "@phosphor-icons/react"
+import { X, MagicWand } from "@phosphor-icons/react"
 import CaseStudyCard from "../components/CaseStudyCard"
 import InfiniteGrid from "../components/InfiniteGrid"
 import Footer from "../components/Footer"
@@ -91,31 +91,6 @@ function InteractiveModal({ open, onClose, children }: {
   )
 }
 
-// ── Popple video (seeks to 8.79s on hover) ───────────────────────────────────
-function PoppleVideo() {
-  const ref = useRef<HTMLVideoElement>(null)
-  const onEnter = () => {
-    const vid = ref.current; if (!vid) return
-    vid.currentTime = 8.79
-    vid.play().catch(() => {})
-  }
-  const onLeave = () => {
-    const vid = ref.current; if (!vid) return
-    vid.pause(); vid.currentTime = 8.79
-  }
-  return (
-    <div style={{ width: "100%", height: "100%", overflow: "hidden" }} onMouseEnter={onEnter} onMouseLeave={onLeave}>
-      <video
-        ref={ref}
-        src="/videos/Popple-Video.webm"
-        poster="/videos/Popple-Video-poster.png"
-        muted loop playsInline preload="auto"
-        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-      />
-    </div>
-  )
-}
-
 // ── Koi Pond iframe (loads immediately when modal opens) ──────────────────────
 function KoiPondEmbed() {
   const [interacted, setInteracted] = useState(false)
@@ -177,13 +152,13 @@ export default function PlayPage() {
 
   return (
     <>
-      <div className="play-page">
+      <div className="play-page footer-curtain">
         <div className="play-header">
-          <p className="play-eyebrow" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>Play</p>
-          <h1 className="play-headline" data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>Fun side projects, explorations, and more.</h1>
+          <h1 className="play-headline" data-reveal style={{ "--reveal-delay": "80ms", display: "flex", alignItems: "center", gap: 4 } as React.CSSProperties}><span>Side Works</span><MagicWand size={32} weight="thin" /></h1>
+          <p className="play-body" data-reveal style={{ "--reveal-delay": "140ms" } as React.CSSProperties}>A collection of my experiments and work in code, motion, branding, and more…</p>
         </div>
 
-        <div className="play-card-grid line-grid">
+        <div className="play-card-grid">
 
           {/* Photography — full width, opens modal */}
           <div style={{ gridColumn: "1 / -1" }}>
@@ -194,51 +169,48 @@ export default function PlayPage() {
                   <InfiniteGrid srcs={PHOTO_SRCS} itemSize={110} gap={6} maxSpeed={120} magnify={0.2} radius={160} />
                 </div>
                 <div className="case-study-card-body">
-                  <div className="case-study-card-header">
-                    <h3 className="case-study-card-title">Photography</h3>
-                    <div className="case-study-card-tags">
-                      {["Personal Project", "Photography", "Interactive"].map(t => (
-                        <span key={t} className="case-study-card-tag">{t}</span>
-                      ))}
-                    </div>
-                  </div>
+                  <h3 className="case-study-card-title">Photography</h3>
                   <p className="case-study-card-description">An interactive medium for exploring film photography through motion and space. Click to explore.</p>
+                  <div className="case-study-card-tags">
+                    {["Photography", "Interactive"].map(t => (
+                      <span key={t} className="case-study-card-tag">{t}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Popple */}
-          <a href="https://popple.pages.dev/" target="_blank" rel="noopener noreferrer" className="case-study-card-wrapper" style={{ display: "block", textDecoration: "none" }}>
-            <div className="case-study-card">
-              <div className="case-study-card-media aspect-4-3" style={{ position: "relative", overflow: "hidden" }}>
-                <PoppleVideo />
-              </div>
-              <div className="case-study-card-body">
-                <div className="case-study-card-header">
-                  <h3 className="case-study-card-title">Popple</h3>
-                  <div className="case-study-card-tags">
-                    {["Personal Project", "AI", "Design Engineering"].map(t => (
-                      <span key={t} className="case-study-card-tag">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <p className="case-study-card-description">Designed an app that makes completed tasks tangible and collectible.</p>
-              </div>
-            </div>
-          </a>
-
-          {/* Focus Notification */}
+          {/* Popple — same CaseStudyCard config as the Home page entry */}
           <CaseStudyCard
-            title="Focus Notification"
-            tags={["Personal Project", "Motion Design"]}
-            image="/images/play/play-07-4oxDlE.png"
-            lottie="/animations/focus-notification.json"
+            title="Popple"
+            tags={["AI", "Design Engineering"]}
+            image="/videos/Popple-Video-poster.png"
+            video="/videos/Popple-Video.webm"
+            bgLottie="/videos/Popple-Background.json"
+            href="https://popple.pages.dev/"
+            description="Designed an app that makes completed tasks tangible and collectible."
+            aspectRatio="4/3"
+            bgColor="linear-gradient(135deg, #d9d3f0, #c7c9d6)"
+            objectFit="cover"
+            dotField
+            dotLayout={2}
+            lottieStartTime={8.79}
+            cursorLabel="Open live site"
+          />
+
+          {/* Canopy Animation */}
+          <CaseStudyCard
+            title="Canopy Animation"
+            tags={["Motion Design"]}
+            image="/images/play/canopy-animation-poster.png"
+            video="/videos/Canopy-Animation.webm"
             href="#"
             description="A notification animation for a Focus Session, designed for Canopy."
             aspectRatio="4/3"
             bgColor="#f5f7fc"
-            cursorLabel="Lottie animation made in Jitter"
+            mediaScale={1}
+            cursorLabel="Video made in Jitter"
           />
 
           {/* Koi Pond — full width, opens modal */}
@@ -256,15 +228,13 @@ export default function PlayPage() {
                   />
                 </div>
                 <div className="case-study-card-body">
-                  <div className="case-study-card-header">
-                    <h3 className="case-study-card-title">Koi Pond</h3>
-                    <div className="case-study-card-tags">
-                      {["Personal Project", "Figma Draw", "Vanilla JS"].map(t => (
-                        <span key={t} className="case-study-card-tag">{t}</span>
-                      ))}
-                    </div>
-                  </div>
+                  <h3 className="case-study-card-title">Koi Pond</h3>
                   <p className="case-study-card-description">An interactive koi pond with draggable lily pads, ripple physics, and dragonflies — every element hand-drawn in Figma Draw. Click to dive in.</p>
+                  <div className="case-study-card-tags">
+                    {["Figma Draw", "Vanilla JS"].map(t => (
+                      <span key={t} className="case-study-card-tag">{t}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useToc } from '../contexts/CaseStudyTocContext'
 
 export default function CaseStudySidebar() {
-  const { sections } = useToc()
+  const { sections, title } = useToc()
   const [activeId, setActiveId] = useState<string>('')
 
   useEffect(() => {
@@ -31,13 +31,13 @@ export default function CaseStudySidebar() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
-    <aside className="sidebar">
+    <aside className="case-study-sidebar">
 
       {/* ── Top: back to home ── */}
       <div>
         <Link
           to="/"
-          className="nav-link"
+          className="case-study-sidebar-home"
         >
           <span>← Home</span>
         </Link>
@@ -45,21 +45,22 @@ export default function CaseStudySidebar() {
 
       {/* ── Middle: table of contents ── */}
       <nav className="flex-1 flex flex-col gap-4">
-        <p
-          className="font-sans font-semibold tracking-[0.14em] uppercase px-2"
-          style={{ fontSize: '10px', color: 'var(--color-secondary)', opacity: 0.6 }}
-        >
-          Table of Contents
-        </p>
-
-        <ul className="flex flex-col gap-1 list-none m-0 p-0">
+        {title && (
+          <p
+            className="case-study-sidebar-title"
+            style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 18, fontWeight: 600, color: 'var(--color-cs-heading)', margin: '0 0 4px', padding: '0 12px' }}
+          >
+            {title}
+          </p>
+        )}
+        <ul className="case-study-toc-list flex flex-col gap-1 list-none m-0 p-0">
           {sections.map(({ id, label }, i) => {
             const isActive = activeId === id
             return (
               <li key={id}>
                 <a
                   href={`#${id}`}
-                  className={`nav-link${isActive ? ' active' : ''}`}
+                  className={`case-study-toc-link${isActive ? ' active' : ''}`}
                   onClick={e => {
                     e.preventDefault()
                     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -77,7 +78,7 @@ export default function CaseStudySidebar() {
       <div>
         <button
           onClick={scrollToTop}
-          className="nav-link bg-transparent border-0 cursor-pointer p-0"
+          className="case-study-sidebar-home bg-transparent border-0 cursor-pointer p-0"
           style={{ width: 'fit-content' }}
         >
           <span>↑ Back to top</span>

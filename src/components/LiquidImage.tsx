@@ -23,6 +23,7 @@ const FRAG = `
   uniform float u_power;
   uniform float u_radius;
   uniform float u_time;
+  uniform float u_aspect;
   varying vec2 v_uv;
 
   float hash(vec2 p) {
@@ -41,19 +42,29 @@ const FRAG = `
   void main() {
     vec2 uv = v_uv;
     vec2 diff = uv - u_mouse;
-    float dist = length(diff);
+    // correct for the canvas's on-screen aspect ratio so the ripple is a
+    // true circle around the cursor instead of a stretched ellipse
+    vec2 diffScreen = diff;
+    diffScreen.x *= u_aspect;
+    float dist = length(diffScreen);
     float mask = smoothstep(u_radius, 0.0, dist);
-    float n = noise(uv * 6.0 + u_time * 0.4) * 2.0 - 1.0;
-    vec2 disp = normalize(diff + 0.001) * n * mask * u_power * 0.04;
+    float n1 = noise(uv * 6.0 + u_time * 0.35) * 2.0 - 1.0;
+    float n2 = noise(uv * 13.0 - u_time * 0.55 + 4.2) * 2.0 - 1.0;
+    float n = n1 * 0.7 + n2 * 0.3;
+    vec2 flow = vec2(
+      noise(uv * 5.0 + u_time * 0.2) - 0.5,
+      noise(uv * 5.0 - u_time * 0.2 + 9.1) - 0.5
+    );
+    vec2 disp = (normalize(diff + 0.001) * n + flow * 0.6) * mask * u_power * 0.05;
     gl_FragColor = texture2D(u_tex, uv + disp);
   }
 `
 
 export default function LiquidImage({ src, alt, style }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const mouseRef  = useRef({ x: 0.5, y: 0.5 })
   const targetRef = useRef({ x: 0.5, y: 0.5 })
   const powerRef  = useRef(0)
+  const targetPowerRef = useRef(0)
   const rafRef    = useRef(0)
 
   useEffect(() => {
@@ -90,6 +101,7 @@ export default function LiquidImage({ src, alt, style }: Props) {
     const uPower  = gl.getUniformLocation(prog, "u_power")
     const uRadius = gl.getUniformLocation(prog, "u_radius")
     const uTime   = gl.getUniformLocation(prog, "u_time")
+    const uAspect = gl.getUniformLocation(prog, "u_aspect")
 
     const tex = gl.createTexture()
     gl.bindTexture(gl.TEXTURE_2D, tex)
@@ -109,15 +121,19 @@ export default function LiquidImage({ src, alt, style }: Props) {
         if (!start) start = now
         const t = (now - start) / 1000
 
-        // spring toward target
-        mouseRef.current.x += (targetRef.current.x - mouseRef.current.x) * 0.08
-        mouseRef.current.y += (targetRef.current.y - mouseRef.current.y) * 0.08
+        // ease ripple intensity in/out instead of snapping, so it builds up
+        // and settles like real water rather than toggling on contact
+        // (position itself tracks the cursor directly — no lag — only the
+        // intensity is eased, so the ripple always sits under the cursor)
+        powerRef.current += (targetPowerRef.current - powerRef.current) * 0.05
 
         gl.viewport(0, 0, canvas.width, canvas.height)
-        gl.uniform2f(uMouse, mouseRef.current.x, mouseRef.current.y)
+        gl.uniform2f(uMouse, targetRef.current.x, targetRef.current.y)
         gl.uniform1f(uPower, powerRef.current)
-        gl.uniform1f(uRadius, 0.35)
+        gl.uniform1f(uRadius, 0.5)
         gl.uniform1f(uTime, t)
+        const rect = canvas.getBoundingClientRect()
+        gl.uniform1f(uAspect, rect.width / rect.height)
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
         rafRef.current = requestAnimationFrame(render)
@@ -133,11 +149,11 @@ export default function LiquidImage({ src, alt, style }: Props) {
     const r = canvasRef.current!.getBoundingClientRect()
     targetRef.current = {
       x: (e.clientX - r.left) / r.width,
-      y: 1 - (e.clientY - r.top) / r.height,
+      y: (e.clientY - r.top) / r.height,
     }
-    powerRef.current = 0.6
+    targetPowerRef.current = 0.6
   }
-  const onMouseLeave = () => { powerRef.current = 0 }
+  const onMouseLeave = () => { targetPowerRef.current = 0 }
 
   return (
     <canvas

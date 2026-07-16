@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
 import { Brain, Ghost, BookOpen, MapPin, Briefcase, User, ChartBar, Stack, Bell, Robot, AirTrafficControl } from '@phosphor-icons/react'
-import Footer from '../../components/Footer'
 import SectionHeading from '../../components/case-study/SectionHeading'
 import ImageFigure from '../../components/case-study/ImageFigure'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
@@ -30,7 +29,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
     <section
       id={id}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
-      style={{ marginTop: 48 }}
+      style={{ marginTop: 256 }}
     >
       {children}
     </section>
@@ -43,7 +42,7 @@ function Prose({ children, className = '' }: { children: React.ReactNode; classN
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
+    <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
       {children}
     </p>
   )
@@ -53,9 +52,9 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
   return (
     <div>
       {tag && (
-        <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
+        <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[22px] font-bold text-navy-dark leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 24, marginTop: 0 }}>
+      <h3 className="text-[22px] font-bold text-[var(--color-cs-heading)] leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -64,7 +63,7 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
 
 function Label({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-sans text-[10px] font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ marginBottom: 8 }}>
+    <p className="font-landing-body text-[10px] font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ marginBottom: 8 }}>
       {children}
     </p>
   )
@@ -80,7 +79,7 @@ function PersonaCard({
 }) {
   return (
     <div>
-      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
+      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
         {/* Avatar */}
         <div style={{
           width: 80, height: 80, borderRadius: '50%',
@@ -92,33 +91,31 @@ function PersonaCard({
         </div>
 
         {/* Name */}
-        <h4 className="font-bold text-navy-dark text-center" style={{ fontFamily: 'var(--font-display)', fontSize: 20, margin: '0 0 12px' }}>{name}</h4>
+        <h4 className="font-semibold text-[var(--color-cs-heading)] text-center" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 20, margin: '0 0 12px' }}>{name}</h4>
 
         {/* Age + Location + Experience — single row */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, marginBottom: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <User size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
-            <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{age}</span>
+            <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{age}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <MapPin size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
-            <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{location}</span>
+            <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{location}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <Briefcase size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
-            <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{experience}</span>
+            <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{experience}</span>
           </div>
         </div>
 
-        <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.12)', marginBottom: 16 }} />
-
         {/* Needs */}
-        <p className="font-sans font-bold text-navy" style={{ fontSize: 14, marginBottom: 12 }}>Needs:</p>
+        <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, marginBottom: 12 }}>Needs:</p>
         <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
           {needs.map(n => (
             <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <span className="font-sans text-navy/40 shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>—</span>
-              <span className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', lineHeight: 1.5 }}>{n}</span>
+              <span className="font-bold text-[var(--color-cs-heading)] shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>
+              <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', lineHeight: 1.5 }}>{n}</span>
             </li>
           ))}
         </ul>
@@ -136,20 +133,20 @@ function ComparisonCard({
   title: string; pros: string; cons: string; verdict?: string
 }) {
   return (
-    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
-      <h4 className="text-[15px] font-bold text-navy-dark mb-4" style={{ fontFamily: 'var(--font-display)' }}>{title}</h4>
+    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
+      <h4 className="text-[15px] font-semibold text-[var(--color-cs-heading)] mb-4" style={{ fontFamily: 'var(--font-landing-heading)' }}>{title}</h4>
       <div className="space-y-3">
         <div className="flex gap-2">
-          <span className="font-bold text-navy text-[16px] leading-none mt-0.5 shrink-0">+</span>
-          <p className="font-sans text-navy/70 leading-relaxed" style={{ fontSize: 12 }}>{pros}</p>
+          <span className="font-bold text-[var(--color-cs-heading)] text-[16px] leading-none mt-0.5 shrink-0">+</span>
+          <p className="font-landing-body text-[var(--color-cs-heading)]/70 leading-relaxed" style={{ fontSize: 12 }}>{pros}</p>
         </div>
         <div className="flex gap-2">
-          <span className="font-bold text-navy/30 text-[16px] leading-none mt-0.5 shrink-0">−</span>
-          <p className="font-sans text-navy/70 leading-relaxed" style={{ fontSize: 12 }}>{cons}</p>
+          <span className="font-bold text-[var(--color-cs-heading)]/30 text-[16px] leading-none mt-0.5 shrink-0">−</span>
+          <p className="font-landing-body text-[var(--color-cs-heading)]/70 leading-relaxed" style={{ fontSize: 12 }}>{cons}</p>
         </div>
       </div>
       {verdict && (
-        <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50 mt-4 pt-4 border-t border-navy/10" style={{ fontSize: 12 }}>
+        <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50 mt-4 pt-4 border-t border-navy/10" style={{ fontSize: 12 }}>
           ✓ {verdict}
         </p>
       )}
@@ -167,22 +164,21 @@ function SolutionBlock({
 }) {
   const num = String(index).padStart(2, '0')
   return (
-    <div style={{ marginTop: index === 1 ? 40 : 64 }}>
-      {index > 1 && <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', marginBottom: 64 }} />}
+    <div style={{ marginTop: 86 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
         {/* Left: text + impact */}
         <div>
-          <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>{num}. {heading}</h3>
-          <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 24 }}>{body}</p>
-          <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', paddingTop: 16, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-            <span className="text-navy font-bold" style={{ fontSize: 16, flexShrink: 0 }}>→</span>
-            <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>
-              <strong className="text-navy">User Impact: </strong>{impact}
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>{num}. {heading}</h3>
+          <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 24 }}>{body}</p>
+          <div style={{ paddingTop: 16, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+            <span className="text-[var(--color-cs-heading)] font-bold" style={{ fontSize: 16, flexShrink: 0, lineHeight: 1.3 }}>→</span>
+            <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>
+              <strong className="text-[var(--color-cs-heading)]">User Impact: </strong>{impact}
             </p>
           </div>
         </div>
         {/* Right: image */}
-        <img src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
+        <img src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
       </div>
     </div>
   )
@@ -194,19 +190,19 @@ function FeedbackRow({ feedback, response }: { feedback: string; response: strin
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 16 }}>
       {/* Stakeholder feedback card */}
-      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
+      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-          <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-navy)', flexShrink: 0 }}>
+          <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-cs-heading)', flexShrink: 0 }}>
             <AirTrafficControl size={18} weight="light" />
           </div>
-          <h4 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 16, margin: 0 }}>Stakeholder</h4>
+          <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, margin: 0 }}>Stakeholder</h4>
         </div>
-        <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{feedback}</p>
+        <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{feedback}</p>
       </div>
       {/* My response card */}
-      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
-        <h4 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 16, margin: '0 0 16px' }}>My Response</h4>
-        <p className="font-sans" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{response}</p>
+      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
+        <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, margin: '0 0 16px' }}>My Response</h4>
+        <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{response}</p>
       </div>
     </div>
   )
@@ -257,7 +253,7 @@ const PERSONAS = [
     needs: [
       'To make price adjustments quickly without unnecessary steps',
       'Alerts that show what needs attention and filter out what does not',
-      'External market data pulled into the platform — no manual sourcing',
+      'External market data pulled into the platform, with no manual sourcing needed',
     ],
   },
 ]
@@ -281,16 +277,16 @@ function PersonaToggle({ className = '', style: styleProp }: { className?: strin
               style={{
                 textAlign: 'left',
                 padding: 16,
-                border: `1px solid ${isActive ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.2)'}`,
-                background: isActive ? 'rgba(var(--color-navy-rgb),0.1)' : 'transparent',
+                border: `1px solid ${isActive ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.2)'}`, borderRadius: 12,
+                background: 'transparent',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
               }}
             >
-              <p className="font-sans font-semibold text-navy" style={{ fontSize: 14, margin: '0 0 4px' }}>
+              <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 4px' }}>
                 {persona.type}
               </p>
-              <p className="font-sans text-[13px] italic cs-persona-desc" style={{ margin: 0 }}>
+              <p className="font-landing-body text-[13px] italic cs-persona-desc" style={{ margin: 0 }}>
                 {persona.description}
               </p>
             </button>
@@ -332,16 +328,15 @@ function MyMarketsExplorer() {
   const option = MARKET_OPTIONS[active]
 
   return (
-    <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 86 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
         {/* Left */}
         <div>
-          <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>Exploring Card Layout</p>
-          <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 16px' }}>
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
             My Markets
           </h3>
-          <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 32px' }}>
-            How might we display market cards so analysts can scan quickly without losing important context?
+          <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 32px' }}>
+            How might we <strong className="font-semibold text-[var(--color-cs-heading)]">display market cards so analysts can scan quickly</strong> without losing important context?
           </p>
           <div className="cs-option-btns" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             {MARKET_OPTIONS.map((o, i) => (
@@ -351,9 +346,9 @@ function MyMarketsExplorer() {
                 className="cs-tab-btn"
                 data-cursor-label="Open option"
                 style={{
-                  border: `1px solid ${i === active ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.2)'}`,
-                  background: i === active ? 'rgba(var(--color-navy-rgb),0.1)' : 'transparent',
-                  color: i === active ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.5)',
+                  border: `1px solid ${i === active ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.2)'}`, borderRadius: 12,
+                  background: 'transparent',
+                  color: i === active ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.5)',
                 }}
               >
                 {o.title}
@@ -371,19 +366,19 @@ function MyMarketsExplorer() {
             transition={{ duration: 0.25 }}
             style={{ marginBottom: 16 }}
           >
-            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
+            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
           </motion.div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100 }}>
             <div style={{ display: 'flex', gap: 10 }}>
-              <span className="font-bold text-navy" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>+</span>
-              <p className="font-sans" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
-                <strong className="text-navy">Pros:</strong> {option.pros}
+              <span className="font-bold text-[var(--color-cs-heading)]" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>+</span>
+              <p className="font-landing-body" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
+                <strong className="text-[var(--color-cs-heading)]">Pros:</strong> {option.pros}
               </p>
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
-              <span className="font-sans text-navy/30" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>−</span>
-              <p className="font-sans" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
-                <strong className="text-navy">Cons:</strong> {option.cons}
+              <span className="font-landing-body text-[var(--color-cs-heading)]/30" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>−</span>
+              <p className="font-landing-body" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
+                <strong className="text-[var(--color-cs-heading)]">Cons:</strong> {option.cons}
               </p>
             </div>
           </div>
@@ -404,7 +399,7 @@ const AI_OPTIONS = [
     title: 'Left Chat Panel',
     image: img('revenue-management-16-1hN5yG.png'),
     pros: 'Always visible.',
-    cons: 'Risked feeling intrusive — AI leading the experience.',
+    cons: 'Risked feeling intrusive, with AI leading the experience.',
   },
   {
     title: 'Right Chat Panel',
@@ -425,16 +420,15 @@ function AIPlacementExplorer() {
   const option = AI_OPTIONS[active]
 
   return (
-    <div className="cs-card-box" style={{ padding: 32, marginTop: 48 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 86 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
         {/* Left: context + 2x2 buttons */}
         <div>
-          <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>Exploring Placement</p>
-          <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 16px' }}>
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
             AI Assistant
           </h3>
-          <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 32px' }}>
-            "How might we offer AI help that's there when you need it and invisible when you don't?"
+          <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 32px' }}>
+            "How might we <strong className="font-semibold text-[var(--color-cs-heading)]">offer AI help</strong> that's there when you need it and invisible when you don't?"
           </p>
           <div className="cs-option-btns" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             {AI_OPTIONS.map((o, i) => (
@@ -444,9 +438,9 @@ function AIPlacementExplorer() {
                 className="cs-tab-btn"
                 data-cursor-label="Open option"
                 style={{
-                  border: `1px solid ${i === active ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.2)'}`,
-                  background: i === active ? 'rgba(var(--color-navy-rgb),0.1)' : 'transparent',
-                  color: i === active ? 'var(--color-navy)' : 'rgba(var(--color-navy-rgb),0.5)',
+                  border: `1px solid ${i === active ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.2)'}`, borderRadius: 12,
+                  background: 'transparent',
+                  color: i === active ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.5)',
                 }}
               >
                 {o.title}
@@ -464,20 +458,20 @@ function AIPlacementExplorer() {
             transition={{ duration: 0.25 }}
             style={{ marginBottom: 16 }}
           >
-            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
+            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
           </motion.div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100 }}>
             <div style={{ display: 'flex', gap: 10 }}>
-              <span className="font-bold text-navy" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>+</span>
-              <p className="font-sans" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
-                <strong className="text-navy">Pros:</strong> {option.pros}
+              <span className="font-bold text-[var(--color-cs-heading)]" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>+</span>
+              <p className="font-landing-body" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
+                <strong className="text-[var(--color-cs-heading)]">Pros:</strong> {option.pros}
               </p>
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
-              <span className="font-sans text-navy/30" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>−</span>
-              <p className="font-sans" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
-                <strong className="text-navy">Cons:</strong> {option.cons}
+              <span className="font-landing-body text-[var(--color-cs-heading)]/30" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>−</span>
+              <p className="font-landing-body" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
+                <strong className="text-[var(--color-cs-heading)]">Cons:</strong> {option.cons}
               </p>
             </div>
           </div>
@@ -516,7 +510,7 @@ function PolaroidDeck({ fullWidth = false }: { fullWidth?: boolean }) {
               alt={photo.caption}
               style={{ width: '100%', aspectRatio: '1/1.2', objectFit: 'cover', display: 'block' }}
             />
-            <p className="font-sans" style={{
+            <p className="font-landing-body" style={{
               textAlign: 'center',
               marginTop: 12,
               fontSize: 12,
@@ -567,7 +561,7 @@ function PolaroidDeck({ fullWidth = false }: { fullWidth?: boolean }) {
                 alt={photo.caption}
                 style={{ width: '100%', height: 224, objectFit: 'cover', display: 'block' }}
               />
-              <p className="font-sans" style={{
+              <p className="font-landing-body" style={{
                 textAlign: 'center',
                 marginTop: 12,
                 fontSize: 12,
@@ -624,9 +618,16 @@ function HeroLottie() {
   }
 
   return (
-    <div className="w-full overflow-hidden" style={{ position: 'relative' }}>
+    <div className="w-full h-full overflow-hidden" style={{ position: 'relative' }}>
       {data && (
-        <Lottie lottieRef={lottieRef} animationData={data} loop autoplay style={{ width: '100%', display: 'block' }} />
+        <Lottie
+          lottieRef={lottieRef}
+          animationData={data}
+          loop
+          autoplay
+          rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
+          style={{ width: '100%', height: '100%', display: 'block', transform: 'scale(1.1)' }}
+        />
       )}
       {data && <PlayPauseButton playing={playing} onToggle={handleToggle} />}
     </div>
@@ -636,7 +637,7 @@ function HeroLottie() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function RevenueManagementPage() {
-  useCaseToc(TOC)
+  useCaseToc(TOC, 'Revenue Management')
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
     <div className="min-h-screen cs-page">
@@ -645,8 +646,8 @@ export default function RevenueManagementPage() {
       {/* ── Hero ── */}
       <section>
         {/* Hero Lottie — paused by default, plays on hover */}
-        <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginBottom: 48 }}>
-          <div className="case-study-card-media--ai" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', lineHeight: 0, fontSize: 0 }}>
+        <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
+          <div style={{ background: '#12213a', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, position: 'relative', aspectRatio: '16/9', overflow: 'hidden' }}>
             <HeroLottie />
           </div>
         </div>
@@ -654,16 +655,16 @@ export default function RevenueManagementPage() {
         {/* Text content below image */}
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
         <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-          <p className="font-sans font-semibold tracking-[0.14em] uppercase" style={{ fontSize: 12, color: 'var(--color-navy)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>PROS</p>
-          <h1 className="text-[44px] sm:text-[58px] font-bold text-navy-dark leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+          <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-cs-heading)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>PROS</p>
+          <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
             Revenue Management
           </h1>
 
-          <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
+          <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
             An enterprise airline pricing platform for major airlines. Redesigned the core workflow for new-hire and veteran analysts and handed off to engineering.
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4" style={{ marginBottom: 0 }}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" style={{ marginBottom: 0 }}>
             {[
               { label: 'Role',     value: 'UX Design Intern' },
               { label: 'Duration', value: 'Jun – Sep 2025' },
@@ -672,7 +673,7 @@ export default function RevenueManagementPage() {
             ].map(({ label, value }) => (
               <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
                 <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
-                <p style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>{value}</p>
+                <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', margin: 0, lineHeight: 1.4 }}>{value}</p>
               </div>
             ))}
           </div>
@@ -690,8 +691,8 @@ export default function RevenueManagementPage() {
         {/* Chapter label + indicator — full width */}
         <div style={{ marginBottom: 8 }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span className="font-sans text-navy/40" style={{ fontSize: 13, fontWeight: 500 }}>1.</span>
-            <h2 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
+            <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>1.</span>
+            <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
               Introduction
             </h2>
           </div>
@@ -708,41 +709,37 @@ export default function RevenueManagementPage() {
 
         {/* Row 1: h3 + body text */}
         <div style={{ marginBottom: 32 }}>
-          <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>OVERVIEW</p>
-          <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
             Revenue Management Platform at PROS
           </h3>
           <Prose>
             <BodyText>
-              This past summer, I interned at PROS, a B2B software company that builds digital products for commercial airlines and their internal teams. I worked with the UX Strategist, User Researcher, and Project Manager to define the design direction for the Revenue Management Platform — with a dual focus: modernize the platform and explore AI integration.
+              This past summer, I interned at PROS, a B2B software company that builds digital products for commercial airlines and their internal teams. I worked with the UX Strategist, User Researcher, and Project Manager to define the design direction for the Revenue Management Platform, with a dual focus: modernize the platform and explore AI integration.
             </BodyText>
           </Prose>
         </div>
 
-        <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.08)', margin: '48px 0' }} />
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
+        <div style={{ marginTop: 86, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
           <div>
-            <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>CONTEXT</p>
-            <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
+            <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
               How Covid-19 affected the Airline Industry & RM
             </h3>
             <BodyText>
               When COVID-19 hit, travel came to a halt. Airlines faced widespread layoffs, including airline analysts. With them went years of institutional knowledge. When hiring picked back up, a new generation of analysts entered the field.
             </BodyText>
             <BodyText>
-              The RM platform has a steep learning curve — it assumed users would have expert guidance or in-depth tutorials. However, the new generation of analysts prefers to learn differently and has shown a preference for AI tools. Meanwhile, Senior analysts still make up a significant portion of the user base and have established workflows.
+              The RM platform has a steep learning curve. It assumed users would have expert guidance or in-depth tutorials. However, the new generation of analysts prefers to learn differently and has shown a preference for AI tools. Meanwhile, Senior analysts still make up a significant portion of the user base and have established workflows.
             </BodyText>
           </div>
 
           <figure style={{ margin: 0 }}>
-            <img src={img('revenue-management-10-eiVem1.png')} alt="Major US airlines to lay off thousands of workers as Covid-19 support expires" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
-            <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Airplanes parked at Southern California Logistics Airport in July 2020. (Credit: Ryan Patterson)</figcaption>
+            <img src={img('revenue-management-10-eiVem1.png')} alt="Major US airlines to lay off thousands of workers as Covid-19 support expires" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
+            <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Airplanes parked at Southern California Logistics Airport in July 2020. (Credit: Ryan Patterson)</figcaption>
           </figure>
         </div>
 
         <ChallengeBanner
-          question="How might we modernize the RM platform and successfully integrate AI to support both new and more senior analysts?"
+          question={<>How might we <strong className="font-semibold">modernize the RM platform</strong> and successfully <strong className="font-semibold">integrate AI</strong> to support both new and more senior analysts?</>}
         />
       </Section>
 
@@ -751,8 +748,8 @@ export default function RevenueManagementPage() {
         {/* Chapter label + indicator */}
         <div style={{ marginBottom: 8 }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span className="font-sans text-navy/40" style={{ fontSize: 13, fontWeight: 500 }}>2.</span>
-            <h2 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
+            <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>2.</span>
+            <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
               Solution Preview
             </h2>
           </div>
@@ -768,42 +765,26 @@ export default function RevenueManagementPage() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
-          <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0 }}>
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0 }}>
             A clearer and supportive data platform for Airline Analysts
           </h3>
           <BodyText>
-            Revenue Management is the platform airlines use to price flights and manage seat inventory — now redesigned to be clearer, faster, and with AI built in where it matters.
+            Revenue Management is the platform airlines use to price flights and manage seat inventory, now redesigned to be clearer, faster, and with AI built in where it matters.
           </BodyText>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16, alignItems: 'start' }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', overflow: 'hidden' }}>
-            <video
-              src="/videos/RM-Solution.webm"
-              autoPlay loop muted playsInline
-              className="cs-solution-video-inner"
-              style={{ width: '75%', display: 'block', margin: '0 auto' }}
-            />
-          </div>
-          <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', background: 'rgba(var(--color-navy-rgb),0.03)', padding: 20 }}>
-            <p className="font-sans font-bold text-navy" style={{ fontSize: 13, marginBottom: 12 }}>IMPACT</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {[
-                { kpi: 'Timeline:', value: '10 weeks from research to engineering handoff' },
-                { kpi: 'Users Served:', value: '2 analyst types supported by one adaptive UI' },
-              ].map(({ kpi, value }) => (
-                <p key={kpi} className="font-sans text-[13px]" style={{ color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>
-                  <span className="font-bold text-navy">{kpi}</span> {value}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
+        <video
+          src="/videos/RM-Solution.webm"
+          autoPlay loop muted playsInline
+          className="cs-solution-video-inner"
+          style={{ width: '100%', display: 'block' }}
+        />
+        <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Shipped in 10 weeks from research to engineering handoff, supporting 2 analyst types with one adaptive UI</figcaption>
       </Section>
 
       {/* ── Research ── */}
       <Section id="rm-research" className="">
-        <SectionHeading index={3} chapter="Research" heading="Pain Points in the Analyst Experience" tag="USER RESEARCH" />
+        <SectionHeading index={3} chapter="Research" heading="Pain Points in the Analyst Experience" />
         <Prose>
           <BodyText>
             I joined the RM team after user research was already conducted. To get up to speed, I met with the User Researcher and UX Strategist to review findings, and spoke with the PM who had worked directly with airline analysts and the Customer Support team.
@@ -813,32 +794,31 @@ export default function RevenueManagementPage() {
           </BodyText>
         </Prose>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginTop: 48 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginTop: 16 }}>
           {[
             { icon: <Brain size={24} weight="light" />, title: 'High Cognitive Load',  body: 'Junior Analysts were dropped into complex views without context or guidance.' },
             { icon: <Ghost size={24} weight="light" />, title: 'Low User Adoption',    body: 'Junior Analysts abandoned tasks mid-way and opted for AI workarounds outside the platform.' },
             { icon: <BookOpen size={24} weight="light" />, title: 'Training Dependency', body: 'Junior Analysts relied on Senior colleagues and external AI when they got stuck.' },
           ].map(({ icon, title, body }) => (
-            <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
+            <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
               <div style={{
                 width: 40, height: 40,
                 borderRadius: '50%',
                 border: '1px solid rgba(var(--color-navy-rgb),0.2)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'var(--color-navy)',
+                color: 'var(--color-cs-heading)',
                 marginBottom: 12,
               }}>
                 {icon}
               </div>
-              <h4 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 16, marginBottom: 8, marginTop: 0 }}>{title}</h4>
-              <p className="font-sans text-[13px] leading-relaxed" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+              <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, marginBottom: 8, marginTop: 0 }}>{title}</h4>
+              <p className="font-landing-body text-[13px] leading-relaxed" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
             </div>
           ))}
         </div>
 
-        <div style={{ marginTop: 48 }}>
-          <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 6 }}>USER PERSONAS</p>
-          <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
+        <div style={{ marginTop: 86 }}>
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
             Distinctive Users with Varying Levels of Expertise
           </h3>
           <BodyText>
@@ -846,27 +826,25 @@ export default function RevenueManagementPage() {
           </BodyText>
         </div>
 
-        <PersonaToggle className="" style={{ marginTop: 48 }} />
+        <PersonaToggle className="" style={{ marginTop: 32 }} />
 
-        <div style={{ marginTop: 64 }}>
-          <SubHeading tag="SYSTEMS MAPPING">Mapping out the Current State</SubHeading>
+        <div style={{ marginTop: 86 }}>
+          <SubHeading>Mapping out the Current State</SubHeading>
           <BodyText>
-            I mapped the relationship between users, the platform, and the three pain points. High cognitive load pushed Junior Analysts in two directions: some left the platform entirely, others turned to workarounds — relying on Senior colleagues or outside AI to get unstuck. The platform served neither user well.
+            I mapped the relationship between users, the platform, and the three pain points. High cognitive load pushed Junior Analysts in two directions: some left the platform entirely, others turned to workarounds, relying on Senior colleagues or outside AI to get unstuck. The platform served neither user well.
           </BodyText>
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
-            <img src={img('revenue-management-13-pX9ss5.png')} alt="How the current RM experience affects Senior and Junior Analysts differently" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
-          </div>
-          <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>How the current RM experience affects Senior and Junior Analysts differently</figcaption>
+          <img src={img('revenue-management-13-pX9ss5.png')} alt="How the current RM experience affects Senior and Junior Analysts differently" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
+          <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>How the current RM experience affects Senior and Junior Analysts differently</figcaption>
         </figure>
 
 
-        <div style={{ marginTop: 48 }}>
-          <SubHeading tag="USER JOURNEYS">Same Platform, Different Experiences</SubHeading>
+        <div style={{ marginTop: 86 }}>
+          <SubHeading>Same Platform, Different Experiences</SubHeading>
           <BodyText>
-            Even though Junior and Senior analysts used the same platform, their paths looked completely different. The divergence started at login — Juniors landed without direction, Seniors landed with purpose.
+            Even though Junior and Senior analysts used the same platform, their paths looked completely different. The divergence started at login: Juniors landed without direction, Seniors landed with purpose.
           </BodyText>
           <BodyText>
             Focusing on the earliest divergence pointed us toward the most impactful place to start: the landing experience.
@@ -874,16 +852,14 @@ export default function RevenueManagementPage() {
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <div style={{ background: '#f0f4fb', border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 24 }}>
-            <img src={img('revenue-management-14-3LKss2.png')} alt="Comparative look at how Junior and Senior Analysts move through the same platform" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
-          </div>
-          <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>A comparative look at how Junior and Senior Analysts move through the same platform differently</figcaption>
+          <img src={img('revenue-management-14-3LKss2.png')} alt="Comparative look at how Junior and Senior Analysts move through the same platform" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
+          <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>A comparative look at how Junior and Senior Analysts move through the same platform differently</figcaption>
         </figure>
 
-        <div style={{ marginTop: 48 }}>
+        <div style={{ marginTop: 86 }}>
           <ChallengeBanner
             label="Challenge (Revised)"
-            question="How might we modernize the landing experience to help Junior analysts get started and Senior analysts work more efficiently?"
+            question={<>How might we <strong className="font-semibold">modernize the landing experience</strong> to help Junior analysts get started and Senior analysts work more efficiently?</>}
           />
         </div>
 
@@ -891,30 +867,30 @@ export default function RevenueManagementPage() {
 
       {/* ── Development ── */}
       <Section id="rm-development" className="">
-        <SectionHeading index={4} chapter="Development" heading="Approved Concepts" tag="IDEATION" />
+        <SectionHeading index={4} chapter="Development" heading="Approved Concepts" />
         <BodyText>
-          After identifying the core pain points, we brainstormed concepts to address them. I suggested starting with My Markets — the screen where research showed Juniors got lost most. The team agreed and added Market Overview, which Seniors use regularly. We then explored an AI assistant and an onboarding experience, agreeing both had to serve analysts at every level.
+          After identifying the core pain points, we brainstormed concepts to address them. I suggested starting with My Markets, the screen where research showed Juniors got lost most. The team agreed and added Market Overview, which Seniors use regularly. We then explored an AI assistant and an onboarding experience, agreeing both had to serve analysts at every level.
         </BodyText>
 
         <div className="grid sm:grid-cols-2 gap-5" style={{ marginTop: 8 }}>
           {[
             { icon: <ChartBar size={24} weight="light" />, title: 'My Markets',      body: 'A dashboard showing analysts which markets need attention first.' },
             { icon: <Stack size={24} weight="light" />,    title: 'Market Overview', body: 'Analytics with booking outlooks and trend data for deeper market context.' },
-            { icon: <Bell size={24} weight="light" />,     title: 'Onboarding',      body: 'A welcome message and quick tour — just enough to orient new users.' },
+            { icon: <Bell size={24} weight="light" />,     title: 'Onboarding',      body: 'A welcome message and quick tour, just enough to orient new users.' },
             { icon: <Robot size={24} weight="light" />,    title: 'AI Assistant',    body: 'Context-aware guidance that suggests next steps based on what is on screen.' },
           ].map(({ icon, title, body }) => (
-            <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16, display: 'flex', gap: 12 }}>
+            <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16, display: 'flex', gap: 12 }}>
               <div style={{
                 width: 40, height: 40, borderRadius: '50%',
                 border: '1px solid rgba(var(--color-navy-rgb),0.2)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'var(--color-navy)', flexShrink: 0,
+                color: 'var(--color-cs-heading)', flexShrink: 0,
               }}>
                 {icon}
               </div>
               <div style={{ flex: 1 }}>
-                <h4 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 16, margin: 0, marginBottom: 4 }}>{title}</h4>
-                <p className="font-sans text-[13px] leading-relaxed" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+                <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, margin: 0, marginBottom: 4 }}>{title}</h4>
+                <p className="font-landing-body text-[13px] leading-relaxed" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
               </div>
             </div>
           ))}
@@ -923,10 +899,10 @@ export default function RevenueManagementPage() {
         {/* AI Placement */}
         <AIPlacementExplorer />
 
-        <div style={{ marginTop: 48 }}>
-          <SubHeading tag="AI PLACEMENT">Chosen AI Assistant: Hybrid Approach</SubHeading>
+        <div style={{ marginTop: 86 }}>
+          <SubHeading>Chosen AI Assistant: Hybrid Approach</SubHeading>
           <BodyText>
-            After design critique sessions, we scrapped the left panel — it removed user agency. No single option felt right on its own, so we combined what worked: a right panel for quick optional help, embedded AI for lightweight guidance, and a dedicated chat screen for deeper assistance.
+            After design critique sessions, we scrapped the left panel. It removed user agency. No single option felt right on its own, so we combined what worked: a right panel for quick optional help, embedded AI for lightweight guidance, and a dedicated chat screen for deeper assistance.
           </BodyText>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32 }}>
             {[
@@ -935,12 +911,12 @@ export default function RevenueManagementPage() {
               { title: 'Full Chat Experience', image: img('revenue-management-15-ewOSo5.png'), verdict: 'Chosen (separate workflow)' },
             ].map(({ title, image, verdict }) => (
               <div key={title}>
-                <p className="font-bold text-navy" style={{ fontFamily: 'var(--font-display)', fontSize: 15, marginBottom: 8 }}>{title}</p>
+                <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, marginBottom: 8 }}>{title}</p>
                 <div style={{ marginBottom: 10 }}>
-                  <img src={image} alt={title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
+                  <img src={image} alt={title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
                 </div>
-                <p className="font-sans" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>
-                  <strong className="text-navy">Verdict:</strong> {verdict}
+                <p className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>
+                  <strong className="text-[var(--color-cs-heading)]">Verdict:</strong> {verdict}
                 </p>
               </div>
             ))}
@@ -951,19 +927,19 @@ export default function RevenueManagementPage() {
         {/* My Markets layout */}
         <MyMarketsExplorer />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginTop: 48 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginTop: 86 }}>
           {/* Left */}
           <div>
-            <SubHeading tag="LAYOUT EXPLORATION">Chosen My Markets: Compact Cards</SubHeading>
-            <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 16 }}>
+            <SubHeading>Chosen My Markets: Compact Cards</SubHeading>
+            <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 16 }}>
               We chose compact rows as the default view as it can scale for dozens of markets and supports both users.
             </p>
-            <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 24 }}>
+            <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 24 }}>
               Seniors can scan quickly because density and color coding put information in reach. Juniors can see clear priorities without feeling overwhelmed because critical markets rise to the top.
             </p>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span className="text-navy font-bold" style={{ fontSize: 16, flexShrink: 0, marginTop: 2 }}>→</span>
-              <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>
+              <span className="text-[var(--color-cs-heading)] font-bold" style={{ fontSize: 16, flexShrink: 0, marginTop: 2, lineHeight: 1.3 }}>→</span>
+              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>
                 We got internal validation from our PMs, the UX team, and the VP of Design.
               </p>
             </div>
@@ -971,7 +947,7 @@ export default function RevenueManagementPage() {
 
           {/* Right */}
           <div>
-            <img src={img('revenue-management-23-VWDfyX.png')} alt="Compact Cards Layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
+            <img src={img('revenue-management-23-VWDfyX.png')} alt="Compact Cards Layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
           </div>
         </div>
       </Section>
@@ -1001,7 +977,7 @@ export default function RevenueManagementPage() {
         <SolutionBlock
           index={3}
           heading="Market Overview"
-          body="This is where analysts go to dive deep into a specific market. It shows booking outlooks, revenue trends, and competitive context. Senior analysts use this screen constantly — we kept their workflows the same while cleaning up the layout so Juniors could follow the data more easily."
+          body="This is where analysts go to dive deep into a specific market. It shows booking outlooks, revenue trends, and competitive context. Senior analysts use this screen constantly. We kept their workflows the same while cleaning up the layout so Juniors could follow the data more easily."
           impact="Senior workflows stay intact. Juniors can follow the data with less effort."
           image={img('revenue-management-27-Hhvw4d.png')}
           imageAlt="Market Overview screen"
@@ -1017,9 +993,9 @@ export default function RevenueManagementPage() {
         />
 
         {/* Stakeholder Feedback */}
-        <div style={{ marginTop: 48 }}>
+        <div style={{ marginTop: 86 }}>
         <Prose>
-          <SubHeading tag="FEEDBACK">Stakeholder Feedback & Validation</SubHeading>
+          <SubHeading>Stakeholder Feedback & Validation</SubHeading>
           <BodyText>
             We presented our designs to stakeholders. They liked the direction but wanted AI to be more front and center. Here is what they said, and how we responded.
           </BodyText>
@@ -1038,36 +1014,36 @@ export default function RevenueManagementPage() {
         </div>
 
         {/* A/B Testing */}
-        <div style={{ marginTop: 48 }}>
+        <div style={{ marginTop: 86 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
             {/* Left: heading + body + question boxes */}
             <div>
-              <h3 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 16px' }}>
+              <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
                 Questions I would have asked in A/B testing
               </h3>
-              <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 16px' }}>
+              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 16px' }}>
                 We didn't get to resolve this before the internship ended. Our next step would have been A/B testing our version against a more chat-centered layout. Here is a quick mockup of what that could look like, plus the questions I would have asked users.
               </p>
 
               {/* Questions box */}
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16, marginBottom: 8 }}>
-                <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 12px' }}>Questions I would've asked</h4>
+              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16, marginBottom: 8 }}>
+                <h4 style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, fontWeight: 600, color: 'var(--color-cs-heading)', margin: '0 0 12px' }}>Questions I would've asked</h4>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {[
                     'How do you usually figure out where to start?',
                     'Walk me through how you check your markets today.',
                     'Did you notice the chat panel? Did you use it?',
                   ].map(q => (
-                    <li key={q} style={{ fontFamily: 'var(--font-sans)', fontSize: 12, lineHeight: 1.6, color: 'var(--color-secondary)', display: 'flex', gap: 8 }}>
-                      <span className="text-navy/40 shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>{q}
+                    <li key={q} style={{ fontFamily: 'var(--font-landing-body)', fontSize: 12, lineHeight: 1.6, color: 'var(--color-secondary)', display: 'flex', gap: 8 }}>
+                      <span className="font-bold text-[var(--color-cs-heading)] shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>{q}
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Metrics box */}
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', padding: 16 }}>
-                <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 12px' }}>What I would have measured</h4>
+              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
+                <h4 style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, fontWeight: 600, color: 'var(--color-cs-heading)', margin: '0 0 12px' }}>What I would have measured</h4>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {[
                     'Time to first click',
@@ -1075,8 +1051,8 @@ export default function RevenueManagementPage() {
                     'Task completion rate without chat',
                     'How often the chat panel was closed or ignored',
                   ].map(m => (
-                    <li key={m} style={{ fontFamily: 'var(--font-sans)', fontSize: 12, lineHeight: 1.6, color: 'var(--color-secondary)', display: 'flex', gap: 8 }}>
-                      <span className="text-navy/40 shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>{m}
+                    <li key={m} style={{ fontFamily: 'var(--font-landing-body)', fontSize: 12, lineHeight: 1.6, color: 'var(--color-secondary)', display: 'flex', gap: 8 }}>
+                      <span className="font-bold text-[var(--color-cs-heading)] shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>{m}
                     </li>
                   ))}
                 </ul>
@@ -1084,7 +1060,7 @@ export default function RevenueManagementPage() {
             </div>
 
             {/* Right: image */}
-            <img src={img('revenue-management-29-3udItG.png')} alt="A/B test mockup — chat-centered layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
+            <img src={img('revenue-management-29-3udItG.png')} alt="A/B test mockup — chat-centered layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
           </div>
         </div>
       </Section>
@@ -1093,25 +1069,25 @@ export default function RevenueManagementPage() {
       <Section id="rm-reflection" className="">
         <SectionHeading index={6} chapter="Reflection" heading="" />
 
-        <SubHeading tag="TAKEAWAYS">What I'd carry forward from a summer of product strategy</SubHeading>
-        <BodyText>At PROS I had the unique opportunity to modernize a B2B airline pricing platform while balancing the needs of two very different users — and to advocate for them both through every design decision.</BodyText>
+        <SubHeading>What I'd carry forward from a summer of product strategy</SubHeading>
+        <BodyText>At PROS I had the unique opportunity to modernize a B2B airline pricing platform while balancing the needs of two very different users, and to advocate for them both through every design decision.</BodyText>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 24 }}>
           {[
             { heading: 'Designing for two users at once', body: 'Juniors needed guidance to figure out where to start; Seniors needed to move fast without friction. Holding both in mind simultaneously sharpened how I think about role-based design.' },
-            { heading: 'Integrating AI thoughtfully', body: 'Figuring out where AI should live and where it shouldn\'t was one of the most interesting design challenges I\'ve navigated — and taught me to advocate for users in ambiguous product territory.' },
+            { heading: 'Integrating AI thoughtfully', body: 'Figuring out where AI should live and where it shouldn\'t was one of the most interesting design challenges I\'ve navigated, and it taught me to advocate for users in ambiguous product territory.' },
             { heading: 'Gratitude', body: 'I\'m grateful to my team at PROS for trusting me with a modernization initiative for a live enterprise platform and for challenging my thinking at every step.' },
           ].map(({ heading, body }) => (
             <div key={heading} className="cs-info-box" style={{ padding: 20 }}>
-              <p className="font-sans font-bold text-navy" style={{ fontSize: 15, margin: '0 0 10px' }}>{heading}</p>
-              <p className="font-sans text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+              <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px' }}>{heading}</p>
+              <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
             </div>
           ))}
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <img src="/images/revenue-management/ux-houston-team.webp" alt="PROS UX Design team" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
-          <figcaption className="font-sans font-semibold tracking-[0.14em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>PROS UX Design team</figcaption>
+          <img src="/images/revenue-management/ux-houston-team.webp" alt="PROS UX Design team" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
+          <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>PROS UX Design team</figcaption>
         </figure>
       </Section>
 
@@ -1120,14 +1096,18 @@ export default function RevenueManagementPage() {
       <NextProject
         title="PROS Fare Finder Map"
         to="/work/fare-finder"
+        tags={["Enterprise", "Product Design Intern"]}
         description="Designed and shipped a flight map tool for travelers to explore and book their next trip."
         video="/videos/Fare-Finder-Video.webm"
         poster="/videos/Fare-Finder-Video-poster.png"
         restTime={4}
+        mediaZoom={1.3}
+        mediaPadding={16}
+        objectFit="contain"
         category="enterprise"
+        bgColor="#12213a"
       />
 
-      <Footer />
     </div>
   )
 }

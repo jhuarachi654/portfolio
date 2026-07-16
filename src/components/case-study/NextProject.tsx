@@ -2,56 +2,76 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
+import { Sparkle } from '@phosphor-icons/react'
 
 interface NextProjectProps {
   title: string
   to: string
   description?: string
+  tags?: string[]
   image?: string
   video?: string
   poster?: string
   lottie?: string
   restTime?: number
   mediaPadding?: number
+  mediaZoom?: number
+  objectFit?: 'cover' | 'contain'
   category?: 'enterprise' | 'ai' | 'consumer' | 'accessibility'
+  bgColor?: string
 }
 
-// Paused by default, plays on hover — same behavior as the case study heroes.
-function PreviewVideo({ src, poster, restTime = 0 }: { src: string; poster?: string; restTime?: number }) {
+// Paused by default, plays automatically once scrolled into view — same
+// convention as the case-study cards on Home/Play (see CaseStudyCard.tsx).
+function PreviewVideo({ src, poster, restTime = 0, zoom = 1, objectFit = 'cover' }: { src: string; poster?: string; restTime?: number; zoom?: number; objectFit?: 'cover' | 'contain' }) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
+  const wrapRef = useRef<HTMLDivElement>(null)
 
   const handleLoadedMetadata = () => {
     const vid = videoRef.current
     if (vid) vid.currentTime = restTime
   }
-  const handleMouseEnter = () => { if (isDesktop) videoRef.current?.play().catch(() => {}) }
-  const handleMouseLeave = () => {
-    if (!isDesktop) return
-    const vid = videoRef.current
-    if (vid) { vid.pause(); vid.currentTime = restTime }
-  }
+
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const vid = videoRef.current
+        if (!vid) return
+        if (entry.isIntersecting) {
+          vid.play().catch(() => {})
+        } else {
+          vid.pause()
+          vid.currentTime = restTime
+        }
+      },
+      { threshold: 0.5 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [restTime])
 
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      poster={poster}
-      muted
-      loop
-      playsInline
-      onLoadedMetadata={handleLoadedMetadata}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{ width: '100%', display: 'block' }}
-    />
+    <div ref={wrapRef} className="w-full h-full">
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        muted
+        loop
+        playsInline
+        onLoadedMetadata={handleLoadedMetadata}
+        style={{ width: '100%', height: '100%', display: 'block', objectFit, transform: zoom !== 1 ? `scale(${zoom})` : undefined }}
+      />
+    </div>
   )
 }
 
-function PreviewLottie({ src, restTime = 0 }: { src: string; restTime?: number }) {
+function PreviewLottie({ src, restTime = 0, zoom = 1, objectFit = 'cover' }: { src: string; restTime?: number; zoom?: number; objectFit?: 'cover' | 'contain' }) {
   const [data, setData] = useState<object | null>(null)
   const lottieRef = useRef<LottieRefCurrentProps>(null)
-  const [isDesktop] = useState(() => window.matchMedia('(hover: hover)').matches)
+  const wrapRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     fetch(src).then(r => r.json()).then(setData).catch(() => {})
@@ -63,70 +83,118 @@ function PreviewLottie({ src, restTime = 0 }: { src: string; restTime?: number }
     return () => cancelAnimationFrame(id)
   }, [data, restTime])
 
-  const handleMouseEnter = () => { if (isDesktop) lottieRef.current?.play() }
-  const handleMouseLeave = () => { if (isDesktop) lottieRef.current?.goToAndStop(restTime * 1000, false) }
+  useEffect(() => {
+    if (!data) return
+    const el = wrapRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          lottieRef.current?.play()
+        } else {
+          lottieRef.current?.goToAndStop(restTime * 1000, false)
+        }
+      },
+      { threshold: 0.5 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [data, restTime])
 
   return (
-    <div className="w-full overflow-hidden" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div ref={wrapRef} className="w-full h-full overflow-hidden">
       {data && (
-        <Lottie lottieRef={lottieRef} animationData={data} loop autoplay={false} style={{ width: '100%', display: 'block' }} />
+        <Lottie
+          lottieRef={lottieRef}
+          animationData={data}
+          loop
+          autoplay={false}
+          rendererSettings={{ preserveAspectRatio: objectFit === 'contain' ? 'xMidYMid meet' : 'xMidYMid slice' }}
+          style={{ width: '100%', height: '100%', display: 'block', transform: zoom !== 1 ? `scale(${zoom})` : undefined }}
+        />
       )}
     </div>
   )
 }
 
-export default function NextProject({ title, to, description, image, video, poster, lottie, restTime, mediaPadding, category }: NextProjectProps) {
+export default function NextProject({ title, to, description, tags, image, video, poster, lottie, restTime, mediaPadding, mediaZoom = 1, objectFit = 'cover', category, bgColor }: NextProjectProps) {
   return (
-    <div style={{ paddingLeft: 32, paddingRight: 32, marginTop: 84 }}>
-      <section
-        className="max-w-[1080px] px-8 md:px-14"
-        style={{
-          borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-          paddingTop: 48,
-          paddingBottom: 84,
-        }}
-      >
-        <p className="font-sans font-semibold tracking-[0.14em] uppercase text-navy/50" style={{ fontSize: 13, marginBottom: 16 }}>
-          Next Project
-        </p>
+    <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginTop: 84 }}>
+      <section className="max-w-[1080px] px-8 md:px-14" style={{ paddingBottom: 84 }}>
+        <h2
+          className="next-project-heading font-normal"
+          style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'italic', fontSize: 'clamp(24px, 3vw, 36px)', color: 'var(--color-cs-heading)', margin: '0 0 24px', display: 'flex', alignItems: 'center', gap: 10 }}
+        >
+          Explore more work <Sparkle size="0.7em" weight="regular" />
+        </h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: (image || video || lottie) ? '1fr 1fr' : '1fr', gap: 48, alignItems: 'center' }}>
-          <motion.div whileHover={{ x: 6 }} transition={{ duration: 0.2 }}>
-            <Link to={to} data-cursor-label="Open case study" className="group inline-block">
-              <h2 className="font-bold text-navy-dark" style={{ fontFamily: 'var(--font-display)', fontSize: 44, lineHeight: 1.1, margin: '0 0 12px' }}>
-                {title} <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">→</span>
-              </h2>
-              {description && (
-                <p className="font-sans" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', maxWidth: 480, margin: 0 }}>
-                  {description}
-                </p>
-              )}
-            </Link>
-          </motion.div>
-
-          {(video || lottie || image) && (
-            <Link to={to} tabIndex={-1} style={{ display: 'block' }}>
-              <div className={category ? `case-study-card-media--${category}` : undefined} style={{
-                background: category ? undefined : 'rgba(var(--color-navy-rgb),0.05)',
-                border: '1px solid rgba(var(--color-navy-rgb),0.15)',
-                padding: mediaPadding,
-                overflow: 'hidden',
-              }}>
+        <Link
+          to={to}
+          data-cursor-label="Open case study"
+          style={{
+            display: 'block',
+            border: '1px solid rgba(var(--color-navy-rgb),0.15)',
+            borderRadius: 12,
+            padding: 24,
+            textDecoration: 'none',
+            boxShadow: '0 8px 24px rgba(20, 20, 60, 0.12)',
+          }}
+        >
+          <div style={{ display: 'grid', gridTemplateColumns: (image || video || lottie) ? '1fr 1fr' : '1fr', gap: 48, alignItems: 'center' }}>
+            {(video || lottie || image) && (
+              <div
+                className={`case-study-card-media aspect-4-3${!bgColor && category ? ` case-study-card-media--${category}` : ''}`}
+                style={{
+                  background: bgColor ?? (category ? undefined : 'transparent'),
+                  padding: mediaPadding,
+                  overflow: 'hidden',
+                }}
+              >
                 {video ? (
-                  <PreviewVideo src={video} poster={poster} restTime={restTime} />
+                  <PreviewVideo src={video} poster={poster} restTime={restTime} zoom={mediaZoom} objectFit={objectFit} />
                 ) : lottie ? (
-                  <PreviewLottie src={lottie} restTime={restTime} />
+                  <PreviewLottie src={lottie} restTime={restTime} zoom={mediaZoom} objectFit={objectFit} />
                 ) : (
                   <img
                     src={image}
                     alt={title}
-                    style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+                    style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
                   />
                 )}
               </div>
-            </Link>
-          )}
-        </div>
+            )}
+
+            <motion.div whileHover={{ x: 6 }} transition={{ duration: 0.2 }}>
+              <h3 style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'normal', fontWeight: 400, fontSize: 'clamp(28px, 3vw, 36px)', color: 'var(--color-cs-heading)', lineHeight: 1.1, margin: '0 0 16px' }}>
+                {title}
+              </h3>
+              {tags && tags.length > 0 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+                  {tags.map(tag => (
+                    <span
+                      key={tag}
+                      className="font-sans"
+                      style={{
+                        fontSize: 13,
+                        color: '#222225',
+                        border: '1px solid rgba(var(--color-navy-rgb),0.2)',
+                        borderRadius: 999,
+                        padding: '6px 14px',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              {description && (
+                <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 16, lineHeight: 1.7, color: '#222225', maxWidth: 480, margin: 0 }}>
+                  {description}
+                </p>
+              )}
+            </motion.div>
+          </div>
+        </Link>
       </section>
     </div>
   )

@@ -19,7 +19,7 @@ export default function WorkFilter({ allTags, selectedTags, onTagToggle, onClear
 
   return (
     <>
-      {/* ── Desktop: pill row ─────────────────────────────────────── */}
+      {/* ── Desktop/tablet: pill row ──────────────────────────────── */}
       <div className="work-filter-desktop" role="group" aria-label="Filter by skill">
         <button
           className="work-filter-pill work-filter-pill--all"
@@ -39,10 +39,10 @@ export default function WorkFilter({ allTags, selectedTags, onTagToggle, onClear
         ))}
       </div>
 
-      {/* ── Mobile: dropdown ──────────────────────────────────────── */}
+      {/* ── Mobile: dropdown, pill-styled ─────────────────────────── */}
       <div className="work-filter-mobile">
         <button
-          className="work-filter-dropdown-trigger"
+          className="work-filter-pill work-filter-dropdown-trigger"
           onClick={() => setOpen(v => !v)}
           aria-expanded={open}
         >
@@ -58,18 +58,18 @@ export default function WorkFilter({ allTags, selectedTags, onTagToggle, onClear
         {open && (
           <div className="work-filter-dropdown">
             <button
-              className="work-filter-dropdown-item"
+              className={`work-filter-pill work-filter-dropdown-item${selectedTags.length === 0 ? " is-active" : ""}`}
               onClick={() => handleSelect(null)}
             >
-              All
+              <span>All</span>
             </button>
             {allTags.map(tag => (
               <button
                 key={tag}
-                className={`work-filter-dropdown-item${selectedTags.includes(tag) ? " is-active" : ""}`}
+                className={`work-filter-pill work-filter-dropdown-item${selectedTags.includes(tag) ? " is-active" : ""}`}
                 onClick={() => handleSelect(tag)}
               >
-                {tag}
+                <span>{tag}</span>
               </button>
             ))}
           </div>

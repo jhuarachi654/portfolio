@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./components/Layout";
 import CustomCursor from "./components/CustomCursor";
-import LoadingScreen from "./components/LoadingScreen";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import HomePage from "./pages/HomePage";
 import WorkPage from "./pages/WorkPage";
@@ -15,6 +14,7 @@ import FareFinderPage from "./pages/work/FareFinderPage";
 import RevenueManagementPage from "./pages/work/RevenueManagementPage";
 import DNCPage from "./pages/work/DNCPage";
 import ExpertAIPage from "./pages/work/ExpertAIPage";
+import SnapSplitPage from "./pages/work/SnapSplitPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 
@@ -39,6 +39,7 @@ function AnimatedRoutes() {
         <Route path="/work/revenue-management" element={<RevenueManagementPage />} />
         <Route path="/work/democratic-national-committee" element={<DNCPage />} />
         <Route path="/work/expert-ai" element={<ExpertAIPage />} />
+        <Route path="/work/snapsplit" element={<SnapSplitPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
@@ -46,21 +47,9 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(() => window.location.pathname !== "/")
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("loading", !loaded)
-  }, [loaded])
-
-  const handleIntroDone = () => {
-    setLoaded(true)
-    window.dispatchEvent(new Event("intro-complete"))
-  }
-
   return (
     <ThemeProvider>
       <Analytics />
-      {!loaded && <LoadingScreen onDone={handleIntroDone} />}
       <BrowserRouter>
         <ScrollToTop />
         <CustomCursor />

@@ -17,6 +17,7 @@ export interface CaseStudyCardProps {
   image: string
   video?: string
   lottie?: string
+  bgLottie?: string
   href: string
   comingSoon?: boolean
   role?: string
@@ -53,6 +54,7 @@ export default function CaseStudyCard({
   image,
   video,
   lottie,
+  bgLottie,
   href,
   comingSoon = false,
   role,
@@ -82,19 +84,19 @@ export default function CaseStudyCard({
 }: CaseStudyCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const lottieRef = useRef<LottieRefCurrentProps>(null)
+  const bgLottieRef = useRef<LottieRefCurrentProps>(null)
   const cardRef = useRef<HTMLDivElement>(null)
 
   const mediaRef = useRef<HTMLDivElement>(null)
-  const isHoveredRef = useRef(false)
+  const inViewPlayingRef = useRef(false)
 
   const [lottieData, setLottieData] = useState<object | null>(null)
+  const [bgLottieData, setBgLottieData] = useState<object | null>(null)
   const [isDesktop] = useState(() => window.matchMedia("(hover: hover)").matches)
   const [prefersReducedMotion] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches)
   const [isInView, setIsInView] = useState(false)
   const [isReady, setIsReady] = useState(false)
   const [slowLoad, setSlowLoad] = useState(false)
-  const mobileInViewRef = useRef(false)
-
   useEffect(() => {
     if (forcePlay) { setIsInView(true); return }
     const el = mediaRef.current
@@ -125,6 +127,16 @@ export default function CaseStudyCard({
   }, [lottie, isInView, lottieData])
 
   useEffect(() => {
+    if (!bgLottie || !isInView || bgLottieData) return
+    fetch(bgLottie).then(r => r.json()).then(data => setBgLottieData(data)).catch(() => {})
+  }, [bgLottie, isInView, bgLottieData])
+
+  useEffect(() => {
+    if (prefersReducedMotion) return
+    bgLottieRef.current?.play()
+  }, [bgLottieData, prefersReducedMotion])
+
+  useEffect(() => {
     if (prefersReducedMotion) return
     if (forcePlay) {
       videoRef.current?.play().catch(() => {})
@@ -144,52 +156,41 @@ export default function CaseStudyCard({
     if (prefersReducedMotion) return
     const vid = videoRef.current
     if (!vid) return
-    if (forcePlay || (isDesktop && isHoveredRef.current) || (!isDesktop && mobileInViewRef.current)) {
+    if (forcePlay || inViewPlayingRef.current) {
       vid.play().catch(() => {})
     } else {
       vid.currentTime = lottieStartTime ?? 0
     }
   }
 
-  const handleMouseEnter = () => {
-    if (!isDesktop || prefersReducedMotion) return
-    isHoveredRef.current = true
-    videoRef.current?.play().catch(() => {})
-    lottieRef.current?.play()
-  }
-
-  const handleMouseLeave = () => {
-    if (!isDesktop) return
-    isHoveredRef.current = false
-    const vid = videoRef.current
-    if (vid) { vid.pause(); vid.currentTime = 0 }
-    if (lottieStartTime != null) lottieRef.current?.goToAndStop(lottieStartTime * 1000, false)
-    else lottieRef.current?.stop()
-  }
-
+  // Autoplay is driven purely by scroll visibility (not hover) on every
+  // breakpoint — avoids every card's video/Lottie loading and decoding at
+  // once on page load, which is costly for bandwidth, CPU, and battery
+  // (especially with several background tabs open).
   useEffect(() => {
-    if (isDesktop || prefersReducedMotion || !isInView) return
+    if (forcePlay || prefersReducedMotion || !isInView) return
     if (!video && !lottieData) return
     const el = cardRef.current
     if (!el) return
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          mobileInViewRef.current = true
+          inViewPlayingRef.current = true
           videoRef.current?.play().catch(() => {})
           lottieRef.current?.play()
         } else {
-          mobileInViewRef.current = false
+          inViewPlayingRef.current = false
           const vid = videoRef.current
           if (vid) { vid.pause(); vid.currentTime = 0 }
-          lottieRef.current?.stop()
+          if (lottieStartTime != null) lottieRef.current?.goToAndStop(lottieStartTime * 1000, false)
+          else lottieRef.current?.stop()
         }
       },
       { threshold: 0.5 }
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [isDesktop, video, lottieData, isInView, prefersReducedMotion])
+  }, [forcePlay, video, lottieData, isInView, prefersReducedMotion, lottieStartTime])
 
   useEffect(() => {
     if (isDesktop) return
@@ -208,7 +209,7 @@ export default function CaseStudyCard({
 
   const aspectRatioClass = `aspect-${aspectRatio.replace("/", "-")}`
   const category = getCategory(tags)
-  const showSkeleton = slowLoad && !isReady
+  const showSkeleton = slowLoad && !isReady && !bgColor
 
   const hasMetrics = metrics && metrics.length > 0
 
@@ -216,15 +217,22 @@ export default function CaseStudyCard({
     <div
       ref={cardRef}
       className="case-study-card"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <div
         ref={mediaRef}
         className={`case-study-card-media ${aspectRatioClass} ${category ? `case-study-card-media--${category.toLowerCase()}` : ""} ${isReady ? "is-loaded" : ""}`}
         style={{ ...(bgColor ? { background: bgColor } : {}), ...(mediaPadding ? { padding: mediaPadding } : {}) }}
       >
-        {dotField && <DotField layout={dotLayout} />}
+        {dotField && !bgLottie && <DotField layout={dotLayout} />}
+        {bgLottie && bgLottieData && (
+          <Lottie
+            lottieRef={bgLottieRef}
+            animationData={bgLottieData}
+            autoplay
+            loop
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0 }}
+          />
+        )}
         {video ? (
           <video
             ref={videoRef}
@@ -241,7 +249,8 @@ export default function CaseStudyCard({
             animationData={lottieData}
             autoplay={false}
             loop
-            style={{ width: "100%", height: "100%", objectFit, objectPosition, position: "relative", zIndex: 1, ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
+            rendererSettings={{ preserveAspectRatio: objectFit === "contain" ? "xMidYMid meet" : "xMidYMid slice" }}
+            style={{ width: "100%", height: "100%", position: "relative", zIndex: 1, ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
           />
         ) : (
           <img
@@ -254,18 +263,21 @@ export default function CaseStudyCard({
         )}
         {showSkeleton && <div className="case-study-card-skeleton" aria-busy="true" />}
         {comingSoon && <span className="case-study-card-badge">Soon</span>}
+        {!comingSoon && (
+          <div className="case-study-card-overlay">
+            <span className="case-study-card-overlay-btn">View project</span>
+          </div>
+        )}
       </div>
 
       <div className="case-study-card-body">
-        <div className="case-study-card-header">
-          <h3 className="case-study-card-title">{title}</h3>
-          {company && <span className="case-study-card-company font-sans font-semibold tracking-[0.1em] uppercase" style={{ fontSize: 10 }}>at {company}</span>}
-          <div className="case-study-card-tags">
-            {tags.filter(t => t !== "Internship" && t !== "Freelance" && t !== "Solo").map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
-            {role && <span className="case-study-card-tag">{role}</span>}
-          </div>
-        </div>
+        <h3 className="case-study-card-title">{title}</h3>
+        {company && <span className="case-study-card-company">at {company}</span>}
         {description && <p className="case-study-card-description">{description}</p>}
+        <div className="case-study-card-tags">
+          {tags.filter(t => t !== "Internship" && t !== "Freelance" && t !== "Solo").map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
+          {role && <span className="case-study-card-tag">{role}</span>}
+        </div>
       </div>
 
     </div>

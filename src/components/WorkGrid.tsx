@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
+import { ArrowBendRightDown } from "@phosphor-icons/react"
 import CaseStudyCard from "./CaseStudyCard"
 import WorkFilter from "./WorkFilter"
 import { useScrollReveal } from "../hooks/useScrollReveal"
@@ -11,6 +12,7 @@ export type CaseStudy = {
   image: string
   video: string
   lottie?: string
+  bgLottie?: string
   href: string
   comingSoon?: boolean
   role?: string
@@ -50,7 +52,9 @@ const CASE_STUDIES: CaseStudy[] = [
     href: "/work/revenue-management",
     role: "Product Design Intern",
     description: "An enterprise airline pricing platform for major airlines. Redesigned the core workflow for new-hire and veteran analysts and handed off to engineering.",
+    bgColor: "#12213a",
     lottieStartTime: 1.5,
+    mediaScale: 1.1,
     dotField: true,
     dotLayout: 0,
     icon: "/PROS Logo.jpeg",
@@ -72,6 +76,9 @@ const CASE_STUDIES: CaseStudy[] = [
     href: "/work/fare-finder",
     role: "Product Design Intern",
     description: "A flight exploration tool for everyday travelers. Designed the map-based feature for PROS's 130+ airline partners; bookings up 35%.",
+    bgColor: "#12213a",
+    objectFit: "contain",
+    mediaPadding: 16,
     mediaScale: 1.3,
     dotField: true,
     dotLayout: 0,
@@ -95,6 +102,7 @@ const CASE_STUDIES: CaseStudy[] = [
     href: "/work/democratic-national-committee",
     role: "Digital Design Intern",
     description: "Digital design for Biden-Harris and Democratic party initiatives. Turned around 18 same-day assets during an active presidential campaign; posts hit 5,500+ likes.",
+    bgColor: "linear-gradient(135deg, #2b3a8f, #1a2358)",
     objectFit: "contain",
     mediaScale: 1.5,
     dotField: true,
@@ -118,6 +126,7 @@ const CASE_STUDIES: CaseStudy[] = [
     href: "/work/expert-ai",
     role: "Product Design Intern",
     description: "An AI text analysis platform for enterprise teams. Redesigned filtering for accessibility; task time dropped from 2 min to 30s.",
+    bgColor: "#c4ecff",
     objectFit: "contain",
     mediaPadding: 16,
     dotField: true,
@@ -140,6 +149,8 @@ const CASE_STUDIES: CaseStudy[] = [
     href: "https://popple.pages.dev/",
     role: "Design Engineer",
     description: "An app that makes completed tasks tangible and collectible. Designed, built, and shipped solo, end to end.",
+    bgColor: "linear-gradient(135deg, #d9d3f0, #c7c9d6)",
+    bgLottie: "/videos/Popple-Background.json",
     objectFit: "cover",
     aspectRatio: "4/3",
     dotField: true,
@@ -157,12 +168,15 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "Love Lives in SF",
+    company: "Love Lives in SF",
     tags: ["Consumer", "Internship"],
     image: "/videos/llsf-Video-poster.png",
     video: "/videos/llsf-Video.webm",
     href: "https://lovelivesinsf.org/",
     role: "Visual Design Intern",
     description: "Website for SF's public art programming. Designed as the sole designer; traffic grew 35% in the first 30 days.",
+    bgColor: "#3a3a3a",
+    objectFit: "contain",
     mediaPadding: 16,
     dotField: true,
     dotLayout: 1,
@@ -178,20 +192,21 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "SnapSplit",
+    company: "SnapSplit",
     tags: ["Consumer", "Freelance"],
     image: "/videos/SnapSplit-Video-poster.png",
     video: "/videos/SnapSplit-Video.webm",
-    href: "/work",
+    href: "/work/snapsplit",
     role: "Freelance Designer",
     description: "A bill-splitting app for friend groups. Rebranded and redesigned; cut the core task from 4 min to 30s.",
+    bgColor: "#8fd9c4",
     objectFit: "cover",
     aspectRatio: "4/3",
     dotField: true,
     dotLayout: 3,
     icon: "🫰",
     iconIsEmoji: true,
-    comingSoon: true,
-    cursorLabel: "Case study coming soon",
+    cursorLabel: "Open case study",
     projectType: "Freelance",
     status: "Shipped",
     metrics: [{ stat: "30s", label: "core task time (from 4 min)" }, { stat: "40%", label: "reduction in abandonment" }, { stat: "11", label: "users tested" }],
@@ -204,7 +219,7 @@ const CASE_STUDIES: CaseStudy[] = [
 
 // ── Hooks ────────────────────────────────────────────────────────────
 function useNumCols() {
-  const get = () => window.innerWidth < 541 ? 1 : 2
+  const get = () => window.innerWidth < 541 ? 1 : window.innerWidth < 1200 ? 2 : 3
   const [n, setN] = useState(get)
   useEffect(() => {
     const update = () => setN(get())
@@ -254,10 +269,9 @@ export default function WorkGrid() {
     <>
       <section className="work-grid-section">
         <div className="work-grid-header">
-          <h2 ref={headingRef} className="work-grid-heading reveal">Featured Work</h2>
-        </div>
-
-        <div className="work-controls">
+          <h2 ref={headingRef} className="work-grid-heading work-grid-heading--selected reveal">
+            Selected Projects <ArrowBendRightDown className="work-grid-heading-arrow" weight="thin" color="#2A3132" size={32} aria-hidden="true" />
+          </h2>
           <WorkFilter
             allTags={allTags}
             selectedTags={selectedTags}
@@ -282,6 +296,7 @@ export default function WorkGrid() {
                     image={s.image}
                     video={s.video}
                     lottie={s.lottie}
+                    bgLottie={s.bgLottie}
                     href={s.href}
                     comingSoon={s.comingSoon}
                     role={s.role}
@@ -296,9 +311,6 @@ export default function WorkGrid() {
                     dotField={s.dotField}
                     dotColor={s.dotColor}
                     dotLayout={s.dotLayout}
-                    cursorLabel={s.cursorLabel}
-                    cursorIcon={s.iconIsEmoji ? undefined : s.icon}
-                    cursorIconIsEmoji={s.iconIsEmoji}
                     projectType={s.projectType}
                     status={s.status}
                     metrics={s.metrics}

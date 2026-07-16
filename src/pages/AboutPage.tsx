@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { createPortal } from "react-dom"
+import { HandWaving } from "@phosphor-icons/react"
 import VinylPlayer from "../components/VinylPlayer"
 import Footer from "../components/Footer"
 
@@ -7,10 +8,10 @@ const BASE = "/images/about"
 
 // Portrait is index 0 → always starts on top of the pile
 const PILE_PHOTOS = [
-  { src: `${BASE}/about-16-fXGtIR.jpg`, alt: "Johanna Huarachi" },
-  { src: `${BASE}/about-10-EeeX71.jpg`, alt: "Fall hike in the DMV" },
-  { src: `${BASE}/about-12-nWwB5x.jpg`, alt: "Palace of Fine Arts, SF" },
-  { src: `${BASE}/about-17-QN6Eya.jpg`, alt: "SF at golden hour" },
+  { src: `${BASE}/about-16-fXGtIR.jpg`, alt: "Johanna Huarachi", caption: "(jo-HAN-uh wah-RAH-chee)" },
+  { src: `${BASE}/about-10-EeeX71.jpg`, alt: "Fall hike in the DMV", caption: "Fall hike in the DMV" },
+  { src: `${BASE}/about-12-nWwB5x.jpg`, alt: "Palace of Fine Arts, SF", caption: "Palace of Fine Arts, SF" },
+  { src: `${BASE}/about-17-QN6Eya.jpg`, alt: "SF at golden hour", caption: "SF at golden hour" },
 ]
 
 const MOMENTS = [
@@ -24,12 +25,12 @@ const MOMENTS = [
 // size = rendered img size in px, offsetY = vertical nudge (positive = down), floatDelay = animation offset
 // x/y are percent of scatter container (disc centered at 50%, 45%)
 const TREASURES = [
-  { src: `${BASE}/about-24-hIUzPz.jpg`, alt: "Catpple tin",   label: "Some stickers I gifted",          rotate: -8,  size: 94, x: "10%", y: "18%", floatDelay: "0s"   },
-  { src: `${BASE}/about-23-cHxzUK.jpg`, alt: "Latte art",     label: "A cap I made",                    rotate:  5,  size: 56, x: "16%", y: "72%", floatDelay: "0.8s" },
-  { src: `${BASE}/about-25-1kVOwL.jpg`, alt: "Tuxedo cat",    label: "One of my pencil pouches",        rotate: -4,  size: 85, x: "36%", y: "80%", floatDelay: "1.4s" },
-  { src: `${BASE}/about-27-ebo5bp.jpg`, alt: "Doge",          label: "Hi this is my child, Toto.",      rotate:  6,  size: 85, x: "64%", y: "75%", floatDelay: "0.4s" },
-  { src: `${BASE}/about-26-6JOonA.jpg`, alt: "A NYC exhibit that caught my eye", label: "A NYC exhibit that caught my eye", rotate: -5, size: 75, x: "82%", y: "22%", floatDelay: "1.9s" },
-  { src: `${BASE}/about-22-RJyGV4.jpg`, alt: "Salmon nigiri", label: "Some sushi from omakase I had",   rotate:  4,  size: 73, x: "87%", y: "65%", floatDelay: "1.1s" },
+  { src: `${BASE}/about-24-hIUzPz.jpg`, alt: "Catpple tin",   label: "Some stickers I gifted",          rotate: -8,  size: 94, x: "10%", y: "18%", floatDelay: "0s",   edge: "left"  as const },
+  { src: `${BASE}/about-23-cHxzUK.jpg`, alt: "Latte art",     label: "A cap I made",                    rotate:  5,  size: 56, x: "16%", y: "72%", floatDelay: "0.8s", edge: "left"  as const },
+  { src: `${BASE}/about-25-1kVOwL.jpg`, alt: "Tuxedo cat",    label: "One of my pencil pouches",        rotate: -4,  size: 85, x: "36%", y: "80%", floatDelay: "1.4s", edge: null },
+  { src: `${BASE}/about-27-ebo5bp.jpg`, alt: "Doge",          label: "Hi this is my child, Toto.",      rotate:  6,  size: 85, x: "64%", y: "75%", floatDelay: "0.4s", edge: null },
+  { src: `${BASE}/about-26-6JOonA.jpg`, alt: "A NYC exhibit that caught my eye", label: "A NYC exhibit that caught my eye", rotate: -5, size: 75, x: "82%", y: "22%", floatDelay: "1.9s", edge: "right" as const },
+  { src: `${BASE}/about-22-RJyGV4.jpg`, alt: "Salmon nigiri", label: "Some sushi from omakase I had",   rotate:  4,  size: 73, x: "87%", y: "65%", floatDelay: "1.1s", edge: "right" as const },
 ]
 
 // Rotations for [bottom, middle, top] cards in the pile
@@ -131,6 +132,7 @@ export default function AboutPage() {
   // topIdx = which photo is currently on top (index into PILE_PHOTOS)
   const [topIdx, setTopIdx] = useState(0)
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null)
+  const [activeTreasureIdx, setActiveTreasureIdx] = useState<number | null>(null)
   const [shuffling, setShuffling] = useState(false)
   // z-index starts high (card is in front), drops mid-animation so card passes behind the pile
   const [shuffleZ, setShuffleZ] = useState(10)
@@ -236,26 +238,11 @@ export default function AboutPage() {
 
   return (
     <div ref={pageRef}>
-      {/* ── Hero ── */}
-      <div className="line-grid hero-page">
-        <div className="hero-left">
-          <p className="about-eyebrow" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>Hi, again</p>
-          <h1 className="hero-name hero-display-headline" data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
-            <div>I'm Johanna, a first-generation</div>
-            <div>designer building for everyone.</div>
-          </h1>
-
-          <p className="about-pronunciation" data-reveal style={{ "--reveal-delay": "160ms" } as React.CSSProperties}>(jo-HAN-uh wah-RAH-chee)</p>
-
-          <div className="about-cta" data-reveal style={{ "--reveal-delay": "240ms" } as React.CSSProperties}>
-            <a href="mailto:jhuarachi654@gmail.com" className="btn-resume btn-resume--filled">
-              <span>Get in touch</span>
-            </a>
-          </div>
-        </div>
-
-        {/* ── Right: corkboard ── */}
-        <div className="hero-right about-hero-right">
+      <div className="footer-curtain">
+      {/* ── Intro ── */}
+      <div className="hero-page">
+        {/* ── Left: corkboard ── */}
+        <div className="hero-left about-hero-right">
           <div className="about-corkboard">
 
             {/* Main pile — center of corkboard */}
@@ -280,45 +267,48 @@ export default function AboutPage() {
                       src={PILE_PHOTOS[photoIdx].src}
                       alt={photoIdx === 0 ? "Johanna Huarachi" : ""}
                     />
+                    <span className="about-pile-caption">{PILE_PHOTOS[photoIdx].caption}</span>
                   </div>
                 ))}
               </button>
             </div>
 
+          </div>
+        </div>
 
+        <div className="hero-right about-hero-text">
+          <h1 className="hero-name hero-display-headline" data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
+            <div>Thanks for stopping by <HandWaving size={32} weight="thin" /></div>
+          </h1>
+
+          <div className="about-bio-right">
+            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "200ms" } as React.CSSProperties}>
+              I'm a product designer with a background most designers don't have.
+            </p>
+            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "240ms" } as React.CSSProperties}>
+              At Williams College I studied psychology, neuroscience, and latino
+              studies. As a first-generation student, those fields gave me a way of
+              understanding how people think, where systems fail them, and who gets
+              left out. That's the lens I bring to every project.
+            </p>
+            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "280ms" } as React.CSSProperties}>
+              Currently finishing my Masters in Interaction Design at California
+              College of the Arts, graduating August 2026. I also serve as a Figma
+              Campus Leader at CCA, hosting events and workshops for the design
+              community on campus.
+            </p>
+            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "320ms" } as React.CSSProperties}>
+              Always happy to talk design, research, or anything in between.
+            </p>
+            <p className="about-bio-para about-bio-footnote" data-reveal style={{ "--reveal-delay": "360ms" } as React.CSSProperties}>
+              *This portfolio was designed and built entirely in code, React, TypeScript, and Vite.
+            </p>
           </div>
         </div>
       </div>
 
-      {/* ── Bio ── */}
+      {/* ── Photo moments ── */}
       <section className="work-grid-section about-bio-section">
-        <div className="about-bio-grid">
-          <div className="about-bio-left">
-            <h2 className="about-section-heading" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>A snippet of who I am</h2>
-          </div>
-          <div className="about-bio-right">
-            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
-              I grew up in the DMV, and I'm a first-generation student and product
-              designer with a background in the humanities.
-            </p>
-            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "160ms" } as React.CSSProperties}>
-              I'm finishing my Masters in Interaction Design at California College
-              of the Arts, graduating June 2026. Before that, I studied psychology,
-              neuroscience, and Latino studies at Williams College. That combination
-              taught me how people think, why systems fail them, and who gets left out.
-            </p>
-            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "240ms" } as React.CSSProperties}>
-              As a first-generation student, I've seen that firsthand. That's what
-              drives my work. I want to use design to build systems that are both
-              equitable and delightful. The digital world is only growing, and it
-              needs to be built for everyone.
-            </p>
-            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "320ms" } as React.CSSProperties}>
-              This portfolio was designed and built entirely in code — React, TypeScript, and Vite.
-            </p>
-          </div>
-        </div>
-
         <div ref={rowRef} className="about-moments-row" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>
           <div className="about-moments-track" aria-label="Photo moments">
             {MOMENTS.map((m, i) => (
@@ -353,11 +343,13 @@ export default function AboutPage() {
           </div>
 
           {/* Scattered items — absolutely positioned */}
-          {TREASURES.map((t) => (
+          {TREASURES.map((t, i) => (
             <div
               key={t.src}
-              className="about-treasure-item"
+              className={`about-treasure-item${activeTreasureIdx === i ? " is-active" : ""}`}
               data-label={t.label}
+              data-edge={t.edge ?? undefined}
+              onClick={() => setActiveTreasureIdx(cur => cur === i ? null : i)}
               style={{
                 "--rotate": `${t.rotate}deg`,
                 "--float-delay": t.floatDelay,
@@ -370,6 +362,7 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
+      </div>
       <Footer />
       {lightboxIdx !== null && (
         <PhotoLightbox

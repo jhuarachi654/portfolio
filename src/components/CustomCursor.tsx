@@ -32,11 +32,13 @@ export default function CustomCursor() {
     }
 
     const onOver = (e: MouseEvent) => {
+      const inHero = !!(e.target as HTMLElement).closest(".hero-page--landing")
       const overKoi = !!(e.target as HTMLElement).closest(".play-koi-wrap")
-      dotRef.current?.classList.toggle("is-hidden", overKoi)
-      ringRef.current?.classList.toggle("is-hidden", overKoi)
-      labelRef.current?.classList.toggle("is-hidden", overKoi)
-      if (overKoi) return
+      const hidden = overKoi || !inHero
+      dotRef.current?.classList.toggle("is-hidden", hidden)
+      ringRef.current?.classList.toggle("is-hidden", hidden)
+      labelRef.current?.classList.toggle("is-hidden", hidden)
+      if (hidden) return
 
       const onDark = !!(e.target as HTMLElement).closest(".footer-dark")
       dotRef.current?.classList.toggle("is-light", onDark)

@@ -53,7 +53,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className="min-h-screen">
         {isCaseStudy ? <CaseStudySidebar /> : <Sidebar />}
         <MobileNav />
-        <div className="main-content flex flex-col min-h-screen">
+        <div className={`main-content flex flex-col min-h-screen${isCaseStudy ? ' has-case-study-sidebar' : ''}`}>
           <main className="flex-1">
             {children}
           </main>

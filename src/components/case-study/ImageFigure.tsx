@@ -17,7 +17,7 @@ export default function ImageFigure({ src, alt, caption, fullWidth = false, clas
       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       className={`${fullWidth ? 'w-full' : ''} ${className}`}
     >
-      <div className="overflow-hidden" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.3)', padding: 16 }}>
+      <div className="overflow-hidden" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.3)', borderRadius: 12, padding: 16 }}>
         <img
           src={src}
           alt={alt}
@@ -26,7 +26,7 @@ export default function ImageFigure({ src, alt, caption, fullWidth = false, clas
         />
       </div>
       {caption && (
-        <figcaption className="font-sans font-semibold tracking-[0.12em] uppercase text-center" style={{ fontSize: 10, color: 'rgba(var(--color-navy-rgb),0.5)', marginTop: 12 }}>
+        <figcaption className="font-sans font-semibold tracking-[0.12em] uppercase text-center" style={{ fontSize: 12, color: 'var(--color-cs-heading)', opacity: 0.5, marginTop: 12 }}>
           {caption}
         </figcaption>
       )}

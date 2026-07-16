@@ -7,18 +7,24 @@ export interface TocSection {
 
 interface TocContextValue {
   sections: TocSection[]
-  register: (sections: TocSection[]) => void
+  title: string
+  register: (sections: TocSection[], title?: string) => void
 }
 
 const TocContext = createContext<TocContextValue>({
   sections: [],
+  title: '',
   register: () => {},
 })
 
 export function TocProvider({ children }: { children: ReactNode }) {
   const [sections, setSections] = useState<TocSection[]>([])
-  const register = useCallback((s: TocSection[]) => setSections(s), [])
-  return <TocContext.Provider value={{ sections, register }}>{children}</TocContext.Provider>
+  const [title, setTitle] = useState('')
+  const register = useCallback((s: TocSection[], t?: string) => {
+    setSections(s)
+    setTitle(t ?? '')
+  }, [])
+  return <TocContext.Provider value={{ sections, title, register }}>{children}</TocContext.Provider>
 }
 
 export const useToc = () => useContext(TocContext)
