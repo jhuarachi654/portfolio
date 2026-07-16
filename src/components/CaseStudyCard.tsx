@@ -109,6 +109,15 @@ export default function CaseStudyCard({
     return () => observer.disconnect()
   }, [forcePlay])
 
+  // Safety net: on a very slow connection, onCanPlay/onLoad may take a long
+  // time (or never fire cleanly) — never leave the media invisible forever,
+  // reveal whatever's there after a few seconds regardless.
+  useEffect(() => {
+    if (isReady || !isInView) return
+    const t = setTimeout(() => setIsReady(true), 4000)
+    return () => clearTimeout(t)
+  }, [isReady, isInView])
+
   useEffect(() => {
     if (isReady) { setSlowLoad(false); return }
     const t = setTimeout(() => setSlowLoad(true), 400)
@@ -249,7 +258,13 @@ export default function CaseStudyCard({
             poster={image}
             muted loop playsInline preload="metadata"
             onCanPlay={handleCanPlay}
-            style={{ objectFit, objectPosition, ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
+            // On a slow connection, the browser paints the poster/video frame
+            // progressively (top rows first), which briefly looks broken —
+            // the bgColor behind it shows through the undecoded portion.
+            // Keeping this invisible until onCanPlay (a fully decoded frame
+            // is ready) means only the clean bgColor placeholder is visible
+            // during that window, never a half-painted image.
+            style={{ objectFit, objectPosition, opacity: isReady ? 1 : 0, transition: "opacity 0.3s ease", ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
           />
         ) : lottie && lottieData ? (
           <Lottie
@@ -264,18 +279,13 @@ export default function CaseStudyCard({
           <img
             src={image}
             alt={title}
-            style={{ objectFit, objectPosition }}
+            style={{ objectFit, objectPosition, opacity: isReady ? 1 : 0, transition: "opacity 0.3s ease" }}
             className="case-study-card-image"
             onLoad={handleImageLoad}
           />
         )}
         {showSkeleton && <div className="case-study-card-skeleton" aria-busy="true" />}
         {comingSoon && <span className="case-study-card-badge">Soon</span>}
-        {!comingSoon && (
-          <div className="case-study-card-overlay">
-            <span className="case-study-card-overlay-btn">View project</span>
-          </div>
-        )}
       </div>
 
       <div className="case-study-card-body">
