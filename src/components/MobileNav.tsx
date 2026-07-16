@@ -4,6 +4,7 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom"
 const NAV_LINKS = [
   { label: "About", to: "/about" },
   { label: "Play", to: "/play" },
+  { label: "Draw", to: "/draw" },
 ]
 
 export default function MobileNav() {

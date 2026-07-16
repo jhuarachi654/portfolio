@@ -1,0 +1,12 @@
+token,family,weight-range,size-mobile-375,size-tablet-900,size-desktop-1440,line-height,text-transform
+Display,Sentient,400,52,72,110,1,none
+Display-Bold,Sentient,700,48,90,140,0.9,none
+H1,Sentient,400/500,32,38,44,1.15,none
+H2,Sentient,400/700,20,22,28,1.2,none
+H3,Sentient,400/700,18,20,20,1.3,none
+Stat,Sentient,700,18,20,20,1,none
+Body-LG,Inter Display,400/500,15,16,16,1.7,none
+Body,Inter Display,400/500,14,14,14,1.5,none
+Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Code,Mono,400/600,11,11,11,1.4,none

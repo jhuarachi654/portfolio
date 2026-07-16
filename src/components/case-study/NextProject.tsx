@@ -165,7 +165,7 @@ export default function NextProject({ title, to, description, tags, image, video
             )}
 
             <motion.div whileHover={{ x: 6 }} transition={{ duration: 0.2 }}>
-              <h3 style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'normal', fontWeight: 400, fontSize: 'clamp(28px, 3vw, 36px)', color: 'var(--color-cs-heading)', lineHeight: 1.1, margin: '0 0 16px' }}>
+              <h3 className="next-project-title" style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'normal', fontWeight: 400, fontSize: 'clamp(28px, 3vw, 36px)', color: 'var(--color-cs-heading)', lineHeight: 1.1, margin: '0 0 16px' }}>
                 {title}
               </h3>
               {tags && tags.length > 0 && (
@@ -188,7 +188,7 @@ export default function NextProject({ title, to, description, tags, image, video
                 </div>
               )}
               {description && (
-                <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 16, lineHeight: 1.7, color: '#222225', maxWidth: 480, margin: 0 }}>
+                <p className="next-project-desc" style={{ fontFamily: 'var(--font-landing-body)', fontSize: 16, lineHeight: 1.7, color: '#222225', maxWidth: 480, margin: 0 }}>
                   {description}
                 </p>
               )}

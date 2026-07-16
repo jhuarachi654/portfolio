@@ -1,0 +1,99 @@
+section,selector,old-font-family,old-font-size,old-font-weight,old-line-height,token,token-family,token-weight-range,size-mobile-375,size-tablet-900,size-desktop-1440,line-height,text-transform
+About page,.about-pile-caption,var(--font-sans),14px,,,Body,Inter Display,400/500,14,14,14,1.5,none
+About page,.about-contact-text,var(--font-sans),15px,,1.6,Body,Inter Display,400/500,14,14,14,1.5,none
+About page,.about-bio-para,var(--font-landing-body),16px,,1.7,Body-LG,Inter Display,400/500,15,16,16,1.7,none
+About page,.about-treasures-sub,var(--font-landing-body),16px,,1.7,Body-LG,Inter Display,400/500,15,16,16,1.7,none
+About page,.about-pronunciation,var(--font-sans),12px,,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+About page,.about-clip,,22px,,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+About page,.about-bio-footnote,,13px,,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+About page,.about-treasure-item::after,var(--font-sans),12px,500,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+About page,.about-section-heading,var(--font-landing-heading),"clamp(24px, 3vw, 36px)",400,1.15,H2,Sentient,400/700,20,22,28,1.2,none
+About page,.about-eyebrow,var(--font-sans),11px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Case study card,.case-study-card-description,var(--font-sans),15px,,1.5,Body,Inter Display,400/500,14,14,14,1.5,none
+Case study card,.case-study-card-overlay-text,var(--font-sans),13px,500,1.4,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Case study card,.case-study-card-overlay-btn,var(--font-sans),13px,600,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Case study card,.case-study-card-company,var(--font-landing-body),12px,600,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Case study card,.case-study-card-tag,var(--font-sans),13px,400,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Case study card,.case-study-card-index,"var(--font-mono, monospace)",11px,600,,Code,Mono,400/600,11,11,11,1.4,none
+Case study card,.play-card-grid .case-study-card-title,var(--font-landing-heading),20px,500,,H3,Sentient,400/700,18,20,20,1.3,none
+Case study card,.case-study-card-badge,var(--font-sans),10px,600,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Case study card,.case-study-card-year,var(--font-sans),9px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Case study card,.case-study-card-role,var(--font-sans),9px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Case study card,.case-study-card-year-pill,var(--font-sans),10px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Case study card,.case-study-card-role-line,var(--font-sans),11px,400,1.4,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Case study page,.case-study-sidebar-home,var(--font-landing-body),14px,500,,Body,Inter Display,400/500,14,14,14,1.5,none
+Case study page,.case-study-toc-link,var(--font-landing-body),14px,500,,Body,Inter Display,400/500,14,14,14,1.5,none
+Case study page,.cs-jump-btn,var(--font-landing-body),14px,500,,Body,Inter Display,400/500,14,14,14,1.5,none
+Case study page,.cs-page p,var(--font-landing-body) !important,,,,Body,Inter Display,400/500,14,14,14,1.5,none
+Case study page,.cs-metric-label,var(--font-landing-body),12px,600,1.35,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Case study page,.cs-tab-btn,var(--font-sans),13px,400,1.4,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Case study page,".cs-page h1, .cs-page h2, .cs-page h3",var(--font-landing-heading) !important,,400 !important,,H1,Sentient,400/500,32,38,44,1.15,none
+Case study page,.cs-page p.cs-serif-label,var(--font-landing-heading) !important,,600 !important,,H1,Sentient,400/500,32,38,44,1.15,none
+Case study page,.cs-page p.cs-stat-number,var(--font-landing-heading) !important,,700 !important,,H1,Sentient,400/500,32,38,44,1.15,none
+Case study page,".cs-page p.challenge-banner-question, .cs-page p.cs-hmw-question",var(--font-landing-heading) !important,,,,H1,Sentient,400/500,32,38,44,1.15,none
+Case study page,.cs-card-info-label,var(--font-sans),9px,700,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Case study page,.cs-card-info-text,var(--font-sans),11px,500,1.5,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Case study page,.cs-metric-stat,var(--font-display),20px,700,1,Stat,Sentient,700,18,20,20,1,none
+Deck TOC,.deck-toc-pill-emoji,,20px,,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Deck TOC,.deck-toc-pill-label,var(--font-sans),11px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Draw page,".draw-btn-primary, .draw-btn-secondary",var(--font-sans),12px,600,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Draw page,.draw-btn-lightbox,var(--font-sans),12px,600,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Draw page,.draw-empty,var(--font-sans),13px,,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Draw page,.draw-headline,var(--font-landing-heading),"clamp(24px, 6vw, 44px)",400,1.2,H1,Sentient,400/500,32,38,44,1.15,none
+Draw page,.draw-empty-text,var(--font-display),22px,400,1.5,H3,Sentient,400/700,18,20,20,1.3,none
+Draw page,.draw-count,var(--font-sans),11px,500,1.6,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Explore card,.explore-card-title,var(--font-sans),12px,600,1.3,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Explore card,.explore-card-badge,var(--font-sans),10px,600,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Explore card,.explore-card-role,var(--font-sans),11px,400,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Footer,.footer-dark-sub,var(--font-landing-body),14px,500,1.7,Body,Inter Display,400/500,14,14,14,1.5,none
+Footer,.footer-dark-copy,var(--font-landing-body),14px,400,,Body,Inter Display,400/500,14,14,14,1.5,none
+Footer,.footer-spark-particle::before,,11px,,1,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Footer,.footer-hojichas,var(--font-sans),13px,,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Footer,.footer-copy,var(--font-sans),12px,,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Footer,.footer-bar-link,var(--font-sans),13px,,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Footer,.footer-display-name,var(--font-display),"clamp(72px, 13vw, 200px)",700,0.88,Display-Bold,Sentient,700,48,90,140,0.9,none
+Footer,.footer-dark-tagline,var(--font-landing-heading),"clamp(28px, 3.4vw, 44px)",500,1.15,H1,Sentient,400/500,32,38,44,1.15,none
+Global,body,var(--font-sans),14px,,,Body,Inter Display,400/500,14,14,14,1.5,none
+Global,h1,var(--font-serif),,,,H1,Sentient,400/500,32,38,44,1.15,none
+Global buttons,.btn-resume,var(--font-sans),14px,500,,Body,Inter Display,400/500,14,14,14,1.5,none
+Global buttons,.icon-btn::before,var(--font-sans),11px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Hero,.live-clock,var(--font-sans),14px,,,Body,Inter Display,400/500,14,14,14,1.5,none
+Hero,.hero-landing-credentials,var(--font-landing-body),16px,400,1.2,Body-LG,Inter Display,400/500,15,16,16,1.7,none
+Hero,.cursor-label-text,var(--font-sans),12px,500,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Hero,.hero-tag--code,"var(--font-mono, ""ui-monospace"", monospace)",10.5px,,,Code,Mono,400/600,11,11,11,1.4,none
+Hero,.hero-flower-label,"var(--font-mono, ""ui-monospace"", monospace)",10px,500,,Code,Mono,400/600,11,11,11,1.4,none
+Hero,.hero-landing-name,var(--font-landing-heading),"clamp(52px, 8vw, 110px)",400,1,Display,Sentient,400,52,72,110,1,none
+Hero,.hero-name,var(--font-display),"clamp(52px, 8vw, 116px)",700,0.92,Display-Bold,Sentient,700,48,90,140,0.9,none
+Hero,.hero-name.hero-display-headline,var(--font-landing-heading),"clamp(24px, 6vw, 44px)",400,1.2,H1,Sentient,400/500,32,38,44,1.15,none
+Hero,.hero-landing-tagline,var(--font-landing-heading),"clamp(20px, 2.4vw, 28px)",400,1.2,H2,Sentient,400/700,20,22,28,1.2,none
+Hero,.hero-headline,var(--font-display),"clamp(14px, 1.5vw, 20px)",400,1.6,H3,Sentient,400/700,18,20,20,1.3,none
+Hero,.hero-tag,var(--font-sans),11px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+List row view,.list-row-title,var(--font-sans),18px,500,1.2,Body-LG,Inter Display,400/500,15,16,16,1.7,none
+List row view,.list-row-index,var(--font-sans),11px,400,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+List row view,.list-row-role,var(--font-sans),11px,400,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+List row view,.list-row-soon,var(--font-sans),10px,600,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Navigation,.mobile-nav-link--small,var(--font-landing-body),14px,400,,Body,Inter Display,400/500,14,14,14,1.5,none
+Navigation,.sidebar-pill-nav .nav-link,var(--font-landing-body),14px,500,,Body,Inter Display,400/500,14,14,14,1.5,none
+Navigation,.nav-link,var(--font-sans),13px,500,19.5px,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Navigation,.mobile-nav-link,var(--font-landing-heading),20px,500,,H3,Sentient,400/700,18,20,20,1.3,none
+Other,.ships-in-code,"var(--font-mono, ""ui-monospace"", monospace)",0.9em,,,Code,Mono,400/600,11,11,11,1.4,none
+Other,.ships-tooltip,"var(--font-mono, ""ui-monospace"", monospace)",11px,500,,Code,Mono,400/600,11,11,11,1.4,none
+Play page,.play-desc,var(--font-sans),15px,,1.7,Body,Inter Display,400/500,14,14,14,1.5,none
+Play page,.play-body,var(--font-landing-body),16px,,1.7,Body-LG,Inter Display,400/500,15,16,16,1.7,none
+Play page,.play-num,var(--font-display),"clamp(120px, 16vw, 200px)",700,1,Display-Bold,Sentient,700,48,90,140,0.9,none
+Play page,.play-headline,var(--font-landing-heading),"clamp(24px, 6vw, 44px)",400,1.2,H1,Sentient,400/500,32,38,44,1.15,none
+Play page,.play-title,var(--font-display),"clamp(20px, 2.5vw, 34px)",700,1.1,H2,Sentient,400/700,20,22,28,1.2,none
+Play page,.play-eyebrow,var(--font-sans),11px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Play page,.play-tag,var(--font-sans),10px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Work grid,.work-empty-state p,var(--font-sans),14px,,1.4,Body,Inter Display,400/500,14,14,14,1.5,none
+Work grid,.work-grid-all,var(--font-sans),13px,500,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Work grid,.work-card-title,var(--font-sans),13px,600,1.3,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Work grid,.work-filter-tag,var(--font-sans),13px,400,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Work grid,.work-empty-reset,var(--font-sans),12px,500,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Work grid,.work-filter-pill,var(--font-sans),13px,400,,Body-SM,Inter Display,400/600,12,13,13,1.4,none
+Work grid,.work-grid-heading--selected,var(--font-landing-heading),"clamp(28px, 3vw, 36px)",400,,H2,Sentient,400/700,20,22,28,1.2,none
+Work grid,.work-grid-heading,var(--font-sans),11px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Work grid,.work-card-soon,var(--font-sans),10px,600,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Work grid,.work-card-tag,var(--font-sans),10px,500,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Work grid,.work-filter-title,var(--font-sans),11px,600,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
+Work grid,.work-filter-clear,var(--font-sans),11px,600,,Label,Inter Display,400/700,11,11,11,1.4,"uppercase, tracking 0.05-0.06em"
