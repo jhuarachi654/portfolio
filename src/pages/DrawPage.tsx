@@ -1053,17 +1053,9 @@ export default function DrawPage() {
           </div>
         </div>
         <div className="draw-divider">
-          {(visitorCount != null || myVisitorNumber != null) && (
+          {visitorCount != null && (
             <span className="draw-count">
-              {/* The total-count query and this visitor's own INSERT are two
-                  separate, unsequenced requests — for a brand-new visitor,
-                  the count can resolve just before their own row (or another
-                  concurrent one) finishes committing, showing a total lower
-                  than "your" number. Clamping to at least myVisitorNumber
-                  keeps the two lines always consistent with each other. */}
-              {visitorCount != null && <>Total visitors: {Math.max(visitorCount, myVisitorNumber ?? 0)}</>}
-              {visitorCount != null && myVisitorNumber != null && <br />}
-              {myVisitorNumber != null && <>You're visitor #{myVisitorNumber}</>}
+              Total visitors: {visitorCount}
             </span>
           )}
           <div className="draw-divider-line" />
