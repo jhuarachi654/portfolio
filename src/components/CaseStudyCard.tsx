@@ -221,7 +221,15 @@ export default function CaseStudyCard({
       <div
         ref={mediaRef}
         className={`case-study-card-media ${aspectRatioClass} ${category ? `case-study-card-media--${category.toLowerCase()}` : ""} ${isReady ? "is-loaded" : ""}`}
-        style={{ ...(bgColor ? { background: bgColor } : {}), ...(mediaPadding ? { padding: mediaPadding } : {}) }}
+        style={{
+          ...(bgColor ? { background: bgColor } : {}),
+          // mediaPadding is authored in px against a ~400px-wide desktop
+          // card, but applying it as a fixed px value made it a much
+          // bigger proportion of the frame on narrower mobile/tablet
+          // cards — squishing "contain" media unevenly. Converting to a
+          // percentage keeps the same visual proportion at every size.
+          ...(mediaPadding ? { padding: `${(mediaPadding / 400) * 100}%` } : {}),
+        }}
       >
         {dotField && !bgLottie && <DotField layout={dotLayout} />}
         {bgLottie && bgLottieData && (

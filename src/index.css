@@ -2404,6 +2404,12 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(20, 20, 60, 0.18);
   transition: box-shadow 0.3s ease;
+  /* Explicit centering (not just child width/height:100%) so object-fit:
+     contain media with its own padding (mediaPadding) can't end up
+     sitting low/off-center inside the box on any viewport. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 [data-theme="dark"] .case-study-card-media {
