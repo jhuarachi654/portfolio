@@ -1125,14 +1125,31 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 [data-reveal-hero] {
   opacity: 0;
   transform: translateY(16px);
-  animation: heroReveal 600ms ease-out forwards;
+  will-change: transform, opacity;
+  /* ease-out-expo-ish — decelerates much more gently at the tail than plain
+     ease-out, which is what reads as "smooth" for a slow drift-up-and-in
+     rather than a quick snap that just happens to be eased. */
+  animation: heroReveal 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: var(--hero-delay, 0ms);
 }
 @keyframes heroReveal {
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Fades the WebGL hero background in alongside the text stagger instead of
+   it just being instantly there the moment the canvas mounts — the two used
+   to feel disconnected (background snaps in, text drifts in on its own). */
+.hero-godrays-fade {
+  opacity: 0;
+  animation: heroBgFade 1200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes heroBgFade {
+  to { opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal-hero] { opacity: 1; transform: none; animation: none; }
+  .hero-godrays-fade { opacity: 1; animation: none; }
 }
 
 /* ── Cover transition out of the hero into the section below ──────

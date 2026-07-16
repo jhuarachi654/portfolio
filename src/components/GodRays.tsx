@@ -315,7 +315,7 @@ export default function GodRays({
   }, [colors, noiseScale, noiseStrength, speed])
 
   return (
-    <div aria-hidden="true" className={className} style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
+    <div aria-hidden="true" className={`hero-godrays-fade${className ? ` ${className}` : ""}`} style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
       <canvas
         ref={canvasRef}
         style={{
