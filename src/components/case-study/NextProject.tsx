@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
 import { Sparkle } from '@phosphor-icons/react'
 
 interface NextProjectProps {
   title: string
   to: string
+  company?: string
   description?: string
   tags?: string[]
   image?: string
@@ -117,7 +117,7 @@ function PreviewLottie({ src, restTime = 0, zoom = 1, objectFit = 'cover' }: { s
   )
 }
 
-export default function NextProject({ title, to, description, tags, image, video, poster, lottie, restTime, mediaPadding, mediaZoom = 1, objectFit = 'cover', category, bgColor }: NextProjectProps) {
+export default function NextProject({ title, to, company, description, tags, image, video, poster, lottie, restTime, mediaPadding, mediaZoom = 1, objectFit = 'cover', category, bgColor }: NextProjectProps) {
   return (
     <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginTop: 84 }}>
       <section className="max-w-[1080px] px-8 md:px-14" style={{ paddingBottom: 84 }}>
@@ -128,26 +128,20 @@ export default function NextProject({ title, to, description, tags, image, video
           Explore more work <Sparkle size="0.7em" weight="regular" />
         </h2>
 
-        <Link
-          to={to}
-          data-cursor-label="Open case study"
-          style={{
-            display: 'block',
-            border: '1px solid rgba(var(--color-navy-rgb),0.15)',
-            borderRadius: 12,
-            padding: 24,
-            textDecoration: 'none',
-            boxShadow: '0 8px 24px rgba(20, 20, 60, 0.12)',
-          }}
-        >
-          <div style={{ display: 'grid', gridTemplateColumns: (image || video || lottie) ? '1fr 1fr' : '1fr', gap: 48, alignItems: 'center' }}>
+        {/* Reuses the exact CaseStudyCard classes/markup (media on top,
+            compact body below) so a project's "next up" preview here looks
+            and feels identical to how it appears in the landing grid,
+            instead of its own bespoke side-by-side layout. */}
+        <Link to={to} data-cursor-label="Open case study" className="case-study-card-wrapper next-project-card-wrapper" style={{ maxWidth: 400 }}>
+          <div className="case-study-card next-project-card">
             {(video || lottie || image) && (
               <div
                 className={`case-study-card-media aspect-4-3${!bgColor && category ? ` case-study-card-media--${category}` : ''}`}
                 style={{
                   background: bgColor ?? (category ? undefined : 'transparent'),
-                  padding: mediaPadding,
+                  padding: mediaPadding ? `${(mediaPadding / 400) * 100}%` : undefined,
                   overflow: 'hidden',
+                  boxShadow: 'none',
                 }}
               >
                 {video ? (
@@ -164,35 +158,18 @@ export default function NextProject({ title, to, description, tags, image, video
               </div>
             )}
 
-            <motion.div whileHover={{ x: 6 }} transition={{ duration: 0.2 }}>
-              <h3 className="next-project-title" style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'normal', fontWeight: 400, fontSize: 'clamp(28px, 3vw, 36px)', color: 'var(--color-cs-heading)', lineHeight: 1.1, margin: '0 0 16px' }}>
-                {title}
-              </h3>
+            <div className="case-study-card-body">
+              <h3 className="case-study-card-title">{title}</h3>
+              {company && <span className="case-study-card-company">at {company}</span>}
+              {description && <p className="case-study-card-description">{description}</p>}
               {tags && tags.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+                <div className="case-study-card-tags">
                   {tags.map(tag => (
-                    <span
-                      key={tag}
-                      className="font-sans"
-                      style={{
-                        fontSize: 13,
-                        color: '#222225',
-                        border: '1px solid rgba(var(--color-navy-rgb),0.2)',
-                        borderRadius: 999,
-                        padding: '6px 14px',
-                      }}
-                    >
-                      {tag}
-                    </span>
+                    <span key={tag} className="case-study-card-tag">{tag}</span>
                   ))}
                 </div>
               )}
-              {description && (
-                <p className="next-project-desc" style={{ fontFamily: 'var(--font-landing-body)', fontSize: 16, lineHeight: 1.7, color: '#222225', maxWidth: 480, margin: 0 }}>
-                  {description}
-                </p>
-              )}
-            </motion.div>
+            </div>
           </div>
         </Link>
       </section>

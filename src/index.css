@@ -2486,6 +2486,31 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   transform: translateY(0);
 }
 
+/* Next-project preview: unlike the landing grid (where only the media has
+   a shadow and the body sits plain on the page background), this wraps the
+   whole card — media + text — in one shadowed white container, since it
+   needs to read as a single distinct unit sitting inside page content. */
+.next-project-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(20, 20, 60, 0.12);
+  padding: 16px;
+  transition: box-shadow 0.3s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.next-project-card-wrapper:hover .next-project-card {
+  box-shadow: 0 12px 32px rgba(20, 20, 60, 0.16);
+}
+[data-theme="dark"] .next-project-card {
+  background: #17222f;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] .next-project-card-wrapper:hover .next-project-card {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+.next-project-card .case-study-card-body {
+  padding: 16px 4px 4px;
+}
+
 /* "Soon" badge */
 .case-study-card-badge { font-family: var(--type-label-family); font-size: var(--type-label-size); font-weight: 600; line-height: var(--type-label-line-height); position: absolute; top: 10px; right: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: #1E4B9A; background: rgba(255,255,255,0.88); backdrop-filter: blur(4px); border: 1px solid rgba(30, 75, 154, 0.2); padding: 2px 7px; z-index: 2; }
 
@@ -2511,10 +2536,13 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   white-space: nowrap;
 }
 
-/* Play page cards show their title (unlike Home, where media conveys it) */
-.play-card-grid .case-study-card-title { font-family: var(--type-h3-family); font-size: var(--type-h3-size); font-weight: 500; line-height: var(--type-h3-line-height); position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; color: #222225; margin: 0 0 4px; }
+/* Play page cards, and the case-study "next project" preview, show their
+   title (unlike Home, where the media itself already conveys the name) */
+.play-card-grid .case-study-card-title,
+.next-project-card-wrapper .case-study-card-title { font-family: var(--type-h3-family); font-size: var(--type-h3-size); font-weight: 500; line-height: var(--type-h3-line-height); position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; color: #222225; margin: 0 0 4px; }
 
-[data-theme="dark"] .play-card-grid .case-study-card-title { color: #F2F5FA; }
+[data-theme="dark"] .play-card-grid .case-study-card-title,
+[data-theme="dark"] .next-project-card-wrapper .case-study-card-title { color: #F2F5FA; }
 
 .case-study-card-company { font-family: var(--type-body-sm-family); font-size: var(--type-body-sm-size); font-weight: 600; line-height: var(--type-body-sm-line-height); order: 1; }
 .case-study-card-description { order: 2; }
