@@ -3239,7 +3239,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   left: 0;
   width: 340px;
   background: #fff;
-  padding: 16px 16px 46px;
+  padding: 16px 16px 20px;
   box-shadow: 0 4px 18px rgba(30, 75, 154, 0.14);
   transition: transform 0.3s ease, box-shadow 0.25s ease;
   will-change: transform;
@@ -3253,7 +3253,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   display: block;
 }
 
-.about-pile-caption { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); position: absolute; bottom: 12px; left: 0; width: 100%; text-align: center; font-style: italic; color: #222225; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 8px; box-sizing: border-box; }
+.about-pile-caption { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); display: block; text-align: center; font-style: italic; color: #222225; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 18px; padding: 8px 16px; box-sizing: border-box; }
 
 .about-pile-thumb:hover .about-pile-thumb-card:last-child:not(.is-shuffling) {
   transform: rotate(0deg) translateY(-12px) scale(1.03) !important;
@@ -3296,7 +3296,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   }
   .about-pile-hero-wrap { top: 35px; left: 30px; }
   .about-pile-thumb { width: 216px; height: 252px; }
-  .about-pile-thumb-card { width: 216px; padding: 11px 11px 32px; }
+  .about-pile-thumb-card { width: 216px; padding: 11px 11px 14px; }
 }
 
 /* Mobile */
@@ -3304,7 +3304,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   .about-corkboard { height: 420px; }
   .about-pile-hero-wrap { top: 40px; left: 50%; transform: translateX(-50%); }
   .about-pile-thumb { width: 240px; height: 280px; }
-  .about-pile-thumb-card { width: 240px; padding: 12px 12px 34px; }
+  .about-pile-thumb-card { width: 240px; padding: 12px 12px 15px; }
 }
 
 @keyframes pile-card-send-back {
