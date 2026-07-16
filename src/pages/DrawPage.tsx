@@ -538,6 +538,16 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
     return () => { cancelled = true }
   }, [drawing.image_url, idx])
 
+  // startTwinkle's RAF loop is only ever started/stopped from mouse
+  // enter/leave handlers — if the card unmounts while still hovered (fast
+  // scroll, pagination, filter change), nothing else would ever cancel it,
+  // leaving an orphaned rAF loop running forever against a detached canvas.
+  // Over a long session this accumulates and is a real memory-growth/crash
+  // risk, so cancel on unmount too.
+  useEffect(() => {
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [])
+
   const startTwinkle = () => {
     const overlay = overlayRef.current
     if (!overlay) return

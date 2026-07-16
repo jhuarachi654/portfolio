@@ -220,6 +220,11 @@ export function renderGodRaysFrame(
   gl.deleteShader(vertexShader)
   gl.deleteShader(fragmentShader)
   gl.deleteBuffer(positionBuffer)
+  // This is a one-shot render onto an offscreen canvas (used once per drawing
+  // card on the Draw page) — explicitly release the GPU context instead of
+  // relying on GC, since browsers cap simultaneous WebGL contexts and don't
+  // reclaim them promptly, and this can be called many times per session.
+  gl.getExtension("WEBGL_lose_context")?.loseContext()
 }
 
 export default function GodRays({
