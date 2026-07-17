@@ -132,7 +132,7 @@ export default function NextProject({ title, to, company, description, tags, ima
             compact body below) so a project's "next up" preview here looks
             and feels identical to how it appears in the landing grid,
             instead of its own bespoke side-by-side layout. */}
-        <Link to={to} data-cursor-label="Open case study" className="case-study-card-wrapper next-project-card-wrapper" style={{ maxWidth: 400 }}>
+        <Link to={to} data-cursor-label="Open case study" className="case-study-card-wrapper next-project-card-wrapper">
           <div className="case-study-card next-project-card">
             {(video || lottie || image) && (
               <div

@@ -360,7 +360,7 @@ export default function FareFinderPage() {
             <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
               A flight exploration tool for everyday travelers. Designed the map-based feature for PROS's 130+ airline partners; direct bookings up 35%.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'UX Design Intern' },
                 { label: 'Duration', value: 'Jun – Sep 2025' },
@@ -898,7 +898,7 @@ export default function FareFinderPage() {
           <img
             src={img('fare-finder-36-3yud6R.png')}
             alt="PROS UX Design team"
-            style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }}
+            style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }}
           />
           <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>
             PROS UX Design team

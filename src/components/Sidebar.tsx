@@ -57,7 +57,7 @@ export default function Sidebar() {
           <Envelope size={24} weight="regular" />
         </a>
         <a
-          href="https://docs.google.com/document/d/1ak7ln9627ek1KxQODL-yZ3cQLpjccrpHin7fv6HP_qg/edit?usp=sharing"
+          href="https://drive.google.com/file/d/1NNUOYQKVPdOA5eS47eLbHMhYOeYdDfel/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Resume"

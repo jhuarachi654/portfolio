@@ -143,7 +143,7 @@ export default function SnapSplitPage() {
             <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
               A bill-splitting app for friend groups. Rebranded and redesigned to cut the core task from 4 minutes to 30 seconds.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'Freelance Designer' },
                 { label: 'Duration', value: 'Dec 2023 – Sep 2024' },
@@ -304,7 +304,7 @@ export default function SnapSplitPage() {
               Task completion improved substantially once the assignment step became a shared, real-time task instead of a solo one.
             </BodyText>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ marginTop: 16 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 16 }}>
               <div className="cs-info-box" style={{ padding: 20 }}>
                 <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', marginBottom: 8 }}>Task Completion</p>
                 <p className="cs-stat-number" style={{ fontSize: 40, lineHeight: 1, margin: '0 0 8px' }}>50% → 80%</p>
@@ -324,7 +324,7 @@ export default function SnapSplitPage() {
               Designing, building, and shipping SnapSplit solo taught me to hold both the host's and the group's needs in mind at once, and to validate a reframed problem statement with real users before committing to a direction.
             </BodyText>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ marginTop: 16 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 16 }}>
               {[
                 { heading: 'Reframe before you solve', body: "The original brief was about reducing host drop-off. Looking closer revealed the real issue: only the host had a task at all. Reframing the HMW led to a fundamentally better solution." },
                 { heading: 'Validate with real users', body: 'Testing the collaborative flow with people who actually split bills regularly confirmed the shift was worth making, and surfaced language and moments worth refining further.' },

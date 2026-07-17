@@ -140,7 +140,7 @@ function AccessibilityExplorer() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'start' }}>
         <div>
           <h3 className="text-[22px] font-bold text-[var(--color-cs-heading)] leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 8, marginTop: 8 }}>Wireframe iterations</h3>
-          <div className="cs-option-btns" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div className="cs-option-btns" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
             {accessibilityOptions.map((o, i) => (
               <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
                 border: selected === i ? '1px solid var(--color-cs-heading)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
@@ -202,11 +202,11 @@ function ImpactToggle() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateRows: '1fr', gridTemplateColumns: '1fr', alignItems: 'stretch' }}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ gridRow: 1, gridColumn: 1, alignItems: 'stretch', visibility: view === 'stats' ? 'visible' : 'hidden', opacity: view === 'stats' ? 1 : 0, pointerEvents: view === 'stats' ? 'auto' : 'none' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ gridRow: 1, gridColumn: 1, alignItems: 'stretch', visibility: view === 'stats' ? 'visible' : 'hidden', opacity: view === 'stats' ? 1 : 0, pointerEvents: view === 'stats' ? 'auto' : 'none' }}>
           <StatBlock stat="30s" label="Task Time" description="Task time dropped from 2 minutes to 30 seconds. Users could see their results while filtering and change states with a click." icon={<Timer size={16} />} />
           <StatBlock stat="42%" label="Fewer Support Tickets" description="After the redesign shipped, support tickets related to filtering fell by 42%." icon={<Ticket size={16} />} />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ gridRow: 1, gridColumn: 1, alignItems: 'stretch', visibility: view === 'quotes' ? 'visible' : 'hidden', opacity: view === 'quotes' ? 1 : 0, pointerEvents: view === 'quotes' ? 'auto' : 'none' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ gridRow: 1, gridColumn: 1, alignItems: 'stretch', visibility: view === 'quotes' ? 'visible' : 'hidden', opacity: view === 'quotes' ? 1 : 0, pointerEvents: view === 'quotes' ? 'auto' : 'none' }}>
           {[
             { quote: "It's pretty neat that I can see the real time results on the side. The only thing I'm unsure of is how to exclude an item?", role: 'Legal Analyst' },
             { quote: "The content is pretty clear and I appreciate the multiple labels for clarity. I also like that there is no tedious dragging for filtering.", role: 'Data Analyst w/ Colorblindness' },
@@ -217,7 +217,7 @@ function ImpactToggle() {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ gridRow: 1, gridColumn: 1, alignItems: 'stretch', visibility: view === 'future' ? 'visible' : 'hidden', opacity: view === 'future' ? 1 : 0, pointerEvents: view === 'future' ? 'auto' : 'none' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ gridRow: 1, gridColumn: 1, alignItems: 'stretch', visibility: view === 'future' ? 'visible' : 'hidden', opacity: view === 'future' ? 1 : 0, pointerEvents: view === 'future' ? 'auto' : 'none' }}>
           {[
             { label: 'Where we landed', body: 'I handed off the designs at the end of my internship. The redesigned filter component shipped and support tickets related to filtering fell by 42%, a direct result of addressing the root causes uncovered during research.' },
             { label: "What I'd do differently", body: 'If I had more time, I would have pushed for more end-user testing earlier in the process. Discovering the accessibility issues mid-project meant some iterations felt rushed. Starting with a broader audit would have set a stronger foundation.' },
@@ -291,7 +291,7 @@ export default function ExpertAIPage() {
             <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
               An AI text analysis platform for enterprise teams. Redesigned filtering for accessibility; task time dropped from 2 min to 30s.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'Product Design Intern' },
                 { label: 'Duration', value: 'Jun – Sep 2022' },
@@ -439,7 +439,7 @@ export default function ExpertAIPage() {
               </BodyText>
             </Prose>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4" style={{ marginTop: 86 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" style={{ marginTop: 86 }}>
               <TicketCard label="Lack of Visibility" description="Users couldn't see which filters were active. The popup showed nothing once closed." count={34} total={62} />
               <TicketCard label="High Friction" description="Drag and drop often failed. Users had to try multiple times to add a simple filter." count={22} total={62} />
               <TicketCard label="Blocked Results" description="The popup covered the entire screen. Users couldn't see their data while filtering." count={47} total={62} />
@@ -528,7 +528,7 @@ export default function ExpertAIPage() {
               </BodyText>
             </Prose>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ marginTop: 86 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 86 }}>
               <ConstraintCard
                 title="Design System"
                 bullets={[
@@ -612,7 +612,7 @@ export default function ExpertAIPage() {
               </BodyText>
             </Prose>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ marginTop: 86 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 86 }}>
               <ConstraintCard
                 title="Lead Designer"
                 bullets={[

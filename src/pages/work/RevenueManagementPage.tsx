@@ -339,7 +339,7 @@ function MyMarketsExplorer() {
           <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 32px' }}>
             How might we <strong className="font-semibold text-[var(--color-cs-heading)]">display market cards so analysts can scan quickly</strong> without losing important context?
           </p>
-          <div className="cs-option-btns" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+          <div className="cs-option-btns" style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {MARKET_OPTIONS.map((o, i) => (
               <button
                 key={o.title}
@@ -431,7 +431,7 @@ function AIPlacementExplorer() {
           <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 32px' }}>
             "How might we <strong className="font-semibold text-[var(--color-cs-heading)]">offer AI help</strong> that's there when you need it and invisible when you don't?"
           </p>
-          <div className="cs-option-btns" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+          <div className="cs-option-btns" style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {AI_OPTIONS.map((o, i) => (
               <button
                 key={o.title}
@@ -671,7 +671,7 @@ export default function RevenueManagementPage() {
             An enterprise airline pricing platform for major airlines. Redesigned the core workflow for new-hire and veteran analysts and handed off to engineering.
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" style={{ marginBottom: 0 }}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3" style={{ marginBottom: 0 }}>
             {[
               { label: 'Role',     value: 'UX Design Intern' },
               { label: 'Duration', value: 'Jun – Sep 2025' },
@@ -878,7 +878,7 @@ export default function RevenueManagementPage() {
           After identifying the core pain points, we brainstormed concepts to address them. I suggested starting with My Markets, the screen where research showed Juniors got lost most. The team agreed and added Market Overview, which Seniors use regularly. We then explored an AI assistant and an onboarding experience, agreeing both had to serve analysts at every level.
         </BodyText>
 
-        <div className="grid sm:grid-cols-2 gap-5" style={{ marginTop: 8 }}>
+        <div className="grid lg:grid-cols-2 gap-5" style={{ marginTop: 8 }}>
           {[
             { icon: <ChartBar size={24} weight="light" />, title: 'My Markets',      body: 'A dashboard showing analysts which markets need attention first.' },
             { icon: <Stack size={24} weight="light" />,    title: 'Market Overview', body: 'Analytics with booking outlooks and trend data for deeper market context.' },
@@ -910,7 +910,7 @@ export default function RevenueManagementPage() {
           <BodyText>
             After design critique sessions, we scrapped the left panel. It removed user agency. No single option felt right on its own, so we combined what worked: a right panel for quick optional help, embedded AI for lightweight guidance, and a dedicated chat screen for deeper assistance.
           </BodyText>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32 }}>
+          <div className="rm-ai-verdict-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32 }}>
             {[
               { title: 'Right Chat Panel', image: img('revenue-management-17-Edz70r.png'), verdict: 'Chosen (further exploration)' },
               { title: 'Embedded AI', image: img('revenue-management-18-w7PI4H.png'), verdict: 'Chosen (subtle, lightweight)' },

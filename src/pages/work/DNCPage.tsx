@@ -300,7 +300,7 @@ export default function DNCPage() {
             <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
               Digital design for Biden-Harris and Democratic party initiatives. Turned around 18 same-day assets during an active presidential campaign; posts hit 5,500+ likes.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'Visual Design Intern' },
                 { label: 'Duration', value: 'Jun – Sep 2023' },
@@ -377,7 +377,7 @@ export default function DNCPage() {
 
           <BodyText>As I did my design requests, I kept two distinct perspectives in mind while designing.</BodyText>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 24 }}>
+          <div className="dnc-persona-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 24 }}>
             {[
               {
                 type: 'The Scrolling Voter',
