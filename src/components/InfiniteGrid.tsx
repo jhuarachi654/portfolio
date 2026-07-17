@@ -193,6 +193,15 @@ export default function InfiniteGrid({ srcs, itemSize = 120, gap = 6, maxSpeed =
     requestAnimationFrame(() => applyAssignment())
   }, [cols, rows, srcs.length, tileSize, itemSize, gap, applyAssignment])
 
+  // Touch/coarse-pointer devices (mobile, most tablets) have no hover, so
+  // the pointermove-driven parallax below never gets anything to react to
+  // and the grid just sits still. Give those devices a slow constant
+  // horizontal auto-scroll instead, so there's still motion to see.
+  const isCoarsePointer = useMemo(
+    () => typeof window !== "undefined" && window.matchMedia("(hover: none)").matches,
+    []
+  )
+
   useEffect(() => {
     if (!rootRef.current || !worldRef.current || !srcs.length) return
     let raf = 0; let last = performance.now()
@@ -204,8 +213,10 @@ export default function InfiniteGrid({ srcs, itemSize = 120, gap = 6, maxSpeed =
       const k = clamp(1 - damping, 0.03, 0.35)
       smooth.current.x = lerp(smooth.current.x, target.current.x, k)
       smooth.current.y = lerp(smooth.current.y, target.current.y, k)
-      vel.current.x = lerp(vel.current.x, (inside.current ? smooth.current.x / 0.5 : 0) * maxSpeed, k)
-      vel.current.y = lerp(vel.current.y, (inside.current ? smooth.current.y / 0.5 : 0) * maxSpeed, k)
+      const targetVelX = isCoarsePointer ? 0.35 : (inside.current ? smooth.current.x / 0.5 : 0)
+      const targetVelY = isCoarsePointer ? 0 : (inside.current ? smooth.current.y / 0.5 : 0)
+      vel.current.x = lerp(vel.current.x, targetVelX * maxSpeed, k)
+      vel.current.y = lerp(vel.current.y, targetVelY * maxSpeed, k)
       offset.current.x += vel.current.x * dt
       offset.current.y += vel.current.y * dt
 
@@ -229,7 +240,7 @@ export default function InfiniteGrid({ srcs, itemSize = 120, gap = 6, maxSpeed =
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [srcs.length, step, itemSize, maxSpeed, damping, magnify, radius, applyAssignment])
+  }, [srcs.length, step, itemSize, maxSpeed, damping, magnify, radius, applyAssignment, isCoarsePointer])
 
   // ── Build cells ──
   cellsRef.current = []

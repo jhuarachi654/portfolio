@@ -509,6 +509,7 @@ function useNumCols() {
 function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; onZoom: (i: number) => void }) {
   const canvasRef  = useRef<HTMLCanvasElement>(null)
   const overlayRef = useRef<HTMLCanvasElement>(null)
+  const tiltRef    = useRef<HTMLDivElement>(null)
   const rafRef     = useRef(0)
   const asciiRef   = useRef<string[]>([])
   const drawXRef   = useRef(14)
@@ -607,37 +608,59 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
     <div
       className="draw-card-enter"
       style={{
-        borderRadius: 12, overflow: "hidden", position: "relative",
-        boxShadow: "0 2px 16px rgba(58,58,62,0.10), 0 1px 3px rgba(58,58,62,0.06)",
-        transition: "transform 0.22s cubic-bezier(.25,.8,.25,1), box-shadow 0.22s",
+        position: "relative",
         cursor: "zoom-in",
         animationDelay: `${Math.min(idx, 8) * 60}ms`,
       }}
-      onMouseEnter={e => {
-        const el = e.currentTarget as HTMLElement
-        el.style.transform = "translateY(-4px) scale(1.01)"
-        el.style.boxShadow = "0 12px 36px rgba(58,58,62,0.16), 0 2px 6px rgba(58,58,62,0.08)"
+      onMouseEnter={() => {
+        const el = tiltRef.current
+        if (el) el.style.boxShadow = "0 12px 36px rgba(58,58,62,0.16), 0 2px 6px rgba(58,58,62,0.08)"
         startTwinkle()
       }}
-      onMouseLeave={e => {
-        const el = e.currentTarget as HTMLElement
-        el.style.transform = ""; el.style.boxShadow = ""
+      onMouseLeave={() => {
+        const el = tiltRef.current
+        if (el) el.style.boxShadow = ""
         stopTwinkle()
       }}
       onClick={() => onZoom(idx)}
     >
-      <canvas
-        ref={canvasRef}
-        width={CW * CDPR}
-        height={CH * CDPR}
-        style={{ display: "block", width: "100%", height: "auto" }}
-      />
-      <canvas
-        ref={overlayRef}
-        width={CW * CDPR}
-        height={CH * CDPR}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
-      />
+      {/* Separate wrapper for the hover float-tilt so it never shares the
+          `animation` shorthand with the outer element's card-pop entrance —
+          toggling one shorthand between two different animations on hover
+          in/out restarts card-pop from its `backwards`-filled (invisible)
+          state every time you stop hovering, causing the card to flash
+          empty for its entrance duration + stagger delay.
+
+          The card's visual chrome (radius/shadow/clipping) lives here too,
+          not on the outer div — it needs to rotate along with the tilt, or
+          the flat outer box stays put while the tilted content pokes out
+          past its edges, exposing the page background in the gap. */}
+      <div
+        ref={tiltRef}
+        className="draw-card-tilt"
+        style={{
+          position: "relative", width: "100%", height: "100%",
+          borderRadius: 12, overflow: "hidden",
+          boxShadow: "0 2px 16px rgba(58,58,62,0.10), 0 1px 3px rgba(58,58,62,0.06)",
+          // Inline `transition` fully overrides the CSS class's own
+          // `transition: transform ...` (inline always wins for the whole
+          // shorthand), so both properties need to be listed here together.
+          transition: "box-shadow 0.22s, transform 0.4s ease-out",
+        }}
+      >
+        <canvas
+          ref={canvasRef}
+          width={CW * CDPR}
+          height={CH * CDPR}
+          style={{ display: "block", width: "100%", height: "auto" }}
+        />
+        <canvas
+          ref={overlayRef}
+          width={CW * CDPR}
+          height={CH * CDPR}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
+        />
+      </div>
     </div>
   )
 }
@@ -987,6 +1010,58 @@ export default function DrawPage() {
 
   useEffect(() => { load() }, [])
 
+  // Shared by the automatic post-render trigger and the hover handler below
+  // — extracted so the popup doesn't rely solely on a genuine mouseenter
+  // event, which never fires if the modal happens to open with the cursor
+  // already sitting inside its bounds (opening via click very often leaves
+  // the cursor stationary right where the popup appears, unlike the
+  // gallery card where hovering always requires real pointer movement).
+  const startZoomTwinkle = () => {
+    const overlay = zoomOverlayRef.current
+    if (!overlay) return
+    cancelAnimationFrame(zoomRafRef.current)
+    overlay.width = CW * CDPR; overlay.height = CH * CDPR
+    const ctx = overlay.getContext("2d")!
+    ctx.setTransform(CDPR, 0, 0, CDPR, 0, 0)
+
+    const asciiFS = zoomAsciiFSRef.current
+    const asciiLineH = zoomAsciiLineHRef.current
+    const drawX = zoomDrawXRef.current
+    const drawY = zoomDrawYRef.current
+    ctx.font = `bold ${asciiFS}px 'Courier New', Courier, monospace`
+    if ("letterSpacing" in ctx) (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = "-0.5px"
+    const charW = ctx.measureText("M").width
+    const cells: { ch: string; x: number; y: number }[] = []
+    zoomAsciiRef.current.forEach((line, row) => {
+      for (let col = 0; col < line.length; col++) {
+        const ch = concentrateChar(line[col])
+        if (ch !== " ") cells.push({ ch, x: drawX + col * charW, y: drawY + row * asciiLineH })
+      }
+    })
+    if (cells.length === 0) return
+    let last = 0
+    const tick = (now: number) => {
+      if (now - last < 100) { zoomRafRef.current = requestAnimationFrame(tick); return }
+      last = now
+      ctx.clearRect(0, 0, CW, CH)
+      ctx.fillStyle = "#ffffff"
+      const count = Math.floor(cells.length * 0.10)
+      for (let i = 0; i < count; i++) {
+        const c = cells[Math.floor(Math.random() * cells.length)]
+        ctx.globalAlpha = 0.7 + Math.random() * 0.3
+        ctx.fillText(c.ch, c.x, c.y)
+      }
+      ctx.globalAlpha = 1
+      zoomRafRef.current = requestAnimationFrame(tick)
+    }
+    zoomRafRef.current = requestAnimationFrame(tick)
+  }
+
+  const stopZoomTwinkle = () => {
+    cancelAnimationFrame(zoomRafRef.current)
+    zoomOverlayRef.current?.getContext("2d")?.clearRect(0, 0, CW * CDPR, CH * CDPR)
+  }
+
   useEffect(() => {
     if (zoomedIdx === null || !zoomCanvasRef.current) return
     const drawing = visible[zoomedIdx]
@@ -1008,8 +1083,9 @@ export default function DrawPage() {
       zoomDrawYRef.current = zdy
       zoomAsciiLineHRef.current = zlh
       zoomAsciiFSRef.current = zfs
+      if (!cancelled) startZoomTwinkle()
     })
-    return () => { cancelled = true }
+    return () => { cancelled = true; stopZoomTwinkle() }
   }, [zoomedIdx])
 
   const closeModal = () => {
@@ -1183,54 +1259,15 @@ export default function DrawPage() {
               </div>
             )}
 
-            {/* Card container */}
+            {/* Card container — floats continuously (not gated behind
+                hover like the gallery cards) since it's already the one
+                "selected" card being shown off in the lightbox. */}
             <div
+              className="draw-zoom-card"
               style={{ width: "100%", maxWidth: 432, borderRadius: 16, overflow: "hidden", boxShadow: "0 40px 100px rgba(0,0,0,0.5)", position: "relative" }}
-              onMouseEnter={(e) => {
-                const overlay = zoomOverlayRef.current
-                if (!overlay) return
-                overlay.width = CW * CDPR; overlay.height = CH * CDPR
-                const ctx = overlay.getContext("2d")!
-                ctx.setTransform(CDPR, 0, 0, CDPR, 0, 0)
-
-                // Flash the same glyph renderCard drew (same font/position/
-                // concentration) instead of masking with a flat color, so it
-                // lines up and reads as a shimmer against the gradient.
-                const asciiFS = zoomAsciiFSRef.current
-                const asciiLineH = zoomAsciiLineHRef.current
-                const drawX = zoomDrawXRef.current
-                const drawY = zoomDrawYRef.current
-                ctx.font = `bold ${asciiFS}px 'Courier New', Courier, monospace`
-                if ("letterSpacing" in ctx) (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = "-0.5px"
-                const charW = ctx.measureText("M").width
-                const cells: { ch: string; x: number; y: number }[] = []
-                zoomAsciiRef.current.forEach((line, row) => {
-                  for (let col = 0; col < line.length; col++) {
-                    const ch = concentrateChar(line[col])
-                    if (ch !== " ") cells.push({ ch, x: drawX + col * charW, y: drawY + row * asciiLineH })
-                  }
-                })
-                if (cells.length === 0) return
-                let last = 0
-                const tick = (now: number) => {
-                  if (now - last < 100) { zoomRafRef.current = requestAnimationFrame(tick); return }
-                  last = now
-                  ctx.clearRect(0, 0, CW, CH)
-                  ctx.fillStyle = "#ffffff"
-                  const count = Math.floor(cells.length * 0.10)
-                  for (let i = 0; i < count; i++) {
-                    const c = cells[Math.floor(Math.random() * cells.length)]
-                    ctx.globalAlpha = 0.7 + Math.random() * 0.3
-                    ctx.fillText(c.ch, c.x, c.y)
-                  }
-                  ctx.globalAlpha = 1
-                  zoomRafRef.current = requestAnimationFrame(tick)
-                }
-                zoomRafRef.current = requestAnimationFrame(tick)
-              }}
+              onMouseEnter={startZoomTwinkle}
               onMouseLeave={() => {
-                cancelAnimationFrame(zoomRafRef.current)
-                zoomOverlayRef.current?.getContext("2d")?.clearRect(0, 0, CW * CDPR, CH * CDPR)
+                stopZoomTwinkle()
                 document.body.classList.remove("cursor-on-light-card")
               }}
             >

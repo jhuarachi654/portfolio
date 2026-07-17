@@ -4,7 +4,6 @@ import Sidebar from './Sidebar'
 import CaseStudySidebar from './CaseStudySidebar'
 import MobileNav from './MobileNav'
 import { TocProvider } from '../contexts/CaseStudyTocContext'
-import { useVisitorNumber } from '../hooks/useVisitorNumber'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -46,7 +45,6 @@ export default function Layout({ children }: LayoutProps) {
   const { pathname } = useLocation()
   const isCaseStudy = pathname.startsWith('/work/')
   useGlobalReveal()
-  useVisitorNumber() // registers this visit site-wide; displayed on the Drawing Board
 
   return (
     <TocProvider>

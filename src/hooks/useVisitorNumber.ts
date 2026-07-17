@@ -16,9 +16,8 @@ function getOrCreateVisitorUuid(): string {
 }
 
 // Module-level (not per-hook-instance) so that multiple components calling
-// this hook on the same page load — e.g. Layout's Sidebar and a page like
-// DrawPage — share a single in-flight registration instead of racing each
-// other into inserting two rows for one visit.
+// this hook on the same page load share a single in-flight registration
+// instead of racing each other into inserting two rows for one visit.
 let sharedRegisterPromise: Promise<number | null> | null = null
 
 function registerVisitor(): Promise<number | null> {

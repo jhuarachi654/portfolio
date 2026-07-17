@@ -345,7 +345,7 @@ export default function ExpertAIPage() {
             </Prose>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 48, alignItems: 'center', marginTop: 86 }}>
+          <div className="ea-filter-popup-row" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 48, alignItems: 'center', marginTop: 86 }}>
             <div>
               <img src={img('expert-ai-05-DNXec4.png')} alt="Expert.ai Corpus filtering interface — current state" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
               <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>The original filter popup, blocking results while in use</p>
@@ -481,7 +481,7 @@ export default function ExpertAIPage() {
               Several users also mentioned accessibility issues. The system used red and green to show exclusion and inclusion, which meant colorblind users could not tell them apart. The filtering system also required users to drag elements into inclusion and exclusion areas. For users who could not use a mouse, this was difficult.
             </BodyText>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, marginTop: 32 }}>
+            <div className="ea-color-barriers-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, marginTop: 32 }}>
               <div>
                 <img src={img('expert-ai-09-ileoWS.png')} alt="Red/green accessibility contrast failure" style={{ width: '100%', height: 'auto', display: 'block' }} />
                 <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Red/green indicators, inaccessible for colorblind users</p>

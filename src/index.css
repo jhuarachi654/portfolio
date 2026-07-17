@@ -146,7 +146,45 @@
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .draw-card-enter {
-  animation: card-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* `backwards` (not `both`) — holds the pre-animation state during the
+     stagger delay to avoid a flash, but releases `transform` back to the
+     normal cascade once the entrance finishes, instead of permanently
+     outranking the hover-tilt inline style CSS animations otherwise take
+     priority over even after they've completed. */
+  animation: card-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/* Whimsical "showing off" float — a tilt toward the viewer plus a
+   left-right sway, with the lift itself bobbing up and down in sync
+   (rather than sitting at one fixed height) so it reads as continuously
+   floating, not just a one-time lift. Lives on a separate inner wrapper
+   (.draw-card-tilt) rather than .draw-card-enter itself, since that outer
+   element's `animation` shorthand is already spoken for by the card-pop
+   entrance — sharing one shorthand between the two would mean every
+   mouseleave reverts to the card-pop declaration and restarts it from its
+   `backwards`-filled (invisible) state, flashing the card empty. */
+/* transform/box-shadow transition for this element is set inline in
+   DrawPage.tsx, not here — an inline `transition` fully overrides a CSS
+   class's, so it has to include both properties in one place. */
+.draw-card-enter:hover .draw-card-tilt {
+  animation: card-float-tilt 2.6s ease-in-out infinite;
+}
+@keyframes card-float-tilt {
+  0%, 100% { transform: perspective(1100px) rotateX(-12deg) rotateY(-8deg) translateY(-6px)  scale(1.03); }
+  50%      { transform: perspective(1100px) rotateX(-12deg) rotateY(8deg)  translateY(-11px) scale(1.03); }
+}
+/* Same float, always-on rather than hover-gated — see JSX comment. */
+.draw-zoom-card {
+  animation: card-float-tilt 2.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .draw-card-enter:hover .draw-card-tilt {
+    animation: none;
+    transform: translateY(-4px);
+  }
+  .draw-zoom-card {
+    animation: none;
+  }
 }
 
 /* ── 404 stagger ────────────────────────────────────────────────── */
@@ -1320,7 +1358,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
   .hero-left {
     flex-shrink: 0;
-    padding: 24px 0 28px 124px;
+    padding: 80px 0 28px 124px;
     justify-content: center;
   }
   .hero-right {
@@ -1328,7 +1366,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     min-width: 0;
     align-items: center;
     justify-content: center;
-    padding: 0 124px 0 0;
+    padding: 96px 124px 0 0;
     overflow: visible;
   }
   /* Same reasoning as the mobile override just above: the H1 token's own
@@ -3860,8 +3898,14 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   .play-card-grid {
     padding: 0 124px 80px;
   }
+  /* Taller media on tablet — the 4:3 ratio used everywhere else reads a
+     bit short/cramped at this width, so give it more height here only. */
+  .play-card-grid .case-study-card-media {
+    aspect-ratio: 1/1 !important;
+  }
   .play-card-grid > div[style*="grid-column"] .case-study-card-media {
-    height: calc((100vw - (2 * 124px) - 24px) / 2 * 3 / 4);
+    aspect-ratio: unset !important;
+    height: calc((100vw - (2 * 124px) - 24px) / 2);
   }
 }
 
@@ -4268,6 +4312,11 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .collection-img:hover { opacity: 0.85; }
 
 /* ── DNC iteration explorer ─────────────────────────────────────── */
+.dnc-iter-img {
+  border: 1px solid rgba(var(--color-navy-rgb), 0.2);
+  border-radius: 12px;
+  object-fit: cover;
+}
 .dnc-iter-tabs {
   display: flex;
   flex-direction: row;
@@ -4555,6 +4604,18 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
      these are short enough to stay side by side at tablet width instead
      of stacking into one long column. */
   .cs-page .dnc-persona-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Exception: image + short "what wasn't working" list — text column is
+     narrow enough to stay side by side rather than stack. */
+  .cs-page .ea-filter-popup-row[style*="grid-template-columns"] {
+    grid-template-columns: 2fr 1fr !important;
+  }
+
+  /* Exception: two comparison screenshots — meant to be read side by side,
+     not stacked into a long single column. */
+  .cs-page .ea-color-barriers-row[style*="grid-template-columns"] {
     grid-template-columns: 1fr 1fr !important;
   }
 }
