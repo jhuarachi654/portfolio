@@ -11,11 +11,9 @@ import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
   { id: 'ea-intro',       label: 'Introduction' },
-  { id: 'ea-solution',    label: 'Solution Preview' },
   { id: 'ea-research',    label: 'Research' },
-  { id: 'ea-development', label: 'Developments' },
+  { id: 'ea-development', label: 'Development' },
   { id: 'ea-features',    label: 'Solution' },
-  { id: 'ea-impact',      label: 'Impact' },
   { id: 'ea-reflection',  label: 'Reflection' },
 ]
 
@@ -26,7 +24,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
     <section
       id={id}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
-      style={{ marginTop: 256 }}
+      style={{ marginTop: 164 }}
     >
       {children}
     </section>
@@ -289,7 +287,7 @@ export default function ExpertAIPage() {
               Corpus Platform
             </h1>
             <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
-              An AI text analysis platform for enterprise teams. Redesigned filtering for accessibility; task time dropped from 2 min to 30s.
+              Expert.ai builds AI text analysis tools for legal, finance, and government teams. The Corpus Platform is where those teams upload, organize, and filter documents before running analysis. Over time, the filter component generated 62 support tickets in six months as user needs grew beyond what it was originally built to handle. I redesigned it to address those gaps. Task time dropped from 2 minutes to 30 seconds and support tickets fell 42%.
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
@@ -306,7 +304,7 @@ export default function ExpertAIPage() {
             </div>
 
             
-            <a href="#ea-solution" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
+            <a href="#ea-features" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
           </div>
         </div>
       </section>
@@ -334,88 +332,30 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>The current state of the filtering system</SubHeading>
+            <SubHeading>The filter generated more support tickets than any other feature on the platform.</SubHeading>
             <Prose>
               <BodyText>
-                Expert.ai helps legal, finance, and government organizations analyze massive amounts of text: contracts, court rulings, financial reports, and regulatory filings. The Corpus platform is where users upload, organize, and filter documents before running AI analysis.
+                Expert.ai helps legal, finance, and government organizations analyze large volumes of text: contracts, court rulings, financial reports, and regulatory filings. The Corpus Platform is where analysts upload and organize those documents before running AI analysis. Filtering is how analysts narrow thousands of documents down to the ones that matter. It is one of the first things every user does.
               </BodyText>
               <BodyText>
-                In six months, the customer support team received 62 support tickets about filtering alone. When users applied filters, the popup blocked their results completely. They'd add a filter, close the popup to check, reopen it to adjust, and repeat. Each loop took 15–20 seconds.
+                The filter had been designed as a popup that opened over the document results. As the platform grew and the user base expanded across legal, finance, and government teams, the interaction started generating friction. Analysts had to close the popup to check their results, reopen it to adjust a filter, close it again to check, and repeat. Each loop took 15 to 20 seconds. Over six months, that friction accumulated into 62 support tickets.
+              </BodyText>
+              <BodyText>
+                When I reviewed those tickets and spoke with users, what I found was not just a usability problem. The filter also had accessibility limitations that were affecting a portion of users in ways the team had not yet quantified. The original brief did not include accessibility. I made the case that it should.
               </BodyText>
             </Prose>
           </div>
 
-          <div className="ea-filter-popup-row" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 48, alignItems: 'center', marginTop: 86 }}>
-            <div>
-              <img src={img('expert-ai-05-DNXec4.png')} alt="Expert.ai Corpus filtering interface — current state" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
-              <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>The original filter popup, blocking results while in use</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, margin: '0 0 16px' }}>What wasn't working</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {[
-                  { type: '-', text: 'Popup covered results entirely while filtering' },
-                  { type: '-', text: 'Red/green indicators invisible to colorblind users' },
-                  { type: '-', text: 'Drag-and-drop failed frequently, causing repeated attempts' },
-                  { type: '-', text: 'No way to see active filters once the popup was closed' },
-                ].map(({ type, text }, i) => (
-                  <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                    <span style={{ fontFamily: 'var(--font-landing-body)', fontSize: 16, fontWeight: 700, flexShrink: 0, lineHeight: 1.5, color: 'rgba(var(--color-navy-rgb),0.35)' }}>{type}</span>
-                    <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div style={{ marginTop: 32 }}>
+            <ChallengeBanner question={<>How might we <strong className="font-semibold">redesign filtering</strong> to be visible, reliable, and accessible so users can filter efficiently and independently?</>} />
           </div>
         </Section>
 
-        {/* ── Challenge banner ── */}
-        <Section>
-          <ChallengeBanner question={<>How might we <strong className="font-semibold">redesign filtering</strong> to be visible and reliable so users can filter efficiently?</>} />
-        </Section>
-
-        {/* ── 2. Solution Preview ── */}
-        <Section id="ea-solution">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>2.</span>
-              <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
-                Solution Preview
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24, marginTop: 86 }}>
-            <h3 className="font-bold leading-snug" style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--color-cs-heading)', margin: 0 }}>
-              A faster, clearer, and more accessible way to filter.
-            </h3>
-            <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
-              A seamless dropdown filter panel with clear status indicators, accessible interface, and improved usability that work for everyone.
-            </p>
-          </div>
-
-          <LazyVideo
-            src="/videos/expert.ai-Video.webm"
-            poster="/videos/expert.ai-Video-poster.png"
-            style={{ width: '100%', height: 'auto', display: 'block' }}
-          />
-          <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Task time dropped to 30s (from 2 min), support tickets down 42% after ship</figcaption>
-        </Section>
-
-        {/* ── 3. Research ── */}
+        {/* ── 2. Research ── */}
         <Section id="ea-research">
           <div style={{ marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>3.</span>
+              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>2.</span>
               <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
                 Research
               </h2>
@@ -432,31 +372,27 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>What the support tickets showed</SubHeading>
+            <SubHeading>62 support tickets pointed at three failure modes</SubHeading>
             <Prose>
               <BodyText>
-                I met with the Customer Support Specialist and reviewed all 62 support tickets. I also spoke with the PM and a UX engineer to understand what had been tried before. Here is what I found.
+                I met with the Customer Support Specialist and reviewed all 62 support tickets. I also spoke with the PM and a UX Engineer to understand what had been tried before. Three patterns emerged from the tickets.
               </BodyText>
             </Prose>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" style={{ marginTop: 86 }}>
-              <TicketCard label="Lack of Visibility" description="Users couldn't see which filters were active. The popup showed nothing once closed." count={34} total={62} />
-              <TicketCard label="High Friction" description="Drag and drop often failed. Users had to try multiple times to add a simple filter." count={22} total={62} />
-              <TicketCard label="Blocked Results" description="The popup covered the entire screen. Users couldn't see their data while filtering." count={47} total={62} />
+              <TicketCard label="Lack of Visibility" description="Users could not see which filters were active once the popup closed. The popup showed nothing once dismissed." count={34} total={62} />
+              <TicketCard label="High Friction" description="Drag and drop failed frequently. Users had to attempt the same action multiple times to add a single filter." count={22} total={62} />
+              <TicketCard label="Blocked Results" description="The popup covered the entire screen while filtering. Users could not see their data while making selections." count={47} total={62} />
             </div>
           </div>
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>What everyday users experienced</SubHeading>
+            <SubHeading>Users were adapting around the filter, not using it</SubHeading>
             <Prose>
               <BodyText>
-                I talked to 10 enterprise users across legal, finance, and government. What struck me was not just what they said, but how they adapted: one person added extra steps, another abandoned a feature entirely, a third wasn't even aware the feature existed.
+                I talked to 10 enterprise users across legal, finance, and government. What stood out was not just what they said but how they had each found a different workaround for the same interaction. One person added extra steps to work around the popup. Another abandoned drag and drop entirely. A third had not noticed the color indicators at all.
               </BodyText>
             </Prose>
-
-            <BodyText>
-              When multiple users find different workarounds for the same interface, the filter component was clearly the issue.
-            </BodyText>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
@@ -473,40 +409,33 @@ export default function ExpertAIPage() {
                 </div>
               ))}
             </div>
+
+            <BodyText>
+              When multiple users find different workarounds for the same interface, the interface is signaling that it needs to change. Each workaround was a user absorbing friction that the design should have handled differently as the product matured.
+            </BodyText>
           </div>
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>Color and interaction barriers</SubHeading>
+            <SubHeading>The brief was about usability. The research revealed an accessibility gap.</SubHeading>
             <BodyText>
-              Several users also mentioned accessibility issues. The system used red and green to show exclusion and inclusion, which meant colorblind users could not tell them apart. The filtering system also required users to drag elements into inclusion and exclusion areas. For users who could not use a mouse, this was difficult.
+              The filter used red and green to show which documents were excluded or included. For colorblind users, those two colors are indistinguishable. The filter also required drag and drop as the primary interaction, which created a barrier for users who could not use a mouse precisely or at all.
             </BodyText>
-
-            <div className="ea-color-barriers-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, marginTop: 32 }}>
-              <div>
-                <img src={img('expert-ai-09-ileoWS.png')} alt="Red/green accessibility contrast failure" style={{ width: '100%', height: 'auto', display: 'block' }} />
-                <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Red/green indicators, inaccessible for colorblind users</p>
-              </div>
-              <div>
-                <img src={img('expert-ai-10-eGAcY4.png')} alt="Tooltip labels iteration" style={{ width: '100%', height: 'auto', display: 'block' }} />
-                <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Tooltip labels, minor fix, core issues remain</p>
-              </div>
-            </div>
-
-            <div style={{ marginTop: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 20 }}>
-              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
-                <strong style={{ color: 'var(--color-cs-heading)' }}>Takeaway:</strong> This was not part of the original project scope, but I brought it up to my team and backed the case with user research, showing how fixing accessibility would increase overall usability and improve things for everyone.
-              </p>
-            </div>
+            <BodyText>
+              These limitations had not been the focus of the original design. As the platform's user base grew to include more diverse users across enterprise contexts, they became a meaningful source of friction. I brought them to my team with the user research as evidence, showing how addressing the accessibility gaps would improve usability for everyone. The team agreed to expand the scope.
+            </BodyText>
+            <BodyText>
+              The accessibility gaps were not a separate problem alongside the usability ones. They were contributing to many of the usability failures we were already seeing in the tickets.
+            </BodyText>
           </div>
         </Section>
 
-        {/* ── 4. Developments ── */}
+        {/* ── 3. Development ── */}
         <Section id="ea-development">
           <div style={{ marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>4.</span>
+              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>3.</span>
               <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
-                Developments
+                Development
               </h2>
             </div>
             <div style={{
@@ -521,129 +450,55 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>What engineering couldn't change</SubHeading>
+            <SubHeading>The conservative fix did not address the core friction</SubHeading>
             <Prose>
               <BodyText>
-                Although I had the go-ahead on accessibility, I had to ensure design iterations were feasible. I checked in with both developers and the Lead Designer to understand the boundaries.
+                My first attempt was conservative. I added labels inside category buttons and tooltip labels on hover. During a design critique, the Lead Designer pointed out these helped with labeling but did not solve the core problems. The popup still blocked results. Drag and drop still slowed users. I asked if I could explore a more rigorous solution within the existing design system. The team said yes.
               </BodyText>
             </Prose>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 86 }}>
-              <ConstraintCard
-                title="Design System"
-                bullets={[
-                  { text: 'The Lead Designer advised that the filter component had to be built from existing design system elements.', type: 'check' },
-                  { text: 'Consider whether the solution could scale to other products.', type: 'check' },
-                ]}
-              />
-              <ConstraintCard
-                title="Technical Feasibility"
-                bullets={[
-                  { text: 'Developers preferred annotated mockups for async feedback before I went too far down any path.', type: 'check' },
-                  { text: "Check in early and often. Don't wait until a solution is fully baked.", type: 'check' },
-                ]}
-              />
-            </div>
-
-            <div style={{ marginTop: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 20 }}>
-              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
-                <strong style={{ color: 'var(--color-cs-heading)' }}>Takeaway:</strong> The solution had to come from the existing design system. I also had to balance accessibility improvements with what the team could realistically build in one sprint.
-              </p>
-            </div>
           </div>
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>From conservative fix to rigorous redesign</SubHeading>
-            <Prose>
-              <BodyText>
-                My first attempt was conservative. I added labels inside category buttons and tooltip labels on hover. During a design critique, the Lead Designer pointed out these helped with labeling but didn't solve the core problems. The popup still blocked results. Drag-and-drop still slowed users.
-              </BodyText>
-              <BodyText>
-                I asked if I could explore a more rigorous solution. They said yes, as long as I stayed within the design system.
-              </BodyText>
-            </Prose>
-
-            <AccessibilityExplorer />
+            <SubHeading>Engineering and design system constraints shaped what was possible</SubHeading>
+            <BodyText>
+              Before exploring further, I checked in with the developers and the Lead Designer to understand the boundaries.
+            </BodyText>
+            <BodyText>
+              The Lead Designer confirmed the filter component had to be built from existing design system elements and needed to scale to other products in the platform. Developers confirmed they preferred annotated mockups for async feedback before I went too far down any direction, and that clicking to change state was simpler to build than drag and drop. The timeline was manageable with the current approach.
+            </BodyText>
+            <BodyText>
+              Those constraints narrowed the solution space before I started exploring. The new design had to work within the existing system, avoid drag and drop, and ship within one sprint.
+            </BodyText>
           </div>
-        </Section>
 
-        {/* ── Revised challenge ── */}
-        <Section>
-          <ChallengeBanner question={<>How might we <strong className="font-semibold">make filtering visible, reliable, and accessible</strong> so users can filter efficiently and independently?</>} />
-        </Section>
+          <div style={{ marginTop: 86 }}>
+            <SubHeading>The dropdown panel addressed all three friction points</SubHeading>
+            <BodyText>
+              I replaced the popup with a compact dropdown panel that sat alongside the document results. Users could see their data while filtering. I replaced drag and drop with a three-click state system: one click to include a filter, a second click to exclude it, a third click to reset. I replaced red and green with blue and gray, and added a text label to every state so no user had to rely on color alone.
+            </BodyText>
+            <BodyText>
+              The Lead Designer liked the consistency with the previous version and suggested a more compact layout embedded horizontally into the screen. The Developer confirmed the dropdown behaviors were feasible, noted that clicking to change state was simpler to build than drag and drop, and said the timeline was manageable. I kept the design system foundation and updated the layout based on that feedback.
+            </BodyText>
 
-        {/* ── Finalized solution (pre-feedback) ── */}
-        <Section>
-          <SubHeading>Dropdown Panel</SubHeading>
-          <BodyText>
-            After the critique, I went with a more rigorous approach addressing all three pain points.
-          </BodyText>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 20 }}>
-            {[
-              { n: '01', bold: 'Fixed the layout.', body: 'I made the filter panel compact so it no longer blocked results. Users could finally see their data while filtering.' },
-              { n: '02', bold: 'Changed how filtering works.', body: 'I embedded labels directly into the panel. Instead of dragging and dropping, users just click a label to change its state: one click to include, another to exclude, another to reset.' },
-              { n: '03', bold: 'Fixed the colors.', body: 'I swapped red and green for blue and gray. Every state also has a text label so no one has to rely on color alone.' },
-            ].map(({ n, bold, body }) => (
-              <div key={n} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 20 }}>
-                <p className="font-semibold cs-serif-label" style={{ fontSize: 16, margin: '0 0 6px' }}>{bold}</p>
-                <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+            <div style={{ marginTop: 32, paddingTop: 32, display: 'grid', gridTemplateColumns: '2fr auto 3fr', gap: 24, alignItems: 'center' }}>
+              <div>
+                <img src={img('expert-ai-15-bW3HXl.png')} alt="Standalone filter component" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Standalone component</p>
               </div>
-            ))}
-          </div>
-
-          <div style={{ marginTop: 32, paddingTop: 32, display: 'grid', gridTemplateColumns: '2fr auto 3fr', gap: 24, alignItems: 'center' }}>
-            <div>
-              <img src={img('expert-ai-15-bW3HXl.png')} alt="Standalone filter component" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Standalone component</p>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(var(--color-navy-rgb),0.2)', fontSize: 24, fontWeight: 300 }}>→</div>
-            <div>
-              <img src={img('expert-ai-16-BSVPlU.png')} alt="Filter integrated into full page" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Integrated into full page</p>
-            </div>
-          </div>
-
-          <div style={{ marginTop: 86 }}>
-            <SubHeading>Checking in with Design and Technical Teams</SubHeading>
-            <Prose>
-              <BodyText>
-                Before moving to usability testing, I brought the dropdown panel back to the developers and Lead Designer for feasibility and layout feedback.
-              </BodyText>
-            </Prose>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 86 }}>
-              <ConstraintCard
-                title="Lead Designer"
-                bullets={[
-                  { text: 'Liked the consistency with the previous version.', type: 'check' },
-                  { text: 'Suggested a more compact layout.', type: 'x' },
-                  { text: 'Proposed making it horizontal and embedded into the screen.', type: 'x' },
-                ]}
-              />
-              <ConstraintCard
-                title="Developer"
-                bullets={[
-                  { text: 'Confirmed the dropdown behaviors were feasible.', type: 'check' },
-                  { text: 'Noted that clicking to change state was simpler than drag and drop.', type: 'check' },
-                  { text: 'Said the timeline was manageable with the current approach.', type: 'check' },
-                ]}
-              />
-            </div>
-
-            <div style={{ marginTop: 24, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 20 }}>
-              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
-                <strong style={{ color: 'var(--color-cs-heading)' }}>Takeaway:</strong> Consistency with the design system helped with both feasibility and timeline. I kept that foundation and improved the layout based on feedback.
-              </p>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(var(--color-navy-rgb),0.2)', fontSize: 24, fontWeight: 300 }}>→</div>
+              <div>
+                <img src={img('expert-ai-16-BSVPlU.png')} alt="Filter integrated into full page" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Integrated into full page</p>
+              </div>
             </div>
           </div>
         </Section>
 
-        {/* ── 5. Solution ── */}
+        {/* ── 4. Solution ── */}
         <Section id="ea-features">
           <div style={{ marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>5.</span>
+              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>4.</span>
               <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
                 Solution
               </h2>
@@ -661,9 +516,15 @@ export default function ExpertAIPage() {
 
           <div style={{ marginTop: 86, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
             <div>
-              <SubHeading>New Filter Component</SubHeading>
+              <SubHeading>A dropdown filter panel that stays alongside your results</SubHeading>
               <BodyText>
-                After incorporating feedback from both the design critique and technical team, I landed on a dropdown filter panel that sits alongside the results, so users can see their data update in real time as they make selections.
+                The Corpus Platform filter is now a compact dropdown panel that sits beside the document list. Users can see their results update in real time as they make selections. The popup is gone. The screen is no longer blocked while filtering.
+              </BodyText>
+              <BodyText>
+                Filtering works through a three-click state system. One click marks a filter as included, shown in blue with a text label. A second click marks it as excluded, shown in gray with a text label. A third click resets it. Every state has a text label so no user has to rely on color to understand what is active.
+              </BodyText>
+              <BodyText>
+                Red and green are replaced by blue and gray throughout. Colorblind users can read the filter the same way every other user does.
               </BodyText>
 
               <div style={{ marginTop: 24, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 20 }}>
@@ -695,49 +556,11 @@ export default function ExpertAIPage() {
           </div>
         </Section>
 
-        {/* ── 6. Impact ── */}
-        <Section id="ea-impact">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>6.</span>
-              <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
-                Impact
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
-          </div>
-
-          <div style={{ marginTop: 86 }}>
-            <SubHeading>Validating with real users</SubHeading>
-            <BodyText>
-              I ran usability testing with 8 enterprise users across legal, finance, and government. The Lead Designer observed sessions with me. I asked each user to complete filtering tasks while sharing their screen, watching for friction, what they clicked, and how long each task took.
-            </BodyText>
-
-            <ImpactToggle />
-
-            <div className="cs-after-interactive" style={{ marginTop: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 20 }}>
-              <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]" style={{ fontSize: 11, marginBottom: 10 }}>Takeaway</p>
-              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
-                The Lead Designer and I noted that two users still hesitated when trying to reset a filter. The three-click pattern (include → exclude → reset) was not obvious to everyone. If I had more time, I would add a small indicator showing what each click would do, and create an onboarding experience for first-time users.
-              </p>
-            </div>
-
-          </div>
-        </Section>
-
-        {/* ── 7. Reflection ── */}
+        {/* ── 5. Reflection ── */}
         <Section id="ea-reflection">
           <div style={{ marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>7.</span>
+              <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>5.</span>
               <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
                 Reflection
               </h2>
@@ -754,25 +577,49 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>What this project taught me</SubHeading>
-            <BodyText>This was my first UX Design internship, and the one that taught me to look beyond the brief.</BodyText>
+            <SubHeading>Task time dropped from 2 minutes to 30 seconds. Support tickets fell 42%.</SubHeading>
+            <BodyText>
+              I ran usability testing with 8 enterprise users across legal, finance, and government before the redesign shipped. The Lead Designer observed sessions with me. After the redesign shipped, Expert.ai measured support tickets related to filtering over the following period.
+            </BodyText>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 24, marginBottom: 24 }}>
+              <StatBlock stat="30s" label="Task Time" description="Task time before: 2 minutes. Task time after: 30 seconds." icon={<Timer size={16} />} />
+              <StatBlock stat="42%" label="Fewer Support Tickets" description="Support tickets related to filtering: down 42%." icon={<Ticket size={16} />} />
+            </div>
+
+            <BodyText>
+              Two users from the testing sessions responded in ways that validated the accessibility work specifically:
+            </BodyText>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginBottom: 24 }}>
               {[
-                { heading: 'Reframe before you solve', body: 'The initial brief was about usability. But looking deeper revealed an accessibility problem. Taking time to question the problem statement led to a better outcome.' },
-                { heading: 'Advocacy through research', body: "User interviews and support ticket analysis gave me the evidence I needed to push for accessibility improvements, even when it wasn't in the original scope." },
-                { heading: 'Gratitude', body: "I'm so grateful to the Expert.ai AI Innovation team for supporting my initiative and for the mentorship and guidance throughout the process." },
+                { quote: "It's pretty neat that I can see the real time results on the side. The only thing I'm unsure of is how to exclude an item.", role: 'Legal Analyst' },
+                { quote: 'The content is pretty clear and I appreciate the multiple labels for clarity. I also like that there is no tedious dragging for filtering.', role: 'Data Analyst with colorblindness' },
+              ].map(({ quote, role }) => (
+                <div key={role} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 20, height: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', fontStyle: 'italic', margin: '0 0 10px' }}>"{quote}"</p>
+                  <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]" style={{ fontSize: 11, margin: 0 }}>{role}</p>
+                </div>
+              ))}
+            </div>
+
+            <BodyText>
+              The second response mattered most. It confirmed that replacing drag and drop and replacing color-only indicators addressed the exact barriers that had generated the most friction in the original design.
+            </BodyText>
+            <BodyText>
+              Two users still hesitated when trying to reset a filter. The three-click pattern, include then exclude then reset, was not immediately obvious to everyone. If I had more time, I would add a small indicator showing what the next click would do and create a short onboarding experience for first-time users.
+            </BodyText>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 32 }}>
+              {[
+                { heading: 'Reframe before you solve', body: 'The original brief was about usability. Reviewing the support tickets and talking to users revealed that accessibility gaps were contributing to many of the usability failures. Taking time to question the problem statement before designing led to a better outcome than solving the problem as it was originally framed.' },
+                { heading: 'Advocacy through research', body: 'Accessibility was not in the original scope. User interviews and support ticket analysis gave me the evidence I needed to make the case for including it. The team agreed because the evidence was specific: real users, real workarounds, real tickets. That is what turned a suggestion into a decision.' },
               ].map(({ heading, body }) => (
                 <div key={heading} className="cs-info-box" style={{ padding: 20 }}>
                   <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px', lineHeight: 1.4 }}>{heading}</p>
                   <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
                 </div>
               ))}
-            </div>
-
-            <div style={{ marginTop: 24 }}>
-              <img src={img('expert-ai-19-ljiJuP.jpg')} alt="Snippet of final presentation" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
-              <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Snippet of final presentation</p>
             </div>
           </div>
         </Section>

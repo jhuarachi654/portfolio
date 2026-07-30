@@ -1,19 +1,17 @@
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
-import { Brain, Ghost, BookOpen, MapPin, Briefcase, User, ChartBar, Stack, Bell, Robot, AirTrafficControl } from '@phosphor-icons/react'
+import { Brain, Ghost, BookOpen, MapPin, Briefcase, User, ChartBar, Stack, Bell, Robot } from '@phosphor-icons/react'
 import SectionHeading from '../../components/case-study/SectionHeading'
 import ImageFigure from '../../components/case-study/ImageFigure'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import PlayPauseButton from '../../components/PlayPauseButton'
-import LazyVideo from '../../components/LazyVideo'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
   { id: 'rm-intro',       label: 'Introduction' },
-  { id: 'rm-solution',    label: 'Solution Preview' },
   { id: 'rm-research',    label: 'Research' },
   { id: 'rm-development', label: 'Development' },
   { id: 'rm-features',    label: 'Solution' },
@@ -30,7 +28,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
     <section
       id={id}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
-      style={{ marginTop: 256 }}
+      style={{ marginTop: 164 }}
     >
       {children}
     </section>
@@ -59,14 +57,6 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
         {children}
       </h3>
     </div>
-  )
-}
-
-function Label({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="font-landing-body text-[10px] font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ marginBottom: 8 }}>
-      {children}
-    </p>
   )
 }
 
@@ -158,25 +148,19 @@ function ComparisonCard({
 // ─── Solution feature block (stacked: text → full-width image → impact) ───────
 
 function SolutionBlock({
-  index, heading, body, impact, image, imageAlt,
+  index, heading, body, image, imageAlt,
 }: {
-  index: number; heading: string; body: string; impact: string
+  index: number; heading: string; body: string
   image: string; imageAlt: string
 }) {
   const num = String(index).padStart(2, '0')
   return (
     <div style={{ marginTop: 86 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
-        {/* Left: text + impact */}
+        {/* Left: text */}
         <div>
           <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>{num}. {heading}</h3>
-          <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 24 }}>{body}</p>
-          <div style={{ paddingTop: 16, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-            <span className="text-[var(--color-cs-heading)] font-bold" style={{ fontSize: 16, flexShrink: 0, lineHeight: 1.3 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>
-              <strong className="text-[var(--color-cs-heading)]">User Impact: </strong>{impact}
-            </p>
-          </div>
+          <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 0 }}>{body}</p>
         </div>
         {/* Right: image */}
         <img src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
@@ -189,21 +173,19 @@ function SolutionBlock({
 
 function FeedbackRow({ feedback, response }: { feedback: string; response: string }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 16 }}>
+    <div style={{ marginTop: 16 }}>
       {/* Stakeholder feedback card */}
-      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-          <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-cs-heading)', flexShrink: 0 }}>
-            <AirTrafficControl size={18} weight="light" />
-          </div>
-          <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, margin: 0 }}>Stakeholder</h4>
+      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+        <div>
+          <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, lineHeight: 1, margin: '0 0 4px' }}>Stakeholder Feedback</h4>
+          <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{feedback}</p>
         </div>
-        <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{feedback}</p>
-      </div>
-      {/* My response card */}
-      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
-        <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, margin: '0 0 16px' }}>My Response</h4>
-        <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{response}</p>
+
+        {/* My response */}
+        <div>
+          <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, lineHeight: 1, margin: '0 0 4px' }}>Our Response</h4>
+          <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{response}</p>
+        </div>
       </div>
     </div>
   )
@@ -232,29 +214,29 @@ const PERSONAS = [
   {
     type: 'Junior Analysts',
     name: 'Avery Chen',
-    age: '24 yrs old',
+    age: '24',
     location: 'Houston, TX',
     experience: '1 yr exp',
     description: 'A new analyst learning the ropes and trying to work independently.',
     avatar: img('revenue-management-11-4V1tuQ.png'),
     needs: [
-      'Thoughtful guidance that helps her build confidence over time',
+      'Guidance that builds confidence over time',
       'A clear starting point every time she logs in',
-      'To learn on the job without constantly relying on senior colleagues',
+      'To learn on the job without relying on Senior colleagues',
     ],
   },
   {
     type: 'Senior Analysts',
     name: 'Alex Reyes',
-    age: '42 yrs old',
+    age: '42',
     location: 'Austin, TX',
     experience: '10 yrs exp',
     description: 'An experienced analyst who needs efficiency without disruption.',
     avatar: img('revenue-management-12-o8jH7a.png'),
     needs: [
-      'To make price adjustments quickly without unnecessary steps',
-      'Alerts that show what needs attention and filter out what does not',
-      'External market data pulled into the platform, with no manual sourcing needed',
+      'To make price adjustments quickly without extra steps',
+      'Alerts that surface what needs attention',
+      'External market data pulled in directly, no manual sourcing',
     ],
   },
 ]
@@ -372,13 +354,13 @@ function MyMarketsExplorer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100 }}>
             <div style={{ display: 'flex', gap: 10 }}>
               <span className="font-bold text-[var(--color-cs-heading)]" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>+</span>
-              <p className="font-landing-body" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
+              <p className="font-landing-body" style={{ fontSize: 14, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
                 <strong className="text-[var(--color-cs-heading)]">Pros:</strong> {option.pros}
               </p>
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <span className="font-landing-body text-[var(--color-cs-heading)]/30" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>−</span>
-              <p className="font-landing-body" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
+              <p className="font-landing-body" style={{ fontSize: 14, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
                 <strong className="text-[var(--color-cs-heading)]">Cons:</strong> {option.cons}
               </p>
             </div>
@@ -465,13 +447,13 @@ function AIPlacementExplorer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100 }}>
             <div style={{ display: 'flex', gap: 10 }}>
               <span className="font-bold text-[var(--color-cs-heading)]" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>+</span>
-              <p className="font-landing-body" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
+              <p className="font-landing-body" style={{ fontSize: 14, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
                 <strong className="text-[var(--color-cs-heading)]">Pros:</strong> {option.pros}
               </p>
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <span className="font-landing-body text-[var(--color-cs-heading)]/30" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>−</span>
-              <p className="font-landing-body" style={{ fontSize: 12, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
+              <p className="font-landing-body" style={{ fontSize: 14, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
                 <strong className="text-[var(--color-cs-heading)]">Cons:</strong> {option.cons}
               </p>
             </div>
@@ -668,7 +650,13 @@ export default function RevenueManagementPage() {
           </h1>
 
           <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
-            An enterprise airline pricing platform for major airlines. Redesigned the core workflow for new-hire and veteran analysts and handed off to engineering.
+            Revenue Management is an analytics platform that helps airlines price flights and forecast demand. Pricing analysts use it to decide which routes to prioritize and where to adjust fares.
+          </p>
+          <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
+            COVID disrupted the airline industry and left Revenue Management with two conflicting user groups: tenured Senior Analysts handling core pricing and newly hired Junior Analysts learning on the job. The platform had been built for experienced users and now had to support both.
+          </p>
+          <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
+            I redesigned key workflows to bridge that gap. I added contextual AI guidance for new analysts, made pricing adjustments faster for senior analysts, and brought external market data into the platform for both. An adaptive experience for users at every level.
           </p>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3" style={{ marginBottom: 0 }}>
@@ -685,8 +673,13 @@ export default function RevenueManagementPage() {
             ))}
           </div>
 
-          
-          <a href="#rm-solution" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
+          <figure style={{ margin: '32px 0 0' }}>
+            <img src="/images/revenue-management/ux-houston-team.webp" alt="PROS UX Design team" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
+            <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>PROS UX Design team</figcaption>
+          </figure>
+
+
+          <a href="#rm-features" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
         </div>
         </div>
       </section>
@@ -717,25 +710,22 @@ export default function RevenueManagementPage() {
         {/* Row 1: h3 + body text */}
         <div style={{ marginBottom: 32 }}>
           <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
-            Revenue Management Platform at PROS
+            The platform assumed expertise that no longer existed
           </h3>
           <Prose>
             <BodyText>
-              This past summer, I interned at PROS, a B2B software company that builds digital products for commercial airlines and their internal teams. I worked with the UX Strategist, User Researcher, and Project Manager to define the design direction for the Revenue Management Platform, with a dual focus: modernize the platform and explore AI integration.
+              PROS builds software for commercial airlines. I joined the Revenue Management platform team as a UX Design Intern, working alongside a UX Strategist, User Researcher, and Project Manager.
             </BodyText>
           </Prose>
         </div>
 
         <div style={{ marginTop: 86, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
           <div>
-            <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
-              How Covid-19 affected the Airline Industry & RM
-            </h3>
             <BodyText>
-              When COVID-19 hit, travel came to a halt. Airlines faced widespread layoffs, including airline analysts. With them went years of institutional knowledge. When hiring picked back up, a new generation of analysts entered the field.
+              Revenue Management analysts identify underperforming flight routes and adjust pricing to recover revenue. Pricing decisions directly affect how much revenue an airline recovers on a given route.
             </BodyText>
             <BodyText>
-              The RM platform has a steep learning curve. It assumed users would have expert guidance or in-depth tutorials. However, the new generation of analysts prefers to learn differently and has shown a preference for AI tools. Meanwhile, Senior analysts still make up a significant portion of the user base and have established workflows.
+              The platform was built assuming analysts would arrive with deep expertise. After COVID layoffs reduced much of that experienced workforce, Junior analysts were hired to fill the gaps without the institutional knowledge the platform assumed they had. Senior analysts were still present and still relied on the platform daily. Now there were two very different users sharing the same tool, and it had been designed for neither of them.
             </BodyText>
           </div>
 
@@ -750,53 +740,13 @@ export default function RevenueManagementPage() {
         />
       </Section>
 
-      {/* ── Solution Preview ── */}
-      <Section id="rm-solution" className="">
-        {/* Chapter label + indicator */}
-        <div style={{ marginBottom: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>2.</span>
-            <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
-              Solution Preview
-            </h2>
-          </div>
-          <div style={{
-            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderBottom: 'none',
-            borderRadius: '12px 12px 0 0',
-            height: 32,
-            width: '100%',
-          }} />
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
-          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0 }}>
-            A clearer and supportive data platform for Airline Analysts
-          </h3>
-          <BodyText>
-            Revenue Management is the platform airlines use to price flights and manage seat inventory, now redesigned to be clearer, faster, and with AI built in where it matters.
-          </BodyText>
-        </div>
-
-        <LazyVideo
-          src="/videos/RM-Solution.webm"
-          className="cs-solution-video-inner"
-          style={{ width: '100%', display: 'block' }}
-        />
-        <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Shipped in 10 weeks from research to engineering handoff, supporting 2 analyst types with one adaptive UI</figcaption>
-      </Section>
-
       {/* ── Research ── */}
       <Section id="rm-research" className="">
-        <SectionHeading index={3} chapter="Research" heading="Pain Points in the Analyst Experience" />
+        <SectionHeading index={2} chapter="Research" heading="" />
+        <SubHeading>The platform assumed you already knew how to use it</SubHeading>
         <Prose>
           <BodyText>
-            I joined the RM team after user research was already conducted. To get up to speed, I met with the User Researcher and UX Strategist to review findings, and spoke with the PM who had worked directly with airline analysts and the Customer Support team.
-          </BodyText>
-          <BodyText>
-            From those conversations, three pain points stood out:
+            Junior Analysts were dropped into complex views without context or guidance. When they got stuck, they left the platform entirely and used outside AI tools. When that was not enough, they pulled Senior colleagues away from their own work. All three responses pointed at the same problem: the platform assumed you already knew how to use it.
           </BodyText>
         </Prose>
 
@@ -824,36 +774,30 @@ export default function RevenueManagementPage() {
         </div>
 
         <div style={{ marginTop: 86 }}>
-          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
-            Distinctive Users with Varying Levels of Expertise
-          </h3>
+          <SubHeading>Two users pulling in opposite directions</SubHeading>
           <BodyText>
-            Both the user research and internal interviews revealed that the main users of RM were Junior and Senior Analysts. I outlined these user personas to align the team and guide our design direction.
+            Those pain points only told half the story. Senior Analysts were not struggling the same way, they knew the platform well and moved through it quickly. Any change that helped Juniors had to avoid disrupting the workflows Seniors depended on.
+          </BodyText>
+          <BodyText>
+            Junior and Senior Analysts needed opposite things. Juniors needed guidance, orientation, and support when stuck. Seniors needed speed, familiarity, and no interruptions. Every design decision had to work for both.
+          </BodyText>
+          <BodyText>
+            Avery Chen represents the Junior: one year of experience, assigned a set of markets to manage, and no clear starting point when she logs in. She needs to know where to begin, get unstuck without pulling a Senior away from their work, and build confidence over time without the platform making every decision for her.
           </BodyText>
         </div>
 
         <PersonaToggle className="" style={{ marginTop: 32 }} />
 
-        <div style={{ marginTop: 86 }}>
-          <SubHeading>Mapping out the Current State</SubHeading>
-          <BodyText>
-            I mapped the relationship between users, the platform, and the three pain points. High cognitive load pushed Junior Analysts in two directions: some left the platform entirely, others turned to workarounds, relying on Senior colleagues or outside AI to get unstuck. The platform served neither user well.
-          </BodyText>
-        </div>
-
-        <figure style={{ margin: '48px 0 0' }}>
+        <figure style={{ margin: '86px 0 0' }}>
           <img src={img('revenue-management-13-pX9ss5.png')} alt="How the current RM experience affects Senior and Junior Analysts differently" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
           <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>How the current RM experience affects Senior and Junior Analysts differently</figcaption>
         </figure>
 
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>Same Platform, Different Experiences</SubHeading>
+          <SubHeading>The divergence started at login</SubHeading>
           <BodyText>
-            Even though Junior and Senior analysts used the same platform, their paths looked completely different. The divergence started at login: Juniors landed without direction, Seniors landed with purpose.
-          </BodyText>
-          <BodyText>
-            Focusing on the earliest divergence pointed us toward the most impactful place to start: the landing experience.
+            Seniors landed knowing exactly where to go. Juniors landed and clicked around trying to figure out what needed attention. The earliest point of divergence was the most impactful place to start.
           </BodyText>
         </div>
 
@@ -873,16 +817,20 @@ export default function RevenueManagementPage() {
 
       {/* ── Development ── */}
       <Section id="rm-development" className="">
-        <SectionHeading index={4} chapter="Development" heading="Approved Concepts" />
+        <SectionHeading index={3} chapter="Development" heading="" />
+        <SubHeading>Starting from the reframe, not the full platform</SubHeading>
         <BodyText>
-          After identifying the core pain points, we brainstormed concepts to address them. I suggested starting with My Markets, the screen where research showed Juniors got lost most. The team agreed and added Market Overview, which Seniors use regularly. We then explored an AI assistant and an onboarding experience, agreeing both had to serve analysts at every level.
+          The revised challenge narrowed our focus to the screens that mattered most. My Markets is the main landing screen analysts see when they log in, a dashboard that lists every market they are responsible for, and it was where Juniors got lost. Market Overview is where analysts go to understand a single market in depth, pulling together booking trends, revenue data, and competitive context in one place, and Seniors relied on it constantly. We also scoped an AI assistant to address the outside tool dependency, and onboarding to give new users a starting point.
+        </BodyText>
+        <BodyText>
+          We descoped onboarding before high fidelity. Research showed Juniors dropped off mid-task, not at first login, so the higher priority was supporting them once they were already inside the platform.
         </BodyText>
 
         <div className="grid lg:grid-cols-2 gap-5" style={{ marginTop: 8 }}>
           {[
             { icon: <ChartBar size={24} weight="light" />, title: 'My Markets',      body: 'A dashboard showing analysts which markets need attention first.' },
             { icon: <Stack size={24} weight="light" />,    title: 'Market Overview', body: 'Analytics with booking outlooks and trend data for deeper market context.' },
-            { icon: <Bell size={24} weight="light" />,     title: 'Onboarding',      body: 'A welcome message and quick tour, just enough to orient new users.' },
+            { icon: <Bell size={24} weight="light" />,     title: 'Onboarding',      body: 'A welcome message and quick tour to orient new users.' },
             { icon: <Robot size={24} weight="light" />,    title: 'AI Assistant',    body: 'Context-aware guidance that suggests next steps based on what is on screen.' },
           ].map(({ icon, title, body }) => (
             <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16, display: 'flex', gap: 12 }}>
@@ -906,9 +854,12 @@ export default function RevenueManagementPage() {
         <AIPlacementExplorer />
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>Chosen AI Assistant: Hybrid Approach</SubHeading>
+          <SubHeading>No single option was enough on its own</SubHeading>
           <BodyText>
-            After design critique sessions, we scrapped the left panel. It removed user agency. No single option felt right on its own, so we combined what worked: a right panel for quick optional help, embedded AI for lightweight guidance, and a dedicated chat screen for deeper assistance.
+            We explored four directions for the AI assistant. The left panel was scrapped after design critique because positioning AI to drive the right side of the screen made it feel mandatory, and a Senior doing a familiar task would have to work around it every time. The full chat experience required navigating away from the task entirely, which broke the flow for anyone who just needed a quick answer. The right panel worked for quick questions, but a Junior who is lost does not always know what to ask. The embedded button surfaced insights in context but could not handle anything that needed a fuller explanation.
+          </BodyText>
+          <BodyText>
+            None of those options worked on their own. The hybrid kept what each did well. The embedded button surfaces help before Avery knows she needs it, the right panel is there when she does, and the full chat screen handles anything that needs more depth. A Senior who never needs any of it can close the AI panel and work as they always have.
           </BodyText>
           <div className="rm-ai-verdict-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32 }}>
             {[
@@ -936,17 +887,14 @@ export default function RevenueManagementPage() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginTop: 86 }}>
           {/* Left */}
           <div>
-            <SubHeading>Chosen My Markets: Compact Cards</SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 16 }}>
-              We chose compact rows as the default view as it can scale for dozens of markets and supports both users.
-            </p>
+            <SubHeading>The starting point had to be obvious without explanation</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 24 }}>
-              Seniors can scan quickly because density and color coding put information in reach. Juniors can see clear priorities without feeling overwhelmed because critical markets rise to the top.
+              With the AI direction settled, we turned to My Markets. Grid cards looked cleaner but buried critical markets, and with dozens of routes on screen there was no clear starting point. Expanded cards showed more detail per market but only a handful fit on screen at once, which broke down at real scale. I suggested compact rows and the team validated it. Compact rows scale to dozens of markets, use color coding to sort by severity so the most urgent markets rise to the top automatically, and keep the most important numbers visible at a glance.
             </p>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
               <span className="text-[var(--color-cs-heading)] font-bold" style={{ fontSize: 16, flexShrink: 0, marginTop: 2, lineHeight: 1.3 }}>→</span>
               <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>
-                We got internal validation from our PMs, the UX team, and the VP of Design.
+                We presented the direction to our PMs, the UX team, and the VP of Design. All three validated the approach. The validated direction became the four screens that shipped.
               </p>
             </div>
           </div>
@@ -960,22 +908,48 @@ export default function RevenueManagementPage() {
 
       {/* ── Solution ── */}
       <Section id="rm-features" className="">
-        <SectionHeading index={5} chapter="Solution" heading="" />
+        <SectionHeading index={4} chapter="Solution" heading="" />
+
+        {/* Solution Overview — all four screens with arrows between them */}
+        <div style={{ marginBottom: 32 }}>
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
+            Solution Overview
+          </h3>
+          <BodyText>
+            This is the whole user flow from dashboard to specific market content to AI chat.
+          </BodyText>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 24,
+            marginTop: 24,
+          }}>
+            {[
+              { image: img('revenue-management-25-IfGhSb.png'), alt: 'My Markets screen', caption: '1. Analyst logs in to the My Markets dashboard' },
+              { image: img('revenue-management-26-GAa39U.png'), alt: 'AI embedded insights and chat panel', caption: '2. Opens a market and requests AI insights' },
+              { image: img('revenue-management-27-Hhvw4d.png'), alt: 'Market Overview screen', caption: '3. Reviews the full market detail' },
+              { image: img('revenue-management-28-DIN9ZJ.png'), alt: 'Full AI chat screen', caption: '4. Continues the conversation in the full AI chat' },
+            ].map(screen => (
+              <figure key={screen.alt} style={{ margin: 0 }}>
+                <img src={screen.image} alt={screen.alt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 6 }} />
+                <figcaption className="font-landing-body text-left" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', marginTop: 12 }}>{screen.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
 
         <SolutionBlock
           index={1}
           heading="My Markets"
-          body="This is the first screen analysts see when they log in. Compact rows are scalable and scannable for large market datasets. Each row shows the market, its status, revenue, average fare, and passenger numbers. Color coding helps you see what needs attention right away. Critical markets rise to the top."
-          impact="So Juniors know where to start, and Seniors can scan through quickly."
+          body="My Markets is the first screen analysts see when they log in. Markets are sorted by severity automatically, with color coding surfacing the most critical ones at the top. Revenue, average fare, and passenger counts are visible without opening anything. Junior Analysts do not have to know what critical looks like before they can find it. Senior Analysts read the same list in a compact, scannable format."
           image={img('revenue-management-25-IfGhSb.png')}
           imageAlt="My Markets screen"
         />
 
         <SolutionBlock
           index={2}
-          heading="AI Embedded & Chat Panel"
-          body={'Juniors were already leaving the platform to use outside AI tools. So we brought that help directly into RM. A "Get Market Insights" button surfaces AI insights about market performance. A chat panel on the right offers suggested prompts and is always optional.'}
-          impact="If you're a Junior, you can use these to get unstuck. If you're a Senior, you can ignore them or close the panel entirely. The help is there if you need it."
+          heading="AI Embedded and Chat Panel"
+          body={'Research showed Junior Analysts were leaving the platform to use outside AI tools when they got stuck making pricing decisions. Rather than send them elsewhere, we brought that help into the platform. A Get Market Insights button, designed as part of this project, surfaces AI analysis for any market directly on the screen. A chat panel on the right offers suggested prompts for analysts who need more guidance. Senior Analysts have access to the same surfaces when a market calls for a closer look. Market data that previously required manual sourcing is pulled in directly.'}
           image={img('revenue-management-26-GAa39U.png')}
           imageAlt="AI embedded insights and chat panel"
         />
@@ -983,8 +957,7 @@ export default function RevenueManagementPage() {
         <SolutionBlock
           index={3}
           heading="Market Overview"
-          body="This is where analysts go to dive deep into a specific market. It shows booking outlooks, revenue trends, and competitive context. Senior analysts use this screen constantly. We kept their workflows the same while cleaning up the layout so Juniors could follow the data more easily."
-          impact="Senior workflows stay intact. Juniors can follow the data with less effort."
+          body="Market Overview is the screen analysts use to understand a single market in depth. It brings together booking trends, showing how seat sales are tracking over time, revenue data, and competitive context in one place. Senior Analysts use this screen constantly to inform their pricing decisions, so the underlying workflow stayed the same. The same AI surfaces from My Markets carry over here. Junior Analysts can now follow the data without having memorized what each field means, because the layout surfaces the most important signals first."
           image={img('revenue-management-27-Hhvw4d.png')}
           imageAlt="Market Overview screen"
         />
@@ -992,8 +965,7 @@ export default function RevenueManagementPage() {
         <SolutionBlock
           index={4}
           heading="Full Chat Screen"
-          body="The chat panel handles quick questions. For deeper analysis, the full chat screen gives AI more room to show detailed booking trends, share forecasting data, and walk through analysis step by step."
-          impact="When a Junior needs a deeper analysis, they can open a dedicated chat screen. Seniors also have access to this support if they want it."
+          body="The side panel handles quick questions. For anything that needs more, analysts can open the full chat screen, which gives AI room to walk through an analysis step by step, surface booking trends, and show forecasting data in full. Junior Analysts open it when a suggested prompt is not enough to understand what is happening in a market. Senior Analysts use it to go deeper on complex markets without pulling information from multiple places."
           image={img('revenue-management-28-DIN9ZJ.png')}
           imageAlt="Full AI chat screen"
         />
@@ -1001,21 +973,27 @@ export default function RevenueManagementPage() {
         {/* Stakeholder Feedback */}
         <div style={{ marginTop: 86 }}>
         <Prose>
-          <SubHeading>Stakeholder Feedback & Validation</SubHeading>
+          <SubHeading>A disagreement we held and a question we left open</SubHeading>
           <BodyText>
-            We presented our designs to stakeholders. They liked the direction but wanted AI to be more front and center. Here is what they said, and how we responded.
+            Before shipping, we presented the designs and hit a disagreement we could not resolve.
           </BodyText>
         </Prose>
 
         <div style={{ marginTop: 16 }}>
           <FeedbackRow
-            feedback="Why don't we move the AI chat panel to the left side? That way, the chat drives what is seen on the right."
+            feedback="Why not move the AI chat panel to the left? That way the chat drives what analysts see on the right."
             response="That would make AI feel like the leader of the experience. Seniors would lose the ability to ignore it."
           />
           <FeedbackRow
             feedback="What if the first thing they see is a chat prompt?"
-            response="Juniors might benefit. But Seniors would feel forced into a workflow they don't want."
+            response="Juniors might benefit. But Seniors would feel forced into a workflow they do not want."
           />
+        </div>
+
+        <div style={{ marginTop: 16 }}>
+          <BodyText>
+            The disagreement stayed unresolved before the internship ended. Rather than guess at the answer, the right next step was to test it.
+          </BodyText>
         </div>
         </div>
 
@@ -1025,44 +1003,31 @@ export default function RevenueManagementPage() {
             {/* Left: heading + body + question boxes */}
             <div>
               <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
-                Questions I would have asked in A/B testing
+                What we would have tested
               </h3>
               <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 16px' }}>
-                We didn't get to resolve this before the internship ended. Our next step would have been A/B testing our version against a more chat-centered layout. Here is a quick mockup of what that could look like, plus the questions I would have asked users.
+                We would have run an A/B test against a more chat centered layout to answer one question: did the AI placement we defended actually work for both users?
               </p>
-
-              {/* Questions box */}
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16, marginBottom: 8 }}>
-                <h4 style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, fontWeight: 600, color: 'var(--color-cs-heading)', margin: '0 0 12px' }}>Questions I would've asked</h4>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  {[
-                    'How do you usually figure out where to start?',
-                    'Walk me through how you check your markets today.',
-                    'Did you notice the chat panel? Did you use it?',
-                  ].map(q => (
-                    <li key={q} style={{ fontFamily: 'var(--font-landing-body)', fontSize: 12, lineHeight: 1.6, color: 'var(--color-secondary)', display: 'flex', gap: 8 }}>
-                      <span className="font-bold text-[var(--color-cs-heading)] shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>{q}
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
               {/* Metrics box */}
               <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
                 <h4 style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, fontWeight: 600, color: 'var(--color-cs-heading)', margin: '0 0 12px' }}>What I would have measured</h4>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {[
-                    'Time to first click',
-                    'Number of chat interactions per session',
-                    'Task completion rate without chat',
-                    'How often the chat panel was closed or ignored',
+                    'Time to first action after login',
+                    'Whether analysts completed tasks without opening the chat',
+                    'How often the chat panel was opened, used, and closed without returning',
+                    'How often the embedded button was used versus the full chat screen',
                   ].map(m => (
-                    <li key={m} style={{ fontFamily: 'var(--font-landing-body)', fontSize: 12, lineHeight: 1.6, color: 'var(--color-secondary)', display: 'flex', gap: 8 }}>
+                    <li key={m} style={{ fontFamily: 'var(--font-landing-body)', fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', display: 'flex', gap: 8 }}>
                       <span className="font-bold text-[var(--color-cs-heading)] shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>{m}
                     </li>
                   ))}
                 </ul>
               </div>
+              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', margin: '16px 0 0' }}>
+                These four would tell us whether the balance held. If Juniors finish tasks without touching the panel, the embedded button is doing its job. If they open the panel frequently, we underexposed it. If Seniors close it immediately every session, the optional placement was right. If neither group uses the embedded button, we buried it.
+              </p>
             </div>
 
             {/* Right: image */}
@@ -1073,28 +1038,20 @@ export default function RevenueManagementPage() {
 
       {/* ── Reflection ── */}
       <Section id="rm-reflection" className="">
-        <SectionHeading index={6} chapter="Reflection" heading="" />
+        <SectionHeading index={5} chapter="Reflection" heading="" />
 
-        <SubHeading>What I'd carry forward from a summer of product strategy</SubHeading>
-        <BodyText>At PROS I had the unique opportunity to modernize a B2B airline pricing platform while balancing the needs of two very different users, and to advocate for them both through every design decision.</BodyText>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 24 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, marginTop: 24 }}>
           {[
-            { heading: 'Designing for two users at once', body: 'Juniors needed guidance to figure out where to start; Seniors needed to move fast without friction. Holding both in mind simultaneously sharpened how I think about role-based design.' },
-            { heading: 'Integrating AI thoughtfully', body: 'Figuring out where AI should live and where it shouldn\'t was one of the most interesting design challenges I\'ve navigated, and it taught me to advocate for users in ambiguous product territory.' },
-            { heading: 'Gratitude', body: 'I\'m grateful to my team at PROS for trusting me with a modernization initiative for a live enterprise platform and for challenging my thinking at every step.' },
+            { heading: 'Designing for two users at once', body: 'Every time a decision worked for one it had to be checked against the other. The compact rows, the optional panel, keeping Market Overview\'s workflow intact: none of those are neutral choices. They are each a specific answer to the question of what happens to the Senior if we fix this for the Junior. That constraint made every decision harder and more precise.' },
+            { heading: 'Integrating AI thoughtfully', body: 'The core tension was that AI help and user control pull in opposite directions. Every version that gave AI more control made the product faster for a Junior and more disruptive for a Senior. The version that shipped keeps AI available without making it the default.' },
+            { heading: 'Knowing when to hold a position and when to test it', body: 'The stakeholder exchange about the left panel was not a disagreement about aesthetics. It was a disagreement about which user the product was optimizing for. Naming that made it possible to hold the position in the room. Not resolving it by the end of the internship was not a failure. It was an honest acknowledgment that the question deserved data, not a guess.' },
           ].map(({ heading, body }) => (
-            <div key={heading} className="cs-info-box" style={{ padding: 20 }}>
+            <div key={heading}>
               <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px' }}>{heading}</p>
               <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
             </div>
           ))}
         </div>
-
-        <figure style={{ margin: '48px 0 0' }}>
-          <img src="/images/revenue-management/ux-houston-team.webp" alt="PROS UX Design team" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
-          <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>PROS UX Design team</figcaption>
-        </figure>
       </Section>
 
       </div>

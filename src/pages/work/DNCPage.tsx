@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
-import { MapPin, Briefcase, Megaphone, Users, PaintBrush, Star } from '@phosphor-icons/react'
+import { MapPin, Briefcase } from '@phosphor-icons/react'
 import SectionHeading from '../../components/case-study/SectionHeading'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
@@ -12,12 +12,8 @@ import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
   { id: 'dnc-intro',      label: 'Introduction' },
-  { id: 'dnc-context',    label: 'Context' },
-  { id: 'dnc-audience',   label: 'Audience' },
-  { id: 'dnc-process',    label: 'Design Process' },
-  { id: 'dnc-solution',   label: 'Final Design' },
+  { id: 'dnc-process',    label: 'Process' },
   { id: 'dnc-collection', label: 'Collection of Work' },
-  { id: 'dnc-impact',     label: 'Impact' },
   { id: 'dnc-reflection', label: 'Reflection' },
 ]
 
@@ -30,7 +26,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
     <section
       id={id}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
-      style={{ marginTop: 256 }}
+      style={{ marginTop: 164 }}
     >
       {children}
     </section>
@@ -298,7 +294,7 @@ export default function DNCPage() {
               Campaign Design
             </h1>
             <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
-              Digital design for Biden-Harris and Democratic party initiatives. Turned around 18 same-day assets during an active presidential campaign; posts hit 5,500+ likes.
+              The Democratic National Committee's in-house design team powers the party's visual brand. I interned on the Mobilization team during the 2024 presidential campaign, turning around digital assets for a national audience under same-day deadlines. In four months, our work earned 5,500 likes and 600 shares across platforms.
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
@@ -315,7 +311,7 @@ export default function DNCPage() {
             </div>
 
             
-            <a href="#dnc-solution" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
+            <a href="#dnc-collection" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to collection</span></a>
           </div>
         </div>
       </section>
@@ -325,235 +321,143 @@ export default function DNCPage() {
         {/* ── Introduction ── */}
         <Section id="dnc-intro">
           <SectionHeading index={1} chapter="Introduction" heading="" />
-          <SubHeading>Mobilization team at the Democratic National Committee (DNC)</SubHeading>
-          <BodyText>I joined the Mobilization team at the DNC as the Visual Design intern. The DNC acts as the in-house design agency for the DNC initiatives supporting both the Biden-Harris administration and the Democratic platform as well. I managed requests for both simultaneously and even had same-day deadlines.</BodyText>
-          <div style={{ borderLeft: '2px solid rgba(var(--color-navy-rgb),0.2)', paddingLeft: 16, marginBottom: 32 }}>
-            <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>
-              <span className="font-semibold text-[var(--color-cs-heading)]">Context: </span>The Biden-Harris branding system was in midst of a transition when I joined.
-            </p>
-          </div>
-          <figure style={{ marginTop: 86 }}>
-            <img src={img('democratic-national-committee-05-EPOpQr.png')} alt="Biden-Harris 2024 branding" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
-            <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>This is the new branding for the Biden-Harris 2024 campaign. It was characterized by handwritten elements, gradients, and brighter blues and reds.</figcaption>
-          </figure>
-        </Section>
+          <SubHeading>Forty graphics in four months, eighteen same-day, for a national audience</SubHeading>
+          <BodyText>The Democratic National Committee runs design for the Democratic party. I joined the Mobilization team as a Visual Design Intern, working under a Design Director alongside a team of Graphic Designers.</BodyText>
+          <BodyText>Every asset went out to a national audience across Instagram, Facebook, email, and merch, supporting the Biden-Harris campaign and Democratic platform initiatives. Some requests came with a week of lead time. Others arrived in the morning and needed to ship the same afternoon. The brand was mid-transition when I joined, which meant every graphic had to feel consistent with a system that was still being defined.</BodyText>
+          <BodyText>That combination of tight timelines, high visibility, and an evolving brand system shaped every design decision I made that summer.</BodyText>
 
-        {/* ── Context ── */}
-        <Section id="dnc-context">
-          <SectionHeading index={2} chapter="Context" heading="" />
-          <SubHeading>The journey of a design ticket request</SubHeading>
-
-          <BodyText>The workload at the DNC changed all the time. Some days a protest would break out and I had to drop everything to design something that same day. Other times I got assignments with a week or two of notice. My schedule never looked the same week to week, but I learned to adapt fast.</BodyText>
-          <BodyText>No matter the timeline, every request followed the same path. Here is how a typical ticket moved from brief to handoff.</BodyText>
-
-          <img src={img('democratic-national-committee-06-S5fGOr.png')} alt="Design ticket workflow" style={{ width: '100%', height: 'auto', display: 'block', marginTop: 86 }} />
-          <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Every graphic went through the same six steps: brief, draft, feedback, revisions, verification, and handoff. *Even in same-day design requests</p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginTop: 86 }}>
-            <div>
-              <SubHeading>The Challenge</SubHeading>
-              <BodyText>Design requests came in on a daily basis. The brand was mid-transition, so I had to balance that while still delivering high quality work.</BodyText>
-              <BodyText>Every digital asset reached thousands or even millions of people, which meant real potential for impact. With my background in psychology, I wanted my designs to be inclusive, so I made sure everything met WCAG accessibility. Additionally, the review process with tight deadlines sometimes left me less than a day to finish a request.</BodyText>
-              <BodyText>The process was exciting yet I had to keep tabs on myself and be considerate of the constraints.</BodyText>
-            </div>
-            <figure style={{ margin: 0 }}>
-              <img src={img('democratic-national-committee-07-VCrcQ3.gif')} alt="Balance — mentality throughout design requests" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
-              <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>This was my mentality throughout the design requests</figcaption>
-            </figure>
-          </div>
-
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 32 }}>
             <ChallengeBanner
               label="Challenge"
-              question="How might I balance brand consistency, accessibility, and quality to create effective, inclusive designs?"
+              question="How might I balance brand consistency, accessibility, and quality to create effective, inclusive designs on tight timelines?"
             />
           </div>
         </Section>
 
-        {/* ── Audience ── */}
-        <Section id="dnc-audience">
-          <SectionHeading index={3} chapter="Audience" heading="" />
-          <SubHeading>Who I Designed For</SubHeading>
+        {/* ── Process ── */}
+        <Section id="dnc-process">
+          <SectionHeading index={2} chapter="Process" heading="" />
+          <SubHeading>Every graphic went through the same six steps, brief to handoff, even on the tightest deadlines</SubHeading>
+          <BodyText>The workload at the DNC changed constantly. Some requests came with a week of notice. Others arrived in the morning with a same-day deadline. My schedule varied week to week, but the process stayed the same no matter how much time I had.</BodyText>
+          <BodyText>Every graphic went through six steps:</BodyText>
 
-          <BodyText>As I did my design requests, I kept two distinct perspectives in mind while designing.</BodyText>
-
-          <div className="dnc-persona-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 24 }}>
+          <ul style={{ listStyle: 'none', margin: '8px 0 24px', padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
             {[
-              {
-                type: 'The Scrolling Voter',
-                name: 'Sam',
-                location: 'United States',
-                role: 'Everyday citizen',
-                avatar: img('dnc-avatar-sam.jpg'),
-                needs: ['Understand the message fast', 'Read the text easily', 'Feel connected without overthinking'],
-              },
-              {
-                type: 'Brand Strategist',
-                name: 'Jordan',
-                location: 'Washington, D.C.',
-                role: 'DNC brand team',
-                avatar: img('dnc-avatar-jordan.jpg'),
-                needs: ['Trust the brand work is done', 'Have time to give real feedback', 'Get a design that is almost ready to go'],
-              },
-            ].map(({ type, name, location, role, avatar, needs }) => (
-              <div key={name} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
-                <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 20 }}>
-                  <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.15)', flexShrink: 0 }}>
-                    <img src={avatar} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
-                  </div>
-                  <div>
-                    <span className="font-landing-body font-semibold" style={{ fontSize: 11, color: 'var(--color-secondary)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>{type}</span>
-                    <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 20, margin: '2px 0 4px' }}>{name}</h4>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                      <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <MapPin size={12} weight="bold" /> {location}
-                      </span>
-                      <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <Briefcase size={12} weight="bold" /> {role}
-                      </span>
+              { step: 'Brief', body: 'Art Director or Ad Strategist wrote the creative brief.' },
+              { step: 'Draft', body: 'I explored directions and landed on a concept.' },
+              { step: 'Review', body: 'The full design team reviewed the work live and gave feedback.' },
+              { step: 'Revision', body: 'I revised based on feedback and sent the asset for verification.' },
+              { step: 'Verification', body: 'Brand Strategist checked against brand standards.' },
+              { step: 'Handoff', body: 'Approved asset sent to digital channels for publication.' },
+            ].map(({ step, body }) => (
+              <li key={step} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                <span className="font-bold text-[var(--color-cs-heading)] shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>
+                <span className="font-landing-body text-[14px]" style={{ color: 'var(--color-secondary)', lineHeight: 1.6 }}>
+                  <strong className="text-[var(--color-cs-heading)]">{step}</strong> — {body}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <BodyText>That consistency mattered most on the hardest days. Same-day requests still got six rounds of eyes before they went live.</BodyText>
+
+          <div style={{ marginTop: 86 }}>
+            <SubHeading>Designing for two audiences in every file</SubHeading>
+            <BodyText>Every graphic had to work for two very different people at once. The first was the scrolling voter, someone encountering the post on their phone with no context and no patience. The message had to land immediately: clear text, accessible contrast, meaning evident at a glance.</BodyText>
+            <BodyText>The second was the Brand Strategist reviewing the asset before it went out. They needed to trust the design met brand standards so their feedback could be specific and fast. They had no time to catch basic mistakes.</BodyText>
+            <BodyText>Every layout decision I made was an answer to both at once.</BodyText>
+
+            <div className="dnc-persona-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 24 }}>
+              {[
+                {
+                  type: 'The Scrolling Voter',
+                  name: 'Sam',
+                  location: 'United States',
+                  role: 'Everyday citizen',
+                  avatar: img('dnc-avatar-sam.jpg'),
+                  needs: ['Understand the message fast', 'Read the text easily', 'Feel connected without overthinking'],
+                },
+                {
+                  type: 'Brand Strategist',
+                  name: 'Jordan',
+                  location: 'Washington, D.C.',
+                  role: 'DNC brand team',
+                  avatar: img('dnc-avatar-jordan.jpg'),
+                  needs: ['Trust the brand work is done', 'Have time to give real feedback', 'Get a design that is almost ready to go'],
+                },
+              ].map(({ type, name, location, role, avatar, needs }) => (
+                <div key={name} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
+                  <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 20 }}>
+                    <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.15)', flexShrink: 0 }}>
+                      <img src={avatar} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
+                    </div>
+                    <div>
+                      <span className="font-landing-body font-semibold" style={{ fontSize: 11, color: 'var(--color-secondary)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>{type}</span>
+                      <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 20, margin: '2px 0 4px' }}>{name}</h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                        <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                          <MapPin size={12} weight="bold" /> {location}
+                        </span>
+                        <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                          <Briefcase size={12} weight="bold" /> {role}
+                        </span>
+                      </div>
                     </div>
                   </div>
+                  <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, marginBottom: 10 }}>Needs:</p>
+                  <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {needs.map(n => (
+                      <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                        <span className="text-[var(--color-cs-heading)] font-bold shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>
+                        <span className="font-landing-body" style={{ fontSize: 14, color: 'var(--color-secondary)', lineHeight: 1.5 }}>{n}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, marginBottom: 10 }}>Needs:</p>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {needs.map(n => (
-                    <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <span className="text-[var(--color-cs-heading)] font-bold shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>
-                      <span className="font-landing-body" style={{ fontSize: 14, color: 'var(--color-secondary)', lineHeight: 1.5 }}>{n}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* ── Design Process ── */}
-        <Section id="dnc-process">
-          <SectionHeading index={4} chapter="Design Process" heading="" />
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginTop: 8 }}>
-            <div>
-              <SubHeading>Kamala Anniversary Graphic</SubHeading>
-              <BodyText>Kamala Harris is someone who inspires me. When the Vice President was about to hit a milestone anniversary in office, the request came in last minute for an Instagram post.</BodyText>
-              <BodyText>I had worked on many graphics by this point, but this one stood out because of how many things I had to balance at once. The timeline was tight, but the stakes felt high. This was a memorable event, and a lot of people were going to see it.</BodyText>
-              <BodyText>Here is how the Kamala anniversary graphic came together.</BodyText>
+              ))}
             </div>
-            <figure style={{ margin: 0 }}>
-              <img src={img('democratic-national-committee-10-5DfmYK.png')} alt="VP Kamala Harris reference photo" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
-            </figure>
+          </div>
+
+          <div style={{ marginTop: 86 }}>
+            <SubHeading>A same-day milestone graphic for the Vice President</SubHeading>
+            <BodyText>The Kamala Harris anniversary post is the clearest example of that process under pressure. The brief arrived the morning it needed to go live. The Vice President was hitting a milestone in office and the post needed to be on Instagram that afternoon.</BodyText>
+            <BodyText>I explored several directions before landing on the photo. The image choice was the first decision because it set the tone for everything else: a celebratory photo read as a milestone, a formal one read as an announcement. Each option carried a different message before anyone read a word.</BodyText>
+            <BodyText>I ran contrast checks on every version. The flag photo scored 6.22 on the WCAG scale, below the minimum for accessible text legibility. It was a strong image but it did not meet the accessibility bar, so I eliminated it. The final version used a warmer photo against a solid background, scoring 14.59 and passing WCAG AAA. The layout was clear, the tone matched the occasion, and it cleared every quality check before it went out.</BodyText>
+            <BodyText>The team had mixed reactions throughout. One designer preferred the flag photo for authenticity. Another felt the final version read as more celebratory. The Design Director asked for earlier turnarounds on future requests to allow more breathing room. I took all of it in and made the call that best served the brief.</BodyText>
           </div>
 
           <div style={{ marginTop: 86 }}>
             <IterationExplorer />
           </div>
-
-          <div className="cs-after-interactive" style={{ marginTop: 86 }}>
-            <SubHeading>What the team said</SubHeading>
-            <BodyText>One of my favorite parts about design is the iterative process and the discussions centered on layout, feeling, and more. Not everyone agreed on the same thing, but that is alright. Some wanted a different photo. Some wanted a cleaner layout. At the end of the day, they helped me consider aspects of the designs I hadn't thought about.</BodyText>
-            <div style={{ borderLeft: '2px solid rgba(var(--color-navy-rgb),0.2)', paddingLeft: 16, marginBottom: 32 }}>
-              <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>
-                <strong>Takeaway:</strong> I had to narrow in on the solution, so I focused on what made the most sense for the graphic and took that in with the iterations.
-              </p>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
-              {[
-                { quote: 'I still liked the other photo better. It felt more genuine.', role: 'Ad Strategist', icon: <Megaphone size={20} weight="thin" color="var(--color-cs-heading)" /> },
-                { quote: 'The colors feel much more celebratory now.', role: 'Graphic Designer', icon: <PaintBrush size={20} weight="thin" color="var(--color-cs-heading)" /> },
-                { quote: 'Nice speed. Just send it over sooner so we have more breathing room.', role: 'Design Director', icon: <Briefcase size={20} weight="thin" color="var(--color-cs-heading)" /> },
-              ].map(({ quote, role, icon }) => (
-                <div key={quote} className="cs-info-box" style={{ padding: 20 }}>
-                  <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
-                    {icon}
-                  </div>
-                  <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 11, color: 'var(--color-cs-heading)', margin: '0 0 8px' }}>{role}</p>
-                  <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
-                    <span style={{ fontFamily: 'var(--font-display)', fontSize: 40, color: 'rgba(var(--color-navy-rgb),0.15)', lineHeight: 1, flexShrink: 0 }}>"</span>
-                    <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0, fontStyle: 'italic' }}>{quote}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-        </Section>
-
-        {/* ── Final Design ── */}
-        <Section id="dnc-solution">
-          <SectionHeading index={5} chapter="Final Design" heading="" />
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', lineHeight: 1.7, margin: '0 0 4px' }}>The final graphic went live on Instagram for the Vice President's anniversary milestone.</p>
-              {[
-                { heading: 'Color Contrast Check', body: 'Contrast ratio 14.59, passes WCAG AAA.' },
-                { heading: 'Why this design won', body: 'The layout is clear, the tone is celebratory and professional, and it meets accessibility standards.' },
-                { heading: 'Why this photo', body: 'Warm, professional, and celebratory: this image matched the energy of the milestone.' },
-              ].map(({ heading, body }) => (
-                <div key={heading} className="cs-card-box" style={{ padding: 16 }}>
-                  <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 4px' }}>{heading}</p>
-                  <p className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{body}</p>
-                </div>
-              ))}
-            </div>
-
-            <img src={img('dnc-iter-final.png')} alt="Final VP Anniversary graphic" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain', objectPosition: 'top', display: 'block' }} />
-          </div>
-
         </Section>
 
         {/* ── Collection of Work ── */}
         <Section id="dnc-collection">
-          <SectionHeading index={6} chapter="Collection of Work" heading="" />
-          <SubHeading>Here are some of the digital assets I made!</SubHeading>
-          <CollectionGallery />
-        </Section>
-
-        {/* ── Reflection ── */}
-        {/* ── Impact ── */}
-        <Section id="dnc-impact">
-          <SectionHeading index={7} chapter="Impact" heading="" />
-          <SubHeading>Results</SubHeading>
-          <BodyText>Being part of the Mobilization team at the DNC pushed my visual design skills. I got to learn quickly on my feet, consider multiple perspectives, and think about the real-world reach of my work. I also got to practice my interest in accessibility. I advocated for it regularly, shared WCAG checking tools with my team, caught a few issues along the way, and the team started paying more attention to it because of it.</BodyText>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 24 }}>
-            {[
-              { label: 'IN 4 MONTHS', stat: '40 graphics', body: 'Designed across Instagram, Facebook, email, and merch.' },
-              { label: 'REQUESTS', stat: '18 same day', body: 'Turned around within hours while still leaving room for feedback, revisions, and handoff.' },
-              { label: 'ACROSS INSTAGRAM AND TIKTOK', stat: '5,500 likes\n600 shares', body: 'People saw and responded to the work I made.' },
-            ].map(({ label, stat, body }) => (
-              <div key={label} className="cs-card-box" style={{ padding: 20 }}>
-                <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', margin: '0 0 8px' }}>{label}</p>
-                <p className="cs-stat-number" style={{ fontSize: 28, margin: '0 0 8px', lineHeight: 1.2, whiteSpace: 'pre-line' }}>{stat}</p>
-                <p className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>{body}</p>
-              </div>
-            ))}
+          <SectionHeading index={3} chapter="Collection of Work" heading="" />
+          <BodyText>Forty graphics across four months: anniversary posts, issue campaigns, donation drives, and merch. Every asset met WCAG accessibility standards before handoff.</BodyText>
+          <div style={{ marginTop: 24 }}>
+            <CollectionGallery />
           </div>
         </Section>
 
+        {/* ── Reflection ── */}
         <Section id="dnc-reflection">
-          <SectionHeading index={8} chapter="Reflection" heading="" />
+          <SectionHeading index={4} chapter="Reflection" heading="" />
 
-          <SubHeading>What I'd carry forward from a summer in D.C.</SubHeading>
+          <BodyText>In four months: 40 graphics, 18 same-day, 5,500 likes and 600 shares across Instagram and TikTok.</BodyText>
+          <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', marginBottom: 32 }}>All figures measured by the DNC.</p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignItems: 'start', marginTop: -8 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {[
-                { heading: 'Design communicates', body: 'Every choice, whether photo, color, or layout, tells people how to feel. I learned to be intentional even under pressure, because nothing is neutral.' },
-                { heading: 'Speed and quality coexist', body: 'Same-day turnarounds taught me to work faster without sacrificing accessibility or brand integrity. Constraints sharpen your thinking.' },
-                { heading: 'Gratitude', body: 'I am grateful to the Mobilization team for trusting me with real work and for creating the kind of environment where I could grow quickly.' },
-              ].map(({ heading, body }) => (
-                <div key={heading} className="cs-info-box" style={{ padding: 14 }}>
-                  <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px' }}>{heading}</p>
-                  <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
-                </div>
-              ))}
-            </div>
-
-            <figure style={{ margin: 0 }}>
-              <img src={img('democratic-national-committee-18-clohhk.jpg')} alt="DC Metro" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
-              <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Snippet of my morning commute! DC Metro is so cool</figcaption>
-            </figure>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
+            {[
+              { heading: 'Every design choice communicates something', body: 'Photo selection, type weight, color temperature: none of those are neutral decisions, especially in a political context where every visual carries weight. Working at this pace and this scale taught me to be deliberate about every element, not because I had time to second-guess everything, but because I learned to trust the reasoning behind my first call.' },
+              { heading: 'Speed and quality have to coexist', body: 'Same-day does not mean subpar. Every asset still went through six steps regardless of the timeline. The constraint was time, not standard. Working inside that structure taught me that tight deadlines sharpen decisions rather than compromise them.' },
+              { heading: 'Gratitude', body: "I am grateful to the DNC's Mobilization team for trusting me with work that reached millions of people, for building an environment where a junior designer could contribute meaningfully from day one, and for a memorable summer in D.C." },
+            ].map(({ heading, body }) => (
+              <div key={heading} className="cs-info-box" style={{ padding: 14 }}>
+                <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px' }}>{heading}</p>
+                <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+              </div>
+            ))}
           </div>
         </Section>
 

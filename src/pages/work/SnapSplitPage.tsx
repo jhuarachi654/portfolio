@@ -7,7 +7,6 @@ import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
   { id: 'ss-intro',       label: 'Introduction' },
-  { id: 'ss-solution',    label: 'Solution Preview' },
   { id: 'ss-research',    label: 'Research' },
   { id: 'ss-development', label: 'Development' },
   { id: 'ss-features',    label: 'Solution' },
@@ -21,7 +20,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
     <section
       id={id}
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
-      style={{ marginTop: 256 }}
+      style={{ marginTop: 164 }}
     >
       {children}
     </section>
@@ -141,7 +140,7 @@ export default function SnapSplitPage() {
               SnapSplit
             </h1>
             <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
-              A bill-splitting app for friend groups. Rebranded and redesigned to cut the core task from 4 minutes to 30 seconds.
+              SnapSplit is a bill-splitting app for friend groups. In the original version, one person did all the work while everyone else waited. I redesigned the flow to make splitting a shared task, rebranded the product, and cut the core task from 4 minutes to 30 seconds.
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
@@ -157,7 +156,7 @@ export default function SnapSplitPage() {
               ))}
             </div>
 
-            <a href="#ss-solution" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
+            <a href="#ss-features" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
           </div>
         </div>
       </section>
@@ -169,124 +168,128 @@ export default function SnapSplitPage() {
           <ChapterHeading index={1} heading="Introduction" />
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>The Solo Burden</SubHeading>
+            <SubHeading>The problem was not that the host dropped off. It was that only the host had anything to do.</SubHeading>
             <Prose>
               <BodyText>
-                SnapSplit is a bill-splitting app for friend groups. In its original version, one person, the host, had to manually enter every item from a receipt, then assign portions to each person by hand. It was slow, and it made one person responsible for the entire group's math.
+                SnapSplit is a mobile app that helps friend groups split restaurant bills. One person, the host, uploads a photo of the receipt. The app scans the items and costs. The group settles up based on what each person ordered.
               </BodyText>
               <BodyText>
-                While the host struggled through this legacy flow, every other group member was completely disconnected from the process. They had no visibility into what they owed until the host finished, and hosts often abandoned the split partway through.
+                In the original version, the host did everything. They uploaded the receipt, manually entered every item, and assigned each portion to each person by hand. The process took around 4 minutes and required sustained attention throughout. Hosts frequently abandoned the split partway through, leaving the group with nothing resolved.
+              </BodyText>
+              <BodyText>
+                The original brief asked how to reduce host drop-off. Informational interviews with frequent bill splitters pointed to a more fundamental issue. The host was doing work that belonged to the whole group. Every other group member sat idle while one person managed the entire bill. Group members had no step to complete, no visibility into what was happening, and no way to know what they owed until the host finished.
+              </BodyText>
+              <BodyText>
+                That finding changed the design direction. Making the host's solo task faster would not fix the underlying problem. The goal became giving every group member their own step in the process.
               </BodyText>
             </Prose>
           </div>
 
-          <div style={{ marginTop: 86 }}>
-            <img src={img('snapsplit-legacy-critique.jpg')} alt="Legacy design critique of the SnapSplit host-assignment flow: information overload and confusing iconography" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
-          </div>
-
-          <div style={{ marginTop: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 20 }}>
-            <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
-              <strong style={{ color: 'var(--color-cs-heading)' }}>Reframing the brief:</strong> the original framing asked how to reduce drop-offs and frustration in the host's flow. But the real problem wasn't the host's flow alone, it was that only the host had a flow at all.
-            </p>
-          </div>
-
           <ChallengeBanner
-            label="Challenge (Revised)"
-            question={<>How might we design a bill-splitting platform to make splitting bills <strong className="font-semibold">fast</strong>, <strong className="font-semibold">fair</strong>, and <strong className="font-semibold">stress-free</strong>?</>}
+            question={<>How might we design a bill-splitting experience that is <strong className="font-semibold">fast</strong>, <strong className="font-semibold">fair</strong>, and <strong className="font-semibold">stress-free</strong> for everyone in the group?</>}
           />
         </Section>
 
-        {/* ── 2. Solution Preview ── */}
-        <Section id="ss-solution">
-          <ChapterHeading index={2} heading="Solution Preview" />
-
-          <div style={{ marginTop: 86 }}>
-            <SubHeading>Legacy vs. Redesign</SubHeading>
-            <BodyText>
-              The redesign turned item assignment from a host's solo task into a shared group task, giving every member their own page to claim items, review their share, and track what they owe.
-            </BodyText>
-
-            <img src={img('snapsplit-legacy-vs-redesign.jpg')} alt="Legacy SnapSplit UI compared to the redesigned collaborative UI" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, marginTop: 16 }} />
-            <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Task completion up from 50% to 80%; core task time cut from 4 min to 30s</p>
-          </div>
-        </Section>
-
-        {/* ── 3. Research ── */}
+        {/* ── 2. Research ── */}
         <Section id="ss-research">
-          <ChapterHeading index={3} heading="Research" />
+          <ChapterHeading index={2} heading="Research" />
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>Who Needed This</SubHeading>
-            <BodyText>
-              Splitting a bill involves two very different perspectives at once: the host doing the work, and the friends waiting on their share. Both needed a faster, less stressful way to settle up.
-            </BodyText>
-            <img src={img('snapsplit-user-needs.png')} alt="User needs statement: bill splitters who want to divide bills quickly and fairly" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, marginTop: 16 }} />
+            <SubHeading>Hosts were abandoning because the workload was unfair, not because the interface was hard to use</SubHeading>
+            <Prose>
+              <BodyText>
+                I ran informational interviews with recent graduates and young professionals who split bills regularly with friends. I wanted to understand not just where the flow broke down but why people avoided itemized splitting altogether.
+              </BodyText>
+              <BodyText>
+                Hosts described the manual entry step as the point where they gave up. Entering every item individually while friends waited was slow enough that splitting evenly felt like the easier option, even when it was less fair. Group members described a different frustration: they had no visibility into the bill while the host worked through it, and asking what they owed before the host finished felt awkward.
+              </BodyText>
+              <BodyText>
+                I followed the interviews with usability testing on the original flow. Task completion sat at 50%. The drop-off happened almost entirely at the item assignment step, the moment where the host assigned each item to each person individually. That step concentrated all the work in one place when the group was sitting right there to share it.
+              </BodyText>
+            </Prose>
+
+            <div style={{ marginTop: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 20 }}>
+              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>
+                <strong style={{ color: 'var(--color-cs-heading)' }}>User needs statement:</strong> As a young adult who frequently splits expenses with friends, I want to divide bills quickly and fairly so I can pay my share, avoid uncomfortable money conversations, and get back to enjoying time with my group.
+              </p>
+            </div>
           </div>
         </Section>
 
-        {/* ── 4. Development ── */}
+        {/* ── 3. Development ── */}
         <Section id="ss-development">
-          <ChapterHeading index={4} heading="Development" />
+          <ChapterHeading index={3} heading="Development" />
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>The Fix</SubHeading>
-            <BodyText>
-              The goal was to solve the Solo Burden and the resulting host abandonment by turning item assignment into a shared step in the flow, not just the host's problem to solve alone.
-            </BodyText>
+            <SubHeading>Three directions for making assignment collaborative, one that worked within the app's constraints</SubHeading>
+            <Prose>
+              <BodyText>
+                I explored three approaches to distributing the assignment step across the group. The first was a host-controlled drag and drop interface where the host could assign items faster by dragging them to each person's column. This kept assignment with the host and made it slightly faster, but it did not address the core problem: the host was still doing all the work alone.
+              </BodyText>
+              <BodyText>
+                The second was a voting system where the host sent a list of items and group members voted on which ones they shared. This distributed the task but introduced ambiguity about who owed what when items overlapped.
+              </BodyText>
+              <BodyText>
+                The third was individual claiming: each group member opens their own page and taps the items they ordered. Assignment becomes a personal action rather than a host action. This eliminated the bottleneck entirely because the work is now distributed across everyone in the group simultaneously.
+              </BodyText>
+              <BodyText>
+                Individual claiming was the only approach that solved the problem at its source. The dev team confirmed it was feasible within the current architecture. I built the new flow around it.
+              </BodyText>
+              <BodyText>
+                The new flow has four connected steps. The host uploads the receipt and reviews the scanned items. The host shares a link with the group. Every group member opens their own page and claims what they ordered. Everyone tracks payment from a shared bill overview, a screen showing each person's total, itemized by subtotal, tax, and tip.
+              </BodyText>
+              <BodyText>
+                As part of the overall redesign I also rebranded SnapSplit. The original interface used icons that tested as confusing in the informational interviews, particularly the split button which users could not identify without a label. The rebrand replaced ambiguous icons with labeled actions throughout, simplified the color system, and reorganized each screen's hierarchy to surface the most important action at the top.
+              </BodyText>
+            </Prose>
 
             <img src={img('snapsplit-flow-fix.png')} alt="Bill Splitter flow: Receipt upload, Item review, Collaborative Group Assignment task, Payment and tracking" style={{ width: '100%', height: 'auto', display: 'block', marginTop: 16 }} />
           </div>
         </Section>
 
-        {/* ── 5. Solution ── */}
+        {/* ── 4. Solution ── */}
         <Section id="ss-features">
-          <ChapterHeading index={5} heading="Solution" />
-
-          <div style={{ marginTop: 86 }}>
-            <BodyText>
-              Four connected moments carry a group from receipt to settled bill: uploading, reviewing, claiming, and tracking payment.
-            </BodyText>
-          </div>
+          <ChapterHeading index={4} heading="Solution" />
 
           <FeatureBlock
             label="Quick Upload"
-            body="Removing manual entry was the highest-leverage fix on the host's side of the Solo Burden. Skipping the itemized typing step meant a split could start in seconds instead of minutes, before the host had a chance to lose momentum or give up."
+            body="The host starts the split by taking a photo of the receipt. The app scans the image and extracts every item and cost automatically, removing the manual entry step that was causing hosts to abandon the process before it reached the group. Skipping the itemized typing step meant a split could start in seconds instead of minutes, before the host had a chance to lose momentum or give up."
             image="snapsplit-quick-upload.jpg"
             alt="Quick Upload: scanning a receipt to instantly extract items and costs"
           />
           <FeatureBlock
             label="Item Review"
-            body="Giving hosts a review step before sending the bill out kept trust intact. Catching scan errors early is what made a group willing to rely on one shared link instead of a screenshot of a receipt passed around a group chat."
+            body="Before sharing with the group, the host reviews every item the scan extracted, corrects errors, and confirms the tax and tip. Catching scan errors early is what made a group willing to rely on one shared link instead of a screenshot of a receipt passed around a group chat. In testing, hosts who had a review step were more likely to send the link rather than abandon the process, because they felt confident the bill was right before it went out."
             image="snapsplit-item-review.jpg"
             alt="Item Review screen confirming recognized items and tax and tip"
           />
           <FeatureBlock
             label="Group Assignment"
-            body="This is the core of the redesign: assignment moved from the host's solo, repetitive task to a real-time action every group member takes for themselves. It's the single change most responsible for the jump in task completion."
+            body="Each group member opens their own page and taps the items they ordered. Their running total updates in real time as they claim items. The host assigns nothing. This is the single change most responsible for the jump in task completion. Distributing assignment across the group removed the bottleneck that caused host abandonment, because no single person is responsible for the entire bill anymore."
             image="snapsplit-group-assignment.jpg"
             alt="Group Assignment screen where each member claims their own items"
           />
           <FeatureBlock
             label="Payment Tracking"
-            body="Visibility didn't stop at assignment. Keeping the bill overview accessible throughout the flow meant no one had to ask what they owed twice, one of the most common frustrations hosts raised about the legacy version."
+            body="After claiming items, each group member sees their final share broken down by subtotal, tax, and tip. A bill overview stays accessible throughout the entire experience. Keeping that overview visible throughout the flow meant no one had to ask what they owed twice, one of the most common frustrations hosts raised about the original version."
             image="snapsplit-payment-tracking.jpg"
             alt="Payment Tracking and Bill Overview screens"
           />
         </Section>
 
-        {/* ── 6. Reflection ── */}
+        {/* ── 5. Reflection ── */}
         <Section id="ss-reflection">
-          <ChapterHeading index={6} heading="Reflection" />
+          <ChapterHeading index={5} heading="Reflection" />
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>Validating the Redesign</SubHeading>
+            <SubHeading>Task completion rose from 50% to 80%. Core task time dropped from 4 minutes to 30 seconds.</SubHeading>
             <BodyText>
-              I tested the collaborative flow with recent grads and young professionals who regularly split bills with friends. The feedback validated the core shift: putting item assignment in everyone's hands, not just the host's.
+              Both figures come from usability testing of the redesigned prototype with the same group as the original testing: recent graduates and young professionals who split bills regularly. Three responses from those sessions:
             </BodyText>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 20 }}>
               {[
-                { role: 'Recent grad, 3 months post-college', quote: "Finally! I don't feel like I'm doing everyone's homework when we split the bill." },
+                { role: 'Recent grad, 3 months post-college', quote: "Finally, I don't feel like I'm doing everyone's homework when we split the bill." },
                 { role: 'First-year professional, living alone', quote: 'This actually makes splitting bills less awkward.' },
                 { role: 'Recent grad, 3 months post-college', quote: 'I always dreaded splitting bills because I ended up being the accountant. This makes it fair for everyone.' },
               ].map(({ role, quote }, i) => (
@@ -296,38 +299,17 @@ export default function SnapSplitPage() {
                 </div>
               ))}
             </div>
+
+            <BodyText>
+              All three responses pointed at the same thing the metrics showed: the original design had concentrated a group task in one person's hands.
+            </BodyText>
           </div>
 
           <div style={{ marginTop: 86 }}>
-            <SubHeading>Impact</SubHeading>
-            <BodyText>
-              Task completion improved substantially once the assignment step became a shared, real-time task instead of a solo one.
-            </BodyText>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 16 }}>
-              <div className="cs-info-box" style={{ padding: 20 }}>
-                <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', marginBottom: 8 }}>Task Completion</p>
-                <p className="cs-stat-number" style={{ fontSize: 40, lineHeight: 1, margin: '0 0 8px' }}>50% → 80%</p>
-                <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>Task completion metric following the host/member effort redesign, a 60% increase.</p>
-              </div>
-              <div className="cs-info-box" style={{ padding: 20 }}>
-                <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-secondary)', marginBottom: 8 }}>Core Task Time</p>
-                <p className="cs-stat-number" style={{ fontSize: 40, lineHeight: 1, margin: '0 0 8px' }}>4 min → 30s</p>
-                <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>The redesigned, collaborative claiming flow cut the core splitting task down dramatically.</p>
-              </div>
-            </div>
-          </div>
-
-          <div style={{ marginTop: 86 }}>
-            <SubHeading>What I'd carry forward</SubHeading>
-            <BodyText>
-              Designing, building, and shipping SnapSplit solo taught me to hold both the host's and the group's needs in mind at once, and to validate a reframed problem statement with real users before committing to a direction.
-            </BodyText>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 16 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {[
-                { heading: 'Reframe before you solve', body: "The original brief was about reducing host drop-off. Looking closer revealed the real issue: only the host had a task at all. Reframing the HMW led to a fundamentally better solution." },
-                { heading: 'Validate with real users', body: 'Testing the collaborative flow with people who actually split bills regularly confirmed the shift was worth making, and surfaced language and moments worth refining further.' },
+                { heading: 'Reframe before you solve', body: "The original brief described a host drop-off problem. The informational interviews showed the drop-off was a symptom of a structural problem: item assignment was a solo task in a group experience. Fixing the symptom would have produced a faster solo flow. Fixing the structure produced a flow that worked for everyone in the group." },
+                { heading: 'Validate before you commit', body: 'Testing the collaborative flow with people who actually split bills regularly confirmed the direction was right. It also surfaced details the metrics alone did not show. The social discomfort of waiting for the host to finish was a finding that came directly from conversations, not from task completion rates. That finding shaped how the payment tracking screen was designed, specifically the decision to make the bill overview persistent rather than only visible at the end.' },
               ].map(({ heading, body }) => (
                 <div key={heading} className="cs-info-box" style={{ padding: 20 }}>
                   <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px', lineHeight: 1.4 }}>{heading}</p>
