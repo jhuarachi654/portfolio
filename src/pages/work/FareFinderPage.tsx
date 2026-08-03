@@ -50,7 +50,7 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
       {tag && (
         <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[22px] font-bold text-[var(--color-cs-heading)] leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[22px] text-[var(--color-cs-heading)] leading-snug cs-editorial" style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'italic', fontWeight: 400, marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -67,12 +67,12 @@ function PersonaCard({
 }) {
   return (
     <div>
-    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
+    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
       {/* Chip label */}
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
         <span className="font-landing-body font-semibold" style={{
           fontSize: 13, color: 'var(--color-cs-heading)',
-          border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12,
+          border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8,
           padding: '4px 14px',
         }}>{type}</span>
       </div>
@@ -133,7 +133,7 @@ function PersonaCard({
 
 function StatBlock({ stat, description, icon }: { stat: string; description: string; icon: React.ReactNode }) {
   return (
-    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
+    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
         <div style={{
           width: 44, height: 44, borderRadius: '50%',
@@ -143,7 +143,7 @@ function StatBlock({ stat, description, icon }: { stat: string; description: str
         }}>
           {icon}
         </div>
-        <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 44, lineHeight: 1, margin: 0, fontWeight: 700, color: 'var(--color-cs-heading)' }} />
+        <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 44, lineHeight: 1, margin: 0, fontWeight: 500, color: 'var(--color-cs-heading)' }} />
       </div>
       <p className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', lineHeight: 1.6, margin: 0 }}>{description}</p>
     </div>
@@ -169,17 +169,19 @@ function SolutionBlock({
   index: number; heading: string; body: string; outcome?: string
   image: string; imageAlt: string; caption?: string
 }) {
-  const num = String(index).padStart(2, '0')
   return (
     <div style={{ marginTop: 86 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
+      <div className="ff-solution-block-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
         <div>
-          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>{num}. {heading}</h3>
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
+            <span style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'italic', fontWeight: 400, color: 'var(--color-navy)' }}>{index}.</span>{' '}{heading}
+          </h3>
           <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: outcome ? 20 : 0 }}>{body}</p>
           {outcome && (
-            <div style={{ paddingTop: 16, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <span className="text-[var(--color-cs-heading)] font-bold" style={{ fontSize: 16, flexShrink: 0, lineHeight: 1.3 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{outcome}</p>
+            <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px solid rgba(var(--color-navy-rgb),0.12)' }}>
+              <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>
+                <span style={{ color: 'var(--color-navy)', fontWeight: 700, marginRight: 6 }}>→</span><strong style={{ color: 'var(--color-cs-heading)', fontWeight: 600 }}>User Impact:</strong>{' '}{outcome}
+              </p>
             </div>
           )}
         </div>
@@ -197,34 +199,39 @@ function SolutionBlock({
 // ─── Destinations explorer ────────────────────────────────────────────────────
 
 const destinationOptions = [
-  { label: 'Minimized Card Layout', image: 'fare-finder-19-bF3ZmE.png', caption: 'New Default Starting Screen' },
-  { label: 'Expanded Card Layout',  image: 'fare-finder-20-6z8BFr.png', caption: 'Validated Entry Point and Destination Layout' },
+  { label: 'Minimized Card Layout contains: Origin/Destination and Price', image: 'fare-finder-19-bF3ZmE.png', caption: 'New Default Starting Screen' },
+  { label: 'Expanded Card Layout contains: Origin/Destination, Price, and Visual',  image: 'fare-finder-20-6z8BFr.png', caption: 'Validated Entry Point and Destination Layout' },
 ]
+
+const CIRCLE_BTN: React.CSSProperties = { width: 38, height: 38, borderRadius: '50%', background: 'rgba(62,66,66,0.07)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-navy)', fontSize: 18, flexShrink: 0, transition: 'background 0.15s' }
+
+function ImageCarousel({ src, alt, index, total, label, onPrev, onNext, height }: { src: string; alt: string; index: number; total: number; label: string; onPrev: () => void; onNext: () => void; height?: number }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+      <button onClick={onPrev} style={CIRCLE_BTN}>‹</button>
+      <figure style={{ flex: 1, minWidth: 0, margin: 0 }}>
+        <img src={src} alt={alt} style={{ width: '100%', display: 'block', borderRadius: 8, boxShadow: '0 2px 16px rgba(0,0,0,0.10)', border: '1px solid rgba(0,0,0,0.07)', ...(height ? { height, objectFit: 'contain' as const, objectPosition: 'top' } : { height: 'auto' }) }} />
+        <figcaption className="font-landing-body" style={{ textAlign: 'center', fontSize: 11, color: 'var(--color-cs-heading)', opacity: 0.45, marginTop: 6, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{label} · {index + 1} / {total}</figcaption>
+      </figure>
+      <button onClick={onNext} style={CIRCLE_BTN}>›</button>
+    </div>
+  )
+}
 
 function DestinationsExplorer() {
   const [selected, setSelected] = useState(0)
   const opt = destinationOptions[selected]
+  const total = destinationOptions.length
+  const prev = () => setSelected((selected - 1 + total) % total)
+  const next = () => setSelected((selected + 1) % total)
   return (
     <div className="cs-card-box" style={{ padding: 32, marginTop: 86 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'start' }}>
-        <div>
-          <SubHeading>Destinations</SubHeading>
-          <BodyText>I explored two layout directions for the destination cards: a minimized card layout that kept more of the map visible, and an expanded card layout that showed more information per destination.</BodyText>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 24 }}>
-            {destinationOptions.map((o, i) => (
-              <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
-                border: selected === i ? '1px solid var(--color-cs-heading)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
-                background: 'transparent',
-              }}>
-                <span className="font-landing-body" style={{ fontSize: 14, fontWeight: selected === i ? 600 : 400, color: selected === i ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.4)' }}>{o.label}</span>
-              </button>
-            ))}
-          </div>
+      <div>
+        <SubHeading>Destinations</SubHeading>
+        <BodyText>I explored two layout directions for the destination cards: a minimized card layout that kept more of the map visible, and an expanded card layout that showed more information per destination.</BodyText>
+        <div style={{ marginTop: 20 }}>
+          <ImageCarousel src={`/images/fare-finder/${opt.image}`} alt={opt.caption} index={selected} total={total} label={opt.label} onPrev={prev} onNext={next} />
         </div>
-        <figure style={{ margin: 0 }}>
-          <img src={`/images/fare-finder/${opt.image}`} alt={opt.caption} style={{ width: '100%', height: 'auto', display: 'block' }} />
-          <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>{opt.caption}</figcaption>
-        </figure>
       </div>
     </div>
   )
@@ -233,30 +240,25 @@ function DestinationsExplorer() {
 // ─── Flexible Dates explorer ──────────────────────────────────────────────────
 
 const flexibleDatesOptions = [
-  { label: 'Final Designs', image: 'fare-finder-24-GdXvAb.png', caption: 'Flexible Dates Layouts' },
-  { label: 'Claude Generated Content', image: 'fare-finder-26-9cBwLo.png', caption: 'Claude Generated Layout' },
-  { label: 'Prompt', image: 'fare-finder-25-4SFEs9.png', caption: 'Prompt for Flexible Dates on Claude' },
+  { label: 'Flexible Dates Layouts', image: 'fare-finder-24-GdXvAb.png', caption: 'Flexible Dates Layouts' },
+  { label: 'Claude Generated Layouts', image: 'fare-finder-26-9cBwLo.png', caption: 'Claude Generated Layouts' },
+  { label: 'Prompt for Flexible Dates on Claude', image: 'fare-finder-25-4SFEs9.png', caption: 'Prompt for Flexible Dates on Claude' },
 ]
 
 function FlexibleDatesExplorer() {
   const [selected, setSelected] = useState(0)
   const opt = flexibleDatesOptions[selected]
+  const total = flexibleDatesOptions.length
+  const prev = () => setSelected((selected - 1 + total) % total)
+  const next = () => setSelected((selected + 1) % total)
   return (
     <div className="cs-card-box" style={{ padding: 32, marginTop: 86 }}>
-      <h3 className="text-[22px] font-bold text-[var(--color-cs-heading)] leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 8, marginTop: 0 }}>Flexible Dates</h3>
-      <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>How might we <strong className="font-semibold text-[var(--color-cs-heading)]">help travelers who don't have a destination in mind</strong> yet open up their options by exploring flights with flexible availability?</p>
-      <div style={{ display: 'flex', gap: 8, marginTop: 16, flexWrap: 'wrap' }}>
-        {flexibleDatesOptions.map((o, i) => (
-          <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
-            border: selected === i ? '1px solid var(--color-cs-heading)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
-            background: 'transparent',
-          }}>
-            <span className="font-landing-body" style={{ fontSize: 13, fontWeight: selected === i ? 600 : 400, color: selected === i ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.4)' }}>{o.label}</span>
-          </button>
-        ))}
+      <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 11, color: 'var(--color-cs-heading)', opacity: 0.5, marginBottom: 6, marginTop: 0 }}>HMW</p>
+      <h3 className="text-[22px] text-[var(--color-cs-heading)] leading-snug cs-editorial" style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'italic', fontWeight: 400, marginBottom: 8, marginTop: 0 }}>Flexible Dates</h3>
+      <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 1.5, color: 'var(--color-cs-heading)', margin: 0 }}>How might we <strong className="font-semibold">help travelers who don't have a destination in mind</strong> yet open up their options by exploring flights with flexible availability?</p>
+      <div style={{ marginTop: 16 }}>
+        <ImageCarousel src={`/images/fare-finder/${opt.image}`} alt={opt.caption} index={selected} total={total} label={opt.label} onPrev={prev} onNext={next} height={240} />
       </div>
-      <img src={`/images/fare-finder/${opt.image}`} alt={opt.caption} style={{ width: '100%', height: 240, objectFit: 'contain', objectPosition: 'top', display: 'block', marginTop: 16 }} />
-      <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 8 }}>{opt.caption}</p>
     </div>
   )
 }
@@ -266,32 +268,25 @@ function FlexibleDatesExplorer() {
 const flightFareOptions = [
   { label: 'Flight Card Layout Iterations', image: 'fare-finder-27-2A9bhj.png', caption: 'Flight Card Layout Iterations' },
   { label: 'Figma Make Generated Cards',    image: 'fare-finder-29-0uzkCF.png', caption: 'Figma Make Generated Cards' },
-  { label: 'Prompt',                        image: 'fare-finder-28-sl3Pmw.png', caption: 'Prompt for Quick Facts on Figma Make' },
+  { label: 'Prompt for Quick Facts on Figma Make', image: 'fare-finder-28-sl3Pmw.png', caption: 'Prompt for Quick Facts on Figma Make' },
 ]
 
 function FlightFareExplorer() {
   const [selected, setSelected] = useState(0)
   const opt = flightFareOptions[selected]
+  const total = flightFareOptions.length
+  const prev = () => setSelected((selected - 1 + total) % total)
+  const next = () => setSelected((selected + 1) % total)
   return (
     <div className="cs-card-box" style={{ padding: 32, marginTop: 86 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
+      <div className="ff-flight-fare-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
         <div>
-          <SubHeading>Flight Fare Card</SubHeading>
-          <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 16px' }}>How might we <strong className="font-semibold text-[var(--color-cs-heading)]">give travelers the destination context</strong> they need to feel confident enough to book directly from the map?</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 24, alignItems: 'flex-start' }}>
-            {flightFareOptions.map((o, i) => (
-              <button key={o.label} onClick={() => setSelected(i)} className="cs-tab-btn" style={{
-                border: selected === i ? '1px solid var(--color-cs-heading)' : '1px solid rgba(var(--color-navy-rgb),0.2)',
-                background: 'transparent',
-              }}>
-                <span className="font-landing-body" style={{ fontSize: 13, fontWeight: selected === i ? 600 : 400, color: selected === i ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.4)' }}>{o.label}</span>
-              </button>
-            ))}
-          </div>
+          <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 11, color: 'var(--color-cs-heading)', opacity: 0.5, marginBottom: 6, marginTop: 0 }}>HMW</p>
+          <h3 className="text-[22px] text-[var(--color-cs-heading)] leading-snug cs-editorial" style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'italic', fontWeight: 400, marginBottom: 8, marginTop: 0 }}>Card Layout</h3>
+          <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 1.5, color: 'var(--color-cs-heading)', margin: 0 }}>How might we <strong className="font-semibold">give travelers the destination context</strong> they need to feel confident enough to book directly from the map?</p>
         </div>
         <div>
-          <img src={`/images/fare-finder/${opt.image}`} alt={opt.caption} style={{ width: '100%', height: 360, objectFit: 'contain', objectPosition: 'top', display: 'block' }} />
-          <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>{opt.caption}</p>
+          <ImageCarousel src={`/images/fare-finder/${opt.image}`} alt={opt.caption} index={selected} total={total} label={opt.label} onPrev={prev} onNext={next} height={360} />
         </div>
       </div>
     </div>
@@ -343,32 +338,25 @@ export default function FareFinderPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-          <div style={{ background: '#003854', padding: '4%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, position: 'relative', aspectRatio: '16/9', overflow: 'hidden' }}>
+          <div style={{ background: '#003854', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', padding: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
             <HeroVideo />
           </div>
         </div>
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-            <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-cs-heading)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>PROS</p>
-            <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
-              Fare Finder
+            <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+              Fare Finder Map
             </h1>
             <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
-              Fare Finder is a flight search map that airlines embed on their websites. Travelers use it to explore destinations and book flights without leaving the airline's site. It should be the most direct way to book. But it wasn't.
-            </p>
-            <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
-              The map was hard to navigate, recommended no destinations, and offered no context about the cities it showed. Travelers trying to explore had no starting point. Many left for competitor sites instead.
-            </p>
-            <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20, maxWidth: 600 }}>
-              We redesigned the map to fix that, adding city guides, personalized travel recommendations, and a simpler way to browse by destination type. Bookings rose 29%. The new experience kept travelers on the airline's site.
+              Designed and shipped a flight map tool for travelers to explore and to be informed in order to book their next trip.
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'UX Design Intern' },
-                { label: 'Duration', value: 'Jun – Sep 2025' },
-                { label: 'Team',     value: 'UX Strategist, UX Researcher, PM' },
-                { label: 'Tools',    value: 'Figma, Claude, Figma Make' },
+                { label: 'Timeline', value: 'Jun – Sep 2025' },
+                { label: 'Team',     value: 'Fare Finder Team' },
+                { label: 'Tools/Skills', value: 'Figma, Figma Make' },
               ].map(({ label, value }) => (
                 <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
                   <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
@@ -406,18 +394,24 @@ export default function FareFinderPage() {
         </div>
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>The map assumed travelers already knew where they wanted to go</SubHeading>
+          <SubHeading>Friction in flight discovery = fewer bookings.</SubHeading>
           <Prose>
             <BodyText>
-              Travelers came to Fare Finder to explore flight options, but the map gave them no starting point and no guidance. There were no destination recommendations, no way to filter by what kind of trip they wanted, and no context about the destinations on screen. Travelers who could not orient themselves left the site and booked through a third party instead.
+              This past summer, I interned at PROS, a B2B software company providing digital products for airlines and the travelers they serve. One of the projects I worked on was Fare Finder Map, an interactive flight map-based tool that showcases flight fares.
             </BodyText>
             <BodyText>
-              To understand the problem more precisely, I met with the PMs working directly with airline partners and the User Researcher who had run usability testing with travelers. Those conversations established two things: who was making design decisions possible, and who the design had to work for.
+              A Junior Designer and I co-led the redesign of the Fare Finder Map to better support free exploration and provide personalized recommendations for everyday travelers.
             </BodyText>
             <BodyText>
-              Airline partners are the airlines that configure and embed Fare Finder on their sites. They care about direct bookings, brand consistency, and seamless integration. Their needs shaped what was technically feasible and what had to stay consistent across deployments. Travelers are the people actually using the map to find and book flights. Their experience drove every design decision.
+              Flight discovery is the first touchpoint travelers have when planning a trip. Across flight exploration platforms, personalized results and travel-related support have become standard. When the direct booking experience on an airline's site falls short of that, travelers go elsewhere and airlines lose those direct bookings.
             </BodyText>
           </Prose>
+        </div>
+
+        <div style={{ marginTop: 86 }}>
+          <ChallengeBanner
+            question={<>How might we <strong className="font-semibold">redesign the Fare Finder Map</strong> to make flight exploration more supported and personalized?</>}
+          />
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
@@ -426,61 +420,58 @@ export default function FareFinderPage() {
         </figure>
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>Travelers left when they could not find a starting point or a reason to stay</SubHeading>
+          <SubHeading>Friction Points in the Booking Experience</SubHeading>
           <Prose>
             <BodyText>
-              Usability testing had just concluded before I joined. I worked through the findings with the User Researcher to identify where the experience was breaking down. Three friction points came up consistently.
+              Before I joined, usability testing had just concluded. I jumped into the analysis working 1-1 with the User Researcher. These main findings came from the affinity mapping exercise, pointing to where travelers were experiencing friction and what they wanted from the experience.
             </BodyText>
           </Prose>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32, alignItems: 'start' }}>
+        <div className="ff-friction-stats-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32, alignItems: 'start' }}>
           <StatBlock
-            stat="19%"
-            icon={<Compass size={20} weight="regular" color="var(--color-cs-heading)" />}
-            description="had trouble navigating or orienting themselves on the map"
-          />
-          <StatBlock
-            stat="13%"
-            icon={<MapTrifold size={20} weight="regular" color="var(--color-cs-heading)" />}
-            description="wanted destination recommendations based on their preferences"
-          />
-          <StatBlock
-            stat="13%"
+            stat="60%"
             icon={<MagnifyingGlass size={20} weight="regular" color="var(--color-cs-heading)" />}
-            description="asked for country labels and borders to help distinguish destinations"
+            description="requested for country labels and borders"
+          />
+          <StatBlock
+            stat="80%"
+            icon={<Compass size={20} weight="regular" color="var(--color-cs-heading)" />}
+            description="of travelers experienced navigation friction"
+          />
+          <StatBlock
+            stat="40%"
+            icon={<MapTrifold size={20} weight="regular" color="var(--color-cs-heading)" />}
+            description="requested more exploratory features"
           />
         </div>
 
         <div style={{ marginTop: 24 }}>
           <Prose>
             <BodyText>
-              All three pointed at the same gap: the map expected travelers to arrive knowing what they wanted and where to look. Most did not.
-            </BodyText>
-            <BodyText>
-              A review of the existing map confirmed the pattern. Personalized recommendations disappeared when travelers expanded to full map view, exactly when they were most actively exploring. There was no way to search by trip duration or travel month for travelers without set dates. Flight cards showed a price and a route but nothing about the destination itself, which was not enough context for someone still deciding where to go.
+              This raised a few questions for the redesign: how do we balance navigation improvements with new feature requests? What is feasible and what takes priority? Why?
             </BodyText>
           </Prose>
         </div>
 
         <div style={{ marginTop: 86 }}>
           <ChallengeBanner
-            question={<>How might we <strong className="font-semibold">redesign the Fare Finder map</strong> to make flight exploration more supported and personalized?</>}
+            question={<>How might we <strong className="font-semibold">redesign the Fare Finder Map</strong> to make flight exploration more supported and personalized?</>}
           />
         </div>
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>Competitors had already built the personalization Fare Finder was missing</SubHeading>
+          <SubHeading>Booking Features Across the Market</SubHeading>
           <Prose>
             <BodyText>
-              Before moving to design, I looked at how other platforms were solving the same problem. Booking experiences with maps are not new. Competitors and adjacent platforms like hotel and vacation rental sites had already established patterns: personalized suggestions based on origin, travel interest filters, contextual information panels, and layouts that let travelers choose how much of the map they see.
+              To answer these questions, I looked at how competitors and adjacent platforms like hotels and vacation rentals were already solving this. Booking experiences with maps aren't new. These features shared a common goal: helping travelers explore their options intuitively and book with as little effort as possible, all while keeping them informed.
             </BodyText>
             <BodyText>
-              PROS has one advantage none of those platforms have. Fare Finder lives directly on the airline's site. Travelers are already there. The opportunity was to bring the personalization and guidance those platforms offer into the direct booking experience, where it could actually influence a booking rather than send the traveler somewhere else.
+              PROS reaches more travelers than any platform here because it lives directly on the airline's site. Making it more personal and intuitive is a huge opportunity that could directly drive more bookings on airline sites.
             </BodyText>
           </Prose>
           <figure style={{ margin: '48px 0 0' }}>
-            <img src={img('fare-finder-15-18R8vT.png')} alt="State of the market — relevant booking features" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
+            <img src={img('fare-finder-15-18R8vT.png')} alt="State of the market — relevant booking features" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
             <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Relevant features across the booking market</figcaption>
           </figure>
         </div>
@@ -493,20 +484,23 @@ export default function FareFinderPage() {
         <div style={{ marginTop: 86 }}>
           <ChallengeBanner
             label="Challenge (Revised)"
-            question={<>How might we <strong className="font-semibold">redesign the Fare Finder map</strong> to make flight exploration more intuitive, personalized, and informative?</>}
+            question={<>How might we <strong className="font-semibold">redesign the Fare Finder Map</strong> to make flight exploration more intuitive, personalized, and informative?</>}
           />
         </div>
       </Section>
 
       {/* ── Development ── */}
       <Section id="ff-development">
-        <SectionHeading index={2} chapter="Development" heading="Four problems to solve: entry point, layout, dates, and flight context" />
+        <SectionHeading index={2} chapter="Development" heading="Global Audience = Global Constraints" />
         <Prose>
           <BodyText>
-            The revised challenge pointed us to four areas. The entry point, where travelers landed with no starting context. The layout, which buried personalized recommendations the moment travelers expanded the map. The date selection, which required travelers to commit to specific dates before they could explore. And the flight card, which showed a price without enough destination context to support a booking decision.
+            I created a user flow for Fare Finder from the perspective of somebody wanting to book a flight, choose a map view, and apply filters. The mapped out user flow revealed a key inconsistency: personalized destinations were only available in the minimized view. Expanding to the full map meant losing them entirely, limiting personalization at the moment when travelers were most actively exploring.
           </BodyText>
           <BodyText>
-            I mapped out the full user flow to understand where the experience broke down in sequence. A traveler landing on Fare Finder would enter an origin, choose a map view, apply filters, select a destination, choose a flight, and book. The flow revealed a key inconsistency: personalized destination recommendations were only available in the minimized view. Expanding to the full map, which is when travelers were most actively exploring, removed them entirely.
+            Fare Finder would be featured on global airline sites, so standardizing the map across regions was essential. Travelers requested border lines and country labels for orientation, so I brought a mockup to my PM and UX Engineer. Although feasible technically, standardizing borders for a global audience wasn't possible due to differing perceptions of regions and territories.
+          </BodyText>
+          <BodyText>
+            This pushed me to think: if border lines and labels weren't an option, how else could the design orient travelers without relying on them?
           </BodyText>
         </Prose>
 
@@ -515,18 +509,13 @@ export default function FareFinderPage() {
           <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>User flow diagram showing personalized recommendations missing from expanded map view</figcaption>
         </figure>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 48, alignItems: 'center', marginTop: 86 }}>
-          <div>
-            <SubHeading>Travelers wanted country borders. We could not use them. That changed the design question.</SubHeading>
-            <BodyText>
-              Fare Finder would be featured on airline sites serving travelers around the world. Standardizing the map across regions was essential. Travelers in the usability study had asked for country borders and labels to help them orient on the map. I brought a mockup to my PM and UX Engineer. Although technically feasible, standardizing borders for a global audience was not possible. Different regions have different and sometimes disputed perceptions of where borders fall. Using any single version of those borders would be politically and legally problematic across markets.
-            </BodyText>
-            <BodyText>
-              That constraint changed the question. If borders and labels were not available as orientation tools, the design had to orient travelers another way. The answer was destination cards that stayed visible at all times, giving travelers a named starting point without depending on map geography to do that work.
-            </BodyText>
-          </div>
-          <figure style={{ margin: 0 }}>
-            <img src={img('fare-finder-18-4UGudS.png')} alt="Destination card layout concepts" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
+        <div style={{ marginTop: 86 }}>
+          <SubHeading>What if tailored destinations could be accessed at all times?</SubHeading>
+          <BodyText>
+            The destination card layout concepts explored how to keep personalized recommendations visible even as travelers expanded to explore the full map. We tested minimized and expanded card layouts to understand which gave travelers the right amount of context without cluttering the map.
+          </BodyText>
+          <figure style={{ margin: '24px 0 0' }}>
+            <img src={img('fare-finder-18-4UGudS.png')} alt="Destination card layout concepts" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
             <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Destination card layout concepts</figcaption>
           </figure>
         </div>
@@ -534,23 +523,18 @@ export default function FareFinderPage() {
         <DestinationsExplorer />
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>Entry Point</SubHeading>
-          <BodyText>How might the entry point support users who don't yet have a destination in mind?</BodyText>
+          <SubHeading>Narrowing Layout w/ External Testing</SubHeading>
+          <BodyText>After testing with airline partners, the Entry Point was validated. However, there were requests for more travel-centered visual options beyond the map background image. The Destinations layout concepts were scrapped entirely. The final design chosen gives travelers control over what they see on the screen. Personalized destinations, flight card details, and filters are all elements they can show and hide throughout their booking experience.</BodyText>
           <div style={{ marginTop: 24 }}>
-            <img src={img('fare-finder-23-idFeC5.png')} alt="Flight card layout iterations" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
+            <img src={img('fare-finder-23-idFeC5.png')} alt="Entry point screen" style={{ width: '75%', height: 'auto', display: 'block', margin: '0 auto' }} />
             <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>New Default Starting Screen</p>
           </div>
-        </div>
-
-        <div style={{ marginTop: 86 }}>
-          <SubHeading>Partners validated the entry point and cut the destination card layouts entirely</SubHeading>
-          <BodyText>Testing with airline partners confirmed the entry point concept and established the direction. Partners validated the entry point. They asked for more travel-centered visuals beyond the map background. The destination card layouts were cut entirely in favor of a more flexible approach: letting travelers customize which destinations, flight details, and filters appeared throughout the experience rather than locking them into a fixed card format.</BodyText>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 24 }}>
+          <div className="ff-validated-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 24 }}>
             {[
               { label: 'Entry Point', body: 'Validated, with a request for richer visuals.', icon: <CheckCircle size={18} weight="fill" color="var(--color-cs-heading)" /> },
               { label: 'Destination Cards', body: 'Scrapped. Replaced with user-controlled customization throughout.', icon: <XCircle size={18} weight="fill" color="var(--color-secondary)" /> },
             ].map(({ label, body, icon }) => (
-              <div key={label} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
+              <div key={label} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                   {icon}
                   <p className="font-landing-body font-semibold" style={{ fontSize: 14, color: 'var(--color-cs-heading)', margin: 0 }}>{label}</p>
@@ -562,9 +546,9 @@ export default function FareFinderPage() {
         </div>
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>I used Figma Make and Claude to generate layout options fast enough to decide in one meeting</SubHeading>
+          <SubHeading>AI in the Design Process</SubHeading>
           <BodyText>
-            With the direction settled, I used Figma Make and Claude to generate layout iterations for the flight card and flexible date components. This opened up a faster conversation with PMs and engineers about what was feasible and what was worth pursuing. Rather than presenting one direction at a time, I could show multiple options in one session and get to a decision faster.
+            The AI-generated designs were useful for getting ideas on the page, but they were more foundational than innovative. The narrowing and final decisions were still mine to make. Figma Make produced more realistic results but still needed careful evaluation. It sparked ideas while reinforcing that AI output should always be questioned.
           </BodyText>
         </div>
 
@@ -577,10 +561,38 @@ export default function FareFinderPage() {
       <Section id="ff-features">
         <SectionHeading index={3} chapter="Solution" heading="" />
 
+        {/* Solution Overview — key screens with numbered captions */}
+        <div style={{ marginBottom: 32 }}>
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
+            Solution Overview
+          </h3>
+          <BodyText>
+            A breakdown of the features in the redesigned Fare Finder that helps travelers explore and book with confidence.
+          </BodyText>
+          <div className="ff-solution-overview-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 24,
+            marginTop: 24,
+          }}>
+            {[
+              { image: img('fare-finder-30-VCz5wN.png'), alt: 'Focused entry point screen', caption: '1. Traveler lands on Fare Finder with a focused entry point' },
+              { image: img('fare-finder-31-kf20ST.png'), alt: 'Customized map layout', caption: '2. Adjusts the map layout to explore at their own pace' },
+              { image: img('fare-finder-34-vcLxIa.png'), alt: 'Expanded flight card and quick facts panel', caption: '3. Selects a destination and reviews the flight fare card and quick facts' },
+              { image: img('fare-finder-35-2kxfyI.png'), alt: 'Personalized destinations panel', caption: '4. Browses tailored flight recommendations to keep exploring' },
+            ].map(screen => (
+              <figure key={screen.alt} style={{ margin: 0 }}>
+                <img src={screen.image} alt={screen.alt} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                <figcaption className="font-landing-body text-left" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', marginTop: 12 }}>{screen.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
         <SolutionBlock
           index={1}
           heading="Focused Entry"
-          body="When travelers land on Fare Finder, the destination field is set to Anywhere by default. This gives travelers who do not yet have a destination in mind a prompt to start exploring immediately, without requiring them to know where they want to go before they can use the map. Travelers with a specific destination can type it directly."
+          body="The entry point for Fare Finder was redefined. We wanted travelers to have a clear and focused starting point, so the destination is set to Anywhere by default to encourage exploration from the start."
           image={img('fare-finder-30-VCz5wN.png')}
           imageAlt="Focused entry point screen"
           caption="New Default Starting Screen"
@@ -588,47 +600,38 @@ export default function FareFinderPage() {
 
         <SolutionBlock
           index={2}
-          heading="Customizable Map Layout"
-          body="Travelers can collapse both the filter panel and the destinations panel to expand the map, choosing how much guidance they want versus how much map they see. A traveler who wants to explore visually collapses both panels. A traveler who wants guided suggestions keeps them open. The map adapts to how a traveler wants to explore rather than forcing a single layout on everyone."
-          image={img('fare-finder-31-kf20ST.png')}
-          imageAlt="Customized map layout"
-          caption="Collapsible Filter Panel and Destinations"
-        />
-
-        <SolutionBlock
-          index={3}
           heading="Flexible Dates"
-          body="Flexible Dates lets travelers search by trip duration and travel month instead of committing to specific dates. A traveler who knows they want a long weekend in summer but has not picked exact dates can explore options without hitting a dead end. The feature removes the requirement to have a trip fully planned before the map becomes useful."
+          body="We wanted to remove another barrier to exploration. Flexible Dates lets travelers search by trip duration and travel month instead of committing to specific dates, reducing the pressure to have everything figured out before users start exploring."
           image={img('fare-finder-32-IuxZgL.png')}
           imageAlt="Flexible dates component"
           caption="Flexible Dates Component"
         />
 
         <SolutionBlock
-          index={4}
+          index={3}
           heading="Filter Panel"
-          body="The filter panel adds Travel Interests, a set of categories like beach, city, or adventure, letting travelers search by the kind of experience they want rather than a destination they have already decided on. A traveler with no destination in mind can use interests as a starting point instead. The panel can be shown or hidden depending on how much guidance a traveler wants."
+          body="The filter panel expands on the original filters by adding Travel Interests. Instead of starting with a destination, travelers can explore by what they want to experience. The panel can also be shown or hidden, giving travelers control over what they see on the map."
           image={img('fare-finder-33-r6pnhW.png')}
           imageAlt="Collapsible filter panel with travel interests"
-          caption="Collapsible Filter Panel with Travel Interests"
+          caption="Collapsable Filter Panel w/ Travel Interests embedded in"
+        />
+
+        <SolutionBlock
+          index={4}
+          heading="Flight Fare Card + Quick Facts"
+          body="For travelers who are still exploring, the right context at the right moment is what moves them from browsing to booking. The redesigned fare card and Quick Facts bring that directly into the map. When a traveler selects a flight, the fare card shows destination photos, price, and trip type. Quick Facts fill in the supporting details like cheapest month to fly, average price, time zones, and nearby airports. All without leaving the map, right when it matters most."
+          image={img('fare-finder-34-vcLxIa.png')}
+          imageAlt="Expanded flight card and quick facts panel"
+          caption="Expanded flight card and quick facts panel"
         />
 
         <SolutionBlock
           index={5}
-          heading="Flight Fare Card and Quick Facts"
-          body="When a traveler selects a destination on the map, a flight fare card appears showing destination photos, the starting price, and trip type. Quick Facts, a set of supporting details that appear below the card, show the cheapest month to fly, average price, time zones, and nearby airports. All of this appears without leaving the map. A traveler gets enough context to decide whether a destination is worth booking before they navigate to checkout."
-          image={img('fare-finder-34-vcLxIa.png')}
-          imageAlt="Expanded flight card and quick facts panel"
-          caption="Expanded Flight Card and Quick Facts Panel"
-        />
-
-        <SolutionBlock
-          index={6}
           heading="Tailored Flight Recommendations"
-          body="Personalized destination recommendations now live in a collapsible panel at the bottom of the screen. Suggestions are generated based on the traveler's origin, so a traveler flying from Miami sees different options than one flying from Chicago. The map stays open and uninterrupted. Travelers who want a starting point have one. Travelers who want to explore the map on their own can collapse the panel and ignore it."
+          body="Personalized destination recommendations were missing from the original map view. Now they live in a collapsible panel at the bottom of the screen, giving travelers tailored suggestions based on their origin. This keeps the map open and uninterrupted while still giving travelers a starting point to begin their search or a set of options to compare when they are ready."
           image={img('fare-finder-35-2kxfyI.png')}
           imageAlt="Personalized destinations panel"
-          caption="Personalized Destinations Dependent on Origin Input"
+          caption="Personalized Destinations dependent on Origin Input"
         />
 
       </Section>
@@ -637,60 +640,56 @@ export default function FareFinderPage() {
       <Section id="ff-reflection">
         <SectionHeading index={4} chapter="Reflection" heading="How Fare Finder changed the booking experience" />
 
-        <BodyText>The new Fare Finder shipped in January 2026. PROS measured the following outcomes across airline partner sites:</BodyText>
+        <BodyText>By the time these features were defined and validated by airline partners, my internship ended before usability testing could be completed. The new Fare Finder shipped in January 2026. The following is the impact it had and direct feedback from our airline partners.</BodyText>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32, alignItems: 'start' }}>
+        <div className="ff-reflection-stats-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32, alignItems: 'start' }}>
           {[
-            { icon: <AirplaneTakeoff size={24} weight="thin" color="var(--color-cs-heading)" />, stat: '10 wks', label: 'to ship after handoff' },
+            { icon: <AirplaneTakeoff size={24} weight="thin" color="var(--color-cs-heading)" />, stat: '10 wks', label: 'after handoff, Fare Finder went live' },
             { icon: <AirplaneInFlight size={24} weight="thin" color="var(--color-cs-heading)" />, stat: '37%', label: 'decrease in map abandonment' },
             { icon: <TrendUp size={24} weight="thin" color="var(--color-cs-heading)" />, stat: '29%', label: 'increase in direct bookings' },
           ].map(({ icon, stat, label }) => (
-            <div key={stat} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
+            <div key={stat} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
                 <div style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   {icon}
                 </div>
-                <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 36, margin: 0, lineHeight: 1.1, fontWeight: 700, color: 'var(--color-cs-heading)' }} />
+                <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 36, margin: 0, lineHeight: 1.1, fontWeight: 500, color: 'var(--color-cs-heading)' }} />
               </div>
               <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{label}</p>
             </div>
           ))}
         </div>
 
-        <BodyText>The designs shipped three months after handoff. PROS measured the results.</BodyText>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 16 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 32 }}>
           {[
-            { label: 'Where we landed', body: 'I handed off the designs at the end of my internship. Three months later, Fare Finder shipped and the results above reflect its measured impact.' },
-            { label: 'What I would do differently', body: 'If I had more time, I would have planned for more end consumer testing with the PM and User Researcher. Our direct users were airline partners, but Fare Finder ultimately reaches travelers, and their input earlier in the process would have surfaced friction points before handoff rather than after.' },
-          ].map(({ label, body }) => (
-            <div key={label} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
-              <p className="font-semibold cs-serif-label" style={{ fontSize: 16, margin: '0 0 6px' }}>{label}</p>
-              <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+            { quote: '"This is a direction that gives travelers the necessary context and control of their own experience."', attribution: 'Airline Partner (name withheld per NDA)' },
+            { quote: '"This redefines the experience to be much more exploratory with fewer barriers for entry and support tools."', attribution: 'Airline Partner (name withheld per NDA)' },
+          ].map(({ quote, attribution }) => (
+            <div key={attribution} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
+              <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: '0 0 8px', fontStyle: 'italic' }}>{quote}</p>
+              <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 11, color: 'var(--color-secondary)', margin: 0 }}>{attribution}</p>
             </div>
           ))}
         </div>
 
         <div style={{ marginTop: 86 }}>
           <SubHeading>What I'd carry forward from a summer of designing for exploration</SubHeading>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-            {[
-              { heading: 'Designing for two users meant the airline partner set the boundaries and the traveler set the bar', body: 'Designing inside a live product used by airlines taught me to hold two users in mind at once and to make decisions that served both without compromising either. The airline partner determined what was technically and legally possible. The traveler\'s experience determined whether any of it was worth shipping.' },
-              { heading: 'Using AI to generate iterations changed how I presented options to PMs and engineers', body: 'Using Figma Make and Claude to generate layout iterations quickly changed how I presented ideas. Instead of advocating for one direction, I could put multiple options on the table in the same conversation and let the best one emerge from discussion rather than from my own pre-filtering.' },
-            ].map(({ heading, body }) => (
-              <div key={heading} className="cs-info-box" style={{ padding: 20 }}>
-                <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px', lineHeight: 1.4 }}>{heading}</p>
-                <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
-              </div>
-            ))}
-          </div>
+          <BodyText>
+            Interning at PROS put me in situations I hadn't navigated before. Designing inside a live product used by airlines, working within a B2B2C model for the first time, and learning to balance the distinct needs of airline partners and travelers. That discomfort pushed me to be a more holistic and adaptable designer.
+          </BodyText>
+          <BodyText>
+            I also got the chance to use tools like Figma Make and Claude to build out design layouts quickly prompting moments of discussion and revisions. Presenting those layouts to PMs, Engineers, and Designers also taught me to tailor my visuals and storytelling to the audience. I'm so grateful to the PROS UX design team for their mentorship, the conversations that shaped my thinking, and for a memorable summer!
+          </BodyText>
+          <BodyText>
+            Looking back, if I had more time, the one thing I would have done differently was request and plan for more end consumer testing with the PM and User Researcher. Although our direct users were airline partners, Fare Finder ultimately reaches travelers and their input would have been valuable.
+          </BodyText>
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
           <img
             src={img('fare-finder-36-3yud6R.png')}
             alt="PROS UX Design team"
-            style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }}
+            style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }}
           />
           <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>
             PROS UX Design team

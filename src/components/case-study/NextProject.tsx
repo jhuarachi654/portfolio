@@ -122,8 +122,8 @@ export default function NextProject({ title, to, company, description, tags, ima
     <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginTop: 84 }}>
       <section className="max-w-[1080px] px-8 md:px-14" style={{ paddingBottom: 84 }}>
         <h2
-          className="next-project-heading font-normal"
-          style={{ fontFamily: 'var(--font-landing-heading)', fontStyle: 'italic', fontSize: 'clamp(24px, 3vw, 36px)', color: 'var(--color-cs-heading)', margin: '0 0 24px', display: 'flex', alignItems: 'center', gap: 10 }}
+          className="next-project-heading font-bold cs-editorial"
+          style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--color-cs-heading)', margin: '0 0 24px', display: 'flex', alignItems: 'center', gap: 10 }}
         >
           Explore more work <Sparkle size="0.7em" weight="regular" />
         </h2>

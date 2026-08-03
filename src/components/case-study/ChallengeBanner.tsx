@@ -1,21 +1,23 @@
+import { type ReactNode } from 'react'
+
 interface ChallengeBannerProps {
   label?: string
   question: React.ReactNode
+  icon?: ReactNode
+  iconColor?: string
 }
 
-export default function ChallengeBanner({ label = 'Challenge', question }: ChallengeBannerProps) {
+export default function ChallengeBanner({ label = 'Challenge', question, icon, iconColor = 'var(--color-cs-heading)' }: ChallengeBannerProps) {
   return (
-    <div className="challenge-banner-wrap" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: '32px 48px', textAlign: 'center', marginTop: 86, marginBottom: 8 }}>
+    <div className="challenge-banner-wrap" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 'clamp(24px, 4vw, 32px) clamp(20px, 5vw, 48px)', textAlign: 'center', marginTop: 86, marginBottom: 8 }}>
       {/* Icon */}
       <div className="challenge-banner-icon" style={{
-        width: 40, height: 40,
-        borderRadius: '50%',
-        border: '1px solid rgba(var(--color-navy-rgb),0.3)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         margin: '0 auto 12px',
-        color: 'var(--color-cs-heading)',
+        color: iconColor,
+        fontSize: 'clamp(20px, 3vw, 28px)',
       }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+        {icon ?? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>}
       </div>
 
       {/* Label */}
@@ -24,7 +26,7 @@ export default function ChallengeBanner({ label = 'Challenge', question }: Chall
       </p>
 
       {/* Question */}
-      <p className="font-normal challenge-banner-question" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 26, lineHeight: 1.4, margin: 0, maxWidth: 680, marginLeft: 'auto', marginRight: 'auto', color: 'var(--color-cs-heading)' }}>
+      <p className="font-normal challenge-banner-question" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 'clamp(18px, 3vw, 26px)', lineHeight: 'normal', margin: 0, maxWidth: '90%', marginLeft: 'auto', marginRight: 'auto', color: 'var(--color-cs-heading)' }}>
         {question}
       </p>
     </div>

@@ -76,9 +76,9 @@
   --type-body-lg-transform: none;
 
   --type-body-family: var(--font-landing-body);
-  --type-body-weight: 400;
-  --type-body-size: 14px;
-  --type-body-line-height: 1.5;
+  --type-body-weight: 350;
+  --type-body-size: 15px;
+  --type-body-line-height: 1.7;
   --type-body-transform: none;
 
   --type-body-sm-family: var(--font-landing-body);
@@ -303,44 +303,23 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
-.case-study-sidebar-home { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: 500; line-height: var(--type-body-line-height); position: relative; display: inline-flex; align-items: center; justify-content: center; color: var(--color-cs-heading); opacity: 0.4; background: transparent; border: 1px solid rgba(30, 75, 154, 0.25); border-radius: 999px; padding: 0 18px; height: 34px; text-decoration: none; overflow: hidden; transition: color 0.18s, border-color 0.18s, opacity 0.18s; white-space: nowrap; }
-.case-study-sidebar-home::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #3A3A3E;
-  transform: translateX(-101%);
-  transition: transform 0.22s ease-out;
-  z-index: 0;
-}
-.case-study-sidebar-home span {
-  position: relative;
-  z-index: 1;
-}
-.case-study-sidebar-home:hover::after {
-  transform: translateX(0);
-}
+.case-study-sidebar-home { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: 500; line-height: var(--type-body-line-height); display: inline-flex; align-items: center; justify-content: center; color: var(--color-cs-heading); opacity: 1; background: transparent; border: 1px solid rgba(30, 75, 154, 0.3); border-radius: 999px; padding: 0 18px; height: 34px; text-decoration: none; transition: border-color 0.18s, opacity 0.18s; white-space: nowrap; }
 .case-study-sidebar-home:hover {
-  color: #fff;
-  opacity: 1;
-  border-color: #3A3A3E;
+  border-color: rgba(30, 75, 154, 0.7);
+  opacity: 0.85;
 }
-[data-theme="dark"] .case-study-sidebar-home { opacity: 0.35; border-color: rgba(168, 190, 232, 0.2); }
-[data-theme="dark"] .case-study-sidebar-home::after { background: #ffffff; }
-[data-theme="dark"] .case-study-sidebar-home:hover { color: #111; border-color: #ffffff; }
+[data-theme="dark"] .case-study-sidebar-home { border-color: rgba(168, 190, 232, 0.3); }
+[data-theme="dark"] .case-study-sidebar-home:hover { border-color: rgba(168, 190, 232, 0.7); }
 
-.case-study-toc-link { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: 500; line-height: var(--type-body-line-height); position: relative; display: block; width: fit-content; overflow: hidden; text-decoration: none; color: var(--color-cs-heading); opacity: 0.5; padding: 6px 12px; border-radius: 6px; transition: opacity 0.18s; }
+.case-study-toc-link { font-family: var(--font-landing-body); font-size: var(--type-body-sm-size); font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4; position: relative; display: block; width: fit-content; overflow: hidden; text-decoration: none; color: var(--color-cs-heading); opacity: 0.7; padding: 6px 12px; border-radius: 6px; transition: opacity 0.18s; }
 .case-study-toc-link:hover {
   opacity: 0.8;
 }
-
-/* Animated fill — same slide-in language as the site's .nav-link, instead
-   of an instant background swap. */
 .case-study-toc-link::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: #3A3A3E;
+  background: #416BCC;
   border-radius: 6px;
   transform: translateX(-101%);
   transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
@@ -360,8 +339,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .case-study-toc-link.active span {
   color: #fff;
 }
-[data-theme="dark"] .case-study-toc-link.active::before { background: #ffffff; }
-[data-theme="dark"] .case-study-toc-link.active span { color: #111; }
+[data-theme="dark"] .case-study-toc-link.active::before { background: #6b8fd4; }
+[data-theme="dark"] .case-study-toc-link.active span { color: #fff; }
 
 .sidebar img {
   width: 28px !important;
@@ -2317,7 +2296,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .cs-solution-video-wrap {
   padding: 0;
   box-shadow: 0 6px 20px rgba(20, 20, 60, 0.18);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 [data-theme="dark"] .cs-solution-video-wrap {
@@ -2357,7 +2336,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .cs-info-box {
   background: transparent;
   border: 1px solid rgba(30, 75, 154, 0.15);
-  border-radius: 12px;
+  border-radius: 8px;
 }
 [data-theme="dark"] .cs-info-box {
   background: transparent;
@@ -2367,7 +2346,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .cs-card-box {
   background: transparent;
   border: 1px solid rgba(30, 75, 154, 0.2);
-  border-radius: 12px;
+  border-radius: 8px;
 }
 [data-theme="dark"] .cs-card-box {
   background: transparent;
@@ -2386,7 +2365,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   padding: 10px 12px;
   background: transparent;
   border: 1px solid rgba(30, 75, 154, 0.1);
-  border-radius: 12px;
+  border-radius: 8px;
 }
 [data-theme="dark"] .cs-metric-box {
   background: transparent;
@@ -2443,7 +2422,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   width: 100%;
   overflow: hidden;
   background: rgba(30, 75, 154, 0.04);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 6px 20px rgba(20, 20, 60, 0.18);
   transition: box-shadow 0.3s ease;
   /* Explicit centering (not just child width/height:100%) so object-fit:
@@ -2542,20 +2521,14 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
    needs to read as a single distinct unit sitting inside page content. */
 .next-project-card {
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(20, 20, 60, 0.12);
+  border-radius: 8px;
+  border: 1px solid rgba(30, 75, 154, 0.2);
   padding: 16px;
-  transition: box-shadow 0.3s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.next-project-card-wrapper:hover .next-project-card {
-  box-shadow: 0 12px 32px rgba(20, 20, 60, 0.16);
+  transition: border-color 0.2s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
 [data-theme="dark"] .next-project-card {
   background: #17222f;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-}
-[data-theme="dark"] .next-project-card-wrapper:hover .next-project-card {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 .next-project-card .case-study-card-body {
   padding: 16px 4px 4px;
@@ -2650,14 +2623,14 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .case-study-card-role { font-family: var(--type-label-family); font-size: var(--type-label-size); font-weight: 500; line-height: var(--type-label-line-height); letter-spacing: 0.06em; text-transform: uppercase; color: #1E4B9A; opacity: 0.65; white-space: nowrap; padding: 2px 6px; background: rgba(30, 75, 154, 0.05); border-radius: 3px; flex-shrink: 0; }
 
 .case-study-card-description {
-  font-family: var(--font-sans);
+  font-family: var(--font-landing-body);
   font-size: 15px;
-  line-height: 1.5;
-  color: #3E4242;
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-line-height);
+  color: #222225;
   margin: 0 0 4px;
 }
 
-[data-theme="dark"] .case-study-card-description { color: rgba(168, 190, 232, 0.85); }
 
 .cs-card-info-boxes {
   display: flex;
@@ -2751,7 +2724,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   background: transparent;
   border: 1px solid rgba(30, 75, 154, 0.2);
   padding: 4px 8px;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 /* Dark mode */
@@ -2803,7 +2776,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   padding: 12px;
   background: #fff;
   border: 1px solid rgba(30, 75, 154, 0.15);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 8px 24px rgba(20, 20, 60, 0.12);
   z-index: 20;
 }
@@ -4314,7 +4287,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 /* ── DNC iteration explorer ─────────────────────────────────────── */
 .dnc-iter-img {
   border: 1px solid rgba(var(--color-navy-rgb), 0.2);
-  border-radius: 12px;
+  border-radius: 8px;
   object-fit: cover;
 }
 .dnc-iter-tabs {
@@ -4404,6 +4377,22 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   font-style: italic !important;
 }
 
+/* Editorial italic subheadings within case study sections —
+   matches the Framer reference's serif italic treatment for SubHeadings. */
+.cs-page h3.cs-editorial,
+.cs-page h2.cs-editorial {
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+/* Expert.ai: opt a heading out of the blanket line-height above (needs its
+   own !important to win — the blanket rule sets line-height too). */
+.cs-page h1.cs-lh-normal,
+.cs-page h2.cs-lh-normal,
+.cs-page h3.cs-lh-normal {
+  line-height: normal !important;
+}
+
 .cs-page p { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: #222225 !important; }
 
 .cs-page p.cs-serif-label { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-weight: 600; line-height: var(--type-h1-line-height); color: var(--color-cs-heading) !important; }
@@ -4419,6 +4408,18 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .cs-caption-label {
   color: var(--color-secondary) !important;
   opacity: 0.75;
+}
+
+.cs-page p.cs-caption,
+.cs-page figcaption.cs-caption,
+.cs-caption {
+  font-family: var(--font-landing-body);
+  font-size: 13px !important;
+  font-weight: 500;
+  color: var(--color-secondary) !important;
+  opacity: 0.7;
+  text-align: center;
+  line-height: 1.6;
 }
 
 /* ── Case study mobile responsiveness ────────────────────────────── */
@@ -4600,10 +4601,65 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
     grid-template-columns: 1fr 1fr 1fr !important;
   }
 
+  /* Exception: DNC VP Anniversary iteration explorer — text column is narrow
+     enough to stay side by side with the image/tabs at tablet width. */
+  .cs-page .dnc-iter-explorer-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Exception: 4 flow screenshots — a 2x2 grid reads better than one long
+     single column of full-width screenshots. */
+  .cs-page .rm-solution-overview-grid[style*="grid-template-columns"],
+  .cs-page .ff-solution-overview-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Exception: RM Introduction text + image, persona toggle, My Markets
+     and AI Assistant explorers — keep these side by side rather than
+     stacking on tablet. */
+  .cs-page .rm-intro-grid[style*="grid-template-columns"],
+  .cs-page .rm-persona-grid[style*="grid-template-columns"],
+  .cs-page .rm-my-markets-grid[style*="grid-template-columns"],
+  .cs-page .rm-ai-assistant-grid[style*="grid-template-columns"],
+  .cs-page .rm-starting-point-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Exception: 3 pain-point cards ("The platform assumed you already knew
+     how to use it") — 3-up reads better than one long single column at
+     tablet width too. */
+  .cs-page .rm-cognitive-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+
   /* Exception: two compact persona cards (avatar + short needs list) —
      these are short enough to stay side by side at tablet width instead
      of stacking into one long column. */
   .cs-page .dnc-persona-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Exception: Fare Finder text/image explorer panels — text column is
+     narrow enough to stay side by side at tablet width. Keep each grid's
+     own ratio rather than forcing equal halves. */
+  .cs-page .ff-flight-fare-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 2fr !important;
+  }
+
+  /* Exception: Fare Finder 3-stat grids (friction points, reflection
+     metrics) — 3-up reads better than one long single column at tablet
+     width too. */
+  .cs-page .ff-friction-stats-grid[style*="grid-template-columns"],
+  .cs-page .ff-reflection-stats-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+
+  /* Exception: Fare Finder 2-card grids (validated/scrapped, where we
+     landed, what I'd carry forward) — short cards read better side by
+     side than stacked at tablet width. */
+  .cs-page .ff-validated-grid[style*="grid-template-columns"],
+  .cs-page .ff-where-landed-grid[style*="grid-template-columns"],
+  .cs-page .ff-carry-forward-grid[style*="grid-template-columns"] {
     grid-template-columns: 1fr 1fr !important;
   }
 
@@ -4617,6 +4673,96 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
      not stacked into a long single column. */
   .cs-page .ea-color-barriers-row[style*="grid-template-columns"] {
     grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Exception: Expert.ai accessibility wireframe explorer, before/after
+     comparison screenshots, and Solution filter panel — text column is
+     narrow enough to stay side by side at tablet width. */
+  .cs-page .ea-accessibility-grid[style*="grid-template-columns"],
+  .cs-page .ea-solution-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 2fr !important;
+  }
+  .cs-page .ea-comparison-grid[style*="grid-template-columns"] {
+    grid-template-columns: 2fr auto 3fr !important;
+  }
+
+  /* Exception: "Unexpected Find: Accessibility" pair of screenshots — keep
+     side by side at tablet width instead of stacking. */
+  .cs-page .ea-unexpected-find-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Exception: Lead Designer/Developer feedback cards — keep side by side
+     at tablet width instead of stacking. */
+  .cs-page .ea-feedback-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Exception: Reflection's presentation photo + Takeaways text — keep side
+     by side at tablet width instead of stacking. */
+  .cs-page .ea-takeaways-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* Expert.ai Research quote cards — the wrapping container (not the cards
+   themselves) narrows to 80% width on tablet and desktop, staying full
+   width on mobile. */
+@media (min-width: 768px) {
+  .cs-page .ea-quotes-container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Revenue Management — fanned polaroid deck. Cards overlap slightly on
+   narrower viewports so the fixed-width set never overflows or squeezes. */
+.rm-polaroid-deck {
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .rm-polaroid-deck {
+    gap: 0;
+  }
+  .rm-polaroid-card {
+    margin-left: -32px;
+  }
+  .rm-polaroid-card:first-child {
+    margin-left: 0;
+  }
+}
+
+/* Revenue Management — single-active stacked polaroid deck (Introduction
+   chapter). Card width scales proportionally with viewport width instead of
+   a fixed px size, so the whole deck shrinks together on narrow screens. */
+.rm-polaroid-stack {
+  --rm-polaroid-w: clamp(130px, 22vw, 210px);
+  height: calc(var(--rm-polaroid-w) * 350 / 210);
+}
+.rm-polaroid-stack-card {
+  width: var(--rm-polaroid-w);
+  margin-left: calc(var(--rm-polaroid-w) / -2);
+  padding: calc(var(--rm-polaroid-w) * 16 / 210) calc(var(--rm-polaroid-w) * 16 / 210) calc(var(--rm-polaroid-w) * 12 / 210);
+}
+.cs-page p.rm-polaroid-stack-caption {
+  font-family: var(--font-landing-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-cs-heading) !important;
+  line-height: 1.3;
+  margin: 12px 0 0;
+  height: calc(13px * 1.3 * 2);
+}
+
+/* Revenue Management — "My Markets" feature image narrows to 60% on
+   tablet/desktop, matching the reference; stays full-width on mobile. */
+.cs-page .rm-my-markets-feature-img {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .cs-page .rm-my-markets-feature-img {
+    width: 60%;
   }
 }
 

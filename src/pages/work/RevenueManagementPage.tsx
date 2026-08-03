@@ -1,25 +1,27 @@
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
-import { Brain, Ghost, BookOpen, MapPin, Briefcase, User, ChartBar, Stack, Bell, Robot } from '@phosphor-icons/react'
+import { Brain, Ghost, BookOpen, MapPin, User, ChartBar, Stack, Bell, Robot, Asterisk, CheckCircle, MinusCircle, CaretLeft, CaretRight, AirplaneTakeoff, Cake, Gear, ChatCircleText, ArrowBendUpRight } from '@phosphor-icons/react'
 import SectionHeading from '../../components/case-study/SectionHeading'
 import ImageFigure from '../../components/case-study/ImageFigure'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import PlayPauseButton from '../../components/PlayPauseButton'
+import LazyVideo from '../../components/LazyVideo'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
-  { id: 'rm-intro',       label: 'Introduction' },
+  { id: 'rm-intro',             label: 'Context' },
+  { id: 'rm-solution-preview',  label: 'Solution Preview' },
   { id: 'rm-research',    label: 'Research' },
   { id: 'rm-development', label: 'Development' },
   { id: 'rm-features',    label: 'Solution' },
+  { id: 'rm-impact',      label: 'Impact' },
   { id: 'rm-reflection',  label: 'Reflection' },
 ]
 
 const img = (file: string) => `/images/revenue-management/${file}`
-const ff  = (file: string) => `/images/fare-finder/${file}`
 
 // ─── Section wrapper ──────────────────────────────────────────────────────────
 
@@ -41,7 +43,7 @@ function Prose({ children, className = '' }: { children: React.ReactNode; classN
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
+    <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
       {children}
     </p>
   )
@@ -53,7 +55,7 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
       {tag && (
         <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[22px] font-bold text-[var(--color-cs-heading)] leading-snug" style={{ fontFamily: 'var(--font-display)', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -63,14 +65,20 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
 // ─── Persona card ─────────────────────────────────────────────────────────────
 
 function PersonaCard({
-  type, name, age, location, experience, needs, avatar, avatarStyle,
+  type, name, age, location, experience, needs, avatar, avatarStyle, description,
 }: {
   type: string; name: string; age: string; location: string
   experience: string; needs: string[]; avatar: string; avatarStyle?: React.CSSProperties
+  description: string
 }) {
   return (
     <div>
-      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 24 }}>
+      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
+        {/* Type badge */}
+        <div style={{ display: 'inline-block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: '6px 14px', marginBottom: 24 }}>
+          <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-cs-heading)' }}>{type}</span>
+        </div>
+
         {/* Avatar */}
         <div style={{
           width: 80, height: 80, borderRadius: '50%',
@@ -84,10 +92,10 @@ function PersonaCard({
         {/* Name */}
         <h4 className="font-semibold text-[var(--color-cs-heading)] text-center" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 20, margin: '0 0 12px' }}>{name}</h4>
 
-        {/* Age + Location + Experience — single row */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+        {/* Age + Location + Experience */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, marginBottom: 20, flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <User size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
+            <Cake size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
             <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{age}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
@@ -95,52 +103,26 @@ function PersonaCard({
             <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{location}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <Briefcase size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
+            <Gear size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
             <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{experience}</span>
           </div>
         </div>
 
+        <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '0 0 20px' }} />
+
         {/* Needs */}
         <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, marginBottom: 12 }}>Needs:</p>
-        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
           {needs.map(n => (
             <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <span className="font-bold text-[var(--color-cs-heading)] shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>
-              <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', lineHeight: 1.5 }}>{n}</span>
+              <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
+              <span className="font-landing-body text-[13px]" style={{ color: '#222225', lineHeight: 'normal' }}>{n}</span>
             </li>
           ))}
         </ul>
       </div>
 
-    </div>
-  )
-}
-
-// ─── Comparison card (+/−) ────────────────────────────────────────────────────
-
-function ComparisonCard({
-  title, pros, cons, verdict,
-}: {
-  title: string; pros: string; cons: string; verdict?: string
-}) {
-  return (
-    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
-      <h4 className="text-[15px] font-semibold text-[var(--color-cs-heading)] mb-4" style={{ fontFamily: 'var(--font-landing-heading)' }}>{title}</h4>
-      <div className="space-y-3">
-        <div className="flex gap-2">
-          <span className="font-bold text-[var(--color-cs-heading)] text-[16px] leading-none mt-0.5 shrink-0">+</span>
-          <p className="font-landing-body text-[var(--color-cs-heading)]/70 leading-relaxed" style={{ fontSize: 12 }}>{pros}</p>
-        </div>
-        <div className="flex gap-2">
-          <span className="font-bold text-[var(--color-cs-heading)]/30 text-[16px] leading-none mt-0.5 shrink-0">−</span>
-          <p className="font-landing-body text-[var(--color-cs-heading)]/70 leading-relaxed" style={{ fontSize: 12 }}>{cons}</p>
-        </div>
-      </div>
-      {verdict && (
-        <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50 mt-4 pt-4 border-t border-navy/10" style={{ fontSize: 12 }}>
-          ✓ {verdict}
-        </p>
-      )}
+      <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{description}</p>
     </div>
   )
 }
@@ -148,23 +130,36 @@ function ComparisonCard({
 // ─── Solution feature block (stacked: text → full-width image → impact) ───────
 
 function SolutionBlock({
-  index, heading, body, image, imageAlt,
+  index, heading, body, userImpact, image, imageAlt, caption,
 }: {
-  index: number; heading: string; body: string
-  image: string; imageAlt: string
+  index: number; heading: string; body: string | string[]; userImpact?: string
+  image: string; imageAlt: string; caption?: string
 }) {
-  const num = String(index).padStart(2, '0')
+  const paragraphs = Array.isArray(body) ? body : [body]
   return (
     <div style={{ marginTop: 86 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 48, alignItems: 'center' }}>
-        {/* Left: text */}
-        <div>
-          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>{num}. {heading}</h3>
-          <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 0 }}>{body}</p>
-        </div>
-        {/* Right: image */}
-        <img src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+        <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 24, fontWeight: 300, color: 'var(--color-navy)' }}>{index}.</span>
+        <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
+          {heading}
+        </h3>
       </div>
+      {paragraphs.map((p, i) => <BodyText key={i}>{p}</BodyText>)}
+
+      {userImpact && (
+        <>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
+            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+              <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>User Impact:</strong> {userImpact}
+            </p>
+          </div>
+        </>
+      )}
+
+      <img src={image} alt={imageAlt} className="rm-my-markets-feature-img" style={{ height: 'auto', display: 'block', margin: '32px auto 0', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+      {caption && <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{caption}</p>}
     </div>
   )
 }
@@ -175,16 +170,22 @@ function FeedbackRow({ feedback, response }: { feedback: string; response: strin
   return (
     <div style={{ marginTop: 16 }}>
       {/* Stakeholder feedback card */}
-      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 20, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
         <div>
-          <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, lineHeight: 1, margin: '0 0 4px' }}>Stakeholder Feedback</h4>
-          <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{feedback}</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+            <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC' }}><ChatCircleText size={16} weight="bold" /></span>
+            <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', margin: 0 }}>Stakeholder Feedback</p>
+          </div>
+          <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{feedback}</p>
         </div>
 
         {/* My response */}
         <div>
-          <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, lineHeight: 1, margin: '0 0 4px' }}>Our Response</h4>
-          <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>{response}</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+            <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC' }}><ArrowBendUpRight size={16} weight="bold" /></span>
+            <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', margin: 0 }}>My Response</p>
+          </div>
+          <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{response}</p>
         </div>
       </div>
     </div>
@@ -194,18 +195,25 @@ function FeedbackRow({ feedback, response }: { feedback: string; response: strin
 // ─── Polaroid deck ────────────────────────────────────────────────────────────
 
 const POLAROIDS = [
-  { src: ff('houston-skyline-y0ZIYQ.jpg'),            caption: 'Houston Skyline' },
-  { src: ff('coworker-brought-conchas-ldquWV.jpg'),   caption: 'Coworker brought conchas!' },
-  { src: ff('team-brainstorming-sessions-paQq5G.jpg'),caption: 'Team Brainstorming Sessions' },
-  { src: ff('my-badge-oaEkgi.jpg'),                   caption: 'My Badge' },
+  { src: img('conchas.jpeg'),                caption: 'Coworker brought conchas!' },
+  { src: img('houston-skyline.avif'),        caption: 'Houston Skyline' },
+  { src: img('badge.jpeg'),                  caption: 'My Badge' },
+  { src: img('brainstorming-session.jpeg'),  caption: 'Team Sessions' },
 ]
 
 // Rotation + x-offset for each slot position (0 = front/active, 1, 2, 3 = behind)
 const SLOT_STYLE = [
-  { rotate: 0,   x: 0,   scale: 1,    zIndex: 4 },
-  { rotate: 7,   x: 36,  scale: 0.93, zIndex: 3 },
-  { rotate: 13,  x: 64,  scale: 0.87, zIndex: 2 },
-  { rotate: -9,  x: -40, scale: 0.90, zIndex: 1 },
+  { rotate: 0,   x: 0,    scale: 1,    zIndex: 4 },
+  { rotate: 9,   x: 60,   scale: 0.9, zIndex: 3 },
+  { rotate: -16, x: -110, scale: 0.9, zIndex: 1 },
+  { rotate: -9,  x: -60,  scale: 0.9, zIndex: 2 },
+]
+
+const SLOT_STYLE_MOBILE = [
+  { rotate: 0,  x: 0,   scale: 1,    zIndex: 4 },
+  { rotate: 6,  x: 34,  scale: 0.9, zIndex: 3 },
+  { rotate: -9, x: -62, scale: 0.9, zIndex: 1 },
+  { rotate: -5, x: -34, scale: 0.9, zIndex: 2 },
 ]
 
 // ─── Persona toggle ───────────────────────────────────────────────────────────
@@ -214,77 +222,39 @@ const PERSONAS = [
   {
     type: 'Junior Analysts',
     name: 'Avery Chen',
-    age: '24',
-    location: 'Houston, TX',
-    experience: '1 yr exp',
+    age: '24 years old',
+    location: 'Houston, Texas',
+    experience: '1 year of experience',
     description: 'A new analyst learning the ropes and trying to work independently.',
     avatar: img('revenue-management-11-4V1tuQ.png'),
     needs: [
-      'Guidance that builds confidence over time',
+      'To learn on the job without constantly relying on senior colleagues',
       'A clear starting point every time she logs in',
-      'To learn on the job without relying on Senior colleagues',
+      'Thoughtful guidance that helps her build confidence over time',
     ],
   },
   {
     type: 'Senior Analysts',
     name: 'Alex Reyes',
-    age: '42',
-    location: 'Austin, TX',
-    experience: '10 yrs exp',
+    age: '42 years old',
+    location: 'Houston, Texas',
+    experience: '10 years of experience',
     description: 'An experienced analyst who needs efficiency without disruption.',
     avatar: img('revenue-management-12-o8jH7a.png'),
     needs: [
-      'To make price adjustments quickly without extra steps',
-      'Alerts that surface what needs attention',
-      'External market data pulled in directly, no manual sourcing',
+      'To make price adjustments efficiently without unnecessary steps',
+      'Alerts that show him what needs attention and leave out what does not',
+      'External market data brought into the platform so he does not have to source it himself',
     ],
   },
 ]
 
-function PersonaToggle({ className = '', style: styleProp }: { className?: string; style?: React.CSSProperties }) {
-  const [active, setActive] = useState(0)
-  const p = PERSONAS[active]
-
+function PersonaGrid({ className = '', style: styleProp }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <div className={className} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start', ...styleProp }}>
-
-      {/* Left: selector buttons with descriptions */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {PERSONAS.map((persona, i) => {
-          const isActive = i === active
-          return (
-            <button
-              key={persona.type}
-              onClick={() => setActive(i)}
-              data-cursor-label="Open persona"
-              style={{
-                textAlign: 'left',
-                padding: 16,
-                border: `1px solid ${isActive ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.2)'}`, borderRadius: 12,
-                background: 'transparent',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-            >
-              <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 4px' }}>
-                {persona.type}
-              </p>
-              <p className="font-landing-body text-[13px] italic cs-persona-desc" style={{ margin: 0 }}>
-                {persona.description}
-              </p>
-            </button>
-          )
-        })}
-      </div>
-
-      {/* Right: persona card */}
-      <motion.div
-        key={p.name}
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25 }}
-      >
+    <div className={className} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start', ...styleProp }}>
+      {PERSONAS.map(p => (
         <PersonaCard
+          key={p.name}
           type={p.type}
           name={p.name}
           age={p.age}
@@ -292,78 +262,81 @@ function PersonaToggle({ className = '', style: styleProp }: { className?: strin
           experience={p.experience}
           avatar={p.avatar}
           needs={p.needs}
+          description={p.description}
           avatarStyle={p.type === 'Junior Analysts' ? { objectFit: 'cover', objectPosition: 'center 20%' } : undefined}
         />
-      </motion.div>
-
+      ))}
     </div>
   )
 }
 
 const MARKET_OPTIONS = [
-  { title: 'Grid Cards', image: img('revenue-management-22-dMGTox.png'), pros: 'More markets visible at once than expanded cards.', cons: 'Cognitive overload and no defined CTA.' },
-  { title: 'Compact Cards', image: img('revenue-management-23-VWDfyX.png'), pros: 'More markets on screen and color coding helps with scanning.', cons: 'Less context upfront. Action buttons hidden added friction.', verdict: true },
-  { title: 'Expanded Cards', image: img('revenue-management-21-yRkD3C.png'), pros: 'Clear guidance upfront. Action buttons visible without extra clicks.', cons: "Takes up too much vertical space and doesn't scale." },
+  { title: 'Compact Cards Layout', image: img('revenue-management-23-VWDfyX.png'), pros: 'More markets on screen and color coding helps with scanning.', cons: 'Not as much context. Action buttons hidden added friction.', verdict: true },
+  { title: 'Grid Cards Layout', image: img('revenue-management-22-dMGTox.png'), pros: 'More markets visible at once than expanded cards.', cons: 'Cognitive overload and no defined CTA.' },
+  { title: 'Expanded Cards Layout', image: img('revenue-management-21-yRkD3C.png'), pros: 'Clear guidance upfront. Action buttons are visible without extra clicks.', cons: "Takes up too much vertical space and doesn't scale." },
 ]
+
+const CIRCLE_BTN: React.CSSProperties = { flexShrink: 0, width: 28, height: 28, borderRadius: '50%', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(22, 43, 85, 0.35)', color: '#ffffff', cursor: 'pointer', backdropFilter: 'blur(4px)' }
 
 function MyMarketsExplorer() {
   const [active, setActive] = useState(0)
+  const [direction, setDirection] = useState(1)
   const option = MARKET_OPTIONS[active]
+  const total = MARKET_OPTIONS.length
+  const goPrev = () => { setDirection(-1); setActive((active - 1 + total) % total) }
+  const goNext = () => { setDirection(1); setActive((active + 1) % total) }
 
   return (
     <div className="cs-card-box" style={{ padding: 32, marginTop: 86 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+      <div className="rm-my-markets-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'center' }}>
         {/* Left */}
         <div>
-          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
-            My Markets
+          <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6, marginTop: 0 }}>Wireframe Tests</p>
+          <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: 'clamp(20px, 3vw, 28px)', marginBottom: 8 }}><AirplaneTakeoff size="1em" weight="regular" /></span>
+          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: '0 0 8px' }}>
+            My Markets: Exploring Card Layout
           </h3>
-          <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 32px' }}>
-            How might we <strong className="font-semibold text-[var(--color-cs-heading)]">display market cards so analysts can scan quickly</strong> without losing important context?
-          </p>
-          <div className="cs-option-btns" style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {MARKET_OPTIONS.map((o, i) => (
-              <button
-                key={o.title}
-                onClick={() => setActive(i)}
-                className="cs-tab-btn"
-                data-cursor-label="Open option"
-                style={{
-                  border: `1px solid ${i === active ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.2)'}`, borderRadius: 12,
-                  background: 'transparent',
-                  color: i === active ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.5)',
-                }}
-              >
-                {o.title}
-              </button>
-            ))}
-          </div>
+          <BodyText>
+            How might we display market cards so analysts can scan quickly without losing important context?
+          </BodyText>
+          <BodyText>
+            We explored three levels of card density.
+          </BodyText>
         </div>
 
-        {/* Right */}
+        {/* Right: arrows flanking sliding image + pros/cons */}
         <div>
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25 }}
-            style={{ marginBottom: 16 }}
-          >
-            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
-          </motion.div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100 }}>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <span className="font-bold text-[var(--color-cs-heading)]" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>+</span>
-              <p className="font-landing-body" style={{ fontSize: 14, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
-                <strong className="text-[var(--color-cs-heading)]">Pros:</strong> {option.pros}
-              </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <button type="button" onClick={goPrev} aria-label="Show previous wireframe test" style={CIRCLE_BTN}>
+              <CaretLeft size={12} weight="bold" />
+            </button>
+            <div style={{ flex: 1, overflow: 'hidden' }}>
+              <motion.div
+                key={active}
+                initial={{ x: direction === 1 ? 24 : -24 }}
+                animate={{ x: 0 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}
+              >
+                <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 8, marginTop: 8 }}>{option.title}</p>
+                <div style={{ border: '1px solid #d1d1d1', borderRadius: 8, overflow: 'hidden' }}>
+                  <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                </div>
+                <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <p className="font-landing-body" style={{ fontSize: 13, color: '#222225', lineHeight: 'normal', margin: 0, display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                    <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 1 }}><CheckCircle size={16} weight="regular" /></span>
+                    <span><span className="font-bold text-[var(--color-cs-heading)]">Pros:</span> {option.pros}</span>
+                  </p>
+                  <p className="font-landing-body" style={{ fontSize: 13, color: '#222225', lineHeight: 'normal', margin: 0, display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                    <span style={{ color: 'var(--color-cs-heading)', flexShrink: 0, display: 'flex', marginTop: 1 }}><MinusCircle size={16} weight="regular" /></span>
+                    <span><span className="font-bold text-[var(--color-cs-heading)]">Cons:</span> {option.cons}</span>
+                  </p>
+                </div>
+              </motion.div>
             </div>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <span className="font-landing-body text-[var(--color-cs-heading)]/30" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>−</span>
-              <p className="font-landing-body" style={{ fontSize: 14, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
-                <strong className="text-[var(--color-cs-heading)]">Cons:</strong> {option.cons}
-              </p>
-            </div>
+            <button type="button" onClick={goNext} aria-label="Show next wireframe test" style={CIRCLE_BTN}>
+              <CaretRight size={12} weight="bold" />
+            </button>
           </div>
         </div>
       </div>
@@ -375,14 +348,14 @@ const AI_OPTIONS = [
   {
     title: 'Full Chat Experience',
     image: img('revenue-management-15-ewOSo5.png'),
-    pros: 'Dedicated space for deeper AI assistance. Accessible to anyone who needs it.',
+    pros: 'A dedicated space for deeper AI assistance. Accessible to anyone when they needed more help.',
     cons: 'Users had to navigate to a different screen.',
   },
   {
     title: 'Left Chat Panel',
     image: img('revenue-management-16-1hN5yG.png'),
     pros: 'Always visible.',
-    cons: 'Risked feeling intrusive, with AI leading the experience.',
+    cons: 'Risked feeling intrusive or like AI was leading the experience.',
   },
   {
     title: 'Right Chat Panel',
@@ -400,63 +373,60 @@ const AI_OPTIONS = [
 
 function AIPlacementExplorer() {
   const [active, setActive] = useState(0)
+  const [direction, setDirection] = useState(1)
   const option = AI_OPTIONS[active]
+  const total = AI_OPTIONS.length
+  const goPrev = () => { setDirection(-1); setActive((active - 1 + total) % total) }
+  const goNext = () => { setDirection(1); setActive((active + 1) % total) }
 
   return (
     <div className="cs-card-box" style={{ padding: 32, marginTop: 86 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
-        {/* Left: context + 2x2 buttons */}
+      <div className="rm-ai-assistant-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'center' }}>
+        {/* Left: context */}
         <div>
-          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
-            AI Assistant
+          <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6, marginTop: 0 }}>Wireframe Tests</p>
+          <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: 'clamp(20px, 3vw, 28px)', marginBottom: 8 }}><Robot size="1em" weight="regular" /></span>
+          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: '0 0 8px' }}>
+            AI Assistant: Exploring Placement
           </h3>
-          <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 32px' }}>
-            "How might we <strong className="font-semibold text-[var(--color-cs-heading)]">offer AI help</strong> that's there when you need it and invisible when you don't?"
-          </p>
-          <div className="cs-option-btns" style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {AI_OPTIONS.map((o, i) => (
-              <button
-                key={o.title}
-                onClick={() => setActive(i)}
-                className="cs-tab-btn"
-                data-cursor-label="Open option"
-                style={{
-                  border: `1px solid ${i === active ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.2)'}`, borderRadius: 12,
-                  background: 'transparent',
-                  color: i === active ? 'var(--color-cs-heading)' : 'rgba(var(--color-navy-rgb),0.5)',
-                }}
-              >
-                {o.title}
-              </button>
-            ))}
-          </div>
+          <BodyText>
+            How might we offer AI help that's there when you need it and invisible when you don't?
+          </BodyText>
         </div>
 
-        {/* Right: image + pros/cons below */}
+        {/* Right: arrows flanking sliding image + pros/cons */}
         <div>
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25 }}
-            style={{ marginBottom: 16 }}
-          >
-            <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
-          </motion.div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minHeight: 100 }}>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <span className="font-bold text-[var(--color-cs-heading)]" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>+</span>
-              <p className="font-landing-body" style={{ fontSize: 14, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
-                <strong className="text-[var(--color-cs-heading)]">Pros:</strong> {option.pros}
-              </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <button type="button" onClick={goPrev} aria-label="Show previous wireframe test" style={CIRCLE_BTN}>
+              <CaretLeft size={12} weight="bold" />
+            </button>
+            <div style={{ flex: 1, overflow: 'hidden' }}>
+              <motion.div
+                key={active}
+                initial={{ x: direction === 1 ? 24 : -24 }}
+                animate={{ x: 0 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}
+              >
+                <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 8, marginTop: 8 }}>{option.title}</p>
+                <div style={{ border: '1px solid #d1d1d1', borderRadius: 8, overflow: 'hidden' }}>
+                  <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                </div>
+                <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <p className="font-landing-body" style={{ fontSize: 13, color: '#222225', lineHeight: 'normal', margin: 0, display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                    <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 1 }}><CheckCircle size={16} weight="regular" /></span>
+                    <span><span className="font-bold text-[var(--color-cs-heading)]">Pros:</span> {option.pros}</span>
+                  </p>
+                  <p className="font-landing-body" style={{ fontSize: 13, color: '#222225', lineHeight: 'normal', margin: 0, display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                    <span style={{ color: 'var(--color-cs-heading)', flexShrink: 0, display: 'flex', marginTop: 1 }}><MinusCircle size={16} weight="regular" /></span>
+                    <span><span className="font-bold text-[var(--color-cs-heading)]">Cons:</span> {option.cons}</span>
+                  </p>
+                </div>
+              </motion.div>
             </div>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <span className="font-landing-body text-[var(--color-cs-heading)]/30" style={{ fontSize: 16, lineHeight: 1.6, flexShrink: 0 }}>−</span>
-              <p className="font-landing-body" style={{ fontSize: 14, color: "var(--color-secondary)", margin: 0, lineHeight: 1.6 }}>
-                <strong className="text-[var(--color-cs-heading)]">Cons:</strong> {option.cons}
-              </p>
-            </div>
+            <button type="button" onClick={goNext} aria-label="Show next wireframe test" style={CIRCLE_BTN}>
+              <CaretRight size={12} weight="bold" />
+            </button>
           </div>
         </div>
       </div>
@@ -468,37 +438,61 @@ const SPREAD_ROTATIONS = [-6, 3, -3, 5]
 
 function PolaroidDeck({ fullWidth = false }: { fullWidth?: boolean }) {
   const [active, setActive] = useState(0)
-  const n = POLAROIDS.length
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  const photos = isMobile ? POLAROIDS.slice(0, 3) : POLAROIDS
+  const n = photos.length
+
+  useEffect(() => {
+    setActive(a => a % n)
+  }, [n])
 
   if (fullWidth) {
     return (
-      <div style={{ display: 'flex', gap: 16, alignItems: 'flex-end', justifyContent: 'center', padding: '24px 0 8px', width: '80%', margin: '0 auto' }}>
-        {POLAROIDS.map((photo, i) => (
+      <div className="rm-polaroid-deck" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: '24px 0 8px', width: '80%', margin: '0 auto' }}>
+        {photos.map((photo, i) => (
           <motion.div
             key={photo.src}
             whileHover={{ rotate: 0, scale: 1.04, zIndex: 10 }}
             transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+            className="rm-polaroid-card"
             style={{
-              flex: 1,
+              flex: '0 1 200px',
+              width: 200,
               background: '#fff',
-              padding: '10px 10px 28px',
+              padding: '16px 16px 12px',
               boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
               rotate: SPREAD_ROTATIONS[i],
               cursor: 'pointer',
               transformOrigin: 'bottom center',
+              zIndex: i,
             }}
           >
             <img
               src={photo.src}
               alt={photo.caption}
-              style={{ width: '100%', aspectRatio: '1/1.2', objectFit: 'cover', display: 'block' }}
+              style={{ width: '100%', height: 224, objectFit: 'cover', display: 'block' }}
             />
-            <p className="font-landing-body" style={{
+            <p style={{
+              fontFamily: 'var(--font-landing-body)',
+              fontSize: 13,
+              fontWeight: 500,
+              color: 'var(--color-cs-heading)',
               textAlign: 'center',
               marginTop: 12,
-              fontSize: 12,
-              color: 'var(--color-secondary)',
-              lineHeight: 1.4,
+              lineHeight: 'normal',
+              minHeight: 36,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}>
               {photo.caption}
             </p>
@@ -515,42 +509,45 @@ function PolaroidDeck({ fullWidth = false }: { fullWidth?: boolean }) {
       <div
         onClick={advance}
         data-cursor-label="Next"
-        style={{ position: 'relative', width: '100%', height: 279, cursor: 'pointer' }}
+        className="rm-polaroid-stack"
+        style={{ position: 'relative', width: '100%', cursor: 'pointer' }}
       >
-        {POLAROIDS.map((photo, i) => {
+        {photos.map((photo, i) => {
           const slot = (i - active + n) % n
-          const { rotate, x, scale, zIndex } = SLOT_STYLE[slot]
+          const { rotate, x, scale, zIndex } = (isMobile ? SLOT_STYLE_MOBILE : SLOT_STYLE)[slot]
           return (
             <motion.div
               key={photo.src}
               animate={{ rotate, x, scale, zIndex }}
               transition={{ type: 'spring', stiffness: 280, damping: 26 }}
+              className="rm-polaroid-stack-card"
               style={{
                 position: 'absolute',
                 top: 0,
                 left: '50%',
-                marginLeft: -105,
                 background: '#fff',
-                padding: '10px 10px 45px',
                 boxShadow: slot === 0
                   ? '0 8px 40px rgba(0,0,0,0.18)'
                   : '0 3px 16px rgba(0,0,0,0.10)',
-                width: 210,
                 transformOrigin: 'bottom center',
               }}
             >
               <img
                 src={photo.src}
                 alt={photo.caption}
-                style={{ width: '100%', height: 224, objectFit: 'cover', display: 'block' }}
+                style={{ width: '100%', aspectRatio: '210 / 290', objectFit: 'cover', display: 'block' }}
               />
-              <p className="font-landing-body" style={{
+              <p className="rm-polaroid-stack-caption" style={{
+                fontFamily: 'var(--font-landing-body)',
+                fontWeight: 500,
+                color: 'var(--color-cs-heading)',
                 textAlign: 'center',
-                marginTop: 12,
-                fontSize: 12,
-                color: 'var(--color-secondary)',
-                lineHeight: 1.4,
-                margin: '12px 0 0',
+                lineHeight: 1.3,
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transform: `rotate(${-rotate}deg)`,
               }}>
                 {photo.caption}
               </p>
@@ -560,7 +557,7 @@ function PolaroidDeck({ fullWidth = false }: { fullWidth?: boolean }) {
       </div>
 
       <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        {POLAROIDS.map((_, i) => (
+        {photos.map((_, i) => (
           <button
             key={i}
             onClick={() => setActive(i)}
@@ -636,7 +633,7 @@ export default function RevenueManagementPage() {
       <section>
         {/* Hero Lottie — paused by default, plays on hover */}
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-          <div style={{ background: '#12213a', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, position: 'relative', aspectRatio: '16/9', overflow: 'hidden' }}>
+          <div style={{ background: '#12213a', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', border: '1px solid #d1d1d1' }}>
             <HeroLottie />
           </div>
         </div>
@@ -644,40 +641,27 @@ export default function RevenueManagementPage() {
         {/* Text content below image */}
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
         <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-          <p className="font-landing-body font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, color: 'var(--color-cs-heading)', marginBottom: 8, borderLeft: '2px solid var(--color-navy)', paddingLeft: 10 }}>PROS</p>
-          <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] leading-[1.1]" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
-            Revenue Management
+          <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+            PROS Revenue Management Platform
           </h1>
 
-          <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
-            Revenue Management is an analytics platform that helps airlines price flights and forecast demand. Pricing analysts use it to decide which routes to prioritize and where to adjust fares.
-          </p>
-          <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
-            COVID disrupted the airline industry and left Revenue Management with two conflicting user groups: tenured Senior Analysts handling core pricing and newly hired Junior Analysts learning on the job. The platform had been built for experienced users and now had to support both.
-          </p>
-          <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
-            I redesigned key workflows to bridge that gap. I added contextual AI guidance for new analysts, made pricing adjustments faster for senior analysts, and brought external market data into the platform for both. An adaptive experience for users at every level.
+          <p className="font-landing-body text-[15px] " style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
+            During my UX Design internship at PROS, I worked on product strategy and developed AI features for the Revenue Management (RM) platform for airline analysts of all experience levels.
           </p>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3" style={{ marginBottom: 0 }}>
             {[
               { label: 'Role',     value: 'UX Design Intern' },
-              { label: 'Duration', value: 'Jun – Sep 2025' },
-              { label: 'Team',     value: 'UX Strategist, UX Researcher, PM' },
-              { label: 'Tools',    value: 'Figma, Claude, Figma Make' },
+              { label: 'Timeline', value: 'Jun – Sep 2025' },
+              { label: 'Team',     value: 'Visual Designer, UX Researcher, PM' },
+              { label: 'Tools/Skills', value: 'Figma, Claude, Figma Make' },
             ].map(({ label, value }) => (
               <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
-                <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
-                <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', margin: 0, lineHeight: 1.4 }}>{value}</p>
+                <p className="cs-metric-label" style={{ marginBottom: 6, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{label}</p>
+                <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', margin: 0, lineHeight: 'normal' }}>{value}</p>
               </div>
             ))}
           </div>
-
-          <figure style={{ margin: '32px 0 0' }}>
-            <img src="/images/revenue-management/ux-houston-team.webp" alt="PROS UX Design team" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
-            <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>PROS UX Design team</figcaption>
-          </figure>
-
 
           <a href="#rm-features" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
         </div>
@@ -686,14 +670,14 @@ export default function RevenueManagementPage() {
 
       <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 32, display: 'flex', flexDirection: 'column', gap: 0 }}>
 
-      {/* ── Introduction ── */}
+      {/* ── Context ── */}
       <Section id="rm-intro" className="">
         {/* Chapter label + indicator — full width */}
         <div style={{ marginBottom: 8 }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span className="text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>1.</span>
-            <h2 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1.2, margin: 0 }}>
-              Introduction
+            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>1.</span>
+            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
+              Context
             </h2>
           </div>
           <div style={{
@@ -707,109 +691,205 @@ export default function RevenueManagementPage() {
           }} />
         </div>
 
-        {/* Row 1: h3 + body text */}
-        <div style={{ marginBottom: 32 }}>
-          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: 0, marginBottom: 8 }}>
-            The platform assumed expertise that no longer existed
-          </h3>
-          <Prose>
-            <BodyText>
-              PROS builds software for commercial airlines. I joined the Revenue Management platform team as a UX Design Intern, working alongside a UX Strategist, User Researcher, and Project Manager.
-            </BodyText>
-          </Prose>
+        <div style={{ marginTop: 86 }}>
+          <PolaroidDeck />
         </div>
 
-        <div style={{ marginTop: 86, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
-          <div>
-            <BodyText>
-              Revenue Management analysts identify underperforming flight routes and adjust pricing to recover revenue. Pricing decisions directly affect how much revenue an airline recovers on a given route.
-            </BodyText>
-            <BodyText>
-              The platform was built assuming analysts would arrive with deep expertise. After COVID layoffs reduced much of that experienced workforce, Junior analysts were hired to fill the gaps without the institutional knowledge the platform assumed they had. Senior analysts were still present and still relied on the platform daily. Now there were two very different users sharing the same tool, and it had been designed for neither of them.
-            </BodyText>
-          </div>
+        <div style={{ marginTop: 86 }}>
+          <SubHeading>Revenue Management Platform @ PROS</SubHeading>
+          <BodyText>
+            PROS is a B2B software company that builds digital products for commercial airlines and their internal teams. I worked with the UX Strategist, User Researcher, and Project Manager to define the design direction for the Revenue Management Platform (RM) with dual focus to modernize the platform and explore AI integration.
+          </BodyText>
 
-          <figure style={{ margin: 0 }}>
-            <img src={img('revenue-management-10-eiVem1.png')} alt="Major US airlines to lay off thousands of workers as Covid-19 support expires" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
-            <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>Airplanes parked at Southern California Logistics Airport in July 2020. (Credit: Ryan Patterson)</figcaption>
+          <figure style={{ margin: '32px 0 0' }}>
+            <img src="/images/revenue-management/previous-rm-screens.avif" alt="Historical/Forecast Graph, Traffic Mix Data Visualization, and Flight Calendar Grid View from the previous Revenue Management platform" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Precedent Revenue Management Screens for Market JFK-PIT</figcaption>
           </figure>
         </div>
 
-        <ChallengeBanner
-          question={<>How might we <strong className="font-semibold">modernize the RM platform</strong> and successfully <strong className="font-semibold">integrate AI</strong> to support both new and more senior analysts?</>}
-        />
+        <div className="rm-intro-grid" style={{ marginTop: 86, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
+          <Prose>
+            <SubHeading>How Covid-19 affected the Airline Industry & RM</SubHeading>
+            <BodyText>
+              When COVID-19 hit, travel came to a halt. Airlines faced widespread layoffs, including airline analysts. With them went years of institutional knowledge.
+            </BodyText>
+            <BodyText>
+              When hiring picked back up, a new generation of analysts entered the field. The RM platform has a steep learning curve. It assumed users would have expert guidance or in-depth tutorials.
+            </BodyText>
+            <BodyText>
+              However, the new generation of analysts prefers to learn differently as they've shown a preference for AI tools. Meanwhile, Senior analysts still make up a significant portion of the user base and have established workflows.
+            </BodyText>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
+            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
+              <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+                <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>The challenge:</strong> How might we support Junior analysts without disrupting the workflows Senior analysts rely on?
+              </p>
+            </div>
+          </Prose>
+
+          <figure style={{ margin: 0 }}>
+            <img src={img('revenue-management-10-eiVem1.png')} alt="Major US airlines to lay off thousands of workers as Covid-19 support expires" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+            <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Airplanes parked at Southern California Logistics Airport in July 2020. (Credit: Ryan Patterson)</figcaption>
+          </figure>
+        </div>
+
+        <div style={{ marginTop: 86 }}>
+          <ChallengeBanner
+            icon={<AirplaneTakeoff size="1em" weight="regular" />}
+            iconColor="#416BCC"
+            question={<>How might we <strong><em>modernize</em></strong> the RM platform and meaningfully <strong><em>integrate AI</em></strong> to support both Senior analysts and Junior analysts?</>}
+          />
+        </div>
+      </Section>
+
+      {/* ── Solution Preview ── */}
+      <Section id="rm-solution-preview" className="">
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>2.</span>
+            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
+              Solution Preview
+            </h2>
+          </div>
+          <div style={{
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderBottom: 'none',
+            borderRadius: '12px 12px 0 0',
+            height: 32,
+            width: '100%',
+          }} />
+        </div>
+
+        {/* Video container */}
+        <div style={{ width: '100%', margin: '0 auto' }}>
+          <div style={{ borderRadius: 8, overflow: 'hidden', background: 'transparent' }}>
+            <LazyVideo
+              src="/videos/revenue-management-solution-preview.webm"
+              style={{ width: '100%', display: 'block' }}
+            />
+          </div>
+        </div>
+
+        {/* TL:DR */}
+        <div style={{ marginTop: 86 }}>
+          <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>TL:DR</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
+            <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
+              A clearer and supportive data platform for Airline Analysts
+            </h3>
+            <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+              Revenue management is how airlines price flights and manage seat inventory, now clearer, faster, and with built-in AI.
+            </p>
+          </div>
+        </div>
       </Section>
 
       {/* ── Research ── */}
       <Section id="rm-research" className="">
-        <SectionHeading index={2} chapter="Research" heading="" />
-        <SubHeading>The platform assumed you already knew how to use it</SubHeading>
+        <SectionHeading index={3} chapter="Research" heading="" />
+        <SubHeading>Pain Points in the Analyst Experience</SubHeading>
         <Prose>
           <BodyText>
-            Junior Analysts were dropped into complex views without context or guidance. When they got stuck, they left the platform entirely and used outside AI tools. When that was not enough, they pulled Senior colleagues away from their own work. All three responses pointed at the same problem: the platform assumed you already knew how to use it.
+            I joined the RM team after user research was already conducted. To get up to speed, I met with the User Researcher and UX Strategist to review the findings. I also talked with the PM, who had been working directly with airline analysts and the Customer Support team.
+          </BodyText>
+          <BodyText>
+            From the research and these conversations, I walked away with three key pain points:
           </BodyText>
         </Prose>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginTop: 16 }}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" style={{ marginTop: 32 }}>
           {[
-            { icon: <Brain size={24} weight="light" />, title: 'High Cognitive Load',  body: 'Junior Analysts were dropped into complex views without context or guidance.' },
-            { icon: <Ghost size={24} weight="light" />, title: 'Low User Adoption',    body: 'Junior Analysts abandoned tasks mid-way and opted for AI workarounds outside the platform.' },
-            { icon: <BookOpen size={24} weight="light" />, title: 'Training Dependency', body: 'Junior Analysts relied on Senior colleagues and external AI when they got stuck.' },
-          ].map(({ icon, title, body }) => (
-            <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
-              <div style={{
-                width: 40, height: 40,
-                borderRadius: '50%',
-                border: '1px solid rgba(var(--color-navy-rgb),0.2)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'var(--color-cs-heading)',
-                marginBottom: 12,
-              }}>
+            { icon: <Brain size="1em" />, title: 'High Cognitive Load', description: 'Junior Analysts were dropped into complex views without context or clear priorities.' },
+            { icon: <Ghost size="1em" />, title: 'Low User Adoption', description: 'Junior Analysts abandoned tasks mid-way and opted for AI workarounds.' },
+            { icon: <BookOpen size="1em" />, title: 'Training Dependency', description: 'Junior Analysts relied on Senior Analysts and AI for guidance when stuck.' },
+          ].map(({ icon, title, description }) => (
+            <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: '24px 20px' }}>
+              <div style={{ width: 44, height: 44, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#416BCC', fontSize: 'clamp(20px, 3vw, 28px)' }}>
                 {icon}
               </div>
-              <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, marginBottom: 8, marginTop: 0 }}>{title}</h4>
-              <p className="font-landing-body text-[13px] leading-relaxed" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+              <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 12px' }}>{title}</p>
+              <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '0 0 12px' }} />
+              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
             </div>
           ))}
         </div>
+        <p className="font-landing-body cs-caption" style={{ marginTop: 20 }}>
+          Main Pain Points from User Research/Internal Interviews
+        </p>
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>Two users pulling in opposite directions</SubHeading>
+          <SubHeading>Distinctive Users with Varying Levels of Expertise</SubHeading>
           <BodyText>
-            Those pain points only told half the story. Senior Analysts were not struggling the same way, they knew the platform well and moved through it quickly. Any change that helped Juniors had to avoid disrupting the workflows Seniors depended on.
+            Both the user research and internal interviews revealed that the main users of RM were now composed of Junior and Senior Analysts. I outlined these user personas to align the team and guide our design direction.
           </BodyText>
-          <BodyText>
-            Junior and Senior Analysts needed opposite things. Juniors needed guidance, orientation, and support when stuck. Seniors needed speed, familiarity, and no interruptions. Every design decision had to work for both.
-          </BodyText>
-          <BodyText>
-            Avery Chen represents the Junior: one year of experience, assigned a set of markets to manage, and no clear starting point when she logs in. She needs to know where to begin, get unstuck without pulling a Senior away from their work, and build confidence over time without the platform making every decision for her.
-          </BodyText>
+
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
+            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+              The personas made one thing clear: Junior Analysts needed help getting started and building confidence. Senior Analysts needed speed. Designing for one would frustrate the other so the solution had to find the <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>balance between both.</strong>
+            </p>
+          </div>
         </div>
 
-        <PersonaToggle className="" style={{ marginTop: 32 }} />
-
-        <figure style={{ margin: '86px 0 0' }}>
-          <img src={img('revenue-management-13-pX9ss5.png')} alt="How the current RM experience affects Senior and Junior Analysts differently" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
-          <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>How the current RM experience affects Senior and Junior Analysts differently</figcaption>
-        </figure>
-
+        <PersonaGrid className="rm-persona-grid" style={{ marginTop: 32 }} />
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>The divergence started at login</SubHeading>
+          <SubHeading>Mapping out the Current State</SubHeading>
           <BodyText>
-            Seniors landed knowing exactly where to go. Juniors landed and clicked around trying to figure out what needed attention. The earliest point of divergence was the most impactful place to start.
+            I mapped out the relationship between users, the platform, and the three pain points. High cognitive load pushed Junior Analysts in two directions. Some left the platform entirely. Others turned to workarounds, relying on Senior Analysts or AI to get by.
           </BodyText>
+          <BodyText>
+            For Senior Analysts, that meant interruptions every time a Junior asked for help. Sometimes they had to stop their own work to guide or manage the Junior. The platform served neither user well.
+          </BodyText>
+
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
+            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+              The redesign had to do two things: <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>reduce the friction</strong> that pushed Juniors away, and <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>match the convenience of the workarounds</strong> they'd already discovered.
+            </p>
+          </div>
+        </div>
+
+        <figure style={{ margin: '32px 0 0' }}>
+          <img src={img('revenue-management-13-pX9ss5.png')} alt="How the current RM experience affects Senior and Junior Analysts differently" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
+          <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>How the current RM experience affects Senior and Junior Analysts differently</figcaption>
+        </figure>
+
+        <div style={{ marginTop: 86 }}>
+          <SubHeading>Same Platform, Different Experiences</SubHeading>
+          <BodyText>
+            I wanted to see exactly where Junior and Senior experiences diverged. That would help me narrow in on where a redesign would have the most impact.
+          </BodyText>
+          <BodyText>
+            Even though they were using the same platform, their paths looked completely different. The divergence starts at login. Juniors land without direction. Seniors land with purpose.
+          </BodyText>
+
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
+            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+              Juniors couldn't initiate tasks while Seniors could, so we focused on that earliest divergence: the landing experience.
+            </p>
+          </div>
         </div>
 
         <figure style={{ margin: '48px 0 0' }}>
-          <img src={img('revenue-management-14-3LKss2.png')} alt="Comparative look at how Junior and Senior Analysts move through the same platform" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
-          <figcaption className="font-landing-body font-semibold tracking-[0.12em] uppercase text-center cs-caption-label" style={{ fontSize: 12, color: 'var(--color-secondary)', marginTop: 12 }}>A comparative look at how Junior and Senior Analysts move through the same platform differently</figcaption>
+          <img src={img('revenue-management-14-3LKss2.png')} alt="Comparative look at how Junior and Senior Analysts move through the same platform" style={{ width: '80%', height: 'auto', display: 'block', margin: '0 auto', border: '1px solid #d1d1d1', borderRadius: 8 }} />
+          <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>A comparative look at how Junior and Senior Analysts move through the same platform differently, highlighting where design opportunities exist.</figcaption>
         </figure>
 
         <div style={{ marginTop: 86 }}>
           <ChallengeBanner
+            icon={<AirplaneTakeoff size="1em" weight="regular" />}
+            iconColor="#416BCC"
             label="Challenge (Revised)"
-            question={<>How might we <strong className="font-semibold">modernize the landing experience</strong> to help Junior analysts get started and Senior analysts work more efficiently?</>}
+            question={<>How might we <strong><em>modernize</em></strong> the landing experience to help Junior analysts get started and Senior analysts work more <strong><em>efficiently?</em></strong></>}
           />
         </div>
 
@@ -817,34 +897,33 @@ export default function RevenueManagementPage() {
 
       {/* ── Development ── */}
       <Section id="rm-development" className="">
-        <SectionHeading index={3} chapter="Development" heading="" />
-        <SubHeading>Starting from the reframe, not the full platform</SubHeading>
+        <SectionHeading index={4} chapter="Development" heading="" />
+        <SubHeading>Approved Concepts</SubHeading>
         <BodyText>
-          The revised challenge narrowed our focus to the screens that mattered most. My Markets is the main landing screen analysts see when they log in, a dashboard that lists every market they are responsible for, and it was where Juniors got lost. Market Overview is where analysts go to understand a single market in depth, pulling together booking trends, revenue data, and competitive context in one place, and Seniors relied on it constantly. We also scoped an AI assistant to address the outside tool dependency, and onboarding to give new users a starting point.
+          After identifying the core pain points, we brainstormed concepts to address them. I suggested starting with My Markets, a core screen where research showed Juniors spent the most time getting lost. The team agreed and suggested adding Market Overview, which Senior analysts commonly use.
         </BodyText>
         <BodyText>
-          We descoped onboarding before high fidelity. Research showed Juniors dropped off mid-task, not at first login, so the higher priority was supporting them once they were already inside the platform.
+          From there, we brainstormed two additional features: an AI assistant and an onboarding experience. We discussed who each feature was for and agreed that both had to serve Junior and Senior analysts.
         </BodyText>
 
-        <div className="grid lg:grid-cols-2 gap-5" style={{ marginTop: 8 }}>
+        <div className="grid lg:grid-cols-2 gap-6" style={{ marginTop: 8 }}>
           {[
-            { icon: <ChartBar size={24} weight="light" />, title: 'My Markets',      body: 'A dashboard showing analysts which markets need attention first.' },
-            { icon: <Stack size={24} weight="light" />,    title: 'Market Overview', body: 'Analytics with booking outlooks and trend data for deeper market context.' },
-            { icon: <Bell size={24} weight="light" />,     title: 'Onboarding',      body: 'A welcome message and quick tour to orient new users.' },
-            { icon: <Robot size={24} weight="light" />,    title: 'AI Assistant',    body: 'Context-aware guidance that suggests next steps based on what is on screen.' },
-          ].map(({ icon, title, body }) => (
-            <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16, display: 'flex', gap: 12 }}>
-              <div style={{
-                width: 40, height: 40, borderRadius: '50%',
-                border: '1px solid rgba(var(--color-navy-rgb),0.2)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'var(--color-cs-heading)', flexShrink: 0,
-              }}>
-                {icon}
+            { icon: <ChartBar size="1em" weight="light" />, title: 'My Markets',      description: 'A dashboard that shows analysts which markets need attention first.', reason: 'I suggested this because research showed Juniors spend the most time here.' },
+            { icon: <Stack size="1em" weight="light" />,    title: 'Market Overview', description: 'Analytics with booking outlooks and trend data. Context an analyst needs to understand their markets.', reason: 'The team added this because Senior analysts use it regularly.' },
+            { icon: <Bell size="1em" weight="light" />,     title: 'Onboarding',      description: 'A welcome message and a quick tour. Just enough to orient new users and introduce what changed.', reason: 'Seniors need a brief rundown. Juniors need more guidance. The onboarding had to work for both.' },
+            { icon: <Robot size="1em" weight="light" />,    title: 'AI Assistant',    description: "Context-aware guidance that suggests next steps based on what's on screen.", reason: 'Juniors were already using external AI tools. I wanted to bring that help directly into the platform and support Senior analysts too.' },
+          ].map(({ icon, title, description, reason }) => (
+            <div key={title}>
+              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
+                <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: '1em' }}>{icon}</span>
+                  {title}
+                </h3>
+                <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
               </div>
-              <div style={{ flex: 1 }}>
-                <h4 className="font-semibold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, margin: 0, marginBottom: 4 }}>{title}</h4>
-                <p className="font-landing-body text-[13px] leading-relaxed" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+              <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start', marginTop: 12 }}>
+                <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
+                <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', lineHeight: 'normal' }}>{reason}</span>
               </div>
             </div>
           ))}
@@ -854,71 +933,90 @@ export default function RevenueManagementPage() {
         <AIPlacementExplorer />
 
         <div style={{ marginTop: 86 }}>
-          <SubHeading>No single option was enough on its own</SubHeading>
+          <SubHeading>AI Assistant: Hybrid Approach</SubHeading>
           <BodyText>
-            We explored four directions for the AI assistant. The left panel was scrapped after design critique because positioning AI to drive the right side of the screen made it feel mandatory, and a Senior doing a familiar task would have to work around it every time. The full chat experience required navigating away from the task entirely, which broke the flow for anyone who just needed a quick answer. The right panel worked for quick questions, but a Junior who is lost does not always know what to ask. The embedded button surfaced insights in context but could not handle anything that needed a fuller explanation.
+            After bringing the options to design critique sessions with the entire UX design team. We decided to scrap the left panel entirely. It suggested the AI was leading the experience and removed user agency. But no single option felt right on its own.
           </BodyText>
           <BodyText>
-            None of those options worked on their own. The hybrid kept what each did well. The embedded button surfaces help before Avery knows she needs it, the right panel is there when she does, and the full chat screen handles anything that needs more depth. A Senior who never needs any of it can close the AI panel and work as they always have.
+            So we combined what worked from each. A right side panel for quick, optional help that keeps the user in control. Embedded AI suggestions for lightweight guidance. And a dedicated AI chat screen for deeper assistance.
           </BodyText>
+
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
+            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+              With this solution, Juniors get support to build confidence. Seniors get support to stay efficient.
+            </p>
+          </div>
+
           <div className="rm-ai-verdict-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 32 }}>
             {[
               { title: 'Right Chat Panel', image: img('revenue-management-17-Edz70r.png'), verdict: 'Chosen (further exploration)' },
               { title: 'Embedded AI', image: img('revenue-management-18-w7PI4H.png'), verdict: 'Chosen (subtle, lightweight)' },
-              { title: 'Full Chat Experience', image: img('revenue-management-15-ewOSo5.png'), verdict: 'Chosen (separate workflow)' },
+              { title: 'Full Chat Experience', image: img('revenue-management-15-ewOSo5.png'), verdict: 'Chosen (separate from main workflow)' },
             ].map(({ title, image, verdict }) => (
               <div key={title}>
-                <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, marginBottom: 8 }}>{title}</p>
+                <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 8, marginTop: 0 }}>{title}</p>
                 <div style={{ marginBottom: 10 }}>
-                  <img src={image} alt={title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
+                  <img src={image} alt={title} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
                 </div>
-                <p className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 1.5 }}>
+                <p className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
                   <strong className="text-[var(--color-cs-heading)]">Verdict:</strong> {verdict}
                 </p>
               </div>
             ))}
           </div>
+
+          <p className="font-landing-body cs-caption" style={{ marginTop: 32 }}>
+            Note: These are not production final designs. This is what we accomplished by the end of my internship.
+          </p>
         </div>
 
 
         {/* My Markets layout */}
         <MyMarketsExplorer />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center', marginTop: 86 }}>
+        <div className="rm-starting-point-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', marginTop: 86 }}>
           {/* Left */}
           <div>
-            <SubHeading>The starting point had to be obvious without explanation</SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', marginBottom: 24 }}>
-              With the AI direction settled, we turned to My Markets. Grid cards looked cleaner but buried critical markets, and with dozens of routes on screen there was no clear starting point. Expanded cards showed more detail per market but only a handful fit on screen at once, which broke down at real scale. I suggested compact rows and the team validated it. Compact rows scale to dozens of markets, use color coding to sort by severity so the most urgent markets rise to the top automatically, and keep the most important numbers visible at a glance.
-            </p>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span className="text-[var(--color-cs-heading)] font-bold" style={{ fontSize: 16, flexShrink: 0, marginTop: 2, lineHeight: 1.3 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', margin: 0 }}>
-                We presented the direction to our PMs, the UX team, and the VP of Design. All three validated the approach. The validated direction became the four screens that shipped.
+            <SubHeading>My Markets: Compact Cards</SubHeading>
+            <BodyText>
+              We chose compact rows as the default view as it can scale for dozens of markets and supports both users.
+            </BodyText>
+            <BodyText>
+              Seniors can scan quickly because density and color coding put information in reach. Juniors can see clear priorities without feeling overwhelmed because critical markets rise to the top.
+            </BodyText>
+
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
+            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
+              <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+                We got internal validation from our PMs, the UX team, and the VP of Design.
               </p>
             </div>
           </div>
 
           {/* Right */}
           <div>
-            <img src={img('revenue-management-23-VWDfyX.png')} alt="Compact Cards Layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
+            <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 8, marginTop: 0 }}>Compact Cards Layout</p>
+            <img src={img('revenue-management-23-VWDfyX.png')} alt="Compact Cards Layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid #d1d1d1', borderRadius: 8 }} />
           </div>
         </div>
       </Section>
 
       {/* ── Solution ── */}
       <Section id="rm-features" className="">
-        <SectionHeading index={4} chapter="Solution" heading="" />
+        <SectionHeading index={5} chapter="Solution" heading="" />
 
         {/* Solution Overview — all four screens with arrows between them */}
         <div style={{ marginBottom: 32 }}>
-          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
+          <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 'normal', margin: '0 0 8px' }}>
             Solution Overview
           </h3>
           <BodyText>
             This is the whole user flow from dashboard to specific market content to AI chat.
           </BodyText>
-          <div style={{
+          <div className="rm-solution-overview-grid" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: 24,
@@ -931,70 +1029,77 @@ export default function RevenueManagementPage() {
               { image: img('revenue-management-28-DIN9ZJ.png'), alt: 'Full AI chat screen', caption: '4. Continues the conversation in the full AI chat' },
             ].map(screen => (
               <figure key={screen.alt} style={{ margin: 0 }}>
-                <img src={screen.image} alt={screen.alt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 6 }} />
-                <figcaption className="font-landing-body text-left" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', marginTop: 12 }}>{screen.caption}</figcaption>
+                <img src={screen.image} alt={screen.alt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+                <figcaption className="font-landing-body text-left" style={{ fontSize: 14, lineHeight: 'normal', color: 'var(--color-secondary)', marginTop: 12 }}>{screen.caption}</figcaption>
               </figure>
             ))}
           </div>
         </div>
 
+        <p className="font-landing-body cs-caption" style={{ marginTop: 32 }}>
+          Note: These are not production final designs. This is what we accomplished by the end of my internship.
+        </p>
+
         <SolutionBlock
           index={1}
           heading="My Markets"
-          body="My Markets is the first screen analysts see when they log in. Markets are sorted by severity automatically, with color coding surfacing the most critical ones at the top. Revenue, average fare, and passenger counts are visible without opening anything. Junior Analysts do not have to know what critical looks like before they can find it. Senior Analysts read the same list in a compact, scannable format."
+          body="This is the first screen analysts see when they log in. Compact rows are scalable and scannable for large market datasets. Each row shows the market, its status, revenue, average fare, and passenger numbers. Color coding helps you see what needs attention right away. Critical markets rise to the top."
+          userImpact="So Juniors know where to start, and Seniors can scan through quickly."
           image={img('revenue-management-25-IfGhSb.png')}
           imageAlt="My Markets screen"
+          caption="The new My Markets page. Each row shows market, status, revenue, fare, and passengers."
         />
 
         <SolutionBlock
           index={2}
-          heading="AI Embedded and Chat Panel"
-          body={'Research showed Junior Analysts were leaving the platform to use outside AI tools when they got stuck making pricing decisions. Rather than send them elsewhere, we brought that help into the platform. A Get Market Insights button, designed as part of this project, surfaces AI analysis for any market directly on the screen. A chat panel on the right offers suggested prompts for analysts who need more guidance. Senior Analysts have access to the same surfaces when a market calls for a closer look. Market data that previously required manual sourcing is pulled in directly.'}
+          heading="AI Embedded & Chat Panel"
+          body={[
+            "Juniors were already leaving the platform to use outside AI tools. So we brought that help directly into RM.",
+            "We also added a \"Get Market Insights\" button at the top of My Markets. Click it, and it surfaces AI insights about market performance. We also added a chat panel on the right side with suggested prompts you can ask.",
+          ]}
+          userImpact="If you're a Junior, you can use these to get unstuck. If you're a Senior, you can ignore them or close the panel entirely. The help is there if you need it."
           image={img('revenue-management-26-GAa39U.png')}
           imageAlt="AI embedded insights and chat panel"
+          caption="The chat panel slides out from the right. The button sits above the market table. AI help is accessible but not mandatory."
         />
 
         <SolutionBlock
           index={3}
           heading="Market Overview"
-          body="Market Overview is the screen analysts use to understand a single market in depth. It brings together booking trends, showing how seat sales are tracking over time, revenue data, and competitive context in one place. Senior Analysts use this screen constantly to inform their pricing decisions, so the underlying workflow stayed the same. The same AI surfaces from My Markets carry over here. Junior Analysts can now follow the data without having memorized what each field means, because the layout surfaces the most important signals first."
+          body="This is where analysts go to dive deep into a specific market. It shows booking outlooks, revenue trends, and competitive context."
+          userImpact="Senior analysts use this screen all the time. We kept their workflows the same but cleaned up the layout so Juniors could follow the data more easily."
           image={img('revenue-management-27-Hhvw4d.png')}
           imageAlt="Market Overview screen"
+          caption="A detailed view of a single market (MIA-CUN) composed of summary, booking outlook, and forecast."
         />
 
         <SolutionBlock
           index={4}
           heading="Full Chat Screen"
-          body="The side panel handles quick questions. For anything that needs more, analysts can open the full chat screen, which gives AI room to walk through an analysis step by step, surface booking trends, and show forecasting data in full. Junior Analysts open it when a suggested prompt is not enough to understand what is happening in a market. Senior Analysts use it to go deeper on complex markets without pulling information from multiple places."
+          body="The chat panel works for quick questions. But sometimes you need more space to dig into a problem. That's what the full chat screen is for. Here, the AI can show detailed booking trends, share forecasting data, and walk through analysis step by step."
+          userImpact="When a Junior needs a deeper analysis, they can open a dedicated chat screen. Seniors also have access to this support if they want it."
           image={img('revenue-management-28-DIN9ZJ.png')}
           imageAlt="Full AI chat screen"
+          caption="The full chat view is separate from the main workflow."
         />
 
-        {/* Stakeholder Feedback */}
-        <div style={{ marginTop: 86 }}>
-        <Prose>
-          <SubHeading>A disagreement we held and a question we left open</SubHeading>
-          <BodyText>
-            Before shipping, we presented the designs and hit a disagreement we could not resolve.
-          </BodyText>
-        </Prose>
+      </Section>
 
+      {/* ── Impact ── */}
+      <Section id="rm-impact" className="">
+        <SectionHeading index={6} chapter="Impact" heading="" />
+
+        <SubHeading>Stakeholder Feedback</SubHeading>
+        <BodyText>We presented our designs to stakeholders. They liked the direction but wanted AI to be more front and center. Here's what they said, and how we responded.</BodyText>
         <div style={{ marginTop: 16 }}>
           <FeedbackRow
-            feedback="Why not move the AI chat panel to the left? That way the chat drives what analysts see on the right."
-            response="That would make AI feel like the leader of the experience. Seniors would lose the ability to ignore it."
+            feedback="Why don't we move the AI chat panel to the left side? That way, the chat drives what is seen on the right."
+            response="That would make AI feel like the leader. Seniors would lose the ability to ignore it."
           />
           <FeedbackRow
             feedback="What if the first thing they see is a chat prompt?"
-            response="Juniors might benefit. But Seniors would feel forced into a workflow they do not want."
+            response="Juniors might benefit. But Seniors would feel forced into a workflow they don't want."
           />
-        </div>
-
-        <div style={{ marginTop: 16 }}>
-          <BodyText>
-            The disagreement stayed unresolved before the internship ended. Rather than guess at the answer, the right next step was to test it.
-          </BodyText>
-        </div>
         </div>
 
         {/* A/B Testing */}
@@ -1002,55 +1107,75 @@ export default function RevenueManagementPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
             {/* Left: heading + body + question boxes */}
             <div>
-              <h3 className="font-bold text-[var(--color-cs-heading)]" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 1.3, margin: '0 0 8px' }}>
-                What we would have tested
-              </h3>
-              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--color-secondary)', margin: '0 0 16px' }}>
-                We would have run an A/B test against a more chat centered layout to answer one question: did the AI placement we defended actually work for both users?
-              </p>
+              <SubHeading>Questions I would have asked in A/B testing</SubHeading>
+              <BodyText>
+                We didn't get to resolve this before the internship ended. Our next step would have been A/B testing our version against a more chat centered layout. Here's a quick mockup of what that could look like, plus the questions I would have asked users.
+              </BodyText>
 
-              {/* Metrics box */}
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, padding: 16 }}>
-                <h4 style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 16, fontWeight: 600, color: 'var(--color-cs-heading)', margin: '0 0 12px' }}>What I would have measured</h4>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {/* Questions */}
+              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 20, marginBottom: 12 }}>
+                <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', margin: '0 0 12px' }}>Questions I would've asked</p>
+                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {[
-                    'Time to first action after login',
-                    'Whether analysts completed tasks without opening the chat',
-                    'How often the chat panel was opened, used, and closed without returning',
-                    'How often the embedded button was used versus the full chat screen',
-                  ].map(m => (
-                    <li key={m} style={{ fontFamily: 'var(--font-landing-body)', fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', display: 'flex', gap: 8 }}>
-                      <span className="font-bold text-[var(--color-cs-heading)] shrink-0" style={{ fontSize: 16, lineHeight: 1.3 }}>→</span>{m}
+                    'How do you usually figure out where to start?',
+                    'Walk me through how you check your markets today.',
+                    'Did you notice the chat panel? Did you use it?',
+                  ].map(q => (
+                    <li key={q} style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, lineHeight: 'normal', color: '#222225', display: 'flex', gap: 8 }}>
+                      <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>{q}
                     </li>
                   ))}
                 </ul>
               </div>
-              <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--color-secondary)', margin: '16px 0 0' }}>
-                These four would tell us whether the balance held. If Juniors finish tasks without touching the panel, the embedded button is doing its job. If they open the panel frequently, we underexposed it. If Seniors close it immediately every session, the optional placement was right. If neither group uses the embedded button, we buried it.
-              </p>
+
+              {/* Metrics box */}
+              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 20 }}>
+                <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', margin: '0 0 12px' }}>What I would have measured</p>
+                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {[
+                    'Time to first click',
+                    'Number of chat interactions per session',
+                    'Task completion rate without chat',
+                    'How often the chat panel was closed or ignored',
+                  ].map(m => (
+                    <li key={m} style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, lineHeight: 'normal', color: '#222225', display: 'flex', gap: 8 }}>
+                      <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>{m}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             {/* Right: image */}
-            <img src={img('revenue-management-29-3udItG.png')} alt="A/B test mockup — chat-centered layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12 }} />
+            <img src={img('revenue-management-29-3udItG.png')} alt="A/B test mockup — chat-centered layout" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
           </div>
         </div>
       </Section>
 
       {/* ── Reflection ── */}
       <Section id="rm-reflection" className="">
-        <SectionHeading index={5} chapter="Reflection" heading="" />
+        <SectionHeading index={7} chapter="Reflection" heading="" />
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, marginTop: 24 }}>
-          {[
-            { heading: 'Designing for two users at once', body: 'Every time a decision worked for one it had to be checked against the other. The compact rows, the optional panel, keeping Market Overview\'s workflow intact: none of those are neutral choices. They are each a specific answer to the question of what happens to the Senior if we fix this for the Junior. That constraint made every decision harder and more precise.' },
-            { heading: 'Integrating AI thoughtfully', body: 'The core tension was that AI help and user control pull in opposite directions. Every version that gave AI more control made the product faster for a Junior and more disruptive for a Senior. The version that shipped keeps AI available without making it the default.' },
-            { heading: 'Knowing when to hold a position and when to test it', body: 'The stakeholder exchange about the left panel was not a disagreement about aesthetics. It was a disagreement about which user the product was optimizing for. Naming that made it possible to hold the position in the room. Not resolving it by the end of the internship was not a failure. It was an honest acknowledgment that the question deserved data, not a guess.' },
-          ].map(({ heading, body }) => (
-            <div key={heading}>
-              <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px' }}>{heading}</p>
-              <p className="font-landing-body text-[15px] leading-[1.7]" style={{ color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
-            </div>
-          ))}
+        <div className="rm-reflection-grid" style={{ marginTop: 86, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
+          <div>
+            <img src={img('ux-houston-team.webp')} alt="PROS UX Design team" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>PROS UX Design team</p>
+          </div>
+          <div>
+            <SubHeading>Reflecting on RM</SubHeading>
+            <BodyText>
+              Walking away from this project, I'm grateful for the transformative experience I've had at PROS.
+            </BodyText>
+            <BodyText>
+              Through UX strategy for the RM platform, I had the unique opportunity to balance the needs of two different users. Juniors needed guidance to figure out where to start, and Seniors needed to move fast without anything getting in their way.
+            </BodyText>
+            <BodyText>
+              Integrating AI thoughtfully was a transformative experience. Figuring out where AI should live and where it shouldn't was an interesting concept to explore from the user's perspective and to advocate for them by designing meaningfully.
+            </BodyText>
+            <BodyText>
+              I'm grateful to my team at PROS for trusting me with a modernization initiative for a B2B airline platform and for challenging my thinking. This project isn't finished, but I am proud of what we figured out and excited to see how it turns out.
+            </BodyText>
+          </div>
         </div>
       </Section>
 

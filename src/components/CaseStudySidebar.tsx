@@ -48,7 +48,7 @@ export default function CaseStudySidebar() {
         {title && (
           <p
             className="case-study-sidebar-title"
-            style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 18, fontWeight: 600, color: 'var(--color-cs-heading)', margin: '0 0 4px', padding: '0 12px' }}
+            style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 18, fontWeight: 500, color: 'var(--color-cs-heading)', margin: '0 0 4px', padding: '0 12px' }}
           >
             {title}
           </p>

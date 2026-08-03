@@ -6,7 +6,8 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "cwd": "/Users/johannahuarachi/Desktop/Vibe Coded Portfolio",
-      "port": 5173
+      "port": 5177,
+      "autoPort": true
     }
   ]
 }

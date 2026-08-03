@@ -301,7 +301,7 @@ export default function AboutPage() {
               Always happy to talk design, research, or anything in between.
             </p>
             <p className="about-bio-para about-bio-footnote" data-reveal style={{ "--reveal-delay": "360ms" } as React.CSSProperties}>
-              *This portfolio was designed and built entirely in code, React, TypeScript, and Vite.
+              <span style={{ color: 'var(--color-navy)' }}>*</span>This portfolio was designed and built entirely in code, React, TypeScript, and Vite.
             </p>
           </div>
         </div>

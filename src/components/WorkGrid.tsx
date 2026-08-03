@@ -51,7 +51,7 @@ const CASE_STUDIES: CaseStudy[] = [
     lottie: "/videos/Revenue-Management-Video.json",
     href: "/work/revenue-management",
     role: "Product Design Intern",
-    description: "An enterprise airline pricing platform for major airlines. Redesigned the core workflow for new-hire and veteran analysts and handed off to engineering.",
+    description: "Modernized an airline pricing and seat inventory platform for airline analysts.",
     bgColor: "#12213a",
     lottieStartTime: 1.5,
     mediaScale: 1.1,
@@ -75,7 +75,7 @@ const CASE_STUDIES: CaseStudy[] = [
     video: "/videos/Fare-Finder-Video.webm",
     href: "/work/fare-finder",
     role: "Product Design Intern",
-    description: "A flight exploration tool for everyday travelers. Designed the map-based feature for PROS's 130+ airline partners; bookings up 35%.",
+    description: "Designed a map-based flight exploration tool to support everyday travelers.",
     bgColor: "#003854",
     objectFit: "contain",
     mediaPadding: 16,
@@ -101,7 +101,7 @@ const CASE_STUDIES: CaseStudy[] = [
     lottie: "/videos/DNC-Video.json",
     href: "/work/democratic-national-committee",
     role: "Digital Design Intern",
-    description: "Digital design for Biden-Harris and Democratic party initiatives. Turned around 18 same-day assets during an active presidential campaign; posts hit 5,500+ likes.",
+    description: "Created digital assets across social, ads, email, and events to support the Biden-Harris and Democrat campaign.",
     bgColor: "linear-gradient(135deg, #2b3a8f, #1a2358)",
     objectFit: "contain",
     mediaScale: 1.5,
@@ -125,7 +125,7 @@ const CASE_STUDIES: CaseStudy[] = [
     video: "/videos/expert.ai-Video.webm",
     href: "/work/expert-ai",
     role: "Product Design Intern",
-    description: "An AI text analysis platform for enterprise teams. Redesigned filtering for accessibility; task time dropped from 2 min to 30s.",
+    description: "Redesigned the filtering system for an AI text analysis platform to improve usability and accessibility.",
     bgColor: "#c4ecff",
     objectFit: "contain",
     mediaPadding: 16,
@@ -149,7 +149,7 @@ const CASE_STUDIES: CaseStudy[] = [
     video: "/videos/SnapSplit-Video.webm",
     href: "/work/snapsplit",
     role: "Freelance Designer",
-    description: "A bill-splitting app for friend groups. Rebranded and redesigned; cut the core task from 4 min to 30s.",
+    description: "Redesigned the brand and bill-splitting flows to help users split expenses with less friction.",
     bgColor: "#8fd9c4",
     objectFit: "cover",
     aspectRatio: "4/3",
@@ -275,7 +275,7 @@ export default function WorkGrid() {
       <section className="work-grid-section">
         <div className="work-grid-header">
           <h2 ref={headingRef} className="work-grid-heading work-grid-heading--selected reveal">
-            Selected Projects <ArrowBendRightDown className="work-grid-heading-arrow" weight="thin" color="#2A3132" size={32} aria-hidden="true" />
+            Selected Projects <ArrowBendRightDown className="work-grid-heading-arrow" weight="thin" color="#1E4B9A" size={32} aria-hidden="true" />
           </h2>
           <WorkFilter
             allTags={allTags}
