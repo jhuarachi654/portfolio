@@ -282,7 +282,7 @@ export default function DNCPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-          <div style={{ background: 'linear-gradient(135deg, #2b3a8f, #1a2358)', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', padding: 32, border: '1px solid #d1d1d1' }}>
+          <div style={{ background: 'linear-gradient(135deg, #2b3a8f, #1a2358)', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', border: '1px solid #d1d1d1' }}>
             <HeroLottie />
           </div>
         </div>
@@ -319,7 +319,24 @@ export default function DNCPage() {
 
         {/* ── Introduction ── */}
         <Section id="dnc-intro">
-          <SectionHeading index={1} chapter="Overview" heading="" />
+          <div style={{ marginBottom: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>1.</span>
+              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
+                Overview
+              </h2>
+            </div>
+            <div style={{
+              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderBottom: 'none',
+              borderRadius: '12px 12px 0 0',
+              height: 32,
+              width: '100%',
+              marginBottom: 32,
+            }} />
+          </div>
           <SubHeading>Design requests came in daily, the brand was actively changing, and every graphic reaching millions had to pass WCAG accessibility checks — sometimes by end of day.</SubHeading>
 
           <div style={{ marginTop: 32 }}>
@@ -332,14 +349,31 @@ export default function DNCPage() {
 
         {/* ── Process ── */}
         <Section id="dnc-process">
-          <SectionHeading index={2} chapter="Process" heading="" />
+          <div style={{ marginBottom: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>2.</span>
+              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
+                Process
+              </h2>
+            </div>
+            <div style={{
+              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
+              borderBottom: 'none',
+              borderRadius: '12px 12px 0 0',
+              height: 32,
+              width: '100%',
+              marginBottom: 32,
+            }} />
+          </div>
           <SubHeading>Fast-paced workflow with accessibility built in</SubHeading>
           <BodyText>I designed many graphics during my internship. This walkthrough focuses on one project to show my process: a graphic celebrating Vice President Harris's anniversary in office.</BodyText>
           <BodyText>I owned the design decisions from concept to delivery. Choosing layouts, selecting photos, setting typography, checking contrast. I'd present options on Slack, incorporate feedback, and deliver finals. Timelines ranged from same-day to multi-day projects.</BodyText>
           <BodyText>Every design had to pass WCAG accessibility checks. I was implementing new brand guidelines during the Biden-Harris campaign's visual transition. This meant balancing brand consistency with legibility, making judgment calls about photo selection, layout, and contrast ratios for every single asset.</BodyText>
           <BodyText>The work moved fast and reached millions. I'd present options in the morning, receive feedback on Slack, and see the approved design live by afternoon, reaching thousands of engaged users through national Democratic Party digital channels.</BodyText>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>The assignment: create something celebratory and professional while meeting accessibility standards.</SubHeading>
             <BodyText>I started by designing versions with different photos and text layouts. I presented the options on Slack to the design director and communications team.</BodyText>
             <BodyText>Some designs failed accessibility checks. The text didn't have enough contrast against the photos. Other designs passed accessibility but looked too formal. They should have felt celebratory and warm. After trying different options, I found one that worked. Vice President Harris mid-speech, smiling, engaged. It hit all the requirements: on-brand, accessible, and celebratory.</BodyText>
@@ -395,12 +429,12 @@ export default function DNCPage() {
             </div>
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>A same-day milestone graphic for the Vice President</SubHeading>
             <BodyText>The Kamala Harris anniversary post came in same-day. I explored several photo directions before setting aside the flag option, which scored below the WCAG minimum for legible text. The final version passed WCAG AAA and shipped that afternoon.</BodyText>
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <IterationExplorer />
           </div>
         </Section>

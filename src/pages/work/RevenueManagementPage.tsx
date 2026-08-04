@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
 import { Brain, Ghost, BookOpen, MapPin, User, ChartBar, Stack, Bell, Robot, Asterisk, CheckCircle, MinusCircle, CaretLeft, CaretRight, AirplaneTakeoff, Cake, Gear, ChatCircleText, ArrowBendUpRight } from '@phosphor-icons/react'
-import SectionHeading from '../../components/case-study/SectionHeading'
 import ImageFigure from '../../components/case-study/ImageFigure'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
@@ -111,7 +110,7 @@ function PersonaCard({
         <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '0 0 20px' }} />
 
         {/* Needs */}
-        <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, marginBottom: 12 }}>Needs:</p>
+        <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: '0 0 12px' }}>Needs:</p>
         <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
           {needs.map(n => (
             <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
@@ -137,7 +136,7 @@ function SolutionBlock({
 }) {
   const paragraphs = Array.isArray(body) ? body : [body]
   return (
-    <div style={{ marginTop: 86 }}>
+    <div style={{ marginTop: 108 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
         <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 24, fontWeight: 300, color: 'var(--color-navy)' }}>{index}.</span>
         <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
@@ -287,7 +286,7 @@ function MyMarketsExplorer() {
   const goNext = () => { setDirection(1); setActive((active + 1) % total) }
 
   return (
-    <div className="cs-card-box" style={{ padding: 32, marginTop: 86 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 108 }}>
       <div className="rm-my-markets-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'center' }}>
         {/* Left */}
         <div>
@@ -380,7 +379,7 @@ function AIPlacementExplorer() {
   const goNext = () => { setDirection(1); setActive((active + 1) % total) }
 
   return (
-    <div className="cs-card-box" style={{ padding: 32, marginTop: 86 }}>
+    <div className="cs-card-box" style={{ padding: 32, marginTop: 108 }}>
       <div className="rm-ai-assistant-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'center' }}>
         {/* Left: context */}
         <div>
@@ -691,11 +690,11 @@ export default function RevenueManagementPage() {
           }} />
         </div>
 
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 108 }}>
           <PolaroidDeck />
         </div>
 
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 108 }}>
           <SubHeading>Revenue Management Platform @ PROS</SubHeading>
           <BodyText>
             PROS is a B2B software company that builds digital products for commercial airlines and their internal teams. I worked with the UX Strategist, User Researcher, and Project Manager to define the design direction for the Revenue Management Platform (RM) with dual focus to modernize the platform and explore AI integration.
@@ -707,7 +706,7 @@ export default function RevenueManagementPage() {
           </figure>
         </div>
 
-        <div className="rm-intro-grid" style={{ marginTop: 86, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
+        <div className="rm-intro-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
           <Prose>
             <SubHeading>How Covid-19 affected the Airline Industry & RM</SubHeading>
             <BodyText>
@@ -735,7 +734,7 @@ export default function RevenueManagementPage() {
           </figure>
         </div>
 
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 108 }}>
           <ChallengeBanner
             icon={<AirplaneTakeoff size="1em" weight="regular" />}
             iconColor="#416BCC"
@@ -775,7 +774,7 @@ export default function RevenueManagementPage() {
         </div>
 
         {/* TL:DR */}
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 32 }}>
           <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>TL:DR</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
             <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
@@ -790,7 +789,24 @@ export default function RevenueManagementPage() {
 
       {/* ── Research ── */}
       <Section id="rm-research" className="">
-        <SectionHeading index={3} chapter="Research" heading="" />
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>3.</span>
+            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
+              Research
+            </h2>
+          </div>
+          <div style={{
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderBottom: 'none',
+            borderRadius: '12px 12px 0 0',
+            height: 32,
+            width: '100%',
+            marginBottom: 32,
+          }} />
+        </div>
         <SubHeading>Pain Points in the Analyst Experience</SubHeading>
         <Prose>
           <BodyText>
@@ -821,7 +837,7 @@ export default function RevenueManagementPage() {
           Main Pain Points from User Research/Internal Interviews
         </p>
 
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 108 }}>
           <SubHeading>Distinctive Users with Varying Levels of Expertise</SubHeading>
           <BodyText>
             Both the user research and internal interviews revealed that the main users of RM were now composed of Junior and Senior Analysts. I outlined these user personas to align the team and guide our design direction.
@@ -838,7 +854,7 @@ export default function RevenueManagementPage() {
 
         <PersonaGrid className="rm-persona-grid" style={{ marginTop: 32 }} />
 
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 108 }}>
           <SubHeading>Mapping out the Current State</SubHeading>
           <BodyText>
             I mapped out the relationship between users, the platform, and the three pain points. High cognitive load pushed Junior Analysts in two directions. Some left the platform entirely. Others turned to workarounds, relying on Senior Analysts or AI to get by.
@@ -861,7 +877,7 @@ export default function RevenueManagementPage() {
           <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>How the current RM experience affects Senior and Junior Analysts differently</figcaption>
         </figure>
 
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 108 }}>
           <SubHeading>Same Platform, Different Experiences</SubHeading>
           <BodyText>
             I wanted to see exactly where Junior and Senior experiences diverged. That would help me narrow in on where a redesign would have the most impact.
@@ -884,7 +900,7 @@ export default function RevenueManagementPage() {
           <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>A comparative look at how Junior and Senior Analysts move through the same platform differently, highlighting where design opportunities exist.</figcaption>
         </figure>
 
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 108 }}>
           <ChallengeBanner
             icon={<AirplaneTakeoff size="1em" weight="regular" />}
             iconColor="#416BCC"
@@ -897,7 +913,24 @@ export default function RevenueManagementPage() {
 
       {/* ── Development ── */}
       <Section id="rm-development" className="">
-        <SectionHeading index={4} chapter="Development" heading="" />
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>4.</span>
+            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
+              Development
+            </h2>
+          </div>
+          <div style={{
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderBottom: 'none',
+            borderRadius: '12px 12px 0 0',
+            height: 32,
+            width: '100%',
+            marginBottom: 32,
+          }} />
+        </div>
         <SubHeading>Approved Concepts</SubHeading>
         <BodyText>
           After identifying the core pain points, we brainstormed concepts to address them. I suggested starting with My Markets, a core screen where research showed Juniors spent the most time getting lost. The team agreed and suggested adding Market Overview, which Senior analysts commonly use.
@@ -932,7 +965,7 @@ export default function RevenueManagementPage() {
         {/* AI Placement */}
         <AIPlacementExplorer />
 
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 108 }}>
           <SubHeading>AI Assistant: Hybrid Approach</SubHeading>
           <BodyText>
             After bringing the options to design critique sessions with the entire UX design team. We decided to scrap the left panel entirely. It suggested the AI was leading the experience and removed user agency. But no single option felt right on its own.
@@ -976,7 +1009,7 @@ export default function RevenueManagementPage() {
         {/* My Markets layout */}
         <MyMarketsExplorer />
 
-        <div className="rm-starting-point-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', marginTop: 86 }}>
+        <div className="rm-starting-point-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', marginTop: 108 }}>
           {/* Left */}
           <div>
             <SubHeading>My Markets: Compact Cards</SubHeading>
@@ -1006,7 +1039,24 @@ export default function RevenueManagementPage() {
 
       {/* ── Solution ── */}
       <Section id="rm-features" className="">
-        <SectionHeading index={5} chapter="Solution" heading="" />
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>5.</span>
+            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
+              Solution
+            </h2>
+          </div>
+          <div style={{
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderBottom: 'none',
+            borderRadius: '12px 12px 0 0',
+            height: 32,
+            width: '100%',
+            marginBottom: 32,
+          }} />
+        </div>
 
         {/* Solution Overview — all four screens with arrows between them */}
         <div style={{ marginBottom: 32 }}>
@@ -1087,7 +1137,24 @@ export default function RevenueManagementPage() {
 
       {/* ── Impact ── */}
       <Section id="rm-impact" className="">
-        <SectionHeading index={6} chapter="Impact" heading="" />
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>6.</span>
+            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
+              Impact
+            </h2>
+          </div>
+          <div style={{
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderBottom: 'none',
+            borderRadius: '12px 12px 0 0',
+            height: 32,
+            width: '100%',
+            marginBottom: 32,
+          }} />
+        </div>
 
         <SubHeading>Stakeholder Feedback</SubHeading>
         <BodyText>We presented our designs to stakeholders. They liked the direction but wanted AI to be more front and center. Here's what they said, and how we responded.</BodyText>
@@ -1103,7 +1170,7 @@ export default function RevenueManagementPage() {
         </div>
 
         {/* A/B Testing */}
-        <div style={{ marginTop: 86 }}>
+        <div style={{ marginTop: 108 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
             {/* Left: heading + body + question boxes */}
             <div>
@@ -1154,9 +1221,26 @@ export default function RevenueManagementPage() {
 
       {/* ── Reflection ── */}
       <Section id="rm-reflection" className="">
-        <SectionHeading index={7} chapter="Reflection" heading="" />
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>7.</span>
+            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
+              Reflection
+            </h2>
+          </div>
+          <div style={{
+            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
+            borderBottom: 'none',
+            borderRadius: '12px 12px 0 0',
+            height: 32,
+            width: '100%',
+            marginBottom: 32,
+          }} />
+        </div>
 
-        <div className="rm-reflection-grid" style={{ marginTop: 86, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
+        <div className="rm-reflection-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
           <div>
             <img src={img('ux-houston-team.webp')} alt="PROS UX Design team" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
             <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>PROS UX Design team</p>

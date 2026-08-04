@@ -167,7 +167,7 @@ export default function SnapSplitPage() {
         <Section id="ss-intro">
           <ChapterHeading index={1} heading="Problem" />
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>The host was doing everything. Assigning items, chasing people down, managing the whole flow alone. Most users dropped off before finishing.</SubHeading>
           </div>
 
@@ -180,7 +180,7 @@ export default function SnapSplitPage() {
         <Section id="ss-research">
           <ChapterHeading index={2} heading="Research" />
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>Key insights about the bill splitting experience</SubHeading>
             <Prose>
               <BodyText>
@@ -200,7 +200,7 @@ export default function SnapSplitPage() {
         <Section id="ss-development">
           <ChapterHeading index={3} heading="Development" />
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>Stop making one person do all the work. Let people claim their own items. Turn bill splitting into something the group does together.</SubHeading>
             <Prose>
               <BodyText>
@@ -252,7 +252,7 @@ export default function SnapSplitPage() {
         <Section id="ss-reflection">
           <ChapterHeading index={5} heading="Learnings" />
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>The numbers shifted dramatically.</SubHeading>
             <BodyText>
               We tested high-fidelity prototypes with 6 participants, comparing legacy vs. redesigned collaborative flow.
@@ -267,7 +267,7 @@ export default function SnapSplitPage() {
             </div>
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>Key Takeaways</SubHeading>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {[

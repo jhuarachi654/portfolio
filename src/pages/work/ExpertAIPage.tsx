@@ -340,7 +340,7 @@ export default function ExpertAIPage() {
             }} />
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 32 }}>
             <SubHeading>The current state of the filtering system</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', marginBottom: 12 }}>
               Expert.ai helps legal, finance, and government organizations analyze massive amounts of text. Think contracts, court rulings, financial reports, and regulatory filings.
@@ -367,7 +367,7 @@ export default function ExpertAIPage() {
             </figure>
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <ChallengeBanner
               icon={<AirplaneTakeoff size="1em" weight="regular" />}
               iconColor="#416BCC"
@@ -408,7 +408,7 @@ export default function ExpertAIPage() {
           </div>
 
           {/* TL:DR */}
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>TL:DR</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
               <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
@@ -441,7 +441,7 @@ export default function ExpertAIPage() {
             }} />
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 32 }}>
             <SubHeading>What the support tickets showed</SubHeading>
             <Prose>
               <BodyText>
@@ -459,7 +459,7 @@ export default function ExpertAIPage() {
             </p>
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>What users told me</SubHeading>
             <BodyText>
               I talked to 10 enterprise users across legal, finance, and government. What struck me was not just what they said, but how they adapted when the filter component did not meet their needs. One person added extra steps. Another abandoned a feature entirely. A third was not aware that the feature existed.
@@ -499,7 +499,7 @@ export default function ExpertAIPage() {
             </div>
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>Unexpected Find: Accessibility</SubHeading>
             <BodyText>
               Several users also mentioned accessibility issues. The system used red and green to show exclusion and inclusion, which meant colorblind users could not tell them apart. The filtering system also required users to drag elements into inclusion and exclusion areas. For users who could not use a mouse, this was difficult.
@@ -550,7 +550,7 @@ export default function ExpertAIPage() {
           </div>
 
           {/* Technical Constraints — first, per Framer */}
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 32 }}>
             <SubHeading>Technical Constraints</SubHeading>
             <BodyText>
               Although I had the go-ahead from my team to work on accessibility, I had to ensure that my design iterations were feasible with check-ins with the developers on my team and designers as well to ensure that it aligned with the design system. I touched base with both and the following are my takeaways that I brought when iterating the solutions.
@@ -577,11 +577,11 @@ export default function ExpertAIPage() {
           </div>
 
           {/* Accessibility — wireframe tests */}
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <AccessibilityExplorer />
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <ChallengeBanner
               icon={<AirplaneTakeoff size="1em" weight="regular" />}
               iconColor="#416BCC"
@@ -591,7 +591,7 @@ export default function ExpertAIPage() {
           </div>
 
           {/* Revised Solution */}
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 108 }}>
             <SubHeading>Revised Solution</SubHeading>
             <BodyText>
               After the design critique, I went ahead with a more rigorious approach that touched on the painpoints we've uncovered during research.
@@ -625,7 +625,7 @@ export default function ExpertAIPage() {
             </div>
 
             {/* Verifying w/ Design and Technical Teams */}
-            <div style={{ marginTop: 86 }}>
+            <div style={{ marginTop: 108 }}>
               <SubHeading>Verifying w/ Design and Technical Teams</SubHeading>
               <BodyText>
                 Before moving to usability testing, I brought my dropdown panel back to the developers and the Lead Designer for feedback on feasibility and usability.
@@ -736,7 +736,7 @@ export default function ExpertAIPage() {
             }} />
           </div>
 
-          <div style={{ marginTop: 86 }}>
+          <div style={{ marginTop: 32 }}>
             <SubHeading>Usability Testing and Impact</SubHeading>
             <BodyText>
               I ran usability testing with 8 enterprise users across legal, finance, and government. The Lead Designer observed the sessions with me. I asked each user to complete a series of filtering tasks while sharing their screen. I watched for moments of friction, what they clicked, and how long each task took.
@@ -793,7 +793,7 @@ export default function ExpertAIPage() {
             }} />
           </div>
 
-          <div className="ea-takeaways-grid" style={{ marginTop: 86, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
+          <div className="ea-takeaways-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
             <div>
               <img src={img('presentation.webp')} alt="Snippet of my final presentation" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
               <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Snippet of my Final Presentation</p>

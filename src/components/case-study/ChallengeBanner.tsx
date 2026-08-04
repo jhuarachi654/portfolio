@@ -9,7 +9,7 @@ interface ChallengeBannerProps {
 
 export default function ChallengeBanner({ label = 'Challenge', question, icon, iconColor = 'var(--color-cs-heading)' }: ChallengeBannerProps) {
   return (
-    <div className="challenge-banner-wrap" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 'clamp(24px, 4vw, 32px) clamp(20px, 5vw, 48px)', textAlign: 'center', marginTop: 86, marginBottom: 8 }}>
+    <div className="challenge-banner-wrap" style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 12, background: 'transparent', padding: 'clamp(24px, 4vw, 32px) clamp(20px, 5vw, 48px)', textAlign: 'center', marginTop: 108, marginBottom: 8 }}>
       {/* Icon */}
       <div className="challenge-banner-icon" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'center',
