@@ -167,36 +167,6 @@ const CASE_STUDIES: CaseStudy[] = [
     outcome: "Rebrand and redesign that cut the core task from 4 min to 30s",
   },
   {
-    title: "Popple",
-    tags: ["AI", "Solo"],
-    // Popple-Video.webm has real alpha transparency (composited live over the
-    // purple bgColor + bgLottie pattern), but alpha-channel WebM only renders
-    // correctly in Chromium — Safari/Firefox ignore the alpha track entirely
-    // and show a flat opaque frame instead, which reads as a missing/white
-    // background. Popple-Video-composited.mp4 is a screen recording of that
-    // same Chromium-correct composite (phone + purple + pattern, pre-baked
-    // into plain pixels), so it looks identical everywhere with no alpha
-    // dependency at all.
-    image: "/videos/Popple-Video-composited-poster.png",
-    video: "/videos/Popple-Video-composited.mp4",
-    href: "https://popple.pages.dev/",
-    role: "Design Engineer",
-    description: "An app that makes completed tasks tangible and collectible. Designed, built, and shipped solo, end to end.",
-    objectFit: "cover",
-    aspectRatio: "4/3",
-    dotField: false,
-    dotLayout: 2,
-    icon: "/Popple Logo.png",
-    cursorLabel: "Open live site",
-    projectType: "Side Project",
-    status: "Shipped",
-    metrics: [{ stat: "Solo", label: "Designed, built & shipped" }, { stat: "Live", label: "Deployed with Cloudflare R2" }],
-    team: "Solo",
-    timeframe: "2025 – Present",
-    problem: "App that makes completed tasks tangible and collectible",
-    outcome: "Solo: designed, built, and shipped end to end",
-  },
-  {
     title: "Love Lives in SF",
     company: "Love Lives in SF",
     tags: ["Consumer", "Internship"],

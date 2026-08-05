@@ -321,7 +321,7 @@ function ImageCarousel({ src, alt, index, label, onPrev, onNext, height }: { src
           transition={{ duration: 0.3, ease: 'easeOut' }}
           style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}
         >
-          <img src={src} alt={alt} style={{ width: '100%', display: 'block', ...(height ? { height, objectFit: 'contain' as const } : { height: 'auto' }) }} />
+          <img src={src} alt={alt} style={{ width: '100%', display: 'block', borderRadius: 8, ...(height ? { height, objectFit: 'contain' as const } : { height: 'auto' }) }} />
           <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{label}</p>
         </motion.div>
       </div>

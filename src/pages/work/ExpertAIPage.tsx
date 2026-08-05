@@ -192,10 +192,10 @@ function AccessibilityExplorer() {
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}
               >
-                <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 8, marginTop: 8 }}>{opt.label}</p>
                 <div style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
                   <img src={img(opt.image)} alt={opt.label} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
                 </div>
+                <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{opt.label}</p>
                 <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 12 }}>
                   <p className="font-landing-body" style={{ fontSize: 13, color: '#222225', lineHeight: 'normal', margin: 0, display: 'flex', gap: 8, alignItems: 'flex-start' }}>
                     <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 1 }}><CheckCircle size={16} weight="regular" /></span>
