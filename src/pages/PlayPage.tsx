@@ -213,6 +213,23 @@ export default function PlayPage() {
             cursorLabel="Video made in Jitter"
           />
 
+          {/* Love Lives in SF — moved here from the Work grid */}
+          <div style={{ gridColumn: "1 / -1" }}>
+            <CaseStudyCard
+              title="Love Lives in SF"
+              tags={["Consumer", "Internship"]}
+              image="/videos/llsf-Video-poster.png"
+              video="/videos/llsf-Video.webm"
+              href="https://lovelivesinsf.org/"
+              description="Website for SF's public art programming. Designed as the sole designer; traffic grew 35% in the first 30 days."
+              bgColor="#3a3a3a"
+              objectFit="contain"
+              mediaPadding={16}
+              dotLayout={1}
+              cursorLabel="Open live site"
+            />
+          </div>
+
           {/* Koi Pond — full width, opens modal */}
           <div style={{ gridColumn: "1 / -1" }}>
             <div className="case-study-card-wrapper" style={{ cursor: "pointer" }} onClick={() => setModal("koi")}>

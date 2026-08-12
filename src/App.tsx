@@ -15,6 +15,7 @@ import RevenueManagementPage from "./pages/work/RevenueManagementPage";
 import DNCPage from "./pages/work/DNCPage";
 import ExpertAIPage from "./pages/work/ExpertAIPage";
 import SnapSplitPage from "./pages/work/SnapSplitPage";
+import BackStoryPage from "./pages/work/BackStoryPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 
@@ -40,6 +41,7 @@ function AnimatedRoutes() {
         <Route path="/work/democratic-national-committee" element={<DNCPage />} />
         <Route path="/work/expert-ai" element={<ExpertAIPage />} />
         <Route path="/work/snapsplit" element={<SnapSplitPage />} />
+        <Route path="/work/backstory" element={<BackStoryPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

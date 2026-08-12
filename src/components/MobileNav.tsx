@@ -114,7 +114,7 @@ export default function MobileNav() {
               </a>
               <a href="mailto:johanna.s.huarachi@gmail.com" className="mobile-nav-link mobile-nav-link--small">Email</a>
               <a
-                href="https://drive.google.com/file/d/1reWc_7plZVAkf6V6QjjDQ_8NKSNY-2Mx/view?usp=sharing"
+                href="https://drive.google.com/file/d/1wNYUGBOmFI5eHhyiExuZbi1K_-uZcJlt/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={close}
