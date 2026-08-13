@@ -50,7 +50,7 @@ const CASE_STUDIES: CaseStudy[] = [
     video: "/videos/BackStory-Video.webm",
     href: "/work/backstory",
     role: "Interaction Designer",
-    description: "Backstory, a TikTok-native feature that gives users the full context behind a piece of content.",
+    description: "Backstory, a TikTok-native feature to counter misinformation that gives users the full context behind a piece of content.",
     bgColor: "rgba(30,75,154,0.06)",
     dotField: true,
     dotLayout: 0,
