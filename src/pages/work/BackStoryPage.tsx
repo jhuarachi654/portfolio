@@ -451,7 +451,7 @@ export default function BackStoryPage() {
           title="Revenue Management"
           to="/work/revenue-management"
           tags={["Enterprise", "AI", "Internship"]}
-          description="Modernized an airline pricing and seat inventory platform for airline analysts."
+          description="Modernized UI and integrated AI features into an enterprise pricing and seat inventory platform for airline analysts."
           bgColor="#12213a"
         />
       )}
