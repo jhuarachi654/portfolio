@@ -14,7 +14,10 @@ const HERO_GOD_RAYS_GRAIN_OPACITY = 0.52
 
 let godRaysGrainImg: HTMLImageElement | null = null
 function getGodRaysGrainImg(): HTMLImageElement {
-  if (!godRaysGrainImg) {
+  // Recreate if the previous attempt finished but failed (naturalWidth 0) —
+  // otherwise every card render for the rest of the session would keep
+  // reusing the same permanently-broken image.
+  if (!godRaysGrainImg || (godRaysGrainImg.complete && godRaysGrainImg.naturalWidth === 0)) {
     godRaysGrainImg = new Image()
     godRaysGrainImg.src = GOD_RAYS_GRAIN_SVG_URL
   }
@@ -88,7 +91,8 @@ function randomName(used: Set<string>): string {
 // Deterministic whimsical name from a string seed (used to fix old visitor_## names)
 function seededName(seed: string): string {
   let h = 0
-  for (let i = 0; i < seed.length; i++) h = (Math.imul(31, h) + seed.charCodeAt(i)) | 0
+  const s = seed || "visitor"
+  for (let i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0
   const adj = ADJECTIVES[Math.abs(h) % ADJECTIVES.length]
   const noun = NOUNS[Math.abs(h >> 8) % NOUNS.length]
   return `${adj} ${noun}`
@@ -253,13 +257,17 @@ async function renderCard(
       })
     }
     if (!stillCurrent()) return { charW: 0, drawX: 0, drawY: 0, asciiLineH: 0, asciiFS: 0 }
-    const pattern = ctx.createPattern(grainImg, "repeat")!
-    ctx.save()
-    ctx.globalCompositeOperation = "overlay"
-    ctx.globalAlpha = HERO_GOD_RAYS_GRAIN_OPACITY
-    ctx.fillStyle = pattern
-    ctx.fillRect(0, 0, CW, CH)
-    ctx.restore()
+    // A broken image (failed load) throws on createPattern — skip the grain
+    // overlay rather than let one failed asset load blank out the whole card.
+    if (grainImg.naturalWidth > 0) {
+      const pattern = ctx.createPattern(grainImg, "repeat")!
+      ctx.save()
+      ctx.globalCompositeOperation = "overlay"
+      ctx.globalAlpha = HERO_GOD_RAYS_GRAIN_OPACITY
+      ctx.fillStyle = pattern
+      ctx.fillRect(0, 0, CW, CH)
+      ctx.restore()
+    }
 
     // Dark overlay over the gradient only — drawn before any of the white
     // text/ornaments below so it tints the background, not the content.
@@ -977,10 +985,10 @@ export default function DrawPage() {
             apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`,
             "Content-Type": "application/json", Prefer: "return=representation",
           },
-          body: JSON.stringify({ image_url: imageUrl, card_color: cardColor.hex }),
+          body: JSON.stringify({ image_url: imageUrl }),
         })
-        setDrawings(prev => prev.map(d => d.id === editingId ? { ...d, image_url: imageUrl, card_color: cardColor.hex } : d))
-        setShuffled(prev => prev.map(d => d.id === editingId ? { ...d, image_url: imageUrl, card_color: cardColor.hex } : d))
+        setDrawings(prev => prev.map(d => d.id === editingId ? { ...d, image_url: imageUrl } : d))
+        setShuffled(prev => prev.map(d => d.id === editingId ? { ...d, image_url: imageUrl } : d))
         setEditingId(null)
         setModalOpen(false)
       } else {
@@ -991,10 +999,15 @@ export default function DrawPage() {
             apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`,
             "Content-Type": "application/json", Prefer: "return=representation",
           },
-          body: JSON.stringify({ name: randomName(new Set(drawingsRef.current.map(d => d.name))), image_url: imageUrl, card_color: cardColor.hex, position_x: 0, position_y: 0, rotation: 0, visitor_number: myVisitorNumber }),
+          body: JSON.stringify({ name: randomName(new Set(drawingsRef.current.map(d => d.name))), image_url: imageUrl, position_x: 0, position_y: 0, rotation: 0, visitor_number: myVisitorNumber }),
         })
+        if (!res.ok) {
+          console.warn("Post failed — status:", res.status, await res.text())
+          return
+        }
         const saved = await res.json()
         const d: Drawing = Array.isArray(saved) ? saved[0] : saved
+        if (!d?.id) { console.warn("Post failed — no id in response:", saved); return }
         addOwned(d.id)
         setOwnedIds(getOwned())
         setDrawings(prev => [d, ...prev])
