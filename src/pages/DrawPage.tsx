@@ -732,8 +732,6 @@ export default function DrawPage() {
 
   const shuffle = () => setShuffled(prev => [...prev].sort(() => Math.random() - 0.5))
 
-  const LINE_H = LINE_H_CONST
-
   // Synchronous: composite pre-rendered base + current ASCII onto card canvas.
   const renderAsciiOnBase = useCallback(() => {
     const card = cardCanvasRef.current
@@ -794,7 +792,7 @@ export default function DrawPage() {
 
       const off = document.createElement("canvas")
       off.width  = Math.ceil(ASCII_COLS * charW)
-      off.height = Math.ceil(ASCII_ROWS * LINE_H)
+      off.height = Math.ceil(ASCII_ROWS * asciiLineH)
       offscreenRef.current = off
 
       // Load existing drawing when editing
