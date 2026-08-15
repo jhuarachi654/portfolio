@@ -6,7 +6,7 @@ import Footer from "../components/Footer"
 
 const BASE = "/images/about"
 
-const PORTRAIT = { src: `${BASE}/johanna-portrait.png`, alt: "Johanna Huarachi", caption: "(jo-HAN-uh\nwah-RAH-chee)" }
+const PORTRAIT = { src: `${BASE}/johanna-portrait.png`, alt: "Johanna Huarachi", caption: "(jo-HAN-uh wah-RAH-chee)" }
 
 const MOMENTS = [
   { src: `${BASE}/about-13-TPGcKT.jpg`, alt: "At CCA with pennant",       rotate: -1   },
@@ -207,7 +207,7 @@ export default function AboutPage() {
     <div ref={pageRef}>
       <div className="footer-curtain">
       {/* ── Intro ── */}
-      <div className="hero-page">
+      <div className="hero-page about-hero-page">
         {/* ── Left: corkboard ── */}
         <div className="hero-left about-hero-right">
           <div className="about-corkboard">

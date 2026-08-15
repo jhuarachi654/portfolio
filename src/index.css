@@ -1386,6 +1386,35 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
+/* About page — stacked vertically (photo above text) on tablet only.
+   Mobile is already column by default; desktop keeps the row layout. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .about-hero-page.hero-page:not(.hero-page--landing) {
+    flex-direction: column;
+    max-width: 720px;
+    margin: 0 auto;
+    min-height: 0;
+  }
+  .about-hero-page .hero-left {
+    flex-shrink: 1;
+    width: 100%;
+    padding: 64px 20px 0;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  .about-hero-page .hero-right {
+    flex: none;
+    width: 100%;
+    padding: 24px 20px 48px;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  .about-hero-page .hero-name.hero-display-headline {
+    font-size: clamp(32px, 4vw, 44px);
+  }
+}
+
 /* ── Role typewriter ─────────────────────────────────────────────── */
 .hero-role {
   font-style: italic;
@@ -3247,42 +3276,52 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .about-corkboard {
   position: relative;
-  width: 520px;
-  max-width: 100%;
-  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  box-sizing: border-box;
   overflow: visible;
   flex-shrink: 0;
 }
 
-/* Main pile — anchored center of board */
+/* Portrait — fluid width driven by viewport (vw), not the parent's box, so it
+   scales proportionally across breakpoints instead of jumping between fixed
+   sizes. vw is used rather than % because .hero-left has no explicit width
+   at some breakpoints (flex-shrink:0, no basis), which collapses % children. */
 .about-pile-hero-wrap {
-  position: absolute;
-  top: 30px;
-  left: 30px;
+  position: relative;
+  width: clamp(200px, 42vw, 435px);
+}
+
+/* Desktop only — sized to fill ~.75 of the stacked column width (720px max) */
+@media (min-width: 1200px) {
+  .about-pile-hero-wrap {
+    width: clamp(380px, 30vw, 460px);
+  }
 }
 
 .about-clip { font-family: var(--type-body-sm-family); font-size: var(--type-body-sm-size); font-weight: var(--type-body-sm-weight); line-height: var(--type-body-sm-line-height); position: absolute; top: -18px; right: 4px; z-index: 10; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15)); pointer-events: none; }
 
 .about-pile-thumb {
   position: relative;
-  width: 435px;
-  height: 495px;
+  display: block;
+  width: 100%;
   background: none;
   border: none;
   padding: 0;
-  cursor: pointer;
+  cursor: default;
 }
 
 .about-pile-thumb-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 435px;
+  position: relative;
+  width: 100%;
   background: #fff;
   padding: 16px 16px 20px;
   box-shadow: 0 4px 18px rgba(30, 75, 154, 0.14);
   transition: transform 0.3s ease, box-shadow 0.25s ease;
   will-change: transform;
+  box-sizing: border-box;
 }
 
 .about-pile-thumb-card img {
@@ -3293,10 +3332,10 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   display: block;
 }
 
-.about-pile-caption { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: 1.4; display: block; text-align: center; font-style: italic; color: #222225; white-space: pre-line; margin-top: 18px; padding: 8px 16px; box-sizing: border-box; }
+.about-pile-caption { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); display: block; text-align: center; font-style: italic; color: #222225; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 18px; padding: 8px 16px; box-sizing: border-box; }
 
-.about-pile-thumb:hover .about-pile-thumb-card:last-child:not(.is-shuffling) {
-  transform: rotate(0deg) translateY(-12px) scale(1.03) !important;
+.about-pile-thumb:hover .about-pile-thumb-card {
+  transform: translateY(-8px) scale(1.02);
   box-shadow: 0 14px 32px rgba(30, 75, 154, 0.18);
 }
 
@@ -3320,32 +3359,6 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .about-scatter-3 { top: 205px; right: 36px;  transform: rotate(12deg); }
 .about-scatter-4 { bottom: 28px; left: 14px; transform: rotate(-9deg); width: auto; }
 .about-scatter-4 img { width: 110px; height: 110px; }
-
-/* Tablet */
-@media (max-width: 1199px) {
-  .about-corkboard {
-    /* Fixed width, not 100% — the corkboard's visible content
-       (.about-pile-hero-wrap) is position:absolute, so it doesn't
-       contribute to the corkboard's own intrinsic size. A percentage
-       width here resolves against .hero-left, which itself has no
-       explicit width (flex-shrink:0, no basis) at this breakpoint, so
-       the corkboard was collapsing to ~0 width and the absolutely
-       positioned photo pile was spilling out over the text column. */
-    width: 300px;
-    height: 420px;
-  }
-  .about-pile-hero-wrap { top: 35px; left: 30px; }
-  .about-pile-thumb { width: 216px; height: 252px; }
-  .about-pile-thumb-card { width: 216px; padding: 11px 11px 14px; }
-}
-
-/* Mobile */
-@media (max-width: 767px) {
-  .about-corkboard { height: 420px; }
-  .about-pile-hero-wrap { top: 40px; left: 50%; transform: translateX(-50%); }
-  .about-pile-thumb { width: 240px; height: 280px; }
-  .about-pile-thumb-card { width: 240px; padding: 12px 12px 15px; }
-}
 
 @keyframes pile-card-send-back {
   /* slide out to the right */
