@@ -169,7 +169,7 @@ const CASE_STUDIES: CaseStudy[] = [
     video: "/videos/SnapSplit-Video.webm",
     href: "/work/snapsplit",
     role: "Freelance Designer",
-    description: "Redesigned the branding and optimized bill-splitting flows to help users split expenses with less friction at fintech start-up.",
+    description: "Redesigned the branding and optimized bill-splitting flows to help users split with less friction at fintech start-up.",
     bgColor: "#8fd9c4",
     objectFit: "cover",
     aspectRatio: "4/3",
