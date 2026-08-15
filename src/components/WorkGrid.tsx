@@ -95,7 +95,7 @@ const CASE_STUDIES: CaseStudy[] = [
     video: "/videos/Fare-Finder-Video.webm",
     href: "/work/fare-finder",
     role: "Product Design Intern",
-    description: "Re-designed interactions for a map-based flight exploration tool to support everyday travelers explore and book trips seamlessly.",
+    description: "Revised the interactions for a flight map tool so everyday travelers can easily explore and book trips.",
     bgColor: "#003854",
     objectFit: "contain",
     mediaPadding: 16,
