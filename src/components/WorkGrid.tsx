@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { ArrowBendRightDown } from "@phosphor-icons/react"
 import CaseStudyCard from "./CaseStudyCard"
-import WorkFilter from "./WorkFilter"
 import { useScrollReveal } from "../hooks/useScrollReveal"
 
 // ── Shared type ─────────────────────────────────────────────────────
@@ -200,41 +199,9 @@ function useNumCols() {
   return n
 }
 
-function useIsMobile() {
-  const get = () => window.innerWidth < 768
-  const [v, setV] = useState(get)
-  useEffect(() => {
-    const update = () => setV(get())
-    window.addEventListener("resize", update)
-    return () => window.removeEventListener("resize", update)
-  }, [])
-  return v
-}
-
 export default function WorkGrid() {
-  const isMobile = useIsMobile()
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
   const numCols = useNumCols()
   const headingRef = useScrollReveal<HTMLHeadingElement>()
-
-  const FILTER_EXCLUDE = new Set(["Internship", "Solo", "Freelance"])
-  const allTags = useMemo(() => {
-    const count = new Map<string, number>()
-    CASE_STUDIES.forEach(s => s.tags.forEach(t => { if (!FILTER_EXCLUDE.has(t)) count.set(t, (count.get(t) ?? 0) + 1) }))
-    return [...count.entries()].map(([t]) => t).sort()
-  }, [])
-
-  const filtered = useMemo(() =>
-    selectedTags.length === 0
-      ? CASE_STUDIES
-      : CASE_STUDIES.filter(s => selectedTags.some(t => s.tags.includes(t))),
-    [selectedTags]
-  )
-
-  const toggleTag = (tag: string) =>
-    setSelectedTags(prev => prev[0] === tag ? [] : [tag])
-
-  const clearTags = () => setSelectedTags([])
 
   return (
     <>
@@ -243,18 +210,12 @@ export default function WorkGrid() {
           <h2 ref={headingRef} className="work-grid-heading work-grid-heading--selected reveal">
             Selected Projects <ArrowBendRightDown className="work-grid-heading-arrow" weight="thin" color="#1E4B9A" size={32} aria-hidden="true" />
           </h2>
-          <WorkFilter
-            allTags={allTags}
-            selectedTags={selectedTags}
-            onTagToggle={toggleTag}
-            onClearAll={clearTags}
-          />
         </div>
 
         <div className="work-masonry">
-          {filtered.length > 0 ? (() => {
+          {CASE_STUDIES.length > 0 ? (() => {
             const cols: { study: CaseStudy; globalIdx: number }[][] = Array.from({ length: numCols }, () => [])
-            filtered.forEach((s, i) => cols[i % numCols].push({ study: s, globalIdx: i }))
+            CASE_STUDIES.forEach((s, i) => cols[i % numCols].push({ study: s, globalIdx: i }))
             return cols.map((col, ci) => (
               <div key={ci} className="work-masonry-col">
                 {col.map(({ study: s, globalIdx }) => (
@@ -294,12 +255,7 @@ export default function WorkGrid() {
                 ))}
               </div>
             ))
-          })() : (
-            <div className="work-empty">
-              <p>No projects match these filters.</p>
-              <button onClick={clearTags} className="work-empty-reset">Clear filters</button>
-            </div>
-          )}
+          })() : null}
         </div>
       </section>
     </>
