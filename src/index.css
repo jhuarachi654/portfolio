@@ -3247,26 +3247,26 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .about-corkboard {
   position: relative;
-  width: 560px;
+  width: 520px;
   max-width: 100%;
-  height: 640px;
+  height: 600px;
   overflow: visible;
   flex-shrink: 0;
 }
 
-/* Main pile — anchored center-left of board */
+/* Main pile — anchored center of board */
 .about-pile-hero-wrap {
   position: absolute;
-  top: 60px;
-  left: 90px;
+  top: 30px;
+  left: 30px;
 }
 
 .about-clip { font-family: var(--type-body-sm-family); font-size: var(--type-body-sm-size); font-weight: var(--type-body-sm-weight); line-height: var(--type-body-sm-line-height); position: absolute; top: -18px; right: 4px; z-index: 10; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15)); pointer-events: none; }
 
 .about-pile-thumb {
   position: relative;
-  width: 340px;
-  height: 400px;
+  width: 435px;
+  height: 495px;
   background: none;
   border: none;
   padding: 0;
@@ -3277,7 +3277,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   position: absolute;
   top: 0;
   left: 0;
-  width: 340px;
+  width: 435px;
   background: #fff;
   padding: 16px 16px 20px;
   box-shadow: 0 4px 18px rgba(30, 75, 154, 0.14);
@@ -3287,13 +3287,13 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .about-pile-thumb-card img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: top center;
   display: block;
 }
 
-.about-pile-caption { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); display: block; text-align: center; font-style: italic; color: #222225; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 18px; padding: 8px 16px; box-sizing: border-box; }
+.about-pile-caption { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: 1.4; display: block; text-align: center; font-style: italic; color: #222225; white-space: pre-line; margin-top: 18px; padding: 8px 16px; box-sizing: border-box; }
 
 .about-pile-thumb:hover .about-pile-thumb-card:last-child:not(.is-shuffling) {
   transform: rotate(0deg) translateY(-12px) scale(1.03) !important;

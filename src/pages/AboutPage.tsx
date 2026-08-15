@@ -6,13 +6,7 @@ import Footer from "../components/Footer"
 
 const BASE = "/images/about"
 
-// Portrait is index 0 → always starts on top of the pile
-const PILE_PHOTOS = [
-  { src: `${BASE}/about-16-fXGtIR.jpg`, alt: "Johanna Huarachi", caption: "(jo-HAN-uh wah-RAH-chee)" },
-  { src: `${BASE}/about-10-EeeX71.jpg`, alt: "Fall hike in the DMV", caption: "Fall hike in the DMV" },
-  { src: `${BASE}/about-12-nWwB5x.jpg`, alt: "Palace of Fine Arts, SF", caption: "Palace of Fine Arts, SF" },
-  { src: `${BASE}/about-17-QN6Eya.jpg`, alt: "SF at golden hour", caption: "SF at golden hour" },
-]
+const PORTRAIT = { src: `${BASE}/johanna-portrait.png`, alt: "Johanna Huarachi", caption: "(jo-HAN-uh\nwah-RAH-chee)" }
 
 const MOMENTS = [
   { src: `${BASE}/about-13-TPGcKT.jpg`, alt: "At CCA with pennant",       rotate: -1   },
@@ -129,15 +123,9 @@ function PhotoLightbox({ photos, startIdx, onClose }: {
 }
 
 export default function AboutPage() {
-  // topIdx = which photo is currently on top (index into PILE_PHOTOS)
-  const [topIdx, setTopIdx] = useState(0)
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null)
   const [activeTreasureIdx, setActiveTreasureIdx] = useState<number | null>(null)
-  const [shuffling, setShuffling] = useState(false)
-  // z-index starts high (card is in front), drops mid-animation so card passes behind the pile
-  const [shuffleZ, setShuffleZ] = useState(10)
   const pageRef = useRef<HTMLDivElement>(null)
-  const busyRef = useRef(false)
   const rowRef = useRef<HTMLDivElement>(null)
   const dragRef = useRef({ active: false, startX: 0, startScroll: 0 })
   const autoScrollRef = useRef<number>(0)
@@ -215,27 +203,6 @@ export default function AboutPage() {
     }
   }, [])
 
-  const shuffle = () => {
-    if (busyRef.current) return
-    busyRef.current = true
-    setShuffleZ(10)
-    setShuffling(true)
-    // After card peaks right (~32% into 500ms), drop z-index so it tucks behind the pile on the return
-    setTimeout(() => setShuffleZ(0), 165)
-    setTimeout(() => {
-      setTopIdx(i => (i + 1) % PILE_PHOTOS.length)
-      setShuffling(false)
-      busyRef.current = false
-    }, 500)
-  }
-
-  // pile[0]=bottom, pile[1]=middle, pile[2]=top
-  const pile = [
-    (topIdx + 2) % PILE_PHOTOS.length,
-    (topIdx + 1) % PILE_PHOTOS.length,
-    topIdx,
-  ]
-
   return (
     <div ref={pageRef}>
       <div className="footer-curtain">
@@ -245,32 +212,15 @@ export default function AboutPage() {
         <div className="hero-left about-hero-right">
           <div className="about-corkboard">
 
-            {/* Main pile — center of corkboard */}
+            {/* Portrait — center of corkboard */}
             <div className="about-pile-hero-wrap">
               <span className="about-clip" aria-hidden="true" />
-              <button
-                className="about-pile-thumb"
-                onClick={shuffle}
-                aria-label="Shuffle photos"
-                data-cursor-label="Hi, this is me! Click to see more →"
-              >
-                {pile.map((photoIdx, renderIdx) => (
-                  <div
-                    key={renderIdx}
-                    className={`about-pile-thumb-card${renderIdx === 2 && shuffling ? " is-shuffling" : ""}`}
-                    style={{
-                      transform: (renderIdx === 2 && shuffling) ? undefined : `rotate(${PILE_ROTATIONS[renderIdx]}deg)`,
-                      zIndex: renderIdx === 2 && shuffling ? shuffleZ : renderIdx + 1,
-                    }}
-                  >
-                    <img
-                      src={PILE_PHOTOS[photoIdx].src}
-                      alt={photoIdx === 0 ? "Johanna Huarachi" : ""}
-                    />
-                    <span className="about-pile-caption">{PILE_PHOTOS[photoIdx].caption}</span>
-                  </div>
-                ))}
-              </button>
+              <div className="about-pile-thumb">
+                <div className="about-pile-thumb-card" style={{ transform: `rotate(${PILE_ROTATIONS[2]}deg)` }}>
+                  <img src={PORTRAIT.src} alt={PORTRAIT.alt} />
+                  <span className="about-pile-caption">{PORTRAIT.caption}</span>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -283,7 +233,7 @@ export default function AboutPage() {
 
           <div className="about-bio-right">
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "200ms" } as React.CSSProperties}>
-              I'm a product designer with a background most designers don't have.
+              I'm Johanna Huarachi and I'm a product designer with a background most designers don't have.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "240ms" } as React.CSSProperties}>
               At Williams College I studied psychology, neuroscience, and latino
