@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { ArrowBendRightDown } from "@phosphor-icons/react"
 import CaseStudyCard from "./CaseStudyCard"
 import { useScrollReveal } from "../hooks/useScrollReveal"
 
@@ -69,7 +68,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     title: "BackStory",
     company: "BackStory",
-    tags: ["Consumer", "Capstone", "Social Media"],
+    tags: ["Consumer", "Social Media"],
     image: "/videos/BackStory-Video-poster.png",
     video: "/videos/BackStory-Video.webm",
     href: "/work/backstory",
@@ -89,7 +88,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     title: "Fare Finder",
     company: "PROS",
-    tags: ["Enterprise", "Internship"],
+    tags: ["Enterprise", "Visual Design", "Internship"],
     image: "/videos/Fare-Finder-Video-poster.png",
     video: "/videos/Fare-Finder-Video.webm",
     href: "/work/fare-finder",
@@ -138,7 +137,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     title: "Campaign Design",
     company: "Democratic National Committee",
-    tags: ["Consumer", "Internship"],
+    tags: ["Consumer", "Branding", "Internship"],
     image: "/images/featured-work/featured-work-11-hmQDs6.png",
     video: "",
     lottie: "/videos/DNC-Video.json",
@@ -163,7 +162,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     title: "SnapSplit",
     company: "SnapSplit",
-    tags: ["Consumer", "Freelance"],
+    tags: ["Consumer", "Start-Up", "Freelance"],
     image: "/videos/SnapSplit-Video-poster.png",
     video: "/videos/SnapSplit-Video.webm",
     href: "/work/snapsplit",
@@ -208,7 +207,7 @@ export default function WorkGrid() {
       <section className="work-grid-section">
         <div className="work-grid-header">
           <h2 ref={headingRef} className="work-grid-heading work-grid-heading--selected reveal">
-            Selected Projects <ArrowBendRightDown className="work-grid-heading-arrow" weight="thin" color="#1E4B9A" size={32} aria-hidden="true" />
+            Selected Projects
           </h2>
         </div>
 

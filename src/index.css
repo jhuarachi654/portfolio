@@ -203,11 +203,6 @@
   padding: 0;
 }
 
-.hero-page--landing,
-.hero-page--landing * {
-  cursor: none;
-}
-
 html {
   scroll-behavior: auto;
 }
@@ -1091,7 +1086,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 .hero-landing-inner {
   width: 100%;
-  text-shadow: 0 2px 12px rgba(13, 27, 42, 0.18);
+  text-shadow: 0 1px 2px rgba(13, 27, 42, 0.25);
 }
 
 .hero-landing-name { font-family: var(--type-display-family); font-size: var(--type-display-size); font-weight: var(--type-display-weight); line-height: var(--type-display-line-height); color: #ffffff; letter-spacing: 0; }
@@ -3298,6 +3293,18 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 @media (min-width: 1200px) {
   .about-pile-hero-wrap {
     width: clamp(380px, 30vw, 460px);
+  }
+}
+
+/* Mobile — fill most of the viewport width instead of the smaller clamp
+   used at tablet/desktop, and tighten the corkboard's own padding so it
+   doesn't eat into that width. */
+@media (max-width: 767px) {
+  .about-corkboard {
+    padding: 12px;
+  }
+  .about-pile-hero-wrap {
+    width: clamp(260px, 82vw, 400px);
   }
 }
 

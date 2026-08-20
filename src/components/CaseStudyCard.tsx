@@ -89,6 +89,25 @@ export default function CaseStudyCard({
 
   const mediaRef = useRef<HTMLDivElement>(null)
   const inViewPlayingRef = useRef(false)
+  const playTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Matches the [data-reveal] card's own fade/slide-in transition (300ms,
+  // index-staggered up to 240ms) — playback waits for the card to finish
+  // settling into place instead of starting mid-animation, which read as a
+  // jarring "video isn't animated in yet" jump.
+  const revealDelayMs = Math.min((index ?? 0) % 4, 3) * 80
+  const REVEAL_SETTLE_MS = revealDelayMs + 320
+  const clearPlayTimeout = () => {
+    if (playTimeoutRef.current) { clearTimeout(playTimeoutRef.current); playTimeoutRef.current = null }
+  }
+  const playSettled = () => {
+    clearPlayTimeout()
+    playTimeoutRef.current = setTimeout(() => {
+      videoRef.current?.play().catch(() => {})
+      lottieRef.current?.play()
+    }, REVEAL_SETTLE_MS)
+  }
+  useEffect(() => () => clearPlayTimeout(), [])
 
   const [lottieData, setLottieData] = useState<object | null>(null)
   const [bgLottieData, setBgLottieData] = useState<object | null>(null)
@@ -165,8 +184,10 @@ export default function CaseStudyCard({
     if (prefersReducedMotion) return
     const vid = videoRef.current
     if (!vid) return
-    if (forcePlay || inViewPlayingRef.current) {
+    if (forcePlay) {
       vid.play().catch(() => {})
+    } else if (inViewPlayingRef.current) {
+      playSettled()
     } else {
       vid.currentTime = lottieStartTime ?? 0
     }
@@ -185,10 +206,10 @@ export default function CaseStudyCard({
       ([entry]) => {
         if (entry.isIntersecting) {
           inViewPlayingRef.current = true
-          videoRef.current?.play().catch(() => {})
-          lottieRef.current?.play()
+          playSettled()
         } else {
           inViewPlayingRef.current = false
+          clearPlayTimeout()
           const vid = videoRef.current
           if (vid) { vid.pause(); vid.currentTime = 0 }
           if (lottieStartTime != null) lottieRef.current?.goToAndStop(lottieStartTime * 1000, false)

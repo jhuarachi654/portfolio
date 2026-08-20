@@ -30,14 +30,21 @@ void main() {
 }
 `
 
+const RIPPLE_COUNT = 16
+
 const FRAGMENT_SRC = `
 precision highp float;
+
+#define RIPPLE_COUNT ${RIPPLE_COUNT}
 
 uniform vec2 uResolution;
 uniform float uTime;
 uniform vec3 uColors[10];
 uniform float uNoiseScale;
 uniform float uNoiseStrength;
+uniform float uRippleTime[RIPPLE_COUNT];
+uniform vec2 uRipplePos[RIPPLE_COUNT];
+uniform float uRippleAmp[RIPPLE_COUNT];
 
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
 vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -95,22 +102,33 @@ void main() {
   vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
   vec2 p = (uv - 0.5) * aspect;
 
-  vec2 lightPos = vec2(-0.15, -0.05);
-  vec2 toLight = p - lightPos;
-  float angle = atan(toLight.y, toLight.x);
-  float dist = length(toLight);
-
-  // Base angular ray pattern radiating from the light source.
-  float rayPattern = sin(angle * 10.0 + uTime * 0.3) * 0.5 + 0.5;
-  rayPattern = pow(rayPattern, 2.0);
-  float falloff = smoothstep(1.4, 0.0, dist);
-  rayPattern *= falloff;
+  // A trailing wake, like dragging a finger through water — small ripples
+  // are continuously spawned along the cursor's path on the JS side (plus
+  // one bigger "splash" on click), sharing this one ring buffer. Each ripple
+  // is a decaying radial wave that displaces the noise-sampling coordinate,
+  // so the color blobs ring outward from wherever the cursor has been
+  // before settling back — no global pan, no color/brightness change.
+  //
+  // The direction vector is clamped (not divided by the raw distance) so it
+  // stays numerically stable right at each ripple's own center instead of
+  // spinning unstably as rDist approaches zero — that instability was the
+  // source of the earlier "glitchy" flicker.
+  vec2 pRippled = p;
+  for (int i = 0; i < RIPPLE_COUNT; i++) {
+    float age = uTime - uRippleTime[i];
+    if (age >= 0.0 && age < 1.1) {
+      float rDist = length(p - uRipplePos[i]);
+      float wave = sin(rDist * 19.0 - age * 10.5) * exp(-age * 3.7) * exp(-rDist * 3.5);
+      vec2 dir = (p - uRipplePos[i]) / max(rDist, 0.05);
+      pRippled += dir * wave * uRippleAmp[i];
+    }
+  }
 
   // Slow, continuously-morphing domain-warped noise field — big, soft
   // lava-lamp blobs (low frequency), not fine grain. Two independent
   // fields at different scales/offsets, combined so blobs merge and split.
   float t = uTime * 0.014;
-  vec2 noiseCoord = p * (0.11 + uNoiseScale * 0.35);
+  vec2 noiseCoord = pRippled * (0.11 + uNoiseScale * 0.35);
   float fieldA = warpedNoise(noiseCoord, t) * 0.5 + 0.5;
   float fieldB = warpedNoise(noiseCoord * 0.6 + vec2(3.1, -2.4), t * 0.8 + 4.0) * 0.5 + 0.5;
   float field = max(fieldA, fieldB * 0.85);
@@ -205,11 +223,19 @@ export function renderGodRaysFrame(
   const uColors = gl.getUniformLocation(program, "uColors")
   const uNoiseScale = gl.getUniformLocation(program, "uNoiseScale")
   const uNoiseStrength = gl.getUniformLocation(program, "uNoiseStrength")
+  const uRippleTime = gl.getUniformLocation(program, "uRippleTime")
+  const uRipplePos = gl.getUniformLocation(program, "uRipplePos")
+  const uRippleAmp = gl.getUniformLocation(program, "uRippleAmp")
 
   const padded = colors.length >= 10 ? colors.slice(0, 10) : [...colors, ...Array(10 - colors.length).fill(colors[colors.length - 1])]
   gl.uniform3fv(uColors, new Float32Array(padded.flatMap(hexToRgb)))
   gl.uniform1f(uNoiseScale, noiseScale)
   gl.uniform1f(uNoiseStrength, noiseStrength)
+  // Static frame — no interactivity here, so keep every ripple slot
+  // permanently inactive.
+  gl.uniform1fv(uRippleTime, new Float32Array(RIPPLE_COUNT).fill(-999))
+  gl.uniform2fv(uRipplePos, new Float32Array(RIPPLE_COUNT * 2))
+  gl.uniform1fv(uRippleAmp, new Float32Array(RIPPLE_COUNT))
   gl.uniform2f(uResolution, canvas.width, canvas.height)
   gl.uniform1f(uTime, time)
 
@@ -268,6 +294,9 @@ export default function GodRays({
     const uColors = glContext.getUniformLocation(program, "uColors")
     const uNoiseScale = glContext.getUniformLocation(program, "uNoiseScale")
     const uNoiseStrength = glContext.getUniformLocation(program, "uNoiseStrength")
+    const uRippleTime = glContext.getUniformLocation(program, "uRippleTime")
+    const uRipplePos = glContext.getUniformLocation(program, "uRipplePos")
+    const uRippleAmp = glContext.getUniformLocation(program, "uRippleAmp")
 
     const padded = colors.length >= 10 ? colors.slice(0, 10) : [...colors, ...Array(10 - colors.length).fill(colors[colors.length - 1])]
     const flatColors = new Float32Array(padded.flatMap(hexToRgb))
@@ -279,6 +308,74 @@ export default function GodRays({
 
     let rafId = 0
     const startTime = performance.now()
+    let elapsedNow = 0
+
+    // A trailing wake, like a finger dragged through water — a fixed-size
+    // ring buffer of small ripples, continuously re-spawned along the
+    // cursor's path (plus one bigger "splash" on click), all sharing the
+    // same slots so old ones simply get overwritten as new ones spawn.
+    const rippleTimes = new Float32Array(RIPPLE_COUNT).fill(-999)
+    const ripplePositions = new Float32Array(RIPPLE_COUNT * 2)
+    const rippleAmps = new Float32Array(RIPPLE_COUNT)
+    let nextRippleSlot = 0
+    const lastTrailPos = { x: 0, y: 0, has: false }
+    const TRAIL_SPAWN_DIST = 0.045 // in shader p-space units — spaces the trail's ripples along the path
+    const TRAIL_AMP = 0.06
+    const CLICK_AMP = 0.20
+
+    function spawnRipple(x: number, y: number, amp: number) {
+      rippleTimes[nextRippleSlot] = elapsedNow
+      ripplePositions[nextRippleSlot * 2] = x
+      ripplePositions[nextRippleSlot * 2 + 1] = y
+      rippleAmps[nextRippleSlot] = amp
+      nextRippleSlot = (nextRippleSlot + 1) % RIPPLE_COUNT
+    }
+
+    function toShaderSpace(clientX: number, clientY: number) {
+      const rect = canvas!.getBoundingClientRect()
+      const uvx = (clientX - rect.left) / rect.width
+      const uvy = 1 - (clientY - rect.top) / rect.height
+      const aspectX = rect.width / rect.height
+      return { x: (uvx - 0.5) * aspectX, y: uvy - 0.5 }
+    }
+
+    // Listens on window and gates by geometry (is the pointer within the
+    // canvas's own bounding rect?) rather than relying on DOM event bubbling.
+    // The hero text (name/tagline/credentials) is a *sibling* of this
+    // component's wrapper, not a descendant, so clicks landing on or near
+    // that text — a large chunk of the hero — would otherwise never bubble
+    // to a listener attached anywhere inside this component's own subtree.
+    function isOverCanvas(clientX: number, clientY: number) {
+      const rect = canvas!.getBoundingClientRect()
+      return clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom
+    }
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isOverCanvas(e.clientX, e.clientY)) {
+        lastTrailPos.has = false
+        return
+      }
+      const p = toShaderSpace(e.clientX, e.clientY)
+      if (!lastTrailPos.has) {
+        lastTrailPos.x = p.x; lastTrailPos.y = p.y; lastTrailPos.has = true
+        return
+      }
+      const dx = p.x - lastTrailPos.x, dy = p.y - lastTrailPos.y
+      if (Math.hypot(dx, dy) >= TRAIL_SPAWN_DIST) {
+        spawnRipple(p.x, p.y, TRAIL_AMP)
+        lastTrailPos.x = p.x; lastTrailPos.y = p.y
+      }
+    }
+    const onPointerDown = (e: PointerEvent) => {
+      if (!isOverCanvas(e.clientX, e.clientY)) return
+      const p = toShaderSpace(e.clientX, e.clientY)
+      spawnRipple(p.x, p.y, CLICK_AMP)
+    }
+
+    if (!prefersReducedMotion) {
+      window.addEventListener("pointermove", onPointerMove)
+      window.addEventListener("pointerdown", onPointerDown)
+    }
 
     function resize() {
       if (!canvas) return
@@ -294,19 +391,31 @@ export default function GodRays({
     resize()
     window.addEventListener("resize", resize)
 
-    // The render loop only ever touches the uTime uniform — no React
-    // re-renders happen per frame.
     function render(now: number) {
-      const elapsed = prefersReducedMotion ? 0 : ((now - startTime) / 1000) * speed
-      glContext.uniform1f(uTime, elapsed)
+      elapsedNow = prefersReducedMotion ? 0 : ((now - startTime) / 1000) * speed
+      glContext.uniform1f(uTime, elapsedNow)
+      glContext.uniform1fv(uRippleTime, rippleTimes)
+      glContext.uniform2fv(uRipplePos, ripplePositions)
+      glContext.uniform1fv(uRippleAmp, rippleAmps)
+
       glContext.drawArrays(glContext.TRIANGLES, 0, 6)
       if (!prefersReducedMotion) rafId = requestAnimationFrame(render)
     }
     rafId = requestAnimationFrame(render)
+    if (prefersReducedMotion) {
+      // Still needs one draw with every ripple slot inactive.
+      glContext.uniform1fv(uRippleTime, rippleTimes)
+      glContext.uniform2fv(uRipplePos, ripplePositions)
+      glContext.uniform1fv(uRippleAmp, rippleAmps)
+      glContext.uniform1f(uTime, 0)
+      glContext.drawArrays(glContext.TRIANGLES, 0, 6)
+    }
 
     return () => {
       cancelAnimationFrame(rafId)
       window.removeEventListener("resize", resize)
+      window.removeEventListener("pointermove", onPointerMove)
+      window.removeEventListener("pointerdown", onPointerDown)
       glContext.deleteProgram(program)
       glContext.deleteShader(vertexShader)
       glContext.deleteShader(fragmentShader)
@@ -334,8 +443,13 @@ export default function GodRays({
         style={{
           position: "absolute",
           inset: 0,
-          opacity: 0.52,
-          mixBlendMode: "overlay",
+          opacity: 0.65,
+          // "overlay" renders this SVG turbulence noise dramatically more
+          // harshly in Safari than Chrome (a known cross-browser blend-mode
+          // rendering difference) — "soft-light" is far more consistent
+          // across engines and inherently gentler, at the cost of needing a
+          // touch more opacity to read the same in Chrome.
+          mixBlendMode: "soft-light",
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}

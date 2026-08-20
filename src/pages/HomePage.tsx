@@ -21,7 +21,7 @@ export default function HomePage() {
           </p>
 
           <p className="hero-landing-credentials" data-reveal-hero style={{ "--hero-delay": "380ms" } as React.CSSProperties}>
-            Curr. MDes @ CCA &amp; Figma Campus Leader<span className="hero-meta-gap" />Prev. Product Design at DNC &amp; PROS
+            MDes Interaction Design, CCA '26 | Prev. Product Design @ DNC &amp; PROS | Figma Campus Leader
           </p>
         </div>
       </div>

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./components/Layout";
-import CustomCursor from "./components/CustomCursor";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import HomePage from "./pages/HomePage";
 import WorkPage from "./pages/WorkPage";
@@ -54,7 +53,6 @@ export default function App() {
       <Analytics />
       <BrowserRouter>
         <ScrollToTop />
-        <CustomCursor />
         <Layout>
           <AnimatedRoutes />
         </Layout>
