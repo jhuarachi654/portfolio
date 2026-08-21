@@ -1087,8 +1087,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .hero-page--landing {
     height: auto;
     justify-content: flex-start;
-    padding-top: 48px;
-    padding-bottom: 124px;
+    padding-top: 64px;
+    padding-bottom: 148px;
   }
 }
 
@@ -1242,6 +1242,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
   .hero-sticker-text span {
     white-space: normal;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-sticker-inner {
+    filter: none;
   }
 }
 
