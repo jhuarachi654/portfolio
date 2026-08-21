@@ -857,6 +857,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 .footer-dark-copy { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); letter-spacing: normal; text-transform: none; color: #ffffff; margin: 0; }
 
+.footer-dark-note { font-family: var(--type-body-sm-family); font-size: var(--type-body-sm-size); font-weight: var(--type-body-sm-weight); line-height: var(--type-body-sm-line-height); font-style: italic; color: #ffffff; opacity: 0.6; margin: 8px 0 0; }
+
 /* ── Magic sparkle burst ─────────────────────────────────────────── */
 .footer-spark-burst {
   position: absolute;

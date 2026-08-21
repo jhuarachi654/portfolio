@@ -44,6 +44,7 @@ export default function Footer() {
           </p>
           <p className="footer-dark-sub">Open to talk projects, collaborations, or anything design.</p>
           <span className="footer-dark-copy">© 2026 Johanna. Made with grit, thought, and lattes.</span>
+          <p className="footer-dark-note">This portfolio was designed and built entirely in code, React, TypeScript, and Vite.</p>
         </div>
       </div>
 

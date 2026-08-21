@@ -235,30 +235,29 @@ export default function AboutPage() {
           <div className="about-bio-right">
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "200ms" } as React.CSSProperties}>
               I've always been a curious learner, drawn to the social sciences,
-              humanities, and behavioral science. But it was one research paper
-              that made me decide to become a designer. At Williams College, I
-              came across a paper on how adversity builds resilience in
-              first-gen students — and as a first-gen student myself, it
-              struck a real chord.
+              humanities, and behavioral science. But it was one research
+              paper that pushed me to become a designer.
             </p>
-            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "240ms" } as React.CSSProperties}>
-              It also made me sad, knowing that research this important stays
-              locked behind paywalls and jargon, out of reach for the people
-              it's about and need it most. That gap is what led me to
-              interaction design. I wanted to be the bridge.
+            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "230ms" } as React.CSSProperties}>
+              At Williams College, I came across a paper on how adversity
+              builds resilience in first-gen students. As a first-gen student
+              myself, it struck me, and it frustrated me: research this
+              important was locked behind paywalls and jargon, out of reach
+              for the people who needed it most. That gap led me to
+              interaction design. I wanted to be the bridge, bringing that
+              knowledge to the people it's meant for, explained clearly and
+              built with them in mind. That drive brought me to California
+              College of the Arts for my Master's in Interaction Design.
             </p>
-            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "280ms" } as React.CSSProperties}>
-              That drive brought me to California College of the Arts, where I
-              got my Masters in Interaction Design and served as a Figma
-              Campus Leader, building the same kind of bridges on campus that
-              I hoped to build with my work. Now I'm carrying that same
-              mission into my job search: full-time product design roles
-              where I can keep breaking down the barriers between research
-              and the people it's meant to serve, ideally on teams
-              experimenting with new trends and AI tools.
-            </p>
-            <p className="about-bio-para about-bio-footnote" data-reveal style={{ "--reveal-delay": "320ms" } as React.CSSProperties}>
-              <span style={{ color: 'var(--color-navy)' }}>*</span>This portfolio was designed and built entirely in code, React, TypeScript, and Vite.
+            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}>
+              That mission hasn't changed. If anything, it's gotten more
+              urgent. As AI reshapes how knowledge gets produced and used, the
+              gap between what's possible and what's understandable is only
+              widening. I want to be on teams closing that gap, designing the
+              interface between complex systems and the people who need them.
+              That's what I'm looking for now: a full-time product design
+              role where I can keep breaking down the barriers between
+              research and the people it's meant to serve.
             </p>
           </div>
         </div>
