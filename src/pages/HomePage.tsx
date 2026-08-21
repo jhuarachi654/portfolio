@@ -66,11 +66,11 @@ export default function HomePage() {
           </p>
 
           <p className="hero-landing-tagline" data-reveal-hero style={{ "--hero-delay": "260ms" } as React.CSSProperties}>
-            I am a designer whose strength is <em>understanding people</em>, shaped by the humanities, social sciences, and behavioral science into an advocate who <em>designs with intention</em>.
+            I am a designer whose strength is understanding people, shaped by the humanities, social sciences, and behavioral science into an advocate who <em>designs with intention</em>.
           </p>
 
           <p className="hero-landing-credentials" data-reveal-hero style={{ "--hero-delay": "380ms" } as React.CSSProperties}>
-            MDes Interaction Design, CCA | Psych &amp; Neuro, Williams College | Prev. Design @ DNC, PROS &amp; Campus Leader @ Figma
+            MDes Interaction Design, CCA | Psych &amp; Neuro, Williams College | Prev. Design @ DNC, PROS
           </p>
         </div>
 

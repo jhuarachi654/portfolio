@@ -111,15 +111,6 @@
   :root { --page-gutter: 84px; }
 }
 
-@keyframes page-enter {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-.page-transition {
-  animation: page-enter 0.2s ease both;
-}
-
 /* ── Scroll reveal ─────────────────────────────────────────────── */
 @keyframes reveal-up {
   from { opacity: 0; transform: translateY(8px); }
@@ -1102,7 +1093,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   right: 0;
   bottom: 0;
   height: 75%;
-  background: linear-gradient(to bottom, rgba(8,16,40,0) 0%, rgba(8,16,40,0.38) 100%);
+  background: linear-gradient(to bottom, rgba(8,16,40,0) 0%, rgba(8,16,40,0.55) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -1218,7 +1209,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
-.hero-landing-tagline { font-family: var(--type-h2-family); font-size: clamp(20px, 2.2vw, 24px); font-weight: 400; line-height: 1.2; color: #ffffff; max-width: none; white-space: normal; margin-top: 16px; }
+.hero-landing-tagline { font-family: var(--type-h2-family); font-size: clamp(20px, 2.2vw, 24px); font-weight: 400; line-height: 1.2; color: #ffffff; max-width: none; white-space: normal; margin-top: 24px; }
 @media (min-width: 1200px) {
   .hero-landing-tagline {
     max-width: 60%;
@@ -1228,7 +1219,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   font-style: italic;
 }
 
-.hero-landing-credentials { font-family: var(--type-body-lg-family); font-size: var(--type-body-lg-size); font-weight: var(--type-body-lg-weight); line-height: var(--type-body-lg-line-height); color: #ffffff; margin-top: 16px; }
+.hero-landing-credentials { font-family: var(--type-body-lg-family); font-size: var(--type-body-lg-size); font-weight: var(--type-body-lg-weight); line-height: var(--type-body-lg-line-height); color: #ffffff; margin-top: 24px; }
 .hero-meta-gap {
   display: inline-flex;
   align-items: center;
@@ -1436,7 +1427,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
    instead, so this resets it back to normal left-aligned text flow. */
 .about-hero-text {
   align-items: flex-start !important;
-  justify-content: center !important;
+  justify-content: flex-start !important;
   gap: 16px !important;
   overflow: visible !important;
 }
@@ -1488,8 +1479,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
   .hero-left {
     flex-shrink: 0;
-    padding: 96px 0 36px 176px;
-    justify-content: center;
+    padding: 128px 0 36px 176px;
+    justify-content: flex-start;
   }
 
   .hero-name.hero-display-headline > div:first-child {
@@ -1500,8 +1491,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     flex: 1;
     min-width: 0;
     align-items: center;
-    justify-content: center;
-    padding: 96px 176px 0 0;
+    justify-content: flex-start;
+    padding: 128px 176px 0 0;
   }
 }
 

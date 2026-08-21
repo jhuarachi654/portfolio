@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { ShootingStar } from "@phosphor-icons/react"
 
 // Fades + slides the headline in once it scrolls into view. The curtain
@@ -6,9 +6,17 @@ import { ShootingStar } from "@phosphor-icons/react"
 // in index.css) — no JS or scroll-timeline involved in revealing the
 // footer, that's just normal scroll motion passing the section's trailing
 // edge through the corner.
+//
+// Uses a ref rather than a document-wide querySelector: during the
+// page-crossfade transition, the outgoing and incoming page's <Footer>
+// are both briefly mounted, so querySelector(".footer-dark-tagline") could
+// grab the exiting instance instead of this one, mark it visible, then have
+// it unmount — leaving this page's own tagline permanently at opacity 0.
 function useHeadlineReveal() {
+  const ref = useRef<HTMLParagraphElement>(null)
+
   useEffect(() => {
-    const headline = document.querySelector<HTMLElement>(".footer-dark-tagline")
+    const headline = ref.current
     if (!headline) return
 
     const io = new IntersectionObserver(
@@ -19,16 +27,18 @@ function useHeadlineReveal() {
 
     return () => io.disconnect()
   }, [])
+
+  return ref
 }
 
 export default function Footer() {
-  useHeadlineReveal()
+  const taglineRef = useHeadlineReveal()
 
   return (
     <footer className="footer-new footer-dark">
       <div className="footer-dark-body">
         <div className="footer-dark-left">
-          <p className="footer-dark-tagline">
+          <p className="footer-dark-tagline" ref={taglineRef}>
             Thank you for making it all the way here!{" "}
             <ShootingStar size={64} weight="light" className="footer-dark-tagline-icon" />
           </p>
