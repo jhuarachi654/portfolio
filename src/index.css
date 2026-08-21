@@ -1065,7 +1065,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 /* ── Landing hero (restored old-portfolio look) ──────────────────── */
 .hero-page--landing {
-  height: 75vh;
+  height: 80vh;
   min-height: 480px;
   overflow: hidden;
   background: #416BCC;
@@ -1203,7 +1203,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
-.hero-landing-greeting { font-family: var(--type-h2-family); font-size: 42px; font-weight: 600; line-height: var(--type-h2-line-height); color: #ffffff; max-width: 100%; white-space: normal; margin: 0; }
+.hero-landing-greeting { font-family: var(--type-h2-family); font-size: 48px; font-weight: 600; line-height: var(--type-h2-line-height); color: #ffffff; max-width: 100%; white-space: normal; margin: 0; }
 @media (min-width: 1200px) {
   .hero-landing-greeting {
     font-size: 56px;
@@ -1211,7 +1211,13 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 @media (max-width: 480px) {
   .hero-landing-greeting {
-    font-size: 34px;
+    font-size: 48px;
+  }
+  .hero-landing-greeting-hi {
+    display: block;
+  }
+  .hero-landing-greeting-firstname {
+    display: block;
   }
   .hero-landing-greeting-name {
     display: block;
@@ -1253,7 +1259,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
   .hero-landing-credentials {
     max-width: 100%;
-    font-size: 13px;
+    font-size: 12.5px;
   }
   .hero-meta-gap {
     display: block;
