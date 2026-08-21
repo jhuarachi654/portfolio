@@ -87,7 +87,9 @@ export default function MobileNav() {
             </button>
 
             <div className="mobile-nav-links">
-              <a href="/" onClick={handleHome} className="mobile-nav-link">Home</a>
+              {location.pathname !== "/" && (
+                <a href="/" onClick={handleHome} className="mobile-nav-link">Home</a>
+              )}
               <a href="/#featured-work" onClick={handleWorks} className="mobile-nav-link">Works</a>
               {NAV_LINKS.map(({ label, to }) => (
                 <NavLink

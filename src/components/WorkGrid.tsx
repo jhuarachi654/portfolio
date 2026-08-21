@@ -5,6 +5,7 @@ import { useScrollReveal } from "../hooks/useScrollReveal"
 // ── Shared type ─────────────────────────────────────────────────────
 export type CaseStudy = {
   title: string
+  landingTitle?: string
   year?: number
   tags: string[]
   image: string
@@ -42,8 +43,9 @@ export type CaseStudy = {
 const CASE_STUDIES: CaseStudy[] = [
   {
     title: "Revenue Management",
+    landingTitle: "PROS Revenue Management",
     company: "PROS",
-    tags: ["Enterprise", "AI", "Internship"],
+    tags: ["Enterprise", "AI", "Pricing Systems"],
     image: "/images/featured-work/featured-work-pros-rm.png",
     video: "",
     lottie: "/videos/Revenue-Management-Video.json",
@@ -67,8 +69,9 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "BackStory",
+    landingTitle: "BackStory (IDEO Advised)",
     company: "BackStory",
-    tags: ["Consumer", "Social Media"],
+    tags: ["Consumer", "Misinformation", "Social Media"],
     image: "/videos/BackStory-Video-poster.png",
     video: "/videos/BackStory-Video.webm",
     href: "/work/backstory",
@@ -87,8 +90,9 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "Fare Finder",
+    landingTitle: "PROS Fare Finder",
     company: "PROS",
-    tags: ["Enterprise", "Visual Design", "Internship"],
+    tags: ["Enterprise", "Travel", "Booking Flows"],
     image: "/videos/Fare-Finder-Video-poster.png",
     video: "/videos/Fare-Finder-Video.webm",
     href: "/work/fare-finder",
@@ -112,8 +116,9 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "Corpus Platform",
+    landingTitle: "Expert.ai Corpus Filter",
     company: "Expert.ai",
-    tags: ["Enterprise", "Accessibility", "Internship"],
+    tags: ["Enterprise", "Accessibility", "AI Filtering"],
     image: "/videos/expert.ai-Video-poster.png",
     video: "/videos/expert.ai-Video.webm",
     href: "/work/expert-ai",
@@ -136,8 +141,9 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "Campaign Design",
+    landingTitle: "DNC/Biden-Kamala Campaign",
     company: "Democratic National Committee",
-    tags: ["Consumer", "Branding", "Internship"],
+    tags: ["Consumer", "Civic Tech", "Campaign Design"],
     image: "/images/featured-work/featured-work-11-hmQDs6.png",
     video: "",
     lottie: "/videos/DNC-Video.json",
@@ -161,8 +167,9 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "SnapSplit",
+    landingTitle: "SnapSplit Bill Splitting",
     company: "SnapSplit",
-    tags: ["Consumer", "Start-Up", "Freelance"],
+    tags: ["Consumer", "Fintech", "Billing UX"],
     image: "/videos/SnapSplit-Video-poster.png",
     video: "/videos/SnapSplit-Video.webm",
     href: "/work/snapsplit",
@@ -222,6 +229,7 @@ export default function WorkGrid() {
                     key={s.title}
                     index={globalIdx}
                     title={s.title}
+                    landingTitle={s.landingTitle}
                     year={s.year}
                     tags={s.tags}
                     image={s.image}

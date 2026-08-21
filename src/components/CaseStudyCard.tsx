@@ -12,6 +12,7 @@ function getCategory(tags: string[]) {
 export interface CaseStudyCardProps {
   index?: number
   title: string
+  landingTitle?: string
   year?: number
   tags: string[]
   image: string
@@ -49,6 +50,7 @@ export interface CaseStudyCardProps {
 export default function CaseStudyCard({
   index,
   title,
+  landingTitle,
   year,
   tags,
   image,
@@ -311,10 +313,10 @@ export default function CaseStudyCard({
 
       <div className="case-study-card-body">
         <h3 className="case-study-card-title">{title}</h3>
+        {landingTitle && <p className="case-study-card-landing-title">{landingTitle}</p>}
         {description && <p className="case-study-card-description">{description}</p>}
         <div className="case-study-card-tags">
           {tags.filter(t => t !== "Internship" && t !== "Freelance" && t !== "Solo").map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
-          {role && <span className="case-study-card-tag">{role}</span>}
         </div>
       </div>
 

@@ -218,6 +218,7 @@ export default function AboutPage() {
               <div className="about-pile-thumb">
                 <div className="about-pile-thumb-card" style={{ transform: `rotate(${PILE_ROTATIONS[2]}deg)` }}>
                   <img src={PORTRAIT.src} alt={PORTRAIT.alt} />
+                  <span className="about-pile-name">Johanna Huarachi</span>
                   <span className="about-pile-caption">{PORTRAIT.caption}</span>
                 </div>
               </div>
@@ -233,24 +234,30 @@ export default function AboutPage() {
 
           <div className="about-bio-right">
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "200ms" } as React.CSSProperties}>
-              I'm Johanna Huarachi and I'm a product designer with a background most designers don't have.
+              I've always been a curious learner, drawn to the social sciences,
+              humanities, and behavioral science. But it was one research paper
+              that made me decide to become a designer. At Williams College, I
+              came across a paper on how adversity builds resilience in
+              first-gen students — and as a first-gen student myself, it
+              struck a real chord.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "240ms" } as React.CSSProperties}>
-              At Williams College I studied psychology, neuroscience, and latino
-              studies. As a first-generation student, those fields gave me a way of
-              understanding how people think, where systems fail them, and who gets
-              left out. That's the lens I bring to every project.
+              It also made me sad, knowing that research this important stays
+              locked behind paywalls and jargon, out of reach for the people
+              it's about and need it most. That gap is what led me to
+              interaction design. I wanted to be the bridge.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "280ms" } as React.CSSProperties}>
-              Currently finishing my Masters in Interaction Design at California
-              College of the Arts, graduating August 2026. I also serve as a Figma
-              Campus Leader at CCA, hosting events and workshops for the design
-              community on campus.
+              That drive brought me to California College of the Arts, where I
+              got my Masters in Interaction Design and served as a Figma
+              Campus Leader, building the same kind of bridges on campus that
+              I hoped to build with my work. Now I'm carrying that same
+              mission into my job search: full-time product design roles
+              where I can keep breaking down the barriers between research
+              and the people it's meant to serve, ideally on teams
+              experimenting with new trends and AI tools.
             </p>
-            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "320ms" } as React.CSSProperties}>
-              Always happy to talk design, research, or anything in between.
-            </p>
-            <p className="about-bio-para about-bio-footnote" data-reveal style={{ "--reveal-delay": "360ms" } as React.CSSProperties}>
+            <p className="about-bio-para about-bio-footnote" data-reveal style={{ "--reveal-delay": "320ms" } as React.CSSProperties}>
               <span style={{ color: 'var(--color-navy)' }}>*</span>This portfolio was designed and built entirely in code, React, TypeScript, and Vite.
             </p>
           </div>

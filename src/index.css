@@ -1085,13 +1085,145 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .hero-landing-inner {
+  position: relative;
+  z-index: 2;
   width: 100%;
   text-shadow: 0 1px 2px rgba(13, 27, 42, 0.25);
 }
 
-.hero-landing-name { font-family: var(--type-display-family); font-size: var(--type-display-size); font-weight: var(--type-display-weight); line-height: var(--type-display-line-height); color: #ffffff; letter-spacing: 0; }
+/* Dark gradient behind the text (bottom-anchored, since the text block sits
+   low in the hero) — boosts legibility of the white text against the
+   lighter GodRays blobs, without shadowing the letters themselves. Sits
+   above the GodRays canvas but below the text, and stays click-through so
+   it never blocks the water-trail interaction. */
+.hero-landing-bottom-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 75%;
+  background: linear-gradient(to bottom, rgba(8,16,40,0) 0%, rgba(8,16,40,0.38) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
 
-.hero-landing-tagline { font-family: var(--type-h2-family); font-size: var(--type-h2-size); font-weight: var(--type-h2-weight); line-height: var(--type-h2-line-height); color: #ffffff; max-width: none; white-space: nowrap; margin-top: 16px; }
+/* Puffy-flower "sticker" in the empty right side of the hero — a physical,
+   stuck-to-the-page object rather than a UI badge. The flower's own silhouette
+   (8 overlapping petal-lobes, flat and white) is the shape — no separate
+   circle or internal line-art accents — with a resting-paper drop shadow and
+   a slight rotation. */
+.hero-sticker {
+  position: absolute;
+  right: 6%;
+  top: 130px;
+  width: 220px;
+  height: 220px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Rotation (and now drag offset) lives on this inner wrapper, separate from
+   .hero-sticker itself — [data-reveal-hero] (the entrance animation) also
+   sets `transform` on the outer element for its slide-up-and-fade, and
+   since a single element can only have one `transform` value, putting the
+   sticker's own transform there got silently clobbered by the reveal
+   animation's translateY() once it finished.
+
+   Draggable: pointer-events is re-enabled here (the outer .hero-sticker
+   stays none so it never blocks the water-trail GodRays interaction
+   elsewhere). While dragging, no transition — it must track the pointer
+   1:1; on release, a springy transition eases both the position and
+   rotation back to rest. */
+.hero-sticker-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+  transition: transform 550ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 180ms ease;
+  /* Shadow lives on the wrapper, not the masked flower div below — applying
+     filter: drop-shadow() to an element that also has mask-image on it is
+     unreliable across browsers (the shadow can silently fail to paint), so
+     it's hoisted up to a plain element with no mask of its own. */
+  filter: drop-shadow(0 14px 22px rgba(8, 16, 40, 0.22)) drop-shadow(0 2px 6px rgba(8, 16, 40, 0.14));
+}
+
+.hero-sticker-inner.is-dragging {
+  cursor: grabbing;
+  transition: filter 120ms ease;
+  /* Bigger, darker, more lifted shadow while held — reinforces that the
+     sticker has actually been picked up off the page. */
+  filter: drop-shadow(0 22px 24px rgba(8, 16, 40, 0.32)) drop-shadow(0 6px 10px rgba(8, 16, 40, 0.22));
+}
+
+/* Custom puffy-flower asset, masked so it renders pure white at 0.95
+   opacity (the asset itself is off-white) rather than swapping its color. */
+.hero-sticker-flower {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-mask-image: url('/images/hero-sticker-flower.png');
+  mask-image: url('/images/hero-sticker-flower.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: transform 180ms ease;
+}
+
+.hero-sticker-inner.is-dragging .hero-sticker-flower {
+  transform: scale(1.06) translateY(-4px);
+}
+
+.hero-sticker-text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+  max-width: 130px;
+  font-family: var(--font-landing-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.3;
+  color: #2C3E63;
+}
+
+.hero-sticker-text span {
+  white-space: nowrap;
+}
+
+.hero-sticker-text-emph {
+  font-weight: 600;
+}
+
+@media (max-width: 1199px) {
+  .hero-sticker {
+    display: none;
+  }
+}
+
+.hero-landing-greeting { font-family: var(--type-h2-family); font-size: 42px; font-weight: 700; line-height: var(--type-h2-line-height); color: #ffffff; max-width: 100%; white-space: normal; margin: 0; }
+@media (min-width: 1200px) {
+  .hero-landing-greeting {
+    font-size: 56px;
+  }
+}
+
+.hero-landing-tagline { font-family: var(--type-h2-family); font-size: clamp(20px, 2.2vw, 24px); font-weight: 400; line-height: 1.2; color: #ffffff; max-width: none; white-space: normal; margin-top: 16px; }
+@media (min-width: 1200px) {
+  .hero-landing-tagline {
+    max-width: 60%;
+  }
+}
 .hero-landing-tagline em {
   font-style: italic;
 }
@@ -1118,7 +1250,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .hero-landing-tagline {
     white-space: normal;
     max-width: 100%;
-    font-size: 24px;
   }
   .hero-landing-credentials {
     max-width: 100%;
@@ -1343,13 +1474,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     padding: 96px 124px 0 0;
     overflow: visible;
   }
-  /* Same reasoning as the mobile override just above: the H1 token's own
-     clamp is too wide for "Thanks for stopping by [icon]" to fit on one
-     line in the narrower tablet text column, which is squeezed by the
-     fixed-width corkboard. */
-  .about-hero-text .hero-name.hero-display-headline {
-    font-size: clamp(24px, 3.6vw, 32px);
-  }
 }
 
 /* Desktop: side-by-side */
@@ -1364,7 +1488,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
   .hero-left {
     flex-shrink: 0;
-    padding: 28px 0 36px 176px;
+    padding: 96px 0 36px 176px;
     justify-content: center;
   }
 
@@ -1377,7 +1501,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     min-width: 0;
     align-items: center;
     justify-content: center;
-    padding: 0 176px 0 0;
+    padding: 96px 176px 0 0;
   }
 }
 
@@ -1404,9 +1528,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     padding: 24px 20px 48px;
     align-items: flex-start;
     box-sizing: border-box;
-  }
-  .about-hero-page .hero-name.hero-display-headline {
-    font-size: clamp(32px, 4vw, 44px);
   }
 }
 
@@ -1492,6 +1613,20 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   letter-spacing: -0.02em;
   max-width: 640px;
   color: #222225;
+}
+
+/* "Thanks for stopping by" matched to the "Selected Projects" style per
+   explicit request — scoped to About only (extra ancestor classes so it
+   reliably beats the generic breakpoint overrides below, which the 404
+   page's own hero-display-headline still needs). */
+.about-hero-page .about-hero-text .hero-name.hero-display-headline {
+  font-family: var(--type-h2-family);
+  font-weight: var(--type-h2-weight);
+  font-style: normal;
+  font-size: var(--type-h2-size);
+  line-height: var(--type-h2-line-height);
+  letter-spacing: -0.01em;
+  color: #3E4242;
 }
 
 .hero-name.hero-display-headline > div:first-child {
@@ -2608,6 +2743,8 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 [data-theme="dark"] .play-card-grid .case-study-card-title,
 [data-theme="dark"] .next-project-card-wrapper .case-study-card-title { color: #F2F5FA; }
 
+.case-study-card-landing-title { font-family: var(--type-h3-family); font-size: var(--type-h3-size); font-weight: 500; line-height: var(--type-h3-line-height); color: #222225; order: 0; margin: 0 0 4px; }
+
 .case-study-card-company { font-family: var(--type-body-sm-family); font-size: var(--type-body-sm-size); font-weight: 600; line-height: var(--type-body-sm-line-height); order: 1; }
 .case-study-card-description { order: 2; }
 .case-study-card-tags { order: 3; }
@@ -3339,7 +3476,9 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   display: block;
 }
 
-.about-pile-caption { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); display: block; text-align: center; font-style: italic; color: #222225; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 18px; padding: 8px 16px; box-sizing: border-box; }
+.about-pile-name { font-family: var(--type-h3-family); font-size: var(--type-h3-size); font-weight: 500; line-height: var(--type-h3-line-height); display: block; text-align: center; color: #222225; white-space: nowrap; margin-top: 18px; padding: 0 16px; box-sizing: border-box; }
+
+.about-pile-caption { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); display: block; text-align: center; font-style: italic; color: #222225; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 4px; padding: 0 16px 8px; box-sizing: border-box; }
 
 .about-pile-thumb:hover .about-pile-thumb-card {
   transform: translateY(-8px) scale(1.02);
@@ -3388,13 +3527,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 }
 
 /* Section heading — matches landing page heading treatment */
-.about-section-heading { font-family: var(--type-h2-family); font-size: var(--type-h2-size); font-weight: var(--type-h2-weight); line-height: var(--type-h2-line-height); font-style: italic; color: #222225; letter-spacing: -0.01em; }
-
-@media (max-width: 767px) {
-  .about-section-heading {
-    font-size: 32px;
-  }
-}
+.about-section-heading { font-family: var(--type-h2-family); font-size: var(--type-h2-size); font-weight: var(--type-h2-weight); line-height: var(--type-h2-line-height); font-style: normal; color: #3E4242; letter-spacing: -0.01em; }
 
 .about-bio-grid {
   display: grid;
@@ -3855,7 +3988,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 /* shared eyebrow dark mode */
 [data-theme="dark"] .about-eyebrow { color: rgba(168,190,232,0.5); }
 
-.play-headline { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-weight: var(--type-h1-weight); line-height: var(--type-h1-line-height); font-style: italic; letter-spacing: -0.02em; color: #222225; max-width: 640px; margin: 0; }
+.play-headline { font-family: var(--type-h2-family); font-size: var(--type-h2-size); font-weight: var(--type-h2-weight); line-height: var(--type-h2-line-height); font-style: normal; letter-spacing: -0.01em; color: #3E4242; max-width: 640px; margin: 0; }
 
 .play-body { font-family: var(--type-body-lg-family); font-size: var(--type-body-lg-size); font-weight: var(--type-body-lg-weight); line-height: var(--type-body-lg-line-height); color: #222225; max-width: 640px; margin: 16px 0 0; }
 [data-theme="dark"] .play-body { color: rgba(255,255,255,0.75); }
@@ -4146,7 +4279,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .draw-header-left { flex: 1; min-width: 0; }
 
-.draw-headline { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-weight: var(--type-h1-weight); line-height: var(--type-h1-line-height); font-style: italic; letter-spacing: -0.02em; color: var(--color-cs-heading); max-width: 640px; margin: 0; }
+.draw-headline { font-family: var(--type-h2-family); font-size: var(--type-h2-size); font-weight: var(--type-h2-weight); line-height: var(--type-h2-line-height); font-style: normal; letter-spacing: -0.01em; color: #3E4242; max-width: 640px; margin: 0; }
 
 .draw-header-actions {
   display: flex;

@@ -30,9 +30,11 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <nav className="sidebar-pill-nav">
-        <a href="/" onClick={handleHome} className="nav-link">
-          <span>Home</span>
-        </a>
+        {location.pathname !== "/" && (
+          <a href="/" onClick={handleHome} className="nav-link">
+            <span>Home</span>
+          </a>
+        )}
         <a href="/#featured-work" onClick={handleWorks} className="nav-link">
           <span>Works</span>
         </a>
