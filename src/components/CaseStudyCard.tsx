@@ -281,13 +281,14 @@ export default function CaseStudyCard({
             poster={image}
             muted loop playsInline preload="metadata"
             onCanPlay={handleCanPlay}
-            // On a slow connection, the browser paints the poster/video frame
-            // progressively (top rows first), which briefly looks broken —
-            // the bgColor behind it shows through the undecoded portion.
-            // Keeping this invisible until onCanPlay (a fully decoded frame
-            // is ready) means only the clean bgColor placeholder is visible
-            // during that window, never a half-painted image.
-            style={{ objectFit, objectPosition, opacity: isReady ? 1 : 0, transition: "opacity 0.3s ease", ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
+            // The poster is a small, fully-decoded static image — it paints
+            // atomically, unlike a progressively-decoding full-res <img>, so
+            // it's safe (and much better on slow connections) to show it the
+            // instant it's available rather than waiting for onCanPlay. On a
+            // bad connection, onCanPlay can take many seconds to fire, and
+            // gating the poster behind it left the card looking totally
+            // blank that whole time even though a freeze-frame was ready.
+            style={{ objectFit, objectPosition, opacity: 1, transition: "opacity 0.3s ease", ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
           />
         ) : lottie && lottieData ? (
           <Lottie

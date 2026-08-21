@@ -1252,7 +1252,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
   .hero-landing-credentials {
     max-width: 100%;
-    font-size: 12.5px;
+    font-size: 13.5px;
   }
   .hero-meta-gap {
     display: block;
