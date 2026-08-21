@@ -1233,7 +1233,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     bottom: auto;
     width: 96px;
     height: 96px;
-    margin: 0 0 36px;
+    margin: 0 0 8px;
   }
   .hero-sticker-text {
     font-size: 10px;
