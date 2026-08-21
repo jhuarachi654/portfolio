@@ -420,9 +420,10 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   gap: 8px;
 }
 
-.mobile-nav-link { font-family: var(--type-h3-family); font-size: var(--type-h3-size); font-weight: 500; line-height: var(--type-h3-line-height); color: #3E4242; text-decoration: none; }
+.mobile-nav-link { font-family: var(--type-h3-family); font-size: var(--type-h3-size); font-weight: 500; line-height: var(--type-h3-line-height); color: #3E4242; text-decoration: none; align-self: flex-start; border-radius: 8px; padding: 2px 10px; margin: 0 -10px; transition: background-color 0.18s, color 0.18s; }
 .mobile-nav-link.active {
-  color: var(--color-navy);
+  background: #416BCC;
+  color: #ffffff;
 }
 .mobile-nav-link--small { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: #71717B; }
 
@@ -1202,24 +1203,32 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
-.hero-landing-greeting { font-family: var(--type-h2-family); font-size: 42px; font-weight: 700; line-height: var(--type-h2-line-height); color: #ffffff; max-width: 100%; white-space: normal; margin: 0; }
+.hero-landing-greeting { font-family: var(--type-h2-family); font-size: 42px; font-weight: 600; line-height: var(--type-h2-line-height); color: #ffffff; max-width: 100%; white-space: normal; margin: 0; }
 @media (min-width: 1200px) {
   .hero-landing-greeting {
     font-size: 56px;
+  }
+}
+@media (max-width: 480px) {
+  .hero-landing-greeting {
+    font-size: 34px;
+  }
+  .hero-landing-greeting-name {
+    display: block;
   }
 }
 
 .hero-landing-tagline { font-family: var(--type-h2-family); font-size: clamp(20px, 2.2vw, 24px); font-weight: 400; line-height: 1.2; color: #ffffff; max-width: none; white-space: normal; margin-top: 24px; }
 @media (min-width: 1200px) {
   .hero-landing-tagline {
-    max-width: 60%;
+    max-width: 65%;
   }
 }
 .hero-landing-tagline em {
   font-style: italic;
 }
 
-.hero-landing-credentials { font-family: var(--type-body-lg-family); font-size: var(--type-body-lg-size); font-weight: var(--type-body-lg-weight); line-height: var(--type-body-lg-line-height); color: #ffffff; margin-top: 24px; }
+.hero-landing-credentials { font-family: var(--type-body-lg-family); font-size: clamp(13px, 1.1vw, 14.5px); font-weight: var(--type-body-lg-weight); line-height: var(--type-body-lg-line-height); color: #ffffff; margin-top: 24px; }
 .hero-meta-gap {
   display: inline-flex;
   align-items: center;
@@ -1244,7 +1253,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
   .hero-landing-credentials {
     max-width: 100%;
-    font-size: 15px;
+    font-size: 13px;
   }
   .hero-meta-gap {
     display: block;
@@ -1267,7 +1276,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   animation-delay: var(--hero-delay, 0ms);
 }
 @keyframes heroReveal {
-  to { opacity: 1; transform: translateY(0); }
+  to { opacity: var(--hero-reveal-opacity, 1); transform: translateY(0); }
 }
 
 /* Fades the WebGL hero background in alongside the text stagger instead of
@@ -1282,7 +1291,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal-hero] { opacity: 1; transform: none; animation: none; }
+  [data-reveal-hero] { opacity: var(--hero-reveal-opacity, 1); transform: none; animation: none; }
   .hero-godrays-fade { opacity: 1; animation: none; }
 }
 
@@ -1681,7 +1690,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     max-width: 100%;
   }
   .hero-left {
-    padding: 20px 20px 0;
+    padding: 20px 20px 32px;
     min-width: 0;
     width: 100%;
     box-sizing: border-box;
@@ -1904,7 +1913,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 }
 [data-theme="dark"] .mobile-nav-close { color: #E8EFF8; }
 [data-theme="dark"] .mobile-nav-link { color: #E8EFF8; }
-[data-theme="dark"] .mobile-nav-link.active { color: #A8BEE8; }
+[data-theme="dark"] .mobile-nav-link.active { background: #416BCC; color: #ffffff; }
 [data-theme="dark"] .mobile-nav-link--small { color: rgba(232, 239, 248, 0.6); }
 [data-theme="dark"] .mobile-nav-divider { background: rgba(168, 190, 232, 0.15); }
 

@@ -42,8 +42,7 @@ function HeroSticker() {
         <div className="hero-sticker-flower" />
 
         <div className="hero-sticker-text">
-          <span>Open to</span>
-          <span className="hero-sticker-text-emph">full-time</span>
+          <span>Currently seeking</span>
           <span className="hero-sticker-text-emph">design roles</span>
         </div>
       </div>
@@ -62,11 +61,11 @@ export default function HomePage() {
         />
         <div className="hero-landing-inner">
           <p className="hero-landing-greeting" data-reveal-hero style={{ "--hero-delay": "120ms" } as React.CSSProperties}>
-            Hi! I'm Johanna Huarachi.
+            Hi! I'm <span className="hero-landing-greeting-name">Johanna Huarachi.</span>
           </p>
 
           <p className="hero-landing-tagline" data-reveal-hero style={{ "--hero-delay": "260ms" } as React.CSSProperties}>
-            I am a designer whose strength is understanding people, shaped by the humanities, social sciences, and behavioral science into an advocate who <em>designs with intention</em>.
+            I'm a designer with a background in psychology and behavioral science, and I use it to build products people need, understand, and trust.
           </p>
 
           <p className="hero-landing-credentials" data-reveal-hero style={{ "--hero-delay": "380ms" } as React.CSSProperties}>
