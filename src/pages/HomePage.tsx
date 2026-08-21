@@ -65,7 +65,7 @@ export default function HomePage() {
           </p>
 
           <p className="hero-landing-tagline" data-reveal-hero style={{ "--hero-delay": "260ms" } as React.CSSProperties}>
-            I'm a designer with a background in psychology and behavioral science, and I use it to build products people need, understand, and trust.
+            I'm a product designer with a background in interaction design and psychology and I use that lens to create experiences grounded in how people think, decide, and trust.
           </p>
 
           <p className="hero-landing-credentials" data-reveal-hero style={{ "--hero-delay": "380ms" } as React.CSSProperties}>

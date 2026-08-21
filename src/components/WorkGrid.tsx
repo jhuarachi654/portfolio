@@ -6,6 +6,7 @@ import { useScrollReveal } from "../hooks/useScrollReveal"
 export type CaseStudy = {
   title: string
   landingTitle?: string
+  landingLogo?: string
   year?: number
   tags: string[]
   image: string
@@ -43,7 +44,8 @@ export type CaseStudy = {
 const CASE_STUDIES: CaseStudy[] = [
   {
     title: "Revenue Management",
-    landingTitle: "PROS Revenue Management",
+    landingTitle: "Revenue Management",
+    landingLogo: "/images/company-logos/pros.png",
     company: "PROS",
     tags: ["Enterprise", "AI", "Pricing Systems"],
     image: "/images/featured-work/featured-work-pros-rm.png",
@@ -69,7 +71,8 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "BackStory",
-    landingTitle: "BackStory (IDEO Advised)",
+    landingTitle: "BackStory",
+    landingLogo: "/images/company-logos/ideo.png",
     company: "BackStory",
     tags: ["Consumer", "Misinformation", "Social Media"],
     image: "/videos/BackStory-Video-poster.png",
@@ -90,7 +93,8 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "Fare Finder",
-    landingTitle: "PROS Fare Finder",
+    landingTitle: "Fare Finder",
+    landingLogo: "/images/company-logos/pros.png",
     company: "PROS",
     tags: ["Enterprise", "Travel", "Booking Flows"],
     image: "/videos/Fare-Finder-Video-poster.png",
@@ -116,7 +120,8 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "Corpus Platform",
-    landingTitle: "Expert.ai Corpus Filter",
+    landingTitle: "Corpus Filter",
+    landingLogo: "/images/company-logos/expert-ai.png",
     company: "Expert.ai",
     tags: ["Enterprise", "Accessibility", "AI Filtering"],
     image: "/videos/expert.ai-Video-poster.png",
@@ -142,6 +147,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     title: "Campaign Design",
     landingTitle: "DNC/Biden-Kamala Campaign",
+    landingLogo: "/images/company-logos/dnc.png",
     company: "Democratic National Committee",
     tags: ["Consumer", "Civic Tech", "Campaign Design"],
     image: "/images/featured-work/featured-work-11-hmQDs6.png",
@@ -167,7 +173,8 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     title: "SnapSplit",
-    landingTitle: "SnapSplit Bill Splitting",
+    landingTitle: "Bill Splitting",
+    landingLogo: "/images/company-logos/snapsplit.png",
     company: "SnapSplit",
     tags: ["Consumer", "Fintech", "Billing UX"],
     image: "/videos/SnapSplit-Video-poster.png",
@@ -230,6 +237,7 @@ export default function WorkGrid() {
                     index={globalIdx}
                     title={s.title}
                     landingTitle={s.landingTitle}
+                    landingLogo={s.landingLogo}
                     year={s.year}
                     tags={s.tags}
                     image={s.image}
