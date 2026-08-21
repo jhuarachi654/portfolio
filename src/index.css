@@ -1078,6 +1078,20 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   box-sizing: border-box;
 }
 
+/* Mobile/tablet: the centered layout above leaves too much dead space
+   above the text and too little below it once the sticker (a real layout
+   element here, see .hero-sticker override) adds height to the centered
+   group — shift the whole block toward the top instead, so the balance
+   reads better against the curve transition below. */
+@media (max-width: 1199px) {
+  .hero-page--landing {
+    height: auto;
+    justify-content: flex-start;
+    padding-top: 48px;
+    padding-bottom: 124px;
+  }
+}
+
 .hero-landing-inner {
   position: relative;
   z-index: 2;
@@ -1199,9 +1213,35 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   font-weight: 600;
 }
 
+/* Mobile/tablet: taken out of absolute positioning entirely and placed as a
+   real flex item, right-aligned, ahead of the greeting text (order: -1) —
+   instead of floating over the text at a fixed offset. Two absolute-
+   position attempts (top-right, then bottom-right with viewport-height-
+   driven sizing) both broke on some phone height because the hero text is
+   vertically centered and shifts a lot as viewport height changes, so any
+   fixed-offset overlay could collide with it. Being a real layout element
+   means it just pushes the greeting down instead, so it can never overlap
+   regardless of screen size. */
 @media (max-width: 1199px) {
   .hero-sticker {
-    display: none;
+    position: relative;
+    order: -1;
+    align-self: flex-end;
+    flex-shrink: 0;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: 96px;
+    height: 96px;
+    margin: 0 0 36px;
+  }
+  .hero-sticker-text {
+    font-size: 10px;
+    line-height: 1.2;
+    max-width: 74px;
+  }
+  .hero-sticker-text span {
+    white-space: normal;
   }
 }
 
