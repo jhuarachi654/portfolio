@@ -59,7 +59,7 @@ export default function Sidebar() {
           <Envelope size={24} weight="regular" />
         </a>
         <a
-          href="https://drive.google.com/file/d/1wNYUGBOmFI5eHhyiExuZbi1K_-uZcJlt/view?usp=sharing"
+          href="https://rxresu.me/jhuarachi654/huarachi-designer-resume"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Resume"

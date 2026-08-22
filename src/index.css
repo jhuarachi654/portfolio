@@ -2792,7 +2792,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .case-study-card-landing-title-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; order: 0; margin: 0 0 4px; }
 .case-study-card-landing-title { font-family: var(--type-h3-family); font-size: var(--type-h3-size); font-weight: 500; line-height: var(--type-h3-line-height); color: #222225; margin: 0; }
-.case-study-card-landing-logo { height: 42px; width: auto; max-width: 109px; object-fit: contain; flex-shrink: 0; }
+.case-study-card-landing-logo { height: 42px; width: auto; max-width: 109px; object-fit: contain; border-radius: 8px; flex-shrink: 0; }
 
 .case-study-card-company { font-family: var(--type-body-sm-family); font-size: var(--type-body-sm-size); font-weight: 600; line-height: var(--type-body-sm-line-height); order: 1; }
 .case-study-card-description { order: 2; }
