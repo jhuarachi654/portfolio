@@ -234,30 +234,31 @@ export default function AboutPage() {
 
           <div className="about-bio-right">
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "200ms" } as React.CSSProperties}>
-              I've always been a curious learner, drawn to the social sciences,
-              humanities, and behavioral science. But it was one research
-              paper that pushed me to become a designer.
+              I've always been a curious learner, which is probably why I was
+              drawn to the social sciences, humanities, and behavioral
+              science. But it was one research paper that pushed me to
+              become a designer.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "230ms" } as React.CSSProperties}>
-              At Williams College, I came across a paper on how adversity
-              builds resilience in first-gen students. As a first-gen student
-              myself, it struck me, and it frustrated me: research this
-              important was locked behind paywalls and jargon, out of reach
-              for the people who needed it most. That gap led me to
-              interaction design. I wanted to be the bridge, bringing that
-              knowledge to the people it's meant for, explained clearly and
-              built with them in mind. That drive brought me to California
-              College of the Arts for my Master's in Interaction Design.
+              At Williams College, in a Psychology course, I came across a
+              paper on how adversity builds resilience in first-gen
+              students. As a first-gen student myself, it struck me, and it
+              frustrated me: research this important was locked behind
+              paywalls and jargon, invisible to the communities it described
+              and to the designers whose work would shape their lives. That
+              gap led me to interaction design. I wanted to advocate for the
+              populations that research was about, and my background gave me
+              a way to carry that knowledge in. That drive brought me to
+              California College of the Arts for my Master's in Interaction
+              Design.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}>
               That mission hasn't changed. If anything, it's gotten more
-              urgent. As AI reshapes how knowledge gets produced and used, the
-              gap between what's possible and what's understandable is only
-              widening. I want to be on teams closing that gap, designing the
-              interface between complex systems and the people who need them.
-              That's what I'm looking for now: a full-time product design
-              role where I can keep breaking down the barriers between
-              research and the people it's meant to serve.
+              urgent. As AI reshapes how knowledge gets produced and used,
+              the gap between what's possible and who gets represented in
+              those systems is only widening. I want to keep closing that
+              gap, designing the interface between complex systems and the
+              communities who are often left out of them.
             </p>
           </div>
         </div>

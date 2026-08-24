@@ -1079,10 +1079,9 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 /* Mobile/tablet: the centered layout above leaves too much dead space
-   above the text and too little below it once the sticker (a real layout
-   element here, see .hero-sticker override) adds height to the centered
-   group — shift the whole block toward the top instead, so the balance
-   reads better against the curve transition below. */
+   above the text and too little below it — shift the whole block toward
+   the top instead, so the balance reads better against the curve
+   transition below. */
 @media (max-width: 1199px) {
   .hero-page--landing {
     height: auto;
@@ -1113,142 +1112,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   background: linear-gradient(to bottom, rgba(8,16,40,0) 0%, rgba(8,16,40,0.45) 100%);
   pointer-events: none;
   z-index: 1;
-}
-
-/* Puffy-flower "sticker" in the empty right side of the hero — a physical,
-   stuck-to-the-page object rather than a UI badge. The flower's own silhouette
-   (8 overlapping petal-lobes, flat and white) is the shape — no separate
-   circle or internal line-art accents — with a resting-paper drop shadow and
-   a slight rotation. */
-.hero-sticker {
-  position: absolute;
-  right: 6%;
-  top: 130px;
-  width: 220px;
-  height: 220px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Rotation (and now drag offset) lives on this inner wrapper, separate from
-   .hero-sticker itself — [data-reveal-hero] (the entrance animation) also
-   sets `transform` on the outer element for its slide-up-and-fade, and
-   since a single element can only have one `transform` value, putting the
-   sticker's own transform there got silently clobbered by the reveal
-   animation's translateY() once it finished.
-
-   Draggable: pointer-events is re-enabled here (the outer .hero-sticker
-   stays none so it never blocks the water-trail GodRays interaction
-   elsewhere). While dragging, no transition — it must track the pointer
-   1:1; on release, a springy transition eases both the position and
-   rotation back to rest. */
-.hero-sticker-inner {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-  cursor: grab;
-  touch-action: none;
-  transition: transform 550ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 180ms ease;
-  /* Shadow lives on the wrapper, not the masked flower div below — applying
-     filter: drop-shadow() to an element that also has mask-image on it is
-     unreliable across browsers (the shadow can silently fail to paint), so
-     it's hoisted up to a plain element with no mask of its own. */
-  filter: drop-shadow(0 14px 22px rgba(8, 16, 40, 0.22)) drop-shadow(0 2px 6px rgba(8, 16, 40, 0.14));
-}
-
-.hero-sticker-inner.is-dragging {
-  cursor: grabbing;
-  transition: filter 120ms ease;
-  /* Bigger, darker, more lifted shadow while held — reinforces that the
-     sticker has actually been picked up off the page. */
-  filter: drop-shadow(0 22px 24px rgba(8, 16, 40, 0.32)) drop-shadow(0 6px 10px rgba(8, 16, 40, 0.22));
-}
-
-/* Custom puffy-flower asset, masked so it renders pure white at 0.95
-   opacity (the asset itself is off-white) rather than swapping its color. */
-.hero-sticker-flower {
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.95);
-  -webkit-mask-image: url('/images/hero-sticker-flower.png');
-  mask-image: url('/images/hero-sticker-flower.png');
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  transition: transform 180ms ease;
-}
-
-.hero-sticker-inner.is-dragging .hero-sticker-flower {
-  transform: scale(1.06) translateY(-4px);
-}
-
-.hero-sticker-text {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 2px;
-  max-width: 130px;
-  font-family: var(--font-landing-heading);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 1.3;
-  color: #2C3E63;
-}
-
-.hero-sticker-text span {
-  white-space: nowrap;
-}
-
-.hero-sticker-text-emph {
-  font-weight: 600;
-}
-
-/* Mobile/tablet: taken out of absolute positioning entirely and placed as a
-   real flex item, right-aligned, ahead of the greeting text (order: -1) —
-   instead of floating over the text at a fixed offset. Two absolute-
-   position attempts (top-right, then bottom-right with viewport-height-
-   driven sizing) both broke on some phone height because the hero text is
-   vertically centered and shifts a lot as viewport height changes, so any
-   fixed-offset overlay could collide with it. Being a real layout element
-   means it just pushes the greeting down instead, so it can never overlap
-   regardless of screen size. */
-@media (max-width: 1199px) {
-  .hero-sticker {
-    position: relative;
-    order: -1;
-    align-self: flex-end;
-    flex-shrink: 0;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    width: 96px;
-    height: 96px;
-    margin: 0 0 8px;
-  }
-  .hero-sticker-text {
-    font-size: 10px;
-    line-height: 1.2;
-    max-width: 74px;
-  }
-  .hero-sticker-text span {
-    white-space: normal;
-  }
-}
-
-@media (max-width: 767px) {
-  .hero-sticker-inner {
-    filter: none;
-  }
 }
 
 .hero-landing-greeting { font-family: var(--type-h2-family); font-size: 42px; font-weight: 600; line-height: var(--type-h2-line-height); color: #ffffff; max-width: 100%; white-space: normal; margin: 0; }
