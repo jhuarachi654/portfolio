@@ -1078,16 +1078,13 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   box-sizing: border-box;
 }
 
-/* Mobile/tablet: the centered layout above leaves too much dead space
-   above the text and too little below it — shift the whole block toward
-   the top instead, so the balance reads better against the curve
-   transition below. */
 @media (max-width: 1199px) {
   .hero-page--landing {
     height: auto;
-    justify-content: flex-start;
+    min-height: 60vh;
+    justify-content: center;
     padding-top: 64px;
-    padding-bottom: 148px;
+    padding-bottom: 64px;
   }
 }
 
