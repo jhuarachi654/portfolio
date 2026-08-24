@@ -1088,6 +1088,13 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
+@media (max-width: 767px) {
+  .hero-page--landing {
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+}
+
 .hero-landing-inner {
   position: relative;
   z-index: 2;
@@ -1117,9 +1124,9 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     font-size: 56px;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   .hero-landing-greeting {
-    font-size: 42px;
+    font-size: 36px;
     max-width: 100%;
     white-space: normal;
   }

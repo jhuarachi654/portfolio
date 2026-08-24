@@ -13,7 +13,7 @@ export default function HomePage() {
         />
         <div className="hero-landing-inner">
           <p className="hero-landing-greeting" data-reveal-hero style={{ "--hero-delay": "120ms" } as React.CSSProperties}>
-            <span className="hero-landing-greeting-hi">Hi!</span> <span className="hero-landing-greeting-firstname">I'm Johanna</span> <span className="hero-landing-greeting-name">Huarachi.</span>
+            <span className="hero-landing-greeting-hi">Hi! I'm</span> <span className="hero-landing-greeting-firstname">Johanna&nbsp;Huarachi.</span>
           </p>
 
           <p className="hero-landing-tagline" data-reveal-hero style={{ "--hero-delay": "260ms" } as React.CSSProperties}>
