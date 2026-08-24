@@ -244,15 +244,18 @@ export default function AboutPage() {
               paper on how adversity builds resilience in first-gen
               students. As a first-gen student myself, it struck me, and it
               frustrated me: research this important was locked behind
-              paywalls and jargon, invisible to the communities it described
-              and to the designers whose work would shape their lives. That
-              gap led me to interaction design. I wanted to advocate for the
-              populations that research was about, and my background gave me
-              a way to carry that knowledge in. That drive brought me to
-              California College of the Arts for my Master's in Interaction
-              Design.
+              paywalls and jargon, invisible to the communities it
+              described. And, I'd later realize, to the designers whose
+              work would shape their lives.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}>
+              That gap led me to interaction design. I wanted to advocate
+              for the populations that research was about, and my
+              background gave me a way to carry that knowledge in. That
+              drive brought me to California College of the Arts for my
+              Master's in Interaction Design.
+            </p>
+            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "290ms" } as React.CSSProperties}>
               That mission hasn't changed. If anything, it's gotten more
               urgent. As AI reshapes how knowledge gets produced and used,
               the gap between what's possible and who gets represented in
