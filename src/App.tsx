@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Layout from "./components/Layout";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import HomePage from "./pages/HomePage";
+import HomePageSystemUI from "./pages/HomePageSystemUI";
 import WorkPage from "./pages/WorkPage";
 import AboutPage from "./pages/AboutPage";
 import PlayPage from "./pages/PlayPage";
@@ -43,6 +44,7 @@ function AnimatedRoutes() {
       >
         <Routes location={location}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/home-system-ui" element={<HomePageSystemUI />} />
           <Route path="/work" element={<WorkPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/play" element={<PlayPage />} />
