@@ -13,7 +13,6 @@ export interface CaseStudyCardProps {
   index?: number
   title: string
   landingTitle?: string
-  landingLogo?: string
   year?: number
   tags: string[]
   image: string
@@ -52,7 +51,6 @@ export default function CaseStudyCard({
   index,
   title,
   landingTitle,
-  landingLogo,
   year,
   tags,
   image,
@@ -316,12 +314,7 @@ export default function CaseStudyCard({
 
       <div className="case-study-card-body">
         <h3 className="case-study-card-title">{title}</h3>
-        {landingTitle && (
-          <div className="case-study-card-landing-title-row">
-            <p className="case-study-card-landing-title">{landingTitle}</p>
-            {landingLogo && <img src={landingLogo} alt="" className="case-study-card-landing-logo" />}
-          </div>
-        )}
+        {landingTitle && <p className="case-study-card-landing-title">{landingTitle}</p>}
         {description && <p className="case-study-card-description">{description}</p>}
         <div className="case-study-card-tags">
           {tags.filter(t => t !== "Internship" && t !== "Freelance" && t !== "Solo").map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
