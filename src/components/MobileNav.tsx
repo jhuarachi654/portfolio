@@ -13,7 +13,6 @@ export default function MobileNav() {
   const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 1200)
   const navigate = useNavigate()
   const location = useLocation()
-  const isCaseStudy = location.pathname.startsWith("/work/")
 
   useEffect(() => {
     const handler = () => setIsDesktop(window.innerWidth >= 1200)
@@ -67,7 +66,7 @@ export default function MobileNav() {
     <>
       {!open && (
         <button
-          className={`mobile-nav-toggle${isCaseStudy ? " mobile-nav-toggle--dark" : ""}`}
+          className="mobile-nav-toggle mobile-nav-toggle--dark"
           onClick={() => setOpen(true)}
           aria-label="Open menu"
         >
