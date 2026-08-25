@@ -317,7 +317,7 @@ function MyMarketsExplorer() {
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}
               >
-                <div style={{ borderRadius: 8, overflow: 'hidden' }}>
+                <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
                   <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
                 </div>
                 <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{option.title}</p>
@@ -407,7 +407,7 @@ function AIPlacementExplorer() {
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}
               >
-                <div style={{ borderRadius: 8, overflow: 'hidden' }}>
+                <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
                   <img src={option.image} alt={option.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
                 </div>
                 <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{option.title}</p>
