@@ -375,6 +375,15 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   cursor: pointer;
 }
 
+/* Case study pages (mobile): several heroes use light background colors
+   (e.g. Expert.ai's light blue, SnapSplit's light green) that the default
+   white/frosted toggle blends into — swap to a dark pill with a white icon
+   there for reliable contrast regardless of the hero's own color. */
+.mobile-nav-toggle--dark {
+  background: rgba(20, 24, 33, 0.85);
+  color: #ffffff;
+}
+
 .mobile-nav-panel {
   position: fixed;
   top: 16px;
