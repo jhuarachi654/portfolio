@@ -74,6 +74,7 @@ const CASE_STUDIES: CaseStudy[] = [
     tags: ["Consumer", "Misinformation", "Social Media"],
     image: "/videos/BackStory-Video-poster.png",
     video: "/videos/BackStory-Video.webm",
+    lottieStartTime: 4,
     href: "/work/backstory",
     role: "Interaction Designer",
     description: "Backstory, a TikTok-native feature to counter misinformation that gives users the full context behind a piece of content.",
