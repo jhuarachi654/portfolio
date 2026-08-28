@@ -1106,9 +1106,38 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
+/* Isolation group for the hero text + fish — mirrors .hero-page--landing's
+   own padding exactly, since this sits absolutely positioned (inset: 0)
+   inside it purely to give mix-blend-mode a stacking-context boundary that
+   excludes the GodRays background (see PixelFish/FishSwimmer usage). */
+.hero-landing-blend-group {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  isolation: isolate;
+  padding: 180px var(--page-gutter) 200px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1199px) {
+  .hero-landing-blend-group {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-landing-blend-group {
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+}
+
 .hero-landing-inner {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   width: 100%;
   text-shadow: 0 1px 2px rgba(13, 27, 42, 0.25);
 }
@@ -1133,6 +1162,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (min-width: 1200px) {
   .hero-landing-greeting {
     font-size: 56px;
+    max-width: 75%;
   }
 }
 @media (max-width: 767px) {
@@ -1153,7 +1183,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   font-style: italic;
 }
 
-.hero-landing-credentials { font-family: var(--type-body-lg-family); font-size: clamp(13px, 1.1vw, 14.5px); font-weight: var(--type-body-lg-weight); line-height: var(--type-body-lg-line-height); color: #ffffff; margin-top: 24px; }
+.hero-landing-credentials { position: relative; z-index: 4; font-family: var(--type-body-family); font-size: 15px; font-weight: 500; line-height: var(--type-body-line-height); color: #ffffff; opacity: 1; margin-top: 24px; text-shadow: none; }
 .hero-meta-gap {
   display: inline-flex;
   align-items: center;
@@ -1218,6 +1248,108 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (prefers-reduced-motion: reduce) {
   [data-reveal-hero] { opacity: var(--hero-reveal-opacity, 1); transform: none; animation: none; }
   .hero-godrays-fade { opacity: 1; animation: none; }
+}
+
+/* Thought bubble for star facts — cloud-rounded body with two shrinking
+   trailing circles (classic "thought bubble" tail) instead of the fish
+   bubble's speech-triangle tail. Phase (entering/typing/holding/dissolving)
+   is driven from HomePage.tsx via the is-visible / is-dissolving classes,
+   since the typed-text reveal needs JS timing, not just a CSS animation. */
+.hero-star-bubble {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, calc(-100% - 34px)) scale(0.92);
+  max-width: min(260px, 70vw);
+  background: #ffffff;
+  color: #1E293B;
+  font-family: var(--type-body-family);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: 20px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 24px rgba(8, 16, 40, 0.25);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1), transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-star-bubble.is-visible {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 34px)) scale(1);
+}
+.hero-star-bubble.is-dissolving {
+  opacity: 0;
+  transform: translate(-50%, calc(-100% - 44px)) scale(0.94);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+.hero-star-bubble::before,
+.hero-star-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  background: #ffffff;
+  border-radius: 50%;
+}
+.hero-star-bubble::before {
+  width: 11px;
+  height: 11px;
+  bottom: -15px;
+  transform: translateX(-65%);
+}
+.hero-star-bubble::after {
+  width: 5px;
+  height: 5px;
+  bottom: -23px;
+  transform: translateX(-115%);
+}
+.hero-star-bubble-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  background: currentColor;
+  vertical-align: text-bottom;
+  animation: starBubbleCursorBlink 800ms steps(1) infinite;
+}
+@keyframes starBubbleCursorBlink {
+  50% { opacity: 0; }
+}
+
+/* Bottom-right hint, shown only while at least one star is out — nudges
+   the user to click it. Text is typed in character-by-character from
+   HomePage.tsx (see hintRevealed), matching the star bubble's own
+   typewriter reveal. */
+.hero-star-hint {
+  position: absolute;
+  z-index: 10;
+  right: 24px;
+  /* Clear of the "Selected Projects" panel below, which scroll-covers up
+     to 56px (96px at desktop) into the hero — see .featured-work-curve. */
+  bottom: 90px;
+  margin: 0;
+  font-family: var(--type-body-family);
+  font-size: 15px;
+  font-weight: 500;
+  font-style: italic;
+  color: #ffffff;
+  opacity: 1;
+  pointer-events: none;
+  white-space: nowrap;
+}
+@media (min-width: 1200px) {
+  .hero-star-hint {
+    bottom: 130px;
+  }
+}
+@media (max-width: 767px) {
+  .hero-star-hint {
+    right: 16px;
+    bottom: 70px;
+    font-size: 11px;
+    white-space: normal;
+    max-width: 60%;
+    text-align: right;
+  }
 }
 
 /* ── Cover transition out of the hero into the section below ──────
@@ -2062,7 +2194,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .work-masonry {
   display: flex;
-  gap: 32px;
+  gap: 48px;
   align-items: flex-start;
   min-width: 0;
 }
@@ -2486,7 +2618,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .case-study-card-media.aspect-4-3,
 .case-study-card-media.aspect-3-4,
 .case-study-card-media.aspect-1-1 {
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/9;
 }
 @media (max-width: 767px) {
   .case-study-card-wrapper {
@@ -2496,7 +2628,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   .case-study-card-media.aspect-4-3,
   .case-study-card-media.aspect-3-4,
   .case-study-card-media.aspect-1-1 {
-    aspect-ratio: 4/3;
+    aspect-ratio: 16/9;
   }
 }
 
@@ -2506,7 +2638,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   width: 100%;
   overflow: hidden;
   background: rgba(30, 75, 154, 0.04);
-  border: 1px solid rgba(30, 75, 154, 0.45);
+  border: 1px solid rgba(30, 75, 154, 0.2);
   border-radius: 8px;
   /* Explicit centering (not just child width/height:100%) so object-fit:
      contain media with its own padding (mediaPadding) can't end up
@@ -4549,6 +4681,12 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   /* Exception: 3 visuals with their own heading + image + verdict line —
      a 2-up grid reads better than one long single column here too. */
   .cs-page .rm-ai-verdict-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Exception: DNC Solution Preview — 4 campaign graphics, keep as a 2x2
+     grid on mobile too rather than collapsing to one long column. */
+  .cs-page .dnc-solution-preview-grid[style*="grid-template-columns"] {
     grid-template-columns: 1fr 1fr !important;
   }
 

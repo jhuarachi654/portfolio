@@ -234,7 +234,7 @@ function HeroLottie() {
           loop
           autoplay
           rendererSettings={{ preserveAspectRatio: 'xMidYMid meet' }}
-          style={{ width: '100%', height: '100%', display: 'block', transform: 'scale(1.5)' }}
+          style={{ width: '100%', height: '100%', display: 'block', transform: 'scale(1.2)' }}
         />
       )}
       {data && <PlayPauseButton playing={playing} onToggle={handleToggle} />}

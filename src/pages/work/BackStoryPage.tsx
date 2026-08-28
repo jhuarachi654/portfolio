@@ -184,7 +184,7 @@ export default function BackStoryPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-          <div style={{ background: 'rgba(var(--color-navy-rgb),0.06)', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
+          <div style={{ background: 'rgba(var(--color-navy-rgb),0.06)', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.1)' }}>
             <HeroVideo />
           </div>
         </div>
@@ -195,18 +195,18 @@ export default function BackStoryPage() {
               BackStory
             </h1>
             <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
-              TikTok is where young people learn about the world and where misinformation spreads faster than anyone can verify it. For my MDes capstone at CCA, my team and I designed Backstory, a TikTok-native feature that gives users the full context behind a piece of content: community notes, verified third-party sources, and the ability to contribute their own voice, without ever leaving the app.
+              TikTok is where young people learn about the world and where misinformation spreads faster than anyone can verify it. For my MDes capstone at CCA, my team and I designed Backstory, a TikTok-native feature that gives users the full context behind a piece of content: community notes, verified third-party sources, and the ability to contribute their own voice.
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'Interaction Designer' },
                 { label: 'Timeline', value: 'Jan – Jun 2026' },
-                { label: 'Team',     value: 'Johanna Huarachi, Kyle Samonte, Mai Kao, Mackenzie Hart' },
+                { label: 'Team',     value: 'Johanna Huarachi, Kyle Samonte, Mai Kao, Mackenzie Hart\nAdvisors (IDEO)' },
                 { label: 'Skills',   value: 'Research, Prototyping, Interaction Design, Usability Testing, AI-Assisted Design' },
               ].map(({ label, value }) => (
                 <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
                   <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
-                  <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', margin: 0, lineHeight: 'normal' }}>{value}</p>
+                  <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', margin: 0, lineHeight: 'normal', whiteSpace: 'pre-line' }}>{value}</p>
                 </div>
               ))}
             </div>

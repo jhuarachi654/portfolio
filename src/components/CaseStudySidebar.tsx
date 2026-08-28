@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useToc } from '../contexts/CaseStudyTocContext'
 
 export default function CaseStudySidebar() {
-  const { sections, title } = useToc()
+  const { sections } = useToc()
   const [activeId, setActiveId] = useState<string>('')
 
   useEffect(() => {
@@ -45,14 +45,6 @@ export default function CaseStudySidebar() {
 
       {/* ── Middle: table of contents ── */}
       <nav className="flex-1 flex flex-col gap-4">
-        {title && (
-          <p
-            className="case-study-sidebar-title"
-            style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 18, fontWeight: 500, color: 'var(--color-cs-heading)', margin: '0 0 4px', padding: '0 12px' }}
-          >
-            {title}
-          </p>
-        )}
         <ul className="case-study-toc-list flex flex-col gap-1 list-none m-0 p-0">
           {sections.map(({ id, label }, i) => {
             const isActive = activeId === id

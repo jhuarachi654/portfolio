@@ -17,11 +17,7 @@ export default function HomePageSystemUI() {
         />
         <div className="hero-landing-inner">
           <p className="hero-landing-greeting" data-reveal-hero style={{ "--hero-delay": "120ms" } as React.CSSProperties}>
-            <span className="hero-landing-greeting-hi">Hi! I'm</span> <span className="hero-landing-greeting-firstname">Johanna&nbsp;Huarachi.</span>
-          </p>
-
-          <p className="hero-landing-tagline" data-reveal-hero style={{ "--hero-delay": "260ms" } as React.CSSProperties}>
-            I'm a product designer with a background in interaction design and psychology, and I use that lens to create experiences grounded in how people think, decide, and build trust.
+            <span className="hero-landing-greeting-hi">I'm Johanna,</span> <span className="hero-landing-greeting-firstname">a designer built on <em>psychology</em> and <em>interaction design</em></span>
           </p>
 
           <p className="hero-landing-credentials" data-reveal-hero style={{ "--hero-delay": "380ms" } as React.CSSProperties}>

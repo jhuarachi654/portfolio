@@ -74,7 +74,7 @@ const CASE_STUDIES: CaseStudy[] = [
     tags: ["Consumer", "Misinformation", "Social Media"],
     image: "/videos/BackStory-Video-poster.png",
     video: "/videos/BackStory-Video.webm",
-    lottieStartTime: 4,
+    lottieStartTime: 1,
     href: "/work/backstory",
     role: "Interaction Designer",
     description: "Backstory, a TikTok-native feature to counter misinformation that gives users the full context behind a piece of content.",
@@ -148,12 +148,13 @@ const CASE_STUDIES: CaseStudy[] = [
     image: "/images/featured-work/featured-work-11-hmQDs6.png",
     video: "",
     lottie: "/videos/DNC-Video.json",
+    lottieStartTime: 4,
     href: "/work/democratic-national-committee",
     role: "Digital Design Intern",
     description: "Created digital assets across social, ads, email, and events to support the Biden-Harris and Democrat campaign.",
     bgColor: "linear-gradient(135deg, #2b3a8f, #1a2358)",
     objectFit: "contain",
-    mediaScale: 1.5,
+    mediaScale: 1.2,
     dotField: true,
     dotLayout: 1,
     icon: "/DNC Logo.svg.png",
@@ -196,7 +197,7 @@ const CASE_STUDIES: CaseStudy[] = [
 
 // ── Hooks ────────────────────────────────────────────────────────────
 function useNumCols() {
-  const get = () => window.innerWidth < 541 ? 1 : window.innerWidth < 1200 ? 2 : 3
+  const get = () => window.innerWidth < 541 ? 1 : 2
   const [n, setN] = useState(get)
   useEffect(() => {
     const update = () => setN(get())

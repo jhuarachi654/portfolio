@@ -199,14 +199,14 @@ export default function SnapSplitPage() {
               SnapSplit
             </h1>
             <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
-              SnapSplit is a startup that uses AI to scan receipts, extract items, and make splitting bills easier for groups. As the sole designer, I identified a critical drop-off point in the user flow where most hosts abandoned the app before the split was complete. I redesigned the flow around shared group participation instead of a single host doing all the work. Completion rose from 20% to 83%. Alongside the UX work, I also led a full rebrand of the platform.
+              SnapSplit is a startup that uses AI to scan receipts, extract items, and make bill splitting easier for groups. As the founding designer, I identified a critical drop-off point in the user flow that was leading hosts to abandon the bill-splitting process before it was complete. I led the redesign of that flow, which drove completion from 20% to 83%. Alongside the UX work, I also led a full rebrand of the platform.
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
-                { label: 'Role',     value: 'Lead Designer' },
-                { label: 'Timeline', value: '6 weeks' },
-                { label: 'Team',     value: 'PM, Lead Developer, Front End Developer' },
-                { label: 'Skills',   value: 'Research, Usability Testing, Prototyping, Branding' },
+                { label: 'Role',     value: 'Founding Designer, User Researcher, Brand Designer' },
+                { label: 'Timeline', value: '6 months' },
+                { label: 'Team',     value: 'PM, Lead Developer, AI Engineer, Market Researcher' },
+                { label: 'Skills',   value: 'User Research, Usability Testing, Prototyping, Branding' },
               ].map(({ label, value }) => (
                 <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
                   <p className="cs-metric-label" style={{ marginBottom: 6, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{label}</p>
@@ -229,34 +229,21 @@ export default function SnapSplitPage() {
         <Section id="ss-intro">
           <ChapterHeading index={1} heading="Context" />
 
-          <SubHeading>The host was doing everything</SubHeading>
+          <SubHeading>Where I was starting</SubHeading>
           <BodyText>
-            Billclub.io is a startup that helps groups split bills by scanning receipts and dividing costs. When I joined as lead designer, the team had already identified a critical problem: users were dropping off mid-flow, leaving their bills incomplete.
+            When I joined Bill Club (now rebranded to SnapSplit), it was a fintech startup in beta — users had access and we were actively testing features, but the product hadn't officially launched. My team included a PM, market researcher, developers, and an AI engineer. I was their first designer. Alongside the UX work, I was also tasked with establishing the brand and defining a design system.
           </BodyText>
           <BodyText>
-            The process looked simple. Someone would scan a receipt, items populated automatically, and it felt easy. Then came the assignment stage. The host had to manually assign each item to each person while friends waited. Most users gave up here.
+            In my first meeting with the team, the priority became clear: analytical trends showed a high drop-off rate in the user flow, but there was no clear explanation for why it was happening or what to do about it. That became my first focus.
           </BodyText>
-
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 32 }}>
-            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-              I needed to confirm this assumption and figure out why the assignment step was where everyone got stuck.
-            </p>
-          </div>
 
           <figure style={{ margin: '0 0 32px' }}>
             <img src={img('snapsplit-legacy-critique.jpg')} alt="Legacy design: the host manually splits and assigns each item to each person one by one" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
             <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
-              The legacy assignment screen. While the host works through this, group members are completely disconnected from the process.
+              These are the initial designs of SnapSplit, with notes on accessibility and clarity.
             </figcaption>
           </figure>
 
-          <ChallengeBanner
-            icon={<Receipt size="1em" weight="regular" />}
-            iconColor="#416BCC"
-            question={<>How can we redesign bill splitting so the <strong><em>entire group shares the work</em></strong> instead of one person doing everything?</>}
-          />
         </Section>
 
         {/* ── 2. Solution Preview ── */}
@@ -269,10 +256,10 @@ export default function SnapSplitPage() {
             <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>TL:DR</p>
             <div className="rm-intro-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
               <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
-                A shared bill-splitting experience instead of a solo one
+                What We Built
               </h3>
               <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
-                Over 6 weeks as lead designer, I identified a critical abandonment problem. 80% of users dropped off during bill assignment. The host being stuck doing it all alone was the root cause. I redesigned the flow so the whole group shares the work through individual item claiming. Completion rose from 20% to 83%.
+                Over six months, I led the work to solve SnapSplit's high abandonment issue. Through research, I found that the assignment step, where the host had to manually divide and distribute items, was creating too much friction for one person to handle alone. I redesigned the flow to distribute that effort across the group, turning bill splitting into a shared experience rather than a solo task. Completion rates rose from 20% to 83%.
               </p>
             </div>
           </div>
@@ -282,14 +269,27 @@ export default function SnapSplitPage() {
         <Section id="ss-research">
           <ChapterHeading index={3} heading="Research" />
 
-          <SubHeading>What the usability tests showed</SubHeading>
+          <SubHeading>Understanding the Drop-Off</SubHeading>
           <BodyText>
-            When I joined, the team knew users were dropping off but were not sure exactly why. I ran usability tests with 5 users to find out. The pattern held in nearly every session: users scanned their receipt, watched the items populate, then hit the assignment step and stopped. 4 out of 5 hosts abandoned the flow there. Only 1 user finished.
+            To investigate the abandonment issue, I ran five one-on-one sessions with young adults, combining interviews with usability testing, conducted both in person and remotely. I gave each participant the same task: scan a receipt and divide it among a group of three.
+          </BodyText>
+          <BodyText>
+            The pattern was consistent across sessions. The beginning of the flow was seamless, participants scanned the receipt and watched items populate without issue. The breakdown came at the assignment step, where they had to assign items to each person in the group. Participants became confused, lost their place, and had to scroll back and forth between the receipt and the assignment screen. Four out of five gave up and showed visible frustration. The one participant who completed the task said they would not use the app again, especially on the go.
           </BodyText>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ marginTop: 24 }}>
-            <StatBlock stat="80%" label="Drop-off rate" description="Dropped off at the assignment screen" />
-            <StatBlock stat="20%" label="Completion rate" description="Completed the legacy flow" />
+            <StatBlock stat="80%" label="Drop-off rate" description="On the item dividing and assignment screens" />
+            <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24, height: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 12 }}>
+              <div>
+                <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', margin: '0 0 8px' }}>User Quote</p>
+                <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: '#222225', margin: 0, fontStyle: 'italic' }}>
+                  "I would not use the app again, especially on the go."
+                </p>
+              </div>
+              <span style={{ color: '#416BCC', flexShrink: 0, lineHeight: 'normal', display: 'flex', alignSelf: 'flex-end' }}>
+                <Quotes size={22} weight="fill" />
+              </span>
+            </div>
           </div>
 
           <div style={{ marginTop: 32 }}>
@@ -353,6 +353,11 @@ export default function SnapSplitPage() {
             </figure>
           </div>
 
+          <ChallengeBanner
+            icon={<Receipt size="1em" weight="regular" />}
+            iconColor="#416BCC"
+            question={<>How can we redesign bill splitting so the <strong><em>entire group shares the work</em></strong> instead of one person doing everything?</>}
+          />
         </Section>
 
         {/* ── 4. Development ── */}
