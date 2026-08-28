@@ -292,8 +292,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (min-width: 1200px) {
   .main-content.has-case-study-sidebar {
     margin-left: 300px;
-    padding-left: 124px;
-    padding-right: 124px;
+    padding-left: 108px;
+    padding-right: 108px;
   }
 }
 
@@ -305,22 +305,9 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 [data-theme="dark"] .case-study-sidebar-home { border-color: rgba(168, 190, 232, 0.3); }
 [data-theme="dark"] .case-study-sidebar-home:hover { border-color: rgba(168, 190, 232, 0.7); }
 
-.case-study-toc-link { font-family: var(--font-landing-body); font-size: var(--type-body-sm-size); font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4; position: relative; display: block; width: fit-content; overflow: hidden; text-decoration: none; color: var(--color-cs-heading); opacity: 0.7; padding: 6px 12px; border-radius: 6px; transition: opacity 0.18s; }
+.case-study-toc-link { font-family: var(--font-landing-body); font-size: var(--type-body-sm-size); font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4; position: relative; display: block; width: fit-content; overflow: hidden; text-decoration: none; color: var(--color-cs-heading); opacity: 0.7; padding: 6px 12px 6px 24px; border-radius: 6px; transition: opacity 0.18s, color 0.18s; }
 .case-study-toc-link:hover {
   opacity: 0.8;
-}
-.case-study-toc-link::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #416BCC;
-  border-radius: 6px;
-  transform: translateX(-101%);
-  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 0;
-}
-.case-study-toc-link.active::before {
-  transform: translateX(0);
 }
 .case-study-toc-link span {
   position: relative;
@@ -329,12 +316,37 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 .case-study-toc-link.active {
   opacity: 1;
+  margin-left: 14px;
+  transition: opacity 0.18s, color 0.18s, margin-left 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .case-study-toc-link.active span {
-  color: #fff;
+  color: #416BCC;
+  font-weight: 700;
 }
-[data-theme="dark"] .case-study-toc-link.active::before { background: #6b8fd4; }
-[data-theme="dark"] .case-study-toc-link.active span { color: #fff; }
+[data-theme="dark"] .case-study-toc-link.active span { color: #6b8fd4; }
+
+.case-study-toc-active-marker {
+  position: absolute;
+  z-index: 1;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4em;
+  line-height: 1;
+  color: #416BCC;
+  pointer-events: none;
+  transition: top 0.38s cubic-bezier(0.22, 1, 0.36, 1), height 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.case-study-toc-active-marker::before {
+  /* The "*" glyph itself sits high in its own em-box in most fonts, so
+     centering this box alone still reads as too high — nudge the glyph
+     down to its visual (not em-box) center. */
+  content: '*';
+  display: block;
+  transform: translateY(0.2em);
+}
+[data-theme="dark"] .case-study-toc-active-marker { color: #6b8fd4; }
 
 .sidebar img {
   width: 28px !important;
@@ -433,8 +445,11 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 .mobile-nav-link { font-family: var(--type-h3-family); font-size: var(--type-h3-size); font-weight: 500; line-height: var(--type-h3-line-height); color: #3E4242; text-decoration: none; align-self: flex-start; border-radius: 8px; padding: 2px 10px; margin: 0 -10px; transition: background-color 0.18s, color 0.18s; }
 .mobile-nav-link.active {
-  background: #416BCC;
-  color: #ffffff;
+  background: transparent;
+  color: #416BCC;
+}
+.mobile-nav-active-marker {
+  color: #416BCC;
 }
 .mobile-nav-link--small { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: #71717B; }
 
@@ -1101,6 +1116,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 @media (max-width: 767px) {
   .hero-page--landing {
+    height: 75vh;
+    min-height: 75vh;
     padding-top: 128px;
     padding-bottom: 128px;
   }
@@ -1280,7 +1297,23 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .hero-star-bubble.is-dissolving {
   opacity: 0;
   transform: translate(-50%, calc(-100% - 44px)) scale(0.94);
-  transition: opacity 400ms ease, transform 400ms ease;
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.hero-star-bubble-particle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #416BCC;
+  opacity: 0;
+  pointer-events: none;
+  animation: starBubbleParticleFloat 520ms ease-out forwards;
+}
+@keyframes starBubbleParticleFloat {
+  0% { opacity: 0.9; transform: translate(-50%, -50%) scale(0.5); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.15); }
 }
 .hero-star-bubble::before,
 .hero-star-bubble::after {
@@ -1970,7 +2003,8 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 }
 [data-theme="dark"] .mobile-nav-close { color: #E8EFF8; }
 [data-theme="dark"] .mobile-nav-link { color: #E8EFF8; }
-[data-theme="dark"] .mobile-nav-link.active { background: #416BCC; color: #ffffff; }
+[data-theme="dark"] .mobile-nav-link.active { background: transparent; color: #6b8fd4; }
+[data-theme="dark"] .mobile-nav-active-marker { color: #6b8fd4; }
 [data-theme="dark"] .mobile-nav-link--small { color: rgba(232, 239, 248, 0.6); }
 [data-theme="dark"] .mobile-nav-divider { background: rgba(168, 190, 232, 0.15); }
 
@@ -4585,6 +4619,12 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   opacity: 0.7;
   text-align: center;
   line-height: 1.6;
+}
+
+/* Gives TOC-link scrollIntoView() a resting offset from the viewport top,
+   instead of landing the section heading flush against the top edge. */
+.cs-section {
+  scroll-margin-top: 64px;
 }
 
 /* ── Case study mobile responsiveness ────────────────────────────── */

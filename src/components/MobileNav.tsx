@@ -98,7 +98,12 @@ export default function MobileNav() {
                   onClick={close}
                   className={({ isActive }) => `mobile-nav-link${isActive ? " active" : ""}`}
                 >
-                  {label}
+                  {({ isActive }) => (
+                    <>
+                      {isActive && <span className="mobile-nav-active-marker" aria-hidden="true">* </span>}
+                      {label}
+                    </>
+                  )}
                 </NavLink>
               ))}
             </div>

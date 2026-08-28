@@ -26,8 +26,18 @@ type StarBubblePhase = "entering" | "typing" | "holding" | "dissolving"
 type StarBubble = { text: string; x: number; y: number; revealed: number; phase: StarBubblePhase }
 
 const TYPE_INTERVAL_MS = 22
-const HOLD_MS = 5000
-const DISSOLVE_MS = 400
+const HOLD_MS = 3000
+const DISSOLVE_MS = 600
+const PARTICLE_COUNT = 7
+
+function shuffled<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 const HINT_TEXT = "* something's floating — click it"
 const HINT_TYPE_INTERVAL_MS = 28
@@ -44,7 +54,8 @@ export default function HomePage() {
   const [starBubble, setStarBubble] = useState<StarBubble | null>(null)
   const [hintRevealed, setHintRevealed] = useState(0)
   const [hintVisible, setHintVisible] = useState(false)
-  const starFactIndex = useRef(0)
+  const starFactQueue = useRef<string[]>(shuffled(STAR_FACTS))
+  const lastFactShown = useRef<string | null>(null)
   const starFieldRef = useRef<StarFieldHandle>(null)
   const starTimers = useRef<ReturnType<typeof setTimeout>[]>([])
   const heroRef = useRef<HTMLDivElement>(null)
@@ -108,8 +119,15 @@ export default function HomePage() {
     starTimers.current = []
     cancelHint()
 
-    const text = STAR_FACTS[starFactIndex.current % STAR_FACTS.length]
-    starFactIndex.current += 1
+    if (starFactQueue.current.length === 0) {
+      // Reshuffle for another pass, avoiding an immediate repeat of the
+      // last fact shown (which would otherwise land at either end).
+      let next = shuffled(STAR_FACTS)
+      if (next[0] === lastFactShown.current) next = [...next.slice(1), next[0]]
+      starFactQueue.current = next
+    }
+    const text = starFactQueue.current.shift()!
+    lastFactShown.current = text
     const { x, y } = clampToHero(rawX, rawY)
     setStarBubble({ text, x, y, revealed: 0, phase: "entering" })
 
@@ -190,6 +208,22 @@ export default function HomePage() {
             >
               {starBubble.text.slice(0, starBubble.revealed)}
               {starBubble.phase === "typing" && <span className="hero-star-bubble-cursor" aria-hidden="true" />}
+              {starBubble.phase === "dissolving" && Array.from({ length: PARTICLE_COUNT }).map((_, i) => {
+                const angle = (Math.PI * 2 * i) / PARTICLE_COUNT + Math.random() * 0.4
+                const dist = 26 + Math.random() * 22
+                return (
+                  <span
+                    key={i}
+                    className="hero-star-bubble-particle"
+                    aria-hidden="true"
+                    style={{
+                      "--dx": `${Math.cos(angle) * dist}px`,
+                      "--dy": `${Math.sin(angle) * dist}px`,
+                      animationDelay: `${i * 18}ms`,
+                    } as React.CSSProperties}
+                  />
+                )
+              })}
             </div>
           )}
         </div>
