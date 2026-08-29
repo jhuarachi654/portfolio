@@ -202,8 +202,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          <FishSwimmer color="#ffffff" onDropStar={handleDropStar} filled />
-          <FishSwimmer color="#ffffff" onDropStar={handleDropStar} filled />
+          <FishSwimmer color="#ffffff" onDropStar={handleDropStar} filled mobileZone="top" />
+          <FishSwimmer color="#ffffff" onDropStar={handleDropStar} filled mobileZone="bottom" />
           <StarField ref={starFieldRef} onCatch={handleStarCatch} onCountChange={handleStarCountChange} />
 
           {hintVisible && (

@@ -8,6 +8,7 @@ type FishSwimmerProps = {
   color?: string
   onDropStar?: (x: number, y: number) => void
   filled?: boolean
+  mobileZone?: "top" | "bottom"
 }
 
 function drawFilledFish(ctx: CanvasRenderingContext2D, wag: number, color: string) {
@@ -68,7 +69,7 @@ function drawLineFish(ctx: CanvasRenderingContext2D, wag: number, color: string)
   ctx.restore()
 }
 
-export default function FishSwimmer({ color = "#ffffff", onDropStar, filled = false }: FishSwimmerProps) {
+export default function FishSwimmer({ color = "#ffffff", onDropStar, filled = false, mobileZone }: FishSwimmerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -120,8 +121,13 @@ export default function FishSwimmer({ color = "#ffffff", onDropStar, filled = fa
     }
 
     const MARGIN = 40
+    const isMobile = width < 640
     let x = width * (0.4 + Math.random() * 0.5)
-    let y = height * (0.3 + Math.random() * 0.4)
+    let y = isMobile && mobileZone === "top"
+      ? height * (0.08 + Math.random() * 0.15)
+      : isMobile && mobileZone === "bottom"
+      ? height * (0.75 + Math.random() * 0.15)
+      : height * (0.3 + Math.random() * 0.4)
     let angle = Math.random() < 0.5 ? 0 : Math.PI
     let speed = 34
     let startledUntil = 0
