@@ -7,6 +7,37 @@ import { useEffect, useRef } from "react"
 type FishSwimmerProps = {
   color?: string
   onDropStar?: (x: number, y: number) => void
+  filled?: boolean
+}
+
+function drawFilledFish(ctx: CanvasRenderingContext2D, wag: number, color: string) {
+  ctx.save()
+  ctx.fillStyle = color
+
+  ctx.beginPath()
+  ctx.moveTo(7, 0)
+  ctx.bezierCurveTo(16, -7, 26, -6, 30, 0)
+  ctx.bezierCurveTo(26, 6, 16, 7, 7, 0)
+  ctx.closePath()
+  ctx.fill()
+
+  ctx.beginPath()
+  ctx.moveTo(8, 0)
+  ctx.lineTo(-6, -8 + wag * 3)
+  ctx.lineTo(-2, 0)
+  ctx.lineTo(-6, 8 - wag * 3)
+  ctx.closePath()
+  ctx.fill()
+
+  // Eye is punched out of the fill (destination-out) so the background
+  // shows through, instead of drawing a same-color dot on top.
+  ctx.globalCompositeOperation = "destination-out"
+  ctx.beginPath()
+  ctx.arc(25, -1, 1.4, 0, Math.PI * 2)
+  ctx.fill()
+  ctx.globalCompositeOperation = "source-over"
+
+  ctx.restore()
 }
 
 function drawLineFish(ctx: CanvasRenderingContext2D, wag: number, color: string) {
@@ -37,7 +68,7 @@ function drawLineFish(ctx: CanvasRenderingContext2D, wag: number, color: string)
   ctx.restore()
 }
 
-export default function FishSwimmer({ color = "#ffffff", onDropStar }: FishSwimmerProps) {
+export default function FishSwimmer({ color = "#ffffff", onDropStar, filled = false }: FishSwimmerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -52,7 +83,7 @@ export default function FishSwimmer({ color = "#ffffff", onDropStar }: FishSwimm
     let width = 0, height = 0
     let spriteScale = 1.6
     let textRect: { left: number; right: number; top: number; bottom: number } | null = null
-    const TEXT_AVOID_PAD = 24
+    const TEXT_AVOID_PAD = 64
 
     function resize() {
       const parent = canvas!.parentElement
@@ -89,7 +120,7 @@ export default function FishSwimmer({ color = "#ffffff", onDropStar }: FishSwimm
     }
 
     const MARGIN = 40
-    let x = width * (0.3 + Math.random() * 0.4)
+    let x = width * (0.55 + Math.random() * 0.35)
     let y = height * (0.3 + Math.random() * 0.4)
     let angle = Math.random() < 0.5 ? 0 : Math.PI
     let speed = 34
@@ -136,9 +167,13 @@ export default function FishSwimmer({ color = "#ffffff", onDropStar }: FishSwimm
     let nextStarDropAt = performance.now() + 1500 + Math.random() * 2500
 
     function step(now: number) {
-      if (onDropStar && now >= nextStarDropAt) {
+      // Only drop stars when fish is on the right side (past 55% of width) to avoid text overlap
+      if (onDropStar && now >= nextStarDropAt && x > width * 0.55) {
         onDropStar(x, y)
         nextStarDropAt = now + 10000 + Math.random() * 14000
+      } else if (now >= nextStarDropAt) {
+        // Reschedule drop check without dropping
+        nextStarDropAt = now + 500
       }
 
       const dt = Math.min((now - lastTime) / 1000, 0.05)
@@ -190,7 +225,8 @@ export default function FishSwimmer({ color = "#ffffff", onDropStar }: FishSwimm
       const facingLeft = Math.cos(angle) < 0
       ctx.scale(facingLeft ? -1 : 1, 1)
       ctx.scale(spriteScale, spriteScale)
-      drawLineFish(ctx, wag, color)
+      if (filled) drawFilledFish(ctx, wag, color)
+      else drawLineFish(ctx, wag, color)
       ctx.restore()
 
       rafId = requestAnimationFrame(step)
@@ -201,7 +237,8 @@ export default function FishSwimmer({ color = "#ffffff", onDropStar }: FishSwimm
       ctx.save()
       ctx.translate(x, y)
       ctx.scale(spriteScale, spriteScale)
-      drawLineFish(ctx, 0, color)
+      if (filled) drawFilledFish(ctx, 0, color)
+      else drawLineFish(ctx, 0, color)
       ctx.restore()
     } else {
       rafId = requestAnimationFrame(step)

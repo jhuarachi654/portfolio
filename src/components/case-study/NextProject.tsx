@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
-import { Sparkle } from '@phosphor-icons/react'
 
 interface NextProjectProps {
   title: string
@@ -121,19 +120,26 @@ export default function NextProject({ title, to, company, description, tags, ima
   return (
     <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginTop: 84 }}>
       <section className="max-w-[1080px] px-8 md:px-14" style={{ paddingBottom: 84 }}>
-        <h2
-          className="next-project-heading font-bold cs-editorial"
-          style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--color-cs-heading)', margin: '0 0 24px', display: 'flex', alignItems: 'center', gap: 10 }}
+        <p
+          className="cs-metric-label"
+          data-reveal
+          style={{ margin: '0 0 24px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7, '--reveal-delay': '60ms' } as React.CSSProperties}
         >
-          Explore more work <Sparkle size="0.7em" weight="regular" />
-        </h2>
+          See next
+        </p>
 
         {/* Reuses the exact CaseStudyCard classes/markup (media on top,
             compact body below) so a project's "next up" preview here looks
             and feels identical to how it appears in the landing grid,
             instead of its own bespoke side-by-side layout. */}
-        <Link to={to} data-cursor-label="Open case study" className="case-study-card-wrapper next-project-card-wrapper">
-          <div className="case-study-card next-project-card">
+        <Link
+          to={to}
+          data-cursor-label="Open case study"
+          className="case-study-card-wrapper next-project-card-wrapper"
+          data-reveal
+          style={{ '--reveal-delay': '140ms' } as React.CSSProperties}
+        >
+          <div className="case-study-card next-project-card" data-reveal style={{ '--reveal-delay': '220ms' } as React.CSSProperties}>
             {(video || lottie || image) && (
               <div
                 className={`case-study-card-media aspect-4-3${!bgColor && category ? ` case-study-card-media--${category}` : ''}`}

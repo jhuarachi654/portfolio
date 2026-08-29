@@ -29,6 +29,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
   return (
     <section
       id={id}
+      data-reveal
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
       style={{ marginTop: 164 }}
     >
@@ -43,7 +44,7 @@ function Prose({ children, className = '' }: { children: React.ReactNode; classN
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
+    <p className="font-landing-body text-[15px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
       {children}
     </p>
   )
@@ -51,11 +52,11 @@ function BodyText({ children }: { children: React.ReactNode }) {
 
 function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string }) {
   return (
-    <div>
+    <div data-reveal style={{ '--reveal-delay': '60ms' } as React.CSSProperties}>
       {tag && (
         <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -64,23 +65,8 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
 
 function ChapterHeading({ index, heading }: { index: number; heading: string }) {
   return (
-    <div style={{ marginBottom: 8 }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-        <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>{index}.</span>
-        <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-          {heading}
-        </h2>
-      </div>
-      <div style={{
-        borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-        borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-        borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-        borderBottom: 'none',
-        borderRadius: '12px 12px 0 0',
-        height: 32,
-        width: '100%',
-        marginBottom: 32,
-      }} />
+    <div style={{ marginBottom: 32 }}>
+      <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{index}. {heading}</p>
     </div>
   )
 }
@@ -191,13 +177,13 @@ export default function BackStoryPage() {
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-            <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+            <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               BackStory
             </h1>
-            <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
+            <p className="case-study-hero-reveal font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
               TikTok is where young people learn about the world and where misinformation spreads faster than anyone can verify it. For my MDes capstone at CCA, my team and I designed Backstory, a TikTok-native feature that gives users the full context behind a piece of content: community notes, verified third-party sources, and the ability to contribute their own voice.
             </p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'Interaction Designer' },
                 { label: 'Timeline', value: 'Jan – Jun 2026' },
@@ -211,7 +197,7 @@ export default function BackStoryPage() {
               ))}
             </div>
 
-            <a href="#bs-features" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
+            <a href="#bs-features" className="case-study-hero-reveal cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
           </div>
         </div>
       </section>

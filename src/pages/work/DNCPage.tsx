@@ -28,6 +28,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
   return (
     <section
       id={id}
+      data-reveal
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
       style={{ marginTop: 164 }}
     >
@@ -38,7 +39,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
+    <p className="font-landing-body text-[15px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
       {children}
     </p>
   )
@@ -46,11 +47,11 @@ function BodyText({ children }: { children: React.ReactNode }) {
 
 function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string }) {
   return (
-    <div>
+    <div data-reveal style={{ '--reveal-delay': '60ms' } as React.CSSProperties}>
       {tag && (
         <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -185,7 +186,7 @@ function IterationExplorer() {
     <div className="cs-card-box" style={{ padding: 32, marginTop: 32 }}>
       <div>
         <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6, marginTop: 0 }}>Graphic Exploration</p>
-        <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+        <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
           VP Anniversary Iterations
         </h3>
         <BodyText>I tested a few different directions for the Kamala Harris graphic before landing on the final version. I realized that every design choice sends a message, even the ones you do not think about. The photo selection told people whether this was a celebration or an announcement. The layout told them whether to feel inspired or just informed. I got the chance to look at the design through multiple perspectives.</BodyText>
@@ -262,13 +263,13 @@ export default function DNCPage() {
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-            <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+            <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               Campaign Design
             </h1>
-            <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
+            <p className="case-study-hero-reveal font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
               The Democratic National Committee runs the digital communications for the Democratic Party. As a Digital Design Intern, I worked with the communications and design team to produce graphics for the Biden-Harris campaign. Over 4 months, I produced 42 WCAG-compliant assets across social media, digital ads, and email.
             </p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',         value: 'Digital Design Intern' },
                 { label: 'Timeline',     value: 'Jun – Sep 2023' },
@@ -282,7 +283,7 @@ export default function DNCPage() {
               ))}
             </div>
 
-            <a href="#dnc-collection" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to collection</span></a>
+            <a href="#dnc-collection" className="case-study-hero-reveal cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to collection</span></a>
           </div>
         </div>
       </section>
@@ -291,14 +292,8 @@ export default function DNCPage() {
 
         {/* ── 1. Introduction ── */}
         <Section id="dnc-intro">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>1.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Introduction
-              </h2>
-            </div>
-            <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)', borderBottom: 'none', borderRadius: '12px 12px 0 0', height: 32, width: '100%', marginBottom: 32 }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>1. Introduction</p>
           </div>
 
           <div>
@@ -327,14 +322,8 @@ export default function DNCPage() {
 
         {/* ── 2. Solution Preview ── */}
         <Section id="dnc-solution-preview">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>2.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Solution Preview
-              </h2>
-            </div>
-            <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)', borderBottom: 'none', borderRadius: '12px 12px 0 0', height: 32, width: '100%' }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Solution Preview</p>
           </div>
 
           <div className="dnc-solution-preview-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
@@ -363,14 +352,8 @@ export default function DNCPage() {
 
         {/* ── 3. Context ── */}
         <Section id="dnc-context">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>3.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Context
-              </h2>
-            </div>
-            <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)', borderBottom: 'none', borderRadius: '12px 12px 0 0', height: 32, width: '100%', marginBottom: 32 }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Context</p>
           </div>
 
           <div>
@@ -470,14 +453,8 @@ export default function DNCPage() {
 
         {/* ── 4. VP Graphic ── */}
         <Section id="dnc-vp">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>4.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                VP Graphic
-              </h2>
-            </div>
-            <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)', borderBottom: 'none', borderRadius: '12px 12px 0 0', height: 32, width: '100%', marginBottom: 32 }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. VP Graphic</p>
           </div>
 
           <div className="dnc-brief-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
@@ -557,14 +534,8 @@ export default function DNCPage() {
 
         {/* ── 5. Collection ── */}
         <Section id="dnc-collection">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>5.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Collection
-              </h2>
-            </div>
-            <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)', borderBottom: 'none', borderRadius: '12px 12px 0 0', height: 32, width: '100%' }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Collection</p>
           </div>
 
           <div style={{ marginTop: 32 }}>
@@ -584,14 +555,8 @@ export default function DNCPage() {
 
         {/* ── 6. Impact ── */}
         <Section id="dnc-impact">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>6.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Impact
-              </h2>
-            </div>
-            <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)', borderBottom: 'none', borderRadius: '12px 12px 0 0', height: 32, width: '100%', marginBottom: 32 }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Impact</p>
           </div>
 
           <div>
@@ -610,14 +575,8 @@ export default function DNCPage() {
 
         {/* ── 7. Reflection ── */}
         <Section id="dnc-reflection">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>7.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Reflection
-              </h2>
-            </div>
-            <div style={{ borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)', borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)', borderBottom: 'none', borderRadius: '12px 12px 0 0', height: 32, width: '100%' }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>7. Reflection</p>
           </div>
 
           <div className="dnc-reflection-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>

@@ -148,6 +148,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
   return (
     <section
       id={id}
+      data-reveal
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
       style={{ marginTop: 164 }}
     >
@@ -162,7 +163,7 @@ function Prose({ children, className = '' }: { children: React.ReactNode; classN
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
+    <p className="font-landing-body text-[15px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
       {children}
     </p>
   )
@@ -170,11 +171,11 @@ function BodyText({ children }: { children: React.ReactNode }) {
 
 function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string }) {
   return (
-    <div>
+    <div data-reveal style={{ '--reveal-delay': '60ms' } as React.CSSProperties}>
       {tag && (
         <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -341,7 +342,7 @@ function DestinationsExplorer() {
       <div className="ff-destinations-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 32, alignItems: 'center' }}>
         <div>
           <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6, marginTop: 0 }}>Wireframe Tests</p>
-          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>Destinations</h3>
+          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>Destinations</h3>
           <BodyText>What if tailored destinations could be accessed at all times?</BodyText>
         </div>
         <div>
@@ -363,7 +364,7 @@ function EntryPointExplorer() {
       <div className="ff-entry-point-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 32, alignItems: 'center' }}>
         <div>
           <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6, marginTop: 0 }}>Wireframe Tests</p>
-          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>Entry Point</h3>
+          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>Entry Point</h3>
           <BodyText>How might the entry point support users who don't yet have a destination in mind?</BodyText>
         </div>
         <figure style={{ margin: 0 }}>
@@ -394,7 +395,7 @@ function FlexibleDatesExplorer() {
       <div className="ff-flexible-dates-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 32, alignItems: 'center' }}>
         <div>
           <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6, marginTop: 0 }}>Design &amp; AI</p>
-          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>Flexible Dates</h3>
+          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>Flexible Dates</h3>
           <BodyText>How might we help travelers who don't have a destination in mind yet open up their options by exploring flights with flexible availability?</BodyText>
         </div>
         <div>
@@ -427,7 +428,7 @@ function FlightFareExplorer() {
       <div className="ff-flight-fare-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: 32, alignItems: 'center' }}>
         <div>
           <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6, marginTop: 0 }}>Design &amp; AI</p>
-          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>Card Layout</h3>
+          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>Card Layout</h3>
           <BodyText>How might we give travelers the destination context they need to feel confident enough to book directly from the map?</BodyText>
         </div>
         <div>
@@ -493,7 +494,7 @@ export default function FareFinderPage() {
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-            <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+            <h1 className="text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               PROS Fare Finder Map
             </h1>
             <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
@@ -523,23 +524,8 @@ export default function FareFinderPage() {
 
       {/* ── Introduction ── */}
       <Section id="ff-intro">
-        <div style={{ marginBottom: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>1.</span>
-            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-              Introduction
-            </h2>
-          </div>
-          <div style={{
-            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderBottom: 'none',
-            borderRadius: '12px 12px 0 0',
-            height: 32,
-            width: '100%',
-            marginBottom: 32,
-          }} />
+        <div style={{ marginBottom: 32 }}>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>1. Introduction</p>
         </div>
 
         <div>
@@ -593,22 +579,8 @@ export default function FareFinderPage() {
 
         {/* ── Solution Preview ── */}
         <div id="ff-solution-preview" style={{ marginTop: 108 }}>
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>2.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Solution Preview
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Solution Preview</p>
           </div>
 
           {/* Video container */}
@@ -638,23 +610,8 @@ export default function FareFinderPage() {
 
       {/* ── Research ── */}
       <Section id="ff-research">
-        <div style={{ marginBottom: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>3.</span>
-            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-              Research
-            </h2>
-          </div>
-          <div style={{
-            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderBottom: 'none',
-            borderRadius: '12px 12px 0 0',
-            height: 32,
-            width: '100%',
-            marginBottom: 32,
-          }} />
+        <div style={{ marginBottom: 32 }}>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Research</p>
         </div>
 
         <div>
@@ -814,23 +771,8 @@ export default function FareFinderPage() {
 
       {/* ── Development ── */}
       <Section id="ff-development">
-        <div style={{ marginBottom: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>4.</span>
-            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-              Development
-            </h2>
-          </div>
-          <div style={{
-            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderBottom: 'none',
-            borderRadius: '12px 12px 0 0',
-            height: 32,
-            width: '100%',
-            marginBottom: 32,
-          }} />
+        <div style={{ marginBottom: 32 }}>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. Development</p>
         </div>
 
         <Prose>
@@ -905,23 +847,8 @@ export default function FareFinderPage() {
 
       {/* ── Solution ── */}
       <Section id="ff-features">
-        <div style={{ marginBottom: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>5.</span>
-            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-              Solution
-            </h2>
-          </div>
-          <div style={{
-            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderBottom: 'none',
-            borderRadius: '12px 12px 0 0',
-            height: 32,
-            width: '100%',
-            marginBottom: 32,
-          }} />
+        <div style={{ marginBottom: 32 }}>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Solution</p>
         </div>
 
         {/* Solution Overview — key screens with numbered captions */}
@@ -1044,23 +971,8 @@ export default function FareFinderPage() {
 
       {/* ── Reflection ── */}
       <Section id="ff-reflection">
-        <div style={{ marginBottom: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>7.</span>
-            <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-              Reflection
-            </h2>
-          </div>
-          <div style={{
-            borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-            borderBottom: 'none',
-            borderRadius: '12px 12px 0 0',
-            height: 32,
-            width: '100%',
-            marginBottom: 32,
-          }} />
+        <div style={{ marginBottom: 32 }}>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>7. Reflection</p>
         </div>
 
         <div className="ff-reflection-carry-forward-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>

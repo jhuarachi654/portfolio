@@ -6,24 +6,22 @@ import FishSwimmer from "../components/FishSwimmer"
 import StarField, { MAX_STARS, type StarFieldHandle } from "../components/StarField"
 
 const STAR_FACTS = [
-  "Johanna grew up in Koreatown.",
+  "Johanna grew up in Koreatown in the DMV area.",
   "Johanna has studied neuroscience and Latino studies, in addition to psychology and design.",
-  "Her favorite part of design is learning and collaborating with others.",
+  "Johanna's favorite part of design is learning from and collaborating with others.",
   "Johanna likes to look at a design challenge from every angle.",
   "Wondering why the fish? Johanna is a Pisces.",
-  "Her dog is named Toto, and he's a shiba!",
-  "Currently learning Jitter, Paper, and Figma Motion.",
-  "Cares deeply about misinformation on social media — learn more in Backstory.",
-  "Johanna has experience with branding, B2B SaaS products, accessibility, and visual design.",
-  "At the DNC, Johanna once turned around a campaign graphic same-day, mid-protest, with zero revisions.",
-  "Johanna's a sucker for omakase — sushi counters are basically the best UX case study in hospitality.",
-  "As founding designer at SnapSplit, Johanna took completion rates from 20% to 83% by watching five people struggle with the same screen.",
-  "Johanna believes good interaction design is applied psychology — every friction point is a decision cost.",
-  "Johanna hand-gifts stickers she's designed to friends — probably her longest-running 'side project.'",
+  "Johanna's dog is named Toto, and he's a shiba!",
+  "Johanna is currently learning Jitter, Paper, and Figma Motion.",
+  "Johanna cares deeply about misinformation on social media — learn more in BackStory.",
+  "Johanna has experience in branding, B2B SaaS products, accessibility, and visual design.",
+  "Johanna believes that good design should be invisible and intentional.",
+  "Johanna coded this portfolio.",
+  "Johanna likes to make specialty coffee in her free time. Her favorite drink is a pour over.",
 ]
 
 type StarBubblePhase = "entering" | "typing" | "holding" | "dissolving"
-type StarBubble = { text: string; x: number; y: number; revealed: number; phase: StarBubblePhase }
+type StarBubble = { text: string; x: number; y: number; revealed: number; phase: StarBubblePhase; position?: "above" | "below" }
 
 const TYPE_INTERVAL_MS = 22
 const HOLD_MS = 3000
@@ -46,9 +44,10 @@ const HINT_TYPE_INTERVAL_MS = 28
 const HINT_IDLE_MS = 4000
 
 // Keeps a bubble's anchor point far enough from the hero's edges that its
-// max ~280px-wide, ~34px-plus-tail-tall body never renders off-screen.
-const BUBBLE_MARGIN_X = 150
-const BUBBLE_MARGIN_TOP = 110
+// max 350px-wide, ~50px-plus-tail-tall body never renders off-screen or overlaps hero text.
+const BUBBLE_MARGIN_X = 210
+const BUBBLE_MARGIN_TOP = 140
+const BUBBLE_MARGIN_BOTTOM = 180  // Keeps bubbles above hero text content area
 
 export default function HomePage() {
   const [starBubble, setStarBubble] = useState<StarBubble | null>(null)
@@ -103,11 +102,21 @@ export default function HomePage() {
 
   const clampToHero = (x: number, y: number) => {
     const el = heroRef.current
-    const width = el?.clientWidth ?? x + BUBBLE_MARGIN_X
-    return {
-      x: Math.max(BUBBLE_MARGIN_X, Math.min(width - BUBBLE_MARGIN_X, x)),
-      y: Math.max(BUBBLE_MARGIN_TOP, y),
-    }
+    if (!el) return { x, y, position: "above" as const }
+    
+    const width = el.clientWidth
+
+    // Keep X and Y at the star's actual position for visual alignment
+    // Only clamp X to keep bubble within left/right margins
+    const clampedX = Math.max(BUBBLE_MARGIN_X, Math.min(width - BUBBLE_MARGIN_X, x))
+
+    // The bubble renders above the star's point, so a star caught too close
+    // to the top edge produces a bubble that clips out of the hero — clamp
+    // Y down to leave room for the bubble body above it.
+    const clampedY = Math.max(BUBBLE_MARGIN_TOP, y)
+    const position: "above" | "below" = "above"
+    
+    return { x: clampedX, y: clampedY, position }
   }
 
   const handleDropStar = (x: number, y: number) => {
@@ -119,6 +128,9 @@ export default function HomePage() {
     starTimers.current = []
     cancelHint()
 
+    // On mobile the star just pops — no thought bubble/fact reveal.
+    if (window.matchMedia('(max-width: 640px)').matches) return
+
     if (starFactQueue.current.length === 0) {
       // Reshuffle for another pass, avoiding an immediate repeat of the
       // last fact shown (which would otherwise land at either end).
@@ -128,8 +140,8 @@ export default function HomePage() {
     }
     const text = starFactQueue.current.shift()!
     lastFactShown.current = text
-    const { x, y } = clampToHero(rawX, rawY)
-    setStarBubble({ text, x, y, revealed: 0, phase: "entering" })
+    const { x, y, position } = clampToHero(rawX, rawY)
+    setStarBubble({ text, x, y, revealed: 0, phase: "entering", position })
 
     // Enter, then start typing on the next frame so the CSS opacity
     // transition actually has a 0 -> 1 change to animate.
@@ -190,8 +202,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          <FishSwimmer color="#ffffff" onDropStar={handleDropStar} />
-          <FishSwimmer color="#ffffff" onDropStar={handleDropStar} />
+          <FishSwimmer color="#ffffff" onDropStar={handleDropStar} filled />
+          <FishSwimmer color="#ffffff" onDropStar={handleDropStar} filled />
           <StarField ref={starFieldRef} onCatch={handleStarCatch} onCountChange={handleStarCountChange} />
 
           {hintVisible && (
@@ -199,34 +211,42 @@ export default function HomePage() {
               {HINT_TEXT.slice(0, hintRevealed)}
             </p>
           )}
-
-          {starBubble && (
-            <div
-              className={`hero-star-bubble${starBubble.phase !== "entering" ? " is-visible" : ""}${starBubble.phase === "dissolving" ? " is-dissolving" : ""}`}
-              style={{ left: starBubble.x, top: starBubble.y }}
-              aria-live="polite"
-            >
-              {starBubble.text.slice(0, starBubble.revealed)}
-              {starBubble.phase === "typing" && <span className="hero-star-bubble-cursor" aria-hidden="true" />}
-              {starBubble.phase === "dissolving" && Array.from({ length: PARTICLE_COUNT }).map((_, i) => {
-                const angle = (Math.PI * 2 * i) / PARTICLE_COUNT + Math.random() * 0.4
-                const dist = 26 + Math.random() * 22
-                return (
-                  <span
-                    key={i}
-                    className="hero-star-bubble-particle"
-                    aria-hidden="true"
-                    style={{
-                      "--dx": `${Math.cos(angle) * dist}px`,
-                      "--dy": `${Math.sin(angle) * dist}px`,
-                      animationDelay: `${i * 18}ms`,
-                    } as React.CSSProperties}
-                  />
-                )
-              })}
-            </div>
-          )}
         </div>
+
+        {/* Rendered as a sibling of the isolated blend group (not a
+            descendant) so its z-index can actually win against fixed,
+            higher-DOM-order chrome like the nav toggle — isolation:isolate
+            on the blend group would otherwise cap it there regardless of
+            how high its internal z-index goes. Coordinates still line up
+            because hero-landing-blend-group is inset:0 within this same
+            hero-page box. */}
+        {starBubble && (
+          <div
+            className={`hero-star-bubble${starBubble.phase !== "entering" ? " is-visible" : ""}${starBubble.phase === "dissolving" ? " is-dissolving" : ""}`}
+            style={{ left: starBubble.x, top: starBubble.y }}
+            data-position={starBubble.position}
+            aria-live="polite"
+          >
+            {starBubble.text.slice(0, starBubble.revealed)}
+            {starBubble.phase === "typing" && <span className="hero-star-bubble-cursor" aria-hidden="true" />}
+            {starBubble.phase === "dissolving" && Array.from({ length: PARTICLE_COUNT }).map((_, i) => {
+              const angle = (Math.PI * 2 * i) / PARTICLE_COUNT + Math.random() * 0.4
+              const dist = 26 + Math.random() * 22
+              return (
+                <span
+                  key={i}
+                  className="hero-star-bubble-particle"
+                  aria-hidden="true"
+                  style={{
+                    "--dx": `${Math.cos(angle) * dist}px`,
+                    "--dy": `${Math.sin(angle) * dist}px`,
+                    animationDelay: `${i * 18}ms`,
+                  } as React.CSSProperties}
+                />
+              )
+            })}
+          </div>
+        )}
 
         <div className="hero-landing-bottom-mask" aria-hidden="true" />
       </div>

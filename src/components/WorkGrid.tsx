@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import CaseStudyCard from "./CaseStudyCard"
-import { useScrollReveal } from "../hooks/useScrollReveal"
 
 // ── Shared type ─────────────────────────────────────────────────────
 export type CaseStudy = {
@@ -209,17 +208,10 @@ function useNumCols() {
 
 export default function WorkGrid() {
   const numCols = useNumCols()
-  const headingRef = useScrollReveal<HTMLHeadingElement>()
 
   return (
     <>
       <section className="work-grid-section">
-        <div className="work-grid-header">
-          <h2 ref={headingRef} className="work-grid-heading work-grid-heading--selected reveal">
-            Selected Projects
-          </h2>
-        </div>
-
         <div className="work-masonry">
           {CASE_STUDIES.length > 0 ? (() => {
             const cols: { study: CaseStudy; globalIdx: number }[][] = Array.from({ length: numCols }, () => [])

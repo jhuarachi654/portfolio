@@ -314,11 +314,13 @@ export default function CaseStudyCard({
 
       <div className="case-study-card-body">
         <h3 className="case-study-card-title">{title}</h3>
-        {landingTitle && <p className="case-study-card-landing-title">{landingTitle}</p>}
-        {description && <p className="case-study-card-description">{description}</p>}
-        <div className="case-study-card-tags">
-          {tags.filter(t => t !== "Internship" && t !== "Freelance" && t !== "Solo").map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
+        <div className="case-study-card-title-row">
+          {landingTitle && <p className="case-study-card-landing-title">{landingTitle}</p>}
+          <div className="case-study-card-tags">
+            {tags.filter(t => t !== "Internship" && t !== "Freelance" && t !== "Solo").slice(0, 2).map(tag => <span key={tag} className="case-study-card-tag">{tag}</span>)}
+          </div>
         </div>
+        {description && <p className="case-study-card-description">{description}</p>}
       </div>
 
     </div>

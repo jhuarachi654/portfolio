@@ -213,7 +213,7 @@ export default function AboutPage() {
           <div className="about-corkboard">
 
             {/* Portrait — center of corkboard */}
-            <div className="about-pile-hero-wrap">
+            <div className="about-pile-hero-wrap" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>
               <span className="about-clip" aria-hidden="true" />
               <div className="about-pile-thumb">
                 <div className="about-pile-thumb-card" style={{ transform: `rotate(${PILE_ROTATIONS[2]}deg)` }}>
@@ -229,39 +229,35 @@ export default function AboutPage() {
 
         <div className="hero-right about-hero-text">
           <h1 className="hero-name hero-display-headline" data-reveal style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
-            <div>Thanks for stopping by <HandWaving size={32} weight="thin" /></div>
+            <div>How I came to be here <span className="about-wave-icon"><HandWaving size={32} weight="thin" /></span></div>
           </h1>
 
           <div className="about-bio-right">
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "200ms" } as React.CSSProperties}>
-              I've always been a curious learner, which is probably why I was
-              drawn to the social sciences, humanities, and behavioral
-              science. But it was one research paper that pushed me to
-              become a designer.
+              I didn't always start out in the creative space. I began in
+              the humanities — studying psychology, neuroscience, and
+              Latino studies at Williams College, and working as a research
+              assistant in a neuroscience lab, contributing to studies on
+              psychiatric interventions for memory and fear conditioning.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "230ms" } as React.CSSProperties}>
-              At Williams College, in a Psychology course, I came across a
-              paper on how adversity builds resilience in first-gen
-              students. As a first-gen student myself, it struck me, and it
-              frustrated me: research this important was locked behind
-              paywalls and jargon, invisible to the communities it
-              described. And, I'd later realize, to the designers whose
-              work would shape their lives.
+              I loved that the work mattered. But somewhere along the way,
+              I realized I wanted my role to be more direct. To take that
+              research lens and put it into action, to see the impact
+              myself. That's what brought me to California College of the
+              Arts, where I specialized in interaction design. I wanted to
+              understand how a background in research and human behavior
+              could make technology more accessible, more intuitive, and
+              more meaningfully connected to the people using it.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}>
-              That gap led me to interaction design. I wanted to advocate
-              for the populations that research was about, and my
-              background gave me a way to carry that knowledge in. That
-              drive brought me to California College of the Arts for my
-              Master's in Interaction Design.
-            </p>
-            <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "290ms" } as React.CSSProperties}>
-              That mission hasn't changed. If anything, it's gotten more
-              urgent. As AI reshapes how knowledge gets produced and used,
-              the gap between what's possible and who gets represented in
-              those systems is only widening. I want to keep closing that
-              gap, designing the interface between complex systems and the
-              communities who are often left out of them.
+              That drive hasn't changed. I still find myself reading
+              research papers, now using them to inform the products I
+              build. But what's different is proximity. I get to design
+              directly for the person on the other side of the screen, and
+              to see the impact land. I want to keep creating experiences
+              that are as thoughtful as they are scalable, as beautiful as
+              they are functional.
             </p>
           </div>
         </div>

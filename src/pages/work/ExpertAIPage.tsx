@@ -25,6 +25,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
   return (
     <section
       id={id}
+      data-reveal
       className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
       style={{ marginTop: 164 }}
     >
@@ -39,7 +40,7 @@ function Prose({ children, className = '' }: { children: React.ReactNode; classN
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 }}>
+    <p className="font-landing-body text-[15px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
       {children}
     </p>
   )
@@ -47,11 +48,11 @@ function BodyText({ children }: { children: React.ReactNode }) {
 
 function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string }) {
   return (
-    <div>
+    <div data-reveal style={{ '--reveal-delay': '60ms' } as React.CSSProperties}>
       {tag && (
         <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -151,7 +152,7 @@ function AccessibilityExplorer() {
       <div className="ea-accessibility-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'start' }}>
         <div>
           <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6 }}>Wireframe Tests</p>
-          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', marginBottom: 8, marginTop: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: '1em' }}><Hand size="1em" weight="regular" /></span>
             Accessibility
           </h3>
@@ -292,13 +293,13 @@ export default function ExpertAIPage() {
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
-            <h1 className="text-[44px] sm:text-[58px] font-bold text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', marginBottom: 12 }}>
+            <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               Expert.ai Corpus
             </h1>
-            <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
+            <p className="case-study-hero-reveal font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
               Expert.ai is an AI text analysis platform for legal, finance, and government organizations. As a Product Design Intern, I worked with the AI innovation team and directly with enterprise users to redesign the filtering system. Task time dropped from 2 minutes to 30 seconds. Support tickets about filtering fell by 42%.
             </p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'Product Design Intern' },
                 { label: 'Timeline', value: 'Jun – Sep 2022' },
@@ -313,7 +314,7 @@ export default function ExpertAIPage() {
             </div>
 
             
-            <a href="#ea-features" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
+            <a href="#ea-features" className="case-study-hero-reveal cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
           </div>
         </div>
       </section>
@@ -322,22 +323,8 @@ export default function ExpertAIPage() {
 
         {/* ── 1. Introduction ── */}
         <Section id="ea-intro">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>1.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Context
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>1. Context</p>
           </div>
 
           <div style={{ marginTop: 32 }}>
@@ -378,22 +365,8 @@ export default function ExpertAIPage() {
 
         {/* ── 2. Solution Preview ── */}
         <Section id="ea-solution-preview">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>2.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Solution Preview
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Solution Preview</p>
           </div>
 
           {/* Video container */}
@@ -423,22 +396,8 @@ export default function ExpertAIPage() {
 
         {/* ── 3. Research ── */}
         <Section id="ea-research">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>3.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Research
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Research</p>
           </div>
 
           <div style={{ marginTop: 32 }}>
@@ -531,22 +490,8 @@ export default function ExpertAIPage() {
 
         {/* ── 4. Development ── */}
         <Section id="ea-development">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ color: 'var(--color-navy)', fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300 }}>4.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Development
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. Development</p>
           </div>
 
           {/* Technical Constraints — first, per Framer */}
@@ -662,22 +607,8 @@ export default function ExpertAIPage() {
 
         {/* ── 5. Solution ── */}
         <Section id="ea-features">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>5.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Solution
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Solution</p>
           </div>
 
           <div className="ea-solution-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'center' }}>
@@ -718,22 +649,8 @@ export default function ExpertAIPage() {
 
         {/* ── 6. Impact ── */}
         <Section id="ea-impact">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>6.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Impact
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Impact</p>
           </div>
 
           <div style={{ marginTop: 32 }}>
@@ -775,22 +692,8 @@ export default function ExpertAIPage() {
 
         {/* ── 7. Reflection ── */}
         <Section id="ea-reflection">
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, fontWeight: 300, color: 'var(--color-navy)' }}>7.</span>
-              <h2 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 'normal', margin: 0 }}>
-                Reflection
-              </h2>
-            </div>
-            <div style={{
-              borderTop: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderLeft: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderRight: '1px solid rgba(var(--color-navy-rgb),0.2)',
-              borderBottom: 'none',
-              borderRadius: '12px 12px 0 0',
-              height: 32,
-              width: '100%',
-            }} />
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>7. Reflection</p>
           </div>
 
           <div className="ea-takeaways-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
