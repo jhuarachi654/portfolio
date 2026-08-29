@@ -51,7 +51,7 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
       {tag && (
         <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -255,7 +255,7 @@ export default function RevenueManagementPage() {
         <div className="rm-challenge-subheader-style" style={{ marginTop: 108 }}>
           <ChallengeBanner
             label="HMW Statement"
-            question={<>How might we <span style={{ color: '#416BCC' }}>modernize</span> the RM platform and <span style={{ color: '#416BCC' }}>integrate AI</span> to support analysts with decision making?</>}
+            question={<>How might we <span style={{ color: '#416BCC' }}>modernize</span> and <span style={{ color: '#416BCC' }}>integrate AI</span> to support analysts with decision making?</>}
           />
         </div>
       </Section>
@@ -282,7 +282,7 @@ export default function RevenueManagementPage() {
         ].map(({ n, headline, body, image, alt, noCard }) => (
           <div key={n} style={{ marginTop: 64, textAlign: 'center' }}>
             <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Problem #{n}</p>
-            <p style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 auto 16px', maxWidth: 640 }}>
+            <p className="rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 auto 16px', maxWidth: 640 }}>
               {headline}
             </p>
             <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: '0 auto', maxWidth: 560 }}>
@@ -417,7 +417,7 @@ export default function RevenueManagementPage() {
         ].map(({ n, title, headline, body, image, alt }) => (
           <div key={n} style={{ marginTop: n === 1 ? 0 : 108 }}>
             <p className="cs-metric-label" style={{ margin: '0 0 16px', textAlign: 'center', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Solution #{n}: {title}</p>
-            <p style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 auto 32px', maxWidth: 640, textAlign: 'center' }}>
+            <p className="rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 auto 32px', maxWidth: 640, textAlign: 'center' }}>
               {headline}
             </p>
             <div className="rm-solution-grid" style={{ display: 'grid', gridTemplateColumns: '3.2fr 1fr', gap: 8, alignItems: 'center' }}>

@@ -4867,6 +4867,9 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   .next-project-title {
     font-size: 26px !important;
   }
+  .next-project-card-wrapper .case-study-card-title {
+    font-size: 26px !important;
+  }
   .next-project-desc {
     font-size: 15px !important;
   }
@@ -4874,6 +4877,16 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   .challenge-banner-question {
     font-size: 18px !important;
     line-height: 1.5 !important;
+  }
+  .cs-page .rm-challenge-subheader-style p.challenge-banner-question {
+    font-family: var(--font-landing-heading) !important;
+    font-weight: 500 !important;
+    font-size: 26px !important;
+    line-height: normal !important;
+  }
+  .cs-page h3.rm-subheading,
+  .cs-page p.rm-subheading {
+    font-size: 26px !important;
   }
   .challenge-banner-wrap {
     padding: 24px 16px !important;
