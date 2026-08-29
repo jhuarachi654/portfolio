@@ -1203,8 +1203,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 @media (max-width: 767px) {
   .hero-page--landing {
-    height: 75vh;
-    min-height: 75vh;
+    height: 80vh;
+    min-height: 80vh;
     padding-top: 128px;
     padding-bottom: 128px;
   }

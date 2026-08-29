@@ -83,7 +83,7 @@ export default function FishSwimmer({ color = "#ffffff", onDropStar, filled = fa
     let width = 0, height = 0
     let spriteScale = 1.6
     let textRect: { left: number; right: number; top: number; bottom: number } | null = null
-    const TEXT_AVOID_PAD = 64
+    const TEXT_AVOID_PAD = 28
 
     function resize() {
       const parent = canvas!.parentElement
@@ -120,7 +120,7 @@ export default function FishSwimmer({ color = "#ffffff", onDropStar, filled = fa
     }
 
     const MARGIN = 40
-    let x = width * (0.55 + Math.random() * 0.35)
+    let x = width * (0.4 + Math.random() * 0.5)
     let y = height * (0.3 + Math.random() * 0.4)
     let angle = Math.random() < 0.5 ? 0 : Math.PI
     let speed = 34
