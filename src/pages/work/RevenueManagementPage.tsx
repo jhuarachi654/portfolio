@@ -174,7 +174,7 @@ export default function RevenueManagementPage() {
           </h1>
 
           <p className="case-study-hero-reveal font-landing-body text-[17px] " style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
-            Modernizing PROS's Revenue Management (RM) dashboard to improve scannability, clearer data visualization, and introduce AI features for improved airline enterprise usability.
+            Modernizing dashboard to improve scannability and data visualization, and defining AI components and interactions to better support airline analysts' pricing and analysis workflows.
           </p>
 
           <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3" style={{ marginBottom: 0 }}>
@@ -208,7 +208,7 @@ export default function RevenueManagementPage() {
         <div style={{ marginTop: 32 }}>
           <SubHeading>What is PROS?</SubHeading>
           <BodyText>
-            PROS is a B2B SaaS platform that helps airline and aviation companies manage their internal processes and host content related to fare pricing and cost. Revenue Management is their flagship product, designed to streamline the complex process of identifying fare trends and monitoring inventory in one place for airline analysts.
+            PROS is a B2B SaaS company serving the airline and aviation industry. Revenue Management is their flagship product, designed to streamline the complex process of identifying fare trends and monitoring inventory to determine fare pricing.
           </BodyText>
         </div>
 
@@ -219,7 +219,7 @@ export default function RevenueManagementPage() {
         <div style={{ marginTop: 64 }}>
           <SubHeading>My Role</SubHeading>
           <BodyText>
-            As a product design intern at PROS, I worked alongside a UX strategist, product manager, and user researcher on two initiatives: refining AI components across the platform and modernizing the layout for improved scalability. I designed in Figma and shipped implementation into production using Windsurf and Claude Code, provided developer annotations, conducted user research, and analyzed competitors to better support analyst workflows and define AI use across the platform.
+            As a product design intern at PROS, I worked on the Revenue Management team alongside a UX strategist, product manager, and user researcher on two initiatives: modernizing the RM dashboard layout for improved scannability and defining AI components and interactions. I designed in Figma, built prototypes using Windsurf and Claude Code, provided developer annotations, and conducted user research to help analysts make informed, confident pricing decisions efficiently.
           </BodyText>
         </div>
 
@@ -227,7 +227,7 @@ export default function RevenueManagementPage() {
           <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Impact</p>
           <div className="grid grid-cols-3 gap-4">
             {[
-              { stat: '8', description: 'AI components added to the design system' },
+              { stat: '2', description: 'AI components added to the design system' },
               { stat: '48%', description: 'improvement in analyst satisfaction scores' },
               { stat: '35%', description: 'reduction in fare price decision time' },
             ].map(({ stat, description }) => (
@@ -243,7 +243,7 @@ export default function RevenueManagementPage() {
           <Prose>
             <SubHeading>Covid-19 had changed <span style={{ color: '#416BCC' }}>45%</span> of RM's user base</SubHeading>
             <BodyText>
-              The pandemic brought travel to a halt, leading to widespread layoffs across the airline industry. When hiring picked back up, approximately <em style={{ fontStyle: 'italic' }}>45%</em> of RM's users were a newer generation of analysts. The platform's steep learning curve and lack of AI integration were creating costly delays in decision-making for airline companies.
+              The pandemic brought travel to a halt, leading to widespread layoffs across the airline industry. When hiring picked back up, approximately 45% of RM's users were a newer generation of analysts. The platform had a steep learning curve, and growing AI adoption among users signaled a need for redesign.
             </BodyText>
           </Prose>
 
@@ -254,7 +254,7 @@ export default function RevenueManagementPage() {
 
         <div className="rm-challenge-subheader-style" style={{ marginTop: 108 }}>
           <ChallengeBanner
-            label="HMW Statement"
+            label="Mission"
             question={<>How might we <span style={{ color: '#416BCC' }}>modernize</span> and <span style={{ color: '#416BCC' }}>integrate AI</span> to support analysts with decision making?</>}
           />
         </div>
@@ -266,7 +266,7 @@ export default function RevenueManagementPage() {
           {
             n: 1,
             headline: <>The platform assumed <span style={{ color: '#416BCC' }}>expertise analysts didn't have</span>.</>,
-            body: 'New analysts were dropped into complex views with no guidance, forcing them to figure it out alone or give up entirely.',
+            body: <>Analysts were dropped into complex views with no guidance, leading to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>cognitive overload</strong>, low confidence, and a <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>reliance on workarounds</strong> or external tools.</>,
             image: img('problem-1-complex-platform.png'),
             alt: 'Dense, data-heavy RM Advantage screens with complex tables and charts',
             noCard: true,
@@ -274,7 +274,7 @@ export default function RevenueManagementPage() {
           {
             n: 2,
             headline: <>Analysts were leaving the platform <span style={{ color: '#416BCC' }}>to find help elsewhere</span>.</>,
-            body: <>Due to a steep learning curve, analysts turned to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>external AI tools or peers</strong> for support, leading to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>slower workflows and uncertainty</strong> in pricing decisions.</>,
+            body: <>Due to a steep learning curve, analysts turned to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>external AI tools or peers</strong> for support, leaving them <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>less confident and less independent</strong> in their workflows.</>,
             image: img('problem-2-external-tools.png'),
             alt: 'Claude and ChatGPT chat interfaces, the external AI tools analysts turned to instead',
             noCard: false,
@@ -298,7 +298,7 @@ export default function RevenueManagementPage() {
           <p className="cs-metric-label" style={{ margin: '0 0 32px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Research</p>
           <SubHeading>What was <span style={{ color: '#416BCC' }}>holding analysts back</span>?</SubHeading>
           <BodyText>
-            Through internal interviews with the product team, customer support specialists, and analysis of eight user interviews, I combined qualitative insights to understand the full scope of the issue.
+            Through interviews with customer support specialists and analysis of eight user interviews with airline analysts, I gathered perspectives from both sides — those who use the platform and those who support them — to understand where and why analysts were struggling.
           </BodyText>
 
           <div className="grid grid-cols-2 rm-visual-80" style={{ marginTop: 32, width: '100%', marginLeft: 'auto', marginRight: 'auto', gap: 64 }}>
@@ -308,16 +308,16 @@ export default function RevenueManagementPage() {
         </div>
 
         <div style={{ marginTop: 32 }}>
-          <SubHeading>Continuous, <span style={{ color: '#416BCC' }}>in-platform support</span> had not been considered.</SubHeading>
+          <SubHeading>Continuous, <span style={{ color: '#416BCC' }}>native support</span> had not been considered.</SubHeading>
           <BodyText>
-            The platform assumed analysts would learn through traditional training and peer guidance. But nearly half the user base was navigating a steep learning curve with AI tools instead, leaving the platform to seek help elsewhere. Continuous, in-platform support had not been considered.
+            The platform was built with the assumption that analysts would learn through traditional training and peer guidance. But nearly half the user base was navigating a steep learning curve, turning to external AI tools to fill knowledge gaps. There was a clear need for built-in, continuous support that matched how analysts actually worked.
           </BodyText>
         </div>
 
         <div style={{ marginTop: 108 }}>
-          <SubHeading>Outling user base</SubHeading>
+          <SubHeading>Defining the User Base</SubHeading>
           <BodyText>
-            Through user interviews, I confirmed that RM's user base had significantly shifted, now composed of roughly equal parts Junior and Senior Analysts. I defined two user personas to keep the team aligned and to make clear that we were designing for contrasting sets of needs and behaviors. The solution had to find the balance between both.
+            Through user interviews, I confirmed that RM's user base had significantly shifted, now composed of roughly equal parts newer and senior analysts. I defined personas with their behaviors and needs clearly for the team, to show the two contrasting users and serve as a reference as we worked toward a solution that balanced both.
           </BodyText>
 
           <img src={img('persona-cards-composite.png')} alt="Junior Analyst persona (Avery Chen) and Senior Analyst persona (Alex Reyes) cards" className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} />
@@ -326,11 +326,11 @@ export default function RevenueManagementPage() {
         <div style={{ marginTop: 108 }}>
           <SubHeading>Mapping the Analyst Journey</SubHeading>
           <BodyText>
-            To narrow the scope, I mapped out the current journey for each user type to identify <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>pain points, friction</strong>, and where a redesign would have the most impact. Junior and Senior experiences diverge significantly at login. <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Seniors know exactly where to go.</strong> <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Juniors land without direction.</strong>
+            To narrow the scope of the redesign, I mapped a comparative journey for both analyst types to identify specific <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>pain points, friction</strong>, and where a redesign would have the most impact. We found that the two experiences diverge significantly at login — seniors know exactly where to go, while juniors land without direction.
           </BodyText>
         </div>
 
-        <figure style={{ margin: '48px 0 0' }}>
+        <figure className="cs-fullwidth-figure" style={{ margin: '48px 0 0' }}>
           <img src={img('revenue-management-14-3LKss2.png')} alt="Comparative look at how Junior and Senior Analysts move through the same platform" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', border: '1px solid #d1d1d1', borderRadius: 8 }} />
         </figure>
 
@@ -349,9 +349,21 @@ export default function RevenueManagementPage() {
         <img src={img('4-key-areas.png')} alt="Four key areas iterated on: Getting Started, Market Dashboard, AI Integration, and Market Analytics" className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} />
 
         <div style={{ marginTop: 108 }}>
+          <SubHeading>AI Integration Across the Market</SubHeading>
+          <BodyText>
+            To bring the experience of external AI tools into PROS, we conducted a competitive analysis to understand how AI was being integrated across other platforms — what <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>interaction patterns</strong> and <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>mental models</strong> users already had. We looked at dashboard integration, chat experiences, and onboarding flows.
+          </BodyText>
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+            <div style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
+              <img src={img('ai-exploration.png')} alt="AI Competitive Analysis — dashboard integration, onboarding, and chat experiences across platforms" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </div>
+          </figure>
+        </div>
+
+        <div style={{ marginTop: 108 }}>
           <SubHeading>Defining the role of AI</SubHeading>
           <BodyText>
-            To address the ambiguity around AI integration, I explored layouts through sketch wireframes ranging from heavy to light AI presence, using <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>trust</strong> and <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>user agency</strong> as guiding principles for what to implement.
+            To address the ambiguity around AI integration, we explored layouts through sketch wireframes on FigJam ranging from heavy to light AI presence, using <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>trust</strong> and <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>user agency</strong> as guiding principles.
           </BodyText>
 
           <div className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0' }}>
@@ -363,7 +375,7 @@ export default function RevenueManagementPage() {
         <div style={{ marginTop: 108 }}>
           <SubHeading>Market Scannability</SubHeading>
           <BodyText>
-            Analysts review hundreds of markets a day and make pricing decisions that need to be fast and accurate. When exploring display layouts, I prioritized visibility, key KPIs, and built-in organization. Each iteration explored different card sizes, balancing cognitive load, visual priority, color coding, and labeling to surface the right information without overwhelming the analyst.
+            Analysts review hundreds of markets a day and make pricing decisions that need to be <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>fast and accurate</strong>. When exploring flight fare card display layouts, I prioritized <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>scannability and KPIs</strong>, using Claude Code to rapidly iterate high-fidelity mockups. Each iteration explored different card sizes, balancing cognitive load and visual hierarchy to surface the right information when needed.
           </BodyText>
 
           <div className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0', background: '#EFEFEF', borderRadius: 8, padding: 32 }}>
@@ -410,7 +422,7 @@ export default function RevenueManagementPage() {
             n: 4,
             title: 'Full AI Chat Screen',
             headline: <>Deeper analysis gets its own <span style={{ color: '#416BCC' }}>dedicated space</span>.</>,
-            body: <>For questions that go beyond a quick answer, analysts can open a full chat screen where the AI walks through booking trends, forecasting, and analysis step by step, with the <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>ability to save</strong> those conversations for later reference.</>,
+            body: <>When analysts need to dig deeper, they can open a full chat screen where PROS AI walks through booking trends, forecasting, and analysis step by step, with the <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>ability to save</strong> conversations for later reference.</>,
             image: img('solution-4-full-ai-chat.png'),
             alt: 'Full AI chat screen',
           },
@@ -431,15 +443,29 @@ export default function RevenueManagementPage() {
 
       </Section>
 
-      {/* ── Impact ── */}
+      {/* ── Design System ── */}
+      <Section className="">
+        <div style={{ marginTop: 0 }}>
+          <SubHeading>Contributing to the Design System</SubHeading>
+          <BodyText>
+            As part of the modernization, the UX strategist and I documented two new AI components — a contextual <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>market selector</strong> and <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>tailored prompts</strong> — across both the full and side chat panel experiences, adding them to PROS's existing design system for developer handoff.
+          </BodyText>
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+            <div style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
+              <img src={img('design-system.png')} alt="PROS AI Chat design system components — market selector and tailored prompts across full and side chat panels" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </div>
+          </figure>
+        </div>
+      </Section>
+
       {/* ── Reflection ── */}
       <Section id="rm-reflection" className="">
         <div style={{ marginBottom: 32 }}>
           <p className="cs-metric-label" style={{ margin: '0 0 32px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Reflection</p>
 
-          <SubHeading>This was my first role contributing to the foundation of how AI is used in a product.</SubHeading>
+          <SubHeading>This was my first role contributing to how AI is used in a product.</SubHeading>
           <BodyText>
-            This was my first project navigating the ambiguity of integrating AI into a complex B2B platform, and it was a collaborative effort. Through mentorship from Andy, UX Strategist, and Eric, User Researcher, I was pushed to consider the mental models of analysts, balance user needs with technical feasibility, and grow in how I present and communicate my work.
+            This was my first project navigating the ambiguity of integrating AI into a platform. Working closely with the UX strategist and user researcher, I was pushed to think deeper about analysts' mental models, balance user needs with technical feasibility, and grow in how I communicate my design decisions.
           </BodyText>
           <BodyText>
             This experience showed me that modernizing a product while navigating new features like AI comes down to one thing: making sure it truly serves the people you are designing for. I'm excited to see how this project evolves. Thank you, PROS!
@@ -468,7 +494,7 @@ export default function RevenueManagementPage() {
         title="PROS Fare Finder Map"
         to="/work/fare-finder"
         tags={["Enterprise", "Product Design Intern"]}
-        description="Designed and shipped a flight map tool for travelers to explore and book their next trip."
+        description="Designing and shipping a flight map exploration tool for airlines to display on their booking sites, helping travelers make more informed and confident booking decisions."
         video="/videos/Fare-Finder-Video.webm"
         poster="/videos/Fare-Finder-Video-poster.png"
         restTime={4}

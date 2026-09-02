@@ -21,7 +21,7 @@ export default function ChallengeBanner({ label = 'Challenge', question, icon, i
       </div>
 
       {/* Label */}
-      <p className="font-sans font-semibold tracking-[0.12em] uppercase challenge-banner-label" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>
+      <p className="cs-metric-label challenge-banner-label" style={{ marginBottom: 16, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>
         {label}
       </p>
 

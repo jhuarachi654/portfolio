@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { MapTrifold, Compass, MagnifyingGlass, AirplaneTakeoff, Rocket, TrendUp, TrendDown, Airplane, Globe, CaretLeft, CaretRight, Asterisk, MapPin, Gear } from '@phosphor-icons/react'
+import { MapTrifold, Compass, MagnifyingGlass, AirplaneTakeoff, Rocket, TrendUp, TrendDown, Airplane, Globe, CaretLeft, CaretRight, Asterisk } from '@phosphor-icons/react'
 import SectionHeading from '../../components/case-study/SectionHeading'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
@@ -11,8 +11,7 @@ import LazyVideo from '../../components/LazyVideo'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
-  { id: 'ff-intro',             label: 'Introduction' },
-  { id: 'ff-solution-preview',  label: 'Solution Preview' },
+  { id: 'ff-intro',             label: 'Context' },
   { id: 'ff-research',    label: 'Research' },
   { id: 'ff-development', label: 'Development' },
   { id: 'ff-features',    label: 'Solution' },
@@ -175,7 +174,7 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
       {tag && (
         <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
       )}
-      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -194,70 +193,6 @@ function StatBlock({ stat, description, icon }: { stat: string; description: str
         <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, lineHeight: 'normal', margin: 0, fontWeight: 400, color: '#416BCC' }} />
       </div>
       <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
-    </div>
-  )
-}
-
-function PersonaCard({ type, avatar, name, location, role, goals, needs, caption }: { type: string; avatar: string; name: string; location: string; role: string; goals: string[]; needs: string[]; caption: string }) {
-  return (
-    <div>
-      <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 20 }}>
-        {/* Type badge */}
-        <div style={{ display: 'inline-block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: '6px 14px', marginBottom: 16 }}>
-          <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-cs-heading)' }}>{type}</span>
-        </div>
-
-        {/* Avatar */}
-        <div style={{
-          width: 64, height: 64, borderRadius: '50%',
-          overflow: 'hidden', margin: '0 auto 12px',
-          border: '1px solid rgba(var(--color-navy-rgb),0.15)',
-          background: '#ffffff',
-        }}>
-          <img src={avatar} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </div>
-
-        {/* Name */}
-        <h4 className="font-semibold text-[var(--color-cs-heading)] text-center" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 20, margin: '0 0 8px' }}>{name}</h4>
-
-        {/* Location + Role */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, marginBottom: 16, flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <MapPin size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
-            <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{location}</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <Gear size={13} style={{ color: 'rgba(var(--color-navy-rgb),0.4)' }} />
-            <span className="font-landing-body text-[13px]" style={{ color: 'var(--color-secondary)', whiteSpace: 'nowrap' }}>{role}</span>
-          </div>
-        </div>
-
-        <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '0 0 16px' }} />
-
-        {/* Goals */}
-        <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: '0 0 8px' }}>Goals:</p>
-        <ul style={{ listStyle: 'none', margin: '0 0 12px', padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {goals.map(g => (
-            <li key={g} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-              <span className="font-landing-body text-[13px]" style={{ color: '#222225', lineHeight: 'normal' }}>{g}</span>
-            </li>
-          ))}
-        </ul>
-
-        {/* Needs */}
-        <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: '0 0 12px' }}>Needs:</p>
-        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {needs.map(n => (
-            <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-              <span className="font-landing-body text-[13px]" style={{ color: '#222225', lineHeight: 'normal' }}>{n}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{caption}</p>
     </div>
   )
 }
@@ -293,7 +228,7 @@ function SolutionBlock({
         </>
       )}
 
-      <img src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block', margin: '32px auto 0' }} />
+      <img className="cs-fullwidth-figure" src={image} alt={imageAlt} style={{ width: '100%', height: 'auto', display: 'block', margin: '32px auto 0' }} />
       {caption && (
         <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{caption}</p>
       )}
@@ -498,7 +433,7 @@ export default function FareFinderPage() {
               PROS Fare Finder Map
             </h1>
             <p className="font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
-              Designed and shipped a flight map tool for travelers to explore and to be informed in order to book their next trip.
+              Designing and shipping a flight map exploration tool for airlines to display on their booking sites, helping travelers make more informed and confident booking decisions.
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
@@ -522,176 +457,100 @@ export default function FareFinderPage() {
 
       <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 32, display: 'flex', flexDirection: 'column', gap: 0 }}>
 
-      {/* ── Introduction ── */}
+      {/* ── Context ── */}
       <Section id="ff-intro">
         <div style={{ marginBottom: 32 }}>
-          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>1. Introduction</p>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>1. Context</p>
         </div>
 
-        <div>
-          <PolaroidDeck />
+        <div style={{ marginTop: 32 }}>
+          <SubHeading>What is PROS?</SubHeading>
+          <BodyText>
+            PROS is a B2B SaaS company serving the airline and aviation industry. Fare Finder Map is an interactive flight map tool that airlines embed on their booking sites, giving travelers a way to explore destinations and fares before booking.
+          </BodyText>
+        </div>
+
+        <div className="cs-fullwidth-figure" style={{ marginTop: 64 }}>
+          <img src={img('pros-ff-hero.png')} alt="PROS Fare Finder Map interface showing the interactive flight map and destination details" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+        </div>
+
+        <div style={{ marginTop: 64 }}>
+          <SubHeading>My Role</SubHeading>
+          <BodyText>
+              As a product design intern at PROS, I worked on the Fare Finder team alongside a UX designer, visual designer, and product managers to redesign the Fare Finder Map, focusing on personalization and improving usability. I synthesized research, conducted competitive analysis, and built prototypes in Figma to help travelers explore flights and book with confidence.
+          </BodyText>
+        </div>
+
+        <div style={{ marginTop: 64 }}>
+          <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Impact</p>
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              { stat: '3 months', description: 'after handoff, Fare Finder went live' },
+              { stat: '45%', description: 'decrease in map abandonment' },
+              { stat: '35%', description: 'increase in direct bookings' },
+            ].map(({ stat, description }) => (
+              <div key={description}>
+                <p className="cs-stat-number-accent" style={{ margin: '0 0 8px' }}>{stat}</p>
+                <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div style={{ marginTop: 108 }}>
-          <SubHeading>Fare Finder Map @ PROS</SubHeading>
-          <BodyText>
-            This past summer, I interned at PROS, a B2B software company providing digital products for airlines and the travelers they serve. One of the projects I worked on was Fare Finder Map, an interactive flight map-based tool that showcases flight fares.
-          </BodyText>
-          <BodyText>
-            A Junior Designer and I co-led the redesign of the Fare Finder Map to better support free exploration and provide personalized recommendations for everyday travelers.
-          </BodyText>
-
-          <figure style={{ margin: '32px 0 0' }}>
-            <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
-              <LazyVideo src="/videos/old-fare-finder.webm" style={{ width: '100%', display: 'block' }} />
-            </div>
-            <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Precedent Fare Finder</figcaption>
+          <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Problem</p>
+          <SubHeading>Personalization and discovery support were <span style={{ color: '#416BCC' }}>missing.</span></SubHeading>
+          <Prose>
+            <BodyText>
+              Flight discovery is where a traveler's journey begins — and where they were dropping off. Usability testing revealed they were abandoning the experience for third-party platforms offering more personalization and guided exploration. A competitive analysis confirmed the gap: across booking platforms, these features had become the expectation, not the exception.
+            </BodyText>
+          </Prose>
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+            <img src={img('booking-maps-comparison.jpg')} alt="Booking solutions on the market" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </figure>
         </div>
 
-        <div style={{ marginTop: 108 }}>
-          <div className="ff-friction-intro-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
-            <div>
-              <SubHeading>Friction in flight discovery = fewer bookings.</SubHeading>
-              <Prose>
-                <BodyText>
-                  Flight discovery is the first touchpoint travelers have when planning a trip. Across flight exploration platforms, personalized results and travel-related support have become standard.
-                </BodyText>
-                <BodyText>
-                  When the direct booking experience on an airline's site falls short of that, travelers go elsewhere and <em>airlines lose those direct bookings.</em>
-                </BodyText>
-              </Prose>
-            </div>
-            <figure style={{ margin: 0 }}>
-              <img src={img('booking-markets.avif')} alt="Booking solutions on the market" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid #d1d1d1', borderRadius: 8 }} />
-              <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Booking solutions on the market</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div style={{ marginTop: 108 }}>
+        <div className="rm-challenge-subheader-style" style={{ marginTop: 108 }}>
           <ChallengeBanner
-            icon={<AirplaneTakeoff size="1em" weight="regular" />}
-            iconColor="#416BCC"
-            question={<>How might we redesign the Fare Finder Map to make flight exploration <strong><em>more supported</em></strong> and <strong><em>personalized</em></strong>?</>}
+            label="Mission"
+            question={<>How might we redesign the Fare Finder Map to make flight exploration <span style={{ color: '#416BCC' }}>more supported</span> and <span style={{ color: '#416BCC' }}>personalized</span>?</>}
           />
         </div>
 
-        {/* ── Solution Preview ── */}
-        <div id="ff-solution-preview" style={{ marginTop: 108 }}>
-          <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Solution Preview</p>
-          </div>
-
-          {/* Video container */}
-          <div style={{ width: '100%', margin: '0 auto' }}>
-            <div style={{ borderRadius: 8, overflow: 'hidden', background: 'transparent' }}>
-              <LazyVideo
-                src="/videos/fare-finder-solution-preview.webm"
-                style={{ width: '100%', display: 'block' }}
-              />
-            </div>
-          </div>
-
-          {/* TL:DR */}
-          <div style={{ marginTop: 32 }}>
-            <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>TL:DR</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
-              <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
-                A new way to find your next flight destination
-              </h3>
-              <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
-                Fare Finder is an map-based exploration tool with an interface that is <strong className="font-semibold" style={{ color: 'var(--color-cs-heading)' }}>customizable, personalized,</strong> and <strong className="font-semibold" style={{ color: 'var(--color-cs-heading)' }}>intuitive.</strong>
-              </p>
-            </div>
-          </div>
-        </div>
       </Section>
 
       {/* ── Research ── */}
       <Section id="ff-research">
         <div style={{ marginBottom: 32 }}>
-          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Research</p>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Research</p>
         </div>
 
-        <div>
-          <SubHeading>Who I Was Designing For</SubHeading>
-          <Prose>
-            <BodyText>
-              To start, I met with the PMs working directly with our airline partners and the User Researcher who knew our end users, the travelers.
-            </BodyText>
-            <BodyText>
-              Those conversations revealed what made Fare Finder unique: <em>it served two distinct users at once, enterprise and consumer, each with their own goals that I had to balance.</em>
-            </BodyText>
-          </Prose>
-
-          <div className="ff-persona-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginTop: 32 }}>
-            <PersonaCard
-              type="Enterprise User"
-              avatar={img('enterprise-persona.avif')}
-              name="Jordan Taylor"
-              location="Dallas, Texas"
-              role="Director of Digital Strategy"
-              goals={['Increase direct bookings', 'Present a delightful experience to their travelers']}
-              needs={[
-                'A reliable tool that reflects well on their brand',
-                'Seamless integration into their existing website',
-                'Confidence that travelers will complete bookings without friction',
-              ]}
-              caption="The airline that embeds Fare Finder on their site to serve their travelers."
-            />
-            <PersonaCard
-              type="Consumer User"
-              avatar={img('consumer-persona.webp')}
-              name="Casey Smith"
-              location="Chicago, Illinois"
-              role="Travels for work and leisure"
-              goals={['Explore flights while feeling informed', 'Book seamlessly from the map without confusion']}
-              needs={[
-                'A clear, intuitive map interface',
-                'Information that helps them make decisions',
-                'A smooth path from exploration to booking',
-              ]}
-              caption="The person using Fare Finder to explore and book flights."
-            />
+        <figure className="cs-fullwidth-figure" style={{ margin: 0 }}>
+          <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
+            <LazyVideo src="/videos/old-fare-finder.webm" style={{ width: '100%', display: 'block' }} />
           </div>
+        </figure>
 
-          <figure style={{ margin: '48px 0 0' }}>
-            <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
-              <img src={img('fare-finder-10-L9E2IY.png')} alt="Product ecosystem diagram" style={{ width: '100%', height: 'auto', display: 'block' }} />
-            </div>
-            <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Product Ecosystem</figcaption>
+        <div style={{ marginTop: 108 }}>
+          <SubHeading>What was the <span style={{ color: '#416BCC' }}>current</span> user experience?</SubHeading>
+          <BodyText>
+            With the user researcher, I analyzed five guided user interviews through affinity mapping — participants aged 21–35, spanning occasional and regular travelers — to understand how they experienced the current Fare Finder. We used FigJam AI for initial sorting and categorization, then refined the themes through discussion.
+          </BodyText>
+
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+            <img src={img('figjam-ai-affinity-composite.png')} alt="FigJam AI use in Affinity Mapping" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </figure>
         </div>
 
         <div style={{ marginTop: 108 }}>
-          <div className="ff-ai-sorting-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
-            <div>
-              <SubHeading>Attempting to use AI to speed up synthesis</SubHeading>
-              <Prose>
-                <BodyText>
-                  Before I joined the project, usability testing had just concluded. I jumped into the analysis working 1-1 with the User Researcher, trying out FigJam's AI tools for part of the affinity mapping.
-                </BodyText>
-                <BodyText>
-                  It was a good starting foundation but needed detailed review, which took additional time. Looking back, this has shown me to consider this trade-off for future potential uses.
-                </BodyText>
-              </Prose>
-            </div>
-            <figure style={{ margin: 0 }}>
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
-                <img src={img('figjam-ai.avif')} alt="FigJam AI use in Affinity Mapping" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              </div>
-              <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>FigJam AI use in Affinity Mapping</figcaption>
-            </figure>
-          </div>
-
-          <figure style={{ margin: '48px 0 0' }}>
-            <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
-              <img src={img('affinity-mapping.webp')} alt="Before and after affinity mapping using FigJam AI" style={{ width: '100%', height: 'auto', display: 'block' }} />
-            </div>
-            <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Before and After Affinity Mapping</figcaption>
-          </figure>
+          <SubHeading>What did the flight booking market look like?</SubHeading>
+          <BodyText>
+            I conducted a competitive analysis across 10 platforms, spanning third-party booking sites and airline platforms, using thematic analysis to map the current landscape of flight booking experiences and identify gaps and opportunities.
+          </BodyText>
         </div>
+        <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+          <img src={img('competitive-analysis-tables.png')} alt="Competitive analysis tables across direct and indirect competitors" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </figure>
 
         <div style={{ marginTop: 108 }}>
           <SubHeading>Friction Points in the Booking Experience</SubHeading>
@@ -729,21 +588,6 @@ export default function FareFinderPage() {
         </div>
 
         <div style={{ marginTop: 108 }}>
-          <SubHeading>Booking Features Across the Market</SubHeading>
-          <Prose>
-            <BodyText>
-              To answer these questions, I looked at how competitors and adjacent platforms like hotels and vacation rentals were already solving this. <strong className="font-semibold" style={{ color: 'var(--color-cs-heading)' }}>Booking experiences with maps aren't new.</strong> These features shared a common goal: helping travelers explore their options intuitively and book with as little effort as possible, all while keeping them informed.
-            </BodyText>
-          </Prose>
-          <figure className="cs-fullwidth-figure" style={{ margin: '48px 0 0' }}>
-            <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
-              <img src={img('competitive-analysis.webp')} alt="State of the market — relevant booking features" style={{ width: '100%', height: 'auto', display: 'block' }} />
-            </div>
-            <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Relevant features across the booking market</figcaption>
-          </figure>
-        </div>
-
-        <div style={{ marginTop: 108 }}>
           <SubHeading>The Potential of Fare Finder</SubHeading>
           <Prose>
             <BodyText>
@@ -772,7 +616,7 @@ export default function FareFinderPage() {
       {/* ── Development ── */}
       <Section id="ff-development">
         <div style={{ marginBottom: 32 }}>
-          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. Development</p>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Development</p>
         </div>
 
         <Prose>
@@ -848,34 +692,29 @@ export default function FareFinderPage() {
       {/* ── Solution ── */}
       <Section id="ff-features">
         <div style={{ marginBottom: 32 }}>
-          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Solution</p>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. Solution</p>
         </div>
 
-        {/* Solution Overview — key screens with numbered captions */}
-        <div style={{ marginBottom: 32 }}>
-          <h3 className="font-bold text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 'normal', margin: '0 0 8px' }}>
-            Solution Overview
-          </h3>
-          <BodyText>
-            A breakdown of the features in the redesigned Fare Finder that helps travelers explore and book with confidence.
-          </BodyText>
-          <div className="ff-solution-overview-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 24,
-            marginTop: 24,
-          }}>
-            {[
-              { image: img('fare-finder-30-VCz5wN.png'), alt: 'Focused entry point screen', caption: '1. Traveler lands on Fare Finder with a focused entry point' },
-              { image: img('fare-finder-31-kf20ST.png'), alt: 'Customized map layout', caption: '2. Adjusts the map layout to explore at their own pace' },
-              { image: img('fare-finder-34-vcLxIa.png'), alt: 'Expanded flight card and quick facts panel', caption: '3. Selects a destination and reviews the flight fare card and quick facts' },
-              { image: img('fare-finder-35-2kxfyI.png'), alt: 'Personalized destinations panel', caption: '4. Browses tailored flight recommendations to keep exploring' },
-            ].map(screen => (
-              <figure key={screen.alt} style={{ margin: 0 }}>
-                <img src={screen.image} alt={screen.alt} style={{ width: '100%', height: 'auto', display: 'block' }} />
-                <figcaption className="font-landing-body cs-caption" style={{ textAlign: 'left', marginTop: 12 }}>{screen.caption}</figcaption>
-              </figure>
-            ))}
+        {/* Video container */}
+        <div style={{ width: '100%', margin: '0 auto' }}>
+          <div style={{ borderRadius: 8, overflow: 'hidden', background: 'transparent' }}>
+            <LazyVideo
+              src="/videos/fare-finder-solution-preview.webm"
+              style={{ width: '100%', display: 'block' }}
+            />
+          </div>
+        </div>
+
+        {/* TL:DR */}
+        <div style={{ marginTop: 32 }}>
+          <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>TL:DR</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
+            <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
+              A new way to find your next flight destination
+            </h3>
+            <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+              Fare Finder is an map-based exploration tool with an interface that is <strong className="font-semibold" style={{ color: 'var(--color-cs-heading)' }}>customizable, personalized,</strong> and <strong className="font-semibold" style={{ color: 'var(--color-cs-heading)' }}>intuitive.</strong>
+            </p>
           </div>
         </div>
 
@@ -937,7 +776,7 @@ export default function FareFinderPage() {
 
       {/* ── Impact ── */}
       <Section id="ff-impact">
-        <SectionHeading index={6} chapter="Impact" heading="How Fare Finder changed the booking experience" />
+        <SectionHeading index={5} chapter="Impact" heading="How Fare Finder changed the booking experience" />
 
         <BodyText>By the time these features were defined and validated by airline partners, my internship ended before usability testing could be completed.</BodyText>
         <BodyText>
@@ -972,7 +811,7 @@ export default function FareFinderPage() {
       {/* ── Reflection ── */}
       <Section id="ff-reflection">
         <div style={{ marginBottom: 32 }}>
-          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>7. Reflection</p>
+          <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Reflection</p>
         </div>
 
         <div className="ff-reflection-carry-forward-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>

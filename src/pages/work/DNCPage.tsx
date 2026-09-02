@@ -365,7 +365,7 @@ export default function DNCPage() {
               No matter the timeline, every request followed the same path. Here is how a typical ticket moved from brief to handoff.
             </BodyText>
 
-            <figure style={{ margin: '24px 0 0' }}>
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }}>
               <img src={img('design-ticket-process.png')} alt="Flowchart of the design ticket process: request created by brand strategist and ads coordinator, then me as visual design intern, creates draft of design, live review with entire design team, revisions based on feedback, and verification and handoff" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
               <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Every graphic went through the same six steps: brief, draft, feedback, revisions, verification, and handoff. *Even in same-day design requests</figcaption>
             </figure>

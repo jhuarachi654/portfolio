@@ -79,14 +79,14 @@
 
   --type-body-lg-family: var(--font-landing-body);
   --type-body-lg-weight: 400;
-  --type-body-lg-size: clamp(15px, calc(14.286px + 0.1905vw), 16px);
-  --type-body-lg-line-height: 1.7;
+  --type-body-lg-size: 16.5px;
+  --type-body-lg-line-height: 1.4;
   --type-body-lg-transform: none;
 
   --type-body-family: var(--font-landing-body);
-  --type-body-weight: 350;
-  --type-body-size: 17px;
-  --type-body-line-height: 1.7;
+  --type-body-weight: 400;
+  --type-body-size: 16.5px;
+  --type-body-line-height: 1.4;
   --type-body-transform: none;
 
   --type-body-sm-family: var(--font-landing-body);
@@ -361,6 +361,22 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   gap: 28px;
 }
 
+.sidebar-pill-nav .nav-link {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-active-pill--shared {
+  position: absolute !important;
+  top: -8px;
+  left: 0;
+  height: calc(100% + 16px);
+  background: rgba(62, 66, 66, 0.08);
+  border-radius: 100px;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .sidebar-pill-divider {
   width: 1px;
   height: 20px;
@@ -539,7 +555,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   to   { opacity: 1; transform: translate(-50%, 0); }
 }
 
-.sidebar-pill-nav .nav-link { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: 500; line-height: var(--type-body-line-height); color: #3E4242; padding: 0; overflow: visible; opacity: 1; transition: opacity 150ms ease; }
+.sidebar-pill-nav .nav-link { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: #3E4242; padding: 0; overflow: visible; opacity: 1; transition: opacity 150ms ease; }
 .sidebar-pill-nav .nav-link::before,
 .sidebar-pill-nav .nav-link::after {
   display: none;
@@ -1957,50 +1973,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .hero-tag { font-family: var(--type-label-family); font-size: var(--type-label-size); font-weight: 500; line-height: var(--type-label-line-height); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(30, 75, 154, 0.7); background: rgba(30, 75, 154, 0.08); padding: 4px 10px; border-radius: 4px; }
 
 /* ── Custom cursor ───────────────────────────────────────────────── */
-@media (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none !important; }
-}
-
-.cursor-dot {
-  position: fixed;
-  top: -4px;
-  left: -4px;
-  width: 8px;
-  height: 8px;
-  background: #ffffff;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  will-change: transform;
-  mix-blend-mode: difference;
-  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
-}
-
-.cursor-ring {
-  position: fixed;
-  top: -18px;
-  left: -18px;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(30, 75, 154, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  will-change: transform;
-  transition: width 0.25s ease, height 0.25s ease,
-              top 0.25s ease, left 0.25s ease,
-              border-color 0.25s ease, background 0.25s ease;
-}
-
-.cursor-ring.is-hovering {
-  top: -26px;
-  left: -26px;
-  width: 52px;
-  height: 52px;
-  border-color: rgba(30, 75, 154, 0.6);
-  background: rgba(30, 75, 154, 0.06);
-}
-
 @media (max-width: 767px) {
   .cursor-label { display: none !important; }
 }
@@ -2013,8 +1985,9 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   z-index: 10000;
   display: flex;
   align-items: center;
-  padding: 6px 12px;
+  padding: 10px 20px;
   background: #0d1b2a;
+  border: 1px solid #ffffff;
   border-radius: 20px;
   white-space: nowrap;
   opacity: 0;
@@ -2035,56 +2008,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 /* ── Cursor on dark footer ───────────────────────────────────────── */
-.cursor-dot.is-hidden,
-.cursor-ring.is-hidden,
 .cursor-label.is-hidden { opacity: 0; }
-.cursor-dot.is-light {
-  background: #ffffff;
-}
-.cursor-ring.is-light {
-  border-color: rgba(255, 255, 255, 0.45);
-  clip-path: polygon(
-    50% 5%,  61% 35%, 90% 15%, 72% 42%,
-    98% 50%, 72% 58%, 90% 85%, 61% 65%,
-    50% 95%, 39% 65%, 10% 85%, 28% 58%,
-    2%  50%, 28% 42%, 10% 15%, 39% 35%
-  );
-  transition: width 0.25s ease, height 0.25s ease,
-              top 0.25s ease, left 0.25s ease,
-              border-color 0.25s ease, background 0.25s ease,
-              clip-path 0.3s ease;
-}
-.cursor-ring.is-light.is-hovering {
-  border-color: rgba(200, 220, 255, 0.7);
-  background: rgba(168, 190, 232, 0.1);
-  clip-path: polygon(
-    50% 5%,  61% 35%, 90% 15%, 72% 42%,
-    98% 50%, 72% 58%, 90% 85%, 61% 65%,
-    50% 95%, 39% 65%, 10% 85%, 28% 58%,
-    2%  50%, 28% 42%, 10% 15%, 39% 35%
-  );
-}
 .cursor-label.is-light {
   background: #ffffff;
 }
 .cursor-label.is-light .cursor-label-text {
   color: #0d1b2a;
-}
-
-/* ── Overlay-open: ring adapts to dark backdrop ───────────────── */
-body.overlay-open .cursor-ring {
-  border-color: rgba(255, 255, 255, 0.45);
-}
-body.overlay-open .cursor-ring.is-hovering {
-  border-color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.08);
-}
-body.overlay-open.cursor-on-light-card .cursor-ring {
-  border-color: rgba(30, 75, 154, 0.4);
-}
-body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
-  border-color: rgba(30, 75, 154, 0.7);
-  background: rgba(30, 75, 154, 0.06);
 }
 
 /* ── Focus ───────────────────────────────────────────────────────── */
@@ -2276,14 +2205,6 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 .hero-flower-wrap:hover .hero-flower-label {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-}
-
-/* Cursor */
-[data-theme="dark"] .cursor-dot  { background: #E8EFF8; }
-[data-theme="dark"] .cursor-ring { border-color: rgba(232, 239, 248, 0.3); }
-[data-theme="dark"] .cursor-ring.is-hovering {
-  border-color: rgba(232, 239, 248, 0.55);
-  background: rgba(232, 239, 248, 0.05);
 }
 
 /* Focus ring */
@@ -2551,6 +2472,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   outline: none;
   min-width: 0;
   max-width: 100%;
+  cursor: pointer;
 }
 .case-study-card-wrapper:focus-visible .case-study-card {
   border-color: rgba(30, 75, 154, 0.55);
@@ -2930,12 +2852,10 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   white-space: nowrap;
 }
 
-/* Play page cards, and the case-study "next project" preview, show their
-   title (unlike Home, where the media itself already conveys the name) */
-.play-card-grid .case-study-card-title,
+/* The case-study "next project" preview shows its title (unlike Home,
+   where the media itself already conveys the name) */
 .next-project-card-wrapper .case-study-card-title { font-family: var(--font-landing-heading); font-size: 32px; font-weight: 500; line-height: normal; position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; color: var(--color-cs-heading); margin: 0 0 8px; }
 
-[data-theme="dark"] .play-card-grid .case-study-card-title,
 [data-theme="dark"] .next-project-card-wrapper .case-study-card-title { color: #F2F5FA; }
 
 .case-study-card-landing-title { font-family: var(--type-h3-family); font-size: var(--type-h3-size); font-weight: 500; line-height: var(--type-h3-line-height); color: #222225; order: 0; margin: 0 0 4px; }
@@ -2971,7 +2891,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .case-study-card-description {
   font-family: var(--font-landing-body);
-  font-size: 15px;
+  font-size: var(--type-body-size);
   font-weight: var(--type-body-weight);
   line-height: var(--type-body-line-height);
   color: #222225;
@@ -3805,6 +3725,68 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
 .about-bio-para { font-family: var(--type-body-lg-family); font-size: var(--type-body-lg-size); font-weight: var(--type-body-lg-weight); line-height: var(--type-body-lg-line-height); color: #222225; }
 
+/* Pencil-style annotation marks (underline / circle / squiggle) over
+   specific phrases in the About bio — draw themselves in once the
+   surrounding paragraph's own [data-reveal] scroll-in finishes, reusing
+   that observer instead of adding a second one just for these marks.
+   Each mark's --annotate-delay (set inline per <Annotate order={n}>)
+   staggers its draw-in so several landing in the same viewport pass
+   animate one after another instead of all at once. */
+.about-annotate {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.about-annotate-svg {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+}
+.about-annotate-svg path {
+  fill: none;
+}
+/* pathLength={100} normalizes every mark's curve to the same 100-unit
+   length regardless of its actual on-screen size, so one dasharray value
+   works for underline, squiggle, and circle alike. */
+.about-annotate-stroke {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+[data-reveal].is-visible .about-annotate-svg path {
+  animation: aboutAnnotateDraw 0.9s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation-delay: var(--annotate-delay, 0.4s);
+}
+@keyframes aboutAnnotateDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+.about-annotate-underline,
+.about-annotate-squiggle {
+  left: -2px;
+  right: -2px;
+  bottom: -6px;
+  width: calc(100% + 4px);
+  height: 14px;
+}
+
+.about-annotate-circle {
+  left: -10%;
+  right: -10%;
+  top: -22%;
+  bottom: -22%;
+  width: 120%;
+  height: 144%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-annotate-svg path {
+    stroke-dashoffset: 0;
+  }
+  [data-reveal].is-visible .about-annotate-svg path {
+    animation: none;
+  }
+}
+
 .about-bio-footnote { font-family: var(--type-body-sm-family); font-size: var(--type-body-sm-size); font-weight: var(--type-body-sm-weight); line-height: var(--type-body-sm-line-height); font-style: italic; opacity: 0.7; }
 
 .about-highlight {
@@ -4247,46 +4229,18 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 }
 
 .play-card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
   padding: 0 176px 80px;
-}
-
-/* Full-width cards match the height of the 4/3 half-width cards on desktop */
-.play-card-grid > div[style*="grid-column"] .case-study-card-media {
-  aspect-ratio: unset !important;
-  height: calc((100vw - (2 * 176px) - 24px) / 2 * 3 / 4);
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .play-card-grid {
     padding: 0 124px 80px;
   }
-  /* Taller media on tablet — the 4:3 ratio used everywhere else reads a
-     bit short/cramped at this width, so give it more height here only. */
-  .play-card-grid .case-study-card-media {
-    aspect-ratio: 1/1 !important;
-  }
-  .play-card-grid > div[style*="grid-column"] .case-study-card-media {
-    aspect-ratio: unset !important;
-    height: calc((100vw - (2 * 124px) - 24px) / 2);
-  }
 }
 
 @media (max-width: 767px) {
   .play-card-grid {
-    grid-template-columns: 1fr;
     padding: 24px 20px 60px;
-  }
-  /* On mobile 1-col, full-width cards just use natural 4/3 ratio */
-  .play-card-grid > div[style*="grid-column"] .case-study-card-media {
-    height: auto !important;
-    aspect-ratio: 4/3 !important;
-  }
-  /* Ensure Photography & Koi Pond media fills width */
-  .play-card-grid .case-study-card-media {
-    width: 100%;
   }
 }
 
@@ -4760,7 +4714,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
   font-weight: 500 !important;
 }
 
-.cs-page p { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: 1.3; color: #222225 !important; }
+.cs-page p { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: #222225 !important; }
 
 .cs-page p.cs-serif-label { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-weight: 600; line-height: var(--type-h1-line-height); color: var(--color-cs-heading) !important; }
 
@@ -4800,12 +4754,12 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 }
 
 .cs-page .rm-challenge-subheader-style p.challenge-banner-label {
-  font-family: var(--type-body-sm-family) !important;
-  font-size: var(--type-body-sm-size) !important;
+  font-family: var(--type-body-family) !important;
+  font-size: var(--type-body-size) !important;
   font-weight: 400 !important;
   letter-spacing: normal !important;
   text-transform: uppercase !important;
-  color: var(--color-secondary) !important;
+  color: #222225 !important;
   opacity: 0.7 !important;
 }
 
@@ -4965,7 +4919,7 @@ body.overlay-open.cursor-on-light-card .cursor-ring.is-hovering {
 
   /* Tighten within-section spacing */
   .cs-section {
-    margin-top: 32px !important;
+    margin-top: 48px !important;
   }
   /* Bigger gap before each numbered section heading */
   .cs-section-heading {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import CaseStudyCard from "./CaseStudyCard"
 
 // ── Shared type ─────────────────────────────────────────────────────
@@ -36,6 +37,7 @@ export type CaseStudy = {
   problem?: string
   outcome?: string
   company?: string
+  archived?: boolean
 }
 
 // ── Data (newest → oldest) ───────────────────────────────────────────
@@ -57,7 +59,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dotField: true,
     dotLayout: 0,
     icon: "/PROS Logo.jpeg",
-    cursorLabel: "Open case study",
+    cursorLabel: "View case study",
     projectType: "Internship",
     status: "Handed Off",
     metrics: [{ stat: "45%", label: "of analysts were newcomers" }, { stat: "2×", label: "mental models balanced in one UI" }],
@@ -80,7 +82,7 @@ const CASE_STUDIES: CaseStudy[] = [
     bgColor: "rgba(30,75,154,0.06)",
     dotField: true,
     dotLayout: 0,
-    cursorLabel: "Open case study",
+    cursorLabel: "View case study",
     projectType: "MDes Capstone",
     status: "In Progress",
     team: "[ Team ]",
@@ -105,7 +107,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dotField: true,
     dotLayout: 0,
     icon: "/PROS Logo.jpeg",
-    cursorLabel: "Open case study",
+    cursorLabel: "View case study",
     projectType: "Internship",
     status: "Handed Off",
     metrics: [{ stat: "45%", label: "drop in map abandonment" }, { stat: "35%", label: "increase in direct bookings" }, { stat: "30%", label: "improvement in fare findability" }],
@@ -130,7 +132,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dotField: true,
     dotLayout: 2,
     icon: "/expert.ai Logo.png",
-    cursorLabel: "Open case study",
+    cursorLabel: "View case study",
     projectType: "Internship",
     status: "Handed Off",
     metrics: [{ stat: "30s", label: "task time (down from 2 min)" }, { stat: "42%", label: "fewer support tickets after ship" }],
@@ -157,7 +159,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dotField: true,
     dotLayout: 1,
     icon: "/DNC Logo.svg.png",
-    cursorLabel: "Open case study",
+    cursorLabel: "View case study",
     projectType: "Internship",
     status: "Handed Off",
     metrics: [{ stat: "18", label: "same-day turnarounds" }, { stat: "5,500", label: "likes across Instagram & TikTok" }],
@@ -167,6 +169,7 @@ const CASE_STUDIES: CaseStudy[] = [
     outcome: "18 assets turned around same-day during an active presidential campaign; posts hit 5,500+ likes",
   },
   {
+    archived: true,
     title: "SnapSplit",
     landingTitle: "SnapSplit — Flow Redesign",
     company: "SnapSplit",
@@ -183,7 +186,7 @@ const CASE_STUDIES: CaseStudy[] = [
     dotLayout: 3,
     icon: "🫰",
     iconIsEmoji: true,
-    cursorLabel: "Open case study",
+    cursorLabel: "View case study",
     projectType: "Freelance",
     status: "Shipped",
     metrics: [{ stat: "30s", label: "core task time (from 4 min)" }, { stat: "40%", label: "reduction in abandonment" }, { stat: "11", label: "users tested" }],
@@ -195,7 +198,7 @@ const CASE_STUDIES: CaseStudy[] = [
 ]
 
 // ── Hooks ────────────────────────────────────────────────────────────
-function useNumCols() {
+export function useNumCols() {
   const get = () => window.innerWidth < 541 ? 1 : 2
   const [n, setN] = useState(get)
   useEffect(() => {
@@ -206,21 +209,36 @@ function useNumCols() {
   return n
 }
 
+const VISIBLE_COUNT = 4
+
 export default function WorkGrid() {
   const numCols = useNumCols()
+  const [showAll, setShowAll] = useState(false)
+
+  const visibleStudies = CASE_STUDIES.filter(s => !s.archived)
+  const studiesToShow = showAll ? visibleStudies : visibleStudies.slice(0, VISIBLE_COUNT)
+  const hasMore = visibleStudies.length > VISIBLE_COUNT
 
   return (
     <>
       <section className="work-grid-section">
         <div className="work-masonry">
-          {CASE_STUDIES.length > 0 ? (() => {
+          {studiesToShow.length > 0 ? (() => {
             const cols: { study: CaseStudy; globalIdx: number }[][] = Array.from({ length: numCols }, () => [])
-            CASE_STUDIES.forEach((s, i) => cols[i % numCols].push({ study: s, globalIdx: i }))
+            studiesToShow.forEach((s, i) => cols[i % numCols].push({ study: s, globalIdx: i }))
             return cols.map((col, ci) => (
               <div key={ci} className="work-masonry-col">
+                <AnimatePresence initial={false}>
                 {col.map(({ study: s, globalIdx }) => (
-                  <CaseStudyCard
+                  <motion.div
                     key={s.title}
+                    layout
+                    initial={{ opacity: 0, y: 28 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 28 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                  <CaseStudyCard
                     index={globalIdx}
                     title={s.title}
                     landingTitle={s.landingTitle}
@@ -244,6 +262,7 @@ export default function WorkGrid() {
                     dotField={s.dotField}
                     dotColor={s.dotColor}
                     dotLayout={s.dotLayout}
+                    cursorLabel={s.cursorLabel}
                     projectType={s.projectType}
                     status={s.status}
                     metrics={s.metrics}
@@ -253,11 +272,46 @@ export default function WorkGrid() {
                     outcome={s.outcome}
                     company={s.company}
                   />
+                  </motion.div>
                 ))}
+                </AnimatePresence>
               </div>
             ))
           })() : null}
         </div>
+        {hasMore && (
+          <motion.div layout transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }} style={{ display: 'flex', justifyContent: 'center', marginTop: 32, overflow: 'hidden' }}>
+            <button
+              onClick={() => setShowAll(v => !v)}
+              className="work-grid-load-more"
+              style={{
+                position: 'relative',
+                border: '1px solid rgba(var(--color-navy-rgb),0.2)',
+                borderRadius: 8,
+                padding: '10px 24px',
+                background: 'transparent',
+                cursor: 'pointer',
+                font: 'inherit',
+                fontSize: 15,
+                color: 'var(--color-cs-heading)',
+                overflow: 'hidden',
+              }}
+            >
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.span
+                  key={showAll ? 'less' : 'more'}
+                  initial={{ opacity: 0, y: -16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 16 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ display: 'inline-block' }}
+                >
+                  {showAll ? 'Show less' : 'Load more'}
+                </motion.span>
+              </AnimatePresence>
+            </button>
+          </motion.div>
+        )}
       </section>
     </>
   )

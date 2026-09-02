@@ -3,6 +3,7 @@ import { createPortal } from "react-dom"
 import { HandWaving } from "@phosphor-icons/react"
 import VinylPlayer from "../components/VinylPlayer"
 import Footer from "../components/Footer"
+import Annotate from "../components/Annotate"
 
 const BASE = "/images/about"
 
@@ -235,19 +236,19 @@ export default function AboutPage() {
           <div className="about-bio-right">
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "200ms" } as React.CSSProperties}>
               I didn't always start out in the creative space. I began in
-              the humanities — studying psychology, neuroscience, and
-              Latino studies at Williams College, and working as a research
+              the humanities — studying <Annotate type="underline" order={0}>psychology, neuroscience, and
+              Latino studies at Williams College,</Annotate> and working as a research
               assistant in a neuroscience lab, contributing to studies on
               psychiatric interventions for memory and fear conditioning.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "230ms" } as React.CSSProperties}>
               I loved that the work mattered. But somewhere along the way,
-              I realized I wanted my role to be more direct. To take that
+              I realized I wanted my role <Annotate type="circle" order={0}>to be more direct</Annotate>. To take that
               research lens and put it into action, to see the impact
               myself. That's what brought me to California College of the
               Arts, where I specialized in interaction design. I wanted to
               understand how a background in research and human behavior
-              could make technology more accessible, more intuitive, and
+              could <Annotate type="underline" order={1}>make technology more accessible, more intuitive,</Annotate> and
               more meaningfully connected to the people using it.
             </p>
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "260ms" } as React.CSSProperties}>
@@ -256,8 +257,8 @@ export default function AboutPage() {
               build. But what's different is proximity. I get to design
               directly for the person on the other side of the screen, and
               to see the impact land. I want to keep creating experiences
-              that are as thoughtful as they are scalable, as beautiful as
-              they are functional.
+              that are as thoughtful as they are scalable, as beautiful as{" "}
+              <Annotate type="squiggle" order={0}>they are functional.</Annotate>
             </p>
           </div>
         </div>

@@ -3,13 +3,13 @@ import { Analytics } from "@vercel/analytics/react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Layout from "./components/Layout";
+import CustomCursor from "./components/CustomCursor";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import HomePage from "./pages/HomePage";
 import HomePageSystemUI from "./pages/HomePageSystemUI";
 import WorkPage from "./pages/WorkPage";
 import AboutPage from "./pages/AboutPage";
 import PlayPage from "./pages/PlayPage";
-import DrawPage from "./pages/DrawPage";
 import ContactPage from "./pages/ContactPage";
 import FareFinderPage from "./pages/work/FareFinderPage";
 import RevenueManagementPage from "./pages/work/RevenueManagementPage";
@@ -48,7 +48,6 @@ function AnimatedRoutes() {
           <Route path="/work" element={<WorkPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/play" element={<PlayPage />} />
-          <Route path="/draw" element={<DrawPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/work/fare-finder" element={<FareFinderPage />} />
           <Route path="/work/revenue-management" element={<RevenueManagementPage />} />
@@ -67,6 +66,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <Analytics />
+      <CustomCursor />
       <BrowserRouter>
         <ScrollToTop />
         <Layout>

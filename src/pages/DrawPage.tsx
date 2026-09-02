@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { useTheme } from "../contexts/ThemeContext"
-import Footer from "../components/Footer"
 import { useVisitorNumber } from "../hooks/useVisitorNumber"
 import { renderGodRaysFrame, GOD_RAYS_GRAIN_SVG_URL } from "../components/GodRays"
 
@@ -674,7 +673,10 @@ function GalleryCard({ drawing, idx, onZoom }: { drawing: Drawing; idx: number; 
 }
 
 // ── Main page ────────────────────────────────────────────────────────────────
-export default function DrawPage() {
+// Embedded inside PlayPage's InteractiveModal (no standalone /draw route
+// anymore) — no footer-curtain page-transition wrapper or site Footer, since
+// those only make sense for a top-level route.
+export function DrawBoard() {
   const { theme } = useTheme()
   const isDark = theme === "dark"
   const numCols = useNumCols()
@@ -1131,8 +1133,6 @@ export default function DrawPage() {
   return (
     <div style={{ minHeight: "100%", fontFamily: "Space Grotesk, sans-serif", position: "relative" }}>
 
-      <div className="footer-curtain">
-
       {/* ── Header ───────────────────────────────────────────────────── */}
       <div className="draw-header">
         <div className="draw-header-top">
@@ -1199,8 +1199,6 @@ export default function DrawPage() {
             )}
           </>
         )}
-      </div>
-
       </div>
 
       {/* ── Zoom lightbox ────────────────────────────────────────────── */}
@@ -1403,7 +1401,8 @@ export default function DrawPage() {
           </div>
         </div>
       , document.body)}
-      <Footer />
     </div>
   )
 }
+
+export default DrawBoard

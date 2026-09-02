@@ -5,7 +5,6 @@ import { LinkedinLogo, EnvelopeSimple, FileText } from "@phosphor-icons/react"
 const NAV_LINKS = [
   { label: "About", to: "/about" },
   { label: "Play", to: "/play" },
-  { label: "Draw", to: "/draw" },
 ]
 
 export default function MobileNav() {
