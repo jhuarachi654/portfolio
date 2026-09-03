@@ -367,12 +367,10 @@ export default function ExpertAIPage() {
             </figure>
           </div>
 
-          <div style={{ marginTop: 108 }}>
+          <div className="rm-challenge-subheader-style" style={{ marginTop: 108 }}>
             <ChallengeBanner
-              icon={<AirplaneTakeoff size="1em" weight="regular" />}
-              iconColor="#416BCC"
               label="Mission"
-              question={<>How might we make filtering <strong><em>visible, reliable,</em></strong> and <strong><em>accessible</em></strong> so users can filter efficiently and independently?</>}
+              question={<>How might we make filtering <span style={{ color: '#416BCC' }}>visible, reliable,</span> and <span style={{ color: '#416BCC' }}>accessible</span> so users can filter efficiently and independently?</>}
             />
           </div>
         </Section>
