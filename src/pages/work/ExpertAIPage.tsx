@@ -363,7 +363,7 @@ export default function ExpertAIPage() {
           <div style={{ marginTop: 108 }}>
             <SubHeading>62 support tickets about filtering in <span style={{ color: '#416BCC' }}>six months</span></SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
-              I reviewed every ticket with the Customer Support Specialist and grouped them by pattern. Three themes kept surfacing: users couldn't see which filters were active, drag-and-drop kept failing, and the popup blocked their results while they worked.
+              To understand the scope of the problem, I reviewed all 62 support tickets filed in the past six months with the Customer Support Specialist and ran a thematic analysis. Three friction points surfaced consistently.
             </p>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
