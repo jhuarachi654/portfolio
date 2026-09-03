@@ -148,6 +148,15 @@ function HeroVideo() {
     else vid.play().catch(() => {})
   }
 
+  useEffect(() => {
+    const vid = videoRef.current
+    if (!vid) return
+    const playPromise = vid.play()
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {})
+    }
+  }, [])
+
   return (
     <>
       <video
