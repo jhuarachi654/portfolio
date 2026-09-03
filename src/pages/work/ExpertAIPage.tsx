@@ -345,6 +345,21 @@ export default function ExpertAIPage() {
             </figure>
           </div>
 
+          <div style={{ marginTop: 64 }} data-reveal>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Impact</p>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { stat: '30s', description: 'Task time dropped from 2 minutes to 30 seconds' },
+                { stat: '42%', description: 'fewer support tickets related to filtering after launch' },
+              ].map(({ stat, description }, i) => (
+                <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
+                  <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 400, color: '#416BCC', display: 'block' }} />
+                  <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div style={{ marginTop: 108 }}>
             <SubHeading>The current state of the filtering system</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
