@@ -276,7 +276,7 @@ function HeroVideo() {
 }
 
 export default function ExpertAIPage() {
-  useCaseToc(TOC, 'Expert.ai Corpus')
+  useCaseToc(TOC, 'Expert.ai Filter Function')
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
@@ -294,7 +294,7 @@ export default function ExpertAIPage() {
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-[42px] pt-14 pb-16">
             <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
-              Expert.ai Corpus
+              Expert.ai Filter Function
             </h1>
             <p className="case-study-hero-reveal font-landing-body text-[17px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
               Expert.ai is an AI text analysis platform for legal, finance, and government organizations. As a Product Design Intern, I worked with the AI innovation team and directly with enterprise users to redesign the filtering system. Task time dropped from 2 minutes to 30 seconds. Support tickets about filtering fell by 42%.
