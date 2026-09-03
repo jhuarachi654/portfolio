@@ -297,7 +297,7 @@ export default function ExpertAIPage() {
               Expert.ai Filter Function
             </h1>
             <p className="case-study-hero-reveal font-landing-body text-[17px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
-              Expert.ai is an AI text analysis platform for legal, finance, and government organizations. As a Product Design Intern, I worked with the AI innovation team and directly with enterprise users to redesign the filtering system. Task time dropped from 2 minutes to 30 seconds. Support tickets about filtering fell by 42%.
+              Designing and shipping a more accessible and usable filter function for an enterprise AI text analysis platform used by legal, finance, and government organizations.
             </p>
             <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
@@ -352,6 +352,10 @@ export default function ExpertAIPage() {
                 When users applied filters, the popup blocked their results completely. They would add a filter, close the popup to check, see they needed to adjust, reopen the popup, make a change, close it again, and repeat. Each time taking about 15 to 20 seconds. That added up fast.
               </figcaption>
             </figure>
+
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginTop: 24 }}>
+              As a Product Design Intern, I worked with the AI innovation team and directly with enterprise users to redesign the filtering system. Task time dropped from 2 minutes to 30 seconds. Support tickets about filtering fell by 42%.
+            </p>
           </div>
 
           <div style={{ marginTop: 108 }}>
