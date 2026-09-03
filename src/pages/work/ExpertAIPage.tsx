@@ -11,7 +11,6 @@ import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
   { id: 'ea-intro',            label: 'Context' },
-  { id: 'ea-solution-preview', label: 'Solution Preview' },
   { id: 'ea-research',         label: 'Research' },
   { id: 'ea-development',      label: 'Development' },
   { id: 'ea-features',         label: 'Solution' },
@@ -323,10 +322,6 @@ export default function ExpertAIPage() {
 
         {/* ── 1. Introduction ── */}
         <Section id="ea-intro">
-          <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>1. Context</p>
-          </div>
-
           <div style={{ marginTop: 32 }}>
             <SubHeading>What is Expert.ai?</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
@@ -361,6 +356,7 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>1. Context</p>
             <SubHeading>62 support tickets about filtering in <span style={{ color: '#416BCC' }}>six months</span></SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
               To understand the scope of the problem, I reviewed all 62 support tickets filed in the past six months with the Customer Support Specialist and ran a thematic analysis. Three friction points surfaced consistently.
@@ -375,46 +371,16 @@ export default function ExpertAIPage() {
             <ChallengeBanner
               icon={<AirplaneTakeoff size="1em" weight="regular" />}
               iconColor="#416BCC"
-              question={<>How might we redesign filtering to be <strong><em>visible</em></strong> and <strong><em>reliable</em></strong> so users can filter efficiently?</>}
+              label="Mission"
+              question={<>How might we make filtering <strong><em>visible, reliable,</em></strong> and <strong><em>accessible</em></strong> so users can filter efficiently and independently?</>}
             />
-          </div>
-        </Section>
-
-        {/* ── 2. Solution Preview ── */}
-        <Section id="ea-solution-preview">
-          <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Solution Preview</p>
-          </div>
-
-          {/* Video container */}
-          <div style={{ width: '80%', margin: '0 auto' }}>
-            <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden', background: 'transparent' }}>
-              <LazyVideo
-                src="/videos/expert.ai-Video.webm"
-                poster="/videos/expert.ai-Video-poster.png"
-                style={{ width: '100%', display: 'block' }}
-              />
-            </div>
-          </div>
-
-          {/* TL:DR */}
-          <div style={{ marginTop: 108 }}>
-            <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>TL:DR</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
-              <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
-                A faster, clearer, and more accessible way to filter.
-              </h3>
-              <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
-                A seamless dropdown filter panel with clear status indicators, accessible interface, and improved usability that work for everyone.
-              </p>
-            </div>
           </div>
         </Section>
 
         {/* ── 3. Research ── */}
         <Section id="ea-research">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Research</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Research</p>
           </div>
 
           <div style={{ marginTop: 32 }}>
@@ -508,7 +474,7 @@ export default function ExpertAIPage() {
         {/* ── 4. Development ── */}
         <Section id="ea-development">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. Development</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Development</p>
           </div>
 
           {/* Technical Constraints — first, per Framer */}
@@ -625,10 +591,20 @@ export default function ExpertAIPage() {
         {/* ── 5. Solution ── */}
         <Section id="ea-features">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Solution</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. Solution</p>
           </div>
 
-          <div className="ea-solution-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'center' }}>
+          <div style={{ width: '80%', margin: '32px auto 0' }} data-reveal>
+            <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden', background: 'transparent' }}>
+              <LazyVideo
+                src="/videos/expert.ai-Video.webm"
+                poster="/videos/expert.ai-Video-poster.png"
+                style={{ width: '100%', display: 'block' }}
+              />
+            </div>
+          </div>
+
+          <div className="ea-solution-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'center' }}>
             <div>
               <SubHeading>The new Filter Component</SubHeading>
               <BodyText>
@@ -667,7 +643,7 @@ export default function ExpertAIPage() {
         {/* ── 6. Impact ── */}
         <Section id="ea-impact">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Impact</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Impact</p>
           </div>
 
           <div style={{ marginTop: 32 }}>
@@ -710,7 +686,7 @@ export default function ExpertAIPage() {
         {/* ── 7. Reflection ── */}
         <Section id="ea-reflection">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>7. Reflection</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Reflection</p>
           </div>
 
           <div className="ea-takeaways-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
