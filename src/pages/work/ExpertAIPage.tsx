@@ -234,7 +234,7 @@ function StatBlock({ stat, label, description, icon }: { stat: string; label: st
     <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24, height: '100%', boxSizing: 'border-box' }}>
       <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', margin: '0 0 8px' }}>{label}</p>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-        <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, lineHeight: 'normal', margin: 0, fontWeight: 400, color: '#416BCC' }} />
+        <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: 0, fontWeight: 500, color: '#416BCC' }} />
         <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: 'clamp(20px, 3vw, 28px)' }}>{icon}</span>
       </div>
       <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
@@ -353,7 +353,7 @@ export default function ExpertAIPage() {
                 { stat: '42%', description: 'fewer support tickets related to filtering after launch' },
               ].map(({ stat, description }, i) => (
                 <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
-                  <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 400, color: '#416BCC', display: 'block' }} />
+                  <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 500, color: '#416BCC', display: 'block' }} />
                   <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
                 </div>
               ))}

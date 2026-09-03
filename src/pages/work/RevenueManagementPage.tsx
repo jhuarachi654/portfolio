@@ -233,7 +233,7 @@ export default function RevenueManagementPage() {
               { stat: '35%', description: 'reduction in fare price decision time' },
             ].map(({ stat, description }, i) => (
               <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
-                <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 400, color: '#416BCC', display: 'block' }} />
+                <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 500, color: '#416BCC', display: 'block' }} />
                 <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
               </div>
             ))}
