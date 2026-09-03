@@ -4816,7 +4816,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     width: 100% !important;
     height: 100% !important;
   }
-  .cs-hero-lottie-wrap > div video {
+  .ff-hero-lottie-wrap > div video {
     transform: none !important;
     object-fit: cover !important;
   }

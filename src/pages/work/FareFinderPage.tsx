@@ -188,7 +188,7 @@ export default function FareFinderPage() {
 
       {/* ── Hero ── */}
       <section>
-        <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
+        <div className="cs-hero-lottie-wrap ff-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
           <div style={{ background: '#003854', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', padding: 32, border: '1px solid #d1d1d1' }}>
             <HeroVideo />
           </div>
