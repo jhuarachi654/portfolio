@@ -286,7 +286,7 @@ export default function ExpertAIPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-          <div style={{ background: '#c4ecff', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', padding: 32, border: '1px solid #d1d1d1' }}>
+          <div style={{ background: '#c4ecff', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', padding: 16, border: '1px solid #d1d1d1' }}>
             <HeroVideo />
           </div>
         </div>
