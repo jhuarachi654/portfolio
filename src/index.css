@@ -4809,12 +4809,17 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .cs-hero-lottie-wrap > div {
     overflow: hidden;
     aspect-ratio: 16 / 9 !important;
+    padding: 0 !important;
   }
   .cs-hero-lottie-wrap > div > *,
   .cs-hero-lottie-wrap > div video,
   .cs-hero-lottie-wrap > div iframe {
     width: 100% !important;
     height: 100% !important;
+  }
+  .cs-hero-lottie-wrap > div video {
+    transform: none !important;
+    object-fit: cover !important;
   }
   .cs-hero-lottie-wrap > div > img {
     object-fit: cover;
@@ -4992,6 +4997,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .cs-page .rm-market-scan-img {
     width: calc(50% - 8px) !important;
   }
+
+  /* Fare Finder stat card: exempt from the blanket full-width image rule
+     above so it can stay small and centered on mobile. */
+  .cs-page .ff-stat-card-image {
+    width: 200px !important;
+  }
 }
 
 /* Tablet: same collapse as mobile above — a 2-column text/image panel that's
@@ -5097,7 +5108,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     grid-template-columns: 1fr 1fr !important;
   }
   .ff-stat-card-image {
-    width: 60% !important;
+    width: 18% !important;
   }
   .cs-page .ea-comparison-grid[style*="grid-template-columns"] {
     grid-template-columns: 2fr auto 3fr !important;
@@ -5131,6 +5142,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
      cards — keep side by side at tablet width instead of stacking. */
   .cs-page .bs-found-grid[style*="grid-template-columns"] {
     grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ff-stat-card-image {
+    width: 60% !important;
   }
 }
 

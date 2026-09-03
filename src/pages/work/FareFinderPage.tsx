@@ -99,7 +99,7 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
   return (
     <div data-reveal style={{ '--reveal-delay': '60ms' } as React.CSSProperties}>
       {tag && (
-        <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6 }}>{tag}</p>
+        <p className="cs-metric-label" style={{ margin: '0 0 6px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{tag}</p>
       )}
       <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
@@ -128,7 +128,7 @@ function KeyFinding({
       <div style={{ textAlign: 'center' }}>
         <SubHeading>{headline[0]}<span style={{ color: '#416BCC' }}>{headline[1]}</span>{headline[2]}</SubHeading>
       </div>
-      <div className="ff-finding-grid ff-finding-wrapper" style={{ width: '100%', maxWidth: 1220, margin: '0 auto' }}>
+      <div className="ff-finding-grid ff-finding-wrapper" style={{ width: '100%', maxWidth: 1220, margin: '0 auto' }} data-reveal>
         <img className="ff-finding-image" src={image} alt={imageAlt} style={{ width: '70%', maxWidth: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
       </div>
     </div>
@@ -228,7 +228,7 @@ export default function FareFinderPage() {
           </BodyText>
         </div>
 
-        <div className="cs-fullwidth-figure" style={{ marginTop: 64 }}>
+        <div className="cs-fullwidth-figure" style={{ marginTop: 64 }} data-reveal>
           <img src={img('pros-ff-hero.png')} alt="PROS Fare Finder Map interface showing the interactive flight map and destination details" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
         </div>
 
@@ -263,7 +263,7 @@ export default function FareFinderPage() {
               Flight discovery is where a traveler's journey begins — and where they were dropping off. Usability testing revealed they were abandoning the experience for third-party platforms offering more personalization and guided exploration. A competitive analysis confirmed the gap: across booking platforms, these features had become the expectation, not the exception.
             </BodyText>
           </Prose>
-          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
             <img src={img('booking-maps-comparison.jpg')} alt="Booking solutions on the market" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </figure>
         </div>
@@ -283,7 +283,7 @@ export default function FareFinderPage() {
           <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Research</p>
         </div>
 
-        <figure className="cs-fullwidth-figure" style={{ margin: 0 }}>
+        <figure className="cs-fullwidth-figure" style={{ margin: 0 }} data-reveal>
           <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
             <LazyVideo src="/videos/old-fare-finder.webm" style={{ width: '100%', display: 'block' }} />
           </div>
@@ -295,7 +295,7 @@ export default function FareFinderPage() {
             With the user researcher, I analyzed five guided user interviews through affinity mapping — participants aged 21–35, spanning occasional and regular travelers — to understand how they experienced the current Fare Finder. We used FigJam AI for initial sorting and categorization, then refined the themes through discussion.
           </BodyText>
 
-          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
             <img src={img('figjam-ai-affinity-composite.png')} alt="FigJam AI use in Affinity Mapping" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </figure>
         </div>
@@ -306,11 +306,11 @@ export default function FareFinderPage() {
             I conducted a competitive analysis across 10 platforms, spanning third-party booking sites and airline platforms, using thematic analysis to map the current landscape of flight booking experiences and plotted them against a 2x2 matrix identify gaps and opportunities.
           </BodyText>
         </div>
-        <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+        <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
           <img src={img('competitive-analysis-tables.png')} alt="Competitive analysis tables across direct and indirect competitors" style={{ width: '100%', height: 'auto', display: 'block' }} />
         </figure>
 
-        <figure className="cs-fullwidth-figure" style={{ margin: '48px 0 0' }}>
+        <figure className="cs-fullwidth-figure" style={{ margin: '48px 0 0' }} data-reveal>
           <img src={img('fare-finder-16-KkcukH.png')} alt="Fare Finder positioning" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
         </figure>
 
@@ -348,7 +348,7 @@ export default function FareFinderPage() {
           <BodyText>
             To help travelers make decisions without the pressure of fixed dates, we designed a <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>flexible toggle</strong> for the date selector. We iterated across <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>3 layouts</strong>, sketching in Figma, then using Claude with the current design system to prototype and bring to design critiques.
           </BodyText>
-          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }}>
+          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
             <img src={img('iteration-1-flexible-dates.png')} alt="Flexible Dates iterations: Select Dates calendar, Flexible travel month selector, and Trip Duration options" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </figure>
         </div>
@@ -358,7 +358,7 @@ export default function FareFinderPage() {
           <BodyText>
             To help travelers feel confident booking a fare, we designed the <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Quick Facts feature</strong>. We iterated on how it would integrate into the fare card, exploring content hierarchy, navigation, and button layout, using Figma Make to generate high-fidelity options to refine and critique.
           </BodyText>
-          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }}>
+          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
             <img src={img('iteration-2-fare-card.png')} alt="Fare card and Quick Facts panel iterations across five layout variations" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </figure>
         </div>
@@ -368,7 +368,7 @@ export default function FareFinderPage() {
           <BodyText>
             To give travelers control over their exploration, we designed <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>flexible map views</strong>. We iterated on how the card tray, filters, and recommendations could be shown or hidden, prioritizing scannability and agency at every step.
           </BodyText>
-          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }}>
+          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
             <img src={img('iteration-3-map-views.png')} alt="Map view iterations showing the card tray, filters, and recommendations panel shown and hidden" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </figure>
         </div>
@@ -389,7 +389,7 @@ export default function FareFinderPage() {
           </Prose>
         </div>
 
-        <div style={{ width: '100%', margin: '0 auto 108px' }}>
+        <div style={{ width: '100%', margin: '0 auto 108px' }} data-reveal>
           <div style={{ borderRadius: 8, overflow: 'hidden', background: 'transparent' }}>
             <LazyVideo
               src="/videos/fare-finder-solution-preview.webm"
@@ -418,7 +418,7 @@ export default function FareFinderPage() {
           {
             n: 3,
             title: 'Experience-Centered Filtering',
-            headline: <>Travel Interests let users explore by <span style={{ color: '#416BCC' }}>what they want to experience</span></>,
+            headline: <>Travel Interests let users explore by <span style={{ color: '#416BCC' }}>experiences</span></>,
             body: <>The filter panel now expands beyond the original filters to include Travel Interests for an <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>experience-based search</strong>. This panel can also be shown or hidden, giving travelers control over how much of the map they see.</>,
             image: img('fare-finder-33-r6pnhW.png'),
             alt: 'Collapsible Filter Panel w/ Travel Interests',
@@ -445,7 +445,7 @@ export default function FareFinderPage() {
             <p className="rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 auto 32px', maxWidth: 720, textAlign: 'center' }}>
               {headline}
             </p>
-            <div className="rm-solution-grid" style={{ display: 'grid', gridTemplateColumns: '2.6fr 1.4fr', gap: 8, alignItems: 'center' }}>
+            <div className="rm-solution-grid" style={{ display: 'grid', gridTemplateColumns: '2.6fr 1.4fr', gap: 8, alignItems: 'center' }} data-reveal>
               <img src={image} alt={alt} className="rm-solution-laptop" style={{ width: '100%', height: 'auto', display: 'block' }} />
               <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 {body}
@@ -464,7 +464,7 @@ export default function FareFinderPage() {
 
         <SubHeading>Measuring Impact</SubHeading>
 
-        <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }}>
+        <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
           <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
             <img src={img('validation-travelers-tested.png')} alt="5 travelers tested across usability sessions" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
@@ -472,8 +472,8 @@ export default function FareFinderPage() {
 
         <div style={{ marginTop: 108 }}>
         <SubHeading>Results</SubHeading>
-        <div className="ff-validation-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', marginTop: 24 }}>
-          <img src={img('stat-map-abandonment.png')} alt="45% Map Abandonment Decrease" className="ff-stat-card-image" style={{ width: '60%', height: 'auto', display: 'block', borderRadius: 8, justifySelf: 'center', margin: '0 auto' }} />
+        <div className="ff-validation-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', marginTop: 24 }} data-reveal>
+          <img src={img('stat-map-abandonment.png')} alt="45% Map Abandonment Decrease" className="ff-stat-card-image" style={{ width: 200, height: 'auto', display: 'block', borderRadius: 8, justifySelf: 'center', margin: '0 auto' }} />
           <div>
             <BodyText>
               Three months after handoff, Fare Finder went live. The redesigned map reduced drop-off at the point where travelers previously felt lost or overwhelmed.
@@ -541,7 +541,7 @@ export default function FareFinderPage() {
             <PolaroidStack />
           </div>
 
-          <div className="rm-team-photo-wrap">
+          <div className="rm-team-photo-wrap" data-reveal>
             <div className="rm-team-photo-card" style={{ background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.12)', padding: '12px 12px 10px' }}>
               <img src={img('fare-finder-36-3yud6R.png')} alt="PROS UX Design team" style={{ display: 'block', width: 'auto', maxWidth: '100%', height: 'auto', maxHeight: '72vh', objectFit: 'contain' }} />
               <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', textAlign: 'center', lineHeight: 1.3, margin: '12px 0 0' }}>
