@@ -361,34 +361,14 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <SubHeading>The current state of the filtering system</SubHeading>
+            <SubHeading>62 support tickets about filtering in <span style={{ color: '#416BCC' }}>six months</span></SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
-              Expert.ai helps legal, finance, and government organizations analyze massive amounts of text. Think contracts, court rulings, financial reports, and regulatory filings.
+              I reviewed every ticket with the Customer Support Specialist and grouped them by pattern. Three themes kept surfacing: users couldn't see which filters were active, drag-and-drop kept failing, and the popup blocked their results while they worked.
             </p>
 
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
-              The Corpus platform is where users upload, organize, and filter their documents before running AI analysis. Filtering is how users narrow down thousands of documents to the ones that actually matter for their work.
-            </p>
-
-            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-
-            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0 }}>
-                <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Problem:</strong> In six months, the customer support team received 62 support tickets about filtering alone. Users were frustrated, and it was clear something needed to change.
-              </p>
-            </div>
-
-            <figure style={{ margin: '24px 0 0', width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-              <img src={img('expert-ai-filter-popup.webp')} alt="Original Expert.ai filter popup blocking results" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
-              <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
-                When users applied filters, the popup blocked their results completely. They would add a filter, close the popup to check, see they needed to adjust, reopen the popup, make a change, close it again, and repeat. Each time taking about 15 to 20 seconds. That added up fast.
-              </figcaption>
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('users-could-not.png')} alt="Users could not see which filters were active, use drag-and-drop filters, or see their results while they worked" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
             </figure>
-
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginTop: 24 }}>
-              As a Product Design Intern, I worked with the AI innovation team and directly with enterprise users to redesign the filtering system. Task time dropped from 2 minutes to 30 seconds. Support tickets about filtering fell by 42%.
-            </p>
           </div>
 
           <div style={{ marginTop: 108 }}>
