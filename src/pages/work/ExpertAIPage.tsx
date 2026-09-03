@@ -40,7 +40,7 @@ function Prose({ children, className = '' }: { children: React.ReactNode; classN
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[15px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
+    <p className="font-landing-body text-[17px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
       {children}
     </p>
   )
@@ -50,9 +50,9 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
   return (
     <div data-reveal style={{ '--reveal-delay': '60ms' } as React.CSSProperties}>
       {tag && (
-        <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
+        <p className="cs-metric-label" style={{ margin: '0 0 6px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{tag}</p>
       )}
-      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -110,14 +110,14 @@ function FeedbackCard({ role, avatar, bullets }: { role: string; avatar: string;
         <div style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.15)', flexShrink: 0 }}>
           <img src={avatar} alt={role} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         </div>
-        <span className="font-landing-body" style={{ fontSize: 15, color: '#222225' }}>{role}</span>
+        <span className="font-landing-body" style={{ fontSize: 17, color: '#222225' }}>{role}</span>
       </div>
-      <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: '0 0 12px' }}>Feedback:</p>
+      <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: '0 0 12px' }}>Feedback:</p>
       <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
         {bullets.map((text, i) => (
           <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
             <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-            <span className="font-landing-body" style={{ fontSize: 15, color: '#222225', lineHeight: 'normal' }}>{text}</span>
+            <span className="font-landing-body" style={{ fontSize: 17, color: '#222225', lineHeight: 'normal' }}>{text}</span>
           </li>
         ))}
       </ul>
@@ -152,7 +152,7 @@ function AccessibilityExplorer() {
       <div className="ea-accessibility-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'start' }}>
         <div>
           <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6 }}>Wireframe Tests</p>
-          <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: '1em' }}><Hand size="1em" weight="regular" /></span>
             Accessibility
           </h3>
@@ -165,7 +165,7 @@ function AccessibilityExplorer() {
           <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
             <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
               I took this feedback and asked if I could explore a <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>more rigorous solution.</strong> They said yes, as long as I stayed within the design system.
             </p>
           </div>
@@ -286,7 +286,7 @@ export default function ExpertAIPage() {
       {/* ── Hero ── */}
       <section>
         <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-          <div style={{ background: '#c4ecff', borderRadius: 8, padding: 32, border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
+          <div style={{ background: '#c4ecff', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', padding: 32, border: '1px solid #d1d1d1' }}>
             <HeroVideo />
           </div>
         </div>
@@ -296,7 +296,7 @@ export default function ExpertAIPage() {
             <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               Expert.ai Corpus
             </h1>
-            <p className="case-study-hero-reveal font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
+            <p className="case-study-hero-reveal font-landing-body text-[17px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
               Expert.ai is an AI text analysis platform for legal, finance, and government organizations. As a Product Design Intern, I worked with the AI innovation team and directly with enterprise users to redesign the filtering system. Task time dropped from 2 minutes to 30 seconds. Support tickets about filtering fell by 42%.
             </p>
             <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -329,11 +329,11 @@ export default function ExpertAIPage() {
 
           <div style={{ marginTop: 32 }}>
             <SubHeading>The current state of the filtering system</SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', marginBottom: 12 }}>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
               Expert.ai helps legal, finance, and government organizations analyze massive amounts of text. Think contracts, court rulings, financial reports, and regulatory filings.
             </p>
 
-            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', marginBottom: 12 }}>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
               The Corpus platform is where users upload, organize, and filter their documents before running AI analysis. Filtering is how users narrow down thousands of documents to the ones that actually matter for their work.
             </p>
 
@@ -341,7 +341,7 @@ export default function ExpertAIPage() {
 
             <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
               <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0 }}>
+              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0 }}>
                 <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Problem:</strong> In six months, the customer support team received 62 support tickets about filtering alone. Users were frustrated, and it was clear something needed to change.
               </p>
             </div>
@@ -384,10 +384,10 @@ export default function ExpertAIPage() {
           <div style={{ marginTop: 108 }}>
             <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>TL:DR</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
-              <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
+              <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
                 A faster, clearer, and more accessible way to filter.
               </h3>
-              <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+              <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 A seamless dropdown filter panel with clear status indicators, accessible interface, and improved usability that work for everyone.
               </p>
             </div>
@@ -428,7 +428,7 @@ export default function ExpertAIPage() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
             <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 32 }}>
               <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
                 When multiple users find different workarounds for the same interface, the filter component was clearly the issue.
               </p>
             </div>
@@ -477,7 +477,7 @@ export default function ExpertAIPage() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
             <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 16 }}>
               <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
                 This was not part of the original project scope, but I brought it up to my team and backed the case with user research. I mentioned how it could <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>increase overall usability and improve things for everyone.</strong>
               </p>
             </div>
@@ -516,7 +516,7 @@ export default function ExpertAIPage() {
           </div>
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginTop: 16 }}>
             <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+            <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
               <strong className="text-[var(--color-cs-heading)]">Takeaway:</strong> The solution had to come from the existing design system. I also had to balance accessibility improvements with what the team could realistically build in one sprint.
             </p>
           </div>
@@ -550,7 +550,7 @@ export default function ExpertAIPage() {
               ].map(({ bold, body }) => (
                 <div key={bold} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                   <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                  <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', lineHeight: 'normal', margin: 0 }}>
+                  <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', lineHeight: 'normal', margin: 0 }}>
                     <strong className="text-[var(--color-cs-heading)]">{bold}</strong>{body}
                   </p>
                 </div>
@@ -597,7 +597,7 @@ export default function ExpertAIPage() {
               </div>
               <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginTop: 24 }}>
                 <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-                <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+                <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                   <strong className="text-[var(--color-cs-heading)]">Takeaway:</strong> Both appreciated that the design was consistent with the previous version. That helped with feasibility and timeline. I took both pieces of feedback. The consistency was good. The feasibility was solid. But I still had room to improve the layout.
                 </p>
               </div>
@@ -629,7 +629,7 @@ export default function ExpertAIPage() {
                   ].map(g => (
                     <li key={g} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                       <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                      <span className="font-landing-body" style={{ fontSize: 15, color: '#222225', lineHeight: 'normal' }}>{g}</span>
+                      <span className="font-landing-body" style={{ fontSize: 17, color: '#222225', lineHeight: 'normal' }}>{g}</span>
                     </li>
                   ))}
                 </ul>
@@ -683,7 +683,7 @@ export default function ExpertAIPage() {
 
             <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
               <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+              <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 The Lead Designer and I noted that two users still hesitated when trying to reset a filter. The three click pattern (include, exclude, reset) was not obvious to everyone. <strong className="text-[var(--color-cs-heading)]">If I had more time</strong>, I would add a small indicator showing what each click would do and create an onboarding experience for first time users.
               </p>
             </div>

@@ -215,6 +215,15 @@ export default function WorkGrid() {
   const numCols = useNumCols()
   const [showAll, setShowAll] = useState(false)
 
+  // DNC's Lottie JSON is unusually large (~5.5MB), so its card's own
+  // scroll-triggered fetch often can't finish before the card is visible,
+  // causing a visible swap from the static poster image to the animation.
+  // Kick off the fetch immediately on mount (well before scroll) so it's
+  // already in the browser cache by the time CaseStudyCard requests it.
+  useEffect(() => {
+    fetch('/videos/DNC-Video.json').catch(() => {})
+  }, [])
+
   const visibleStudies = CASE_STUDIES.filter(s => !s.archived)
   const studiesToShow = showAll ? visibleStudies : visibleStudies.slice(0, VISIBLE_COUNT)
   const hasMore = visibleStudies.length > VISIBLE_COUNT

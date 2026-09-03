@@ -196,13 +196,13 @@ export default function FareFinderPage() {
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-[42px] pt-14 pb-16">
-            <h1 className="text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
+            <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               PROS Fare Finder Map
             </h1>
-            <p className="font-landing-body text-[17px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
+            <p className="case-study-hero-reveal font-landing-body text-[17px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
               Designing and shipping a flight map exploration tool for airlines to display on their booking sites, helping travelers make more informed and confident booking decisions.
             </p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Role',     value: 'Product Design Intern' },
                 { label: 'Timeline', value: 'Jun – Sep 2025' },
@@ -217,7 +217,7 @@ export default function FareFinderPage() {
             </div>
 
             
-            <a href="#ff-features" className="cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
+            <a href="#ff-features" className="case-study-hero-reveal cs-jump-btn" style={{ marginTop: 16 }} onClick={(e) => { e.preventDefault(); document.querySelector((e.currentTarget as HTMLAnchorElement).getAttribute("href")!)?.scrollIntoView({ behavior: "smooth" }); }}><span>↓ Jump to solution</span></a>
           </div>
         </div>
       </section>
@@ -449,7 +449,7 @@ export default function FareFinderPage() {
             alt: 'Personalized Destinations Dependent on Origin Input',
           },
         ].map(({ n, title, headline, body, image, alt }) => (
-          <div key={n} style={{ marginTop: n === 1 ? 0 : 108 }}>
+          <div key={n} style={{ marginTop: n === 1 ? 0 : 108 }} data-reveal>
             <p className="cs-metric-label" style={{ margin: '0 0 16px', textAlign: 'center', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Feature #{n}: {title}</p>
             <p className="rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 auto 32px', maxWidth: 720, textAlign: 'center' }}>
               {headline}
