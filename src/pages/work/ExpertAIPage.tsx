@@ -330,7 +330,7 @@ export default function ExpertAIPage() {
           <div style={{ marginTop: 32 }}>
             <SubHeading>What is Expert.ai?</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
-              Expert.ai serves legal, finance, and government organizations that need to analyze and organize massive amounts of text. Users upload those documents into the Corpus, where expert.ai's NLU engine analyzes, annotates, and trains models on them, helping teams extract key terms, flag compliance risks, and classify documents at scale.
+              Expert.ai serves legal, finance, and government organizations that need to analyze and organize massive amounts of text. In the Corpus platform, users upload documents that expert.ai's NLU engine analyzes, annotates, and trains models on, helping teams extract key terms, flag compliance risks, and classify documents at scale.
             </p>
           </div>
 
@@ -339,6 +339,10 @@ export default function ExpertAIPage() {
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
               As a product design intern at Expert.ai, I worked alongside an AI Innovation Manager and developers to overhaul the Filter function on the Corpus platform, centering the redesign on accessibility and usability. I designed and prototyped in Figma, provided developer annotations, and conducted usability testing to help enterprise users find and extract key terms from their documents faster.
             </p>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('filter-documents-3d-mockup.png')} alt="Filter documents panel within the Expert.ai Corpus platform" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            </figure>
           </div>
 
           <div style={{ marginTop: 108 }}>
