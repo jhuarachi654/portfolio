@@ -4809,7 +4809,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .cs-hero-lottie-wrap > div {
     overflow: hidden;
     aspect-ratio: 16 / 9 !important;
-    padding: 0 !important;
   }
   .cs-hero-lottie-wrap > div > *,
   .cs-hero-lottie-wrap > div video,
