@@ -206,10 +206,6 @@ html {
   scroll-behavior: auto;
 }
 
-html {
-  background-color: #476ED3;
-}
-
 body { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: var(--color-navy); background-color: var(--color-paper); -webkit-font-smoothing: antialiased; --page-bg: #ffffff; overflow-x: hidden; }
 
 html.loading,
@@ -297,13 +293,30 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
-.case-study-sidebar-home { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: 500; line-height: var(--type-body-line-height); display: inline-flex; align-items: center; justify-content: center; color: var(--color-cs-heading); opacity: 1; background: transparent; border: 1px solid rgba(30, 75, 154, 0.3); border-radius: 999px; padding: 0 18px; height: 34px; text-decoration: none; transition: border-color 0.18s, opacity 0.18s; white-space: nowrap; }
-.case-study-sidebar-home:hover {
-  border-color: rgba(30, 75, 154, 0.7);
-  opacity: 0.85;
+.case-study-sidebar-home { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: 500; line-height: var(--type-body-line-height); position: relative; display: inline-flex; align-items: center; justify-content: center; color: var(--color-cs-heading); background: transparent; border: 1px solid rgba(30, 75, 154, 0.3); border-radius: 999px; padding: 0 18px; height: 34px; text-decoration: none; overflow: hidden; transition: color 0.18s, border-color 0.18s; white-space: nowrap; }
+.case-study-sidebar-home::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #3A3A3E;
+  transform: translateX(-101%);
+  transition: transform 0.22s ease-out;
+  z-index: 0;
 }
-[data-theme="dark"] .case-study-sidebar-home { border-color: rgba(168, 190, 232, 0.3); }
-[data-theme="dark"] .case-study-sidebar-home:hover { border-color: rgba(168, 190, 232, 0.7); }
+.case-study-sidebar-home span {
+  position: relative;
+  z-index: 1;
+}
+.case-study-sidebar-home:hover::after {
+  transform: translateX(0);
+}
+.case-study-sidebar-home:hover {
+  color: #fff;
+  border-color: #3A3A3E;
+}
+[data-theme="dark"] .case-study-sidebar-home { color: #ffffff; border-color: rgba(255, 255, 255, 0.3); }
+[data-theme="dark"] .case-study-sidebar-home::after { background: #ffffff; }
+[data-theme="dark"] .case-study-sidebar-home:hover { color: #111; border-color: #ffffff; }
 
 .case-study-toc-link { font-family: var(--font-landing-body); font-size: var(--type-body-sm-size); font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4; position: relative; display: block; width: fit-content; overflow: hidden; text-decoration: none; color: var(--color-cs-heading); opacity: 0.7; padding: 6px 12px 6px 24px; border-radius: 6px; transition: opacity 0.18s, color 0.18s; }
 .case-study-toc-link:hover {
@@ -4892,6 +4905,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     min-width: 0;
   }
 
+  /* Fare Finder Key Findings are treated as visuals: quote column + image
+     column stay side by side and never wrap. */
+  .cs-page .ff-finding-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
   /* Exception: 3 visuals with their own heading + image + verdict line —
      a 2-up grid reads better than one long single column here too. */
   .cs-page .rm-ai-verdict-grid[style*="grid-template-columns"] {
@@ -4996,8 +5015,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
   /* Exception: 4 flow screenshots — a 2x2 grid reads better than one long
      single column of full-width screenshots. */
-  .cs-page .rm-solution-overview-grid[style*="grid-template-columns"],
-  .cs-page .ff-solution-overview-grid[style*="grid-template-columns"] {
+  .cs-page .rm-solution-overview-grid[style*="grid-template-columns"] {
     grid-template-columns: 1fr 1fr !important;
   }
 
@@ -5043,33 +5061,17 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     grid-template-columns: 1fr 1fr !important;
   }
 
-  /* Exception: Fare Finder text/image explorer panels — text column is
-     narrow enough to stay side by side at tablet width. Keep each grid's
-     own ratio rather than forcing equal halves. */
+  /* Exception: Fare Finder Key Findings and other content + visual pairs —
+     keep the screenshots side by side at every breakpoint instead of
+     wrapping into a long single-column stack. */
+  .cs-page .ff-finding-grid[style*="grid-template-columns"],
   .cs-page .ff-flight-fare-grid[style*="grid-template-columns"] {
-    grid-template-columns: 1fr 2fr !important;
-  }
-
-  /* Exception: Fare Finder 3-stat grids (friction points, reflection
-     metrics) — 3-up reads better than one long single column at tablet
-     width too. */
-  .cs-page .ff-friction-stats-grid[style*="grid-template-columns"],
-  .cs-page .ff-reflection-stats-grid[style*="grid-template-columns"] {
-    grid-template-columns: 1fr 1fr 1fr !important;
+    grid-template-columns: 1fr 1fr !important;
   }
 
   /* Exception: DNC Impact 3-stat grid — same treatment as Fare Finder's. */
   .cs-page .dnc-impact-stats-grid[style*="grid-template-columns"] {
     grid-template-columns: 1fr 1fr 1fr !important;
-  }
-
-  /* Exception: Fare Finder 2-card grids (validated/scrapped, where we
-     landed, what I'd carry forward) — short cards read better side by
-     side than stacked at tablet width. */
-  .cs-page .ff-validated-grid[style*="grid-template-columns"],
-  .cs-page .ff-where-landed-grid[style*="grid-template-columns"],
-  .cs-page .ff-carry-forward-grid[style*="grid-template-columns"] {
-    grid-template-columns: 1fr 1fr !important;
   }
 
   /* Exception: image + short "what wasn't working" list — text column is
@@ -5090,6 +5092,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .cs-page .ea-accessibility-grid[style*="grid-template-columns"],
   .cs-page .ea-solution-grid[style*="grid-template-columns"] {
     grid-template-columns: 1fr 2fr !important;
+  }
+  .cs-page .ff-validation-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .ff-stat-card-image {
+    width: 60% !important;
   }
   .cs-page .ea-comparison-grid[style*="grid-template-columns"] {
     grid-template-columns: 2fr auto 3fr !important;
@@ -5122,12 +5130,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   /* Exception: BackStory's "What We Found" intro text + stacked insight
      cards — keep side by side at tablet width instead of stacking. */
   .cs-page .bs-found-grid[style*="grid-template-columns"] {
-    grid-template-columns: 1fr 1fr !important;
-  }
-
-  /* Exception: Fare Finder's Enterprise/Consumer persona cards — keep side
-     by side at tablet width instead of stacking. */
-  .cs-page .ff-persona-grid[style*="grid-template-columns"] {
     grid-template-columns: 1fr 1fr !important;
   }
 }
@@ -5173,6 +5175,19 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 /* Full-width single-column figures (diagrams, flowcharts, screenshots that
    span the whole section width, not part of a two-column grid) narrow to
    90% on tablet and desktop, staying full width on mobile. */
+.cs-page .ff-finding-wrapper {
+  display: block !important;
+}
+
+.cs-page .ff-finding-image {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  height: auto !important;
+}
+
 @media (min-width: 768px) {
   .cs-page .cs-fullwidth-figure {
     width: 90% !important;

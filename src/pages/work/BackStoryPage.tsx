@@ -30,7 +30,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
     <section
       id={id}
       data-reveal
-      className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
+      className={`max-w-[1080px] px-8 md:px-[42px] cs-section ${className}`}
       style={{ marginTop: 164 }}
     >
       {children}
@@ -176,7 +176,7 @@ export default function BackStoryPage() {
         </div>
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
-          <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
+          <div className="max-w-[1080px] px-8 md:px-[42px] pt-14 pb-16">
             <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               BackStory
             </h1>

@@ -119,7 +119,7 @@ function PreviewLottie({ src, restTime = 0, zoom = 1, objectFit = 'cover' }: { s
 export default function NextProject({ title, to, company, description, tags, image, video, poster, lottie, restTime, mediaPadding, mediaZoom = 1, objectFit = 'cover', category, bgColor }: NextProjectProps) {
   return (
     <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, marginTop: 84 }}>
-      <section className="max-w-[1080px] px-8 md:px-14" style={{ paddingBottom: 84 }}>
+      <section className="max-w-[1080px] px-8 md:px-[42px]" style={{ paddingBottom: 84 }}>
         <p
           className="cs-metric-label"
           data-reveal

@@ -155,7 +155,7 @@ const CASE_STUDIES: CaseStudy[] = [
     description: "Created digital assets across social, ads, email, and events to support the Biden-Harris and Democrat campaign.",
     bgColor: "linear-gradient(135deg, #2b3a8f, #1a2358)",
     objectFit: "contain",
-    mediaScale: 1.2,
+    mediaScale: 1.05,
     dotField: true,
     dotLayout: 1,
     icon: "/DNC Logo.svg.png",

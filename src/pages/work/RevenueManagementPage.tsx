@@ -3,6 +3,7 @@ import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
 import { User, AirplaneTakeoff, Timer } from '@phosphor-icons/react'
 import ImageFigure from '../../components/case-study/ImageFigure'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
+import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import PlayPauseButton from '../../components/PlayPauseButton'
@@ -25,7 +26,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
     <section
       id={id}
       data-reveal
-      className={`max-w-[1080px] px-8 md:px-14 cs-section ${className}`}
+      className={`max-w-[1080px] px-8 md:px-[42px] cs-section ${className}`}
       style={{ marginTop: 164 }}
     >
       {children}
@@ -168,7 +169,7 @@ export default function RevenueManagementPage() {
 
         {/* Text content below image */}
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
-        <div className="max-w-[1080px] px-8 md:px-14 pt-14 pb-16">
+        <div className="max-w-[1080px] px-8 md:px-[42px] pt-14 pb-16">
           <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal rm-hero-title" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
             Modernizing PROS' Revenue Management Platform
           </h1>
@@ -223,16 +224,16 @@ export default function RevenueManagementPage() {
           </BodyText>
         </div>
 
-        <div style={{ marginTop: 64 }}>
+        <div style={{ marginTop: 64 }} data-reveal>
           <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Impact</p>
           <div className="grid grid-cols-3 gap-4">
             {[
               { stat: '2', description: 'AI components added to the design system' },
               { stat: '48%', description: 'improvement in analyst satisfaction scores' },
               { stat: '35%', description: 'reduction in fare price decision time' },
-            ].map(({ stat, description }) => (
-              <div key={description}>
-                <p className="cs-stat-number-accent" style={{ margin: '0 0 8px' }}>{stat}</p>
+            ].map(({ stat, description }, i) => (
+              <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
+                <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 28, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 400, color: '#416BCC', display: 'block' }} />
                 <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
               </div>
             ))}
@@ -429,10 +430,10 @@ export default function RevenueManagementPage() {
         ].map(({ n, title, headline, body, image, alt }) => (
           <div key={n} style={{ marginTop: n === 1 ? 0 : 108 }}>
             <p className="cs-metric-label" style={{ margin: '0 0 16px', textAlign: 'center', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Solution #{n}: {title}</p>
-            <p className="rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 auto 32px', maxWidth: 640, textAlign: 'center' }}>
+            <p className="rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 auto 32px', maxWidth: 720, textAlign: 'center' }}>
               {headline}
             </p>
-            <div className="rm-solution-grid" style={{ display: 'grid', gridTemplateColumns: '3.2fr 1fr', gap: 8, alignItems: 'center' }}>
+            <div className="rm-solution-grid" style={{ display: 'grid', gridTemplateColumns: '2.6fr 1.4fr', gap: 8, alignItems: 'center' }}>
               <img src={image} alt={alt} className="rm-solution-laptop" style={{ width: '100%', height: 'auto', display: 'block' }} />
               <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 {body}
