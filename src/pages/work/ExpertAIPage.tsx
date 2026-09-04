@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Timer, AirplaneTakeoff, Quotes, ShareNetwork, UserGear, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
-import PlayPauseButton from '../../components/PlayPauseButton'
+import HeroMedia from '../../components/case-study/HeroMedia'
 import LazyVideo from '../../components/LazyVideo'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
@@ -219,39 +219,6 @@ function StatBlock({ stat, label, description, icon }: { stat: string; label: st
   )
 }
 
-// ─── Hero video — autoplays by default; the button is the sole manual control ──
-
-function HeroVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [playing, setPlaying] = useState(true)
-
-  const handleToggle = () => {
-    const vid = videoRef.current
-    if (!vid) return
-    if (playing) vid.pause()
-    else vid.play().catch(() => {})
-  }
-
-  return (
-    <>
-      <video
-        ref={videoRef}
-        src="/videos/expert.ai-Video.webm"
-        poster="/videos/expert.ai-Video-poster.png"
-        muted
-        loop
-        autoPlay
-        playsInline
-        preload="metadata"
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }}
-      />
-      <PlayPauseButton playing={playing} onToggle={handleToggle} />
-    </>
-  )
-}
-
 export default function ExpertAIPage() {
   useCaseToc(TOC, 'Expert.ai Filter Function')
   useEffect(() => { window.scrollTo(0, 0) }, [])
@@ -262,11 +229,13 @@ export default function ExpertAIPage() {
 
       {/* ── Hero ── */}
       <section>
-        <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-          <div style={{ background: '#c4ecff', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', padding: 16, border: '1px solid #d1d1d1' }}>
-            <HeroVideo />
-          </div>
-        </div>
+        <HeroMedia
+          video="/videos/expert.ai-Video.webm"
+          poster="/videos/expert.ai-Video-poster.png"
+          bgColor="#c4ecff"
+          objectFit="contain"
+          padding={16}
+        />
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-[42px] pt-14 pb-16">

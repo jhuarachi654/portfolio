@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { Asterisk } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
-import PlayPauseButton from '../../components/PlayPauseButton'
+import HeroMedia from '../../components/case-study/HeroMedia'
 import LazyVideo from '../../components/LazyVideo'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
@@ -135,48 +135,6 @@ function KeyFinding({
   )
 }
 
-// ─── Hero video — autoplays by default; the button is the sole manual control ──
-
-function HeroVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [playing, setPlaying] = useState(true)
-
-  const handleToggle = () => {
-    const vid = videoRef.current
-    if (!vid) return
-    if (playing) vid.pause()
-    else vid.play().catch(() => {})
-  }
-
-  useEffect(() => {
-    const vid = videoRef.current
-    if (!vid) return
-    const playPromise = vid.play()
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {})
-    }
-  }, [])
-
-  return (
-    <>
-      <video
-        ref={videoRef}
-        src="/videos/Fare-Finder-Video.webm"
-        poster="/videos/Fare-Finder-Video-poster.png"
-        muted
-        loop
-        autoPlay
-        playsInline
-        preload="metadata"
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain', transform: 'scale(1.3)' }}
-      />
-      <PlayPauseButton playing={playing} onToggle={handleToggle} />
-    </>
-  )
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function FareFinderPage() {
@@ -188,11 +146,14 @@ export default function FareFinderPage() {
 
       {/* ── Hero ── */}
       <section>
-        <div className="cs-hero-lottie-wrap ff-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-          <div style={{ background: '#003854', borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', padding: 32, border: '1px solid #d1d1d1' }}>
-            <HeroVideo />
-          </div>
-        </div>
+        <HeroMedia
+          video="/videos/Fare-Finder-Video.webm"
+          poster="/videos/Fare-Finder-Video-poster.png"
+          bgColor="#003854"
+          objectFit="contain"
+          scale={1.3}
+          padding={16}
+        />
 
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-[42px] pt-14 pb-16">
