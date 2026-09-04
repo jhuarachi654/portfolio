@@ -1946,6 +1946,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .hero-right {
     padding: 0 20px 16px;
     box-sizing: border-box;
+    width: 100%;
   }
   .hero-right canvas,
   .hero-right video {
@@ -3734,9 +3735,11 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   display: flex;
   flex-direction: column;
   gap: 18px;
+  min-width: 0;
+  width: 100%;
 }
 
-.about-bio-para { font-family: var(--type-body-lg-family); font-size: var(--type-body-lg-size); font-weight: var(--type-body-lg-weight); line-height: var(--type-body-lg-line-height); color: #222225; }
+.about-bio-para { font-family: var(--type-body-lg-family); font-size: var(--type-body-lg-size); font-weight: var(--type-body-lg-weight); line-height: var(--type-body-lg-line-height); color: #222225; max-width: 100%; overflow-wrap: break-word; }
 
 /* Pencil-style annotation marks (underline / circle / squiggle) over
    specific phrases in the About bio — draw themselves in once the
