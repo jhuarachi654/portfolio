@@ -430,34 +430,6 @@ export default function ExpertAIPage() {
             </div>
           </div>
 
-          <div style={{ marginTop: 108 }}>
-            <SubHeading>Unexpected Find: Accessibility</SubHeading>
-            <BodyText>
-              Several users also mentioned accessibility issues. The system used red and green to show exclusion and inclusion, which meant colorblind users could not tell them apart. The filtering system also required users to drag elements into inclusion and exclusion areas. For users who could not use a mouse, this was difficult.
-            </BodyText>
-
-            {/* 2-image visual grid */}
-            <div className="ea-unexpected-find-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 24 }}>
-              <img src={img('wcag-analysis.png')} alt="WCAG contrast check: red #EC5750 on #F4E8E7 scores 2.90:1, all WCAG fail" style={{ width: '100%', borderRadius: 8, display: 'block' }} />
-              <img src={img('motion-drag.png')} alt="Original filter popup requiring drag and drop to include or exclude entities" style={{ width: '100%', borderRadius: 8, display: 'block' }} />
-            </div>
-            <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
-              The original filter popup. It blocks results, uses red/green indicators, and requires drag and drop.
-            </p>
-
-            {/* Callout */}
-            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 16 }}>
-              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-                This was not part of the original project scope, but I brought it up to my team and backed the case with user research. I mentioned how it could <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>increase overall usability and improve things for everyone.</strong>
-              </p>
-            </div>
-
-            <BodyText>
-              I got the go ahead to fix it, but I had to check with the technical team on feasibility and make sure it fit within the design system constraints.
-            </BodyText>
-          </div>
         </Section>
 
         {/* ── 4. Development ── */}
