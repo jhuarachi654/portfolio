@@ -366,7 +366,7 @@ export default function ExpertAIPage() {
                   <div key={role}>
                     <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: '50%', background: 'rgba(var(--color-navy-rgb),0.06)', color: 'var(--color-secondary)', fontSize: 18, fontWeight: 700, marginBottom: 12 }}>"</span>
                     <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: '#222225', margin: '0 0 8px' }}>"{quote}"</p>
-                    <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{role}</p>
+                    <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400 }}>{role}</p>
                   </div>
                 ))}
               </div>
