@@ -520,7 +520,14 @@ export default function ExpertAIPage() {
             <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. Solution</p>
           </div>
 
-          <div style={{ width: '80%', margin: '32px auto 0' }} data-reveal>
+          <div style={{ marginTop: 32 }}>
+            <SubHeading>Four Core Principles</SubHeading>
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('four-core-principles.png')} alt="Four core principles: Visible by Default, Click Not Drag, Accessible by Design, Built from Design System" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            </figure>
+          </div>
+
+          <div style={{ width: '80%', margin: '108px auto 0' }} data-reveal>
             <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden', background: 'transparent' }}>
               <LazyVideo
                 src="/videos/expert.ai-Video.webm"
