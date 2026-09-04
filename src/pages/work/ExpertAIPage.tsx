@@ -341,21 +341,12 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <SubHeading>What users told me</SubHeading>
+            <SubHeading>User interviews surfaced the human cost</SubHeading>
             <BodyText>
-              I talked to 10 enterprise users across legal, finance, and government. What struck me was not just what they said, but how they adapted when the filter component did not meet their needs. One person added extra steps. Another abandoned a feature entirely. A third was not aware that the feature existed.
+              I talked to 10 enterprise users across legal, finance, and government. The ticket analysis showed the patterns. The interviews showed the daily reality: time lost to tedious manual workarounds, and features meant to simplify their work had become obstacles themselves.
             </BodyText>
 
-            {/* Callout */}
-            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 32 }}>
-              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-                When multiple users find different workarounds for the same interface, the filter component was clearly the issue.
-              </p>
-            </div>
-
-            {/* Quotes + placeholder visual, 2-column */}
+            {/* Quotes + illustrations, 2-column */}
             <div className="ea-quotes-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
                 {[
@@ -370,8 +361,8 @@ export default function ExpertAIPage() {
                   </div>
                 ))}
               </div>
-              <div style={{ border: '1px dashed rgba(var(--color-navy-rgb),0.25)', borderRadius: 8, aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-secondary)' }}>
-                <span className="font-landing-body" style={{ fontSize: 13, opacity: 0.6 }}>Illustration placeholder</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img src={img('user-research-illustrations.png')} alt="Illustrations of overwhelmed enterprise users struggling with the filter interface" style={{ width: '100%', height: 'auto', display: 'block' }} />
               </div>
             </div>
           </div>
