@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Timer, AirplaneTakeoff, ShareNetwork, UserGear, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
+import { Timer, ShareNetwork, UserGear, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -443,14 +443,6 @@ export default function ExpertAIPage() {
             <AccessibilityExplorer />
           </div>
 
-          <div style={{ marginTop: 108 }}>
-            <ChallengeBanner
-              icon={<AirplaneTakeoff size="1em" weight="regular" />}
-              iconColor="#416BCC"
-              label="Challenge (Revised)"
-              question={<>How might we make filtering <strong><em>visible,</em></strong> <strong><em>reliable,</em></strong> and <strong><em>accessible</em></strong> so users can filter efficiently and independently?</>}
-            />
-          </div>
 
           {/* Revised Solution */}
           <div style={{ marginTop: 108 }}>
