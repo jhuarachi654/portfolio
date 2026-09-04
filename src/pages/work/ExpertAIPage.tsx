@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Timer, ShareNetwork, UserGear, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
+import { Timer, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -50,32 +50,6 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
       <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
-    </div>
-  )
-}
-
-type Bullet = { text: string; type?: 'check' | 'x' | 'neutral' }
-function ConstraintCard({ title, icon, bullets }: { title: string; icon?: React.ReactNode; bullets: (string | Bullet)[] }) {
-  return (
-    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-        <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: 0 }}>{title}</p>
-        {icon && (
-          <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#416BCC', fontSize: 'clamp(20px, 3vw, 28px)' }}>
-            {icon}
-          </span>
-        )}
-      </div>
-      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {bullets.map((b, i) => {
-          const text = typeof b === 'string' ? b : b.text
-          return (
-            <li key={i}>
-              <span className="font-landing-body" style={{ fontSize: 13, opacity: 1, color: '#222225', lineHeight: 'normal' }}>{text}</span>
-            </li>
-          )
-        })}
-      </ul>
     </div>
   )
 }
@@ -411,35 +385,8 @@ export default function ExpertAIPage() {
             <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Development</p>
           </div>
 
-          {/* Technical Constraints — first, per Framer */}
-          <div style={{ marginTop: 32 }}>
-            <SubHeading>Technical Constraints</SubHeading>
-            <BodyText>
-              Although I had the go-ahead from my team to work on accessibility, I had to ensure that my design iterations were feasible with check-ins with the developers on my team and designers as well to ensure that it aligned with the design system. I touched base with both and the following are my takeaways that I brought when iterating the solutions.
-            </BodyText>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 16 }}>
-            <ConstraintCard
-              title="Design System"
-              icon={<ShareNetwork size="1em" weight="regular" />}
-              bullets={['The Lead Designer advised me that the filter component had to be built from design system elements. Also, to consider whether the solution could scale to other products.']}
-            />
-            <ConstraintCard
-              title="Technical Feasibility"
-              icon={<UserGear size="1em" weight="regular" />}
-              bullets={['The developers asked me to check in with them early and often. They preferred annotated mockups so they could give async feedback before I went too far down any path.']}
-            />
-          </div>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginTop: 16 }}>
-            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
-              <strong className="text-[var(--color-cs-heading)]">Takeaway:</strong> The solution had to come from the existing design system. I also had to balance accessibility improvements with what the team could realistically build in one sprint.
-            </p>
-          </div>
-
           {/* Accessibility — wireframe tests */}
-          <div style={{ marginTop: 108 }}>
+          <div style={{ marginTop: 32 }}>
             <AccessibilityExplorer />
           </div>
 
