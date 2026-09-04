@@ -394,10 +394,10 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #1: The Popup Blocked Everything</p>
-            <SubHeading><span style={{ color: '#416BCC' }}>76%</span> of tickets traced back to the same design failure. The popup blocked results and left no trace of active filters.</SubHeading>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #1: The Popup Blocked Results</p>
+            <SubHeading><span style={{ color: '#416BCC' }}>76%</span> of tickets traced back to one component: the filter popup.</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
-              Users couldn't see their data while filtering, and when they closed it, they had no way to know if their work had any effect.
+              It covered the results screen entirely, and closing it left no visible record of what had been applied.
             </p>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
@@ -407,9 +407,9 @@ export default function ExpertAIPage() {
 
           <div style={{ marginTop: 108 }}>
             <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #2: High Friction</p>
-            <SubHeading>More than a <span style={{ color: '#416BCC' }}>third</span> of all tickets were filed about drag-and-drop failures alone.</SubHeading>
+            <SubHeading><span style={{ color: '#416BCC' }}>More than a third</span> of all tickets were about drag-and-drop failures.</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
-              The interaction was unreliable and tedious. Users had to attempt the same action multiple times, and one analyst abandoned it entirely, switching to typing manually instead.
+              The interaction was unreliable and tedious. One analyst gave up entirely and switched to typing manually.
             </p>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
@@ -418,14 +418,16 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #3: Accessibility Gap — Beyond Original Scope</p>
-            <SubHeading>The filter's red/green indicators scored <span style={{ color: '#416BCC' }}>2.90:1</span> contrast, failing every WCAG standard.</SubHeading>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #3: Accessibility Gap</p>
+            <SubHeading>The filter's red/green indicators <span style={{ color: '#416BCC' }}>did not meet WCAG standards.</span></SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
-              Colorblind users couldn't distinguish inclusion from exclusion. Drag-and-drop excluded anyone without fine motor control.
+              This was outside the original project scope. I surfaced the gap through user research and advocated for its inclusion in the redesign.
             </p>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('key-finding-3-wcag-contrast.png')} alt="Accessibility Colour Contrast Checker showing the filter's red and green indicators both failing WCAG AA and AAA" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <div style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8 }}>
+                <img src={img('key-finding-3-wcag-contrast.png')} alt="Accessibility Colour Contrast Checker showing the filter's red and green indicators both failing WCAG AA and AAA" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
             </figure>
           </div>
 
