@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Timer, AirplaneTakeoff, Quotes, ShareNetwork, UserGear, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
+import { Timer, AirplaneTakeoff, ShareNetwork, UserGear, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -355,28 +355,24 @@ export default function ExpertAIPage() {
               </p>
             </div>
 
-            {/* Quote cards */}
-            <div className="ea-quotes-container" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {[
-                { role: 'Legal Analyst', avatar: img('legal-analyst.avif'), quote: 'I have to close it every time just to check my work. Then open it again. Then close it. It is exhausting.', align: 'left' },
-                { role: 'Government Contract Analyst', avatar: img('government-analyst.avif'), quote: 'I gave up on drag and drop. I just type everything now.', align: 'right' },
-                { role: 'Data Analyst w/ Colorblindness', avatar: img('data-analyst.avif'), quote: 'I did not even know there were red and green indicators until someone told me.', align: 'left' },
-              ].map(({ role, avatar, quote, align }) => (
-                <div key={role} style={{ maxWidth: '80%', marginLeft: align === 'right' ? 'auto' : 0, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: '12px 16px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', overflow: 'hidden', flexShrink: 0 }}>
-                      <img src={avatar} alt={role} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                    </div>
-                    <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', opacity: 0.7 }}>{role}</span>
+            {/* Quotes + placeholder visual, 2-column */}
+            <div className="ea-quotes-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                {[
+                  { role: 'Legal Analyst', quote: 'I have to close it every time just to check my work. Then open it again. Then close it. It is exhausting.' },
+                  { role: 'Government Contract Analyst', quote: 'I gave up on drag and drop. I just type everything now.' },
+                  { role: 'Data Analyst w/ Colorblindness', quote: 'I did not even know there were red and green indicators until someone told me.' },
+                ].map(({ role, quote }) => (
+                  <div key={role}>
+                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: '50%', background: 'rgba(var(--color-navy-rgb),0.06)', color: 'var(--color-secondary)', fontSize: 18, fontWeight: 700, marginBottom: 12 }}>"</span>
+                    <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: '#222225', margin: '0 0 8px' }}>"{quote}"</p>
+                    <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>— {role}</p>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12 }}>
-                    <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 'normal', color: '#222225', margin: 0 }}>{quote}</p>
-                    <span style={{ color: '#416BCC', flexShrink: 0, lineHeight: 'normal', display: 'flex', alignItems: 'flex-end' }}>
-                      <Quotes size={22} weight="fill" />
-                    </span>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <div style={{ border: '1px dashed rgba(var(--color-navy-rgb),0.25)', borderRadius: 8, aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-secondary)' }}>
+                <span className="font-landing-body" style={{ fontSize: 13, opacity: 0.6 }}>Illustration placeholder</span>
+              </div>
             </div>
           </div>
 
