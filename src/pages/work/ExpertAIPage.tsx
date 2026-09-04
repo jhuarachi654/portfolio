@@ -341,7 +341,7 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <SubHeading>User interviews surfaced the human cost</SubHeading>
+            <SubHeading>User interviews surfaced the <span style={{ color: '#416BCC' }}>human cost</span></SubHeading>
             <BodyText>
               I talked to 10 enterprise users across legal, finance, and government. The ticket analysis showed the patterns. The interviews showed the daily reality: time lost to tedious manual workarounds, and features meant to simplify their work had become obstacles themselves.
             </BodyText>
