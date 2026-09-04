@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Timer, AirplaneTakeoff, Brain, Ghost, BookOpen, Quotes, ShareNetwork, UserGear, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
+import { Timer, AirplaneTakeoff, Quotes, ShareNetwork, UserGear, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -33,10 +33,6 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
   )
 }
 
-function Prose({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={className}>{children}</div>
-}
-
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
     <p className="font-landing-body text-[17px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
@@ -54,24 +50,6 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
       <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
-    </div>
-  )
-}
-
-function TicketCard({ label, description, count, total, icon }: { label: string; description: string; count: number; total: number; icon: React.ReactNode }) {
-  return (
-    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: '24px 20px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-        <div style={{ width: 44, height: 44, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#416BCC', fontSize: 'clamp(20px, 3vw, 28px)' }}>
-          {icon}
-        </div>
-        <p style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 20, fontWeight: 500, color: 'var(--color-cs-heading)', margin: 0, lineHeight: 'normal' }}>{label}</p>
-      </div>
-      <div className="font-landing-body" style={{ fontSize: 14, color: '#416BCC', marginBottom: 12, fontWeight: 500 }}>
-        {count} of {total} support tickets
-      </div>
-      <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '0 0 12px' }} />
-      <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
     </div>
   )
 }
@@ -413,7 +391,7 @@ export default function ExpertAIPage() {
             <div style={{ textAlign: 'center' }}>
               <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #2: High Friction</p>
               <div style={{ maxWidth: 640, margin: '0 auto' }}>
-                <SubHeading><span style={{ color: '#416BCC' }}>More than 1/3</span> of tickets were about drag-and-drop.</SubHeading>
+                <SubHeading><span style={{ color: '#416BCC' }}>More than 1/3</span> of support tickets were about drag-and-drop.</SubHeading>
               </div>
               <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', maxWidth: 560, margin: '0 auto' }}>
                 The interaction was unreliable and tedious. One analyst gave up entirely and switched to typing manually.
@@ -441,24 +419,6 @@ export default function ExpertAIPage() {
                 <img src={img('key-finding-3-wcag-contrast.png')} alt="Accessibility Colour Contrast Checker showing the filter's red and green indicators both failing WCAG AA and AAA" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
             </figure>
-          </div>
-
-          <div style={{ marginTop: 108 }}>
-            <SubHeading>What the support tickets showed</SubHeading>
-            <Prose>
-              <BodyText>
-                I met with the Customer Support Specialist and started reviewing the 62 support tickets. I also talked to the PM and a UX engineer to understand what had been tried before. The filtering component had been overdue for a redesign and although there was data, no one had pulled it together yet. Here is what I found.
-              </BodyText>
-            </Prose>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" style={{ marginTop: 32 }}>
-              <TicketCard label="Lack of visibility" description="Users could not see which filters were active. The popup showed nothing once you closed it." count={34} total={62} icon={<Brain size="1em" />} />
-              <TicketCard label="High friction" description="Drag and drop often failed. Users had to try multiple times just to add a simple filter." count={22} total={62} icon={<Ghost size="1em" />} />
-              <TicketCard label="Blocked results" description="The popup covered the entire screen. Users could not see their data while filtering." count={47} total={62} icon={<BookOpen size="1em" />} />
-            </div>
-            <p className="font-landing-body cs-caption" style={{ marginTop: 20 }}>
-              Main Pain Points from User Research/Internal Interviews
-            </p>
           </div>
 
           <div style={{ marginTop: 108 }}>
