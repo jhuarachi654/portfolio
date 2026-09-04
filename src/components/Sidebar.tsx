@@ -57,7 +57,6 @@ export default function Sidebar() {
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
       navigate("/")
-      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 120)
     }
   }
 

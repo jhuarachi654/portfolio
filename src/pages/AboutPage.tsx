@@ -236,8 +236,8 @@ export default function AboutPage() {
           <div className="about-bio-right">
             <p className="about-bio-para" data-reveal style={{ "--reveal-delay": "200ms" } as React.CSSProperties}>
               I didn't always start out in the creative space. I began in
-              the humanities — studying <Annotate type="underline" order={0}>psychology, neuroscience, and
-              Latino studies at Williams College,</Annotate> and working as a research
+              the humanities — studying psychology, neuroscience, and
+              Latino studies at <Annotate type="underline" order={0}>Williams College,</Annotate> and working as a research
               assistant in a neuroscience lab, contributing to studies on
               psychiatric interventions for memory and fear conditioning.
             </p>

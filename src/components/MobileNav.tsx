@@ -42,7 +42,6 @@ export default function MobileNav() {
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
       navigate("/")
-      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 120)
     }
   }
 
