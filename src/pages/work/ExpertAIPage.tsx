@@ -346,25 +346,11 @@ export default function ExpertAIPage() {
               I talked to 10 enterprise users across legal, finance, and government. The ticket analysis showed the patterns. The interviews showed the daily reality: time lost to tedious manual workarounds, and features meant to simplify their work had become obstacles themselves.
             </BodyText>
 
-            {/* Quotes + illustrations, 2-column */}
-            <div className="ea-quotes-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-                {[
-                  { role: 'Legal Analyst', quote: 'I have to close it every time just to check my work. Then open it again. Then close it. It is exhausting.' },
-                  { role: 'Government Contract Analyst', quote: 'I gave up on drag and drop. I just type everything now.' },
-                  { role: 'Data Analyst w/ Colorblindness', quote: 'I did not even know there were red and green indicators until someone told me.' },
-                ].map(({ role, quote }) => (
-                  <div key={role}>
-                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: '50%', background: 'rgba(var(--color-navy-rgb),0.06)', color: 'var(--color-secondary)', fontSize: 18, fontWeight: 700, marginBottom: 12 }}>"</span>
-                    <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: '#222225', margin: '0 0 8px' }}>"{quote}"</p>
-                    <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400 }}>{role}</p>
-                  </div>
-                ))}
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <div style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8 }}>
+                <img src={img('user-research-illustrations.png')} alt="Illustrations of overwhelmed enterprise users struggling with the filter interface" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img src={img('user-research-illustrations.png')} alt="Illustrations of overwhelmed enterprise users struggling with the filter interface" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              </div>
-            </div>
+            </figure>
           </div>
 
           <div style={{ marginTop: 108 }}>
