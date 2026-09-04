@@ -332,7 +332,7 @@ export default function ExpertAIPage() {
           <div style={{ marginTop: 108 }}>
             <SubHeading>My Role</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
-              As a product design intern at Expert.ai, I worked alongside an AI Innovation Manager and developers to overhaul the Filter function on the Corpus platform, centering the redesign on accessibility and usability. I designed and prototyped in Figma, provided developer annotations, and conducted usability testing to help enterprise users find and extract key terms from their documents faster.
+              As a product design intern at Expert.ai, I worked alongside an AI Innovation Manager and developers to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>improve the design of the Filter function</strong>, centering the redesign on usability then accessibility. I designed and prototyped in Figma, provided developer annotations, and conducted usability testing to help enterprise users identify key content from their documents faster.
             </p>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
