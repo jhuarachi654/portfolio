@@ -367,6 +367,19 @@ export default function ExpertAIPage() {
             </figure>
           </div>
 
+          <div style={{ marginTop: 108 }}>
+            <SubHeading>More documents didn't mean better decisions. It meant <span style={{ color: '#416BCC' }}>paralysis.</span></SubHeading>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
+              Psychologist Barry Schwartz found that more options lead to overwhelm, not better outcomes. Digitalization gave organizations access to everything — every contract, ruling, and filing. But access without structure isn't power. Filtering is what turns information overload into a decision.
+            </p>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <div style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8 }}>
+                <img src={img('document-archive.jpg')} alt="A crowded physical records archive with shelves of overflowing document folders" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+            </figure>
+          </div>
+
           <div className="rm-challenge-subheader-style" style={{ marginTop: 108 }}>
             <ChallengeBanner
               label="Mission"
