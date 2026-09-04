@@ -394,6 +394,51 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #1</p>
+            <SubHeading>The popup blocked <span style={{ color: '#416BCC' }}>everything.</span></SubHeading>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
+              76% of tickets traced back to the same design failure. The popup blocked results and left no trace of active filters.
+            </p>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
+              Users couldn't see their data while filtering, and when they closed it, they had no way to know if their work had any effect.
+            </p>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('key-finding-1-popup-blocked.png')} alt="Filter documents popup overlaying the results, blocking the user's data" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            </figure>
+          </div>
+
+          <div style={{ marginTop: 108 }}>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #2</p>
+            <SubHeading>High friction</SubHeading>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
+              More than a third of all tickets were filed about drag-and-drop failures alone.
+            </p>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
+              The interaction was unreliable and tedious. Users had to attempt the same action multiple times, and one analyst abandoned it entirely, switching to typing manually instead.
+            </p>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('key-finding-2-high-friction.png')} alt="Cursor dragging a Geography entity toward the include panel in the filter documents interface" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            </figure>
+          </div>
+
+          <div style={{ marginTop: 108 }}>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #3</p>
+            <SubHeading>Accessibility gap — <span style={{ color: '#416BCC' }}>beyond original scope</span></SubHeading>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
+              The filter's red/green indicators scored 2.90:1 contrast, failing every WCAG standard.
+            </p>
+            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
+              Colorblind users couldn't distinguish inclusion from exclusion. Drag-and-drop excluded anyone without fine motor control.
+            </p>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('key-finding-3-wcag-contrast.png')} alt="Accessibility Colour Contrast Checker showing the filter's red and green indicators both failing WCAG AA and AAA" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            </figure>
+          </div>
+
+          <div style={{ marginTop: 108 }}>
             <SubHeading>What the support tickets showed</SubHeading>
             <Prose>
               <BodyText>
