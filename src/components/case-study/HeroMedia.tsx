@@ -42,9 +42,20 @@ export default function HeroMedia({
 
   return (
     <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
-      <div style={{ background: bgColor, borderRadius: 8, position: 'relative', aspectRatio: '16/9', overflow: 'hidden', padding, border: `1px solid ${borderColor}` }}>
+      <div
+        className="case-study-card-media"
+        style={{
+          background: bgColor,
+          borderRadius: 8,
+          position: 'relative',
+          aspectRatio: '16/9',
+          border: `1px solid ${borderColor}`,
+          padding: `${(padding / 400) * 100}%`,
+        }}
+      >
         <video
           ref={videoRef}
+          className="case-study-card-video"
           src={video}
           poster={poster}
           muted
@@ -54,7 +65,7 @@ export default function HeroMedia({
           preload="metadata"
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
-          style={{ width: '100%', height: '100%', display: 'block', objectFit, ...(scale ? { transform: `scale(${scale})` } : {}) }}
+          style={{ objectFit, ...(scale ? { transform: `scale(${scale})` } : {}) }}
         />
         <PlayPauseButton playing={playing} onToggle={handleToggle} />
       </div>
