@@ -341,6 +341,46 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
+            <SubHeading>What users told me</SubHeading>
+            <BodyText>
+              I talked to 10 enterprise users across legal, finance, and government. What struck me was not just what they said, but how they adapted when the filter component did not meet their needs. One person added extra steps. Another abandoned a feature entirely. A third was not aware that the feature existed.
+            </BodyText>
+
+            {/* Callout */}
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
+            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 32 }}>
+              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
+              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+                When multiple users find different workarounds for the same interface, the filter component was clearly the issue.
+              </p>
+            </div>
+
+            {/* Quote cards */}
+            <div className="ea-quotes-container" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {[
+                { role: 'Legal Analyst', avatar: img('legal-analyst.avif'), quote: 'I have to close it every time just to check my work. Then open it again. Then close it. It is exhausting.', align: 'left' },
+                { role: 'Government Contract Analyst', avatar: img('government-analyst.avif'), quote: 'I gave up on drag and drop. I just type everything now.', align: 'right' },
+                { role: 'Data Analyst w/ Colorblindness', avatar: img('data-analyst.avif'), quote: 'I did not even know there were red and green indicators until someone told me.', align: 'left' },
+              ].map(({ role, avatar, quote, align }) => (
+                <div key={role} style={{ maxWidth: '80%', marginLeft: align === 'right' ? 'auto' : 0, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: '12px 16px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+                    <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', overflow: 'hidden', flexShrink: 0 }}>
+                      <img src={avatar} alt={role} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    </div>
+                    <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', opacity: 0.7 }}>{role}</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12 }}>
+                    <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 'normal', color: '#222225', margin: 0 }}>{quote}</p>
+                    <span style={{ color: '#416BCC', flexShrink: 0, lineHeight: 'normal', display: 'flex', alignItems: 'flex-end' }}>
+                      <Quotes size={22} weight="fill" />
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginTop: 108 }}>
             <div style={{ textAlign: 'center' }}>
               <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #1: The Popup Blocked Results</p>
               <div style={{ maxWidth: 640, margin: '0 auto' }}>
@@ -388,46 +428,6 @@ export default function ExpertAIPage() {
                 <img src={img('key-finding-3-wcag-contrast.png')} alt="Accessibility Colour Contrast Checker showing the filter's red and green indicators both failing WCAG AA and AAA" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
             </figure>
-          </div>
-
-          <div style={{ marginTop: 108 }}>
-            <SubHeading>What users told me</SubHeading>
-            <BodyText>
-              I talked to 10 enterprise users across legal, finance, and government. What struck me was not just what they said, but how they adapted when the filter component did not meet their needs. One person added extra steps. Another abandoned a feature entirely. A third was not aware that the feature existed.
-            </BodyText>
-
-            {/* Callout */}
-            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 32 }}>
-              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-                When multiple users find different workarounds for the same interface, the filter component was clearly the issue.
-              </p>
-            </div>
-
-            {/* Quote cards */}
-            <div className="ea-quotes-container" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {[
-                { role: 'Legal Analyst', avatar: img('legal-analyst.avif'), quote: 'I have to close it every time just to check my work. Then open it again. Then close it. It is exhausting.', align: 'left' },
-                { role: 'Government Contract Analyst', avatar: img('government-analyst.avif'), quote: 'I gave up on drag and drop. I just type everything now.', align: 'right' },
-                { role: 'Data Analyst w/ Colorblindness', avatar: img('data-analyst.avif'), quote: 'I did not even know there were red and green indicators until someone told me.', align: 'left' },
-              ].map(({ role, avatar, quote, align }) => (
-                <div key={role} style={{ maxWidth: '80%', marginLeft: align === 'right' ? 'auto' : 0, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: '12px 16px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', overflow: 'hidden', flexShrink: 0 }}>
-                      <img src={avatar} alt={role} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                    </div>
-                    <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', opacity: 0.7 }}>{role}</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12 }}>
-                    <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 'normal', color: '#222225', margin: 0 }}>{quote}</p>
-                    <span style={{ color: '#416BCC', flexShrink: 0, lineHeight: 'normal', display: 'flex', alignItems: 'flex-end' }}>
-                      <Quotes size={22} weight="fill" />
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
         </Section>
