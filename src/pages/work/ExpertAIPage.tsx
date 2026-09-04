@@ -394,11 +394,8 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #1</p>
-            <SubHeading>The popup blocked <span style={{ color: '#416BCC' }}>everything.</span></SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
-              76% of tickets traced back to the same design failure. The popup blocked results and left no trace of active filters.
-            </p>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #1: The Popup Blocked Everything</p>
+            <SubHeading><span style={{ color: '#416BCC' }}>76%</span> of tickets traced back to the same design failure. The popup blocked results and left no trace of active filters.</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
               Users couldn't see their data while filtering, and when they closed it, they had no way to know if their work had any effect.
             </p>
@@ -409,11 +406,8 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #2</p>
-            <SubHeading>High friction</SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
-              More than a third of all tickets were filed about drag-and-drop failures alone.
-            </p>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #2: High Friction</p>
+            <SubHeading>More than a <span style={{ color: '#416BCC' }}>third</span> of all tickets were filed about drag-and-drop failures alone.</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
               The interaction was unreliable and tedious. Users had to attempt the same action multiple times, and one analyst abandoned it entirely, switching to typing manually instead.
             </p>
@@ -424,11 +418,8 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #3</p>
-            <SubHeading>Accessibility gap — <span style={{ color: '#416BCC' }}>beyond original scope</span></SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
-              The filter's red/green indicators scored 2.90:1 contrast, failing every WCAG standard.
-            </p>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #3: Accessibility Gap — Beyond Original Scope</p>
+            <SubHeading>The filter's red/green indicators scored <span style={{ color: '#416BCC' }}>2.90:1</span> contrast, failing every WCAG standard.</SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
               Colorblind users couldn't distinguish inclusion from exclusion. Drag-and-drop excluded anyone without fine motor control.
             </p>
