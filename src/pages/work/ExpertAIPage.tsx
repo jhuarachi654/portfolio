@@ -394,11 +394,13 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #1: The Popup Blocked Results</p>
-            <SubHeading><span style={{ color: '#416BCC' }}>76%</span> of tickets traced back to one component: the filter popup.</SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
-              It covered the results screen entirely, and closing it left no visible record of what had been applied.
-            </p>
+            <div style={{ textAlign: 'center' }}>
+              <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #1: The Popup Blocked Results</p>
+              <SubHeading><span style={{ color: '#416BCC' }}>76%</span> of tickets traced back to one component: the filter popup.</SubHeading>
+              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
+                It covered the results screen entirely, and closing it left no visible record of what had been applied.
+              </p>
+            </div>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
               <img src={img('key-finding-1-popup-blocked.png')} alt="Filter documents popup overlaying the results, blocking the user's data" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
@@ -406,11 +408,13 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #2: High Friction</p>
-            <SubHeading><span style={{ color: '#416BCC' }}>More than a third</span> of all tickets were about drag-and-drop failures.</SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
-              The interaction was unreliable and tedious. One analyst gave up entirely and switched to typing manually.
-            </p>
+            <div style={{ textAlign: 'center' }}>
+              <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #2: High Friction</p>
+              <SubHeading><span style={{ color: '#416BCC' }}>More than a third</span> of all tickets were about drag-and-drop failures.</SubHeading>
+              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
+                The interaction was unreliable and tedious. One analyst gave up entirely and switched to typing manually.
+              </p>
+            </div>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
               <img src={img('key-finding-2-high-friction.png')} alt="Cursor dragging a Geography entity toward the include panel in the filter documents interface" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
@@ -418,11 +422,13 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #3: Accessibility Gap</p>
-            <SubHeading>The filter's red/green indicators <span style={{ color: '#416BCC' }}>did not meet WCAG standards.</span></SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
-              This was outside the original project scope. I surfaced the gap through user research and advocated for its inclusion in the redesign.
-            </p>
+            <div style={{ textAlign: 'center' }}>
+              <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Key Finding #3: Accessibility Gap</p>
+              <SubHeading>The filter's red/green indicators <span style={{ color: '#416BCC' }}>did not meet WCAG standards.</span></SubHeading>
+              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)' }}>
+                This was outside the original project scope. I surfaced the gap through user research and advocated for its inclusion in the redesign.
+              </p>
+            </div>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
               <div style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8 }}>
