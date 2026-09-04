@@ -359,7 +359,7 @@ export default function ExpertAIPage() {
             <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>1. Context</p>
             <SubHeading>62 support tickets about filtering in <span style={{ color: '#416BCC' }}>six months</span></SubHeading>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
-              To understand the scope of the problem, I reviewed 62 support tickets filed in the past six months with the Customer Support Specialist and ran a thematic analysis. Three friction points surfaced consistently.
+              To understand the scope of the problem, I reviewed 62 support tickets filed over six months and interviewed the Customer Support Specialist — the person closest to user frustration. Three friction points surfaced consistently.
             </p>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
