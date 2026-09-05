@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Timer, TrendDown } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
@@ -62,6 +62,70 @@ function StatBlock({ stat, label, description, icon }: { stat: string; label: st
         <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: 'clamp(20px, 3vw, 28px)' }}>{icon}</span>
       </div>
       <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
+    </div>
+  )
+}
+
+// Sticky video on the left, three scroll-triggered insight blocks on the
+// right. Each block is observed independently; whichever is most visible
+// as the user scrolls becomes "active," and its body text fades in while
+// the others fade out — the video itself never changes, only the copy.
+function ScrollFilterFeatures() {
+  const features = [
+    { body: 'Users see their documents update in real time as they apply filters. The panel sits alongside results instead of covering them.' },
+    { body: 'Users include or exclude a filter with a single click. One click to include, another to exclude, another to reset.' },
+    { body: 'Filter state is communicated with color and a text label. Blue and gray replace red and green.' },
+  ]
+  const [active, setActive] = useState(0)
+  const refs = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const idx = refs.current.findIndex(el => el === entry.target)
+            if (idx !== -1) setActive(idx)
+          }
+        })
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+    )
+    refs.current.forEach(el => el && observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div className="ea-scroll-filter-grid" style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 32, alignItems: 'start', marginTop: 32 }}>
+      <div style={{ position: 'sticky', top: 96 }}>
+        <div style={{ background: '#EFEFEF', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
+          <LazyVideo
+            src="/videos/expert.ai-Video.webm"
+            poster="/videos/expert.ai-Video-poster.png"
+            style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }}
+          />
+        </div>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {features.map((f, i) => (
+          <div
+            key={i}
+            ref={el => { refs.current[i] = el }}
+            style={{ minHeight: '60vh', display: 'flex', alignItems: 'center' }}
+          >
+            <p
+              className="font-landing-body"
+              style={{
+                fontSize: 20, lineHeight: 1.4, color: 'var(--color-secondary)', margin: 0,
+                opacity: active === i ? 1 : 0.25,
+                transition: 'opacity 0.4s ease',
+              }}
+            >
+              {f.body}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
@@ -300,29 +364,7 @@ export default function ExpertAIPage() {
 
           <div style={{ marginTop: 108 }}>
             <SubHeading>A more <span style={{ color: '#416BCC' }}>accessible</span> and <span style={{ color: '#416BCC' }}>usable</span> filter</SubHeading>
-
-            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <div style={{ background: '#EFEFEF', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
-                <LazyVideo
-                  src="/videos/expert.ai-Video.webm"
-                  poster="/videos/expert.ai-Video-poster.png"
-                  style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }}
-                />
-              </div>
-            </figure>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" style={{ marginTop: 32 }}>
-              {[
-                { n: 1, label: 'Results Stay Visible', body: 'Users see their documents update in real time as they apply filters. The panel sits alongside results instead of covering them.' },
-                { n: 2, label: 'Click, Not Drag', body: 'Users include or exclude a filter with a single click. One click to include, another to exclude, another to reset.' },
-                { n: 3, label: 'Accessible by Default', body: 'Filter state is communicated with color and a text label. Blue and gray replace red and green.' },
-              ].map(({ n, label, body }) => (
-                <div key={n}>
-                  <p className="cs-metric-label" style={{ margin: '0 0 8px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{n}) {label}</p>
-                  <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
-                </div>
-              ))}
-            </div>
+            <ScrollFilterFeatures />
           </div>
         </Section>
 
