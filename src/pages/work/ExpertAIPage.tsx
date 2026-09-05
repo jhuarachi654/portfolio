@@ -292,9 +292,9 @@ export default function ExpertAIPage() {
             <SubHeading>A more <span style={{ color: '#416BCC' }}>accessible</span> and <span style={{ color: '#416BCC' }}>usable</span> filter</SubHeading>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {[
-                'Users see their documents update in real time as they apply filters. The panel sits alongside results instead of covering them.',
-                'Users include or exclude a filter with a single click. One click to include, another to exclude, another to reset.',
-                'Filter state is communicated with color and a text label. Blue and gray replace red and green.',
+                'The filter panel sits alongside results, keeping documents visible as filters are applied.',
+                'Filtering is now a single click, reliable and fast for every user.',
+                'Filter states have a color and a text label, making selection clear at a glance.',
               ].map((body, i) => (
                 <p key={i} className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                   {i + 1}) {body}
