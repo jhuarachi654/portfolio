@@ -288,15 +288,15 @@ export default function ExpertAIPage() {
             </figure>
           </div>
 
-          <div style={{ width: '80%', margin: '108px auto 0' }} data-reveal>
-            <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden', background: 'transparent' }}>
+          <figure className="cs-fullwidth-figure" style={{ margin: '108px 0 0' }} data-reveal>
+            <div style={{ background: '#EFEFEF', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
               <LazyVideo
                 src="/videos/expert.ai-Video.webm"
                 poster="/videos/expert.ai-Video-poster.png"
-                style={{ width: '100%', display: 'block' }}
+                style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }}
               />
             </div>
-          </div>
+          </figure>
 
           <div className="ea-solution-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'center' }}>
             <div>
