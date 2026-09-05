@@ -5112,6 +5112,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     grid-template-columns: 2fr auto 3fr !important;
   }
 
+  /* Exception: scroll-driven filter feature section — sticky video needs to
+     stay beside the scrolling text at tablet width, not stack above it. */
+  .cs-page .ea-scroll-filter-grid[style*="grid-template-columns"] {
+    grid-template-columns: 3fr 2fr !important;
+  }
+
   /* Exception: "Unexpected Find: Accessibility" pair of screenshots — keep
      side by side at tablet width instead of stacking. */
   .cs-page .ea-unexpected-find-grid[style*="grid-template-columns"] {
