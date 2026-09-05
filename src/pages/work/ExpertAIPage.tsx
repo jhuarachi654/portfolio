@@ -53,30 +53,6 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
   )
 }
 
-function FeedbackCard({ role, avatar, bullets }: { role: string; avatar: string; bullets: string[] }) {
-  return (
-    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
-      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: '4px 16px 4px 4px', marginBottom: 20 }}>
-        <div style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.15)', flexShrink: 0 }}>
-          <img src={avatar} alt={role} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-        </div>
-        <span className="font-landing-body" style={{ fontSize: 17, color: '#222225' }}>{role}</span>
-      </div>
-      <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: '0 0 12px' }}>Feedback:</p>
-      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {bullets.map((text, i) => (
-          <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-            <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-            <span className="font-landing-body" style={{ fontSize: 17, color: '#222225', lineHeight: 'normal' }}>{text}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
-
-
 function StatBlock({ stat, label, description, icon }: { stat: string; label: string; description: string; icon: React.ReactNode }) {
   return (
     <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24, height: '100%', boxSizing: 'border-box' }}>
@@ -294,77 +270,9 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <SubHeading>It was pointed out that these changes did not address the core problems. The popup blocked results, and drag-and-drop excluded users with motor limitations. They gave me the go to explore a <span style={{ color: '#416BCC' }}>more rigorous solution.</span></SubHeading>
+            <SubHeading>It was pointed out that these changes <span style={{ color: '#416BCC' }}>did not address the core problems.</span> The popup blocked results, and drag-and-drop excluded users with motor limitations.</SubHeading>
           </div>
 
-          {/* Revised Solution */}
-          <div style={{ marginTop: 108 }}>
-            <SubHeading>Revised Solution</SubHeading>
-            <BodyText>
-              After the design critique, I went ahead with a more rigorious approach that touched on the painpoints we've uncovered during research.
-            </BodyText>
-            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {[
-                { bold: 'First, I fixed the layout.', body: ' I made the filter panel compact so it no longer blocked the results. Users could finally see their data while filtering.' },
-                { bold: 'Second, I changed how filtering works.', body: ' I embedded labels directly into the panel. Instead of dragging and dropping, users just click a label to change its state. One click to include, another to exclude, another to reset.' },
-                { bold: 'Third, I fixed the colors.', body: ' I swapped red and green for blue and gray. The colors help, but every state also has a text label so no one has to rely on color alone.' },
-              ].map(({ bold, body }) => (
-                <div key={bold} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                  <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                  <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', lineHeight: 'normal', margin: 0 }}>
-                    <strong className="text-[var(--color-cs-heading)]">{bold}</strong>{body}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="ea-comparison-grid" style={{ marginTop: 32, paddingTop: 32, display: 'grid', gridTemplateColumns: '2fr auto 3fr', gap: 24, alignItems: 'center' }}>
-              <div>
-                <img src={img('expert-ai-15-bW3HXl.png')} alt="Standalone filter component" style={{ width: '100%', height: 'auto', display: 'block' }} />
-                <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Filter DropDown</p>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(var(--color-navy-rgb),0.2)', fontSize: 24, fontWeight: 300 }}>→</div>
-              <div>
-                <img src={img('expert-ai-16-BSVPlU.png')} alt="Filter integrated into full page" style={{ width: '100%', height: 'auto', display: 'block' }} />
-                <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Filter Drop Down (integrated)</p>
-              </div>
-            </div>
-
-            {/* Verifying w/ Design and Technical Teams */}
-            <div style={{ marginTop: 108 }}>
-              <SubHeading>Verifying w/ Design and Technical Teams</SubHeading>
-              <BodyText>
-                Before moving to usability testing, I brought my dropdown panel back to the developers and the Lead Designer for feedback on feasibility and usability.
-              </BodyText>
-              <div className="ea-feedback-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 16 }}>
-                <FeedbackCard
-                  role="Lead Designer"
-                  avatar={img('lead-designer.avif')}
-                  bullets={[
-                    'Liked the consistency with the previous version',
-                    'Suggested a more compact layout',
-                    'Proposed making it horizontal and embedded into the screen',
-                  ]}
-                />
-                <FeedbackCard
-                  role="Developer"
-                  avatar={img('developer.avif')}
-                  bullets={[
-                    'Confirmed the dropdown behaviors were feasible',
-                    'Noted that clicking to change state was simpler than drag and drop',
-                    'Said the timeline was manageable with the current approach',
-                  ]}
-                />
-              </div>
-              <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginTop: 24 }}>
-                <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-                <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
-                  <strong className="text-[var(--color-cs-heading)]">Takeaway:</strong> Both appreciated that the design was consistent with the previous version. That helped with feasibility and timeline. I took both pieces of feedback. The consistency was good. The feasibility was solid. But I still had room to improve the layout.
-                </p>
-              </div>
-            </div>
-          </div>
         </Section>
 
         {/* ── 5. Solution ── */}
