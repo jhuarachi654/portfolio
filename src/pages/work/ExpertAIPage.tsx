@@ -313,13 +313,12 @@ export default function ExpertAIPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" style={{ marginTop: 32 }}>
               {[
-                { n: 1, label: 'Results Stay Visible', header: 'Users see their documents update in real time as they apply filters.', body: 'The panel sits alongside results instead of covering them.' },
-                { n: 2, label: 'Click, Not Drag', header: 'Users include or exclude a filter with a single click.', body: 'One click to include, another to exclude, another to reset.' },
-                { n: 3, label: 'Accessible by Default', header: 'Filter state is communicated with color and a text label.', body: 'Blue and gray replace red and green.' },
-              ].map(({ n, label, header, body }) => (
+                { n: 1, label: 'Results Stay Visible', body: 'Users see their documents update in real time as they apply filters. The panel sits alongside results instead of covering them.' },
+                { n: 2, label: 'Click, Not Drag', body: 'Users include or exclude a filter with a single click. One click to include, another to exclude, another to reset.' },
+                { n: 3, label: 'Accessible by Default', body: 'Filter state is communicated with color and a text label. Blue and gray replace red and green.' },
+              ].map(({ n, label, body }) => (
                 <div key={n}>
                   <p className="cs-metric-label" style={{ margin: '0 0 8px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{n}) {label}</p>
-                  <p style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 20, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 0 8px' }}>{header}</p>
                   <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
                 </div>
               ))}
