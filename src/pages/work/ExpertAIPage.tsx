@@ -96,9 +96,10 @@ function ScrollFilterFeatures() {
   }, [])
 
   return (
-    <div className="ea-scroll-filter-grid" style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 32, alignItems: 'start', marginTop: 32 }}>
+    <div className="ea-scroll-filter-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 32, alignItems: 'start', marginTop: 32 }}>
       <div style={{ position: 'sticky', top: 96 }}>
-        <div style={{ background: '#EFEFEF', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
+        <SubHeading>A more <span style={{ color: '#416BCC' }}>accessible</span> and <span style={{ color: '#416BCC' }}>usable</span> filter</SubHeading>
+        <div style={{ background: '#EFEFEF', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box', marginTop: 16 }}>
           <LazyVideo
             src="/videos/expert.ai-Video.webm"
             poster="/videos/expert.ai-Video-poster.png"
@@ -106,19 +107,19 @@ function ScrollFilterFeatures() {
           />
         </div>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', paddingTop: 96 }}>
         {features.map((f, i) => (
           <div
             key={i}
             ref={el => { refs.current[i] = el }}
-            style={{ minHeight: '60vh', display: 'flex', alignItems: 'center' }}
+            style={{ minHeight: '32vh', display: 'flex', alignItems: 'center' }}
           >
             <p
               className="font-landing-body"
               style={{
-                fontSize: 20, lineHeight: 1.4, color: 'var(--color-secondary)', margin: 0,
+                fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0,
                 opacity: active === i ? 1 : 0.25,
-                transition: 'opacity 0.4s ease',
+                transition: 'opacity 0.2s ease',
               }}
             >
               {f.body}
@@ -363,7 +364,6 @@ export default function ExpertAIPage() {
           </figure>
 
           <div style={{ marginTop: 108 }}>
-            <SubHeading>A more <span style={{ color: '#416BCC' }}>accessible</span> and <span style={{ color: '#416BCC' }}>usable</span> filter</SubHeading>
             <ScrollFilterFeatures />
           </div>
         </Section>
