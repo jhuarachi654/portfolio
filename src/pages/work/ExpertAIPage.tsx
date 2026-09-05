@@ -102,22 +102,19 @@ function AccessibilityExplorer() {
     <div className="cs-card-box" style={{ padding: 32, marginTop: 32 }}>
       <div className="ea-accessibility-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'start' }}>
         <div>
-          <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6 }}>Wireframe Tests</p>
+          <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6 }}>Iterations</p>
           <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: '1em' }}><Hand size="1em" weight="regular" /></span>
-            Accessibility
+            Labeling the existing component
           </h3>
           <BodyText>
-            With the defined constraints, my first attempt was conservative. I added labels inside the category buttons and tooltip labels on hover.
-          </BodyText>
-          <BodyText>
-            During a design critique, the Lead Designer pointed out that these changes helped with labeling but did not solve the core problems. The popup still blocked results. Drag and drop still slowed users w/ motor deficits. Results were still blocked.
+            With the defined constraints, my first attempt was conservative. I added text labels inside the category buttons and tooltip labels on hover to improve clarity without changing the core interaction.
           </BodyText>
           <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
             <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
             <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-              I took this feedback and asked if I could explore a <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>more rigorous solution.</strong> They said yes, as long as I stayed within the design system.
+              My mentor pointed out that these changes helped with labeling but did not address the core problems. The popup still blocked results, and drag-and-drop still excluded users with motor limitations. I asked if I could explore a <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>more rigorous solution</strong> — within the design system. They said yes.
             </p>
           </div>
         </div>
