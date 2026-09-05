@@ -107,25 +107,37 @@ function ScrollFilterFeatures() {
           />
         </div>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', paddingTop: 96 }}>
-        {features.map((f, i) => (
-          <div
-            key={i}
-            ref={el => { refs.current[i] = el }}
-            style={{ minHeight: '32vh', display: 'flex', alignItems: 'center' }}
-          >
-            <p
-              className="font-landing-body"
-              style={{
-                fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0,
-                opacity: active === i ? 1 : 0.25,
-                transition: 'opacity 0.2s ease',
-              }}
-            >
-              {f.body}
-            </p>
-          </div>
+      <div style={{ position: 'relative' }}>
+        {/* Invisible scroll-trigger zones — drive the IntersectionObserver
+           as the user scrolls, but render no visible text of their own. */}
+        {features.map((_, i) => (
+          <div key={i} ref={el => { refs.current[i] = el }} style={{ height: '60vh' }} />
         ))}
+        {/* The only text actually on screen: a single sticky slot with all
+           features stacked absolutely on top of each other, cross-fading —
+           so exactly one is ever visible instead of three ghosted copies. */}
+        <div style={{ position: 'sticky', top: 96 }}>
+          <div style={{ position: 'relative', minHeight: 90 }}>
+            {features.map((f, i) => (
+              <p
+                key={i}
+                className="font-landing-body"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0,
+                  opacity: active === i ? 1 : 0,
+                  transition: 'opacity 0.25s ease',
+                  pointerEvents: active === i ? 'auto' : 'none',
+                }}
+              >
+                {f.body}
+              </p>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
