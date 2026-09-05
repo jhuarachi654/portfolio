@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import { Timer, Hand, CheckCircle, MinusCircle, CaretRight, CaretLeft, Asterisk, TrendDown } from '@phosphor-icons/react'
+import { useEffect } from 'react'
+import { Timer, Asterisk, TrendDown } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -77,105 +76,6 @@ function FeedbackCard({ role, avatar, bullets }: { role: string; avatar: string;
 }
 
 
-const accessibilityOptions = [
-  {
-    label: 'Labels inside buttons',
-    image: 'expert-ai-12-e6QDix.png',
-    pros: 'Immediately visible, no hover required. Clear grouping at a glance.',
-    cons: 'Only fixed labeling. Did not solve color inaccessibility, the popup blocking results, or drag-and-drop issues.',
-  },
-  {
-    label: 'Tooltip labels',
-    image: 'expert-ai-11-Fj1Yo1.png',
-    pros: "Cleaner UI. Doesn't add visual clutter to the button.",
-    cons: 'Requires hover to discover. Not accessible for keyboard or touch users. Same core problems remain.',
-  },
-]
-
-function AccessibilityExplorer() {
-  const [selected, setSelected] = useState(0)
-  const [direction, setDirection] = useState(1)
-  const opt = accessibilityOptions[selected]
-  const goNext = () => { setDirection(1); setSelected(i => (i + 1) % accessibilityOptions.length) }
-  const goPrev = () => { setDirection(-1); setSelected(i => (i - 1 + accessibilityOptions.length) % accessibilityOptions.length) }
-  return (
-    <div className="cs-card-box" style={{ padding: 32, marginTop: 32 }}>
-      <div className="ea-accessibility-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'start' }}>
-        <div>
-          <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6 }}>Iterations</p>
-          <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: '1em' }}><Hand size="1em" weight="regular" /></span>
-            Labeling the existing component
-          </h3>
-          <BodyText>
-            With the defined constraints, my first attempt was conservative. I added text labels inside the category buttons and tooltip labels on hover to improve clarity without changing the core interaction.
-          </BodyText>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-              My mentor pointed out that these changes helped with labeling but did not address the core problems. The popup still blocked results, and drag-and-drop still excluded users with motor limitations. I asked if I could explore a <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>more rigorous solution</strong> — within the design system. They said yes.
-            </p>
-          </div>
-        </div>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <button
-              type="button"
-              onClick={goPrev}
-              aria-label="Show previous wireframe test"
-              style={{
-                flexShrink: 0, width: 28, height: 28, borderRadius: '50%', border: 'none',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: 'rgba(22, 43, 85, 0.35)', color: '#ffffff', cursor: 'pointer',
-                backdropFilter: 'blur(4px)',
-              }}
-            >
-              <CaretLeft size={12} weight="bold" />
-            </button>
-            <div style={{ flex: 1, overflow: 'hidden' }}>
-              <motion.div
-                key={selected}
-                initial={{ x: direction === 1 ? 24 : -24 }}
-                animate={{ x: 0 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}
-              >
-                <div style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
-                  <img src={img(opt.image)} alt={opt.label} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-                </div>
-                <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{opt.label}</p>
-                <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  <p className="font-landing-body" style={{ fontSize: 13, color: '#222225', lineHeight: 'normal', margin: 0, display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                    <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 1 }}><CheckCircle size={16} weight="regular" /></span>
-                    <span><span className="font-bold text-[var(--color-cs-heading)]">Pros:</span> {opt.pros}</span>
-                  </p>
-                  <p className="font-landing-body" style={{ fontSize: 13, color: '#222225', lineHeight: 'normal', margin: 0, display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                    <span style={{ color: 'var(--color-cs-heading)', flexShrink: 0, display: 'flex', marginTop: 1 }}><MinusCircle size={16} weight="regular" /></span>
-                    <span><span className="font-bold text-[var(--color-cs-heading)]">Cons:</span> {opt.cons}</span>
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-            <button
-              type="button"
-              onClick={goNext}
-              aria-label="Show next wireframe test"
-              style={{
-                flexShrink: 0, width: 28, height: 28, borderRadius: '50%', border: 'none',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: 'rgba(22, 43, 85, 0.35)', color: '#ffffff', cursor: 'pointer',
-                backdropFilter: 'blur(4px)',
-              }}
-            >
-              <CaretRight size={12} weight="bold" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 function StatBlock({ stat, label, description, icon }: { stat: string; label: string; description: string; icon: React.ReactNode }) {
   return (
@@ -382,11 +282,20 @@ export default function ExpertAIPage() {
             <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Development</p>
           </div>
 
-          {/* Accessibility — wireframe tests */}
           <div style={{ marginTop: 32 }}>
-            <AccessibilityExplorer />
+            <SubHeading>Labeling the existing component</SubHeading>
+            <BodyText>
+              With the defined constraints, my first attempt was conservative. I added text labels inside the category buttons and tooltip labels on hover to improve clarity without changing the core interaction.
+            </BodyText>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('filter-documents-before-after.png')} alt="Filter documents interface comparing document inclusion and exclusion states" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            </figure>
           </div>
 
+          <div style={{ marginTop: 108 }}>
+            <SubHeading>It was pointed out that these changes did not address the core problems. The popup blocked results, and drag-and-drop excluded users with motor limitations. They gave me the go to explore a <span style={{ color: '#416BCC' }}>more rigorous solution.</span></SubHeading>
+          </div>
 
           {/* Revised Solution */}
           <div style={{ marginTop: 108 }}>
