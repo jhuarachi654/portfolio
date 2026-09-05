@@ -288,16 +288,6 @@ export default function ExpertAIPage() {
             </figure>
           </div>
 
-          <figure className="cs-fullwidth-figure" style={{ margin: '108px 0 0' }} data-reveal>
-            <div style={{ background: '#EFEFEF', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
-              <LazyVideo
-                src="/videos/expert.ai-Video.webm"
-                poster="/videos/expert.ai-Video-poster.png"
-                style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }}
-              />
-            </div>
-          </figure>
-
           <div style={{ marginTop: 108 }}>
             <SubHeading>A more <span style={{ color: '#416BCC' }}>accessible</span> and <span style={{ color: '#416BCC' }}>usable</span> filter</SubHeading>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
