@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Timer, Asterisk, TrendDown } from '@phosphor-icons/react'
+import { Timer, TrendDown } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -298,38 +298,31 @@ export default function ExpertAIPage() {
             </div>
           </figure>
 
-          <div className="ea-solution-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 32, alignItems: 'center' }}>
-            <div>
-              <SubHeading>The new Filter Component</SubHeading>
-              <BodyText>
-                After incorporating feedback from the design critique and the technical team, I landed on a drop down filter panel. The panel sits alongside the results so users can see their data update in real time as they make selections.
-              </BodyText>
+          <div style={{ marginTop: 108 }}>
+            <SubHeading>A more <span style={{ color: '#416BCC' }}>accessible</span> and <span style={{ color: '#416BCC' }}>usable</span> filter</SubHeading>
 
-              <div style={{ marginTop: 24, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, background: 'transparent', padding: 20 }}>
-                <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, marginBottom: 12 }}>New Guidelines</p>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {[
-                    'Click once to include a filter',
-                    'Click twice to exclude',
-                    'Click three times to reset',
-                    'Blue and gray indicate status, with text labels for every state',
-                  ].map(g => (
-                    <li key={g} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                      <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                      <span className="font-landing-body" style={{ fontSize: 17, color: '#222225', lineHeight: 'normal' }}>{g}</span>
-                    </li>
-                  ))}
-                </ul>
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <div style={{ background: '#EFEFEF', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
+                <LazyVideo
+                  src="/videos/expert.ai-Video.webm"
+                  poster="/videos/expert.ai-Video-poster.png"
+                  style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }}
+                />
               </div>
-            </div>
+            </figure>
 
-            <div>
-              <LazyVideo
-                src="/videos/expert.ai-Video.webm"
-                poster="/videos/expert.ai-Video-poster.png"
-                style={{ width: '100%', height: 'auto', display: 'block' }}
-              />
-              <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Final filter component, dropdown panel embedded alongside results</p>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" style={{ marginTop: 32 }}>
+              {[
+                { n: 1, label: 'Results Stay Visible', header: 'Users see their documents update in real time as they apply filters.', body: 'The panel sits alongside results instead of covering them.' },
+                { n: 2, label: 'Click, Not Drag', header: 'Users include or exclude a filter with a single click.', body: 'One click to include, another to exclude, another to reset.' },
+                { n: 3, label: 'Accessible by Default', header: 'Filter state is communicated with color and a text label.', body: 'Blue and gray replace red and green.' },
+              ].map(({ n, label, header, body }) => (
+                <div key={n}>
+                  <p className="cs-metric-label" style={{ margin: '0 0 8px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{n}) {label}</p>
+                  <p style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 20, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 0 8px' }}>{header}</p>
+                  <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{body}</p>
+                </div>
+              ))}
             </div>
           </div>
         </Section>
