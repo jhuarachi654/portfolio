@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Timer, TrendDown } from '@phosphor-icons/react'
+import { Timer, TrendDown, Asterisk } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -13,6 +13,7 @@ const TOC = [
   { id: 'ea-research',         label: 'Research' },
   { id: 'ea-development',      label: 'Development' },
   { id: 'ea-features',         label: 'Solution' },
+  { id: 'ea-validation',       label: 'Validation Study' },
   { id: 'ea-impact',           label: 'Impact' },
   { id: 'ea-reflection',       label: 'Reflection' },
 ]
@@ -314,10 +315,40 @@ export default function ExpertAIPage() {
           </div>
         </Section>
 
+        {/* ── 5. Validation Study ── */}
+        <Section id="ea-validation">
+          <div style={{ marginBottom: 32 }}>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Validation Study</p>
+          </div>
+
+          <SubHeading>Results</SubHeading>
+          <BodyText>
+            After the redesign shipped, task time dropped from 2 minutes to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>30 seconds</strong>. Users could see their results while filtering and change states with a single click. Support tickets about filtering fell by <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>42%</strong>, confirming the core friction had been resolved.
+          </BodyText>
+
+          <div style={{ marginTop: 64 }}>
+            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Where the Filter Goes From Here</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {[
+                { bold: 'Add', body: ' an indicator showing what each click will do: include, exclude, or reset.' },
+                { bold: 'Introduce', body: ' the filter component into the onboarding experience for first-time users.' },
+                { bold: 'Explore', body: ' how the component scales to other products in the Expert.ai platform.' },
+              ].map(({ bold, body }) => (
+                <div key={bold} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                  <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
+                  <p className="font-landing-body" style={{ fontSize: 15, color: '#222225', lineHeight: 'normal', margin: 0 }}>
+                    <strong className="text-[var(--color-cs-heading)]">{bold}</strong>{body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Section>
+
         {/* ── 6. Impact ── */}
         <Section id="ea-impact">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Impact</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Impact</p>
           </div>
 
           <div style={{ marginTop: 32 }}>
@@ -360,7 +391,7 @@ export default function ExpertAIPage() {
         {/* ── 7. Reflection ── */}
         <Section id="ea-reflection">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Reflection</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>7. Reflection</p>
           </div>
 
           <div className="ea-takeaways-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
