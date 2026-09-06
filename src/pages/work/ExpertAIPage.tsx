@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Timer, TrendDown, Asterisk } from '@phosphor-icons/react'
+import { Asterisk } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -14,7 +14,6 @@ const TOC = [
   { id: 'ea-development',      label: 'Development' },
   { id: 'ea-features',         label: 'Solution' },
   { id: 'ea-validation',       label: 'Validation Study' },
-  { id: 'ea-impact',           label: 'Impact' },
   { id: 'ea-reflection',       label: 'Reflection' },
 ]
 
@@ -50,19 +49,6 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
       <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
-    </div>
-  )
-}
-
-function StatBlock({ stat, label, description, icon }: { stat: string; label: string; description: string; icon: React.ReactNode }) {
-  return (
-    <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24, height: '100%', boxSizing: 'border-box' }}>
-      <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', margin: '0 0 8px' }}>{label}</p>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-        <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: 0, fontWeight: 500, color: '#416BCC' }} />
-        <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: 'clamp(20px, 3vw, 28px)' }}>{icon}</span>
-      </div>
-      <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
     </div>
   )
 }
@@ -321,10 +307,22 @@ export default function ExpertAIPage() {
             <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Validation Study</p>
           </div>
 
-          <SubHeading>Results</SubHeading>
-          <BodyText>
-            After the redesign shipped, task time dropped from 2 minutes to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>30 seconds</strong>. Users could see their results while filtering and change states with a single click. Support tickets about filtering fell by <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>42%</strong>, confirming the core friction had been resolved.
-          </BodyText>
+          <SubHeading>Measuring Impact</SubHeading>
+
+          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+            <img src={img('validation-users-tested.png')} alt="8 enterprise users tested across usability sessions and post-launch support ticket analysis" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+          </figure>
+
+          <div style={{ marginTop: 108 }}>
+            <SubHeading>Results</SubHeading>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 24, marginBottom: 16 }}>
+              <img src={img('stat-task-time.png')} alt="30 seconds task time reduction" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <img src={img('stat-support-tickets.png')} alt="42% fewer support tickets" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            </div>
+            <BodyText>
+              After the redesign shipped, task time dropped from 2 minutes to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>30 seconds</strong>. Users could see their results while filtering and change states with a single click. Support tickets about filtering fell by <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>42%</strong>, confirming the core friction had been resolved.
+            </BodyText>
+          </div>
 
           <div style={{ marginTop: 64 }}>
             <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Where the Filter Goes From Here</p>
@@ -345,53 +343,10 @@ export default function ExpertAIPage() {
           </div>
         </Section>
 
-        {/* ── 6. Impact ── */}
-        <Section id="ea-impact">
-          <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Impact</p>
-          </div>
-
-          <div style={{ marginTop: 32 }}>
-            <SubHeading>Usability Testing and Impact</SubHeading>
-            <BodyText>
-              I ran usability testing with 8 enterprise users across legal, finance, and government. The Lead Designer observed the sessions with me. I asked each user to complete a series of filtering tasks while sharing their screen. I watched for moments of friction, what they clicked, and how long each task took.
-            </BodyText>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 16, marginBottom: 16 }}>
-              <StatBlock stat="30 seconds" label="Task time" description="Task time dropped from 2 minutes to 30 seconds. Users could see their results while filtering and change states with a click." icon={<Timer size="1em" />} />
-              <StatBlock stat="42% less" label="Support Tickets" description="After the redesign shipped, support tickets related to filtering fell by 42%." icon={<TrendDown size="1em" />} />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginBottom: 16 }}>
-              {[
-                { quote: "It's pretty neat that I can see the real time results on the side. The only thing I'm unsure of is how to exclude an item?", role: 'Legal Analyst', avatar: img('legal-analyst.avif') },
-                { quote: 'The content is pretty clear and I appreciate the multiple labels for clarity. I also like that there is no tedious dragging for filtering.', role: 'Data Analyst w/ Colorblindness', avatar: img('data-analyst.avif') },
-              ].map(({ quote, role, avatar }) => (
-                <div key={role} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 20, height: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <p className="font-landing-body" style={{ fontSize: 13, lineHeight: 'normal', color: 'var(--color-secondary)', fontStyle: 'italic', margin: '0 0 10px' }}>"{quote}"</p>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <div style={{ width: 32, height: 32, borderRadius: '50%', overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.15)', flexShrink: 0 }}>
-                      <img src={avatar} alt={role} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                    </div>
-                    <p className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', margin: 0 }}>{role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
-                The Lead Designer and I noted that two users still hesitated when trying to reset a filter. The three click pattern (include, exclude, reset) was not obvious to everyone. <strong className="text-[var(--color-cs-heading)]">If I had more time</strong>, I would add a small indicator showing what each click would do and create an onboarding experience for first time users.
-              </p>
-            </div>
-          </div>
-        </Section>
-
-        {/* ── 7. Reflection ── */}
+        {/* ── 6. Reflection ── */}
         <Section id="ea-reflection">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>7. Reflection</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Reflection</p>
           </div>
 
           <div className="ea-takeaways-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
