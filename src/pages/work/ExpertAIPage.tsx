@@ -316,8 +316,8 @@ export default function ExpertAIPage() {
           <div style={{ marginTop: 108 }}>
             <SubHeading>Results</SubHeading>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ marginTop: 24, marginBottom: 16 }}>
-              <img src={img('stat-task-time.png')} alt="30 seconds task time reduction" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
-              <img src={img('stat-support-tickets.png')} alt="42% fewer support tickets" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <img src={img('stat-task-time.png')} alt="30 seconds task time reduction" className="ff-stat-card-image" style={{ width: 200, height: 'auto', display: 'block', borderRadius: 8, justifySelf: 'center', margin: '0 auto' }} />
+              <img src={img('stat-support-tickets.png')} alt="42% fewer support tickets" className="ff-stat-card-image" style={{ width: 200, height: 'auto', display: 'block', borderRadius: 8, justifySelf: 'center', margin: '0 auto' }} />
             </div>
             <BodyText>
               After the redesign shipped, task time dropped from 2 minutes to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>30 seconds</strong>. Users could see their results while filtering and change states with a single click. Support tickets about filtering fell by <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>42%</strong>, confirming the core friction had been resolved.
