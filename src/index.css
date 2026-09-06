@@ -568,7 +568,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   to   { opacity: 1; transform: translate(-50%, 0); }
 }
 
-.sidebar-pill-nav .nav-link { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: #3E4242; padding: 0; overflow: visible; opacity: 1; transition: opacity 150ms ease; }
+.sidebar-pill-nav .nav-link { font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: 500; line-height: var(--type-body-line-height); color: #3E4242; padding: 0; overflow: visible; opacity: 1; transition: opacity 150ms ease; }
 .sidebar-pill-nav .nav-link::before,
 .sidebar-pill-nav .nav-link::after {
   display: none;
