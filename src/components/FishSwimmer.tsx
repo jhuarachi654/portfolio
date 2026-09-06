@@ -6,7 +6,6 @@ import { useEffect, useRef } from "react"
 
 type FishSwimmerProps = {
   color?: string
-  onDropStar?: (x: number, y: number) => void
   filled?: boolean
   mobileZone?: "top" | "bottom"
 }
@@ -69,7 +68,7 @@ function drawLineFish(ctx: CanvasRenderingContext2D, wag: number, color: string)
   ctx.restore()
 }
 
-export default function FishSwimmer({ color = "#ffffff", onDropStar, filled = false, mobileZone }: FishSwimmerProps) {
+export default function FishSwimmer({ color = "#ffffff", filled = false, mobileZone }: FishSwimmerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -170,18 +169,8 @@ export default function FishSwimmer({ color = "#ffffff", onDropStar, filled = fa
 
     let rafId = 0
     let lastTime = performance.now()
-    let nextStarDropAt = performance.now() + 1500 + Math.random() * 2500
 
     function step(now: number) {
-      // Only drop stars when fish is on the right side (past 55% of width) to avoid text overlap
-      if (onDropStar && now >= nextStarDropAt && x > width * 0.55) {
-        onDropStar(x, y)
-        nextStarDropAt = now + 10000 + Math.random() * 14000
-      } else if (now >= nextStarDropAt) {
-        // Reschedule drop check without dropping
-        nextStarDropAt = now + 500
-      }
-
       const dt = Math.min((now - lastTime) / 1000, 0.05)
       lastTime = now
 
