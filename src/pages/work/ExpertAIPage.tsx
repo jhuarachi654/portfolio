@@ -352,13 +352,13 @@ export default function ExpertAIPage() {
           <div style={{ marginTop: 32 }}>
             <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Key Takeaways</p>
 
-            <SubHeading>A single component can define the entire experience.</SubHeading>
+            <SubHeading>One component can affect the <span style={{ color: '#416BCC' }}>entire experience.</span></SubHeading>
             <BodyText>
               76% of support tickets traced back to one filter popup. It revealed how much a small feature shapes the way users perceive a product.
             </BodyText>
 
             <div style={{ marginTop: 64 }}>
-              <SubHeading>Advocacy can be part of the design process.</SubHeading>
+              <SubHeading><span style={{ color: '#416BCC' }}>Advocacy</span> is part of the design process.</SubHeading>
               <BodyText>
                 The accessibility gap was not part of the original scope. Surfacing it through user research and validating it with users gave the team a reason to pivot toward a more inclusive solution.
               </BodyText>
