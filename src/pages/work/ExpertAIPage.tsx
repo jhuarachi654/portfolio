@@ -349,23 +349,24 @@ export default function ExpertAIPage() {
             <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Reflection</p>
           </div>
 
-          <div className="ea-takeaways-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
-            <div>
-              <img src={img('presentation.webp')} alt="Snippet of my final presentation" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
-              <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Snippet of my Final Presentation</p>
-            </div>
-            <div>
-              <SubHeading>Takeaways</SubHeading>
+          <div style={{ marginTop: 32 }}>
+            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Key Takeaways</p>
+
+            <SubHeading>A single component can define the entire experience.</SubHeading>
+            <BodyText>
+              76% of support tickets traced back to one filter popup. It revealed how much a small feature shapes the way users perceive a product.
+            </BodyText>
+
+            <div style={{ marginTop: 64 }}>
+              <SubHeading>Advocacy can be part of the design process.</SubHeading>
               <BodyText>
-                This was my first UX Design internship, and I am so thankful to the Expert.ai AI Innovation team.
-              </BodyText>
-              <BodyText>
-                This experience taught me how much impact a small component can have on all types of users. The initial request was improving usability, but I learned that sometimes it takes reflection and initiative to reframe the problem. I discovered deeper issues with accessibility and advocated for that with user research while talking to the technical team through the process.
-              </BodyText>
-              <BodyText>
-                I am grateful to my team for supporting my initiative on accessibility and for their guidance!
+                The accessibility gap was not part of the original scope. Surfacing it through user research and validating it with users gave the team a reason to pivot toward a more inclusive solution.
               </BodyText>
             </div>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('presentation.webp')} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block', borderRadius: 8 }} />
+            </figure>
           </div>
         </Section>
 

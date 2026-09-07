@@ -4991,12 +4991,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     grid-template-columns: 1fr 1fr !important;
   }
 
-  /* Exception: Reflection's presentation photo + Takeaways text — keep side
-     by side at tablet width instead of stacking. */
-  .cs-page .ea-takeaways-grid[style*="grid-template-columns"] {
-    grid-template-columns: 1fr 1fr !important;
-  }
-
   /* Exception: SnapSplit's team-meetings photo + Takeaways text — same
      treatment as Expert.ai's. */
   .cs-page .ss-takeaways-grid[style*="grid-template-columns"] {
