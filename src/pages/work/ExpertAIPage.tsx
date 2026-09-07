@@ -352,7 +352,7 @@ export default function ExpertAIPage() {
           <div style={{ marginTop: 32 }}>
             <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Key Takeaways</p>
 
-            <SubHeading>One component can affect the <span style={{ color: '#416BCC' }}>entire experience.</span></SubHeading>
+            <SubHeading>A component can affect the <span style={{ color: '#416BCC' }}>entire experience.</span></SubHeading>
             <BodyText>
               76% of support tickets traced back to one filter popup. It revealed how much a small feature shapes the way users perceive a product.
             </BodyText>
