@@ -89,7 +89,7 @@ function FeatureBlock({ index, label, body, userImpact, image, alt, first = fals
           <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
             <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+            <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
               <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>User Impact:</strong> {userImpact}
             </p>
           </div>
@@ -244,7 +244,7 @@ export default function SnapSplitPage() {
               <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
                 What We Built
               </h3>
-              <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+              <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 Over six months, I led the work to solve SnapSplit's high abandonment issue. Through research, I found that the assignment step, where the host had to manually divide and distribute items, was creating too much friction for one person to handle alone. I redesigned the flow to distribute that effort across the group, turning bill splitting into a shared experience rather than a solo task. Completion rates rose from 20% to 83%.
               </p>
             </div>
@@ -268,7 +268,7 @@ export default function SnapSplitPage() {
             <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24, height: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 12 }}>
               <div>
                 <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', margin: '0 0 8px' }}>User Quote</p>
-                <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: '#222225', margin: 0, fontStyle: 'italic' }}>
+                <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: '#222225', margin: 0, fontStyle: 'italic' }}>
                   "I would not use the app again, especially on the go."
                 </p>
               </div>

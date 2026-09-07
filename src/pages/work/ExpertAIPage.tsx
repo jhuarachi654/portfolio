@@ -34,7 +34,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[17px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
+    <p className="font-landing-body text-[16px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
       {children}
     </p>
   )
@@ -76,7 +76,7 @@ export default function ExpertAIPage() {
             <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               Expert.ai Filter Function
             </h1>
-            <p className="case-study-hero-reveal font-landing-body text-[17px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
+            <p className="case-study-hero-reveal font-landing-body text-[16px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
               Designing and shipping a more accessible and usable filter function for an enterprise AI text analysis platform used by legal, finance, and government organizations.
             </p>
             <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -105,14 +105,14 @@ export default function ExpertAIPage() {
         <Section id="ea-intro">
           <div style={{ marginTop: 32 }}>
             <SubHeading>What is Expert.ai?</SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
+            <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', marginBottom: 12 }}>
               Expert.ai serves legal, finance, and government organizations that need to analyze and organize massive amounts of text. In the Corpus platform, users upload documents that expert.ai's NLU engine analyzes, annotates, and trains models on, helping teams extract key terms, flag compliance risks, and classify documents at scale.
             </p>
           </div>
 
           <div style={{ marginTop: 108 }}>
             <SubHeading>My Role</SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
+            <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', marginBottom: 12 }}>
               As a product design intern at Expert.ai, I worked alongside an AI Innovation Manager and developers to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>improve the design of the Filter function</strong>, centering the redesign on usability then accessibility. I designed and prototyped in Figma, provided developer annotations, and conducted usability testing to help enterprise users identify key content from their documents faster.
             </p>
 
@@ -130,7 +130,7 @@ export default function ExpertAIPage() {
               ].map(({ stat, description }, i) => (
                 <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
                   <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 500, color: '#416BCC', display: 'block' }} />
-                  <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
+                  <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
                 </div>
               ))}
             </div>
@@ -138,7 +138,7 @@ export default function ExpertAIPage() {
 
           <div style={{ marginTop: 108 }}>
             <SubHeading>More documents didn't mean better decisions. It meant <span style={{ color: '#416BCC' }}>paralysis.</span></SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
+            <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', marginBottom: 12 }}>
               Psychologist Barry Schwartz found that <strong>more options lead to overwhelm,</strong> not better outcomes. Digitalization gave organizations access to everything — every contract, ruling, and filing. But access without structure isn't power. Filtering is what turns information overload into a decision.
             </p>
 
@@ -165,7 +165,7 @@ export default function ExpertAIPage() {
 
           <div style={{ marginTop: 32 }}>
             <SubHeading>62 support tickets about filtering in <span style={{ color: '#416BCC' }}>six months</span></SubHeading>
-            <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', marginBottom: 12 }}>
+            <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', marginBottom: 12 }}>
               To understand the scope of the problem, I reviewed 62 support tickets filed over six months and interviewed the Customer Support Specialist — the person closest to user frustration. Three friction points surfaced consistently.
             </p>
 
@@ -193,7 +193,7 @@ export default function ExpertAIPage() {
               <div style={{ maxWidth: 640, margin: '0 auto' }}>
                 <SubHeading><span style={{ color: '#416BCC' }}>76%</span> of tickets traced back to one component: the filter popup.</SubHeading>
               </div>
-              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', maxWidth: 560, margin: '0 auto' }}>
+              <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', maxWidth: 560, margin: '0 auto' }}>
                 It covered the results screen entirely, and closing it left no visible record of what had been applied.
               </p>
             </div>
@@ -209,7 +209,7 @@ export default function ExpertAIPage() {
               <div style={{ maxWidth: 640, margin: '0 auto' }}>
                 <SubHeading><span style={{ color: '#416BCC' }}>More than 1/3</span> of support tickets were about drag-and-drop.</SubHeading>
               </div>
-              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', maxWidth: 560, margin: '0 auto' }}>
+              <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', maxWidth: 560, margin: '0 auto' }}>
                 The interaction was unreliable and tedious. One analyst gave up entirely and switched to typing manually.
               </p>
             </div>
@@ -225,7 +225,7 @@ export default function ExpertAIPage() {
               <div style={{ maxWidth: 640, margin: '0 auto' }}>
                 <SubHeading>The filter's red/green indicators <span style={{ color: '#416BCC' }}>did not meet WCAG standards.</span></SubHeading>
               </div>
-              <p className="font-landing-body" style={{ fontSize: 17, color: 'var(--color-secondary)', maxWidth: 560, margin: '0 auto' }}>
+              <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', maxWidth: 560, margin: '0 auto' }}>
                 This was outside the original project scope. I surfaced the gap through user research and advocated for its inclusion in the redesign.
               </p>
             </div>
@@ -283,7 +283,7 @@ export default function ExpertAIPage() {
                 'Filtering is now a single click, reliable and fast for every user.',
                 'Filter states have a color and a text label, making selection clear at a glance.',
               ].map((body, i) => (
-                <p key={i} className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+                <p key={i} className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                   {i + 1}) {body}
                 </p>
               ))}
@@ -334,7 +334,7 @@ export default function ExpertAIPage() {
               ].map(({ bold, body }) => (
                 <div key={bold} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                   <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                  <p className="font-landing-body" style={{ fontSize: 15, color: '#222225', lineHeight: 'normal', margin: 0 }}>
+                  <p className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal', margin: 0 }}>
                     <strong className="text-[var(--color-cs-heading)]">{bold}</strong>{body}
                   </p>
                 </div>

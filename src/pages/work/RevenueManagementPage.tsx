@@ -40,7 +40,7 @@ function Prose({ children, className = '' }: { children: React.ReactNode; classN
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[17px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
+    <p className="font-landing-body text-[16px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
       {children}
     </p>
   )
@@ -174,7 +174,7 @@ export default function RevenueManagementPage() {
             Modernizing PROS' Revenue Management Platform
           </h1>
 
-          <p className="case-study-hero-reveal font-landing-body text-[17px] " style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
+          <p className="case-study-hero-reveal font-landing-body text-[16px] " style={{ color: 'var(--color-secondary)', marginBottom: 20 }}>
             Modernizing dashboard to improve scannability and data visualization, and defining AI components and interactions to better support airline analysts' pricing and analysis workflows.
           </p>
 
@@ -234,7 +234,7 @@ export default function RevenueManagementPage() {
             ].map(({ stat, description }, i) => (
               <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
                 <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 500, color: '#416BCC', display: 'block' }} />
-                <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
+                <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
               </div>
             ))}
           </div>
@@ -286,7 +286,7 @@ export default function RevenueManagementPage() {
             <p className="rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, fontWeight: 500, lineHeight: 'normal', color: 'var(--color-cs-heading)', margin: '0 auto 16px', maxWidth: 640 }}>
               {headline}
             </p>
-            <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: '0 auto', maxWidth: 560 }}>
+            <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: '0 auto', maxWidth: 560 }}>
               {body}
             </p>
             {image && (
@@ -435,7 +435,7 @@ export default function RevenueManagementPage() {
             </p>
             <div className="rm-solution-grid" style={{ display: 'grid', gridTemplateColumns: '2.6fr 1.4fr', gap: 8, alignItems: 'center' }}>
               <img src={image} alt={alt} className="rm-solution-laptop" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+              <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 {body}
               </p>
             </div>

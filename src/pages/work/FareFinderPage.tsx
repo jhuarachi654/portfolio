@@ -89,7 +89,7 @@ function Prose({ children, className = '' }: { children: React.ReactNode; classN
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[17px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
+    <p className="font-landing-body text-[16px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
       {children}
     </p>
   )
@@ -160,7 +160,7 @@ export default function FareFinderPage() {
             <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               PROS Fare Finder Map
             </h1>
-            <p className="case-study-hero-reveal font-landing-body text-[17px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
+            <p className="case-study-hero-reveal font-landing-body text-[16px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
               Designing and shipping a flight map exploration tool for airlines to display on their booking sites, helping travelers make more informed and confident booking decisions.
             </p>
             <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -219,7 +219,7 @@ export default function FareFinderPage() {
             ].map(({ stat, description }, i) => (
               <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
                 <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 500, color: '#416BCC', display: 'block' }} />
-                <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
+                <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
               </div>
             ))}
           </div>
@@ -417,7 +417,7 @@ export default function FareFinderPage() {
             </p>
             <div className="rm-solution-grid" style={{ display: 'grid', gridTemplateColumns: '2.6fr 1.4fr', gap: 8, alignItems: 'center' }} data-reveal>
               <img src={image} alt={alt} className="rm-solution-laptop" style={{ width: '100%', height: 'auto', display: 'block' }} />
-              <p className="font-landing-body" style={{ fontSize: 17, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+              <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 {body}
               </p>
             </div>
@@ -465,7 +465,7 @@ export default function FareFinderPage() {
             ].map(({ bold, body }) => (
               <div key={bold} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                 <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                <p className="font-landing-body" style={{ fontSize: 15, color: '#222225', lineHeight: 'normal', margin: 0 }}>
+                <p className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal', margin: 0 }}>
                   <strong className="text-[var(--color-cs-heading)]">{bold}</strong>{body}
                 </p>
               </div>

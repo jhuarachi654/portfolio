@@ -194,7 +194,7 @@ function IterationExplorer() {
         <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
         <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 24 }}>
           <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-          <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+          <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
             Throughout the process, I got input from my team, which helped me narrow down the options.
           </p>
         </div>
@@ -308,7 +308,7 @@ export default function DNCPage() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
             <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
               <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+              <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
                 The challenge wasn't any one graphic. It was doing this <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>consistently, at speed, across dozens of assets,</strong> while the brand itself was still being defined.
               </p>
             </div>
@@ -343,7 +343,7 @@ export default function DNCPage() {
               <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
                 42 graphics. 4 months. Every one WCAG-compliant.
               </h3>
-              <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
+              <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 Campaign assets for the Biden-Harris campaign delivered under same-day deadlines, through a live brand transition, and to national Democratic Party channels.
               </p>
             </div>
@@ -397,7 +397,7 @@ export default function DNCPage() {
                   {['Understand the message fast', 'Read the text easily', 'Feel connected without overthinking'].map(n => (
                     <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                       <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                      <span className="font-landing-body" style={{ fontSize: 15, color: '#222225', lineHeight: 'normal' }}>{n}</span>
+                      <span className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal' }}>{n}</span>
                     </li>
                   ))}
                 </ul>
@@ -415,7 +415,7 @@ export default function DNCPage() {
                   {['Trust the brand work is done', 'Have time to give real feedback', 'Get a design that is almost ready to go'].map(n => (
                     <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                       <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                      <span className="font-landing-body" style={{ fontSize: 15, color: '#222225', lineHeight: 'normal' }}>{n}</span>
+                      <span className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal' }}>{n}</span>
                     </li>
                   ))}
                 </ul>
@@ -488,7 +488,7 @@ export default function DNCPage() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
             <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 32 }}>
               <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+              <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
                 <strong className="text-[var(--color-cs-heading)]">Takeaway:</strong> I had to narrow in on the solution, so I focused on what made the most sense for the graphic and took that in with the iterations.
               </p>
             </div>

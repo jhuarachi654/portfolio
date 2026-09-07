@@ -86,7 +86,7 @@ function FeatureBlock({ index, label, body, userImpact, image, alt, first = fals
           <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
             <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+            <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
               <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>User Impact:</strong> {userImpact}
             </p>
           </div>
@@ -219,7 +219,7 @@ export default function BackStoryPage() {
           <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
           <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
             <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 15, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+            <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
               At the beginning of the project, we needed to establish a baseline for how Gen Z was interacting with social media and how they approached misinformation when they encountered it.
             </p>
           </div>
@@ -276,7 +276,7 @@ export default function BackStoryPage() {
                       <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: '1.2em' }}>{icon}</span>
                       {title}
                     </p>
-                    <p className="font-landing-body" style={{ fontSize: 15, lineHeight: 'normal', color: '#222225', margin: 0 }}>{body}</p>
+                    <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: '#222225', margin: 0 }}>{body}</p>
                   </div>
                 ))}
               </div>
