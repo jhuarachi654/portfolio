@@ -5016,6 +5016,15 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
+/* Expert.ai Validation Study stat cards — inline style sets 50% width for
+   tablet/desktop; full width on mobile so both cards stay legible instead
+   of being squeezed to half the viewport. */
+@media (max-width: 767px) {
+  .cs-page .ea-validation-stats[style*="width"] {
+    width: 100% !important;
+  }
+}
+
 /* Expert.ai Research quote cards — the wrapping container (not the cards
    themselves) narrows to 80% width on tablet and desktop, staying full
    width on mobile. */
