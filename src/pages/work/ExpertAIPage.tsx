@@ -315,7 +315,7 @@ export default function ExpertAIPage() {
 
           <div style={{ marginTop: 108 }}>
             <SubHeading>Results</SubHeading>
-            <div style={{ display: 'flex', gap: 64, width: '70%', margin: '24px auto 16px' }}>
+            <div style={{ display: 'flex', gap: 64, width: '50%', margin: '24px auto 16px' }}>
               <img src={img('stat-task-time.png')} alt="30 seconds task time reduction" style={{ width: '50%', height: 'auto', display: 'block', borderRadius: 8 }} />
               <img src={img('stat-support-tickets.png')} alt="42% fewer support tickets" style={{ width: '50%', height: 'auto', display: 'block', borderRadius: 8 }} />
             </div>
