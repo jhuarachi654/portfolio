@@ -350,10 +350,16 @@ export default function ExpertAIPage() {
           </div>
 
           <div style={{ marginTop: 32 }}>
-            <SubHeading>A component can affect the <span style={{ color: '#416BCC' }}>entire experience.</span></SubHeading>
-            <BodyText>
-              76% of support tickets traced back to one filter popup. It revealed how much a small feature shapes the way users perceive a product.
-            </BodyText>
+            <figure className="cs-fullwidth-figure" style={{ margin: 0 }} data-reveal>
+              <img src={img('presentation.webp')} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block', borderRadius: 8 }} />
+            </figure>
+
+            <div style={{ marginTop: 32 }}>
+              <SubHeading>A component can affect the <span style={{ color: '#416BCC' }}>entire experience.</span></SubHeading>
+              <BodyText>
+                76% of support tickets traced back to one filter popup. It revealed how much a small feature shapes the way users perceive a product.
+              </BodyText>
+            </div>
 
             <div style={{ marginTop: 32 }}>
               <SubHeading><span style={{ color: '#416BCC' }}>Advocacy</span> is part of the design process.</SubHeading>
@@ -361,10 +367,6 @@ export default function ExpertAIPage() {
                 The accessibility gap was not part of the original scope. Surfacing it through user research and validating it with users gave the team a reason to pivot toward a more inclusive solution.
               </BodyText>
             </div>
-
-            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('presentation.webp')} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block', borderRadius: 8 }} />
-            </figure>
           </div>
         </Section>
 
