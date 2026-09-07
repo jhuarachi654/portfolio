@@ -315,13 +315,15 @@ export default function ExpertAIPage() {
 
           <div style={{ marginTop: 108 }}>
             <SubHeading>Results</SubHeading>
-            <div className="ea-validation-stats" style={{ display: 'flex', gap: '8%', width: '50%', margin: '24px auto 16px' }}>
-              <img src={img('stat-task-time.png')} alt="30 seconds task time reduction" style={{ width: '50%', minWidth: 0, height: 'auto', display: 'block', borderRadius: 8 }} />
-              <img src={img('stat-support-tickets.png')} alt="42% fewer support tickets" style={{ width: '50%', minWidth: 0, height: 'auto', display: 'block', borderRadius: 8 }} />
+            <div className="ea-validation-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', marginTop: 24 }}>
+              <div className="ea-validation-stats" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <img src={img('stat-task-time.png')} alt="30 seconds task time reduction" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+                <img src={img('stat-support-tickets.png')} alt="42% fewer support tickets" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              </div>
+              <BodyText>
+                After the redesign shipped, task time dropped from 2 minutes to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>30 seconds</strong>. Users could see their results while filtering and change states with a single click. Support tickets about filtering fell by <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>42%</strong>, confirming the core friction had been resolved.
+              </BodyText>
             </div>
-            <BodyText>
-              After the redesign shipped, task time dropped from 2 minutes to <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>30 seconds</strong>. Users could see their results while filtering and change states with a single click. Support tickets about filtering fell by <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>42%</strong>, confirming the core friction had been resolved.
-            </BodyText>
           </div>
 
           <div style={{ marginTop: 64 }}>

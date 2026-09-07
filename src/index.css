@@ -4881,6 +4881,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     min-width: 0;
   }
 
+  /* Exception: Expert.ai Validation Study — stat cards (1fr) beside Results
+     copy (2fr), same as desktop, instead of collapsing to one column. */
+  .cs-page .ea-validation-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 2fr !important;
+  }
+
   /* Exception: this one has 3 visuals, each with its own heading + image +
      verdict line — collapsing it to one column like the rule above wastes a
      lot of vertical space, a 2-up grid reads better here. (Extra class
@@ -5013,15 +5019,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (min-width: 1200px) {
   .ff-stat-card-image {
     width: 60% !important;
-  }
-}
-
-/* Expert.ai Validation Study stat cards — inline style sets 50% width for
-   tablet/desktop; full width on mobile so both cards stay legible instead
-   of being squeezed to half the viewport. */
-@media (max-width: 767px) {
-  .cs-page .ea-validation-stats[style*="width"] {
-    width: 100% !important;
   }
 }
 
