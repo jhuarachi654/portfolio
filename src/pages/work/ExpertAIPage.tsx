@@ -355,7 +355,7 @@ export default function ExpertAIPage() {
               76% of support tickets traced back to one filter popup. It revealed how much a small feature shapes the way users perceive a product.
             </BodyText>
 
-            <div style={{ marginTop: 64 }}>
+            <div style={{ marginTop: 32 }}>
               <SubHeading><span style={{ color: '#416BCC' }}>Advocacy</span> is part of the design process.</SubHeading>
               <BodyText>
                 The accessibility gap was not part of the original scope. Surfacing it through user research and validating it with users gave the team a reason to pivot toward a more inclusive solution.
