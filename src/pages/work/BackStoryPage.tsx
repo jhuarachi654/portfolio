@@ -239,6 +239,17 @@ export default function BackStoryPage() {
             <SkeletonImage src={img('backstory-why-backstory.png')} alt="Hands scrolling on a phone" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
 
+          <div style={{ marginTop: 108 }}>
+            <SubHeading>Gen-Z is more susceptible</SubHeading>
+            <BodyText>
+              A large-scale international study across 66,000+ participants in 24 countries found that Gen Z showed greater susceptibility to misinformation than older age groups — despite growing up online. Their perceived ability to spot false claims did not match reality.
+            </BodyText>
+
+            <figure style={{ margin: '24px 0 0' }} data-reveal>
+              <SkeletonImage src={img('backstory-genz-tiktok-icon.png')} alt="Close-up of the TikTok app icon on a smartphone home screen" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
+            </figure>
+          </div>
+
           <ChallengeBanner
             icon={<ChatCircleText size="1em" weight="regular" />}
             iconColor="#416BCC"
