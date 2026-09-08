@@ -348,42 +348,43 @@ export default function DNCPage() {
             </BodyText>
 
             <div className="dnc-persona-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginTop: 32 }}>
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '1px solid rgba(var(--color-navy-rgb),0.15)' }}>
-                    <img src={img('dnc-avatar-sam.jpg')} alt="Sam" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
+              {[
+                {
+                  type: 'Scrolling Voter',
+                  name: 'Sam',
+                  avatar: img('dnc-avatar-sam.jpg'),
+                  needs: ['Understand the message fast', 'Read the text easily', 'Feel connected without overthinking'],
+                },
+                {
+                  type: 'Brand Strategist',
+                  name: 'Jordan',
+                  avatar: img('dnc-avatar-jordan.jpg'),
+                  needs: ['Trust the brand work is done', 'Have time to give real feedback', 'Get a design that is almost ready to go'],
+                },
+              ].map(({ type, name, avatar, needs }) => (
+                <div key={name} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24, textAlign: 'center' }}>
+                  <p className="cs-caption-label" style={{ display: 'inline-block', margin: '0 0 16px', textTransform: 'uppercase', opacity: 1, background: 'var(--color-cs-heading)', color: '#fff', borderRadius: 999, padding: '4px 12px' }}>{type}</p>
+
+                  <div style={{ width: 72, height: 72, borderRadius: '50%', overflow: 'hidden', margin: '0 auto 12px', border: '1px solid rgba(var(--color-navy-rgb),0.15)' }}>
+                    <img src={avatar} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                   </div>
-                  <h4 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 'normal', margin: 0 }}>
-                    The Scrolling Voter (Sam)
+                  <h4 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 'normal', margin: '0 0 16px' }}>
+                    {name}
                   </h4>
+
+                  <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '0 0 16px' }} />
+
+                  <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: '0 0 12px', textAlign: 'left' }}>Needs:</p>
+                  <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12, textAlign: 'left' }}>
+                    {needs.map(n => (
+                      <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                        <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
+                        <span className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal' }}>{n}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {['Understand the message fast', 'Read the text easily', 'Feel connected without overthinking'].map(n => (
-                    <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                      <span className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal' }}>{n}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '1px solid rgba(var(--color-navy-rgb),0.15)' }}>
-                    <img src={img('dnc-avatar-jordan.jpg')} alt="Jordan" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
-                  </div>
-                  <h4 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 'normal', margin: 0 }}>
-                    Brand Strategist (Jordan)
-                  </h4>
-                </div>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {['Trust the brand work is done', 'Have time to give real feedback', 'Get a design that is almost ready to go'].map(n => (
-                    <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                      <span className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal' }}>{n}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              ))}
             </div>
           </div>
 
