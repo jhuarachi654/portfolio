@@ -227,11 +227,10 @@ export default function BackStoryPage() {
 
           <div style={{ marginTop: 64 }} data-reveal>
             <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Impact</p>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {[
                 { stat: '170M', description: 'US users who could verify content without leaving TikTok' },
                 { stat: '1 in 2', description: 'Gen Z users who could close the gap between perceived and actual media literacy' },
-                { stat: '1st', description: 'native fact-checking feature designed for short-form video feeds' },
               ].map(({ stat, description }, i) => (
                 <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
                   <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 500, color: '#416BCC', display: 'block' }} />
