@@ -274,7 +274,7 @@ export default function DNCPage() {
                 { label: 'Role',         value: 'Digital Design Intern' },
                 { label: 'Timeline',     value: 'Jun – Sep 2023' },
                 { label: 'Team',         value: 'Design & Comms Team' },
-                { label: 'Tools/Skills', value: 'Figma' },
+                { label: 'Tools/Skills', value: 'Figma, Adobe Illustrator, Canva' },
               ].map(({ label, value }) => (
                 <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
                   <p className="cs-metric-label" style={{ marginBottom: 6, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{label}</p>
