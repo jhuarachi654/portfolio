@@ -192,7 +192,7 @@ export default function BackStoryPage() {
                 { label: 'Skills',   value: 'Research, Prototyping, Interaction Design, Usability Testing, AI-Assisted Design' },
               ].map(({ label, value }) => (
                 <div key={label} className="cs-info-box" style={{ padding: '10px 12px' }}>
-                  <p className="cs-metric-label" style={{ marginBottom: 6 }}>{label}</p>
+                  <p className="cs-metric-label" style={{ marginBottom: 6, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{label}</p>
                   <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', margin: 0, lineHeight: 'normal', whiteSpace: 'pre-line' }}>{value}</p>
                 </div>
               ))}
