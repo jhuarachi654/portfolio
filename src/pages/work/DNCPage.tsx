@@ -12,7 +12,7 @@ import { useCaseToc } from '../../hooks/useCaseToc'
 const TOC = [
   { id: 'dnc-intro',            label: 'Introduction' },
   { id: 'dnc-context',          label: 'Context' },
-  { id: 'dnc-vp',               label: 'VP Graphic' },
+  { id: 'dnc-vp',               label: 'Development' },
   { id: 'dnc-collection',       label: 'Collection' },
   { id: 'dnc-reflection',       label: 'Reflection' },
 ]
@@ -150,30 +150,31 @@ const iterationOptions = [
 
 function IterationExplorer() {
   return (
-    <div className="cs-card-box" style={{ padding: 32, marginTop: 32 }}>
-      <div>
-        <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6, marginTop: 0 }}>Graphic Exploration</p>
-        <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
-          VP Anniversary Iterations
-        </h3>
-        <BodyText>I tested a few different directions for the Kamala Harris graphic before landing on the final version. I realized that every design choice sends a message, even the ones you do not think about. The photo selection told people whether this was a celebration or an announcement. The layout told them whether to feel inspired or just informed. I got the chance to look at the design through multiple perspectives.</BodyText>
+    <>
+      <SubHeading>VP Anniversary Exploration</SubHeading>
+      <BodyText>When a request came in to commemorate Vice President Kamala Harris's milestone anniversary in office, I had under a day to design a graphic going out to a national audience. I tested a few directions before landing on the final version.</BodyText>
 
-        <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 24 }}>
-          <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-          <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-            Throughout the process, I got input from my team, which helped me narrow down the options.
-          </p>
-        </div>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {iterationOptions.map(({ image, label }) => (
-          <div key={image} style={{ background: '#252525', aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', marginTop: 24 }}>
+        {iterationOptions.map(({ image, label }, i) => (
+          <div
+            key={image}
+            style={{
+              background: '#252525',
+              aspectRatio: '16/9',
+              overflow: 'hidden',
+              padding: 16,
+              boxSizing: 'border-box',
+              borderTopLeftRadius: i === 0 ? 8 : 0,
+              borderTopRightRadius: i === 0 ? 8 : 0,
+              borderBottomLeftRadius: i === iterationOptions.length - 1 ? 8 : 0,
+              borderBottomRightRadius: i === iterationOptions.length - 1 ? 8 : 0,
+            }}
+          >
             <img src={img(image)} alt={label} style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }} />
           </div>
         ))}
       </div>
-    </div>
+    </>
   )
 }
 
@@ -345,7 +346,7 @@ export default function DNCPage() {
         {/* ── 4. VP Graphic ── */}
         <Section id="dnc-vp">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. VP Graphic</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Development</p>
           </div>
 
           <div className="dnc-brief-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
