@@ -381,27 +381,36 @@ export default function DNCPage() {
             <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Reflection</p>
           </div>
 
-          <div className="dnc-reflection-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
-            <div>
-              <SubHeading>Takeaways</SubHeading>
-              <BodyText>
-                What I will take away from this experience is that design is not just about making things look good. It is about communicating clearly, working fast when you have to, and caring about the details even when no one is watching.
-              </BodyText>
-              <BodyText>
-                I am grateful to the Mobilization team for trusting me with real work. This was my first time designing in a fast paced, high stakes environment, and it confirmed that this is what I want to keep doing.
-              </BodyText>
-            </div>
-            <figure style={{ margin: 0 }}>
-              <img
-                src={img('dnc-metro-commute.jpeg')}
-                alt="Washington DC Metro station platform"
-                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }}
-              />
-              <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
-                Snippet of my morning commute! DC Metro is so cool
-              </figcaption>
-            </figure>
+          <div style={{ marginTop: 32 }}>
+            <SubHeading>Designing across teams takes adaptability.</SubHeading>
+            <BodyText>
+              Every team I worked with had different priorities and a different way of giving feedback. Learning to communicate across all of them made me a stronger collaborator and a more intentional designer.
+            </BodyText>
           </div>
+
+          <div style={{ marginTop: 64 }}>
+            <SubHeading>Fast-paced work teaches you how to manage yourself.</SubHeading>
+            <BodyText>
+              Juggling multiple projects with real deadlines pushed me to get better at prioritization and time management in ways a classroom cannot replicate.
+            </BodyText>
+          </div>
+
+          <div style={{ marginTop: 64 }}>
+            <BodyText>
+              I am grateful to the Mobilization team for the concrete feedback, the design conversations, and for trusting me with accessibility from the start.
+            </BodyText>
+          </div>
+
+          <figure style={{ margin: '64px 0 0' }}>
+            <img
+              src={img('dnc-metro-commute.jpeg')}
+              alt="Washington DC Metro station platform"
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }}
+            />
+            <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
+              Snippet of my morning commute! DC Metro is so cool
+            </figcaption>
+          </figure>
         </Section>
 
       </div>
