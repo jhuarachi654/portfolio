@@ -362,7 +362,7 @@ export default function DNCPage() {
           <div className="rm-challenge-subheader-style" style={{ marginTop: 108 }}>
             <ChallengeBanner
               label="Mission"
-              question={<>How might we deliver campaign graphics that are <span style={{ color: '#416BCC' }}>on-brand</span>, <span style={{ color: '#416BCC' }}>accessible</span>, and <span style={{ color: '#416BCC' }}>compelling</span> — consistently and at speed?</>}
+              question={<>How might we design campaign graphics that <span style={{ color: '#416BCC' }}>resonate</span> with a national audience, <span style={{ color: '#416BCC' }}>reflect the brand</span>, and hold up to <span style={{ color: '#416BCC' }}>accessibility standards</span>?</>}
             />
           </div>
         </Section>
