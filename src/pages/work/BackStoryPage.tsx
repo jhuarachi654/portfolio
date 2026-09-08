@@ -7,6 +7,7 @@ import ReadingProgress from '../../components/case-study/ReadingProgress'
 import StatCallout from '../../components/case-study/StatCallout'
 import PlayPauseButton from '../../components/PlayPauseButton'
 import SkeletonImage from '../../components/SkeletonImage'
+import CrossfadeImage from '../../components/CrossfadeImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 // Development/Solution/Testing/Learnings aren't written yet — keep the code below intact
@@ -332,15 +333,22 @@ export default function BackStoryPage() {
         <Section id="bs-development">
           <ChapterHeading index={3} heading="Ideation" />
 
+          <SubHeading>Co-Creation Workshop</SubHeading>
           <BodyText>
             We brought diary study participants into a Miro co-creation workshop to brainstorm solutions together. Starting wide, we used two HMW questions as guide-rails, ran Crazy 8s fast-sketching, and dot-voted on the strongest concepts.
           </BodyText>
 
           <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-            <SkeletonImage src={img('backstory-cocreation-miro-board.png')} alt="Miro co-creation board: HMWs, Crazy 8s sketches from each team member, dot voting, and downselected concepts plotted on a 2x2 matrix" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
+            <CrossfadeImage
+              images={[
+                { src: img('backstory-cocreation-before.png'), alt: 'Miro co-creation board title card: Co-creation with diary study participants' },
+                { src: img('backstory-cocreation-after.png'), alt: 'Annotated Miro co-creation board flow: Agenda, Context, Crazy 8s, Dot Vote, Discuss, 2x2, Select' },
+              ]}
+            />
           </figure>
 
           <div style={{ marginTop: 108 }}>
+            <SubHeading>Downselecting Features</SubHeading>
             <BodyText>
               To separate promising ideas from wish-list features, we plotted every concept on a Feasibility vs. Impact matrix.
             </BodyText>
