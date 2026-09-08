@@ -246,7 +246,7 @@ export default function BackStoryPage() {
             </BodyText>
 
             <figure style={{ margin: '24px 0 0' }} data-reveal>
-              <SkeletonImage src={img('backstory-genz-tiktok-icon.png')} alt="Close-up of the TikTok app icon on a smartphone home screen" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
+              <SkeletonImage src={img('backstory-genz-tiktok-icon.png')} alt="Research shows that Gen Z specifically had greater susceptibility to misinformation, citing Kyrychenko et al., Personality and Individual Differences, 2025" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
 
