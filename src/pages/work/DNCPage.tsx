@@ -308,28 +308,9 @@ export default function DNCPage() {
             <BodyText>
               I joined as a Digital Design Intern on the Mobilization team, an in-house design agency producing digital assets for both the Biden-Harris campaign and broader Democratic initiatives. I collaborated with Strategy, Communications, and Fundraising teams on social graphics, email modules, flyers, merchandise, and motion, adapting quickly as priorities shifted and requests came in daily.
             </BodyText>
-          </div>
 
-          <div style={{ marginTop: 108 }}>
-            <SubHeading>Campaign graphics at the DNC</SubHeading>
-            <BodyText>
-              The Democratic National Committee runs the digital communications for the Democratic Party. During the summer of 2023, I joined as a Digital Design Intern on the Biden-Harris campaign, working with the communications and design team to produce graphics for social media, digital ads, and email.
-            </BodyText>
-            <BodyText>
-              The work moved fast. Requests came in daily, sometimes with same-day turnarounds. Every asset had to be WCAG-compliant. And the campaign's visual identity was actively shifting. Colors, fonts, and graphic accents were being updated as the brand evolved.
-            </BodyText>
-
-            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-                The challenge wasn't any one graphic. It was doing this <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>consistently, at speed, across dozens of assets,</strong> while the brand itself was still being defined.
-              </p>
-            </div>
-
-            <figure style={{ margin: '24px 0 0', width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-              <img src={img('branding-transition.png')} alt="Biden-Harris 2024 campaign branding, including handwritten ad copy, donor call-to-action graphics, bumper stickers, and buttons" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
-              <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>This is the new branding for the Biden-Harris 2024 campaign. It was characterized by handwritten elements, gradients, and brighter blues and reds.</figcaption>
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('branding-transition-collage.png')} alt="Biden-Harris 2024 campaign assets, including social graphics, donor call-to-action pages, bumper stickers, and buttons" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
             </figure>
           </div>
         </Section>
