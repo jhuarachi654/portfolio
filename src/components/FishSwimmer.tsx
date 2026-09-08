@@ -8,6 +8,8 @@ type FishSwimmerProps = {
   color?: string
   filled?: boolean
   mobileZone?: "top" | "bottom"
+  scale?: number
+  startSide?: "left" | "right"
 }
 
 function drawFilledFish(ctx: CanvasRenderingContext2D, wag: number, color: string) {
@@ -68,7 +70,7 @@ function drawLineFish(ctx: CanvasRenderingContext2D, wag: number, color: string)
   ctx.restore()
 }
 
-export default function FishSwimmer({ color = "#ffffff", filled = false, mobileZone }: FishSwimmerProps) {
+export default function FishSwimmer({ color = "#ffffff", filled = false, mobileZone, scale, startSide }: FishSwimmerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -94,14 +96,18 @@ export default function FishSwimmer({ color = "#ffffff", filled = false, mobileZ
       canvas!.style.height = `${height}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      spriteScale = width < 640 ? 1.0 : 1.6
+      spriteScale = scale ?? (width < 640 ? 1.0 : 1.6)
     }
     resize()
     window.addEventListener("resize", resize)
 
     const MARGIN = 40
     const isMobile = width < 640
-    let x = width * (0.4 + Math.random() * 0.5)
+    let x = startSide === "right"
+      ? width * (0.65 + Math.random() * 0.25)
+      : startSide === "left"
+      ? width * (0.1 + Math.random() * 0.25)
+      : width * (0.4 + Math.random() * 0.5)
     let y = isMobile && mobileZone === "top"
       ? height * (0.08 + Math.random() * 0.15)
       : isMobile && mobileZone === "bottom"
