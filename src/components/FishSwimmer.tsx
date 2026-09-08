@@ -82,8 +82,6 @@ export default function FishSwimmer({ color = "#ffffff", filled = false, mobileZ
 
     let width = 0, height = 0
     let spriteScale = 1.6
-    let textRect: { left: number; right: number; top: number; bottom: number } | null = null
-    const TEXT_AVOID_PAD = 28
 
     function resize() {
       const parent = canvas!.parentElement
@@ -97,27 +95,9 @@ export default function FishSwimmer({ color = "#ffffff", filled = false, mobileZ
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
       spriteScale = width < 640 ? 1.0 : 1.6
-
-      const textEl = parent?.querySelector(".hero-landing-inner")
-      if (textEl) {
-        const canvasRect = canvas!.getBoundingClientRect()
-        const tr = textEl.getBoundingClientRect()
-        textRect = {
-          left: tr.left - canvasRect.left,
-          right: tr.right - canvasRect.left,
-          top: tr.top - canvasRect.top,
-          bottom: tr.bottom - canvasRect.top,
-        }
-      }
     }
     resize()
     window.addEventListener("resize", resize)
-
-    function isInsideTextZone(px: number, py: number) {
-      if (!textRect) return false
-      return px > textRect.left - TEXT_AVOID_PAD && px < textRect.right + TEXT_AVOID_PAD &&
-        py > textRect.top - TEXT_AVOID_PAD && py < textRect.bottom + TEXT_AVOID_PAD
-    }
 
     const MARGIN = 40
     const isMobile = width < 640
@@ -189,13 +169,6 @@ export default function FishSwimmer({ color = "#ffffff", filled = false, mobileZ
 
       if (!startled && (!pointer.active || Math.hypot(x - pointer.x, y - pointer.y) >= FLEE_RADIUS)) {
         angle += (Math.random() - 0.5) * 0.35 * dt * 10
-      }
-
-      if (!startled && isInsideTextZone(x, y) && textRect) {
-        const cx = (textRect.left + textRect.right) / 2
-        const cy = (textRect.top + textRect.bottom) / 2
-        angle = Math.atan2(y - cy, x - cx)
-        targetSpeed = Math.max(targetSpeed, 90)
       }
 
       speed += (targetSpeed - speed) * Math.min(dt * 4, 1)
