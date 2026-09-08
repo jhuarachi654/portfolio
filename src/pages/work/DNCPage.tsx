@@ -15,7 +15,6 @@ const TOC = [
   { id: 'dnc-context',          label: 'Context' },
   { id: 'dnc-vp',               label: 'VP Graphic' },
   { id: 'dnc-collection',       label: 'Collection' },
-  { id: 'dnc-impact',           label: 'Impact' },
   { id: 'dnc-reflection',       label: 'Reflection' },
 ]
 
@@ -312,6 +311,22 @@ export default function DNCPage() {
               <img src={img('branding-transition-collage.png')} alt="Biden-Harris 2024 campaign assets, including social graphics, donor call-to-action pages, bumper stickers, and buttons" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
             </figure>
           </div>
+
+          <div style={{ marginTop: 64 }} data-reveal>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Impact</p>
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { stat: '120K', description: 'total reach across 40 graphics' },
+                { stat: '12', description: 'rapid-turnaround requests delivered within hours' },
+                { stat: '5.5K', description: 'engagements on a single VP-level asset' },
+              ].map(({ stat, description }, i) => (
+                <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
+                  <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 500, color: '#416BCC', display: 'block' }} />
+                  <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </Section>
 
         {/* ── 2. Context ── */}
@@ -503,30 +518,10 @@ export default function DNCPage() {
           </div>
         </Section>
 
-        {/* ── 6. Impact ── */}
-        <Section id="dnc-impact">
-          <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Impact</p>
-          </div>
-
-          <div>
-            <SubHeading>Impact</SubHeading>
-            <BodyText>
-              Being part of the Mobilization team at the DNC pushed my visual design skills. I got to learn quickly on my feet, consider multiple perspectives, and also consider the impact of my design work. I also got to practice my interest in accessibility in design and advocated for it regularly within my design work and shared accessibility checking tools with my team. I caught a few WCAG issues along the way, and the team started paying more attention to accessibility because of it.
-            </BodyText>
-
-            <div className="dnc-impact-stats-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16, marginTop: 24 }}>
-              <StatBlock label="In 4 months" stat="40 graphics" description="Designed across Instagram, Facebook, email, and merch" />
-              <StatBlock label="Requests" stat="18 same day" description="Turned around within hours while still leaving room for feedback, revisions, and handoff." />
-              <StatBlock label="Across Social Media" stat="5,500 likes" description="People saw and responded to the work I made." />
-            </div>
-          </div>
-        </Section>
-
-        {/* ── 7. Reflection ── */}
+        {/* ── 5. Reflection ── */}
         <Section id="dnc-reflection">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Reflection</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Reflection</p>
           </div>
 
           <div className="dnc-reflection-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>

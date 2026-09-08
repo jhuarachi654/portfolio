@@ -4945,11 +4945,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     grid-template-columns: 1fr 1fr !important;
   }
 
-  /* Exception: DNC Impact 3-stat grid — same treatment as Fare Finder's. */
-  .cs-page .dnc-impact-stats-grid[style*="grid-template-columns"] {
-    grid-template-columns: 1fr 1fr 1fr !important;
-  }
-
   /* Exception: image + short "what wasn't working" list — text column is
      narrow enough to stay side by side rather than stack. */
   .cs-page .ea-filter-popup-row[style*="grid-template-columns"] {
