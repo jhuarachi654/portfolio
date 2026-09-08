@@ -145,8 +145,6 @@ function CollectionGallery() {
 const iterationOptions = [
   { label: 'Flag Photo', image: 'dnc-iter-1.webp' },
   { label: 'Outdoor Shot', image: 'dnc-iter-2.webp' },
-  { label: 'Light Blue', image: 'dnc-iter-3.webp' },
-  { label: 'Navy Background', image: 'dnc-iter-4.webp' },
   { label: 'Final', image: 'dnc-iter-final.webp' },
 ]
 
