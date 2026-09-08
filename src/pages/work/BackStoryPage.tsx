@@ -181,7 +181,7 @@ export default function BackStoryPage() {
               BackStory
             </h1>
             <p className="case-study-hero-reveal font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
-              Designing Backstory, a TikTok-native feature that empowers users with the full context behind a piece of content on social media: community notes, verified third-party sources, and the ability to contribute their own voice.
+              Designing Backstory, a TikTok-native feature that combats misinformation by giving users the full context behind a piece of content: community notes, verified third-party sources, and the ability to contribute their own voice.
             </p>
             <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
