@@ -222,6 +222,26 @@ export default function BackStoryPage() {
               </BodyText>
             </div>
           </div>
+
+          <div style={{ marginTop: 108 }}>
+            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>AI Artists are more common than it seems</p>
+            <BodyText>
+              A friend discovered a soul-blues artist through her father. She added songs, looked them up, and found nothing — no social media, no trace of a real person.
+            </BodyText>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('backstory-ai-artist-discovery.png')} alt="Fictional AI-generated artist Eddie Dalton's analytics dashboard beside a Reddit post describing the discovery" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            </figure>
+
+            <div style={{ marginTop: 24 }}>
+              <BodyText>
+                <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Eddie Dalton has 138,000 followers across Spotify, Apple Music, and SoundCloud. He is entirely AI-generated.</strong> She felt deceived.
+              </BodyText>
+              <BodyText>
+                Stories like this became the foundation of Backstory.
+              </BodyText>
+            </div>
+          </div>
         </div>
 
         {/* ── 1. Context ── */}
