@@ -39,7 +39,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
 
 function BodyText({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-landing-body text-[15px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
+    <p className="font-landing-body text-[16px]" data-reveal style={{ '--reveal-delay': '140ms', lineHeight: 1.3, color: 'var(--color-secondary)', marginBottom: 16, marginTop: 0 } as React.CSSProperties}>
       {children}
     </p>
   )
@@ -266,7 +266,7 @@ export default function DNCPage() {
             <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
               Branding and Digital Design for the DNC
             </h1>
-            <p className="case-study-hero-reveal font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
+            <p className="case-study-hero-reveal font-landing-body text-[16px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
               Designing social graphics, digital ads, email modules, and merchandise for the Biden-Harris campaign and Democratic initiatives, while adapting to a live brand transition.
             </p>
             <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -444,9 +444,10 @@ export default function DNCPage() {
 
           <div style={{ marginTop: 108 }}>
             <ChallengeBanner
+              label="Mission"
               icon={<Megaphone size="1em" weight="regular" />}
               iconColor="#416BCC"
-              question={<>How might we deliver campaign graphics that are <strong><em>on-brand,</em></strong> <strong><em>accessible,</em></strong> and <strong><em>compelling</em></strong> — consistently and at speed?</>}
+              question={<>How might we deliver campaign graphics that are <span style={{ color: '#416BCC' }}>on-brand</span>, <span style={{ color: '#416BCC' }}>accessible</span>, and <span style={{ color: '#416BCC' }}>compelling</span> — consistently and at speed?</>}
             />
           </div>
         </Section>
