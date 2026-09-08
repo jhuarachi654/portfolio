@@ -357,6 +357,24 @@ export default function BackStoryPage() {
               <SkeletonImage src={img('backstory-2x2-matrix.png')} alt="Feasibility vs. Impact 2x2 matrix plotting concepts including Bread Crumbs, Profile Investigator, Quiz, Wiki for misinfo, and the Backstory button" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
+
+          <div style={{ marginTop: 108 }}>
+            <SubHeading>Design Principles</SubHeading>
+            <BodyText>
+              From the downselection, we established three principles: the feature had to be platform-embedded within TikTok, Gen Z behavior-centric in format and interaction, and grounded in community consensus and fact-checking for both speed and authority.
+            </BodyText>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <CrossfadeImage
+                images={[
+                  { src: img('backstory-design-principles-0.png'), alt: 'Design Approach board, blank' },
+                  { src: img('backstory-design-principles-1.png'), alt: 'Design principle: Platform-embedded' },
+                  { src: img('backstory-design-principles-2.png'), alt: 'Design principle: Platform-embedded, Gen Z behavior-centric (short-form + post)' },
+                  { src: img('backstory-design-principles-3.png'), alt: 'Design principle: Platform-embedded, Gen Z behavior-centric, Community consensus + fact-checking' },
+                ]}
+              />
+            </figure>
+          </div>
         </Section>
 
         {SHOW_DRAFT && <>
