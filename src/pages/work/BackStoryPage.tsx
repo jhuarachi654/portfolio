@@ -279,12 +279,8 @@ export default function BackStoryPage() {
 
           <SubHeading>A Diary Study on Misinformation</SubHeading>
           <BodyText>
-            Rather than retrospective interviews, we tracked real-time encounters. Participants screenshotted suspicious or misleading posts from their normal social media use as they happened, then joined follow-up depth interviews. Three behavioral patterns emerged.
+            Rather than retrospective interviews, we tracked real-time encounters over <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>3 days</strong>. <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>6 participants</strong> screenshotted suspicious or misleading posts as they happened across their normal feeds, documenting <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>12 instances</strong> of misinformation in total. Follow-up depth interviews surfaced three behavioral patterns.
           </BodyText>
-
-          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-            <SkeletonImage src={img('backstory-diary-study-stats.png')} alt="Diary study methodology: 6 users recruited, 12 documented instances of misinformation, 3 days" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
-          </figure>
 
           <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
             <SkeletonImage src={img('backstory-diary-study-board.png')} alt="Diary study compilation board of screenshotted social media posts with participant annotations" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
