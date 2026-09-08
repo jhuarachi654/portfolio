@@ -213,7 +213,7 @@ export default function RevenueManagementPage() {
           </BodyText>
         </div>
 
-        <div className="cs-fullwidth-figure" style={{ marginTop: 64 }}>
+        <div className="cs-fullwidth-figure" style={{ marginTop: 64 }} data-reveal>
           <img src="/images/revenue-management/pros-rm-hero.png" alt="PROS RM platform interface showing the My Markets dashboard and PROS AI assistant chat" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
         </div>
 
@@ -248,7 +248,7 @@ export default function RevenueManagementPage() {
             </BodyText>
           </Prose>
 
-          <figure className="rm-visual-80" style={{ margin: 0, width: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
+          <figure className="rm-visual-80" style={{ margin: 0, width: '100%', marginLeft: 'auto', marginRight: 'auto' }} data-reveal>
             <img src={img('why-now-covid-headline.png')} alt="Major US airlines to lay off thousands of workers as Covid-19 support expires" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
           </figure>
         </div>
@@ -290,7 +290,7 @@ export default function RevenueManagementPage() {
               {body}
             </p>
             {image && (
-              <img src={image} alt={alt} className="rm-visual-80" style={{ width: '100%', height: 'auto', display: 'block', margin: '32px auto 0', ...(noCard ? {} : { border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }) }} />
+              <img src={image} alt={alt} className="rm-visual-80" data-reveal style={{ width: '100%', height: 'auto', display: 'block', margin: '32px auto 0', ...(noCard ? {} : { border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }) }} />
             )}
           </div>
         ))}
@@ -302,7 +302,7 @@ export default function RevenueManagementPage() {
             Through interviews with customer support specialists and analysis of eight user interviews with airline analysts, I gathered perspectives from both sides — those who use the platform and those who support them — to understand where and why analysts were struggling.
           </BodyText>
 
-          <div className="grid grid-cols-2 rm-visual-80" style={{ marginTop: 32, width: '100%', marginLeft: 'auto', marginRight: 'auto', gap: 64 }}>
+          <div className="grid grid-cols-2 rm-visual-80" data-reveal style={{ marginTop: 32, width: '100%', marginLeft: 'auto', marginRight: 'auto', gap: 64 }}>
             <img src={img('method-user-interviews.png')} alt="User Interviews — Customer Support Specialist and Internal Research team" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
             <img src={img('method-drop-off-trends.png')} alt="Drop-rate Trends — Half of analysts would leave the platform to access AI tools" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
           </div>
@@ -321,7 +321,7 @@ export default function RevenueManagementPage() {
             Through user interviews, I confirmed that RM's user base had significantly shifted, now composed of roughly equal parts newer and senior analysts. I defined personas with their behaviors and needs clearly for the team, to show the two contrasting users and serve as a reference as we worked toward a solution that balanced both.
           </BodyText>
 
-          <img src={img('persona-cards-composite.png')} alt="Junior Analyst persona (Avery Chen) and Senior Analyst persona (Alex Reyes) cards" className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} />
+          <img src={img('persona-cards-composite.png')} alt="Junior Analyst persona (Avery Chen) and Senior Analyst persona (Alex Reyes) cards" className="rm-visual-80" data-reveal style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} />
         </div>
 
         <div style={{ marginTop: 108 }}>
@@ -331,7 +331,7 @@ export default function RevenueManagementPage() {
           </BodyText>
         </div>
 
-        <figure className="cs-fullwidth-figure" style={{ margin: '48px 0 0' }}>
+        <figure className="cs-fullwidth-figure" style={{ margin: '48px 0 0' }} data-reveal>
           <img src={img('revenue-management-14-3LKss2.png')} alt="Comparative look at how Junior and Senior Analysts move through the same platform" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', border: '1px solid #d1d1d1', borderRadius: 8 }} />
         </figure>
 
@@ -347,14 +347,14 @@ export default function RevenueManagementPage() {
           Over 4 weeks of weekly validation sessions with users and stakeholders, I iterated on 4 key areas based on ongoing feedback:
         </BodyText>
 
-        <img src={img('4-key-areas.png')} alt="Four key areas iterated on: Getting Started, Market Dashboard, AI Integration, and Market Analytics" className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} />
+        <img src={img('4-key-areas.png')} alt="Four key areas iterated on: Getting Started, Market Dashboard, AI Integration, and Market Analytics" className="rm-visual-80" data-reveal style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} />
 
         <div style={{ marginTop: 108 }}>
           <SubHeading>AI Integration Across the Market</SubHeading>
           <BodyText>
             To bring the experience of external AI tools into PROS, we conducted a competitive analysis to understand how AI was being integrated across other platforms — what <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>interaction patterns</strong> and <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>mental models</strong> users already had. We looked at dashboard integration, chat experiences, and onboarding flows.
           </BodyText>
-          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
             <div style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
               <img src={img('ai-exploration.png')} alt="AI Competitive Analysis — dashboard integration, onboarding, and chat experiences across platforms" style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>
@@ -367,7 +367,7 @@ export default function RevenueManagementPage() {
             To address the ambiguity around AI integration, we explored layouts through sketch wireframes on FigJam ranging from heavy to light AI presence, using <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>trust</strong> and <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>user agency</strong> as guiding principles.
           </BodyText>
 
-          <div className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0' }}>
+          <div className="rm-visual-80" data-reveal style={{ width: '100%', margin: '32px auto 0' }}>
             <img src={img('ai-role-full-side-left.png')} alt="Full Chat View and Side Chat View (Left) wireframe comparison" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }} />
             <img src={img('ai-role-side-embedded.png')} alt="Side Chat View (Right) and Embedded AI Insights wireframe comparison" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, borderTopLeftRadius: 0, borderTopRightRadius: 0 }} />
           </div>
@@ -379,7 +379,7 @@ export default function RevenueManagementPage() {
             Analysts review hundreds of markets a day and make pricing decisions that need to be <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>fast and accurate</strong>. When exploring flight fare card display layouts, I prioritized <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>scannability and KPIs</strong>, using Claude Code to rapidly iterate high-fidelity mockups. Each iteration explored different card sizes, balancing cognitive load and visual hierarchy to surface the right information when needed.
           </BodyText>
 
-          <div className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0', background: '#EFEFEF', borderRadius: 8, padding: 32 }}>
+          <div className="rm-visual-80" data-reveal style={{ width: '100%', margin: '32px auto 0', background: '#EFEFEF', borderRadius: 8, padding: 32 }}>
             <div style={{ display: 'flex', gap: 16 }}>
               <img src={img('market-scan-list-view.png')} alt="My Markets list view with search, filters, and status-grouped rows" className="rm-market-scan-img" style={{ width: 'calc(50% - 8px)', minWidth: 0, flexShrink: 1, height: 'auto', display: 'block', borderRadius: 8 }} />
               <img src={img('market-scan-card-grid-view.png')} alt="My Markets card grid view grouped by severity with Ask AI actions" className="rm-market-scan-img" style={{ width: 'calc(50% - 8px)', minWidth: 0, flexShrink: 1, height: 'auto', display: 'block', borderRadius: 8 }} />
@@ -451,7 +451,7 @@ export default function RevenueManagementPage() {
           <BodyText>
             As part of the modernization, the UX strategist and I documented two new AI components — a contextual <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>market selector</strong> and <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>tailored prompts</strong> — across both the full and side chat panel experiences, adding them to PROS's existing design system for developer handoff.
           </BodyText>
-          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
             <div style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
               <img src={img('design-system.png')} alt="PROS AI Chat design system components — market selector and tailored prompts across full and side chat panels" style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>

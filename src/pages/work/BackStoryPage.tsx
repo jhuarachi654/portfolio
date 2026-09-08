@@ -224,7 +224,7 @@ export default function BackStoryPage() {
             </p>
           </div>
 
-          <figure style={{ margin: '32px 0 0' }}>
+          <figure style={{ margin: '32px 0 0' }} data-reveal>
             <img src={img('backstory-why-backstory.png')} alt="Hands scrolling on a phone" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
             <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
               Everyday we scroll on social media and encounter misinformation whether we are aware of it or not
@@ -242,7 +242,7 @@ export default function BackStoryPage() {
         <Section id="bs-solution-preview">
           <ChapterHeading index={2} heading="Solution Preview" />
 
-          <figure style={{ margin: 0 }}>
+          <figure style={{ margin: 0 }} data-reveal>
             <img src={img('backstory-solution-preview.jpeg')} alt="BackStory fact-check panel over a TikTok post, showing Community Notes and Professional verdict tabs" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
           </figure>
 
@@ -328,7 +328,7 @@ export default function BackStoryPage() {
             </BodyText>
           </div>
 
-          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }}>
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
             <img src={img('backstory-flow-placeholder.png')} alt="[ Flow diagram placeholder ]" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
             <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
               [ Caption describing the redesigned flow ]
@@ -414,7 +414,7 @@ export default function BackStoryPage() {
                 [ Takeaway 3: closing reflection. ]
               </BodyText>
             </div>
-            <figure style={{ margin: 0 }}>
+            <figure style={{ margin: 0 }} data-reveal>
               <img src={img('backstory-closing-placeholder.png')} alt="[ Closing photo placeholder ]" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
               <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>[ Caption ]</figcaption>
             </figure>
