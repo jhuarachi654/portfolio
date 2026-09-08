@@ -49,9 +49,9 @@ function SubHeading({ children, tag }: { children: React.ReactNode; tag?: string
   return (
     <div data-reveal style={{ '--reveal-delay': '60ms' } as React.CSSProperties}>
       {tag && (
-        <p className="font-landing-body font-semibold tracking-[0.12em] uppercase text-[var(--color-cs-heading)]/50" style={{ fontSize: 13, marginBottom: 6 }}>{tag}</p>
+        <p className="cs-metric-label" style={{ margin: '0 0 6px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>{tag}</p>
       )}
-      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+      <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
         {children}
       </h3>
     </div>
@@ -186,7 +186,7 @@ function IterationExplorer() {
     <div className="cs-card-box" style={{ padding: 32, marginTop: 32 }}>
       <div>
         <p className="font-landing-body tracking-[0.12em] uppercase cs-caption-label" style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-secondary)', marginBottom: 6, marginTop: 0 }}>Graphic Exploration</p>
-        <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
+        <h3 className="text-[32px] text-[var(--color-cs-heading)] cs-lh-normal rm-subheading" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 500, lineHeight: 'normal', marginBottom: 8, marginTop: 0 }}>
           VP Anniversary Iterations
         </h3>
         <BodyText>I tested a few different directions for the Kamala Harris graphic before landing on the final version. I realized that every design choice sends a message, even the ones you do not think about. The photo selection told people whether this was a celebration or an announcement. The layout told them whether to feel inspired or just informed. I got the chance to look at the design through multiple perspectives.</BodyText>
@@ -297,6 +297,13 @@ export default function DNCPage() {
           </div>
 
           <div>
+            <SubHeading>What is the Democratic National Committee?</SubHeading>
+            <BodyText>
+              The Democratic National Committee coordinates the Democratic Party's communications, organizing, and campaign strategy. During the summer of 2023, it was running digital operations for the Biden-Harris administration, supporting policy initiatives, voter engagement, and campaign messaging at a national scale.
+            </BodyText>
+          </div>
+
+          <div style={{ marginTop: 108 }}>
             <SubHeading>Campaign graphics at the DNC</SubHeading>
             <BodyText>
               The Democratic National Committee runs the digital communications for the Democratic Party. During the summer of 2023, I joined as a Digital Design Intern on the Biden-Harris campaign, working with the communications and design team to produce graphics for social media, digital ads, and email.
