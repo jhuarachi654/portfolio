@@ -349,7 +349,7 @@ export default function DNCPage() {
           <div style={{ marginTop: 108 }}>
             <SubHeading>My Approach</SubHeading>
             <BodyText>
-              Requests came in daily, often with same-day turnarounds. The brand was mid-transition, and every graphic reached thousands of people nationally. That meant accuracy, brand consistency, and accessibility had to hold.
+              Requests came in daily, sometimes with same-day turnarounds. The brand was mid-transition, so every graphic had to honor both old and new guidelines. My approach centered on accuracy, brand consistency, and accessibility standards throughout.
             </BodyText>
 
             <div style={{ marginTop: 24 }}>
