@@ -348,7 +348,7 @@ export default function DNCPage() {
                     <img src={img('dnc-avatar-sam.jpg')} alt="Sam" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
                   </div>
                   <h4 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 'normal', margin: 0 }}>
-                    The Scrolling Voter
+                    Scrolling Voter
                   </h4>
                 </div>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
