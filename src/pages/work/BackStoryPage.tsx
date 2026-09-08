@@ -224,7 +224,7 @@ export default function BackStoryPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>AI Artists are more common than it seems</p>
+            <SubHeading>AI Artists are more common than it seems</SubHeading>
             <BodyText>
               A friend discovered a soul-blues artist through her father. She added songs, looked them up, and found nothing — no social media, no trace of a real person.
             </BodyText>
