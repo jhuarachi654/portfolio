@@ -338,13 +338,7 @@ export default function DNCPage() {
           <div>
             <SubHeading>Who I Designed For</SubHeading>
             <BodyText>
-              As I did my design requests, I kept two distinct perspective in mind while designing.
-            </BodyText>
-            <BodyText>
-              <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>First, the person scrolling Instagram on their phone.</strong> They were moving fast, so the message had to land in seconds. That meant clear typography, strong contrast, and no clutter.
-            </BodyText>
-            <BodyText>
-              <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Second, the internal stakeholders who had to approve the graphic.</strong> They needed assets fast and of high quality.
+              Every graphic had two audiences: the person encountering it in the wild, and the team approving it before it went out.
             </BodyText>
 
             <div className="dnc-persona-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginTop: 32 }}>
@@ -358,7 +352,7 @@ export default function DNCPage() {
                   </h4>
                 </div>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {['Understand the message fast', 'Read the text easily', 'Feel connected without overthinking'].map(n => (
+                  {['Grasp the message in under 3 seconds', 'Feel like the content is relevant to them', 'Trust the source at a glance'].map(n => (
                     <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                       <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
                       <span className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal' }}>{n}</span>
@@ -376,7 +370,7 @@ export default function DNCPage() {
                   </h4>
                 </div>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {['Trust the brand work is done', 'Have time to give real feedback', 'Get a design that is almost ready to go'].map(n => (
+                  {['Receive work that matches current brand guidelines', 'Give feedback without starting from scratch', 'Trust the designer to catch what they might miss'].map(n => (
                     <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                       <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
                       <span className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal' }}>{n}</span>
