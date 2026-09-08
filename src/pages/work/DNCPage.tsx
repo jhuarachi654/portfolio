@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
-import { MapPin, Gear, Asterisk, Megaphone, CaretLeft, CaretRight, Quotes } from '@phosphor-icons/react'
+import { MapPin, Gear, Asterisk, CaretLeft, CaretRight, Quotes } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -362,8 +362,6 @@ export default function DNCPage() {
           <div style={{ marginTop: 108 }}>
             <ChallengeBanner
               label="Mission"
-              icon={<Megaphone size="1em" weight="regular" />}
-              iconColor="#416BCC"
               question={<>How might we deliver campaign graphics that are <span style={{ color: '#416BCC' }}>on-brand</span>, <span style={{ color: '#416BCC' }}>accessible</span>, and <span style={{ color: '#416BCC' }}>compelling</span> — consistently and at speed?</>}
             />
           </div>
