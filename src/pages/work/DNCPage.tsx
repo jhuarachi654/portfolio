@@ -356,7 +356,6 @@ export default function DNCPage() {
               <div style={{ background: '#CCD6E9', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
                 <img src={img('balance.webp')} alt="Illustration of a figure labeled 'Balance' with red and blue coloring" style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }} />
               </div>
-              <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>This was my mentality throughout the design requests</p>
             </div>
           </div>
 
