@@ -12,7 +12,6 @@ import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
   { id: 'dnc-intro',            label: 'Introduction' },
-  { id: 'dnc-solution-preview', label: 'Solution Preview' },
   { id: 'dnc-context',          label: 'Context' },
   { id: 'dnc-vp',               label: 'VP Graphic' },
   { id: 'dnc-collection',       label: 'Collection' },
@@ -315,40 +314,10 @@ export default function DNCPage() {
           </div>
         </Section>
 
-        {/* ── 2. Solution Preview ── */}
-        <Section id="dnc-solution-preview">
-          <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Solution Preview</p>
-          </div>
-
-          <div className="dnc-solution-preview-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            {[
-              { file: 'Frame 27675.png', alt: 'Protect Reproductive Rights graphic' },
-              { file: 'Frame 27677.png', alt: 'Protect Affordable Health Care graphic' },
-              { file: 'Frame 27678.png', alt: 'Bidenomics 101 graphic' },
-              { file: 'dnc-vp-anniversary-graphic.png', alt: 'VP Kamala Harris anniversary graphic' },
-            ].map(({ file, alt }) => (
-              <img key={file} src={img(file)} alt={alt} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, border: '1px solid rgba(var(--color-navy-rgb),0.2)' }} />
-            ))}
-          </div>
-
-          <div style={{ marginTop: 32 }}>
-            <p className="font-sans font-semibold tracking-[0.12em] uppercase" style={{ fontSize: 12, marginBottom: 16, color: 'var(--color-cs-heading)', opacity: 0.5 }}>TL:DR</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
-              <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: 0 }}>
-                42 graphics. 4 months. Every one WCAG-compliant.
-              </h3>
-              <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
-                Campaign assets for the Biden-Harris campaign delivered under same-day deadlines, through a live brand transition, and to national Democratic Party channels.
-              </p>
-            </div>
-          </div>
-        </Section>
-
-        {/* ── 3. Context ── */}
+        {/* ── 2. Context ── */}
         <Section id="dnc-context">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Context</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>2. Context</p>
           </div>
 
           <div>
@@ -450,7 +419,7 @@ export default function DNCPage() {
         {/* ── 4. VP Graphic ── */}
         <Section id="dnc-vp">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. VP Graphic</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. VP Graphic</p>
           </div>
 
           <div className="dnc-brief-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
@@ -531,7 +500,7 @@ export default function DNCPage() {
         {/* ── 5. Collection ── */}
         <Section id="dnc-collection">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Collection</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>4. Collection</p>
           </div>
 
           <div style={{ marginTop: 32 }}>
@@ -552,7 +521,7 @@ export default function DNCPage() {
         {/* ── 6. Impact ── */}
         <Section id="dnc-impact">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Impact</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>5. Impact</p>
           </div>
 
           <div>
@@ -572,7 +541,7 @@ export default function DNCPage() {
         {/* ── 7. Reflection ── */}
         <Section id="dnc-reflection">
           <div style={{ marginBottom: 32 }}>
-            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>7. Reflection</p>
+            <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>6. Reflection</p>
           </div>
 
           <div className="dnc-reflection-grid" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
