@@ -210,19 +210,18 @@ export default function BackStoryPage() {
             <SkeletonImage src={img('backstory-solution-preview.jpeg')} alt="BackStory fact-check panel over a TikTok post, showing Community Notes and Professional verdict tabs" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
 
-          <div className="bs-what-is-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center' }}>
-            <div>
-              <SubHeading>What is Backstory?</SubHeading>
-              <BodyText>
-                Backstory is a conceptual TikTok-native feature that combats misinformation by giving viewers the full context behind a piece of content: community notes, verified third-party sources, and the ability to contribute their own voice, all without leaving the app.
-              </BodyText>
-            </div>
-            <div>
-              <SubHeading>My Role</SubHeading>
-              <BodyText>
-                As part of a four-person MDes capstone team at CCA, advised by IDEO, I contributed to early ideation and research before leading the design and development of the native pop-up screen. I iterated from lo-fi wireframes to hi-fi designs and a coded React prototype.
-              </BodyText>
-            </div>
+          <div>
+            <SubHeading>What is Backstory?</SubHeading>
+            <BodyText>
+              Backstory is a conceptual TikTok-native feature that combats misinformation by giving viewers the full context behind a piece of content: community notes, verified third-party sources, and the ability to contribute their own voice, all without leaving the app.
+            </BodyText>
+          </div>
+
+          <div style={{ marginTop: 64 }}>
+            <SubHeading>My Role</SubHeading>
+            <BodyText>
+              As part of a four-person MDes capstone team at CCA, advised by IDEO, I contributed to early ideation and research before leading the design and development of the native pop-up screen. I iterated from lo-fi wireframes to hi-fi designs and a coded React prototype.
+            </BodyText>
           </div>
 
           <div style={{ marginTop: 64 }} data-reveal>
