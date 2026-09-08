@@ -235,7 +235,7 @@ export default function BackStoryPage() {
             Social media is where Gen Z learns about the world — and where misinformation spreads faster than anyone can verify it. Checking a claim means leaving the app, opening a browser, and doing manual research. In a feed designed for frictionless scrolling, that friction is enough to stop most people from trying.
           </BodyText>
 
-          <figure style={{ margin: '32px 0 0' }} data-reveal>
+          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
             <SkeletonImage src={img('backstory-why-backstory.png')} alt="Hands scrolling on a phone" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
 
@@ -245,7 +245,7 @@ export default function BackStoryPage() {
               A large-scale international study across 66,000+ participants in 24 countries found that Gen Z showed greater susceptibility to misinformation than older age groups — despite growing up online. Their perceived ability to spot false claims did not match reality.
             </BodyText>
 
-            <figure style={{ margin: '24px 0 0' }} data-reveal>
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
               <SkeletonImage src={img('backstory-genz-tiktok-icon.png')} alt="Research shows that Gen Z specifically had greater susceptibility to misinformation, citing Kyrychenko et al., Personality and Individual Differences, 2025" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
