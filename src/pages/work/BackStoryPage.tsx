@@ -210,7 +210,7 @@ export default function BackStoryPage() {
             <SkeletonImage src={img('backstory-solution-preview.jpeg')} alt="BackStory fact-check panel over a TikTok post, showing Community Notes and Professional verdict tabs" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
 
-          <div className="bs-what-is-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
+          <div className="bs-what-is-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center' }}>
             <div>
               <SubHeading>What is Backstory?</SubHeading>
               <BodyText>
