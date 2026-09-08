@@ -4994,7 +4994,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   /* Exception: BackStory's Research findings — text + quote visual pair,
      keep side by side at tablet width instead of stacking. */
   .cs-page .bs-finding-grid[style*="grid-template-columns"] {
-    grid-template-columns: 1fr 1fr !important;
+    grid-template-columns: 1.5fr 1fr !important;
   }
 }
 

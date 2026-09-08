@@ -286,7 +286,7 @@ export default function BackStoryPage() {
             <SkeletonImage src={img('backstory-diary-study-board.png')} alt="Diary study compilation board of screenshotted social media posts with participant annotations" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
 
-          <div className="bs-finding-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center' }}>
+          <div className="bs-finding-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center' }}>
             <div>
               <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 01</p>
               <SubHeading>Gen Z mistakes a curated feed for a safe one.</SubHeading>
