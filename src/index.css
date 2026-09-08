@@ -4997,15 +4997,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
-/* DNC "What the team said" quote cards — same treatment as Expert.ai's. */
-@media (min-width: 768px) {
-  .cs-page .dnc-quotes-container {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
 /* SnapSplit Solution Preview media — same 80% treatment as the quote containers above. */
 @media (min-width: 768px) {
   .cs-page .ss-solution-preview-media {

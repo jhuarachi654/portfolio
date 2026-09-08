@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
-import { MapPin, Gear, Asterisk, Quotes } from '@phosphor-icons/react'
+import { MapPin, Gear, Asterisk } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -351,58 +351,6 @@ export default function DNCPage() {
 
           <div>
             <IterationExplorer />
-          </div>
-
-          <div style={{ marginTop: 108 }}>
-            <SubHeading>What the team said</SubHeading>
-            <BodyText>
-              One of my favorite parts about design is the iterative process and the discussions centered on layout, feeling, and more. Not everyone agreed on the same thing, but that is alright. Some wanted a different photo. Some wanted a cleaner layout. At the end of the day, they helped me consider aspects of the designs I hadn't thought about.
-            </BodyText>
-
-            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 32 }}>
-              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-              <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-                <strong className="text-[var(--color-cs-heading)]">Takeaway:</strong> I had to narrow in on the solution, so I focused on what made the most sense for the graphic and took that in with the iterations.
-              </p>
-            </div>
-
-            <div className="dnc-quotes-container" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {[
-                { role: 'Ad Strategist', avatar: img('dnc-quote-ad-strategist.avif'), quote: 'I still liked the other photo better. It felt more genuine.', align: 'left' },
-                { role: 'Graphic Designer', avatar: img('dnc-quote-graphic-designer.avif'), quote: 'The colors feel much more celebratory now.', align: 'right' },
-                { role: 'Design Director', avatar: img('dnc-quote-design-director.avif'), quote: 'Nice speed. Just send it over sooner so we have more breathing room.', align: 'left' },
-              ].map(({ role, avatar, quote, align }) => (
-                <div key={role} style={{ maxWidth: '80%', marginLeft: align === 'right' ? 'auto' : 0, border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: '12px 16px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid rgba(var(--color-navy-rgb),0.2)', overflow: 'hidden', flexShrink: 0 }}>
-                      <img src={avatar} alt={role} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                    </div>
-                    <span className="font-landing-body" style={{ fontSize: 13, color: 'var(--color-secondary)', opacity: 0.7 }}>{role}</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12 }}>
-                    <p className="font-landing-body" style={{ fontSize: 14, lineHeight: 'normal', color: '#222225', margin: 0 }}>{quote}</p>
-                    <span style={{ color: '#416BCC', flexShrink: 0, lineHeight: 'normal', display: 'flex', alignItems: 'flex-end' }}>
-                      <Quotes size={22} weight="fill" />
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ marginTop: 108 }}>
-            <SubHeading>The final solution</SubHeading>
-            <BodyText>
-              Here is the final Kamala Harris anniversary graphic that went out on Instagram.
-            </BodyText>
-            <BodyText>
-              The design used a warm, celebratory photo of the Vice President with bold typography. The colors came from the new brand guidelines, and the layout kept the focus on her accomplishments without feeling cluttered.
-            </BodyText>
-
-            <figure style={{ margin: '48px auto 0', width: '80%' }}>
-              <img src={img('dnc-iter-final.webp')} alt="Final Vice President Kamala Harris anniversary graphic, selected design passing WCAG AAA" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
-            </figure>
           </div>
         </Section>
 
