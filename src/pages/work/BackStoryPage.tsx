@@ -212,13 +212,13 @@ export default function BackStoryPage() {
             <div>
               <SubHeading>What is Backstory?</SubHeading>
               <BodyText>
-                Backstory is a TikTok-native feature that brings the full context of a piece of content directly into the feed. Rather than asking viewers to search elsewhere, it surfaces community notes and verified third-party sources in one place, so anyone can get the full picture without leaving the app.
+                Backstory is a conceptual TikTok-native feature that combats misinformation by giving viewers the full context behind a piece of content: community notes, verified third-party sources, and the ability to contribute their own voice, all without leaving the app.
               </BodyText>
             </div>
             <div>
               <SubHeading>My Role</SubHeading>
               <BodyText>
-                As part of a four-person team, I contributed to ideation and research, then led the design and development of the informative native pop-up screen, iterating from lo-fi wireframes through hi-fi design to a coded prototype in React. I also helped put together the cross-feature prototype with Figma Make and code.
+                As part of a four-person MDes capstone team at CCA, advised by IDEO, I contributed to early ideation and research before leading the design and development of the native pop-up screen. I iterated from lo-fi wireframes to hi-fi designs and a coded React prototype.
               </BodyText>
             </div>
           </div>
