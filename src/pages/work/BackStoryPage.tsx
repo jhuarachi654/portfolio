@@ -300,27 +300,31 @@ export default function BackStoryPage() {
             </figure>
           </div>
 
-          <div style={{ marginTop: 108 }}>
-            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 02</p>
-            <SubHeading>Awareness of misinformation doesn't change behavior.</SubHeading>
-            <BodyText>
-              Gen Z knows social media is untrustworthy. They stay anyway. FOMO and social connection consistently outweigh the discomfort of an unreliable platform.
-            </BodyText>
+          <div className="bs-finding-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center' }}>
+            <div>
+              <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 02</p>
+              <SubHeading>Awareness of misinformation doesn't change behavior.</SubHeading>
+              <BodyText>
+                Gen Z knows social media is untrustworthy. They stay anyway. FOMO and social connection consistently outweigh the discomfort of an unreliable platform.
+              </BodyText>
+            </div>
 
-            <figure style={{ margin: '24px 0 0', maxWidth: 400 }} data-reveal>
-              <SkeletonImage src={img('backstory-quote-kiki.png')} alt="Quote from Kiki, 24: I stay on social media since it's the easiest way to stay connected... I hate FOMO." style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
+            <figure style={{ margin: 0, width: '100%' }} data-reveal>
+              <SkeletonImage src={img('backstory-quote-kiki.png')} alt="Quote from Kiki, 24: I stay on social media since it's the easiest way to stay connected... I hate FOMO." style={{ width: '100%', height: 'auto', display: 'block', transform: 'scale(1.2)' }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
 
-          <div style={{ marginTop: 108 }}>
-            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 03</p>
-            <SubHeading>Crowdsourcing alone isn't enough.</SubHeading>
-            <BodyText>
-              Community notes were seen as useful but insufficient. Participants wanted a hybrid: the speed of crowd input paired with the credibility of professional fact-checkers.
-            </BodyText>
+          <div className="bs-finding-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center' }}>
+            <div>
+              <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 03</p>
+              <SubHeading>Crowdsourcing alone isn't enough.</SubHeading>
+              <BodyText>
+                Community notes were seen as useful but insufficient. Participants wanted a hybrid: the speed of crowd input paired with the credibility of professional fact-checkers.
+              </BodyText>
+            </div>
 
-            <figure style={{ margin: '24px 0 0', maxWidth: 400 }} data-reveal>
-              <SkeletonImage src={img('backstory-quote-daniel.png')} alt="Quote from Daniel, 27: Community Notes helps me clock something false pretty often. I do wish it had something more professional like how Wikipedia does it." style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
+            <figure style={{ margin: 0, width: '100%' }} data-reveal>
+              <SkeletonImage src={img('backstory-quote-daniel.png')} alt="Quote from Daniel, 27: Community Notes helps me clock something false pretty often. I do wish it had something more professional like how Wikipedia does it." style={{ width: '100%', height: 'auto', display: 'block', transform: 'scale(1.2)' }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
         </Section>
