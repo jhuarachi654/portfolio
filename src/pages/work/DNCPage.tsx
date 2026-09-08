@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { motion } from 'framer-motion'
 import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
-import { MapPin, Gear, Asterisk, CaretLeft, CaretRight, Quotes } from '@phosphor-icons/react'
+import { MapPin, Gear, Asterisk, Quotes } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
@@ -151,35 +150,7 @@ const iterationOptions = [
   { label: 'Final', image: 'dnc-iter-final.webp' },
 ]
 
-const CIRCLE_BTN: React.CSSProperties = { flexShrink: 0, width: 28, height: 28, borderRadius: '50%', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(22, 43, 85, 0.35)', color: '#ffffff', cursor: 'pointer', backdropFilter: 'blur(4px)' }
-
-function IterationImageCarousel({ src, alt, index, label, onPrev, onNext }: { src: string; alt: string; index: number; label: string; onPrev: () => void; onNext: () => void }) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <button onClick={onPrev} aria-label="Show previous" style={CIRCLE_BTN}><CaretLeft size={12} weight="bold" /></button>
-      <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
-        <motion.div
-          key={index}
-          initial={{ x: 24 }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}
-        >
-          <img src={src} alt={alt} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
-          <p className="font-landing-body cs-caption" style={{ marginTop: 12 }}>{label}</p>
-        </motion.div>
-      </div>
-      <button onClick={onNext} aria-label="Show next" style={CIRCLE_BTN}><CaretRight size={12} weight="bold" /></button>
-    </div>
-  )
-}
-
 function IterationExplorer() {
-  const [selected, setSelected] = useState(0)
-  const opt = iterationOptions[selected]
-  const total = iterationOptions.length
-  const prev = () => setSelected((selected - 1 + total) % total)
-  const next = () => setSelected((selected + 1) % total)
   return (
     <div className="cs-card-box" style={{ padding: 32, marginTop: 32 }}>
       <div>
@@ -197,7 +168,13 @@ function IterationExplorer() {
           </p>
         </div>
       </div>
-      <IterationImageCarousel src={img(opt.image)} alt={opt.label} index={selected} label={opt.label} onPrev={prev} onNext={next} />
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {iterationOptions.map(({ image, label }) => (
+          <div key={image} style={{ background: '#252525', aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
+            <img src={img(image)} alt={label} style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
