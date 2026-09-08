@@ -6,6 +6,7 @@ import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import CountUp from '../../components/case-study/CountUp'
 import PlayPauseButton from '../../components/PlayPauseButton'
+import SkeletonImage from '../../components/SkeletonImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -224,7 +225,7 @@ export default function SnapSplitPage() {
           </BodyText>
 
           <figure style={{ margin: '0 0 32px' }} data-reveal>
-            <img src={img('snapsplit-legacy-critique.jpg')} alt="Legacy design: the host manually splits and assigns each item to each person one by one" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+            <SkeletonImage src={img('snapsplit-legacy-critique.jpg')} alt="Legacy design: the host manually splits and assigns each item to each person one by one" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
               These are the initial designs of SnapSplit, with notes on accessibility and clarity.
             </figcaption>
@@ -291,7 +292,7 @@ export default function SnapSplitPage() {
             </BodyText>
 
             <figure style={{ margin: '32px 0 0' }} data-reveal>
-              <img src={img('snapsplit-bill-splitters.jpg')} alt="A group of young adults, the target users for SnapSplit" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+              <SkeletonImage src={img('snapsplit-bill-splitters.jpg')} alt="A group of young adults, the target users for SnapSplit" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
               <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Bill splitter(s)</figcaption>
             </figure>
           </div>
@@ -334,7 +335,7 @@ export default function SnapSplitPage() {
             </BodyText>
 
             <figure style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('snapsplit-objectives.jpg')} alt="How traits translate to objectives: Effortless, Distributed, Trustworthy" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+              <SkeletonImage src={img('snapsplit-objectives.jpg')} alt="How traits translate to objectives: Effortless, Distributed, Trustworthy" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
               <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>How the observed traits translated into design objectives</figcaption>
             </figure>
           </div>
@@ -358,7 +359,7 @@ export default function SnapSplitPage() {
           </Prose>
 
           <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
-            <img src={img('snapsplit-flow-fix.png')} alt="Bill Splitter flow: Receipt upload, Item review, Collaborative Group Assignment task, Payment and tracking" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+            <SkeletonImage src={img('snapsplit-flow-fix.png')} alt="Bill Splitter flow: Receipt upload, Item review, Collaborative Group Assignment task, Payment and tracking" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
               The new flow distributes the work across the group while keeping the process simple and visual.
             </figcaption>
@@ -463,7 +464,7 @@ export default function SnapSplitPage() {
               </BodyText>
             </div>
             <figure style={{ margin: 0 }} data-reveal>
-              <img src={img('snapsplit-team-meetings.png')} alt="Video call with the Billclub.io team" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('snapsplit-team-meetings.png')} alt="Video call with the Billclub.io team" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
               <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Team meetings</figcaption>
             </figure>
           </div>

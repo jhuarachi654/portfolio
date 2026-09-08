@@ -268,7 +268,7 @@ export default function FareFinderPage() {
           </BodyText>
 
           <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
-            <img src={img('figjam-ai-affinity-composite.png')} alt="FigJam AI use in Affinity Mapping" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <SkeletonImage src={img('figjam-ai-affinity-composite.png')} alt="FigJam AI use in Affinity Mapping" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
         </div>
 
@@ -279,11 +279,11 @@ export default function FareFinderPage() {
           </BodyText>
         </div>
         <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
-          <img src={img('competitive-analysis-tables.png')} alt="Competitive analysis tables across direct and indirect competitors" style={{ width: '100%', height: 'auto', display: 'block' }} />
+          <SkeletonImage src={img('competitive-analysis-tables.png')} alt="Competitive analysis tables across direct and indirect competitors" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
         </figure>
 
         <figure className="cs-fullwidth-figure" style={{ margin: '48px 0 0' }} data-reveal>
-          <img src={img('fare-finder-16-KkcukH.png')} alt="Fare Finder positioning" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
+          <SkeletonImage src={img('fare-finder-16-KkcukH.png')} alt="Fare Finder positioning" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto' }} wrapperStyle={{ display: 'block', width: '100%' }} />
         </figure>
 
         <KeyFinding
@@ -321,7 +321,7 @@ export default function FareFinderPage() {
             To help travelers make decisions without the pressure of fixed dates, we designed a <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>flexible toggle</strong> for the date selector. We iterated across <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>3 layouts</strong>, sketching in Figma, then using Claude with the current design system to prototype and bring to design critiques.
           </BodyText>
           <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-            <img src={img('iteration-1-flexible-dates.png')} alt="Flexible Dates iterations: Select Dates calendar, Flexible travel month selector, and Trip Duration options" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <SkeletonImage src={img('iteration-1-flexible-dates.png')} alt="Flexible Dates iterations: Select Dates calendar, Flexible travel month selector, and Trip Duration options" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
         </div>
 
@@ -331,7 +331,7 @@ export default function FareFinderPage() {
             To help travelers feel confident booking a fare, we designed the <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Quick Facts feature</strong>. We iterated on how it would integrate into the fare card, exploring content hierarchy, navigation, and button layout, using Figma Make to generate high-fidelity options to refine and critique.
           </BodyText>
           <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-            <img src={img('iteration-2-fare-card.png')} alt="Fare card and Quick Facts panel iterations across five layout variations" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <SkeletonImage src={img('iteration-2-fare-card.png')} alt="Fare card and Quick Facts panel iterations across five layout variations" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
         </div>
 
@@ -341,7 +341,7 @@ export default function FareFinderPage() {
             To give travelers control over their exploration, we designed <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>flexible map views</strong>. We iterated on how the card tray, filters, and recommendations could be shown or hidden, prioritizing scannability and agency at every step.
           </BodyText>
           <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-            <img src={img('iteration-3-map-views.png')} alt="Map view iterations showing the card tray, filters, and recommendations panel shown and hidden" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <SkeletonImage src={img('iteration-3-map-views.png')} alt="Map view iterations showing the card tray, filters, and recommendations panel shown and hidden" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
         </div>
 
@@ -418,7 +418,7 @@ export default function FareFinderPage() {
               {headline}
             </p>
             <div className="rm-solution-grid" style={{ display: 'grid', gridTemplateColumns: '2.6fr 1.4fr', gap: 8, alignItems: 'center' }} data-reveal>
-              <img src={image} alt={alt} className="rm-solution-laptop" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <SkeletonImage src={image} alt={alt} className="rm-solution-laptop" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
               <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 {body}
               </p>
@@ -438,14 +438,14 @@ export default function FareFinderPage() {
 
         <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
           <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, overflow: 'hidden' }}>
-            <img src={img('validation-travelers-tested.png')} alt="5 travelers tested across usability sessions" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <SkeletonImage src={img('validation-travelers-tested.png')} alt="5 travelers tested across usability sessions" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </div>
         </figure>
 
         <div style={{ marginTop: 108 }}>
         <SubHeading>Results</SubHeading>
         <div className="ff-validation-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', marginTop: 24 }} data-reveal>
-          <img src={img('stat-map-abandonment.png')} alt="45% Map Abandonment Decrease" className="ff-stat-card-image" style={{ width: 200, height: 'auto', display: 'block', borderRadius: 8, justifySelf: 'center', margin: '0 auto' }} />
+          <SkeletonImage src={img('stat-map-abandonment.png')} alt="45% Map Abandonment Decrease" className="ff-stat-card-image" style={{ width: 200, height: 'auto', display: 'block', borderRadius: 8, justifySelf: 'center', margin: '0 auto' }} wrapperStyle={{ display: 'block', width: 200, justifySelf: 'center', margin: '0 auto' }} />
           <div>
             <BodyText>
               Three months after handoff, Fare Finder went live. The redesigned map reduced drop-off at the point where travelers previously felt lost or overwhelmed.
@@ -515,7 +515,7 @@ export default function FareFinderPage() {
 
           <div className="rm-team-photo-wrap" data-reveal>
             <div className="rm-team-photo-card" style={{ background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.12)', padding: '12px 12px 10px' }}>
-              <img src={img('fare-finder-36-3yud6R.png')} alt="PROS UX Design team" style={{ display: 'block', width: 'auto', maxWidth: '100%', height: 'auto', maxHeight: '72vh', objectFit: 'contain' }} />
+              <SkeletonImage src={img('fare-finder-36-3yud6R.png')} alt="PROS UX Design team" style={{ display: 'block', width: 'auto', maxWidth: '100%', height: 'auto', maxHeight: '72vh', objectFit: 'contain' }} wrapperStyle={{ display: 'block', width: '100%' }} />
               <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', textAlign: 'center', lineHeight: 1.3, margin: '12px 0 0' }}>
                 UX Design Team Photo
               </p>

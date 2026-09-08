@@ -6,6 +6,7 @@ import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import HeroMedia from '../../components/case-study/HeroMedia'
 import LazyVideo from '../../components/LazyVideo'
+import SkeletonImage from '../../components/SkeletonImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -117,7 +118,7 @@ export default function ExpertAIPage() {
             </p>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('filter-documents-3d-mockup.png')} alt="Filter documents panel within the Expert.ai Corpus platform" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('filter-documents-3d-mockup.png')} alt="Filter documents panel within the Expert.ai Corpus platform" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: "block", width: "100%" }} />
             </figure>
           </div>
 
@@ -144,7 +145,7 @@ export default function ExpertAIPage() {
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
               <div style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8 }}>
-                <img src={img('document-archive.jpg')} alt="A crowded physical records archive with shelves of overflowing document folders" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <SkeletonImage src={img('document-archive.jpg')} alt="A crowded physical records archive with shelves of overflowing document folders" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} wrapperStyle={{ display: "block", width: "100%" }} />
               </div>
             </figure>
           </div>
@@ -170,7 +171,7 @@ export default function ExpertAIPage() {
             </p>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('users-could-not.png')} alt="Users could not see which filters were active, use drag-and-drop filters, or see their results while they worked" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('users-could-not.png')} alt="Users could not see which filters were active, use drag-and-drop filters, or see their results while they worked" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: "block", width: "100%" }} />
             </figure>
           </div>
 
@@ -182,7 +183,7 @@ export default function ExpertAIPage() {
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
               <div style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8 }}>
-                <img src={img('user-research-illustrations.png')} alt="Illustrations of overwhelmed enterprise users struggling with the filter interface" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <SkeletonImage src={img('user-research-illustrations.png')} alt="Illustrations of overwhelmed enterprise users struggling with the filter interface" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} wrapperStyle={{ display: "block", width: "100%" }} />
               </div>
             </figure>
           </div>
@@ -199,7 +200,7 @@ export default function ExpertAIPage() {
             </div>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('key-finding-1-popup-blocked.png')} alt="Filter documents popup overlaying the results, blocking the user's data" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('key-finding-1-popup-blocked.png')} alt="Filter documents popup overlaying the results, blocking the user's data" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: "block", width: "100%" }} />
             </figure>
           </div>
 
@@ -215,7 +216,7 @@ export default function ExpertAIPage() {
             </div>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('key-finding-2-high-friction.png')} alt="Cursor dragging a Geography entity toward the include panel in the filter documents interface" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('key-finding-2-high-friction.png')} alt="Cursor dragging a Geography entity toward the include panel in the filter documents interface" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: "block", width: "100%" }} />
             </figure>
           </div>
 
@@ -232,7 +233,7 @@ export default function ExpertAIPage() {
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
               <div style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8 }}>
-                <img src={img('key-finding-3-wcag-contrast.png')} alt="Accessibility Colour Contrast Checker showing the filter's red and green indicators both failing WCAG AA and AAA" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <SkeletonImage src={img('key-finding-3-wcag-contrast.png')} alt="Accessibility Colour Contrast Checker showing the filter's red and green indicators both failing WCAG AA and AAA" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} wrapperStyle={{ display: "block", width: "100%" }} />
               </div>
             </figure>
           </div>
@@ -252,7 +253,7 @@ export default function ExpertAIPage() {
             </BodyText>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('filter-documents-before-after.png')} alt="Filter documents interface comparing document inclusion and exclusion states" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('filter-documents-before-after.png')} alt="Filter documents interface comparing document inclusion and exclusion states" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: "block", width: "100%" }} />
             </figure>
           </div>
 
@@ -271,7 +272,7 @@ export default function ExpertAIPage() {
           <div style={{ marginTop: 32 }}>
             <SubHeading>Four Core Principles</SubHeading>
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('four-core-principles.png')} alt="Four core principles: Visible by Default, Click Not Drag, Accessible by Design, Built from Design System" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('four-core-principles.png')} alt="Four core principles: Visible by Default, Click Not Drag, Accessible by Design, Built from Design System" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: "block", width: "100%" }} />
             </figure>
           </div>
 
@@ -310,7 +311,7 @@ export default function ExpertAIPage() {
           <SubHeading>Measuring Impact</SubHeading>
 
           <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-            <img src={img('validation-users-tested.png')} alt="8 enterprise users tested across usability sessions and post-launch support ticket analysis" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            <SkeletonImage src={img('validation-users-tested.png')} alt="8 enterprise users tested across usability sessions and post-launch support ticket analysis" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: "block", width: "100%" }} />
           </figure>
 
           <div style={{ marginTop: 108 }}>
@@ -320,7 +321,7 @@ export default function ExpertAIPage() {
             </BodyText>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('validation-stats.png')} alt="30 seconds task time reduction, 42% fewer support tickets" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('validation-stats.png')} alt="30 seconds task time reduction, 42% fewer support tickets" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: "block", width: "100%" }} />
             </figure>
           </div>
 
@@ -351,7 +352,7 @@ export default function ExpertAIPage() {
 
           <div style={{ marginTop: 32 }}>
             <figure className="cs-fullwidth-figure" style={{ margin: 0 }} data-reveal>
-              <img src={img('presentation.webp')} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('presentation.webp')} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: "block", width: "100%" }} />
             </figure>
 
             <div style={{ marginTop: 32 }}>

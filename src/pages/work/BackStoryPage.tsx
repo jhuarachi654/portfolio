@@ -5,6 +5,7 @@ import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import StatCallout from '../../components/case-study/StatCallout'
 import PlayPauseButton from '../../components/PlayPauseButton'
+import SkeletonImage from '../../components/SkeletonImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 // Development/Solution/Testing/Learnings aren't written yet — keep the code below intact
@@ -205,7 +206,7 @@ export default function BackStoryPage() {
 
         <div className="max-w-[1080px] px-8 md:px-[42px]" style={{ marginBottom: 108 }}>
           <figure style={{ margin: '0 0 32px' }} data-reveal>
-            <img src={img('backstory-solution-preview.jpeg')} alt="BackStory fact-check panel over a TikTok post, showing Community Notes and Professional verdict tabs" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+            <SkeletonImage src={img('backstory-solution-preview.jpeg')} alt="BackStory fact-check panel over a TikTok post, showing Community Notes and Professional verdict tabs" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
 
           <div className="bs-what-is-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
@@ -233,7 +234,7 @@ export default function BackStoryPage() {
             </BodyText>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('backstory-ai-artist-discovery.png')} alt="Fictional AI-generated artist Eddie Dalton's analytics dashboard beside a Reddit post describing the discovery" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('backstory-ai-artist-discovery.png')} alt="Fictional AI-generated artist Eddie Dalton's analytics dashboard beside a Reddit post describing the discovery" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
         </div>
@@ -259,7 +260,7 @@ export default function BackStoryPage() {
           </div>
 
           <figure style={{ margin: '32px 0 0' }} data-reveal>
-            <img src={img('backstory-why-backstory.png')} alt="Hands scrolling on a phone" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+            <SkeletonImage src={img('backstory-why-backstory.png')} alt="Hands scrolling on a phone" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
               Everyday we scroll on social media and encounter misinformation whether we are aware of it or not
             </figcaption>
@@ -282,7 +283,7 @@ export default function BackStoryPage() {
           </BodyText>
 
           <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-            <img src={img('backstory-diary-study-board.png')} alt="Diary study compilation board of screenshotted social media posts with participant annotations" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            <SkeletonImage src={img('backstory-diary-study-board.png')} alt="Diary study compilation board of screenshotted social media posts with participant annotations" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
 
           <div style={{ marginTop: 108 }}>
@@ -293,7 +294,7 @@ export default function BackStoryPage() {
             </BodyText>
 
             <figure style={{ margin: '24px 0 0', maxWidth: 400 }} data-reveal>
-              <img src={img('backstory-quote-nate.png')} alt="Quote from Nate, 25: I couldn't really find any posts to add to the diary study. I feel like I spam-blocked people and made my feed more real." style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <SkeletonImage src={img('backstory-quote-nate.png')} alt="Quote from Nate, 25: I couldn't really find any posts to add to the diary study. I feel like I spam-blocked people and made my feed more real." style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
 
@@ -305,7 +306,7 @@ export default function BackStoryPage() {
             </BodyText>
 
             <figure style={{ margin: '24px 0 0', maxWidth: 400 }} data-reveal>
-              <img src={img('backstory-quote-kiki.png')} alt="Quote from Kiki, 24: I stay on social media since it's the easiest way to stay connected... I hate FOMO." style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <SkeletonImage src={img('backstory-quote-kiki.png')} alt="Quote from Kiki, 24: I stay on social media since it's the easiest way to stay connected... I hate FOMO." style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
 
@@ -317,7 +318,7 @@ export default function BackStoryPage() {
             </BodyText>
 
             <figure style={{ margin: '24px 0 0', maxWidth: 400 }} data-reveal>
-              <img src={img('backstory-quote-daniel.png')} alt="Quote from Daniel, 27: Community Notes helps me clock something false pretty often. I do wish it had something more professional like how Wikipedia does it." style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <SkeletonImage src={img('backstory-quote-daniel.png')} alt="Quote from Daniel, 27: Community Notes helps me clock something false pretty often. I do wish it had something more professional like how Wikipedia does it." style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
         </Section>
@@ -342,7 +343,7 @@ export default function BackStoryPage() {
           </div>
 
           <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
-            <img src={img('backstory-flow-placeholder.png')} alt="[ Flow diagram placeholder ]" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+            <SkeletonImage src={img('backstory-flow-placeholder.png')} alt="[ Flow diagram placeholder ]" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
               [ Caption describing the redesigned flow ]
             </figcaption>
@@ -428,7 +429,7 @@ export default function BackStoryPage() {
               </BodyText>
             </div>
             <figure style={{ margin: 0 }} data-reveal>
-              <img src={img('backstory-closing-placeholder.png')} alt="[ Closing photo placeholder ]" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('backstory-closing-placeholder.png')} alt="[ Closing photo placeholder ]" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
               <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>[ Caption ]</figcaption>
             </figure>
           </div>

@@ -7,6 +7,7 @@ import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import PlayPauseButton from '../../components/PlayPauseButton'
+import SkeletonImage from '../../components/SkeletonImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -114,7 +115,7 @@ function CollectionLightbox({ src, onClose }: { src: string; onClose: () => void
         onMouseEnter={() => document.body.classList.add('cursor-on-light-card')}
         onMouseLeave={() => document.body.classList.remove('cursor-on-light-card')}
         style={{ background: '#fff', padding: 'clamp(10px,2vw,18px)', paddingBottom: 'clamp(36px,6vw,60px)', boxShadow: '0 24px 80px rgba(0,0,0,0.55)', animation: 'lb-in 0.3s cubic-bezier(0.22,1,0.36,1) forwards', transform: 'rotate(-1.5deg)', maxWidth: 'min(85vw,640px)', cursor: 'default', position: 'relative' }}>
-        <img src={src} alt="" style={{ display: 'block', width: '100%', maxHeight: '65vh', objectFit: 'contain' }} />
+        <SkeletonImage src={src} alt="" style={{ display: 'block', width: '100%', maxHeight: '65vh', objectFit: 'contain' }} wrapperStyle={{ display: 'block', width: '100%' }} />
         <button onClick={close} style={{ position: 'absolute', top: -14, right: -14, width: 30, height: 30, borderRadius: '50%', border: 'none', background: 'rgba(0,0,0,0.55)', color: '#fff', fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
       </div>
     </div>
@@ -173,7 +174,7 @@ function IterationExplorer() {
               borderBottomRightRadius: i === iterationOptions.length - 1 ? 8 : 0,
             }}
           >
-            <img src={img(image)} alt={label} style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }} />
+            <SkeletonImage src={img(image)} alt={label} style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }} wrapperStyle={{ display: 'block', width: '100%', height: '100%' }} />
           </div>
         ))}
       </div>
@@ -287,7 +288,7 @@ export default function DNCPage() {
             </BodyText>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('branding-transition-collage.png')} alt="Biden-Harris 2024 campaign assets, including social graphics, donor call-to-action pages, bumper stickers, and buttons" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('branding-transition-collage.png')} alt="Biden-Harris 2024 campaign assets, including social graphics, donor call-to-action pages, bumper stickers, and buttons" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
 
@@ -321,7 +322,7 @@ export default function DNCPage() {
             </BodyText>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <img src={img('persona-cards-composite.png')} alt="Scrolling Voter and Brand Strategist persona cards" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('persona-cards-composite.png')} alt="Scrolling Voter and Brand Strategist persona cards" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
 
@@ -333,7 +334,7 @@ export default function DNCPage() {
 
             <div style={{ marginTop: 24 }}>
               <div style={{ background: '#CCD6E9', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
-                <img src={img('balance.webp')} alt="Illustration of a figure labeled 'Balance' with red and blue coloring" style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }} />
+                <SkeletonImage src={img('balance.webp')} alt="Illustration of a figure labeled 'Balance' with red and blue coloring" style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }} wrapperStyle={{ display: 'block', width: '100%', height: '100%' }} />
               </div>
             </div>
           </div>
@@ -403,10 +404,11 @@ export default function DNCPage() {
 
           <figure style={{ margin: '64px 0 0' }}>
             <div style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8 }}>
-              <img
+              <SkeletonImage
                 src={img('dnc-metro-commute.jpeg')}
                 alt="Washington DC Metro station platform"
                 style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
+                wrapperStyle={{ display: 'block', width: '100%', height: '100%' }}
               />
             </div>
             <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
