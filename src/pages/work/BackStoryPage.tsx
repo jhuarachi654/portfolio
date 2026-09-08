@@ -367,6 +367,7 @@ export default function BackStoryPage() {
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
               <CrossfadeImage
                 images={[
+                  { src: img('backstory-design-principles-0.png'), alt: 'Design Approach board, blank' },
                   { src: img('backstory-design-principles-1.png'), alt: 'Design principle: Platform-embedded' },
                   { src: img('backstory-design-principles-2.png'), alt: 'Design principle: Platform-embedded, Gen Z behavior-centric (short-form + post)' },
                   { src: img('backstory-design-principles-3.png'), alt: 'Design principle: Platform-embedded, Gen Z behavior-centric, Community consensus + fact-checking' },
