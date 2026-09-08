@@ -4901,12 +4901,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     grid-template-columns: 1fr 1fr !important;
   }
 
-  /* Exception: DNC "The Brief" content + visual pair — keep side by side
-     rather than stacking on tablet. */
-  .cs-page .dnc-brief-grid[style*="grid-template-columns"] {
-    grid-template-columns: 1fr 1fr !important;
-  }
-
   /* Exception: RM persona toggle, My Markets
      and AI Assistant explorers — keep these side by side rather than
      stacking on tablet. */

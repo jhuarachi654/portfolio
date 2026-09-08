@@ -349,25 +349,7 @@ export default function DNCPage() {
             <p className="cs-metric-label" style={{ margin: 0, textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>3. Development</p>
           </div>
 
-          <div className="dnc-brief-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
-            <div>
-              <SubHeading>Kamala Anniversary Graphic</SubHeading>
-              <BodyText>
-                Kamala Harris is someone who inspires me. When the Vice President was about to hit a milestone anniversary in office, the request came in last minute for an Instagram post.
-              </BodyText>
-              <BodyText>
-                I had worked on many graphics by this point, but this one stood out because of how many things I had to balance at once. The timeline was tight, but the stakes felt high. This was a memorable event, and a lot of people were going to see it.
-              </BodyText>
-              <BodyText>
-                Here is how the Kamala anniversary graphic came together.
-              </BodyText>
-            </div>
-            <div>
-              <img src={img('kamala-anniversary-photo.webp')} alt="Vice President Kamala Harris seated in front of American flags" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
-            </div>
-          </div>
-
-          <div style={{ marginTop: 108 }}>
+          <div>
             <IterationExplorer />
           </div>
 
