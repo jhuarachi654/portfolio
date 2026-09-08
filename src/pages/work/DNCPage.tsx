@@ -341,7 +341,7 @@ export default function DNCPage() {
               Every graphic had two audiences: the person encountering it in the wild, and the team approving it before it went out.
             </BodyText>
 
-            <div className="dnc-persona-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 284, marginTop: 32 }}>
+            <div className="dnc-persona-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 216, marginTop: 32 }}>
               <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
                   <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '1px solid rgba(var(--color-navy-rgb),0.15)' }}>
