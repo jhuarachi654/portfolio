@@ -373,14 +373,14 @@ export default function ExpertAIPage() {
       </div>
 
       <NextProject
-        title="SnapSplit"
-        to="/work/snapsplit"
-        tags={["Consumer", "Freelance"]}
-        description="A bill-splitting app for friend groups; rebranded and redesigned to cut the core task from 4 min to 30s."
-        video="/videos/SnapSplit-Video.webm"
-        poster="/videos/SnapSplit-Video-poster.png"
+        title="BackStory"
+        to="/work/backstory"
+        tags={["Consumer", "Misinformation", "Social Media"]}
+        description="Backstory, a TikTok-native feature to counter misinformation that gives users the full context behind a piece of content."
+        video="/videos/BackStory-Video.webm"
+        poster="/videos/BackStory-Video-poster.png"
         objectFit="cover"
-        bgColor="#8fd9c4"
+        bgColor="rgba(30,75,154,0.06)"
         category="consumer"
       />
 
