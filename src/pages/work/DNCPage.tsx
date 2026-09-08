@@ -348,15 +348,9 @@ export default function DNCPage() {
 
           <div className="dnc-challenge-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
             <div>
-              <SubHeading>The Challenge</SubHeading>
+              <SubHeading>My mindset</SubHeading>
               <BodyText>
-                Design requests came in daily basis. The brand was mid-transition, so I had to balance that while still delivering high quality work.
-              </BodyText>
-              <BodyText>
-                Every digital asset reached thousands or even millions of people, which meant real potential for impact. With my background in psychology, I wanted my designs to be inclusive, so I made sure everything met WCAG accessibility. Additionally, the review process with tight deadlines sometimes left me less than a day to finish a request.
-              </BodyText>
-              <BodyText>
-                The process was exciting yet I had to keep tabs on myself be considerate of the constraints.
+                Requests came in daily, often with same-day turnarounds. The brand was mid-transition, and every graphic reached thousands of people nationally. That meant accuracy, brand consistency, and accessibility had to hold.
               </BodyText>
             </div>
             <div>
