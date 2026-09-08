@@ -388,14 +388,14 @@ export default function DNCPage() {
             </BodyText>
           </div>
 
-          <div style={{ marginTop: 64 }}>
+          <div style={{ marginTop: 32 }}>
             <SubHeading>Fast pace, real growth.</SubHeading>
             <BodyText>
               Juggling multiple projects with real deadlines pushed me to get better at prioritization and time management in ways a classroom cannot replicate.
             </BodyText>
           </div>
 
-          <div style={{ marginTop: 64 }}>
+          <div style={{ marginTop: 32 }}>
             <BodyText>
               I am grateful to the Mobilization team for the concrete feedback, the design conversations, and for trusting me with accessibility from the start.
             </BodyText>
