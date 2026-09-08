@@ -346,14 +346,13 @@ export default function DNCPage() {
             </figure>
           </div>
 
-          <div className="dnc-challenge-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
-            <div>
-              <SubHeading>My mindset</SubHeading>
-              <BodyText>
-                Requests came in daily, often with same-day turnarounds. The brand was mid-transition, and every graphic reached thousands of people nationally. That meant accuracy, brand consistency, and accessibility had to hold.
-              </BodyText>
-            </div>
-            <div>
+          <div style={{ marginTop: 108 }}>
+            <SubHeading>My Approach</SubHeading>
+            <BodyText>
+              Requests came in daily, often with same-day turnarounds. The brand was mid-transition, and every graphic reached thousands of people nationally. That meant accuracy, brand consistency, and accessibility had to hold.
+            </BodyText>
+
+            <div style={{ marginTop: 24 }}>
               <div style={{ background: '#E0E0E0', borderRadius: 8, aspectRatio: '16/9', overflow: 'hidden', padding: 16, boxSizing: 'border-box' }}>
                 <img src={img('balance.webp')} alt="Illustration of a figure labeled 'Balance' with red and blue coloring" style={{ width: '100%', height: '100%', display: 'block', objectFit: 'contain' }} />
               </div>
