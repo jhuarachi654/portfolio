@@ -224,19 +224,6 @@ export default function BackStoryPage() {
             </div>
           </div>
 
-          <div style={{ marginTop: 108 }}>
-            <SubHeading>AI Artists are <span style={{ color: '#416BCC' }}>more common</span> than it seems</SubHeading>
-            <BodyText>
-              A friend discovered a soul-blues artist through her father. She added songs, looked them up, and found nothing. No social media, no trace of a real person. Eddie Dalton has 138,000 followers across Spotify, Apple Music, and SoundCloud. He is entirely AI-generated. <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>She felt deceived.</strong>
-            </BodyText>
-            <BodyText>
-              Stories like this became the <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>foundation of Backstory.</strong>
-            </BodyText>
-
-            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <SkeletonImage src={img('backstory-ai-artist-discovery.png')} alt="Fictional AI-generated artist Eddie Dalton's analytics dashboard beside a Reddit post describing the discovery" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
-            </figure>
-          </div>
         </div>
 
         {/* ── 1. Context ── */}
@@ -247,14 +234,6 @@ export default function BackStoryPage() {
           <BodyText>
             Social media is where Gen Z learns about the world — and where misinformation spreads faster than anyone can verify it. Checking a claim means leaving the app, opening a browser, and doing manual research. In a feed designed for frictionless scrolling, that friction is enough to stop most people from trying.
           </BodyText>
-
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-              At the beginning of the project, we needed to establish a baseline for how Gen Z was interacting with social media and how they approached misinformation when they encountered it.
-            </p>
-          </div>
 
           <figure style={{ margin: '32px 0 0' }} data-reveal>
             <SkeletonImage src={img('backstory-why-backstory.png')} alt="Hands scrolling on a phone" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
