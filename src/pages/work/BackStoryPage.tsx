@@ -296,7 +296,7 @@ export default function BackStoryPage() {
             </div>
 
             <figure style={{ margin: 0, width: '100%' }} data-reveal>
-              <SkeletonImage src={img('backstory-quote-nate.png')} alt="Quote from Nate, 25: I couldn't really find any posts to add to the diary study. I feel like I spam-blocked people and made my feed more real." style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
+              <SkeletonImage src={img('backstory-quote-nate.png')} alt="Quote from Nate, 25: I couldn't really find any posts to add to the diary study. I feel like I spam-blocked people and made my feed more real." style={{ width: '100%', height: 'auto', display: 'block', transform: 'scale(1.2)' }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
 
