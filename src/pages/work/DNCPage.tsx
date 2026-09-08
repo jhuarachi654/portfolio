@@ -304,6 +304,13 @@ export default function DNCPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
+            <SubHeading>My Role</SubHeading>
+            <BodyText>
+              I joined as a Digital Design Intern on the Mobilization team, an in-house design agency producing digital assets for both the Biden-Harris campaign and broader Democratic initiatives. I collaborated with Strategy, Communications, and Fundraising teams on social graphics, email modules, flyers, merchandise, and motion, adapting quickly as priorities shifted and requests came in daily.
+            </BodyText>
+          </div>
+
+          <div style={{ marginTop: 108 }}>
             <SubHeading>Campaign graphics at the DNC</SubHeading>
             <BodyText>
               The Democratic National Committee runs the digital communications for the Democratic Party. During the summer of 2023, I joined as a Digital Design Intern on the Biden-Harris campaign, working with the communications and design team to produce graphics for social media, digital ads, and email.
