@@ -382,14 +382,14 @@ export default function DNCPage() {
           </div>
 
           <div style={{ marginTop: 32 }}>
-            <SubHeading>Designing across teams takes adaptability.</SubHeading>
+            <SubHeading>Adaptability across every team.</SubHeading>
             <BodyText>
               Every team I worked with had different priorities and a different way of giving feedback. Learning to communicate across all of them made me a stronger collaborator and a more intentional designer.
             </BodyText>
           </div>
 
           <div style={{ marginTop: 64 }}>
-            <SubHeading>Fast-paced work teaches you how to manage yourself.</SubHeading>
+            <SubHeading>Fast pace, real growth.</SubHeading>
             <BodyText>
               Juggling multiple projects with real deadlines pushed me to get better at prioritization and time management in ways a classroom cannot replicate.
             </BodyText>
