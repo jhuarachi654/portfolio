@@ -503,7 +503,7 @@ export default function RevenueManagementPage() {
         mediaPadding={16}
         objectFit="contain"
         category="enterprise"
-        bgColor="#12213a"
+        bgColor="#003854"
       />
 
     </div>

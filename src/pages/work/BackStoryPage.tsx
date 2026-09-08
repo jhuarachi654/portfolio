@@ -438,6 +438,8 @@ export default function BackStoryPage() {
           to="/work/revenue-management"
           tags={["Enterprise", "AI", "Internship"]}
           description="Modernized UI and integrated AI features into an enterprise pricing and seat inventory platform for airline analysts."
+          lottie="/videos/Revenue-Management-Video.json"
+          mediaZoom={1.1}
           bgColor="#12213a"
         />
       )}
