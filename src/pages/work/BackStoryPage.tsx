@@ -224,23 +224,17 @@ export default function BackStoryPage() {
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <SubHeading>AI Artists are more common than it seems</SubHeading>
+            <SubHeading>AI Artists are <span style={{ color: '#416BCC' }}>more common</span> than it seems</SubHeading>
             <BodyText>
-              A friend discovered a soul-blues artist through her father. She added songs, looked them up, and found nothing. No social media, no trace of a real person.
+              A friend discovered a soul-blues artist through her father. She added songs, looked them up, and found nothing. No social media, no trace of a real person. Eddie Dalton has 138,000 followers across Spotify, Apple Music, and SoundCloud. He is entirely AI-generated. <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>She felt deceived.</strong>
+            </BodyText>
+            <BodyText>
+              Stories like this became the <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>foundation of Backstory.</strong>
             </BodyText>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
               <img src={img('backstory-ai-artist-discovery.png')} alt="Fictional AI-generated artist Eddie Dalton's analytics dashboard beside a Reddit post describing the discovery" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
             </figure>
-
-            <div style={{ marginTop: 24 }}>
-              <BodyText>
-                Eddie Dalton has 138,000 followers across Spotify, Apple Music, and SoundCloud. He is entirely AI-generated. <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>She felt deceived.</strong>
-              </BodyText>
-              <BodyText>
-                Stories like this became the <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>foundation of Backstory.</strong>
-              </BodyText>
-            </div>
           </div>
         </div>
 
