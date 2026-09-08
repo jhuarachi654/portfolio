@@ -73,23 +73,23 @@ function StatBlock({ label, stat, statSecondary, description }: { label: string;
 // ─── Collection Gallery ───────────────────────────────────────────────────────
 
 const collectionItems = [
-  { file: 'dnc-collection-vp-anniversary.webp',      alt: 'VP Kamala Harris anniversary graphic',                   label: 'VP Anniversary' },
-  { file: 'dnc-collection-vp-anniversary-green.png', alt: 'VP Kamala Harris anniversary graphic, green background', label: 'VP Anniversary' },
-  { file: 'dnc-collection-vp-anniversary-navy.png',  alt: 'VP Kamala Harris anniversary graphic, navy background',  label: 'VP Anniversary' },
-  { file: 'dnc-collection-vp-anniversary-sky.png',   alt: 'VP Kamala Harris anniversary graphic, sky blue background', label: 'VP Anniversary' },
-  { file: 'dnc-collection-ban-weapons-1.webp',        alt: 'Ban Assault Weapons graphic',                            label: 'Ban Assault Weapons' },
-  { file: 'dnc-collection-ban-weapons-2.webp',        alt: 'Ban Assault Weapons repeating pattern graphic',          label: 'Ban Assault Weapons' },
-  { file: 'dnc-collection-ban-weapons-3.webp',        alt: 'Ban Assault Weapons repeating pattern graphic',          label: 'Ban Assault Weapons' },
-  { file: 'dnc-collection-ban-weapons-4.webp',        alt: 'Ban Assault Weapons graphic',                            label: 'Ban Assault Weapons' },
-  { file: 'dnc-collection-sweatshirt.webp',           alt: 'Biden 2024 sweatshirt',                                  label: 'Biden Sweatshirt' },
-  { file: 'dnc-collection-merch.webp',                alt: 'Biden 2024 merch collection',                            label: 'Merch Collection' },
-  { file: 'dnc-collection-reproductive-rights.webp',  alt: 'Protect Reproductive Rights and Abortion Access graphic', label: 'Reproductive Rights' },
   { file: 'dnc-collection-healthcare.webp',           alt: 'Protect Affordable Health Care graphic',                 label: 'Affordable Health Care' },
-  { file: 'dnc-collection-lgbtq-rights.webp',         alt: 'Protect and Advance LGBTQ+ Rights graphic',              label: 'LGBTQ+ Rights' },
-  { file: 'dnc-collection-bidenomics-101.webp',       alt: 'Bidenomics 101 graphic',                                 label: 'Bidenomics 101' },
-  { file: 'dnc-collection-jobs-thumbsup.webp',        alt: 'Biden jobs and economy achievements infographic',        label: 'Biden Achievements' },
+  { file: 'dnc-collection-vp-anniversary-navy.png',  alt: 'VP Kamala Harris anniversary graphic, navy background',  label: 'VP Anniversary' },
   { file: 'dnc-collection-jobs-waving.webp',          alt: 'Biden jobs and economy achievements infographic',        label: 'Biden Achievements' },
+  { file: 'dnc-collection-ban-weapons-2.webp',        alt: 'Ban Assault Weapons repeating pattern graphic',          label: 'Ban Assault Weapons' },
   { file: 'dnc-collection-training-academy.webp',     alt: 'Summer Training Academy Organizing to Victory graphic',  label: 'Summer Training Academy' },
+  { file: 'dnc-collection-vp-anniversary.webp',      alt: 'VP Kamala Harris anniversary graphic',                   label: 'VP Anniversary' },
+  { file: 'dnc-collection-bidenomics-101.webp',       alt: 'Bidenomics 101 graphic',                                 label: 'Bidenomics 101' },
+  { file: 'dnc-collection-sweatshirt.webp',           alt: 'Biden 2024 sweatshirt',                                  label: 'Biden Sweatshirt' },
+  { file: 'dnc-collection-ban-weapons-4.webp',        alt: 'Ban Assault Weapons graphic',                            label: 'Ban Assault Weapons' },
+  { file: 'dnc-collection-vp-anniversary-sky.png',   alt: 'VP Kamala Harris anniversary graphic, sky blue background', label: 'VP Anniversary' },
+  { file: 'dnc-collection-lgbtq-rights.webp',         alt: 'Protect and Advance LGBTQ+ Rights graphic',              label: 'LGBTQ+ Rights' },
+  { file: 'dnc-collection-merch.webp',                alt: 'Biden 2024 merch collection',                            label: 'Merch Collection' },
+  { file: 'dnc-collection-ban-weapons-1.webp',        alt: 'Ban Assault Weapons graphic',                            label: 'Ban Assault Weapons' },
+  { file: 'dnc-collection-jobs-thumbsup.webp',        alt: 'Biden jobs and economy achievements infographic',        label: 'Biden Achievements' },
+  { file: 'dnc-collection-vp-anniversary-green.png', alt: 'VP Kamala Harris anniversary graphic, green background', label: 'VP Anniversary' },
+  { file: 'dnc-collection-reproductive-rights.webp',  alt: 'Protect Reproductive Rights and Abortion Access graphic', label: 'Reproductive Rights' },
+  { file: 'dnc-collection-ban-weapons-3.webp',        alt: 'Ban Assault Weapons repeating pattern graphic',          label: 'Ban Assault Weapons' },
 ]
 
 function CollectionLightbox({ src, onClose }: { src: string; onClose: () => void }) {
