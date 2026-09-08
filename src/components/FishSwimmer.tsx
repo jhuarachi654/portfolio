@@ -23,9 +23,10 @@ function drawFilledFish(ctx: CanvasRenderingContext2D, wag: number, color: strin
 
   ctx.beginPath()
   ctx.moveTo(8, 0)
-  ctx.lineTo(-6, -8 + wag * 3)
-  ctx.lineTo(-2, 0)
-  ctx.lineTo(-6, 8 - wag * 3)
+  ctx.quadraticCurveTo(-2, -6 + wag * 2, -6, -8 + wag * 3)
+  ctx.quadraticCurveTo(0, -3, -2, 0)
+  ctx.quadraticCurveTo(0, 3, -6, 8 - wag * 3)
+  ctx.quadraticCurveTo(-2, 6 - wag * 2, 8, 0)
   ctx.closePath()
   ctx.fill()
 
@@ -55,9 +56,10 @@ function drawLineFish(ctx: CanvasRenderingContext2D, wag: number, color: string)
 
   ctx.beginPath()
   ctx.moveTo(8, 0)
-  ctx.lineTo(-6, -8 + wag * 3)
-  ctx.lineTo(-2, 0)
-  ctx.lineTo(-6, 8 - wag * 3)
+  ctx.quadraticCurveTo(-2, -6 + wag * 2, -6, -8 + wag * 3)
+  ctx.quadraticCurveTo(0, -3, -2, 0)
+  ctx.quadraticCurveTo(0, 3, -6, 8 - wag * 3)
+  ctx.quadraticCurveTo(-2, 6 - wag * 2, 8, 0)
   ctx.closePath()
   ctx.stroke()
 
