@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Users, Quotes } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
+import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import StatCallout from '../../components/case-study/StatCallout'
@@ -224,6 +225,21 @@ export default function BackStoryPage() {
             </div>
           </div>
 
+          <div style={{ marginTop: 64 }} data-reveal>
+            <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Impact</p>
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { stat: '170M', description: 'US users who could verify content without leaving TikTok' },
+                { stat: '1 in 2', description: 'Gen Z users who could close the gap between perceived and actual media literacy' },
+                { stat: '1st', description: 'native fact-checking feature designed for short-form video feeds' },
+              ].map(({ stat, description }, i) => (
+                <div key={description} data-reveal style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}>
+                  <CountUp stat={stat} style={{ fontFamily: 'var(--font-landing-heading)', fontSize: 32, lineHeight: 'normal', margin: '0 0 8px', fontWeight: 500, color: '#416BCC', display: 'block' }} />
+                  <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>{description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* ── 1. Context ── */}
@@ -253,7 +269,7 @@ export default function BackStoryPage() {
           <div className="rm-challenge-subheader-style" style={{ marginTop: 108 }}>
             <ChallengeBanner
               label="Mission"
-              question={<>How might we make fact-checking as <span style={{ color: '#416BCC' }}>native</span> and <span style={{ color: '#416BCC' }}>effortless</span> as the scroll itself?</>}
+              question={<>How might we make fact-checking <span style={{ color: '#416BCC' }}>native</span> and <span style={{ color: '#416BCC' }}>effortless</span>?</>}
             />
           </div>
         </Section>
