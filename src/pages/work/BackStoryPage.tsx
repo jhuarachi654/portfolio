@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ChatCircleText, Users, Quotes } from '@phosphor-icons/react'
+import { Users, Quotes } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
@@ -250,11 +250,12 @@ export default function BackStoryPage() {
             </figure>
           </div>
 
-          <ChallengeBanner
-            icon={<ChatCircleText size="1em" weight="regular" />}
-            iconColor="#416BCC"
-            question={<>How might we help <strong><em>US-based Gen Z social media users</em></strong> quickly verify and label misinformation?</>}
-          />
+          <div className="rm-challenge-subheader-style" style={{ marginTop: 108 }}>
+            <ChallengeBanner
+              label="Mission"
+              question={<>How might we make fact-checking as <span style={{ color: '#416BCC' }}>native</span> and <span style={{ color: '#416BCC' }}>effortless</span> as the scroll itself?</>}
+            />
+          </div>
         </Section>
 
         {/* ── 2. Research ── */}
