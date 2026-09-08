@@ -245,10 +245,7 @@ export default function BackStoryPage() {
 
           <SubHeading>Why Backstory</SubHeading>
           <BodyText>
-            TikTok is where young people learn about the world. It is also where misinformation spreads faster than users can verify it, because checking a claim means leaving the app entirely.
-          </BodyText>
-          <BodyText>
-            For my MDes capstone at CCA, my team and I spent six months designing Backstory, a TikTok-native feature that brings the full context of a piece of content directly into the feed. Rather than asking users to do more work, we surfaced community notes and verified third-party sources in one place, so anyone could get the whole picture without ever leaving the app.
+            Social media is where Gen Z learns about the world — and where misinformation spreads faster than anyone can verify it. Checking a claim means leaving the app, opening a browser, and doing manual research. In a feed designed for frictionless scrolling, that friction is enough to stop most people from trying.
           </BodyText>
 
           <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
@@ -261,9 +258,6 @@ export default function BackStoryPage() {
 
           <figure style={{ margin: '32px 0 0' }} data-reveal>
             <SkeletonImage src={img('backstory-why-backstory.png')} alt="Hands scrolling on a phone" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
-            <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
-              Everyday we scroll on social media and encounter misinformation whether we are aware of it or not
-            </figcaption>
           </figure>
 
           <ChallengeBanner
