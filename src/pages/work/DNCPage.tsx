@@ -402,11 +402,13 @@ export default function DNCPage() {
           </div>
 
           <figure style={{ margin: '64px 0 0' }}>
-            <img
-              src={img('dnc-metro-commute.jpeg')}
-              alt="Washington DC Metro station platform"
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }}
-            />
+            <div style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8 }}>
+              <img
+                src={img('dnc-metro-commute.jpeg')}
+                alt="Washington DC Metro station platform"
+                style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
+              />
+            </div>
             <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
               Snippet of my morning commute! DC Metro is so cool
             </figcaption>
