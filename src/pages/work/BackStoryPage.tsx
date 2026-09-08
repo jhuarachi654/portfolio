@@ -226,7 +226,7 @@ export default function BackStoryPage() {
           <div style={{ marginTop: 108 }}>
             <SubHeading>AI Artists are more common than it seems</SubHeading>
             <BodyText>
-              A friend discovered a soul-blues artist through her father. She added songs, looked them up, and found nothing — no social media, no trace of a real person.
+              A friend discovered a soul-blues artist through her father. She added songs, looked them up, and found nothing. No social media, no trace of a real person.
             </BodyText>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
@@ -235,10 +235,10 @@ export default function BackStoryPage() {
 
             <div style={{ marginTop: 24 }}>
               <BodyText>
-                <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Eddie Dalton has 138,000 followers across Spotify, Apple Music, and SoundCloud. He is entirely AI-generated.</strong> She felt deceived.
+                Eddie Dalton has 138,000 followers across Spotify, Apple Music, and SoundCloud. He is entirely AI-generated. <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>She felt deceived.</strong>
               </BodyText>
               <BodyText>
-                Stories like this became the foundation of Backstory.
+                Stories like this became the <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>foundation of Backstory.</strong>
               </BodyText>
             </div>
           </div>
