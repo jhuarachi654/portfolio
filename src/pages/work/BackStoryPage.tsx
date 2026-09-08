@@ -361,7 +361,7 @@ export default function BackStoryPage() {
           <div style={{ marginTop: 108 }}>
             <SubHeading>Design Principles</SubHeading>
             <BodyText>
-              From the downselection, we established three principles: the feature had to be platform-embedded within TikTok, Gen Z behavior-centric in format and interaction, and grounded in community consensus and fact-checking for both speed and authority.
+              From the downselection, we established three principles: the feature had to be <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>platform-embedded within TikTok</strong>, <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>Gen Z behavior-centric</strong> in format and interaction, and grounded in <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>community consensus and fact-checking</strong> for both speed and authority.
             </BodyText>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
