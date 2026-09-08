@@ -185,8 +185,8 @@ export default function BackStoryPage() {
             </p>
             <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
-                { label: 'Role',     value: 'Interaction Designer' },
-                { label: 'Timeline', value: 'Jan – Jun 2026' },
+                { label: 'Role',     value: 'Interaction Designer, User Researcher, Prototyper' },
+                { label: 'Timeline', value: 'Jan – Aug 2026' },
                 { label: 'Team',     value: 'Johanna Huarachi, Kyle Samonte, Mai Kao, Mackenzie Hart\nAdvisors (IDEO)' },
                 { label: 'Skills',   value: 'Research, Prototyping, Interaction Design, Usability Testing, AI-Assisted Design' },
               ].map(({ label, value }) => (
