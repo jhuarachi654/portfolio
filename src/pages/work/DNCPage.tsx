@@ -314,7 +314,7 @@ export default function DNCPage() {
 
           <div style={{ marginTop: 64 }} data-reveal>
             <p className="cs-metric-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', fontWeight: 400, opacity: 0.7 }}>Impact</p>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3" style={{ gap: 32 }}>
               {[
                 { stat: '120K', description: 'total reach across 40 graphics' },
                 { stat: '12', description: 'rapid-turnaround requests delivered within hours' },
