@@ -364,12 +364,9 @@ export default function DNCPage() {
           </div>
 
           <div style={{ marginTop: 32 }}>
-            <SubHeading>42 graphics across 4 months</SubHeading>
+            <SubHeading>Selected Works</SubHeading>
             <BodyText>
-              The VP anniversary graphic was one project. Over the summer, I designed dozens more: policy announcements, campaign updates, voter engagement graphics, event content, and merch. Each one had to be on-brand, accessible, and ready for national distribution.
-            </BodyText>
-            <BodyText>
-              Below is a selection of the work.
+              Over four months, I designed policy announcements, campaign updates, voter engagement graphics, event content, and merchandise. Below is a selection of the work.
             </BodyText>
           </div>
 
