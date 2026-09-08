@@ -16,8 +16,8 @@ const SHOW_DRAFT = false
 const TOC = [
   { id: 'bs-intro',            label: 'Context' },
   { id: 'bs-research',         label: 'Research' },
+  { id: 'bs-development',      label: 'Ideation' },
   ...(SHOW_DRAFT ? [
-    { id: 'bs-development',      label: 'Development' },
     { id: 'bs-features',         label: 'Solution' },
     { id: 'bs-testing',          label: 'Testing' },
     { id: 'bs-reflection',       label: 'Learnings' },
@@ -328,33 +328,30 @@ export default function BackStoryPage() {
           </div>
         </Section>
 
-        {SHOW_DRAFT && <>
-        {/* ── 3. Development ── */}
+        {/* ── 3. Ideation ── */}
         <Section id="bs-development">
-          <ChapterHeading index={3} heading="Development" />
+          <ChapterHeading index={3} heading="Ideation" />
 
-          <SubHeading>[ Design vision / the direction you landed on ]</SubHeading>
-          <Prose>
-            <BodyText>
-              [ What the solution had to do differently, and why. Two to three sentences. ]
-            </BodyText>
-          </Prose>
+          <BodyText>
+            We brought diary study participants into a Miro co-creation workshop to brainstorm solutions together. Starting wide, we used two HMW questions as guide-rails, ran Crazy 8s fast-sketching, and dot-voted on the strongest concepts.
+          </BodyText>
 
-          <div style={{ marginTop: 32 }}>
-            <SubHeading>[ How you got there ]</SubHeading>
-            <BodyText>
-              [ Optional: approaches explored and why they were rejected, or how the direction was validated with the team. ]
-            </BodyText>
-          </div>
-
-          <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
-            <SkeletonImage src={img('backstory-flow-placeholder.png')} alt="[ Flow diagram placeholder ]" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
-            <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>
-              [ Caption describing the redesigned flow ]
-            </figcaption>
+          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+            <SkeletonImage src={img('backstory-cocreation-miro-board.png')} alt="Miro co-creation board: HMWs, Crazy 8s sketches from each team member, dot voting, and downselected concepts plotted on a 2x2 matrix" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
+
+          <div style={{ marginTop: 108 }}>
+            <BodyText>
+              To separate promising ideas from wish-list features, we plotted every concept on a Feasibility vs. Impact matrix.
+            </BodyText>
+
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <SkeletonImage src={img('backstory-2x2-matrix.png')} alt="Feasibility vs. Impact 2x2 matrix plotting concepts including Bread Crumbs, Profile Investigator, Quiz, Wiki for misinfo, and the Backstory button" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
+            </figure>
+          </div>
         </Section>
 
+        {SHOW_DRAFT && <>
         {/* ── 4. Solution ── */}
         <Section id="bs-features">
           <ChapterHeading index={4} heading="Solution" />
