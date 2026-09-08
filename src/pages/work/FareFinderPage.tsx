@@ -6,6 +6,7 @@ import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import HeroMedia from '../../components/case-study/HeroMedia'
 import LazyVideo from '../../components/LazyVideo'
+import SkeletonImage from '../../components/SkeletonImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -46,10 +47,11 @@ function PolaroidStack() {
           } as React.CSSProperties}
           onAnimationEnd={(e) => e.currentTarget.classList.add('rm-polaroid-scatter-card--settled')}
         >
-          <img
+          <SkeletonImage
             src={photo.src}
             alt={photo.caption}
             style={{ width: '100%', aspectRatio: '210 / 290', objectFit: 'cover', display: 'block' }}
+            wrapperStyle={{ display: 'block', width: '100%', aspectRatio: '210 / 290' }}
           />
           <p style={{
             fontFamily: 'var(--font-landing-body)',
@@ -129,7 +131,7 @@ function KeyFinding({
         <SubHeading>{headline[0]}<span style={{ color: '#416BCC' }}>{headline[1]}</span>{headline[2]}</SubHeading>
       </div>
       <div className="ff-finding-grid ff-finding-wrapper" style={{ width: '100%', maxWidth: 1220, margin: '0 auto' }} data-reveal>
-        <img className="ff-finding-image" src={image} alt={imageAlt} style={{ width: '70%', maxWidth: '100%', height: 'auto', display: 'block', margin: '0 auto' }} />
+        <SkeletonImage className="ff-finding-image" src={image} alt={imageAlt} style={{ width: '70%', maxWidth: '100%', height: 'auto', display: 'block', margin: '0 auto' }} wrapperStyle={{ display: 'block', width: '70%', margin: '0 auto' }} />
       </div>
     </div>
   )
@@ -199,7 +201,7 @@ export default function FareFinderPage() {
         </div>
 
         <div className="cs-fullwidth-figure" style={{ marginTop: 64 }} data-reveal>
-          <img src={img('pros-ff-hero.png')} alt="PROS Fare Finder Map interface showing the interactive flight map and destination details" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+          <SkeletonImage src={img('pros-ff-hero.png')} alt="PROS Fare Finder Map interface showing the interactive flight map and destination details" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
         </div>
 
         <div style={{ marginTop: 64 }}>
@@ -234,7 +236,7 @@ export default function FareFinderPage() {
             </BodyText>
           </Prose>
           <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
-            <img src={img('booking-maps-comparison.jpg')} alt="Booking solutions on the market" style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <SkeletonImage src={img('booking-maps-comparison.jpg')} alt="Booking solutions on the market" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
         </div>
 

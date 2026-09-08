@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ChatCircleText, Users, Quotes, Eye, UsersThree, Heart } from '@phosphor-icons/react'
+import { ChatCircleText, Users, Quotes } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
@@ -276,54 +276,49 @@ export default function BackStoryPage() {
         <Section id="bs-research">
           <ChapterHeading index={2} heading="Research" />
 
-          <SubHeading>What We Found</SubHeading>
+          <SubHeading>A Diary Study on Misinformation</SubHeading>
           <BodyText>
-            The goal was to uncover habitual patterns hidden in everyday social media use and establish a baseline for how Gen Z was actually encountering misinformation. To capture that in the moment, the team decided on a diary study where 4 participants logged misinformation encounters in real time as they scrolled, with up to 3 entries per day over 7 days. The following insights reflect the broader patterns we identified in how Gen Z encounters and responds to misinformation.
+            Rather than retrospective interviews, we tracked real-time encounters. Participants screenshotted suspicious or misleading posts from their normal social media use as they happened, then joined follow-up depth interviews. Three behavioral patterns emerged.
           </BodyText>
 
-          <div style={{ marginTop: 32 }}>
-            <div style={{ background: 'rgba(var(--color-navy-rgb),0.04)', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4" style={{ alignItems: 'start' }}>
-                {[
-                  { icon: <Eye size="1em" weight="light" />, title: 'Insight 1', body: 'Gen Z is not as good at spotting misinformation as they think. They curate their feeds to filter it out, but they still fall for posts that decontextualize rather than outright lie. The subtler the misinformation, the more effective it is.', offset: 0 },
-                  { icon: <UsersThree size="1em" weight="light" />, title: 'Insight 2', body: 'Despite knowing social media is disingenuous, Gen Z keeps engaging because the fear of social invisibility outweighs the burden of participating. They know the game is rigged but stay in it anyway.', offset: 28 },
-                  { icon: <Heart size="1em" weight="light" />, title: 'Insight 3', body: 'Misinformation works by making users feel something. Community notes and labeling strategies help, but only when backed by both community consensus and real fact-checking.', offset: 12 },
-                ].map(({ icon, title, body, offset }) => (
-                  <div key={title} style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24, background: 'var(--color-paper)', marginTop: offset }}>
-                    <p className="font-semibold text-[var(--color-cs-heading)] cs-serif-label" style={{ fontSize: 16, margin: '0 0 10px', lineHeight: 'normal', display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <span style={{ display: 'flex', alignItems: 'center', color: '#416BCC', fontSize: '1.2em' }}>{icon}</span>
-                      {title}
-                    </p>
-                    <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: '#222225', margin: 0 }}>{body}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+            <img src={img('backstory-diary-study-board.png')} alt="Diary study compilation board of screenshotted social media posts with participant annotations" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+          </figure>
 
-          <div style={{ marginTop: 32 }}>
-            <SubHeading>Where It Led Us</SubHeading>
-
-            <QuoteCards
-              quotes={[
-                { role: 'Maya, 22', avatar: '/images/expert-ai/legal-analyst.avif', quote: "Not necessarily misinfo, but apparently is an old vid. Thought it was fake at first, but then dug around in the comments and it seems like it's just an old video posted as if it just happened recently.", align: 'left' },
-                { role: 'Jordan, 20', avatar: '/images/expert-ai/government-analyst.avif', quote: "Here's a fake news reel my mom sent me. I was a bit surprised by the news and after some digging in the comment section/reading the account name again I realized it was fake.", align: 'right' },
-                { role: 'Devon, 24', avatar: '/images/expert-ai/data-analyst.avif', quote: 'Community Notes helped me clock something false pretty often. I do wish it had something more professional, like how Wikipedia does it.', align: 'left' },
-              ]}
-            />
-            <p className="font-landing-body cs-caption" style={{ marginTop: 12, marginBottom: 16 }}>
-              Excerpts from the diary study logs
-            </p>
-
+          <div style={{ marginTop: 108 }}>
+            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 01</p>
+            <SubHeading>Gen Z mistakes a curated feed for a safe one.</SubHeading>
             <BodyText>
-              What the diary study made clear was that the problem was not awareness. It was access. Gen Z needed a way to get context without ever leaving the platform they were already on. That realization shifted our question from something superficial about verification and fact-checking to something deeper: giving users a more holistic, well-rounded view of the content they were already consuming.
+              Participants actively blocked accounts and tapped "not interested" — and believed this had trained their algorithm to filter out misinformation. It hadn't.
             </BodyText>
+
+            <figure style={{ margin: '24px 0 0', maxWidth: 400 }} data-reveal>
+              <img src={img('backstory-quote-nate.png')} alt="Quote from Nate, 25: I couldn't really find any posts to add to the diary study. I feel like I spam-blocked people and made my feed more real." style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </figure>
           </div>
 
           <div style={{ marginTop: 108 }}>
-            <p className="font-landing-body cs-caption" style={{ textAlign: 'left', opacity: 1, color: 'var(--color-secondary)' }}>
-              Research is still in progress — the rest of this case study (development, solution, and testing) will be added as the capstone continues.
-            </p>
+            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 02</p>
+            <SubHeading>Awareness of misinformation doesn't change behavior.</SubHeading>
+            <BodyText>
+              Gen Z knows social media is untrustworthy. They stay anyway. FOMO and social connection consistently outweigh the discomfort of an unreliable platform.
+            </BodyText>
+
+            <figure style={{ margin: '24px 0 0', maxWidth: 400 }} data-reveal>
+              <img src={img('backstory-quote-kiki.png')} alt="Quote from Kiki, 24: I stay on social media since it's the easiest way to stay connected... I hate FOMO." style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </figure>
+          </div>
+
+          <div style={{ marginTop: 108 }}>
+            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 03</p>
+            <SubHeading>Crowdsourcing alone isn't enough.</SubHeading>
+            <BodyText>
+              Community notes were seen as useful but insufficient. Participants wanted a hybrid: the speed of crowd input paired with the credibility of professional fact-checkers.
+            </BodyText>
+
+            <figure style={{ margin: '24px 0 0', maxWidth: 400 }} data-reveal>
+              <img src={img('backstory-quote-daniel.png')} alt="Quote from Daniel, 27: Community Notes helps me clock something false pretty often. I do wish it had something more professional like how Wikipedia does it." style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </figure>
           </div>
         </Section>
 

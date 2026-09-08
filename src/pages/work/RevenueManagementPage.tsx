@@ -7,6 +7,7 @@ import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import PlayPauseButton from '../../components/PlayPauseButton'
+import SkeletonImage from '../../components/SkeletonImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 const TOC = [
@@ -85,10 +86,11 @@ function PolaroidStack() {
           } as React.CSSProperties}
           onAnimationEnd={(e) => e.currentTarget.classList.add('rm-polaroid-scatter-card--settled')}
         >
-          <img
+          <SkeletonImage
             src={photo.src}
             alt={photo.caption}
             style={{ width: '100%', aspectRatio: '210 / 290', objectFit: 'cover', display: 'block' }}
+            wrapperStyle={{ display: 'block', width: '100%', aspectRatio: '210 / 290' }}
           />
           <p style={{
             fontFamily: 'var(--font-landing-body)',
@@ -214,7 +216,7 @@ export default function RevenueManagementPage() {
         </div>
 
         <div className="cs-fullwidth-figure" style={{ marginTop: 64 }} data-reveal>
-          <img src="/images/revenue-management/pros-rm-hero.png" alt="PROS RM platform interface showing the My Markets dashboard and PROS AI assistant chat" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+          <SkeletonImage src="/images/revenue-management/pros-rm-hero.png" alt="PROS RM platform interface showing the My Markets dashboard and PROS AI assistant chat" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
         </div>
 
         <div style={{ marginTop: 64 }}>
@@ -249,7 +251,7 @@ export default function RevenueManagementPage() {
           </Prose>
 
           <figure className="rm-visual-80" style={{ margin: 0, width: '100%', marginLeft: 'auto', marginRight: 'auto' }} data-reveal>
-            <img src={img('why-now-covid-headline.png')} alt="Major US airlines to lay off thousands of workers as Covid-19 support expires" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+            <SkeletonImage src={img('why-now-covid-headline.png')} alt="Major US airlines to lay off thousands of workers as Covid-19 support expires" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </figure>
         </div>
 
@@ -290,7 +292,7 @@ export default function RevenueManagementPage() {
               {body}
             </p>
             {image && (
-              <img src={image} alt={alt} className="rm-visual-80" data-reveal style={{ width: '100%', height: 'auto', display: 'block', margin: '32px auto 0', ...(noCard ? {} : { border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }) }} />
+              <SkeletonImage src={image} alt={alt} className="rm-visual-80" style={{ width: '100%', height: 'auto', display: 'block', margin: '32px auto 0', ...(noCard ? {} : { border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }) }} wrapperStyle={{ display: 'block', width: '100%' }} />
             )}
           </div>
         ))}
@@ -303,8 +305,8 @@ export default function RevenueManagementPage() {
           </BodyText>
 
           <div className="grid grid-cols-2 rm-visual-80" data-reveal style={{ marginTop: 32, width: '100%', marginLeft: 'auto', marginRight: 'auto', gap: 64 }}>
-            <img src={img('method-user-interviews.png')} alt="User Interviews — Customer Support Specialist and Internal Research team" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
-            <img src={img('method-drop-off-trends.png')} alt="Drop-rate Trends — Half of analysts would leave the platform to access AI tools" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            <SkeletonImage src={img('method-user-interviews.png')} alt="User Interviews — Customer Support Specialist and Internal Research team" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
+            <SkeletonImage src={img('method-drop-off-trends.png')} alt="Drop-rate Trends — Half of analysts would leave the platform to access AI tools" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </div>
         </div>
 
@@ -321,7 +323,7 @@ export default function RevenueManagementPage() {
             Through user interviews, I confirmed that RM's user base had significantly shifted, now composed of roughly equal parts newer and senior analysts. I defined personas with their behaviors and needs clearly for the team, to show the two contrasting users and serve as a reference as we worked toward a solution that balanced both.
           </BodyText>
 
-          <img src={img('persona-cards-composite.png')} alt="Junior Analyst persona (Avery Chen) and Senior Analyst persona (Alex Reyes) cards" className="rm-visual-80" data-reveal style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} />
+          <SkeletonImage src={img('persona-cards-composite.png')} alt="Junior Analyst persona (Avery Chen) and Senior Analyst persona (Alex Reyes) cards" className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
         </div>
 
         <div style={{ marginTop: 108 }}>
@@ -332,7 +334,7 @@ export default function RevenueManagementPage() {
         </div>
 
         <figure className="cs-fullwidth-figure" style={{ margin: '48px 0 0' }} data-reveal>
-          <img src={img('revenue-management-14-3LKss2.png')} alt="Comparative look at how Junior and Senior Analysts move through the same platform" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', border: '1px solid #d1d1d1', borderRadius: 8 }} />
+          <SkeletonImage src={img('revenue-management-14-3LKss2.png')} alt="Comparative look at how Junior and Senior Analysts move through the same platform" style={{ width: '100%', height: 'auto', display: 'block', margin: '0 auto', border: '1px solid #d1d1d1', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
         </figure>
 
       </Section>
@@ -347,7 +349,7 @@ export default function RevenueManagementPage() {
           Over 4 weeks of weekly validation sessions with users and stakeholders, I iterated on 4 key areas based on ongoing feedback:
         </BodyText>
 
-        <img src={img('4-key-areas.png')} alt="Four key areas iterated on: Getting Started, Market Dashboard, AI Integration, and Market Analytics" className="rm-visual-80" data-reveal style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} />
+        <SkeletonImage src={img('4-key-areas.png')} alt="Four key areas iterated on: Getting Started, Market Dashboard, AI Integration, and Market Analytics" className="rm-visual-80" style={{ width: '100%', margin: '32px auto 0', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
 
         <div style={{ marginTop: 108 }}>
           <SubHeading>AI Integration Across the Market</SubHeading>
@@ -356,7 +358,7 @@ export default function RevenueManagementPage() {
           </BodyText>
           <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
             <div style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
-              <img src={img('ai-exploration.png')} alt="AI Competitive Analysis — dashboard integration, onboarding, and chat experiences across platforms" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <SkeletonImage src={img('ai-exploration.png')} alt="AI Competitive Analysis — dashboard integration, onboarding, and chat experiences across platforms" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </div>
           </figure>
         </div>
@@ -368,8 +370,8 @@ export default function RevenueManagementPage() {
           </BodyText>
 
           <div className="rm-visual-80" data-reveal style={{ width: '100%', margin: '32px auto 0' }}>
-            <img src={img('ai-role-full-side-left.png')} alt="Full Chat View and Side Chat View (Left) wireframe comparison" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }} />
-            <img src={img('ai-role-side-embedded.png')} alt="Side Chat View (Right) and Embedded AI Insights wireframe comparison" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, borderTopLeftRadius: 0, borderTopRightRadius: 0 }} />
+            <SkeletonImage src={img('ai-role-full-side-left.png')} alt="Full Chat View and Side Chat View (Left) wireframe comparison" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }} wrapperStyle={{ display: 'block', width: '100%' }} />
+            <SkeletonImage src={img('ai-role-side-embedded.png')} alt="Side Chat View (Right) and Embedded AI Insights wireframe comparison" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, borderTopLeftRadius: 0, borderTopRightRadius: 0 }} wrapperStyle={{ display: 'block', width: '100%' }} />
           </div>
         </div>
 
@@ -381,11 +383,11 @@ export default function RevenueManagementPage() {
 
           <div className="rm-visual-80" data-reveal style={{ width: '100%', margin: '32px auto 0', background: '#EFEFEF', borderRadius: 8, padding: 32 }}>
             <div style={{ display: 'flex', gap: 16 }}>
-              <img src={img('market-scan-list-view.png')} alt="My Markets list view with search, filters, and status-grouped rows" className="rm-market-scan-img" style={{ width: 'calc(50% - 8px)', minWidth: 0, flexShrink: 1, height: 'auto', display: 'block', borderRadius: 8 }} />
-              <img src={img('market-scan-card-grid-view.png')} alt="My Markets card grid view grouped by severity with Ask AI actions" className="rm-market-scan-img" style={{ width: 'calc(50% - 8px)', minWidth: 0, flexShrink: 1, height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('market-scan-list-view.png')} alt="My Markets list view with search, filters, and status-grouped rows" className="rm-market-scan-img" style={{ width: 'calc(50% - 8px)', minWidth: 0, flexShrink: 1, height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: 'calc(50% - 8px)', flexShrink: 1 }} />
+              <SkeletonImage src={img('market-scan-card-grid-view.png')} alt="My Markets card grid view grouped by severity with Ask AI actions" className="rm-market-scan-img" style={{ width: 'calc(50% - 8px)', minWidth: 0, flexShrink: 1, height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: 'calc(50% - 8px)', flexShrink: 1 }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}>
-              <img src={img('market-scan-detailed-view.png')} alt="My Markets onboarding checklist with detailed market cards" className="rm-market-scan-img" style={{ width: 'calc(50% - 8px)', minWidth: 0, height: 'auto', display: 'block', borderRadius: 8 }} />
+              <SkeletonImage src={img('market-scan-detailed-view.png')} alt="My Markets onboarding checklist with detailed market cards" className="rm-market-scan-img" style={{ width: 'calc(50% - 8px)', minWidth: 0, height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: 'calc(50% - 8px)' }} />
             </div>
           </div>
         </div>
@@ -434,7 +436,7 @@ export default function RevenueManagementPage() {
               {headline}
             </p>
             <div className="rm-solution-grid" style={{ display: 'grid', gridTemplateColumns: '2.6fr 1.4fr', gap: 8, alignItems: 'center' }}>
-              <img src={image} alt={alt} className="rm-solution-laptop" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <SkeletonImage src={image} alt={alt} className="rm-solution-laptop" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
               <p className="font-landing-body" style={{ fontSize: 16, lineHeight: 'normal', color: 'var(--color-secondary)', margin: 0 }}>
                 {body}
               </p>
@@ -453,7 +455,7 @@ export default function RevenueManagementPage() {
           </BodyText>
           <figure className="cs-fullwidth-figure" style={{ margin: '32px 0 0' }} data-reveal>
             <div style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(var(--color-navy-rgb),0.2)' }}>
-              <img src={img('design-system.png')} alt="PROS AI Chat design system components — market selector and tailored prompts across full and side chat panels" style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <SkeletonImage src={img('design-system.png')} alt="PROS AI Chat design system components — market selector and tailored prompts across full and side chat panels" style={{ width: '100%', height: 'auto', display: 'block' }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </div>
           </figure>
         </div>
@@ -479,7 +481,7 @@ export default function RevenueManagementPage() {
 
             <div className="rm-team-photo-wrap">
               <div className="rm-team-photo-card" style={{ background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.12)', padding: '12px 12px 10px' }}>
-                <img src={img('ux-houston-team.webp')} alt="PROS UX Design team" style={{ display: 'block', width: 'auto', maxWidth: '100%', height: 'auto', maxHeight: '72vh', objectFit: 'contain' }} />
+                <SkeletonImage src={img('ux-houston-team.webp')} alt="PROS UX Design team" style={{ display: 'block', width: 'auto', maxWidth: '100%', height: 'auto', maxHeight: '72vh', objectFit: 'contain' }} wrapperStyle={{ display: 'block', width: '100%' }} />
                 <p style={{ fontFamily: 'var(--font-landing-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-cs-heading)', textAlign: 'center', lineHeight: 1.3, margin: '12px 0 0' }}>
                   UX Design Team Photo
                 </p>
