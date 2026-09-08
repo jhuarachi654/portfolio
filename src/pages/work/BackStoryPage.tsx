@@ -13,7 +13,6 @@ const SHOW_DRAFT = false
 
 const TOC = [
   { id: 'bs-intro',            label: 'Context' },
-  { id: 'bs-solution-preview', label: 'Solution Preview' },
   { id: 'bs-research',         label: 'Research' },
   ...(SHOW_DRAFT ? [
     { id: 'bs-development',      label: 'Development' },
@@ -204,6 +203,27 @@ export default function BackStoryPage() {
 
       <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 32, display: 'flex', flexDirection: 'column', gap: 0 }}>
 
+        <div className="max-w-[1080px] px-8 md:px-[42px]" style={{ marginBottom: 108 }}>
+          <figure style={{ margin: '0 0 32px' }} data-reveal>
+            <img src={img('backstory-solution-preview.jpeg')} alt="BackStory fact-check panel over a TikTok post, showing Community Notes and Professional verdict tabs" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
+          </figure>
+
+          <div className="bs-what-is-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
+            <div>
+              <SubHeading>What is Backstory?</SubHeading>
+              <BodyText>
+                Backstory is a TikTok-native feature that brings the full context of a piece of content directly into the feed. Rather than asking viewers to search elsewhere, it surfaces community notes and verified third-party sources in one place, so anyone can get the full picture without leaving the app.
+              </BodyText>
+            </div>
+            <div>
+              <SubHeading>My Role</SubHeading>
+              <BodyText>
+                As part of a four-person team, I contributed to ideation and research, then led the design and development of the informative native pop-up screen, iterating from lo-fi wireframes through hi-fi design to a coded prototype in React. I also helped put together the cross-feature prototype with Figma Make and code.
+              </BodyText>
+            </div>
+          </div>
+        </div>
+
         {/* ── 1. Context ── */}
         <Section id="bs-intro">
           <ChapterHeading index={1} heading="Context" />
@@ -238,25 +258,9 @@ export default function BackStoryPage() {
           />
         </Section>
 
-        {/* ── 2. Solution Preview ── */}
-        <Section id="bs-solution-preview">
-          <ChapterHeading index={2} heading="Solution Preview" />
-
-          <figure style={{ margin: 0 }} data-reveal>
-            <img src={img('backstory-solution-preview.jpeg')} alt="BackStory fact-check panel over a TikTok post, showing Community Notes and Professional verdict tabs" style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8 }} />
-          </figure>
-
-          <div style={{ marginTop: 32 }}>
-            <SubHeading>Unravel the context, see the full picture.</SubHeading>
-            <BodyText>
-              Backstory is a contextual feature embedded directly in the TikTok feed. When a post raises questions, users can access community notes and verified third-party sources in one place, without ever switching tabs or leaving the app. The goal was to provide users a holistic perspective on a post.
-            </BodyText>
-          </div>
-        </Section>
-
-        {/* ── 3. Research ── */}
+        {/* ── 2. Research ── */}
         <Section id="bs-research">
-          <ChapterHeading index={3} heading="Research" />
+          <ChapterHeading index={2} heading="Research" />
 
           <SubHeading>What We Found</SubHeading>
           <BodyText>
@@ -312,7 +316,7 @@ export default function BackStoryPage() {
         {SHOW_DRAFT && <>
         {/* ── 3. Development ── */}
         <Section id="bs-development">
-          <ChapterHeading index={4} heading="Development" />
+          <ChapterHeading index={3} heading="Development" />
 
           <SubHeading>[ Design vision / the direction you landed on ]</SubHeading>
           <Prose>
@@ -338,7 +342,7 @@ export default function BackStoryPage() {
 
         {/* ── 4. Solution ── */}
         <Section id="bs-features">
-          <ChapterHeading index={5} heading="Solution" />
+          <ChapterHeading index={4} heading="Solution" />
 
           <FeatureBlock
             first
@@ -369,7 +373,7 @@ export default function BackStoryPage() {
 
         {/* ── 5. Testing ── */}
         <Section id="bs-testing">
-          <ChapterHeading index={6} heading="Testing" />
+          <ChapterHeading index={5} heading="Testing" />
 
           <SubHeading>Quantitative Results</SubHeading>
           <BodyText>
@@ -399,7 +403,7 @@ export default function BackStoryPage() {
 
         {/* ── 6. Learnings ── */}
         <Section id="bs-reflection">
-          <ChapterHeading index={7} heading="Learnings" />
+          <ChapterHeading index={6} heading="Learnings" />
 
           <div className="bs-takeaways-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
             <div>
