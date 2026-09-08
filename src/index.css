@@ -2120,6 +2120,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   z-index: 1;
 }
 
+/* Crossfades a card's Lottie animation in over its fallback image once the
+   Lottie JSON finishes loading, instead of an instant swap that flashes. */
+@keyframes csCardLottieFadeIn {
+  to { opacity: 1; }
+}
+
 .work-masonry-outer {
   position: relative;
   overflow: hidden;

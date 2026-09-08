@@ -290,15 +290,29 @@ export default function CaseStudyCard({
             // blank that whole time even though a freeze-frame was ready.
             style={{ objectFit, objectPosition, opacity: 1, transition: "opacity 0.3s ease", ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
           />
-        ) : lottie && lottieData ? (
-          <Lottie
-            lottieRef={lottieRef}
-            animationData={lottieData}
-            autoplay={false}
-            loop
-            rendererSettings={{ preserveAspectRatio: objectFit === "contain" ? "xMidYMid meet" : "xMidYMid slice" }}
-            style={{ width: "100%", height: "100%", position: "relative", zIndex: 1, ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
-          />
+        ) : lottie ? (
+          <>
+            {/* Kept mounted and cross-faded under the Lottie (instead of
+                unmounting the moment lottieData resolves) so the fallback
+                image doesn't hard-swap/flash into the animation. */}
+            <img
+              src={image}
+              alt={title}
+              style={{ objectFit, objectPosition, opacity: lottieData ? 0 : (isReady ? 1 : 0), transition: "opacity 0.3s ease", position: lottieData ? "absolute" : "relative", inset: 0 }}
+              className="case-study-card-image"
+              onLoad={handleImageLoad}
+            />
+            {lottieData && (
+              <Lottie
+                lottieRef={lottieRef}
+                animationData={lottieData}
+                autoplay={false}
+                loop
+                rendererSettings={{ preserveAspectRatio: objectFit === "contain" ? "xMidYMid meet" : "xMidYMid slice" }}
+                style={{ width: "100%", height: "100%", position: "relative", zIndex: 1, opacity: 0, animation: "csCardLottieFadeIn 0.3s ease forwards", ...(mediaScale ? { transform: `scale(${mediaScale})` } : {}) }}
+              />
+            )}
+          </>
         ) : (
           <img
             src={image}
