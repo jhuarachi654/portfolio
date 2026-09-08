@@ -4930,13 +4930,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     grid-template-columns: 1fr 1fr 1fr !important;
   }
 
-  /* Exception: two compact persona cards (avatar + short needs list) —
-     these are short enough to stay side by side at tablet width instead
-     of stacking into one long column. */
-  .cs-page .dnc-persona-grid[style*="grid-template-columns"] {
-    grid-template-columns: 1fr 1fr !important;
-  }
-
   /* Exception: Fare Finder Key Findings and other content + visual pairs —
      keep the screenshots side by side at every breakpoint instead of
      wrapping into a long single-column stack. */

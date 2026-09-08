@@ -341,44 +341,9 @@ export default function DNCPage() {
               Every graphic had two audiences: the person encountering it in the wild, and the team approving it before it went out.
             </BodyText>
 
-            <div className="dnc-persona-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 124, marginTop: 32 }}>
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '1px solid rgba(var(--color-navy-rgb),0.15)' }}>
-                    <img src={img('dnc-avatar-sam.jpg')} alt="Sam" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
-                  </div>
-                  <h4 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 'normal', margin: 0 }}>
-                    Scrolling Voter
-                  </h4>
-                </div>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {['Grasp the message in under 3 seconds', 'Feel like the content is relevant to them', 'Trust the source at a glance'].map(n => (
-                    <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                      <span className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal' }}>{n}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div style={{ border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, padding: 24 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '1px solid rgba(var(--color-navy-rgb),0.15)' }}>
-                    <img src={img('dnc-avatar-jordan.jpg')} alt="Jordan" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
-                  </div>
-                  <h4 className="font-bold cs-editorial text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontSize: 22, lineHeight: 'normal', margin: 0 }}>
-                    Brand Strategist
-                  </h4>
-                </div>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {['Receive work that matches current brand guidelines', 'Give feedback without starting from scratch', 'Trust the designer to catch what they might miss'].map(n => (
-                    <li key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                      <span style={{ color: '#416BCC', flexShrink: 0, display: 'flex', marginTop: 3 }}><Asterisk size={16} weight="bold" /></span>
-                      <span className="font-landing-body" style={{ fontSize: 16, color: '#222225', lineHeight: 'normal' }}>{n}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
+              <img src={img('persona-cards-composite.png')} alt="Scrolling Voter and Brand Strategist persona cards" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+            </figure>
           </div>
 
           <div className="dnc-challenge-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
