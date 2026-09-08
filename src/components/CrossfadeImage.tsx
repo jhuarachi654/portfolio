@@ -5,12 +5,16 @@ interface CrossfadeImageProps {
   className?: string
   style?: React.CSSProperties
   intervalMs?: number
+  aspectRatio?: string
 }
 
 // Loops through a list of images, crossfading between them — used where a
 // single figure needs to show a sequence (e.g. a board's before/after
-// state) without adding carousel controls.
-export default function CrossfadeImage({ images, className, style, intervalMs = 2600 }: CrossfadeImageProps) {
+// state) without adding carousel controls. The wrapper owns a fixed
+// aspect-ratio and every frame is absolutely positioned to fill it, so no
+// single image's intrinsic size drives layout — avoids a background flash
+// between frames if their dimensions differ even slightly.
+export default function CrossfadeImage({ images, className, style, intervalMs = 2600, aspectRatio = "16/9" }: CrossfadeImageProps) {
   const [active, setActive] = useState(0)
 
   useEffect(() => {
@@ -24,7 +28,7 @@ export default function CrossfadeImage({ images, className, style, intervalMs = 
   }, [images.length, intervalMs])
 
   return (
-    <div style={{ position: "relative", width: "100%", ...style }}>
+    <div style={{ position: "relative", width: "100%", aspectRatio, borderRadius: 8, overflow: "hidden", ...style }}>
       {images.map((img, i) => (
         <img
           key={img.src}
@@ -34,13 +38,12 @@ export default function CrossfadeImage({ images, className, style, intervalMs = 
           style={{
             display: "block",
             width: "100%",
-            height: "auto",
-            borderRadius: 8,
+            height: "100%",
+            objectFit: "cover",
             opacity: i === active ? 1 : 0,
             transition: "opacity 1s ease",
-            position: i === 0 ? "relative" : "absolute",
-            top: 0,
-            left: 0,
+            position: "absolute",
+            inset: 0,
           }}
         />
       ))}
