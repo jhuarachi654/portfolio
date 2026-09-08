@@ -321,21 +321,6 @@ export default function DNCPage() {
           </div>
 
           <div>
-            <SubHeading>The journey of a design ticket request</SubHeading>
-            <BodyText>
-              The workload at the DNC changed all the time. Some days a protest would break out and I had to drop everything to design something that same day. Other times I got assignments with a week or two of notice. My schedule never looked the same week to week, but I learned to adapt fast.
-            </BodyText>
-            <BodyText>
-              No matter the timeline, every request followed the same path. Here is how a typical ticket moved from brief to handoff.
-            </BodyText>
-
-            <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }}>
-              <img src={img('design-ticket-process.png')} alt="Flowchart of the design ticket process: request created by brand strategist and ads coordinator, then me as visual design intern, creates draft of design, live review with entire design team, revisions based on feedback, and verification and handoff" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
-              <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>Every graphic went through the same six steps: brief, draft, feedback, revisions, verification, and handoff. *Even in same-day design requests</figcaption>
-            </figure>
-          </div>
-
-          <div style={{ marginTop: 108 }}>
             <SubHeading>Who I Designed For</SubHeading>
             <BodyText>
               As I did my design requests, I kept two distinct perspective in mind while designing.
