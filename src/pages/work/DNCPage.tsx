@@ -264,10 +264,10 @@ export default function DNCPage() {
         <div className="cs-outer-wrap" style={{ paddingLeft: 32, paddingRight: 32 }}>
           <div className="max-w-[1080px] px-8 md:px-[42px] pt-14 pb-16">
             <h1 className="case-study-hero-reveal text-[44px] sm:text-[58px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, marginBottom: 12 }}>
-              Campaign Design
+              Branding and Digital Design for the Democratic National Committee
             </h1>
             <p className="case-study-hero-reveal font-landing-body text-[15px]" style={{ lineHeight: 'normal', color: 'var(--color-secondary)', marginBottom: 20 }}>
-              The Democratic National Committee runs the digital communications for the Democratic Party. As a Digital Design Intern, I worked with the communications and design team to produce graphics for the Biden-Harris campaign. Over 4 months, I produced 42 WCAG-compliant assets across social media, digital ads, and email.
+              Designing social graphics, digital ads, email modules, and merchandise for the Biden-Harris campaign and Democratic initiatives, while adapting to a live brand transition.
             </p>
             <div className="case-study-hero-reveal grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
