@@ -74,6 +74,9 @@ function StatBlock({ label, stat, statSecondary, description }: { label: string;
 
 const collectionItems = [
   { file: 'dnc-collection-vp-anniversary.webp',      alt: 'VP Kamala Harris anniversary graphic',                   label: 'VP Anniversary' },
+  { file: 'dnc-collection-vp-anniversary-green.png', alt: 'VP Kamala Harris anniversary graphic, green background', label: 'VP Anniversary' },
+  { file: 'dnc-collection-vp-anniversary-navy.png',  alt: 'VP Kamala Harris anniversary graphic, navy background',  label: 'VP Anniversary' },
+  { file: 'dnc-collection-vp-anniversary-sky.png',   alt: 'VP Kamala Harris anniversary graphic, sky blue background', label: 'VP Anniversary' },
   { file: 'dnc-collection-ban-weapons-1.webp',        alt: 'Ban Assault Weapons graphic',                            label: 'Ban Assault Weapons' },
   { file: 'dnc-collection-ban-weapons-2.webp',        alt: 'Ban Assault Weapons repeating pattern graphic',          label: 'Ban Assault Weapons' },
   { file: 'dnc-collection-ban-weapons-3.webp',        alt: 'Ban Assault Weapons repeating pattern graphic',          label: 'Ban Assault Weapons' },
