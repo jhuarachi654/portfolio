@@ -22,8 +22,8 @@ const TOC = [
   { id: 'bs-features',         label: 'Solution' },
   ...(SHOW_DRAFT ? [
     { id: 'bs-testing',          label: 'Testing' },
-    { id: 'bs-reflection',       label: 'Learnings' },
   ] : []),
+  { id: 'bs-reflection',       label: 'Learnings' },
 ]
 
 const img = (file: string) => `/images/backstory/${file}`
@@ -470,31 +470,42 @@ export default function BackStoryPage() {
             />
           </div>
         </Section>
+        </>}
 
-        {/* ── 6. Learnings ── */}
+        {/* ── 5. Learnings ── */}
         <Section id="bs-reflection">
-          <ChapterHeading index={6} heading="Learnings" />
+          <ChapterHeading index={5} heading="Learnings" />
 
-          <div className="bs-takeaways-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
-            <div>
-              <SubHeading>Takeaways</SubHeading>
-              <BodyText>
-                [ Takeaway 1: what the project taught you, tied to a specific moment or decision. ]
-              </BodyText>
-              <BodyText>
-                [ Takeaway 2: the hardest part, and how you worked through it. ]
-              </BodyText>
-              <BodyText>
-                [ Takeaway 3: closing reflection. ]
-              </BodyText>
-            </div>
-            <figure style={{ margin: 0 }} data-reveal>
-              <SkeletonImage src={img('backstory-closing-placeholder.png')} alt="[ Closing photo placeholder ]" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
-              <figcaption className="font-landing-body cs-caption" style={{ marginTop: 12 }}>[ Caption ]</figcaption>
+          <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>What's Next for Backstory</p>
+          <SubHeading>Validate, expand, and scale.</SubHeading>
+          <BodyText>
+            The next step is testing with a larger Gen Z cohort alongside third-party fact-checking networks to measure whether native tooltips outperform traditional warning banners. From there, we want to bring Backstory's framework to other short-form platforms through a browser extension or standalone solution.
+          </BodyText>
+
+          <div style={{ marginTop: 108 }}>
+            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Key Takeaway</p>
+            <SubHeading>Co-creation is slower, but it produces things people will actually use.</SubHeading>
+            <BodyText>
+              The hardest part wasn't the UI. It was shifting from punitive warnings to community-driven media literacy embedded directly in the scroll. Peer consensus paired with professional auditing matters just as much as the technology itself.
+            </BodyText>
+
+            <figure style={{ margin: '24px 0 0' }} data-reveal>
+              <SkeletonImage src={img('backstory-team-photo.jpeg')} alt="The Backstory MDes capstone team at CCA" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
+
+          <div style={{ marginTop: 108 }}>
+            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Learn More About Backstory</p>
+            <div style={{ position: 'relative', aspectRatio: '16/9', borderRadius: 8, overflow: 'hidden' }} data-reveal>
+              <iframe
+                src="https://drive.google.com/file/d/1NDqTIJLFHJWLLQf5TxiJQJYuna99EmV0/preview"
+                allow="autoplay"
+                allowFullScreen
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
+              />
+            </div>
+          </div>
         </Section>
-        </>}
 
       </div>
 
