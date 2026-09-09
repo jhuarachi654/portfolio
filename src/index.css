@@ -5026,6 +5026,11 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .cs-page .bs-feature-grid:first-of-type {
     margin-top: 64px !important;
   }
+  /* Shrink the phone mockups a bit more on mobile than the 90%
+     desktop/tablet size. */
+  .cs-page .bs-feature-grid .bs-feature-visual img {
+    max-width: 80% !important;
+  }
 }
 
 @media (min-width: 1200px) {
