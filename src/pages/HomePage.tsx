@@ -21,8 +21,8 @@ export default function HomePage() {
               <LineReveal
                 delayMs={620}
                 lines={[
-                  "Studied at CCA & Williams, and designed at DNC, PROS.",
-                  "Recently designed BackStory, a TikTok-native feature for fighting misinformation.",
+                  "Studied IxD at CCA & Psych/Neuro at Williams, and designed at DNC, PROS.",
+                  "Recently w/ IDEO designed BackStory, a TikTok-native feature for fighting misinformation.",
                 ]}
               />
             </p>

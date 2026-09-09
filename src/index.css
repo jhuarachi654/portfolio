@@ -1419,7 +1419,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 50%;
   overflow: hidden;
   will-change: transform;
 }

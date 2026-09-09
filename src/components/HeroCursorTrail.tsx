@@ -1,11 +1,22 @@
 import { useEffect, useRef } from "react"
 import GodRays from "./GodRays"
 
-// A trail of small circular "blobs," each filled with the same animated
-// GodRays canvas used for the "Johanna" name-fill (same color array), that
-// follow the cursor and fade out — scoped to the hero section only.
+// A trail of small organic "blobs," each filled with the same animated
+// GodRays canvas used for the "Johanna" name-fill and the site favicon
+// (same color array, same soft irregular flower-like outline instead of a
+// plain circle), that follow the cursor and fade out — scoped to the hero.
 const TRAIL_LENGTH = 10
 const BLOB_SIZE = 22
+
+// A handful of distinct blob outlines (as CSS border-radius shorthand,
+// which accepts 8 values for elliptical corners) so consecutive trail dots
+// don't all read as the same identical shape — echoes the favicon's soft,
+// asymmetric petal silhouette rather than a uniform circle.
+const BLOB_SHAPES = [
+  "62% 38% 55% 45% / 45% 55% 45% 55%",
+  "45% 55% 40% 60% / 55% 40% 62% 38%",
+  "58% 42% 62% 38% / 38% 58% 42% 62%",
+]
 
 export default function HeroCursorTrail() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -73,6 +84,7 @@ export default function HeroCursorTrail() {
             height: BLOB_SIZE,
             opacity: 1 - i / TRAIL_LENGTH,
             transform: `scale(${1 - i / (TRAIL_LENGTH * 1.4)})`,
+            borderRadius: BLOB_SHAPES[i % BLOB_SHAPES.length],
           }}
         >
           <GodRays
