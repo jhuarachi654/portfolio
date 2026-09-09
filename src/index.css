@@ -5005,7 +5005,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (max-width: 767px) {
   .cs-page .bs-feature-grid {
     width: 100% !important;
-    margin-top: 32px !important;
+    margin-top: 64px !important;
     gap: 8px !important;
     text-align: center;
   }
@@ -5022,8 +5022,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .cs-page .bs-feature-grid .bs-feature-visual {
     order: 2;
   }
-  /* First feature block sits right after the chapter intro copy — give
-     it a slightly larger gap than the 48px used between feature blocks. */
+  /* First feature block sits right after the chapter intro copy. */
   .cs-page .bs-feature-grid:first-of-type {
     margin-top: 64px !important;
   }
