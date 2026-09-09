@@ -79,6 +79,10 @@ function ChapterHeading({ index, heading }: { index: number; heading: string }) 
 function FeatureBlock({ index, label, body, userImpact, image, alt, first = false }: { index: number; label: string; body: string; userImpact?: string; image: string; alt: string; first?: boolean }) {
   return (
     <div className="bs-feature-grid" style={{ marginTop: first ? 0 : 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center' }}>
+      <figure style={{ margin: 0, width: '100%' }} data-reveal>
+        <SkeletonImage src={img(image)} alt={alt} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
+      </figure>
+
       <div>
         <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: '0 0 8px' }}>{label}</h3>
         <BodyText>{body}</BodyText>
@@ -94,10 +98,6 @@ function FeatureBlock({ index, label, body, userImpact, image, alt, first = fals
           </>
         )}
       </div>
-
-      <figure style={{ margin: 0, width: '100%' }} data-reveal>
-        <SkeletonImage src={img(image)} alt={alt} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
-      </figure>
     </div>
   )
 }
