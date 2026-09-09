@@ -1227,7 +1227,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     min-height: 40vh;
     justify-content: flex-start;
     padding-top: 292px;
-    padding-bottom: 176px;
+    padding-bottom: 48px;
   }
 }
 
