@@ -189,14 +189,14 @@ function HeroLottie() {
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const [playing, setPlaying] = useState(true)
 
+  // Fetched eagerly (not gated behind requestIdleCallback/setTimeout like
+  // off-screen Lottie animations elsewhere on this page) — this is the
+  // hero's own animation, needed immediately for it to appear and autoplay
+  // on load. Deferring it was making the hero visibly not autoplay, since
+  // the <Lottie> element (and the play button) didn't exist in the DOM
+  // until the idle-callback-gated fetch resolved.
   useEffect(() => {
-    const load = () => fetch('/videos/DNC-Video.json').then(r => r.json()).then(setData).catch(() => {})
-    if ('requestIdleCallback' in window) {
-      const id = window.requestIdleCallback(load)
-      return () => window.cancelIdleCallback(id)
-    }
-    const id = setTimeout(load, 0)
-    return () => clearTimeout(id)
+    fetch('/videos/DNC-Video.json').then(r => r.json()).then(setData).catch(() => {})
   }, [])
 
   const handleToggle = () => {
@@ -206,6 +206,7 @@ function HeroLottie() {
 
   return (
     <div className="w-full h-full overflow-hidden" style={{ position: 'relative' }}>
+      {!data && <div className="case-study-card-skeleton" style={{ position: 'absolute', inset: 0 }} />}
       {data && (
         <Lottie
           lottieRef={lottieRef}

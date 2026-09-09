@@ -136,6 +136,7 @@ function HeroLottie() {
 
   return (
     <div className="w-full h-full overflow-hidden" style={{ position: 'relative' }}>
+      {!data && <div className="case-study-card-skeleton" style={{ position: 'absolute', inset: 0 }} />}
       {data && (
         <Lottie
           lottieRef={lottieRef}

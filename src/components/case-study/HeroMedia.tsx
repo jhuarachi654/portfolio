@@ -24,12 +24,18 @@ export default function HeroMedia({
   padding = 16,
 }: HeroMediaProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [playing, setPlaying] = useState(true)
+  // Starts false rather than assuming autoplay succeeds — Safari (and other
+  // browsers under some conditions) can silently block the initial play(),
+  // which used to leave this stuck at true showing a "Pause" icon for a
+  // video that never actually started, so the button did nothing when
+  // clicked. onPlay/onPause below keep this in sync with real playback
+  // once it does start.
+  const [playing, setPlaying] = useState(false)
 
   const handleToggle = () => {
     const vid = videoRef.current
     if (!vid) return
-    if (playing) vid.pause()
+    if (!vid.paused) vid.pause()
     else vid.play().catch(() => {})
   }
 
