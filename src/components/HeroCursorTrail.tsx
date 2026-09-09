@@ -7,7 +7,7 @@ const TRAIL_LENGTH = 9
 const BLOB_SIZE = 22
 // Lower = looser, gentler trail (more visible gap between trailing dots,
 // softer/slower chase instead of snapping to the cursor).
-const FOLLOW_EASE = 0.16
+const FOLLOW_EASE = 0.11
 
 export default function HeroCursorTrail() {
   const containerRef = useRef<HTMLDivElement>(null)
