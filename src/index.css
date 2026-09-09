@@ -1460,6 +1460,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     inset: 0;
     z-index: 6;
     pointer-events: none;
+    perspective: 400px;
   }
 }
 
@@ -1539,10 +1540,16 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 .hero-favicon-sticker-ghost {
   position: absolute;
+  transform-style: preserve-3d;
   transform:
     translate(-50%, -50%)
-    scale(calc(1.3 + var(--peel-amount, 0) * 0.25))
-    rotate(calc(var(--peel-tilt, 0deg) * var(--peel-amount, 0) * 0.3));
+    scale(calc(1.15 + var(--peel-amount, 0) * 0.25))
+    rotate3d(
+      var(--fold-axis-x, 1),
+      var(--fold-axis-y, 0),
+      0,
+      calc(var(--peel-amount, 0) * 130deg)
+    );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1558,10 +1565,11 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   width: 30px;
   height: 30px;
   transform: translate(-50%, -50%);
-  border: 1.5px dashed rgba(var(--color-navy-rgb), 0.35);
+  border: 1.5px dashed rgba(var(--color-navy-rgb), calc(0.2 + var(--peel-amount, 0) * 0.3));
   border-radius: 50%;
   pointer-events: none;
   animation: heroFaviconSlotIn 200ms ease-out;
+  transition: border-color 60ms linear;
 }
 @keyframes heroFaviconSlotIn {
   0% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }

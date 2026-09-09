@@ -135,28 +135,41 @@ export default function HeroFaviconBurst() {
         <span className="hero-favicon-burst-label">peel sticker</span>
       </button>
 
-      {peelOrigin && (
-        <div className="hero-favicon-peel-slot" style={{ left: peelOrigin.x, top: peelOrigin.y }} aria-hidden="true" />
-      )}
-
-      {peelPoint && peelOrigin && (() => {
+      {peelOrigin && peelPoint && (() => {
         const dx = peelPoint.x - peelOrigin.x
         const dy = peelPoint.y - peelOrigin.y
-        const pulled = Math.min(Math.hypot(dx, dy) / 80, 1)
+        const pulled = Math.min(Math.hypot(dx, dy) / 70, 1)
         const angle = (Math.atan2(dy, dx) * 180) / Math.PI
+        // Fold axis is perpendicular to the pull direction, so the sticker
+        // curls up along the edge closest to peelOrigin (like lifting a
+        // real sticker corner) rather than spinning flat on the page.
+        const foldAxisX = -Math.sin((angle * Math.PI) / 180)
+        const foldAxisY = Math.cos((angle * Math.PI) / 180)
         return (
-          <div
-            className="hero-favicon-sticker-ghost"
-            aria-hidden="true"
-            style={{
-              left: peelPoint.x,
-              top: peelPoint.y,
-              "--peel-tilt": `${angle + 90}deg`,
-              "--peel-amount": pulled,
-            } as React.CSSProperties}
-          >
-            <img src="/favicon.svg" alt="" width="30" height="30" />
-          </div>
+          <>
+            <div
+              className="hero-favicon-peel-slot"
+              style={{
+                left: peelOrigin.x,
+                top: peelOrigin.y,
+                "--peel-amount": pulled,
+              } as React.CSSProperties}
+              aria-hidden="true"
+            />
+            <div
+              className="hero-favicon-sticker-ghost"
+              aria-hidden="true"
+              style={{
+                left: peelPoint.x,
+                top: peelPoint.y,
+                "--fold-axis-x": foldAxisX,
+                "--fold-axis-y": foldAxisY,
+                "--peel-amount": pulled,
+              } as React.CSSProperties}
+            >
+              <img src="/favicon.svg" alt="" width="30" height="30" />
+            </div>
+          </>
         )
       })()}
 
