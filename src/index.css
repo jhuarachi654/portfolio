@@ -1305,7 +1305,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   font-style: italic;
 }
 
-.hero-landing-credentials { position: relative; z-index: 4; font-family: var(--type-body-family); font-size: 15px; font-weight: 400; line-height: var(--type-body-line-height); color: var(--color-secondary); opacity: 1; margin-top: 14px; }
+.hero-landing-credentials { position: relative; z-index: 4; font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: #222225; opacity: 1; margin-top: 14px; }
 .hero-meta-gap {
   display: inline-flex;
   align-items: center;
