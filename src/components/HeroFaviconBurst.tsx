@@ -8,6 +8,9 @@ import { useRef, useState } from "react"
 // draggable afterward but nothing persists across reloads.
 const MAX_STICKERS = 3
 const BURST_COUNT = 16
+// Renders the dragged/placed icon this many px above the actual touch
+// point so a thumb/finger doesn't cover it while dragging on mobile.
+const TOUCH_LIFT = 56
 
 type Burst = { id: number; x: number; y: number; dx: number; dy: number; rotate: number; size: number }
 type Sticker = { id: number; x: number; y: number }
@@ -151,7 +154,7 @@ export default function HeroFaviconBurst() {
             aria-hidden="true"
             style={{
               left: peelPoint.x,
-              top: peelPoint.y,
+              top: peelPoint.y - TOUCH_LIFT,
               "--fold-axis-x": foldAxisX,
               "--fold-axis-y": foldAxisY,
               "--peel-amount": pulled,
@@ -167,11 +170,11 @@ export default function HeroFaviconBurst() {
           key={s.id}
           type="button"
           className={`hero-favicon-sticker${dragId === s.id ? " is-dragging" : ""}`}
-          style={{ left: s.x, top: s.y }}
+          style={{ left: s.x, top: s.y - (dragId === s.id ? TOUCH_LIFT : 0) }}
           onPointerDown={(e) => beginDrag(s.id, e)}
           aria-label="Drag to move sticker"
         >
-          <img src="/favicon.svg" alt="" width="36" height="36" draggable={false} />
+          <img src="/favicon.svg" alt="" width="52" height="52" draggable={false} />
         </button>
       ))}
 
