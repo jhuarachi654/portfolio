@@ -1212,7 +1212,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   height: 80vh;
   min-height: 480px;
   overflow: hidden;
-  background-color: rgba(var(--color-navy-rgb),0.06);
+  background-color: var(--color-paper);
   position: relative;
   z-index: 1;
   justify-content: center;
