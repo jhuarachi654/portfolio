@@ -1425,7 +1425,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   z-index: 5;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.45s ease;
 }
 .hero-cursor-trail-dot {
   position: absolute;
@@ -1434,14 +1434,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   overflow: visible;
   will-change: transform;
 }
-.hero-cursor-trail-blob {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: top left;
-  overflow: hidden;
-}
-
 @media (max-width: 1199px) {
   .hero-cursor-trail { display: none; }
 }
@@ -1535,7 +1527,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .hero-favicon-sticker-outline {
   /* Stacked drop-shadows in every direction fake a solid die-cut white
      border hugging the favicon's irregular silhouette (a plain CSS
-     border can't follow a non-rectangular shape). */
+     border can't follow a non-rectangular shape). No soft shadow layer
+     on mobile/tablet, where this whole feature lives. */
   filter:
     drop-shadow(1.5px 0 0 #fff)
     drop-shadow(-1.5px 0 0 #fff)
@@ -1544,8 +1537,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     drop-shadow(1.1px 1.1px 0 #fff)
     drop-shadow(-1.1px 1.1px 0 #fff)
     drop-shadow(1.1px -1.1px 0 #fff)
-    drop-shadow(-1.1px -1.1px 0 #fff)
-    drop-shadow(0 2px 4px rgba(20, 24, 60, 0.25));
+    drop-shadow(-1.1px -1.1px 0 #fff);
   animation: heroFaviconOutlineIn 260ms cubic-bezier(0.34, 1.56, 0.64, 1) 80ms both;
 }
 @keyframes heroFaviconOutlineIn {
@@ -1559,8 +1551,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
       drop-shadow(1.1px 1.1px 0 #fff)
       drop-shadow(-1.1px 1.1px 0 #fff)
       drop-shadow(1.1px -1.1px 0 #fff)
-      drop-shadow(-1.1px -1.1px 0 #fff)
-      drop-shadow(0 2px 4px rgba(20, 24, 60, 0.25));
+      drop-shadow(-1.1px -1.1px 0 #fff);
     transform: scale(1);
   }
 }
@@ -1587,7 +1578,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  filter: drop-shadow(0 8px 14px rgba(20, 24, 60, 0.35));
   transition: transform 60ms linear;
   z-index: 2;
 }
