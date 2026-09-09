@@ -155,7 +155,7 @@ export default function HeroFaviconBurst() {
               "--peel-amount": pulled,
             } as React.CSSProperties}
           >
-            <img src="/favicon.svg" alt="" width="26" height="26" />
+            <img src="/favicon.svg" alt="" width="30" height="30" />
           </div>
         )
       })()}
