@@ -384,37 +384,60 @@ export default function BackStoryPage() {
           </div>
         </Section>
 
-        {SHOW_DRAFT && <>
         {/* ── 4. Solution ── */}
         <Section id="bs-features">
           <ChapterHeading index={4} heading="Solution" />
 
+          <SubHeading>What's the backstory of this post?</SubHeading>
+          <BodyText>
+            Backstory is a native TikTok feature that verifies and reveals the context of a post in real time, without ever leaving the feed. While conceptualized as a universal framework for short-form video, we focused our prototype on TikTok, Gen Z's primary platform, to test native embedded interactions within an established mobile ecosystem.
+          </BodyText>
+
           <FeatureBlock
-            first
             index={1}
-            label="[ Feature name ]"
-            body="[ What this screen/feature does and why it matters. ]"
-            userImpact="[ The concrete effect on the user. ]"
-            image="backstory-feature-1-placeholder.png"
-            alt="[ Feature 1 placeholder ]"
+            label="The Tooltip"
+            body="Fact-checking surfaces directly in the feed after 20 to 30 seconds of engagement, never interrupting a casual scroll."
+            image="backstory-feature-tooltip.png"
+            alt="TikTok video with a BackStory tooltip appearing over the post"
           />
           <FeatureBlock
             index={2}
-            label="[ Feature name ]"
-            body="[ What this screen/feature does and why it matters. ]"
-            userImpact="[ The concrete effect on the user. ]"
-            image="backstory-feature-2-placeholder.png"
-            alt="[ Feature 2 placeholder ]"
+            label="Generated Consensus"
+            body="Backstory states what the community has confirmed, why it matters, and what to do next."
+            image="backstory-feature-consensus.png"
+            alt="BackStory panel summarizing community consensus, why it matters, and what to do"
           />
           <FeatureBlock
             index={3}
-            label="[ Feature name ]"
-            body="[ What this screen/feature does and why it matters. ]"
-            userImpact="[ The concrete effect on the user. ]"
-            image="backstory-feature-3-placeholder.png"
-            alt="[ Feature 3 placeholder ]"
+            label="Verified Voices"
+            body="Notes from credentialed contributors are surfaced instantly and labeled by expertise."
+            image="backstory-feature-verified-voices.png"
+            alt="BackStory community notes from verified contributors labeled with their credentials"
+          />
+          <FeatureBlock
+            index={4}
+            label="Third-Party Coverage"
+            body="Professional assessments from Snopes and Lead Stories are aggregated via Google API without leaving the app."
+            image="backstory-feature-third-party.png"
+            alt="BackStory verified sources tab showing Snopes and Lead Stories assessments"
+          />
+          <FeatureBlock
+            index={5}
+            label="Community Contribution"
+            body="Any user can add context, corrections, or credentials directly to the conversation."
+            image="backstory-feature-community.png"
+            alt="BackStory Add Your Voice form for submitting name, credential, and context"
+          />
+          <FeatureBlock
+            index={6}
+            label="Request a Backstory"
+            body="For posts with no existing fact-check, users can submit a request to start the process themselves."
+            image="backstory-feature-request.png"
+            alt="BackStory panel showing no context yet, with a Request a BackStory button"
           />
         </Section>
+
+        {SHOW_DRAFT && <>
 
         {/* ── 5. Testing ── */}
         <Section id="bs-testing">
