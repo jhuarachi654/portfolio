@@ -1209,33 +1209,33 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 /* ── Landing hero (restored old-portfolio look) ──────────────────── */
 .hero-page--landing {
-  height: 80vh;
-  min-height: 480px;
+  height: 60vh;
+  min-height: 400px;
   overflow: hidden;
   background-color: var(--color-paper);
   position: relative;
   z-index: 1;
   justify-content: flex-start;
-  padding: 260px var(--page-gutter) 200px;
+  padding: 160px var(--page-gutter) 100px;
   box-sizing: border-box;
 }
 
 @media (max-width: 1199px) {
   .hero-page--landing {
     height: auto;
-    min-height: 60vh;
+    min-height: 40vh;
     justify-content: flex-start;
-    padding-top: 140px;
-    padding-bottom: 64px;
+    padding-top: 100px;
+    padding-bottom: 48px;
   }
 }
 
 @media (max-width: 767px) {
   .hero-page--landing {
     height: auto;
-    min-height: 60vh;
-    padding-top: 160px;
-    padding-bottom: 128px;
+    min-height: 40vh;
+    padding-top: 120px;
+    padding-bottom: 64px;
   }
 }
 
@@ -1245,21 +1245,21 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 260px var(--page-gutter) 200px;
+  padding: 160px var(--page-gutter) 100px;
   box-sizing: border-box;
 }
 
 @media (max-width: 1199px) {
   .hero-landing-blend-group {
-    padding-top: 140px;
-    padding-bottom: 64px;
+    padding-top: 100px;
+    padding-bottom: 48px;
   }
 }
 
 @media (max-width: 767px) {
   .hero-landing-blend-group {
-    padding-top: 160px;
-    padding-bottom: 128px;
+    padding-top: 120px;
+    padding-bottom: 64px;
   }
 }
 
