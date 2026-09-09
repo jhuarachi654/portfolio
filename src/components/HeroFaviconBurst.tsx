@@ -83,8 +83,13 @@ export default function HeroFaviconBurst() {
       setPeelOrigin(p)
       setPeelPoint(p)
     } else {
+      // Stored sticker x/y is the floating (lifted) position already, so the
+      // offset is computed against that directly — keeps the icon anchored
+      // under the same point of the shape the finger originally grabbed,
+      // consistent with where it visually sits above the touch point.
       const s = stickers.find((s) => s.id === id)
-      dragOffset.current = { x: (s?.x ?? p.x) - p.x, y: (s?.y ?? p.y) - p.y }
+      const liftedP = { x: p.x, y: p.y - TOUCH_LIFT }
+      dragOffset.current = { x: (s?.x ?? liftedP.x) - liftedP.x, y: (s?.y ?? liftedP.y) - liftedP.y }
     }
     window.addEventListener("pointermove", onDragMove)
     window.addEventListener("pointerup", onDragEnd)
@@ -96,10 +101,11 @@ export default function HeroFaviconBurst() {
     if (dragging === "source") {
       setPeelPoint(p)
     } else if (dragging !== null) {
+      const liftedP = { x: p.x, y: p.y - TOUCH_LIFT }
       setStickers((prev) =>
         prev.map((s) =>
           s.id === dragging
-            ? { ...s, x: p.x + dragOffset.current.x, y: p.y + dragOffset.current.y }
+            ? { ...s, x: liftedP.x + dragOffset.current.x, y: liftedP.y + dragOffset.current.y }
             : s
         )
       )
@@ -115,15 +121,17 @@ export default function HeroFaviconBurst() {
     if (dragging === "source") {
       if (stickersRef.current.length < MAX_STICKERS) {
         const id = nextStickerId.current++
-        setStickers((prev) => [...prev, { id, x: p.x, y: p.y }])
-        spawnBurst(p.x, p.y)
+        const liftedP = { x: p.x, y: p.y - TOUCH_LIFT }
+        setStickers((prev) => [...prev, { id, x: liftedP.x, y: liftedP.y }])
+        spawnBurst(liftedP.x, liftedP.y)
       }
       setPopping(true)
       window.setTimeout(() => setPopping(false), 320)
       setPeelPoint(null)
       setPeelOrigin(null)
     } else if (dragging !== null) {
-      spawnBurst(p.x, p.y)
+      const s = stickersRef.current.find((s) => s.id === dragging)
+      if (s) spawnBurst(s.x, s.y)
     }
     setDragId(null)
   }
@@ -174,7 +182,7 @@ export default function HeroFaviconBurst() {
           key={s.id}
           type="button"
           className={`hero-favicon-sticker${dragId === s.id ? " is-dragging" : ""}`}
-          style={{ left: s.x, top: s.y - (dragId === s.id ? TOUCH_LIFT : 0) }}
+          style={{ left: s.x, top: s.y }}
           onPointerDown={(e) => beginDrag(s.id, e)}
           aria-label="Drag to move sticker"
         >
