@@ -95,7 +95,7 @@ function FeatureBlock({ index, label, body, userImpact, image, alt, first = fals
           </div>
         </>
       )}
-      <img src={img(image)} alt={alt} style={{ width: '100%', height: 'auto', display: 'block', border: '1px solid rgba(var(--color-navy-rgb),0.2)', borderRadius: 8, marginTop: 16 }} />
+      <img src={img(image)} alt={alt} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, marginTop: 16 }} />
     </div>
   )
 }
