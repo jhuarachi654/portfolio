@@ -13,7 +13,9 @@ export default function HomePage() {
             </p>
 
             <p className="hero-landing-credentials" data-reveal-hero style={{ "--hero-delay": "380ms" } as React.CSSProperties}>
-              studied at <span className="hero-landing-credential-tag">CCA</span> &amp; <span className="hero-landing-credential-tag">Williams</span> &amp; designed at <span className="hero-landing-credential-tag">DNC</span>, <span className="hero-landing-credential-tag">PROS</span>
+              Studied <span className="hero-landing-credential-tag">interaction design</span> at CCA and <span className="hero-landing-credential-tag">psychology &amp; neuroscience</span> at Williams, and designed at <span className="hero-landing-credential-tag">DNC</span> and <span className="hero-landing-credential-tag">PROS</span>
+              <br />
+              Recently designed <span className="hero-landing-credential-tag">BackStory</span>, a TikTok-native feature for fighting misinformation
             </p>
           </div>
         </div>
