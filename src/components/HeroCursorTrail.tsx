@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import GodRays from "./GodRays"
 
 // A trail of small "blobs," each filled with the same animated GodRays
@@ -6,7 +6,7 @@ import GodRays from "./GodRays"
 // silhouette (its real SVG path, not an approximation) — same shape the
 // browser tab icon uses, at trail-dot scale — that follow the cursor and
 // fade out. Scoped to the hero section only.
-const TRAIL_LENGTH = 10
+const TRAIL_LENGTH = 7
 const BLOB_SIZE = 22
 
 // The favicon's own path data (public/favicon.svg, viewBox 0 0 80 80) —
@@ -22,6 +22,48 @@ const FAVICON_PATH =
 const FAVICON_NATIVE_SIZE = 80
 const BLOB_SCALE = BLOB_SIZE / FAVICON_NATIVE_SIZE
 
+const BURST_COUNT = 6
+const BURST_SIZE = 26
+const BURST_RADIUS = 70
+const BURST_DURATION_MS = 650
+
+type Burst = { id: number; x: number; y: number }
+
+function BurstBlob({ angle }: { angle: number }) {
+  const dx = Math.cos(angle) * BURST_RADIUS
+  const dy = Math.sin(angle) * BURST_RADIUS
+  return (
+    <div
+      className="hero-cursor-burst-dot"
+      style={{
+        width: BURST_SIZE,
+        height: BURST_SIZE,
+        "--burst-dx": `${dx}px`,
+        "--burst-dy": `${dy}px`,
+        animationDuration: `${BURST_DURATION_MS}ms`,
+      } as React.CSSProperties}
+    >
+      <div
+        className="hero-cursor-trail-blob"
+        style={{
+          width: FAVICON_NATIVE_SIZE,
+          height: FAVICON_NATIVE_SIZE,
+          clipPath: `path("${FAVICON_PATH}")`,
+          WebkitClipPath: `path("${FAVICON_PATH}")`,
+          transform: `scale(${BURST_SIZE / FAVICON_NATIVE_SIZE})`,
+        }}
+      >
+        <GodRays
+          colors={["#476ED3", "#5379E8", "#5B82F5", "#6F8EF6", "#7CA2FF", "#95B9F8", "#829CF5", "#8CA3FA", "#B7BDF0", "#A9AAF7"]}
+          noiseScale={0.2}
+          noiseStrength={0.7}
+          blurAmount={4}
+        />
+      </div>
+    </div>
+  )
+}
+
 export default function HeroCursorTrail() {
   const containerRef = useRef<HTMLDivElement>(null)
   const dotsRef = useRef<HTMLDivElement[]>([])
@@ -30,6 +72,8 @@ export default function HeroCursorTrail() {
   )
   const target = useRef({ x: -999, y: -999 })
   const active = useRef(false)
+  const [bursts, setBursts] = useState<Burst[]>([])
+  const burstIdRef = useRef(0)
 
   useEffect(() => {
     const container = containerRef.current
@@ -47,18 +91,33 @@ export default function HeroCursorTrail() {
       active.current = false
       container.style.opacity = "0"
     }
+    const onClick = (e: MouseEvent) => {
+      const rect = heroEl.getBoundingClientRect()
+      const id = burstIdRef.current++
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      setBursts((prev) => [...prev, { id, x, y }])
+      window.setTimeout(() => {
+        setBursts((prev) => prev.filter((b) => b.id !== id))
+      }, BURST_DURATION_MS)
+    }
 
     heroEl.addEventListener("mousemove", onMove)
     heroEl.addEventListener("mouseleave", onLeave)
+    heroEl.addEventListener("click", onClick)
 
+    // Gentler, more spaced-out trail: a slower catch-up speed (each point
+    // eases toward the one ahead of it more gradually) and fewer, more
+    // widely spaced points overall so the trail reads as a loose scatter
+    // following the cursor rather than a tight, snappy line.
     let rafId = 0
     function tick() {
       const pts = positions.current
-      pts[0].x += (target.current.x - pts[0].x) * 0.35
-      pts[0].y += (target.current.y - pts[0].y) * 0.35
+      pts[0].x += (target.current.x - pts[0].x) * 0.16
+      pts[0].y += (target.current.y - pts[0].y) * 0.16
       for (let i = 1; i < pts.length; i++) {
-        pts[i].x += (pts[i - 1].x - pts[i].x) * 0.35
-        pts[i].y += (pts[i - 1].y - pts[i].y) * 0.35
+        pts[i].x += (pts[i - 1].x - pts[i].x) * 0.16
+        pts[i].y += (pts[i - 1].y - pts[i].y) * 0.16
       }
       dotsRef.current.forEach((el, i) => {
         if (!el) return
@@ -72,6 +131,7 @@ export default function HeroCursorTrail() {
     return () => {
       heroEl.removeEventListener("mousemove", onMove)
       heroEl.removeEventListener("mouseleave", onLeave)
+      heroEl.removeEventListener("click", onClick)
       cancelAnimationFrame(rafId)
     }
   }, [])
@@ -86,7 +146,7 @@ export default function HeroCursorTrail() {
           style={{
             width: BLOB_SIZE,
             height: BLOB_SIZE,
-            opacity: 1 - i / TRAIL_LENGTH,
+            opacity: (1 - i / TRAIL_LENGTH) * 0.6,
           }}
         >
           <div
@@ -106,6 +166,14 @@ export default function HeroCursorTrail() {
               blurAmount={4}
             />
           </div>
+        </div>
+      ))}
+
+      {bursts.map((b) => (
+        <div key={b.id} className="hero-cursor-burst" style={{ transform: `translate(${b.x}px, ${b.y}px)` }}>
+          {Array.from({ length: BURST_COUNT }, (_, i) => (
+            <BurstBlob key={i} angle={(i / BURST_COUNT) * Math.PI * 2} />
+          ))}
         </div>
       ))}
     </div>
