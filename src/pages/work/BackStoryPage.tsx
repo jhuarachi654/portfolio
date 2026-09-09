@@ -19,8 +19,8 @@ const TOC = [
   { id: 'bs-intro',            label: 'Context' },
   { id: 'bs-research',         label: 'Research' },
   { id: 'bs-development',      label: 'Ideation' },
+  { id: 'bs-features',         label: 'Solution' },
   ...(SHOW_DRAFT ? [
-    { id: 'bs-features',         label: 'Solution' },
     { id: 'bs-testing',          label: 'Testing' },
     { id: 'bs-reflection',       label: 'Learnings' },
   ] : []),
@@ -78,21 +78,23 @@ function ChapterHeading({ index, heading }: { index: number; heading: string }) 
 
 function FeatureBlock({ index, label, body, userImpact, image, alt, first = false }: { index: number; label: string; body: string; userImpact?: string; image: string; alt: string; first?: boolean }) {
   return (
-    <div style={{ marginTop: first ? 0 : 108 }}>
-      <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: '0 0 8px' }}>{label}</h3>
-      <BodyText>{body}</BodyText>
-      {userImpact && (
-        <>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
-          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-            <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
-            <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
-              <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>User Impact:</strong> {userImpact}
-            </p>
-          </div>
-        </>
-      )}
-      <img src={img(image)} alt={alt} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, marginTop: 16 }} />
+    <div className="bs-feature-grid" style={{ marginTop: first ? 0 : 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center' }}>
+      <img src={img(image)} alt={alt} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} />
+      <div>
+        <h3 className="text-[24px] text-[var(--color-cs-heading)] cs-lh-normal" style={{ fontFamily: 'var(--font-landing-heading)', fontWeight: 400, lineHeight: 'normal', margin: '0 0 8px' }}>{label}</h3>
+        <BodyText>{body}</BodyText>
+        {userImpact && (
+          <>
+            <hr style={{ border: 'none', borderTop: '1px solid rgba(var(--color-navy-rgb),0.15)', margin: '24px 0 16px' }} />
+            <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+              <span style={{ color: '#416BCC', fontSize: 18, lineHeight: 'normal', flexShrink: 0 }}>→</span>
+              <p className="font-landing-body" style={{ fontSize: 16, color: 'var(--color-secondary)', margin: 0, lineHeight: 'normal' }}>
+                <strong style={{ color: 'var(--color-cs-heading)', fontWeight: 700 }}>User Impact:</strong> {userImpact}
+              </p>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   )
 }
