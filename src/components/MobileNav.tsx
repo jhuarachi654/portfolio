@@ -123,7 +123,7 @@ export default function MobileNav() {
                 <EnvelopeSimple size={29} weight="regular" />
               </a>
               <a
-                href="https://v4.rxresu.me/jhuarachi654/johanna-s-huarachi-resume"
+                href="https://drive.google.com/file/d/1B7Z2qW2Hn8-53myyEnm_NpMKWdfzKW9D/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={close}
