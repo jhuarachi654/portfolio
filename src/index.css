@@ -5014,6 +5014,14 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     flex-direction: column;
     align-items: center;
   }
+  /* Text before visual on mobile, reversing the desktop/tablet visual-
+     then-text DOM order. */
+  .cs-page .bs-feature-grid .bs-feature-text {
+    order: 1;
+  }
+  .cs-page .bs-feature-grid .bs-feature-visual {
+    order: 2;
+  }
 }
 
 @media (min-width: 1200px) {
