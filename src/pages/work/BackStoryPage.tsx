@@ -481,7 +481,7 @@ export default function BackStoryPage() {
             The next step is testing with a larger Gen Z cohort alongside third-party fact-checking networks to measure whether native tooltips outperform traditional warning banners. From there, we want to bring Backstory's framework to other short-form platforms through a browser extension or standalone solution.
           </BodyText>
 
-          <div style={{ marginTop: 108 }}>
+          <div style={{ marginTop: 32 }}>
             <SubHeading>Co-creation is slower, but it produces things people will actually use.</SubHeading>
             <BodyText>
               The hardest part wasn't the UI. It was shifting from punitive warnings to community-driven media literacy embedded directly in the scroll. Peer consensus paired with professional auditing matters just as much as the technology itself.
