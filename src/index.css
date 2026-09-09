@@ -1497,6 +1497,15 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .hero-favicon-burst-trigger.is-popping {
   animation: heroFaviconPop 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+.hero-favicon-burst-trigger.is-tap-cancelled {
+  animation: heroFaviconTapCancelled 260ms ease;
+}
+@keyframes heroFaviconTapCancelled {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+}
 .hero-favicon-burst-icon {
   display: flex;
   align-items: center;

@@ -15,6 +15,10 @@ const TOUCH_LIFT = 56
 // placed stickers, so the favicon reads as the same object throughout
 // the peel-and-place interaction.
 const ICON_SIZE = 42
+// A press-and-release with less movement than this (px) reads as an
+// accidental tap rather than an intentional drag — no sticker is placed,
+// so a tap can't silently burn through the MAX_STICKERS budget.
+const MIN_DRAG_DISTANCE = 24
 
 type Burst = { id: number; x: number; y: number; dx: number; dy: number; rotate: number; size: number }
 type Sticker = { id: number; x: number; y: number }
@@ -48,6 +52,10 @@ export default function HeroFaviconBurst() {
   // toward the drag direction like a sticker peeling off a sheet.
   const [peelPoint, setPeelPoint] = useState<{ x: number; y: number } | null>(null)
   const [peelOrigin, setPeelOrigin] = useState<{ x: number; y: number } | null>(null)
+  // Briefly true right after a press-and-release that didn't move far
+  // enough to count as a real drag, so the trigger can play a "nope, try
+  // dragging" cue instead of silently doing nothing.
+  const [tapCancelled, setTapCancelled] = useState(false)
   const nextBurstId = useRef(0)
   const nextStickerId = useRef(0)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -59,6 +67,8 @@ export default function HeroFaviconBurst() {
   dragIdRef.current = dragId
   const stickersRef = useRef<Sticker[]>(stickers)
   stickersRef.current = stickers
+  const peelOriginRef = useRef<{ x: number; y: number } | null>(null)
+  peelOriginRef.current = peelOrigin
 
   const spawnBurst = (x: number, y: number) => {
     const fresh = makeBurst(nextBurstId, x, y)
@@ -119,14 +129,21 @@ export default function HeroFaviconBurst() {
     const dragging = dragIdRef.current
 
     if (dragging === "source") {
-      if (stickersRef.current.length < MAX_STICKERS) {
+      const origin = peelOriginRef.current
+      const dragDistance = origin ? Math.hypot(p.x - origin.x, p.y - origin.y) : 0
+      const isRealDrag = dragDistance >= MIN_DRAG_DISTANCE
+
+      if (isRealDrag && stickersRef.current.length < MAX_STICKERS) {
         const id = nextStickerId.current++
         const liftedP = { x: p.x, y: p.y - TOUCH_LIFT }
         setStickers((prev) => [...prev, { id, x: liftedP.x, y: liftedP.y }])
         spawnBurst(liftedP.x, liftedP.y)
+        setPopping(true)
+        window.setTimeout(() => setPopping(false), 320)
+      } else if (!isRealDrag) {
+        setTapCancelled(true)
+        window.setTimeout(() => setTapCancelled(false), 260)
       }
-      setPopping(true)
-      window.setTimeout(() => setPopping(false), 320)
       setPeelPoint(null)
       setPeelOrigin(null)
     } else if (dragging !== null) {
@@ -140,14 +157,16 @@ export default function HeroFaviconBurst() {
     <div ref={containerRef} className="hero-favicon-burst">
       <button
         type="button"
-        className={`hero-favicon-burst-trigger${popping ? " is-popping" : ""}${dragId === "source" ? " is-dragging" : ""}${stickers.length >= MAX_STICKERS ? " is-maxed" : ""}`}
+        className={`hero-favicon-burst-trigger${popping ? " is-popping" : ""}${dragId === "source" ? " is-dragging" : ""}${stickers.length >= MAX_STICKERS ? " is-maxed" : ""}${tapCancelled ? " is-tap-cancelled" : ""}`}
         onPointerDown={(e) => beginDrag("source", e)}
-        aria-label="Drag to peel off a favicon sticker"
+        aria-label="Hold and drag to peel off a favicon sticker"
       >
         <span className="hero-favicon-burst-icon">
           <img src="/favicon.svg" alt="" width={ICON_SIZE} height={ICON_SIZE} draggable={false} />
         </span>
-        <span className="hero-favicon-burst-label">peel sticker</span>
+        <span className="hero-favicon-burst-label">
+          {dragId === "source" ? "hold & drag" : "peel sticker"}
+        </span>
       </button>
 
       {peelOrigin && peelPoint && (() => {
