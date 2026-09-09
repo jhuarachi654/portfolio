@@ -359,7 +359,7 @@ export default function BackStoryPage() {
                 src={img('backstory-2x2-matrix.png')}
                 alt="Feasibility vs. Impact 2x2 matrix plotting concepts including Bread Crumbs, Profile Investigator, Quiz, Wiki for misinfo, and the Backstory button, which is circled as the selected concept"
                 focusX={80}
-                focusY={38}
+                focusY={28}
               />
             </figure>
           </div>
