@@ -106,7 +106,7 @@ export default function Sidebar() {
           <Envelope size={24} weight="regular" />
         </a>
         <a
-          href="https://rxresu.me/jhuarachi654/huarachi-designer-resume"
+          href="https://v4.rxresu.me/jhuarachi654/johanna-s-huarachi-resume"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Resume"
