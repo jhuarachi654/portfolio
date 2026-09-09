@@ -6,7 +6,7 @@ import GodRays from "./GodRays"
 // silhouette (its real SVG path, not an approximation) — same shape the
 // browser tab icon uses, at trail-dot scale — that follow the cursor and
 // fade out. Scoped to the hero section only.
-const TRAIL_LENGTH = 7
+const TRAIL_LENGTH = 9
 const BLOB_SIZE = 22
 
 // The favicon's own path data (public/favicon.svg, viewBox 0 0 80 80) —
@@ -22,10 +22,10 @@ const FAVICON_PATH =
 const FAVICON_NATIVE_SIZE = 80
 const BLOB_SCALE = BLOB_SIZE / FAVICON_NATIVE_SIZE
 
-const BURST_COUNT = 6
-const BURST_SIZE = 26
-const BURST_RADIUS = 70
-const BURST_DURATION_MS = 650
+const BURST_COUNT = 10
+const BURST_SIZE = 36
+const BURST_RADIUS = 110
+const BURST_DURATION_MS = 700
 
 type Burst = { id: number; x: number; y: number }
 
@@ -106,18 +106,14 @@ export default function HeroCursorTrail() {
     heroEl.addEventListener("mouseleave", onLeave)
     heroEl.addEventListener("click", onClick)
 
-    // Gentler, more spaced-out trail: a slower catch-up speed (each point
-    // eases toward the one ahead of it more gradually) and fewer, more
-    // widely spaced points overall so the trail reads as a loose scatter
-    // following the cursor rather than a tight, snappy line.
     let rafId = 0
     function tick() {
       const pts = positions.current
-      pts[0].x += (target.current.x - pts[0].x) * 0.16
-      pts[0].y += (target.current.y - pts[0].y) * 0.16
+      pts[0].x += (target.current.x - pts[0].x) * 0.28
+      pts[0].y += (target.current.y - pts[0].y) * 0.28
       for (let i = 1; i < pts.length; i++) {
-        pts[i].x += (pts[i - 1].x - pts[i].x) * 0.16
-        pts[i].y += (pts[i - 1].y - pts[i].y) * 0.16
+        pts[i].x += (pts[i - 1].x - pts[i].x) * 0.28
+        pts[i].y += (pts[i - 1].y - pts[i].y) * 0.28
       }
       dotsRef.current.forEach((el, i) => {
         if (!el) return
@@ -146,7 +142,7 @@ export default function HeroCursorTrail() {
           style={{
             width: BLOB_SIZE,
             height: BLOB_SIZE,
-            opacity: (1 - i / TRAIL_LENGTH) * 0.6,
+            opacity: (1 - i / TRAIL_LENGTH) * 0.85,
           }}
         >
           <div
