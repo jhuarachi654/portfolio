@@ -1446,6 +1446,35 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .hero-cursor-trail { display: none; }
 }
 
+.hero-cursor-click-burst {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+.hero-cursor-click-burst-particle {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  animation: heroCursorClickBurstOut 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes heroCursorClickBurstOut {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--burst-dx)), calc(-50% + var(--burst-dy))) scale(0.5) rotate(var(--burst-rotate));
+  }
+}
+@media (max-width: 1199px) {
+  .hero-cursor-click-burst { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cursor-click-burst { display: none; }
+}
+
 /* ── Mobile/tablet favicon sticker peel (tap+drag counterpart to the desktop cursor trail) ── */
 .hero-favicon-burst {
   display: none;
