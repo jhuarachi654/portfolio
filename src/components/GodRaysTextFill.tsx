@@ -27,7 +27,18 @@ export default function GodRaysTextFill({ text, className }: { text: string; cla
     const ro = new ResizeObserver(measure)
     ro.observe(el)
     window.addEventListener("resize", measure)
+
+    // The initial measure can run before the webfont (Sentient) has
+    // finished loading, so it captures the fallback font's (narrower or
+    // wider) glyph metrics — the mask then goes stale relative to the real
+    // rendered text once the webfont swaps in, clipping the last glyph(s).
+    let cancelled = false
+    document.fonts?.ready?.then(() => {
+      if (!cancelled) measure()
+    })
+
     return () => {
+      cancelled = true
       ro.disconnect()
       window.removeEventListener("resize", measure)
     }
@@ -44,7 +55,7 @@ export default function GodRaysTextFill({ text, className }: { text: string; cla
   // the mask. A small horizontal pad on both the SVG canvas and the masked
   // layer's box gives the glyphs room to render at their true width without
   // affecting layout (the visible text still comes from the real span).
-  const MASK_PAD = 8
+  const MASK_PAD = 16
   const maskDataUrl =
     box.width > 0
       ? `url("data:image/svg+xml,${encodeURIComponent(
