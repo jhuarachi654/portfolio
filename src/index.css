@@ -4991,16 +4991,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     grid-template-columns: 1fr 1fr !important;
   }
 
-}
-
-/* BackStory's Solution feature blocks (bs-feature-grid) are a flex row, not
-   a grid, so they're outside the blanket [style*="grid-template-columns"]
-   collapse above — stack them explicitly on mobile so the phone mockup and
-   its text don't squeeze into a too-narrow row. */
-@media (max-width: 767px) {
-  .cs-page .bs-feature-grid {
-    flex-direction: column !important;
+  /* Exception: BackStory's Solution feature blocks — text + visual pair,
+     keep side by side at tablet width instead of stacking. */
+  .cs-page .bs-feature-grid[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
   }
+
 }
 
 @media (min-width: 1200px) {
