@@ -19,11 +19,11 @@ export default function HomePage() {
         <div className="hero-landing-blend-group">
           <div className="hero-landing-inner">
             <p className="hero-landing-greeting" data-reveal-hero style={{ "--hero-delay": "120ms" } as React.CSSProperties}>
-              <span className="hero-landing-greeting-hi">I'm Johanna,</span> <span className="hero-landing-greeting-firstname">a designer built on <em>psychology</em> and <em>interaction design</em></span>
+              hey! i'm <span className="hero-landing-name-fill">Johanna</span>, a designer built on <em>psychology</em> and <em>interaction design</em>
             </p>
 
             <p className="hero-landing-credentials" data-reveal-hero style={{ "--hero-delay": "380ms" } as React.CSSProperties}>
-              MDes Interaction Design, CCA | Psych &amp; Neuro, Williams College | Prev. Design @ DNC, PROS
+              studied at <span className="hero-landing-credential-tag">CCA</span> &amp; <span className="hero-landing-credential-tag">Williams</span> &amp; designed at <span className="hero-landing-credential-tag">DNC</span>, <span className="hero-landing-credential-tag">PROS</span>
             </p>
           </div>
 
