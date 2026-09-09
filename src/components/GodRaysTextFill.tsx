@@ -20,7 +20,15 @@ export default function GodRaysTextFill({ text, className }: { text: string; cla
       const rect = el.getBoundingClientRect()
       const style = window.getComputedStyle(el)
       setBox({ width: rect.width, height: rect.height })
-      setFont({ family: style.fontFamily, size: style.fontSize, weight: style.fontWeight })
+      // SVG's <text> renderer doesn't apply the same synthetic-bold
+      // fallback the HTML text renderer uses for a numeric weight (like
+      // 500) that the loaded font has no real static face for — it can
+      // render visibly thinner than the actual span. Snapping to the
+      // nearest of the two weights browsers reliably synthesize
+      // (400/normal or 700/bold) keeps the mask's visual weight matching.
+      const numericWeight = parseInt(style.fontWeight, 10) || 400
+      const svgWeight = numericWeight >= 550 ? "bold" : "normal"
+      setFont({ family: style.fontFamily, size: style.fontSize, weight: svgWeight })
     }
 
     measure()
