@@ -4999,6 +4999,23 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 }
 
+/* BackStory's Solution feature blocks on mobile: full width (no 80%
+   side margins), text centered instead of left-aligned, tighter gaps
+   than the desktop/tablet 1fr-1fr layout uses. */
+@media (max-width: 767px) {
+  .cs-page .bs-feature-grid {
+    width: 100% !important;
+    margin-top: 32px !important;
+    gap: 16px !important;
+    text-align: center;
+  }
+  .cs-page .bs-feature-grid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 @media (min-width: 1200px) {
   .ff-stat-card-image {
     width: 60% !important;
