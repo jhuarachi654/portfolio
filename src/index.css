@@ -1419,8 +1419,15 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   position: absolute;
   top: 0;
   left: 0;
-  overflow: hidden;
+  overflow: visible;
   will-change: transform;
+}
+.hero-cursor-trail-blob {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  overflow: hidden;
 }
 
 @media (max-width: 1199px) {
