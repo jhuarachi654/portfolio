@@ -80,7 +80,7 @@ function FeatureBlock({ index, label, body, userImpact, image, alt, first = fals
   return (
     <div className="bs-feature-grid" style={{ marginTop: first ? 0 : 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignItems: 'center', justifyItems: 'center', width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
       <figure className="bs-feature-visual" style={{ margin: 0 }} data-reveal>
-        <SkeletonImage src={img(image)} alt={alt} style={{ maxWidth: '90%', width: 'auto', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block' }} />
+        <SkeletonImage src={img(image)} alt={alt} style={{ maxWidth: '90%', width: 'auto', height: 'auto', display: 'block', borderRadius: 8, margin: '0 auto' }} wrapperStyle={{ display: 'block' }} />
       </figure>
 
       <div className="bs-feature-text">
