@@ -23,7 +23,7 @@ const TOC = [
   ...(SHOW_DRAFT ? [
     { id: 'bs-testing',          label: 'Testing' },
   ] : []),
-  { id: 'bs-reflection',       label: 'Learnings' },
+  { id: 'bs-reflection',       label: 'Reflection' },
 ]
 
 const img = (file: string) => `/images/backstory/${file}`
@@ -472,18 +472,16 @@ export default function BackStoryPage() {
         </Section>
         </>}
 
-        {/* ── 5. Learnings ── */}
+        {/* ── 5. Reflection ── */}
         <Section id="bs-reflection">
-          <ChapterHeading index={5} heading="Learnings" />
+          <ChapterHeading index={5} heading="Reflection" />
 
-          <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>What's Next for Backstory</p>
-          <SubHeading>Validate, expand, and scale.</SubHeading>
+          <SubHeading>What's Next for Backstory</SubHeading>
           <BodyText>
             The next step is testing with a larger Gen Z cohort alongside third-party fact-checking networks to measure whether native tooltips outperform traditional warning banners. From there, we want to bring Backstory's framework to other short-form platforms through a browser extension or standalone solution.
           </BodyText>
 
           <div style={{ marginTop: 108 }}>
-            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Key Takeaway</p>
             <SubHeading>Co-creation is slower, but it produces things people will actually use.</SubHeading>
             <BodyText>
               The hardest part wasn't the UI. It was shifting from punitive warnings to community-driven media literacy embedded directly in the scroll. Peer consensus paired with professional auditing matters just as much as the technology itself.
