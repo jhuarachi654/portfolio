@@ -37,11 +37,19 @@ export default function GodRaysTextFill({ text, className }: { text: string; cla
   // in-page <mask>, only a standalone SVG document — so the mask is built
   // as a self-contained data: URI (with its own width/height/text) rather
   // than an id reference, which also works fine in Chrome/Firefox.
+  //
+  // The SVG's own text-layout metrics can render a couple px wider than the
+  // CSS box measured via getBoundingClientRect (kerning/hinting differences,
+  // worse on bold serif faces) — that mismatch clipped the last glyph(s) of
+  // the mask. A small horizontal pad on both the SVG canvas and the masked
+  // layer's box gives the glyphs room to render at their true width without
+  // affecting layout (the visible text still comes from the real span).
+  const MASK_PAD = 8
   const maskDataUrl =
     box.width > 0
       ? `url("data:image/svg+xml,${encodeURIComponent(
-          `<svg xmlns='http://www.w3.org/2000/svg' width='${box.width}' height='${box.height}'>` +
-            `<text x='0' y='${box.height * 0.5}' dominant-baseline='middle' ` +
+          `<svg xmlns='http://www.w3.org/2000/svg' width='${box.width + MASK_PAD * 2}' height='${box.height}'>` +
+            `<text x='${MASK_PAD}' y='${box.height * 0.5}' dominant-baseline='middle' ` +
             `font-family='${font.family}' font-size='${font.size}' font-weight='${font.weight}' fill='#fff'>` +
             `${text}</text></svg>`
         )}")`
@@ -55,9 +63,9 @@ export default function GodRaysTextFill({ text, className }: { text: string; cla
           aria-hidden="true"
           style={{
             position: "absolute",
-            left: 0,
+            left: -MASK_PAD,
             top: 0,
-            width: box.width,
+            width: box.width + MASK_PAD * 2,
             height: box.height,
             WebkitMaskImage: maskDataUrl,
             maskImage: maskDataUrl,
