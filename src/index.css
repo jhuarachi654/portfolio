@@ -1212,7 +1212,11 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   height: 80vh;
   min-height: 480px;
   overflow: hidden;
-  background: #416BCC;
+  background-color: #f4f4f2;
+  background-image:
+    linear-gradient(rgba(20,22,26,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,22,26,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
   position: relative;
   z-index: 1;
   justify-content: center;
@@ -1239,17 +1243,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
-/* Isolation group for the hero text + fish — mirrors .hero-page--landing's
-   own padding exactly, since this sits absolutely positioned (inset: 0)
-   inside it purely to give mix-blend-mode a stacking-context boundary that
-   excludes the GodRays background (see PixelFish/FishSwimmer usage). */
 .hero-landing-blend-group {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  isolation: isolate;
   padding: 180px var(--page-gutter) 200px;
   box-sizing: border-box;
 }
@@ -1272,26 +1271,9 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   position: relative;
   z-index: 4;
   width: 100%;
-  text-shadow: 0 1px 2px rgba(13, 27, 42, 0.25);
 }
 
-/* Dark gradient behind the text (bottom-anchored, since the text block sits
-   low in the hero) — boosts legibility of the white text against the
-   lighter GodRays blobs, without shadowing the letters themselves. Sits
-   above the GodRays canvas but below the text, and stays click-through so
-   it never blocks the water-trail interaction. */
-.hero-landing-bottom-mask {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 75%;
-  background: linear-gradient(to bottom, rgba(8,16,40,0) 0%, rgba(8,16,40,0.45) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.hero-landing-greeting { font-family: var(--type-h2-family); font-size: 42px; font-weight: 600; line-height: var(--type-h2-line-height); color: #ffffff; max-width: 100%; white-space: normal; margin: 0; }
+.hero-landing-greeting { font-family: var(--type-h2-family); font-size: 42px; font-weight: 600; line-height: var(--type-h2-line-height); color: #1c1d1f; max-width: 100%; white-space: normal; margin: 0; }
 @media (min-width: 1200px) {
   .hero-landing-greeting {
     font-size: 56px;
@@ -1314,9 +1296,9 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   vertical-align: baseline;
 }
 
-.hero-landing-credential-tag { font-weight: 700; color: #ffffff; }
+.hero-landing-credential-tag { font-weight: 700; color: #1c1d1f; }
 
-.hero-landing-tagline { font-family: var(--type-h2-family); font-size: clamp(20px, 2.2vw, 24px); font-weight: 400; line-height: 1.2; color: #ffffff; max-width: none; white-space: normal; margin-top: 24px; }
+.hero-landing-tagline { font-family: var(--type-h2-family); font-size: clamp(20px, 2.2vw, 24px); font-weight: 400; line-height: 1.2; color: #1c1d1f; max-width: none; white-space: normal; margin-top: 24px; }
 @media (min-width: 1200px) {
   .hero-landing-tagline {
     max-width: 60%;
@@ -1326,7 +1308,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   font-style: italic;
 }
 
-.hero-landing-credentials { position: relative; z-index: 4; font-family: var(--type-body-family); font-size: 15px; font-weight: 500; line-height: var(--type-body-line-height); color: #ffffff; opacity: 1; margin-top: 24px; text-shadow: none; }
+.hero-landing-credentials { position: relative; z-index: 4; font-family: var(--type-body-family); font-size: 15px; font-weight: 500; line-height: var(--type-body-line-height); color: #767a82; opacity: 1; margin-top: 24px; }
 .hero-meta-gap {
   display: inline-flex;
   align-items: center;
@@ -1338,7 +1320,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   width: 1px;
   height: 18px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(20, 22, 26, 0.2);
 }
 
 @media (max-width: 767px) {
