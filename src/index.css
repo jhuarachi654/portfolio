@@ -1449,7 +1449,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .hero-cursor-trail { display: none; }
 }
 
-/* ── Mobile/tablet favicon burst (tap counterpart to the desktop cursor trail) ── */
+/* ── Mobile/tablet favicon sticker peel (tap+drag counterpart to the desktop cursor trail) ── */
 .hero-favicon-burst {
   display: none;
 }
@@ -1457,13 +1457,16 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .hero-favicon-burst {
     display: block;
     position: absolute;
-    top: 72px;
-    right: var(--page-gutter);
+    inset: 0;
     z-index: 6;
+    pointer-events: none;
   }
 }
 
 .hero-favicon-burst-trigger {
+  position: absolute;
+  top: 72px;
+  right: var(--page-gutter);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1471,12 +1474,26 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   background: none;
   border: none;
   padding: 8px;
-  cursor: pointer;
+  cursor: grab;
+  touch-action: none;
+  pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
-  animation: heroFaviconPulse 2.6s ease-in-out infinite;
+  opacity: 0;
+  animation:
+    heroFaviconIntro 700ms cubic-bezier(0.16, 1, 0.3, 1) 900ms forwards,
+    heroFaviconPulse 2.6s ease-in-out 1600ms infinite;
 }
 .hero-favicon-burst-trigger:active {
   transform: scale(0.94);
+  cursor: grabbing;
+}
+.hero-favicon-burst-trigger.is-dragging {
+  opacity: 0.35;
+  cursor: grabbing;
+  animation: none;
+}
+.hero-favicon-burst-trigger.is-maxed {
+  opacity: 0.5;
 }
 .hero-favicon-burst-trigger.is-popping {
   animation: heroFaviconPop 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1494,6 +1511,60 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   transform: scale(0.8);
 }
 
+.hero-favicon-sticker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: grab;
+  touch-action: none;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-favicon-sticker.is-dragging {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.hero-favicon-sticker-ghost {
+  position: absolute;
+  transform:
+    translate(-50%, -50%)
+    scale(calc(1.15 + var(--peel-amount, 0) * 0.1))
+    rotate(calc(var(--peel-tilt, 0deg) * var(--peel-amount, 0) * 0.12))
+    skew(calc(var(--peel-tilt, 0deg) * var(--peel-amount, 0) * 0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 10px rgba(20, 24, 60, 0.25));
+  transition: transform 60ms linear;
+}
+
+.hero-favicon-peel-slot {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  border: 1.5px dashed rgba(var(--color-navy-rgb), 0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: heroFaviconSlotIn 200ms ease-out;
+}
+@keyframes heroFaviconSlotIn {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes heroFaviconIntro {
+  0% { opacity: 0; transform: translateY(-16px) scale(0.6) rotate(-14deg); }
+  60% { opacity: 1; transform: translateY(2px) scale(1.08) rotate(4deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+}
 @keyframes heroFaviconPulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.06); }
@@ -1507,8 +1578,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 
 .hero-favicon-burst-particle {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  transform: translate(-50%, -50%);
   overflow: visible;
   pointer-events: none;
   animation: heroFaviconBurstOut 1100ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -1516,16 +1586,20 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @keyframes heroFaviconBurstOut {
   0% {
     opacity: 1;
-    transform: translate(0, 0) scale(1) rotate(0deg);
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
   }
   100% {
     opacity: 0;
-    transform: translate(var(--burst-dx), var(--burst-dy)) scale(0.5) rotate(var(--burst-rotate));
+    transform: translate(calc(-50% + var(--burst-dx)), calc(-50% + var(--burst-dy))) scale(0.5) rotate(var(--burst-rotate));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-favicon-burst-trigger, .hero-favicon-burst-trigger.is-popping { animation: none; }
+  .hero-favicon-burst-trigger, .hero-favicon-burst-trigger.is-popping {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
   .hero-favicon-burst-particle { animation: none; opacity: 0; }
 }
 
