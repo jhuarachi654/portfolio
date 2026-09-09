@@ -258,7 +258,7 @@ export default function BackStoryPage() {
           </figure>
 
           <div style={{ marginTop: 108 }}>
-            <SubHeading>Gen-Z is more susceptible</SubHeading>
+            <SubHeading>Gen-Z is <span style={{ color: '#416BCC' }}>more susceptible</span></SubHeading>
             <BodyText>
               A large-scale international study across 66,000+ participants in 24 countries found that Gen Z showed greater susceptibility to misinformation than older age groups — despite growing up online. Their perceived ability to spot false claims did not match reality.
             </BodyText>
@@ -292,7 +292,7 @@ export default function BackStoryPage() {
           <div className="bs-finding-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center' }}>
             <div>
               <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 01</p>
-              <SubHeading>Gen Z mistakes a curated feed for a safe one.</SubHeading>
+              <SubHeading>Gen Z mistakes a <span style={{ color: '#416BCC' }}>curated feed</span> for a safe one.</SubHeading>
               <BodyText>
                 Participants actively blocked accounts and tapped "not interested" — and believed this had trained their algorithm to filter out misinformation. It hadn't.
               </BodyText>
@@ -306,7 +306,7 @@ export default function BackStoryPage() {
           <div className="bs-finding-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center' }}>
             <div>
               <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 02</p>
-              <SubHeading>Awareness of misinformation doesn't change behavior.</SubHeading>
+              <SubHeading>Awareness of misinformation <span style={{ color: '#416BCC' }}>doesn't change behavior.</span></SubHeading>
               <BodyText>
                 Gen Z knows social media is untrustworthy. They stay anyway. FOMO and social connection consistently outweigh the discomfort of an unreliable platform.
               </BodyText>
@@ -320,7 +320,7 @@ export default function BackStoryPage() {
           <div className="bs-finding-grid" style={{ marginTop: 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center' }}>
             <div>
               <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Finding 03</p>
-              <SubHeading>Crowdsourcing alone isn't enough.</SubHeading>
+              <SubHeading>Crowdsourcing alone <span style={{ color: '#416BCC' }}>isn't enough.</span></SubHeading>
               <BodyText>
                 Community notes were seen as useful but insufficient. Participants wanted a hybrid: the speed of crowd input paired with the credibility of professional fact-checkers.
               </BodyText>
@@ -390,7 +390,7 @@ export default function BackStoryPage() {
         <Section id="bs-features">
           <ChapterHeading index={4} heading="Solution" />
 
-          <SubHeading>What's the backstory of this post?</SubHeading>
+          <SubHeading>What's the <span style={{ color: '#416BCC' }}>backstory</span> of this post?</SubHeading>
           <BodyText>
             Backstory is a native TikTok feature that verifies and reveals the context of a post in real time, without ever leaving the feed. While conceptualized as a universal framework for short-form video, we focused our prototype on TikTok, Gen Z's primary platform, to test native embedded interactions within an established mobile ecosystem.
           </BodyText>
@@ -482,7 +482,7 @@ export default function BackStoryPage() {
           </BodyText>
 
           <div style={{ marginTop: 32 }}>
-            <SubHeading>Co-creation is slower, but it produces things people will actually use.</SubHeading>
+            <SubHeading>Co-creation is slower, but it produces things people will <span style={{ color: '#416BCC' }}>actually use.</span></SubHeading>
             <BodyText>
               The hardest part wasn't the UI. It was shifting from punitive warnings to community-driven media literacy embedded directly in the scroll. Peer consensus paired with professional auditing matters just as much as the technology itself.
             </BodyText>
