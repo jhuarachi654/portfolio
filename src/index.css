@@ -1280,6 +1280,11 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     max-width: 65%;
   }
 }
+@media (min-width: 768px) and (max-width: 1199px) {
+  .hero-landing-greeting {
+    max-width: 70%;
+  }
+}
 @media (max-width: 767px) {
   .hero-landing-greeting {
     font-size: 28px;
