@@ -360,7 +360,7 @@ export default function BackStoryPage() {
                 alt="Feasibility vs. Impact 2x2 matrix plotting concepts including Bread Crumbs, Profile Investigator, Quiz, Wiki for misinfo, and the Backstory button, which is circled as the selected concept"
                 zoomScale={1.6}
                 focusX={80}
-                focusY={28}
+                focusY={20}
               />
             </figure>
           </div>
