@@ -11,6 +11,10 @@ const BURST_COUNT = 16
 // Renders the dragged/placed icon this many px above the actual touch
 // point so a thumb/finger doesn't cover it while dragging on mobile.
 const TOUCH_LIFT = 56
+// Shared size (px) for the source trigger icon, the drag ghost, and
+// placed stickers, so the favicon reads as the same object throughout
+// the peel-and-place interaction.
+const ICON_SIZE = 42
 
 type Burst = { id: number; x: number; y: number; dx: number; dy: number; rotate: number; size: number }
 type Sticker = { id: number; x: number; y: number }
@@ -133,7 +137,7 @@ export default function HeroFaviconBurst() {
         aria-label="Drag to peel off a favicon sticker"
       >
         <span className="hero-favicon-burst-icon">
-          <img src="/favicon.svg" alt="" width="29" height="29" draggable={false} />
+          <img src="/favicon.svg" alt="" width={ICON_SIZE} height={ICON_SIZE} draggable={false} />
         </span>
         <span className="hero-favicon-burst-label">peel sticker</span>
       </button>
@@ -160,7 +164,7 @@ export default function HeroFaviconBurst() {
               "--peel-amount": pulled,
             } as React.CSSProperties}
           >
-            <img src="/favicon.svg" alt="" width="42" height="42" />
+            <img src="/favicon.svg" alt="" width={ICON_SIZE} height={ICON_SIZE} />
           </div>
         )
       })()}
@@ -174,7 +178,7 @@ export default function HeroFaviconBurst() {
           onPointerDown={(e) => beginDrag(s.id, e)}
           aria-label="Drag to move sticker"
         >
-          <img src="/favicon.svg" alt="" width="52" height="52" draggable={false} />
+          <img src="/favicon.svg" alt="" width={ICON_SIZE} height={ICON_SIZE} draggable={false} />
         </button>
       ))}
 
