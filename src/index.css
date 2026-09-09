@@ -1478,6 +1478,9 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .hero-favicon-burst-trigger:active {
   transform: scale(0.94);
 }
+.hero-favicon-burst-trigger.is-popping {
+  animation: heroFaviconPop 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 .hero-favicon-burst-icon {
   display: flex;
   align-items: center;
@@ -1495,6 +1498,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.06); }
 }
+@keyframes heroFaviconPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35) rotate(-8deg); }
+  70% { transform: scale(0.92) rotate(4deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
 
 .hero-favicon-burst-particle {
   position: absolute;
@@ -1502,21 +1511,21 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   right: 20px;
   overflow: visible;
   pointer-events: none;
-  animation: heroFaviconBurstOut 850ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroFaviconBurstOut 1100ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 @keyframes heroFaviconBurstOut {
   0% {
     opacity: 1;
-    transform: translate(0, 0) scale(1);
+    transform: translate(0, 0) scale(1) rotate(0deg);
   }
   100% {
     opacity: 0;
-    transform: translate(var(--burst-dx), var(--burst-dy)) scale(0.6);
+    transform: translate(var(--burst-dx), var(--burst-dy)) scale(0.5) rotate(var(--burst-rotate));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-favicon-burst-trigger { animation: none; }
+  .hero-favicon-burst-trigger, .hero-favicon-burst-trigger.is-popping { animation: none; }
   .hero-favicon-burst-particle { animation: none; opacity: 0; }
 }
 
