@@ -155,10 +155,9 @@ export default function PlayPage() {
   const [modal, setModal] = useState<"photography" | "koi" | "draw" | null>(null)
   const numCols = useNumCols()
 
-  const items: { key: string; fullWidth: boolean; render: (index: number) => React.ReactNode }[] = [
+  const items: { key: string; render: (index: number) => React.ReactNode }[] = [
     {
       key: "photography",
-      fullWidth: true,
       render: (index) => (
         <div
           className="case-study-card-wrapper"
@@ -190,7 +189,6 @@ export default function PlayPage() {
     },
     {
       key: "llsf",
-      fullWidth: true,
       render: (index) => (
         // Love Lives in SF — moved here from the Work grid
         <CaseStudyCard
@@ -212,7 +210,6 @@ export default function PlayPage() {
     },
     {
       key: "draw",
-      fullWidth: true,
       render: (index) => (
         <div
           className="case-study-card-wrapper"
@@ -243,7 +240,6 @@ export default function PlayPage() {
     },
     {
       key: "koi",
-      fullWidth: true,
       render: (index) => (
         <div
           className="case-study-card-wrapper"
@@ -281,7 +277,6 @@ export default function PlayPage() {
     },
     {
       key: "popple",
-      fullWidth: false,
       render: (index) => (
         // Popple — same CaseStudyCard config as the Home page entry.
         // Uses the pre-composited MP4 (phone + purple bg baked in) rather
@@ -306,7 +301,6 @@ export default function PlayPage() {
     },
     {
       key: "canopy",
-      fullWidth: false,
       render: (index) => (
         <CaseStudyCard
           index={index}
@@ -326,24 +320,10 @@ export default function PlayPage() {
     },
   ]
 
-  // Split the ordered item list into blocks: a run of consecutive non-full-width
-  // items becomes one work-masonry (flex, N-column round-robin) row; each
-  // full-width item becomes its own standalone row — mirrors how WorkGrid lays
-  // out its own masonry columns, but allows full-bleed items to interrupt it.
-  type Block = { type: "masonry"; entries: { key: string; node: React.ReactNode }[] } | { type: "full"; key: string; node: React.ReactNode }
-  const blocks: Block[] = []
-  items.forEach((item, i) => {
-    if (item.fullWidth) {
-      blocks.push({ type: "full", key: item.key, node: item.render(i) })
-    } else {
-      const last = blocks[blocks.length - 1]
-      if (last?.type === "masonry") {
-        last.entries.push({ key: item.key, node: item.render(i) })
-      } else {
-        blocks.push({ type: "masonry", entries: [{ key: item.key, node: item.render(i) }] })
-      }
-    }
-  })
+  // Uniform round-robin column split — every item is the same size, no
+  // full-bleed rows — mirrors WorkGrid's own masonry layout exactly.
+  const cols: { key: string; node: React.ReactNode }[][] = Array.from({ length: numCols }, () => [])
+  items.forEach((item, i) => cols[i % numCols].push({ key: item.key, node: item.render(i) }))
 
   return (
     <>
@@ -354,30 +334,17 @@ export default function PlayPage() {
         </div>
 
         <div className="play-card-grid">
-          {blocks.map((block, bi) => {
-            if (block.type === "full") {
-              return (
-                <motion.div key={block.key} layout style={{ gridColumn: "1 / -1" }}>
-                  {block.node}
-                </motion.div>
-              )
-            }
-            const cols: { key: string; node: React.ReactNode }[][] = Array.from({ length: numCols }, () => [])
-            block.entries.forEach((entry, i) => cols[i % numCols].push(entry))
-            return (
-              <div key={`masonry-${bi}`} className="work-masonry" style={{ gridColumn: "1 / -1" }}>
-                {cols.map((col, ci) => (
-                  <div key={ci} className="work-masonry-col">
-                    {col.map(entry => (
-                      <motion.div key={entry.key} layout>
-                        {entry.node}
-                      </motion.div>
-                    ))}
-                  </div>
+          <div className="work-masonry">
+            {cols.map((col, ci) => (
+              <div key={ci} className="work-masonry-col">
+                {col.map(entry => (
+                  <motion.div key={entry.key} layout>
+                    {entry.node}
+                  </motion.div>
                 ))}
               </div>
-            )
-          })}
+            ))}
+          </div>
         </div>
       </div>
 
