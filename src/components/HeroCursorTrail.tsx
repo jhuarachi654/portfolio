@@ -7,7 +7,7 @@ const TRAIL_LENGTH = 9
 const BLOB_SIZE = 22
 // Lower = looser, gentler trail (more visible gap between trailing dots,
 // softer/slower chase instead of snapping to the cursor).
-const FOLLOW_EASE = 0.11
+const FOLLOW_EASE = 0.18
 
 export default function HeroCursorTrail() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -24,9 +24,17 @@ export default function HeroCursorTrail() {
     const heroEl = container.closest(".hero-page--landing") as HTMLElement | null
     if (!heroEl) return
 
+    // Reading getBoundingClientRect() on every mousemove forces a synchronous
+    // layout — Safari is noticeably more sensitive to this than Chrome, and
+    // it was making the whole trail feel sluggish independent of the easing
+    // factor. Cache the rect and only refresh it on resize/scroll instead.
+    let heroRect = heroEl.getBoundingClientRect()
+    const updateRect = () => { heroRect = heroEl.getBoundingClientRect() }
+    window.addEventListener("resize", updateRect)
+    window.addEventListener("scroll", updateRect, { passive: true })
+
     const onMove = (e: MouseEvent) => {
-      const rect = heroEl.getBoundingClientRect()
-      target.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
+      target.current = { x: e.clientX - heroRect.left, y: e.clientY - heroRect.top }
       active.current = true
       container.style.opacity = "1"
     }
@@ -58,6 +66,8 @@ export default function HeroCursorTrail() {
     return () => {
       heroEl.removeEventListener("mousemove", onMove)
       heroEl.removeEventListener("mouseleave", onLeave)
+      window.removeEventListener("resize", updateRect)
+      window.removeEventListener("scroll", updateRect)
       cancelAnimationFrame(rafId)
     }
   }, [])
