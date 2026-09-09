@@ -14,6 +14,8 @@ export default function HomePage() {
 
             <p className="hero-landing-credentials" data-reveal-hero style={{ "--hero-delay": "380ms" } as React.CSSProperties}>
               Studied at CCA &amp; Williams, and designed at DNC, PROS.
+              <br />
+              Recently designed BackStory, a TikTok-native feature for fighting misinformation.
             </p>
           </div>
         </div>
