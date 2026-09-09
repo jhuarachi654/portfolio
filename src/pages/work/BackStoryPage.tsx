@@ -8,6 +8,7 @@ import StatCallout from '../../components/case-study/StatCallout'
 import PlayPauseButton from '../../components/PlayPauseButton'
 import SkeletonImage from '../../components/SkeletonImage'
 import CrossfadeImage from '../../components/CrossfadeImage'
+import ZoomPanImage from '../../components/ZoomPanImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
 // Development/Solution/Testing/Learnings aren't written yet — keep the code below intact
@@ -354,7 +355,12 @@ export default function BackStoryPage() {
             </BodyText>
 
             <figure className="cs-fullwidth-figure" style={{ margin: '24px 0 0' }} data-reveal>
-              <SkeletonImage src={img('backstory-2x2-matrix.png')} alt="Feasibility vs. Impact 2x2 matrix plotting concepts including Bread Crumbs, Profile Investigator, Quiz, Wiki for misinfo, and the Backstory button" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
+              <ZoomPanImage
+                src={img('backstory-2x2-matrix.png')}
+                alt="Feasibility vs. Impact 2x2 matrix plotting concepts including Bread Crumbs, Profile Investigator, Quiz, Wiki for misinfo, and the Backstory button, which is circled as the selected concept"
+                focusX={80}
+                focusY={38}
+              />
             </figure>
           </div>
 
