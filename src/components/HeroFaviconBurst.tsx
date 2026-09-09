@@ -178,7 +178,7 @@ export default function HeroFaviconBurst() {
           onPointerDown={(e) => beginDrag(s.id, e)}
           aria-label="Drag to move sticker"
         >
-          <img src="/favicon.svg" alt="" width={ICON_SIZE} height={ICON_SIZE} draggable={false} />
+          <img src="/favicon.svg" alt="" width={ICON_SIZE} height={ICON_SIZE} draggable={false} className="hero-favicon-sticker-outline" />
         </button>
       ))}
 
