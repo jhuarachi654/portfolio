@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Quattrocento:wght@400;700&family=Inter:opsz,wght@14..32,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Quattrocento:wght@400;700&family=Inter:opsz,wght@14..32,300..800&family=Caveat:wght@500;600;700&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=sentient@400,500,600,700,1,2&display=swap');
 @import "tailwindcss";
 
@@ -16,6 +16,7 @@
   --font-display: "Quattrocento", Georgia, serif;
   --font-landing-heading: "Sentient", Georgia, serif;
   --font-landing-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-doodle: "Caveat", cursive;
 
   --color-navy: #1E4B9A;
   --color-navy-dark: #162B55;
@@ -1233,10 +1234,10 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (max-width: 767px) {
   .hero-page--landing {
     height: auto;
-    min-height: 40vh;
+    min-height: 0;
     overflow: visible;
-    padding-top: 120px;
-    padding-bottom: 64px;
+    padding-top: 96px;
+    padding-bottom: 32px;
   }
 }
 
@@ -1260,8 +1261,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (max-width: 767px) {
   .hero-landing-blend-group {
     position: static;
-    padding-top: 120px;
-    padding-bottom: 64px;
+    padding-top: 96px;
+    padding-bottom: 32px;
   }
 }
 
@@ -1333,6 +1334,15 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .hero-landing-credentials {
     max-width: 100%;
     font-size: 13.5px;
+  }
+  .hero-landing-credentials .hero-reveal-line {
+    margin-bottom: 10px;
+  }
+  .hero-landing-credentials .hero-reveal-line:last-child {
+    margin-bottom: 0;
+  }
+  .hero-landing-credentials .hero-reveal-line:nth-child(2) {
+    display: none;
   }
   .hero-meta-gap {
     display: block;
@@ -1437,6 +1447,77 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-cursor-trail { display: none; }
+}
+
+/* ── Mobile/tablet favicon burst (tap counterpart to the desktop cursor trail) ── */
+.hero-favicon-burst {
+  display: none;
+}
+@media (max-width: 1199px) {
+  .hero-favicon-burst {
+    display: block;
+    position: absolute;
+    top: 72px;
+    right: var(--page-gutter);
+    z-index: 6;
+  }
+}
+
+.hero-favicon-burst-trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: heroFaviconPulse 2.6s ease-in-out infinite;
+}
+.hero-favicon-burst-trigger:active {
+  transform: scale(0.94);
+}
+.hero-favicon-burst-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-favicon-burst-label {
+  font-family: var(--font-doodle);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  transform: scale(0.8);
+}
+
+@keyframes heroFaviconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.hero-favicon-burst-particle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  overflow: visible;
+  pointer-events: none;
+  animation: heroFaviconBurstOut 850ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes heroFaviconBurstOut {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--burst-dx), var(--burst-dy)) scale(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-favicon-burst-trigger { animation: none; }
+  .hero-favicon-burst-particle { animation: none; opacity: 0; }
 }
 
 

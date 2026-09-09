@@ -2,6 +2,7 @@ import WorkGrid from "../components/WorkGrid"
 import Footer from "../components/Footer"
 import GodRaysTextFill from "../components/GodRaysTextFill"
 import HeroCursorTrail from "../components/HeroCursorTrail"
+import HeroFaviconBurst from "../components/HeroFaviconBurst"
 import { WordReveal, LineReveal } from "../components/HeroTextReveal"
 
 export default function HomePage() {
@@ -9,6 +10,7 @@ export default function HomePage() {
     <>
       <div className="hero-page hero-page--landing">
         <HeroCursorTrail />
+        <HeroFaviconBurst />
         <div className="hero-landing-blend-group">
           <div className="hero-landing-inner">
             <p className="hero-landing-greeting">
