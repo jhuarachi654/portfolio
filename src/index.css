@@ -1212,11 +1212,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   height: 80vh;
   min-height: 480px;
   overflow: hidden;
-  background-color: #f4f4f2;
-  background-image:
-    linear-gradient(rgba(20,22,26,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20,22,26,0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-color: rgba(var(--color-navy-rgb),0.06);
   position: relative;
   z-index: 1;
   justify-content: center;
@@ -1273,7 +1269,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   width: 100%;
 }
 
-.hero-landing-greeting { font-family: var(--type-h2-family); font-size: 42px; font-weight: 600; line-height: var(--type-h2-line-height); color: #1c1d1f; max-width: 100%; white-space: normal; margin: 0; }
+.hero-landing-greeting { font-family: var(--type-h2-family); font-size: 42px; font-weight: 600; line-height: var(--type-h2-line-height); color: var(--color-cs-heading); max-width: 100%; white-space: normal; margin: 0; }
 @media (min-width: 1200px) {
   .hero-landing-greeting {
     font-size: 56px;
@@ -1296,9 +1292,9 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   vertical-align: baseline;
 }
 
-.hero-landing-credential-tag { font-weight: 700; color: #1c1d1f; }
+.hero-landing-credential-tag { font-weight: 700; color: var(--color-cs-heading); }
 
-.hero-landing-tagline { font-family: var(--type-h2-family); font-size: clamp(20px, 2.2vw, 24px); font-weight: 400; line-height: 1.2; color: #1c1d1f; max-width: none; white-space: normal; margin-top: 24px; }
+.hero-landing-tagline { font-family: var(--type-h2-family); font-size: clamp(20px, 2.2vw, 24px); font-weight: 400; line-height: 1.2; color: var(--color-cs-heading); max-width: none; white-space: normal; margin-top: 24px; }
 @media (min-width: 1200px) {
   .hero-landing-tagline {
     max-width: 60%;
@@ -1308,7 +1304,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   font-style: italic;
 }
 
-.hero-landing-credentials { position: relative; z-index: 4; font-family: var(--type-body-family); font-size: 15px; font-weight: 500; line-height: var(--type-body-line-height); color: #767a82; opacity: 1; margin-top: 24px; }
+.hero-landing-credentials { position: relative; z-index: 4; font-family: var(--type-body-family); font-size: 15px; font-weight: 500; line-height: var(--type-body-line-height); color: var(--color-secondary); opacity: 1; margin-top: 24px; }
 .hero-meta-gap {
   display: inline-flex;
   align-items: center;
@@ -1320,7 +1316,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   width: 1px;
   height: 18px;
   margin: 0 auto;
-  background: rgba(20, 22, 26, 0.2);
+  background: rgba(var(--color-navy-rgb), 0.2);
 }
 
 @media (max-width: 767px) {
