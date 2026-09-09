@@ -1430,27 +1430,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   overflow: hidden;
 }
 
-.hero-cursor-burst {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-}
-.hero-cursor-burst-dot {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: -13px 0 0 -13px;
-  opacity: 1;
-  animation-name: heroCursorBurst;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  animation-fill-mode: forwards;
-}
-@keyframes heroCursorBurst {
-  to { transform: translate(var(--burst-dx), var(--burst-dy)) scale(0.3); opacity: 0; }
-}
-
 @media (max-width: 1199px) {
   .hero-cursor-trail { display: none; }
 }
