@@ -79,8 +79,8 @@ function ChapterHeading({ index, heading }: { index: number; heading: string }) 
 function FeatureBlock({ index, label, body, userImpact, image, alt, first = false }: { index: number; label: string; body: string; userImpact?: string; image: string; alt: string; first?: boolean }) {
   return (
     <div className="bs-feature-grid" style={{ marginTop: first ? 0 : 108, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', justifyItems: 'center', width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-      <figure style={{ margin: 0, width: '70%' }} data-reveal>
-        <SkeletonImage src={img(image)} alt={alt} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
+      <figure style={{ margin: 0 }} data-reveal>
+        <SkeletonImage src={img(image)} alt={alt} style={{ maxWidth: '100%', width: 'auto', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block' }} />
       </figure>
 
       <div>
