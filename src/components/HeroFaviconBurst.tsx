@@ -146,30 +146,19 @@ export default function HeroFaviconBurst() {
         const foldAxisX = -Math.sin((angle * Math.PI) / 180)
         const foldAxisY = Math.cos((angle * Math.PI) / 180)
         return (
-          <>
-            <div
-              className="hero-favicon-peel-slot"
-              style={{
-                left: peelOrigin.x,
-                top: peelOrigin.y,
-                "--peel-amount": pulled,
-              } as React.CSSProperties}
-              aria-hidden="true"
-            />
-            <div
-              className="hero-favicon-sticker-ghost"
-              aria-hidden="true"
-              style={{
-                left: peelPoint.x,
-                top: peelPoint.y,
-                "--fold-axis-x": foldAxisX,
-                "--fold-axis-y": foldAxisY,
-                "--peel-amount": pulled,
-              } as React.CSSProperties}
-            >
-              <img src="/favicon.svg" alt="" width="30" height="30" />
-            </div>
-          </>
+          <div
+            className="hero-favicon-sticker-ghost"
+            aria-hidden="true"
+            style={{
+              left: peelPoint.x,
+              top: peelPoint.y,
+              "--fold-axis-x": foldAxisX,
+              "--fold-axis-y": foldAxisY,
+              "--peel-amount": pulled,
+            } as React.CSSProperties}
+          >
+            <img src="/favicon.svg" alt="" width="42" height="42" />
+          </div>
         )
       })()}
 
@@ -182,7 +171,7 @@ export default function HeroFaviconBurst() {
           onPointerDown={(e) => beginDrag(s.id, e)}
           aria-label="Drag to move sticker"
         >
-          <img src="/favicon.svg" alt="" width="26" height="26" draggable={false} />
+          <img src="/favicon.svg" alt="" width="36" height="36" draggable={false} />
         </button>
       ))}
 

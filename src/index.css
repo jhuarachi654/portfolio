@@ -1560,22 +1560,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 
-.hero-favicon-peel-slot {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  transform: translate(-50%, -50%);
-  border: 1.5px dashed rgba(var(--color-navy-rgb), calc(0.2 + var(--peel-amount, 0) * 0.3));
-  border-radius: 50%;
-  pointer-events: none;
-  animation: heroFaviconSlotIn 200ms ease-out;
-  transition: border-color 60ms linear;
-}
-@keyframes heroFaviconSlotIn {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
-  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-
 @keyframes heroFaviconIntro {
   0% { opacity: 0; transform: translateY(-16px) scale(0.6) rotate(-14deg); }
   60% { opacity: 1; transform: translateY(2px) scale(1.08) rotate(4deg); }
