@@ -493,18 +493,6 @@ export default function BackStoryPage() {
               <SkeletonImage src={img('backstory-team-photo.jpeg')} alt="The Backstory MDes capstone team at CCA" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }} wrapperStyle={{ display: 'block', width: '100%' }} />
             </figure>
           </div>
-
-          <div style={{ marginTop: 108 }}>
-            <p className="cs-caption-label" style={{ margin: '0 0 16px', textTransform: 'uppercase', opacity: 1 }}>Learn More About Backstory</p>
-            <div style={{ position: 'relative', aspectRatio: '16/9', borderRadius: 8, overflow: 'hidden' }} data-reveal>
-              <iframe
-                src="https://drive.google.com/file/d/1NDqTIJLFHJWLLQf5TxiJQJYuna99EmV0/preview"
-                allow="autoplay"
-                allowFullScreen
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
-              />
-            </div>
-          </div>
         </Section>
 
       </div>
