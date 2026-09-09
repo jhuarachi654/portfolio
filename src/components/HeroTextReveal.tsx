@@ -47,7 +47,7 @@ export function WordReveal({ children, delayMs = 0 }: { children: ReactNode; del
   )
 }
 
-export function LineReveal({ lines, delayMs = 0, lineGapMs = 140 }: { lines: ReactNode[]; delayMs?: number }) {
+export function LineReveal({ lines, delayMs = 0, lineGapMs = 140 }: { lines: ReactNode[]; delayMs?: number; lineGapMs?: number }) {
   return (
     <>
       {lines.map((line, i) => (
