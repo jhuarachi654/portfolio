@@ -5005,8 +5005,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (max-width: 767px) {
   .cs-page .bs-feature-grid {
     width: 100% !important;
-    margin-top: 32px !important;
-    gap: 16px !important;
+    margin-top: 48px !important;
+    gap: 8px !important;
     text-align: center;
   }
   .cs-page .bs-feature-grid > div {
