@@ -4,17 +4,6 @@ import GodRaysTextFill from "../components/GodRaysTextFill"
 import HeroCursorTrail from "../components/HeroCursorTrail"
 import { WordReveal, LineReveal } from "../components/HeroTextReveal"
 
-function LogoMark({ src, alt, float }: { src: string; alt: string; float: "up" | "down" }) {
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className="hero-landing-logo-mark"
-      style={{ transform: float === "up" ? "translateY(-3px) rotate(-4deg)" : "translateY(3px) rotate(4deg)" }}
-    />
-  )
-}
-
 export default function HomePage() {
   return (
     <>
@@ -32,8 +21,8 @@ export default function HomePage() {
               <LineReveal
                 delayMs={620}
                 lines={[
-                  <>Studied at <LogoMark src="/images/company-logos/cca.png" alt="CCA" float="up" /> &amp; <LogoMark src="/images/company-logos/williams.png" alt="Williams" float="down" />, and designed at <LogoMark src="/images/company-logos/dnc.png" alt="DNC" float="up" />, <LogoMark src="/images/company-logos/pros.png" alt="PROS" float="down" />.</>,
-                  <>Recently designed <LogoMark src="/images/company-logos/ideo.png" alt="IDEO" float="up" /> BackStory, a TikTok-native feature for fighting misinformation.</>,
+                  "Studied at CCA & Williams, and designed at DNC, PROS.",
+                  "Recently designed BackStory, a TikTok-native feature for fighting misinformation.",
                 ]}
               />
             </p>

@@ -1306,16 +1306,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .hero-landing-credentials { position: relative; z-index: 4; font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: #222225; opacity: 1; margin-top: 14px; }
-
-.hero-landing-logo-mark {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  vertical-align: middle;
-  margin: 0 2px;
-  object-fit: cover;
-}
 .hero-meta-gap {
   display: inline-flex;
   align-items: center;
