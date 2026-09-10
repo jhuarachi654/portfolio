@@ -162,11 +162,12 @@ export default function HeroFaviconBurst() {
         onPointerDown={(e) => beginDrag("source", e)}
         aria-label="Hold and drag to take and place a favicon sticker"
       >
+        <span className="hero-favicon-burst-title">stickers</span>
         <span className="hero-favicon-burst-icon">
           <img src="/favicon.svg" alt="" width={ICON_SIZE} height={ICON_SIZE} draggable={false} className="hero-favicon-sticker-outline" />
         </span>
         <span className="hero-favicon-burst-label">
-          {dragId === "source" ? "drag sticker" : "peel sticker"}
+          {dragId === "source" ? "drag to place" : "hold & drop to place"}
         </span>
       </button>
 

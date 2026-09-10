@@ -1543,12 +1543,18 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   align-items: center;
   justify-content: center;
 }
-.hero-favicon-burst-label {
+.hero-favicon-burst-title {
   font-family: var(--font-doodle);
   font-size: 20px;
   font-weight: 700;
   color: var(--color-cs-heading);
-  transform: scale(0.8);
+}
+.hero-favicon-burst-label {
+  font-family: var(--font-doodle);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-cs-heading);
+  white-space: nowrap;
 }
 
 .hero-favicon-sticker {
