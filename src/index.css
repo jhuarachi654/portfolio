@@ -1112,7 +1112,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     margin-left: 2px;
   }
   .footer-dark-sub {
-    font-size: 14px;
     line-height: 1.5;
   }
 }
@@ -3165,7 +3164,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     font-size: 18px;
   }
   .case-study-card-description {
-    font-size: 14px;
     margin-bottom: 4px;
   }
   .case-study-card-role {
@@ -5046,9 +5044,6 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
   .next-project-card-wrapper .case-study-card-title {
     font-size: 26px !important;
-  }
-  .next-project-desc {
-    font-size: 15px !important;
   }
 
   .challenge-banner-question {
