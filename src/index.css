@@ -1516,9 +1516,11 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   cursor: grabbing;
 }
 .hero-favicon-burst-trigger.is-dragging {
-  opacity: 0.35;
   cursor: grabbing;
   animation: none;
+}
+.hero-favicon-burst-trigger.is-dragging .hero-favicon-burst-icon {
+  opacity: 0.35;
 }
 .hero-favicon-burst-trigger.is-maxed {
   animation: heroFaviconShrinkAway 380ms cubic-bezier(0.4, 0, 1, 1) forwards;
@@ -1544,8 +1546,8 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .hero-favicon-burst-label {
   font-family: var(--font-doodle);
   font-size: 20px;
-  font-weight: 600;
-  color: var(--color-secondary);
+  font-weight: 700;
+  color: var(--color-cs-heading);
   transform: scale(0.8);
 }
 
@@ -1571,8 +1573,10 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .hero-favicon-sticker-outline {
   /* Stacked drop-shadows in every direction fake a solid die-cut white
      border hugging the favicon's irregular silhouette (a plain CSS
-     border can't follow a non-rectangular shape). No soft shadow layer
-     on mobile/tablet, where this whole feature lives. */
+     border can't follow a non-rectangular shape), plus a second, larger
+     stack just outside it for a very light gray edge — like a sticker's
+     white backing paper with a faint cut line. No soft blurred shadow
+     layer on mobile/tablet, where this whole feature lives. */
   filter:
     drop-shadow(1.5px 0 0 #fff)
     drop-shadow(-1.5px 0 0 #fff)
@@ -1581,7 +1585,11 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     drop-shadow(1.1px 1.1px 0 #fff)
     drop-shadow(-1.1px 1.1px 0 #fff)
     drop-shadow(1.1px -1.1px 0 #fff)
-    drop-shadow(-1.1px -1.1px 0 #fff);
+    drop-shadow(-1.1px -1.1px 0 #fff)
+    drop-shadow(2.5px 0 0 rgba(0, 0, 0, 0.12))
+    drop-shadow(-2.5px 0 0 rgba(0, 0, 0, 0.12))
+    drop-shadow(0 2.5px 0 rgba(0, 0, 0, 0.12))
+    drop-shadow(0 -2.5px 0 rgba(0, 0, 0, 0.12));
   animation: heroFaviconOutlineIn 260ms cubic-bezier(0.34, 1.56, 0.64, 1) 80ms both;
 }
 @keyframes heroFaviconOutlineIn {
@@ -1595,7 +1603,11 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
       drop-shadow(1.1px 1.1px 0 #fff)
       drop-shadow(-1.1px 1.1px 0 #fff)
       drop-shadow(1.1px -1.1px 0 #fff)
-      drop-shadow(-1.1px -1.1px 0 #fff);
+      drop-shadow(-1.1px -1.1px 0 #fff)
+      drop-shadow(2.5px 0 0 rgba(0, 0, 0, 0.12))
+      drop-shadow(-2.5px 0 0 rgba(0, 0, 0, 0.12))
+      drop-shadow(0 2.5px 0 rgba(0, 0, 0, 0.12))
+      drop-shadow(0 -2.5px 0 rgba(0, 0, 0, 0.12));
     transform: scale(1);
   }
 }

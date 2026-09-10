@@ -17,8 +17,9 @@ const TOUCH_LIFT = 56
 const ICON_SIZE = 42
 // A press-and-release with less movement than this (px) reads as an
 // accidental tap rather than an intentional drag — no sticker is placed,
-// so a tap can't silently burn through the MAX_STICKERS budget.
-const MIN_DRAG_DISTANCE = 24
+// so a tap can't silently burn through the MAX_STICKERS budget. Raised
+// from 24 so an ordinary click/tap can't clear it by accident.
+const MIN_DRAG_DISTANCE = 44
 
 type Burst = { id: number; x: number; y: number; dx: number; dy: number; rotate: number; size: number }
 type Sticker = { id: number; x: number; y: number }
@@ -159,13 +160,13 @@ export default function HeroFaviconBurst() {
         type="button"
         className={`hero-favicon-burst-trigger${popping ? " is-popping" : ""}${dragId === "source" ? " is-dragging" : ""}${stickers.length >= MAX_STICKERS ? " is-maxed" : ""}${tapCancelled ? " is-tap-cancelled" : ""}`}
         onPointerDown={(e) => beginDrag("source", e)}
-        aria-label="Hold and drag to peel off a favicon sticker"
+        aria-label="Hold and drag to take and place a favicon sticker"
       >
         <span className="hero-favicon-burst-icon">
-          <img src="/favicon.svg" alt="" width={ICON_SIZE} height={ICON_SIZE} draggable={false} />
+          <img src="/favicon.svg" alt="" width={ICON_SIZE} height={ICON_SIZE} draggable={false} className="hero-favicon-sticker-outline" />
         </span>
         <span className="hero-favicon-burst-label">
-          {dragId === "source" ? "hold & drag" : "peel sticker"}
+          {dragId === "source" ? "drag sticker" : "peel sticker"}
         </span>
       </button>
 
