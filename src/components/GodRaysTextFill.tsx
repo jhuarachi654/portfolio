@@ -88,7 +88,7 @@ export default function GodRaysTextFill({ text, className }: { text: string; cla
           }}
         >
           <GodRays
-            colors={["#0653EF", "#236AFA", "#417FFB", "#558CFB", "#73A0FC", "#91B4FC", "#AFC9FD", "#CDDDFE", "#EAF1FF", "#417FFB"]}
+            colors={["#0754F0", "#276CF9", "#4581F9", "#598EFA", "#77A2FB", "#94B6FC", "#B2CBFD", "#D0DFFE", "#EEF3FE", "#4581F9"]}
             noiseScale={0.2}
             noiseStrength={0.7}
           />
