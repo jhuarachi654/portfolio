@@ -1296,7 +1296,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 .hero-landing-name-fill {
   font-family: inherit;
   font-size: inherit;
-  font-weight: 500;
+  font-weight: inherit;
   line-height: inherit;
   vertical-align: baseline;
 }

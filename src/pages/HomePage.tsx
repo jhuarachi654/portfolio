@@ -1,6 +1,5 @@
 import WorkGrid from "../components/WorkGrid"
 import Footer from "../components/Footer"
-import GodRaysTextFill from "../components/GodRaysTextFill"
 import HeroCursorTrail from "../components/HeroCursorTrail"
 import HeroFaviconBurst from "../components/HeroFaviconBurst"
 import { WordReveal, LineReveal } from "../components/HeroTextReveal"
@@ -15,7 +14,7 @@ export default function HomePage() {
           <div className="hero-landing-inner">
             <p className="hero-landing-greeting">
               <WordReveal delayMs={120}>
-                hey! i'm <GodRaysTextFill text="Johanna" className="hero-landing-name-fill" />, a designer built on <em>psychology</em> and <em>interaction design</em>
+                hey! i'm <span className="hero-landing-name-fill" style={{ color: "#588DFB" }}>Johanna</span>, a designer built on <em>psychology</em> and <em>interaction design</em>
               </WordReveal>
             </p>
 
