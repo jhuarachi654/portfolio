@@ -1543,17 +1543,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   align-items: center;
   justify-content: center;
 }
-.hero-favicon-burst-title {
+.hero-favicon-burst-label {
   font-family: var(--font-doodle);
   font-size: 20px;
   font-weight: 700;
   color: var(--color-cs-heading);
-}
-.hero-favicon-burst-label {
-  font-family: var(--font-doodle);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-cs-heading);
+  transform: scale(0.8);
   white-space: nowrap;
 }
 
@@ -1615,7 +1610,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @keyframes heroFaviconIntro {
   0% { opacity: 0; transform: translateY(-16px) scale(0.6) rotate(-14deg); }
   60% { opacity: 1; transform: translateY(2px) scale(1.08) rotate(4deg); }
-  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  100% { opacity: 0.85; transform: translateY(0) scale(1) rotate(0deg); }
 }
 @keyframes heroFaviconPulse {
   0%, 100% { transform: scale(1); }
@@ -1649,7 +1644,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (prefers-reduced-motion: reduce) {
   .hero-favicon-burst-trigger, .hero-favicon-burst-trigger.is-popping {
     animation: none;
-    opacity: 1;
+    opacity: 0.85;
     transform: none;
   }
   .hero-favicon-burst-particle { animation: none; opacity: 0; }
