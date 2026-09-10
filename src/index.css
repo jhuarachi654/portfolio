@@ -1571,45 +1571,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .hero-favicon-sticker-outline {
-  /* Stacked drop-shadows in every direction fake a solid die-cut white
-     border hugging the favicon's irregular silhouette (a plain CSS
-     border can't follow a non-rectangular shape), plus a second, larger
-     stack just outside it for a very light gray edge — like a sticker's
-     white backing paper with a faint cut line. No soft blurred shadow
-     layer on mobile/tablet, where this whole feature lives. */
-  filter:
-    drop-shadow(1.5px 0 0 #fff)
-    drop-shadow(-1.5px 0 0 #fff)
-    drop-shadow(0 1.5px 0 #fff)
-    drop-shadow(0 -1.5px 0 #fff)
-    drop-shadow(1.1px 1.1px 0 #fff)
-    drop-shadow(-1.1px 1.1px 0 #fff)
-    drop-shadow(1.1px -1.1px 0 #fff)
-    drop-shadow(-1.1px -1.1px 0 #fff)
-    drop-shadow(2.5px 0 0 rgba(0, 0, 0, 0.12))
-    drop-shadow(-2.5px 0 0 rgba(0, 0, 0, 0.12))
-    drop-shadow(0 2.5px 0 rgba(0, 0, 0, 0.12))
-    drop-shadow(0 -2.5px 0 rgba(0, 0, 0, 0.12));
-  animation: heroFaviconOutlineIn 260ms cubic-bezier(0.34, 1.56, 0.64, 1) 80ms both;
-}
-@keyframes heroFaviconOutlineIn {
-  0% { filter: none; transform: scale(0.85); }
-  100% {
-    filter:
-      drop-shadow(1.5px 0 0 #fff)
-      drop-shadow(-1.5px 0 0 #fff)
-      drop-shadow(0 1.5px 0 #fff)
-      drop-shadow(0 -1.5px 0 #fff)
-      drop-shadow(1.1px 1.1px 0 #fff)
-      drop-shadow(-1.1px 1.1px 0 #fff)
-      drop-shadow(1.1px -1.1px 0 #fff)
-      drop-shadow(-1.1px -1.1px 0 #fff)
-      drop-shadow(2.5px 0 0 rgba(0, 0, 0, 0.12))
-      drop-shadow(-2.5px 0 0 rgba(0, 0, 0, 0.12))
-      drop-shadow(0 2.5px 0 rgba(0, 0, 0, 0.12))
-      drop-shadow(0 -2.5px 0 rgba(0, 0, 0, 0.12));
-    transform: scale(1);
-  }
+  /* A single drop-shadow ring fakes a subtle gray stroke hugging the
+     favicon's irregular silhouette (a plain CSS border can't follow a
+     non-rectangular shape). Static, no animation — filter-based drop
+     shadows are expensive to animate/repaint, which was the actual
+     cause of the lag, not the stroke itself. */
+  filter: drop-shadow(0 0 0.75px rgba(0, 0, 0, 0.25));
 }
 
 @keyframes heroFaviconShrinkAway {
