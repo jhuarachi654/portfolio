@@ -3164,6 +3164,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
     font-size: 18px;
   }
   .case-study-card-description {
+    font-size: 14px;
     margin-bottom: 4px;
   }
   .case-study-card-role {
