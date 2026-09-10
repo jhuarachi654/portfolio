@@ -1564,7 +1564,15 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .hero-favicon-sticker {
+  /* Same circular-sizing issue as .hero-favicon-sticker-ghost: the img has
+     no explicit CSS size, so a site-wide `max-width: 100%` reset resolves
+     it against this button's width — which has no intrinsic size of its
+     own and was sized *by* the img, collapsing both toward 0 in some
+     containers/drag positions. Explicit width/height on both fixes it. */
   position: absolute;
+  z-index: 2147483647;
+  width: 54px;
+  height: 54px;
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
@@ -1572,10 +1580,15 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   background: none;
   border: none;
   padding: 6px;
+  box-sizing: border-box;
   cursor: grab;
   touch-action: none;
   pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
+}
+.hero-favicon-sticker img {
+  width: 42px;
+  height: 42px;
 }
 .hero-favicon-sticker.is-dragging {
   cursor: grabbing;
