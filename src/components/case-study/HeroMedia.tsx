@@ -1,6 +1,3 @@
-import { useRef, useState, useEffect } from 'react'
-import PlayPauseButton from '../PlayPauseButton'
-
 interface HeroMediaProps {
   video: string
   poster: string
@@ -23,29 +20,6 @@ export default function HeroMedia({
   scale,
   padding = 16,
 }: HeroMediaProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  // Starts false rather than assuming autoplay succeeds — Safari (and other
-  // browsers under some conditions) can silently block the initial play(),
-  // which used to leave this stuck at true showing a "Pause" icon for a
-  // video that never actually started, so the button did nothing when
-  // clicked. onPlay/onPause below keep this in sync with real playback
-  // once it does start.
-  const [playing, setPlaying] = useState(false)
-
-  const handleToggle = () => {
-    const vid = videoRef.current
-    if (!vid) return
-    if (!vid.paused) vid.pause()
-    else vid.play().catch(() => {})
-  }
-
-  useEffect(() => {
-    const vid = videoRef.current
-    if (!vid) return
-    const playPromise = vid.play()
-    if (playPromise !== undefined) playPromise.catch(() => {})
-  }, [])
-
   return (
     <div className="cs-hero-lottie-wrap" style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 64, marginBottom: 48 }}>
       <div
@@ -60,7 +34,6 @@ export default function HeroMedia({
         }}
       >
         <video
-          ref={videoRef}
           className="case-study-card-video"
           src={video}
           poster={poster}
@@ -69,11 +42,8 @@ export default function HeroMedia({
           autoPlay
           playsInline
           preload="metadata"
-          onPlay={() => setPlaying(true)}
-          onPause={() => setPlaying(false)}
           style={{ objectFit, ...(scale ? { transform: `scale(${scale})` } : {}) }}
         />
-        <PlayPauseButton playing={playing} onToggle={handleToggle} />
       </div>
     </div>
   )

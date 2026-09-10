@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
+import Lottie from 'lottie-react'
 import { MapPin, Gear, Asterisk } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
-import PlayPauseButton from '../../components/PlayPauseButton'
 import SkeletonImage from '../../components/SkeletonImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
@@ -186,30 +185,22 @@ function IterationExplorer() {
 
 function HeroLottie() {
   const [data, setData] = useState<object | null>(null)
-  const lottieRef = useRef<LottieRefCurrentProps>(null)
-  const [playing, setPlaying] = useState(true)
 
   // Fetched eagerly (not gated behind requestIdleCallback/setTimeout like
   // off-screen Lottie animations elsewhere on this page) — this is the
   // hero's own animation, needed immediately for it to appear and autoplay
   // on load. Deferring it was making the hero visibly not autoplay, since
-  // the <Lottie> element (and the play button) didn't exist in the DOM
-  // until the idle-callback-gated fetch resolved.
+  // the <Lottie> element didn't exist in the DOM until the idle-callback-
+  // gated fetch resolved.
   useEffect(() => {
     fetch('/videos/DNC-Video.json').then(r => r.json()).then(setData).catch(() => {})
   }, [])
-
-  const handleToggle = () => {
-    if (playing) { lottieRef.current?.pause(); setPlaying(false) }
-    else { lottieRef.current?.play(); setPlaying(true) }
-  }
 
   return (
     <div className="w-full h-full overflow-hidden" style={{ position: 'relative' }}>
       {!data && <div className="case-study-card-skeleton" style={{ position: 'absolute', inset: 0 }} />}
       {data && (
         <Lottie
-          lottieRef={lottieRef}
           animationData={data}
           loop
           autoplay
@@ -217,7 +208,6 @@ function HeroLottie() {
           style={{ width: '100%', height: '100%', display: 'block', transform: 'scale(1.2)' }}
         />
       )}
-      {data && <PlayPauseButton playing={playing} onToggle={handleToggle} />}
     </div>
   )
 }

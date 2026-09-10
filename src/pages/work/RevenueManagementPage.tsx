@@ -1,12 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
-import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
+import { useEffect, useState } from 'react'
+import Lottie from 'lottie-react'
 import { User, AirplaneTakeoff, Timer } from '@phosphor-icons/react'
 import ImageFigure from '../../components/case-study/ImageFigure'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import CountUp from '../../components/case-study/CountUp'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
-import PlayPauseButton from '../../components/PlayPauseButton'
 import SkeletonImage from '../../components/SkeletonImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
@@ -109,12 +108,10 @@ function PolaroidStack() {
   )
 }
 
-// ─── Hero Lottie — autoplays by default; the button is the sole manual control ──
+// ─── Hero Lottie — autoplays by default ──────────────────────────────────────
 
 function HeroLottie() {
   const [data, setData] = useState<object | null>(null)
-  const lottieRef = useRef<LottieRefCurrentProps>(null)
-  const [playing, setPlaying] = useState(true)
 
   useEffect(() => {
     // Defers the 4MB Lottie fetch/parse off the initial render's critical
@@ -129,17 +126,11 @@ function HeroLottie() {
     return () => clearTimeout(id)
   }, [])
 
-  const handleToggle = () => {
-    if (playing) { lottieRef.current?.pause(); setPlaying(false) }
-    else { lottieRef.current?.play(); setPlaying(true) }
-  }
-
   return (
     <div className="w-full h-full overflow-hidden" style={{ position: 'relative' }}>
       {!data && <div className="case-study-card-skeleton" style={{ position: 'absolute', inset: 0 }} />}
       {data && (
         <Lottie
-          lottieRef={lottieRef}
           animationData={data}
           loop
           autoplay
@@ -147,7 +138,6 @@ function HeroLottie() {
           style={{ width: '100%', height: '100%', display: 'block', transform: 'scale(1.1)' }}
         />
       )}
-      {data && <PlayPauseButton playing={playing} onToggle={handleToggle} />}
     </div>
   )
 }

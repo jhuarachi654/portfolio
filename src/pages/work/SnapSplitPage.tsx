@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 import Lottie from 'lottie-react'
 import { Receipt, Quotes } from '@phosphor-icons/react'
 import ChallengeBanner from '../../components/case-study/ChallengeBanner'
 import NextProject from '../../components/case-study/NextProject'
 import ReadingProgress from '../../components/case-study/ReadingProgress'
 import CountUp from '../../components/case-study/CountUp'
-import PlayPauseButton from '../../components/PlayPauseButton'
 import SkeletonImage from '../../components/SkeletonImage'
 import { useCaseToc } from '../../hooks/useCaseToc'
 
@@ -131,36 +130,20 @@ function SolutionPreviewLottie() {
   )
 }
 
-// ─── Hero video — autoplays by default; the button is the sole manual control ──
+// ─── Hero video — autoplays by default ───────────────────────────────────────
 
 function HeroVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [playing, setPlaying] = useState(true)
-
-  const handleToggle = () => {
-    const vid = videoRef.current
-    if (!vid) return
-    if (playing) vid.pause()
-    else vid.play().catch(() => {})
-  }
-
   return (
-    <>
-      <video
-        ref={videoRef}
-        src="/videos/SnapSplit-Video.webm"
-        poster="/videos/SnapSplit-Video-poster.png"
-        muted
-        loop
-        autoPlay
-        playsInline
-        preload="metadata"
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
-      />
-      <PlayPauseButton playing={playing} onToggle={handleToggle} />
-    </>
+    <video
+      src="/videos/SnapSplit-Video.webm"
+      poster="/videos/SnapSplit-Video-poster.png"
+      muted
+      loop
+      autoPlay
+      playsInline
+      preload="metadata"
+      style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
+    />
   )
 }
 
