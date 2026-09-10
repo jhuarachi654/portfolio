@@ -1294,6 +1294,23 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
+/* The break marker is a plain (non-string) child of WordReveal, so it gets
+   wrapped in .hero-reveal-word-wrap like any other word — but that wrapper
+   is display:inline-block/overflow:hidden, which clips a block child inside
+   it and defeats the line break. :has() lets the wrapper itself switch to
+   block only when it contains this marker, so the break actually takes. */
+.hero-landing-greeting-break-mobile {
+  display: none;
+}
+@media (max-width: 767px) {
+  .hero-reveal-word-wrap:has(.hero-landing-greeting-break-mobile) {
+    display: block;
+    width: 100%;
+    height: 0;
+    overflow: visible;
+  }
+}
+
 .hero-landing-name-fill {
   font-family: inherit;
   font-size: inherit;
