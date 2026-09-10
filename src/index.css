@@ -1476,9 +1476,20 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   .hero-cursor-click-burst { display: none; }
 }
 
-/* ── Mobile/tablet favicon sticker peel (tap+drag counterpart to the desktop cursor trail) ── */
+/* ── Mobile/tablet favicon sticker peel (tap+drag counterpart to the desktop cursor trail) ──
+   .hero-favicon-burst--always-on (HeroFaviconBurst's alwaysOn prop) shows it
+   at every breakpoint instead, for pages that want this interaction without
+   swapping to the cursor-trail on desktop. */
 .hero-favicon-burst {
   display: none;
+}
+.hero-favicon-burst--always-on {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  perspective: 400px;
 }
 @media (max-width: 1199px) {
   .hero-favicon-burst {
@@ -1587,7 +1598,16 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .hero-favicon-sticker-ghost {
+  /* Explicit width/height on the ghost (and its img, below) — without it,
+     the img's own `max-width: 100%` (from a site-wide image reset) resolves
+     against this flex container's width, which has no intrinsic size of
+     its own and was sized *by* the img — a circular dependency that
+     collapsed both to 0x0 and made the sticker disappear entirely mid-drag
+     in some containers (reproduced reliably once this component started
+     running inside narrower containers like About's corkboard). */
   position: absolute;
+  width: 42px;
+  height: 42px;
   transform-style: preserve-3d;
   transform:
     translate(-50%, -50%)
@@ -1596,7 +1616,7 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
       var(--fold-axis-x, 1),
       var(--fold-axis-y, 0),
       0,
-      calc(var(--peel-amount, 0) * 130deg)
+      calc(var(--peel-amount, 0) * 55deg)
     );
   display: flex;
   align-items: center;
@@ -1604,6 +1624,10 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   pointer-events: none;
   transition: transform 60ms linear;
   z-index: 2;
+}
+.hero-favicon-sticker-ghost img {
+  width: 42px;
+  height: 42px;
 }
 
 
@@ -3768,6 +3792,16 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .about-clip { font-family: var(--type-body-sm-family); font-size: var(--type-body-sm-size); font-weight: var(--type-body-sm-weight); line-height: var(--type-body-sm-line-height); position: absolute; top: -18px; right: 4px; z-index: 10; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15)); pointer-events: none; }
+
+/* Sticker trigger placement on About: HeroFaviconBurst is nested inside
+   .about-corkboard (not the whole hero) so its inset:0 container matches
+   the polaroid's own box, then nudged to sit in the empty gap just
+   below-right of the card rather than the default top-right corner. */
+.about-corkboard .hero-favicon-burst-trigger {
+  top: auto;
+  right: -8px;
+  bottom: -80px;
+}
 
 .about-pile-thumb {
   position: relative;

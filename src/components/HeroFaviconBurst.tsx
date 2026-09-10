@@ -40,7 +40,15 @@ function makeBurst(nextId: { current: number }, x: number, y: number): Burst[] {
   })
 }
 
-export default function HeroFaviconBurst() {
+interface HeroFaviconBurstProps {
+  // Shows the sticker trigger at every breakpoint, including desktop,
+  // instead of the default mobile/tablet-only behavior (where desktop
+  // gets HeroCursorTrail's mouse-follow trail instead). Used on pages
+  // that want this interaction without the cursor-trail alternative.
+  alwaysOn?: boolean
+}
+
+export default function HeroFaviconBurst({ alwaysOn = false }: HeroFaviconBurstProps) {
   const [bursts, setBursts] = useState<Burst[]>([])
   const [stickers, setStickers] = useState<Sticker[]>([])
   const [popping, setPopping] = useState(false)
@@ -155,7 +163,7 @@ export default function HeroFaviconBurst() {
   }
 
   return (
-    <div ref={containerRef} className="hero-favicon-burst">
+    <div ref={containerRef} className={`hero-favicon-burst${alwaysOn ? " hero-favicon-burst--always-on" : ""}`}>
       <button
         type="button"
         className={`hero-favicon-burst-trigger${popping ? " is-popping" : ""}${dragId === "source" ? " is-dragging" : ""}${stickers.length >= MAX_STICKERS ? " is-maxed" : ""}${tapCancelled ? " is-tap-cancelled" : ""}`}

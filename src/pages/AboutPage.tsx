@@ -4,6 +4,7 @@ import { HandWaving } from "@phosphor-icons/react"
 import VinylPlayer from "../components/VinylPlayer"
 import Footer from "../components/Footer"
 import Annotate from "../components/Annotate"
+import HeroFaviconBurst from "../components/HeroFaviconBurst"
 
 const BASE = "/images/about"
 
@@ -212,6 +213,7 @@ export default function AboutPage() {
         {/* ── Left: corkboard ── */}
         <div className="hero-left about-hero-right">
           <div className="about-corkboard">
+            <HeroFaviconBurst alwaysOn />
 
             {/* Portrait — center of corkboard */}
             <div className="about-pile-hero-wrap" data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>
