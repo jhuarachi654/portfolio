@@ -22,7 +22,7 @@ export default function HomePage() {
               <LineReveal
                 delayMs={620}
                 lines={[
-                  <><em>Studied</em> IxD at CCA & Psych/Neuro at Williams College, and <em>designed</em> at DNC, PROS.</>,
+                  <><em>Studied</em> Interaction Design at CCA & Psych/Neuro at Williams College, and <em>designed</em> at DNC, PROS.</>,
                   "Recently w/ IDEO designed BackStory, a TikTok-native feature for fighting misinformation.",
                 ]}
               />
