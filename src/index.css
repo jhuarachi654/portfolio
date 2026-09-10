@@ -117,6 +117,10 @@
 @media (min-width: 768px) {
   :root { --page-gutter: 48px; }
 }
+
+@media (max-width: 767px) {
+  :root { --type-body-size: 17px; }
+}
 @media (min-width: 1200px) {
   :root { --page-gutter: 84px; }
 }
