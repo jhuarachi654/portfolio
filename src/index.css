@@ -4417,18 +4417,18 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .play-header {
-  padding: 128px var(--page-gutter) 32px;
+  padding: 128px var(--page-gutter) 64px;
 }
 
 @media (max-width: 767px) {
   .play-header {
-    padding: 108px var(--page-gutter) 24px;
+    padding: 108px var(--page-gutter) 48px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .play-header {
-    padding: 116px var(--page-gutter) 32px;
+    padding: 116px var(--page-gutter) 64px;
   }
 }
 
