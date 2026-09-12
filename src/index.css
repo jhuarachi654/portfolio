@@ -4417,18 +4417,18 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .play-header {
-  padding: 128px 176px 32px;
+  padding: 128px var(--page-gutter) 32px;
 }
 
 @media (max-width: 767px) {
   .play-header {
-    padding: 108px 20px 24px;
+    padding: 108px var(--page-gutter) 24px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .play-header {
-    padding: 116px 124px 32px;
+    padding: 116px var(--page-gutter) 32px;
   }
 }
 
@@ -4447,18 +4447,18 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .play-card-grid {
-  padding: 0 176px 80px;
+  padding: 0 var(--page-gutter) 80px;
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .play-card-grid {
-    padding: 0 124px 80px;
+    padding: 0 var(--page-gutter) 80px;
   }
 }
 
 @media (max-width: 767px) {
   .play-card-grid {
-    padding: 24px 20px 60px;
+    padding: 24px var(--page-gutter) 60px;
   }
 }
 
