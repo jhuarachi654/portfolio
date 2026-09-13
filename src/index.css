@@ -1310,6 +1310,20 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
   }
 }
 
+/* Swaps the "built on ___" phrase between the full desktop/tablet version
+   and a shorter mobile-only version — only one of the two is ever shown. */
+.hero-landing-greeting-mobile-phrase {
+  display: none;
+}
+@media (max-width: 767px) {
+  .hero-landing-greeting-desktop-phrase {
+    display: none;
+  }
+  .hero-landing-greeting-mobile-phrase {
+    display: inline;
+  }
+}
+
 .hero-landing-name-fill {
   font-family: inherit;
   font-size: inherit;

@@ -14,7 +14,9 @@ export default function HomePage() {
           <div className="hero-landing-inner">
             <p className="hero-landing-greeting">
               <WordReveal delayMs={120}>
-                hey! I'm <span className="hero-landing-name-fill" style={{ color: "#588DFB" }}>Johanna</span>,<span className="hero-landing-greeting-break-mobile" aria-hidden="true" /> a designer built on <em>psychology</em> and <em>interaction design</em>
+                hey! I'm <span className="hero-landing-name-fill" style={{ color: "#588DFB" }}>Johanna</span>,<span className="hero-landing-greeting-break-mobile" aria-hidden="true" /> a designer built on{" "}
+                <span className="hero-landing-greeting-desktop-phrase"><em>psychology</em>, <em>interaction design</em>, and code</span>
+                <span className="hero-landing-greeting-mobile-phrase"><em>psychology</em> and code</span>
               </WordReveal>
             </p>
 
