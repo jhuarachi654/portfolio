@@ -1345,6 +1345,12 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 }
 
 .hero-landing-credentials { position: relative; z-index: 4; font-family: var(--type-body-family); font-size: var(--type-body-size); font-weight: var(--type-body-weight); line-height: var(--type-body-line-height); color: #222225; opacity: 0.9; margin-top: 14px; }
+@media (min-width: 768px) and (max-width: 1199px) {
+  .hero-landing-credentials {
+    max-width: 70%;
+    font-size: 14px;
+  }
+}
 .hero-meta-gap {
   display: inline-flex;
   align-items: center;
