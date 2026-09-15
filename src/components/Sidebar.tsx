@@ -42,13 +42,26 @@ export default function Sidebar() {
       : isPlayActive ? playRef
       : (isHome && !worksInView) ? homeRef
       : null
-    const navEl = navRef.current
-    const targetEl = activeRef?.current
-    if (!navEl || !targetEl) { setPillStyle(null); return }
-    const navRect = navEl.getBoundingClientRect()
-    const targetRect = targetEl.getBoundingClientRect()
-    const PILL_PAD = 12
-    setPillStyle({ x: targetRect.left - navRect.left - PILL_PAD, width: targetRect.width + PILL_PAD * 2 })
+
+    const measure = () => {
+      const navEl = navRef.current
+      const targetEl = activeRef?.current
+      if (!navEl || !targetEl) { setPillStyle(null); return }
+      const navRect = navEl.getBoundingClientRect()
+      const targetRect = targetEl.getBoundingClientRect()
+      const PILL_PAD = 12
+      setPillStyle({ x: targetRect.left - navRect.left - PILL_PAD, width: targetRect.width + PILL_PAD * 2 })
+    }
+
+    measure()
+    // A measurement taken before the real nav font finishes loading uses
+    // fallback-font metrics, which can freeze the pill at the wrong width
+    // (e.g. this stays shrunk to a small oval instead of hugging "Home")
+    // since nothing previously re-ran the measurement afterward. Also
+    // re-measure on resize, since link widths/positions can shift there too.
+    document.fonts?.ready?.then(measure)
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
   }, [isHome, isWorksActive, isAboutActive, isPlayActive, worksInView])
 
   const handleHome = (e: React.MouseEvent) => {
