@@ -1348,7 +1348,9 @@ h1 { font-family: var(--type-h1-family); font-size: var(--type-h1-size); font-we
 @media (min-width: 768px) and (max-width: 1199px) {
   .hero-landing-credentials {
     max-width: 70%;
-    font-size: 14px;
+  }
+  .hero-landing-credentials .hero-reveal-line:nth-child(2) {
+    display: none;
   }
 }
 .hero-meta-gap {
