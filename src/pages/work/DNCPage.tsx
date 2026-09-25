@@ -202,7 +202,7 @@ function HeroLottie() {
       {data && (
         <Lottie
           animationData={data}
-          loop
+          loop={false}
           autoplay
           rendererSettings={{ preserveAspectRatio: 'xMidYMid meet' }}
           style={{ width: '100%', height: '100%', display: 'block', transform: 'scale(1.2)' }}
