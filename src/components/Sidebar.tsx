@@ -119,7 +119,7 @@ export default function Sidebar() {
           <Envelope size={24} weight="regular" />
         </a>
         <a
-          href="https://drive.google.com/file/d/1B7Z2qW2Hn8-53myyEnm_NpMKWdfzKW9D/view?usp=sharing"
+          href="https://drive.google.com/file/d/1cwqh8izcYCBSnUtkfR_dEjBSE41swvZb/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Resume"
