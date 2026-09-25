@@ -193,7 +193,7 @@ function HeroLottie() {
   // the <Lottie> element didn't exist in the DOM until the idle-callback-
   // gated fetch resolved.
   useEffect(() => {
-    fetch('/videos/DNC-Video.json').then(r => r.json()).then(setData).catch(() => {})
+    fetch('/videos/DNC-phones-landing.json').then(r => r.json()).then(setData).catch(() => {})
   }, [])
 
   return (
